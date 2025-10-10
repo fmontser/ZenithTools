@@ -1,2 +1,28 @@
 # ZenithTools
-ZenithTimer aims to be a multi-platform toolset for concentration and productivity enhancing. Free, open source, resource efficient and clean.
+
+ZenithTools aims to be a multi-platform toolset for concentration and productivity enhancing.
+
+Free, open source, resource efficient and safe.
+
+## Requirements
+
+*   A C++17 compliant compiler (e.g., GCC 7+, Clang 5+, MSVC 2017+).
+*   CMake (version 3.10 or higher).
+
+## Building
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/fmontser/zenith-tools.git
+    cd zenith-tools
+    ```
+
+2.  **Configure the project with CMake:**
+    ```bash
+    cmake -S . -B build
+    ```
+
+3.  **Build the project:**
+    ```bash
+    cmake --build build
+    ```
