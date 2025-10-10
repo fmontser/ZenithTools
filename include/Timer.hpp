@@ -8,15 +8,14 @@ namespace zenith {
 	using TimePoint = std::chrono::time_point<std::chrono::steady_clock>;
 	using Seconds = std::chrono::seconds;
 	using Minutes = std::chrono::minutes;
-	using Duration = std::chrono::duration<int>;
 
 	class Timer {
-		enum Status {
-			STOPPED, PAUSED, RUNNING
+		enum class Status {
+			Stopped, Paused, Running
 		};
 
 		Status _status;
-		Duration _remainingTime;
+		Seconds _remainingTime;
 		TimePoint _targetTime;
 
 		public:
