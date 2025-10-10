@@ -13,8 +13,8 @@ Free, open source, resource efficient and safe.
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/fmontser/zenith-tools.git
-    cd zenith-tools
+    git clone https://github.com/fmontser/ZenithTools.git
+    cd ZenithTools
     ```
 
 2.  **Configure the project with CMake:**
