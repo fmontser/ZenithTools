@@ -2,63 +2,98 @@
 #include "Exceptions.hpp"
 #include <sstream>
 #include <iomanip>
+#include <thread>
 
 using namespace zenith;
 using std::string;
 using std::stringstream;
 
 Timer::Timer(Minutes minutes,Seconds seconds) {
-	_status = Status::Stopped;
 	_remainingTime = minutes + seconds;
 	_durationTime = _remainingTime;
+	_status.state = State::Stopped;
+}
+
+Timer::~Timer() {
+	{
+		std::lock_guard<std::mutex> lock(_statusMutex);
+		_status.state = State::Ended;
+	}
+	if (_thread.joinable())
+		_thread.join();
 }
 
 void Timer::Start() {
-	if (_status == Status::Stopped) {
+	std::lock_guard<std::mutex> lock(_statusMutex);
+
+	if (_status.state == State::Ended) {
+		if (_thread.joinable())
+			_thread.join();
+		_remainingTime = _durationTime;
+		_status.state = State::Stopped;
+	}
+
+	if (_status.state == State::Stopped) {
 		_startTime = Clock::now();
 		_targetTime = _startTime + _remainingTime;
-		_status = Status::Running;
+		_status.state = State::Running;
+		_thread = std::thread(&Timer::Daemon, this);
 	}
 }
 
 void Timer::Pause() {
-	if (_status == Status::Running) {
+	std::lock_guard<std::mutex> lock(_statusMutex);
+
+	if (_status.state == State::Running) {
 		_remainingTime = FetchRemainingTime();
-		_status = Status::Paused;
+		_status.state = State::Paused;
 	}
 }
 
 void Timer::Resume() {
-	if (_status == Status::Paused) {
+	std::lock_guard<std::mutex> lock(_statusMutex);
+
+	if (_status.state == State::Paused) {
 		_targetTime = Clock::now() + _remainingTime;
-		_status = Status::Running;
+		_status.state = State::Running;
 	}
 }
 
-const string Timer::GetRemainingTime() const {
-	auto remainingTime = FetchRemainingTime();
-	return FormatTimer(remainingTime);
+void Timer::Reset() {
+	std::lock_guard<std::mutex> lock(_statusMutex);
+
+	if (_status.state != State::Stopped) {
+		_remainingTime = _durationTime;
+		_status.state = State::Stopped;
+	}
 }
 
-const string Timer::GetElapsedTime() const {
-	auto remainingTime = FetchRemainingTime();
-	auto elapsedTime = _durationTime - remainingTime;
-	return FormatTimer(elapsedTime);
+const Timer::Status Timer::GetStatus(){
+	std::lock_guard<std::mutex> lock(_statusMutex);
+
+	return _status;
 }
 
-const Seconds Timer::FetchRemainingTime() const {
-	switch (_status)
+const Seconds Timer::FetchRemainingTime_locked() const {
+	switch (_status.state)
 	{
-		case Status::Stopped:
+		case State::Stopped:
 			return _durationTime;
-		case Status::Paused:
+		case State::Paused:
 			return _remainingTime;
-		case Status::Running:
+		case State::Running:
 			return std::chrono::duration_cast<Seconds>(
-				_targetTime - Clock::now());
+			_targetTime - Clock::now());
+		case State::Ended:
+			return Seconds::zero();
 		default:
 			throw InvalidStateException();
 	}
+}
+
+const Seconds Timer::FetchRemainingTime() {
+	std::lock_guard<std::mutex> lock(_statusMutex);
+	return FetchRemainingTime_locked();
 }
 
 const string Timer::FormatTimer(const Seconds& seconds) const {
@@ -71,4 +106,25 @@ const string Timer::FormatTimer(const Seconds& seconds) const {
 			<< (seconds - minutes).count();
 
 	return timeSS.str();
+}
+
+void Timer::Daemon() {
+	while(_status.state != State::Ended && _status.state != State::Stopped) {
+		std::this_thread::sleep_for(Seconds(1));
+
+		std::lock_guard<std::mutex> lock(_statusMutex);
+
+		auto remainingTime = FetchRemainingTime_locked();
+		if (remainingTime <= Seconds::zero()) {
+			remainingTime = Seconds::zero();
+			_status.state = State::Ended;
+		}
+
+		auto elapsedTime = _durationTime - remainingTime;
+		if (elapsedTime > _durationTime)
+			elapsedTime = _durationTime;
+
+		_status.remaining = FormatTimer(remainingTime);
+		_status.elapsed = FormatTimer(elapsedTime);
+	}
 }
