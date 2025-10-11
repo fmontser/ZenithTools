@@ -18,8 +18,9 @@ namespace zenith {
 		};
 
 		Status _status;
+		Seconds _durationTime;
 		Seconds _remainingTime;
-		Seconds _elapsedTime;
+		TimePoint _startTime;
 		TimePoint _targetTime;
 
 		public:

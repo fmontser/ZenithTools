@@ -10,11 +10,13 @@ using std::stringstream;
 Timer::Timer(Minutes minutes, Seconds seconds) {
 	_status = Status::Stopped;
 	_remainingTime = minutes + seconds;
+	_durationTime = _remainingTime;
 }
 
 void Timer::Start() {
 	if (_status == Status::Stopped) {
-		_targetTime = Clock::now() + _remainingTime;
+		_startTime = Clock::now();
+		_targetTime = _startTime + _remainingTime;
 		_status = Status::Running;
 	}
 }
@@ -36,7 +38,21 @@ void Timer::Resume() {
 }
 
 const string Timer::GetRemainingTime() const {
-	auto remainingTime = _targetTime - Clock::now();
+	auto remainingTime = [&]() {
+		switch (_status)
+		{
+			case Status::Stopped:
+				return _durationTime;
+			case Status::Paused:
+				return _remainingTime;
+			case Status::Running:
+				return std::chrono::duration_cast<Seconds>(
+					_targetTime - Clock::now());
+			default:
+				throw InvalidStateException();
+		}
+	}();
+
 	auto remainingMinutes = std::chrono::duration_cast<Minutes>(remainingTime);
 	auto remainingSeconds = std::chrono::duration_cast<Seconds>(remainingTime);
 
@@ -49,8 +65,6 @@ const string Timer::GetRemainingTime() const {
 	return timeSS.str();
 }
 
-#include <exception>
-
-string const Timer::GetElapsedTime() const {
+const string Timer::GetElapsedTime() const {
 	throw NotImplementedException();
 }
