@@ -7,7 +7,7 @@ using namespace zenith;
 using std::string;
 using std::stringstream;
 
-Timer::Timer(Minutes minutes, Seconds seconds) {
+Timer::Timer(Minutes minutes,Seconds seconds) {
 	_status = Status::Stopped;
 	_remainingTime = minutes + seconds;
 	_durationTime = _remainingTime;
@@ -23,9 +23,7 @@ void Timer::Start() {
 
 void Timer::Pause() {
 	if (_status == Status::Running) {
-		_remainingTime = std::chrono::duration_cast<Seconds>(
-			_targetTime - Clock::now()
-		);
+		_remainingTime = FetchRemainingTime();
 		_status = Status::Paused;
 	}
 }
@@ -38,33 +36,39 @@ void Timer::Resume() {
 }
 
 const string Timer::GetRemainingTime() const {
-	auto remainingTime = [&]() {
-		switch (_status)
-		{
-			case Status::Stopped:
-				return _durationTime;
-			case Status::Paused:
-				return _remainingTime;
-			case Status::Running:
-				return std::chrono::duration_cast<Seconds>(
-					_targetTime - Clock::now());
-			default:
-				throw InvalidStateException();
-		}
-	}();
-
-	auto remainingMinutes = std::chrono::duration_cast<Minutes>(remainingTime);
-	auto remainingSeconds = std::chrono::duration_cast<Seconds>(remainingTime);
-
-	stringstream timeSS;
-	timeSS	<< std::setw(2) << std::setfill('0') << remainingMinutes.count()
-			<< ":"
-			<< std::setw(2) << std::setfill('0')
-			<< (remainingSeconds - remainingMinutes).count();
-
-	return timeSS.str();
+	auto remainingTime = FetchRemainingTime();
+	return FormatTimer(remainingTime);
 }
 
 const string Timer::GetElapsedTime() const {
-	throw NotImplementedException();
+	auto remainingTime = FetchRemainingTime();
+	auto elapsedTime = _durationTime - remainingTime;
+	return FormatTimer(elapsedTime);
+}
+
+const Seconds Timer::FetchRemainingTime() const {
+	switch (_status)
+	{
+		case Status::Stopped:
+			return _durationTime;
+		case Status::Paused:
+			return _remainingTime;
+		case Status::Running:
+			return std::chrono::duration_cast<Seconds>(
+				_targetTime - Clock::now());
+		default:
+			throw InvalidStateException();
+	}
+}
+
+const string Timer::FormatTimer(const Seconds& seconds) const {
+	auto minutes = std::chrono::duration_cast<Minutes>(seconds);
+
+	stringstream timeSS;
+	timeSS	<< std::setw(2) << std::setfill('0') << minutes.count()
+			<< ":"
+			<< std::setw(2) << std::setfill('0')
+			<< (seconds - minutes).count();
+
+	return timeSS.str();
 }

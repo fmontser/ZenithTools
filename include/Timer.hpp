@@ -13,16 +13,6 @@ namespace zenith {
 	using Minutes = std::chrono::minutes;
 
 	class Timer {
-		enum class Status {
-			Stopped, Paused, Running
-		};
-
-		Status _status;
-		Seconds _durationTime;
-		Seconds _remainingTime;
-		TimePoint _startTime;
-		TimePoint _targetTime;
-
 		public:
 			Timer(Minutes minutes, Seconds seconds);
 			
@@ -32,7 +22,20 @@ namespace zenith {
 
 			const string GetRemainingTime() const;
 			const string GetElapsedTime() const;
+			
+		private:
+			enum class Status {
+				Stopped, Paused, Running
+			};
 
+			Status _status;
+			Seconds _durationTime;
+			Seconds _remainingTime;
+			TimePoint _startTime;
+			TimePoint _targetTime;
+
+			const Seconds FetchRemainingTime() const;
+			const string FormatTimer(const Seconds& seconds) const;
 	};
 
 }
