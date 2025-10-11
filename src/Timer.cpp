@@ -1,6 +1,11 @@
 #include "Timer.hpp"
+#include "Exceptions.hpp"
+#include <sstream>
+#include <iomanip>
 
 using namespace zenith;
+using std::string;
+using std::stringstream;
 
 Timer::Timer(Minutes minutes, Seconds seconds) {
 	_status = Status::Stopped;
@@ -28,4 +33,24 @@ void Timer::Resume() {
 		_targetTime = Clock::now() + _remainingTime;
 		_status = Status::Running;
 	}
+}
+
+const string Timer::GetRemainingTime() const {
+	auto remainingTime = _targetTime - Clock::now();
+	auto remainingMinutes = std::chrono::duration_cast<Minutes>(remainingTime);
+	auto remainingSeconds = std::chrono::duration_cast<Seconds>(remainingTime);
+
+	stringstream timeSS;
+	timeSS	<< std::setw(2) << std::setfill('0') << remainingMinutes.count()
+			<< ":"
+			<< std::setw(2) << std::setfill('0')
+			<< (remainingSeconds - remainingMinutes).count();
+
+	return timeSS.str();
+}
+
+#include <exception>
+
+string const Timer::GetElapsedTime() const {
+	throw NotImplementedException();
 }

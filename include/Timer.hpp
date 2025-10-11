@@ -1,6 +1,9 @@
 #pragma once
 
 #include <chrono>
+#include <string>
+
+using std::string;
 
 namespace zenith {
 
@@ -16,6 +19,7 @@ namespace zenith {
 
 		Status _status;
 		Seconds _remainingTime;
+		Seconds _elapsedTime;
 		TimePoint _targetTime;
 
 		public:
@@ -24,6 +28,10 @@ namespace zenith {
 			void Start();
 			void Pause();
 			void Resume();
+
+			const string GetRemainingTime() const;
+			const string GetElapsedTime() const;
+
 	};
 
 }
