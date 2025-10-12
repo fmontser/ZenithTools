@@ -12,6 +12,8 @@ Timer::Timer(Minutes minutes,Seconds seconds) {
 	_remainingTime = minutes + seconds;
 	_durationTime = _remainingTime;
 	_status.state = State::Stopped;
+	_status.remaining = FormatTimer(_remainingTime);
+	_status.elapsed = FormatTimer(Seconds::zero());
 }
 
 Timer::~Timer() {
@@ -70,7 +72,6 @@ void Timer::Reset() {
 
 const Timer::Status Timer::GetStatus(){
 	std::lock_guard<std::mutex> lock(_statusMutex);
-
 	return _status;
 }
 
