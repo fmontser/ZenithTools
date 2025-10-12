@@ -83,7 +83,7 @@ const Seconds Timer::FetchRemainingTime_locked() const {
 		case State::Paused:
 			return _remainingTime;
 		case State::Running:
-			return std::chrono::duration_cast<Seconds>(
+			return std::chrono::round<Seconds>(
 			_targetTime - Clock::now());
 		case State::Ended:
 			return Seconds::zero();
