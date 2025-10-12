@@ -1,3 +1,9 @@
+/**
+ * @file Timer.hpp
+ * @author https://github.com/fmontser
+ * @brief Timer class definition.
+ */
+
 #pragma once
 
 #include <thread>
@@ -9,46 +15,118 @@ using std::string;
 
 namespace zenith {
 
+	/// @brief A clock that cannot be set and represents monotonic time.
 	using Clock = std::chrono::steady_clock;
+	/// @brief A specific point in time, as measured by a Clock.
 	using TimePoint = std::chrono::time_point<std::chrono::steady_clock>;
+	/// @brief A duration measured in seconds.
 	using Seconds = std::chrono::seconds;
+	/// @brief A duration measured in minutes.
 	using Minutes = std::chrono::minutes;
 
-
+	/**
+	 * @brief Manages a thread based timer with minutes and seconds.
+	 * 
+	 * Allows to start, pause, resume and stop a timer. Concurrency safe.
+	 */
 	class Timer {
 		public:
+			/**
+			 * @brief Represents the possible states of the Timer.
+			 */
 			enum class State {
-				Stopped, Paused, Running, Ended
+				Stopped, ///< The timer is not started.
+				Paused,  ///< The timer is paused.
+				Running, ///< The timer is actively counting down.
+				Ended    ///< The timer has finished its countdown.
 			};
 
+			/**
+			 * @brief A snapshot of the timer's current status.
+			 */
 			struct Status {
-				State state;
-				string remaining;
-				string elapsed;
+				State state;      ///< The current state of the timer.
+				string remaining; ///< Formatted string of the remaining time (e.g., "24:59").
+				string elapsed;   ///< Formatted string of the elapsed time.
 			};
 
+			/**
+			 * @brief Constructs a new Timer with a specific duration.
+			 * @param minutes The minutes part of the timer's duration.
+			 * @param seconds The seconds part of the timer's duration.
+			 */
 			Timer(Minutes minutes, Seconds seconds);
+
+			/**
+			 * @brief Destructor that ensures the background thread is properly handled.
+			 */
 			~Timer();
 
+			/**
+			 * @brief Starts the timer countdown.
+			 * @note If the timer was already running, it will be reset and started again.
+			 *       This method is thread-safe.
+			 */
 			void Start();
+
+			/**
+			 * @brief Pauses the timer's countdown.
+			 * @note If the timer is not running, this method has no effect.
+			 *       This method is thread-safe.
+			 */
 			void Pause();
+
+			/**
+			 * @brief Resumes the timer's countdown from where it was paused.
+			 * @note If the timer was not paused, this method has no effect.
+			 *       This method is thread-safe.
+			 */
 			void Resume();
+
+			/**
+			 * @brief Resets the timer to its initial duration and stops it.
+			 * @note This method is thread-safe.
+			 */
 			void Reset();
 
+			/**
+			 * @brief Retrieves a snapshot of the timer's current status.
+			 * @return A const Status struct containing the state, remaining time, and elapsed time.
+			 * @note This method is thread-safe.
+			 */
 			const Status GetStatus();
 
 		private:
-			Status _status;
-			std::thread _thread;
-			std::mutex _statusMutex;
-			Seconds _durationTime;
-			Seconds _remainingTime;
-			TimePoint _startTime;
-			TimePoint _targetTime;
+			Status _status; ///< Holds the current snapshot of the timer's status.
+			std::thread _thread; ///< The background thread that runs the Daemon function.
+			std::mutex _statusMutex; ///< Mutex to protect shared access to timer data.
+			Seconds _durationTime; ///< The total duration the timer was set for.
+			Seconds _remainingTime; ///< The time remaining when paused.
+			TimePoint _startTime; ///< The time point when the timer was last (re)started.
+			TimePoint _targetTime; ///< The time point when the timer is scheduled to end.
 
+			/**
+			 * @brief Calculates the remaining time based on the current time (internal, non-locking).
+			 * @return The remaining seconds.
+			 */
 			const Seconds FetchRemainingTime_locked() const;
+
+			/**
+			 * @brief Acquires a lock and calculates the remaining time.
+			 * @return The remaining seconds.
+			 */
 			const Seconds FetchRemainingTime();
+
+			/**
+			 * @brief Formats a duration in seconds into a MM:SS string.
+			 * @param seconds The duration to format.
+			 * @return A string in "MM:SS" format.
+			 */
 			const string FormatTimer(const Seconds& seconds) const;
+
+			/**
+			 * @brief The main function for the background thread.
+			 */
 			void Daemon();
 	};
 
