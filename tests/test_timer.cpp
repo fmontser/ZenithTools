@@ -40,4 +40,16 @@ namespace zenith {
 		EXPECT_EQ(status.elapsed, "00:01");
 	}
 
+	// Verify time stops after pausing
+	TEST(TimerTest, TimeStopAfterPause) {
+		Timer timer(Minutes(0), Seconds(10));
+		timer.Start();
+		std::this_thread::sleep_for(std::chrono::seconds(2));
+		timer.Pause();
+		std::this_thread::sleep_for(std::chrono::seconds(2));
+		auto status = timer.GetStatus();
+		EXPECT_EQ(status.remaining, "00:08");
+		EXPECT_EQ(status.elapsed, "00:02");
+	}
+
 }

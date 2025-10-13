@@ -47,7 +47,7 @@ void Timer::Pause() {
 	std::lock_guard<std::mutex> lock(_statusMutex);
 
 	if (_status.state == State::Running) {
-		_remainingTime = FetchRemainingTime();
+		_remainingTime = FetchRemainingTime_locked();
 		_status.state = State::Paused;
 	}
 }
