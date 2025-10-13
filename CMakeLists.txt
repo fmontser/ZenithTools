@@ -1,23 +1,31 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.31)
 project(ZenithTools LANGUAGES CXX)
 
 # Google Test
 include(FetchContent)
 FetchContent_Declare(
-  googletest
-  GIT_REPOSITORY https://github.com/google/googletest.git
-  GIT_TAG    release-1.12.1
+	googletest
+	GIT_REPOSITORY https://github.com/google/googletest.git
+	GIT_TAG        release-1.12.1
 )
 # C++17 mandatory for google tests
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
+
+# FTXUI
+FetchContent_Declare(
+	ftxui
+	GIT_REPOSITORY https://github.com/ArthurSonzogni/FTXUI.git
+	GIT_TAG        v5.0.0
+)
+FetchContent_MakeAvailable(ftxui)
 
 # Option
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Libraries
-add_library(ZenithToolsLib
+add_library(ZenithToolsLib STATIC
 	src/Timer.cpp
 	src/Exceptions.cpp
 )

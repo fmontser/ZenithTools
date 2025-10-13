@@ -72,6 +72,17 @@ void Timer::Reset() {
 
 const Timer::Status Timer::GetStatus(){
 	std::lock_guard<std::mutex> lock(_statusMutex);
+
+	auto remainingTime = FetchRemainingTime_locked();
+	if (remainingTime <= Seconds::zero())
+		remainingTime = Seconds::zero();
+
+	auto elapsedTime = _durationTime - remainingTime;
+	if (elapsedTime > _durationTime)
+		elapsedTime = _durationTime;
+
+	_status.remaining = FormatTimer(remainingTime);
+	_status.elapsed = FormatTimer(elapsedTime);
 	return _status;
 }
 
@@ -116,16 +127,7 @@ void Timer::Daemon() {
 		std::lock_guard<std::mutex> lock(_statusMutex);
 
 		auto remainingTime = FetchRemainingTime_locked();
-		if (remainingTime <= Seconds::zero()) {
-			remainingTime = Seconds::zero();
+		if (remainingTime <= Seconds::zero())
 			_status.state = State::Ended;
-		}
-
-		auto elapsedTime = _durationTime - remainingTime;
-		if (elapsedTime > _durationTime)
-			elapsedTime = _durationTime;
-
-		_status.remaining = FormatTimer(remainingTime);
-		_status.elapsed = FormatTimer(elapsedTime);
 	}
 }
