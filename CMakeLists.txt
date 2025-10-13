@@ -8,7 +8,7 @@ FetchContent_Declare(
 	GIT_REPOSITORY https://github.com/google/googletest.git
 	GIT_TAG        release-1.12.1
 )
-# C++17 mandatory for google tests
+	# C++17 mandatory for google tests
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
@@ -20,9 +20,15 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(ftxui)
 
-# Option
+# Compiler options
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+if(ENABLE_ASAN)
+	message(STATUS "AddressSanitizer enabled.")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -g")
+endif()
+option(ENABLE_ASAN "Enable AddressSanitizer" OFF)
 
 # Libraries
 add_library(ZenithToolsLib STATIC

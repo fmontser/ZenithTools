@@ -6,7 +6,6 @@ using namespace zenith;
 using std::cout;
 
 int main(int argc, char* argv[]){
-
 	auto testTimer = Timer(Minutes(0), Seconds(10));
 
 	testTimer.Start();
