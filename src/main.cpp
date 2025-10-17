@@ -6,12 +6,26 @@
 int main(int argc, char* argv[]){
 	
 	//TODO Delete Imgui library test
-	sf::RenderWindow window(sf::VideoMode(800, 600), "ZenithTools");
+
+	sf::VideoMode resolution = sf::VideoMode::getDesktopMode();
+	resolution.height /= 10;
+	
+	sf::RenderWindow window	(
+		resolution,
+		"ZenithTools",
+		sf::Style::None | sf::Style::Close
+	);
+
 	window.setFramerateLimit(60);
+	window.setPosition(sf::Vector2i(0,0));
+
+
 	ImGui::SFML::Init(window);
 
 	sf::Clock deltaClock;
 	while (window.isOpen()) {
+		
+		
 		sf::Event event;
 		while (window.pollEvent(event)) {
 			ImGui::SFML::ProcessEvent(window, event);
@@ -21,9 +35,6 @@ int main(int argc, char* argv[]){
 		}
 
 		ImGui::SFML::Update(window, deltaClock.restart());
-
-		ImGui::ShowDemoWindow();
-
 		window.clear();
 		ImGui::SFML::Render(window);
 		window.display();

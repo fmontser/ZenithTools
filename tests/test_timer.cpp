@@ -1,7 +1,5 @@
 #include "gtest/gtest.h"
 #include "Timer.hpp"
-#include <thread>
-#include <chrono>
 
 namespace zenith {
 
