@@ -30,8 +30,6 @@ include(FetchContent)
 	)
 	FetchContent_MakeAvailable(imgui)
 
-
-
 	# IMGUI-SFML Binding
 	FetchContent_Declare(
 		imgui-sfml
@@ -46,7 +44,6 @@ include(FetchContent)
 # COMPILE OPTIONS
 	set(CMAKE_CXX_STANDARD 17)
 	set(CMAKE_CXX_STANDARD_REQUIRED ON)
-	set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 	if(ENABLE_ASAN)
 		message(STATUS "AddressSanitizer enabled.")
@@ -56,12 +53,6 @@ include(FetchContent)
 
 
 # LIBS
-	add_library(ZenithToolsLib STATIC
-		src/Timer.cpp
-		src/Exceptions.cpp
-	)
-	target_include_directories(ZenithToolsLib PUBLIC include)
-
 	add_library(imguiLib STATIC
 		${imgui_SOURCE_DIR}/imgui.cpp
 		${imgui_SOURCE_DIR}/imgui_demo.cpp
@@ -72,12 +63,17 @@ include(FetchContent)
 	target_include_directories(imguiLib PUBLIC ${imgui_SOURCE_DIR})
 
 # BINARIES
-	add_executable(zenith
-		src/main.cpp
+
+	# APP
+	set(APP_SOURCES
+		${CMAKE_SOURCE_DIR}/src/main.cpp
+		${CMAKE_SOURCE_DIR}/src/Timer.cpp
+		${CMAKE_SOURCE_DIR}/src/Exceptions.cpp
+		${CMAKE_SOURCE_DIR}/src/ZenithUi.cpp
+		${CMAKE_SOURCE_DIR}/src/ZenithBar.cpp
 	)
 
-	target_link_libraries(zenith PRIVATE
-		ZenithToolsLib
+	set(APP_LIBS
 		imguiLib
 		sfml-system
 		sfml-window
@@ -85,6 +81,10 @@ include(FetchContent)
 		sfml-audio
 		ImGui-SFML
 	)
+
+	add_executable(zenith ${APP_SOURCES})
+	target_include_directories(zenith PUBLIC include)
+	target_link_libraries(zenith PUBLIC ${APP_LIBS})
 
 # MISC
 	enable_testing()
