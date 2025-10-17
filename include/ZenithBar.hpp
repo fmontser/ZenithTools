@@ -17,6 +17,7 @@ namespace zenith {
 
 			sf::RenderWindow& GetWindow() const;
 			const UiEventList& GetUiEventList() const;
+			void Render();
 
 		private:
 			sf::VideoMode _dynamicResolution;

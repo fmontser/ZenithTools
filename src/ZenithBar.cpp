@@ -11,6 +11,34 @@ ZenithBar::ZenithBar() {
 
 ZenithBar::~ZenithBar() {}
 
+
+void ZenithBar::Render() {
+
+	const ImGuiViewport* viewport = ImGui::GetMainViewport();
+
+	ImGuiWindowFlags windowFlags = 0
+		| ImGuiWindowFlags_NoTitleBar
+		| ImGuiWindowFlags_NoResize
+		| ImGuiWindowFlags_NoMove
+		| ImGuiWindowFlags_NoScrollbar
+		| ImGuiWindowFlags_NoSavedSettings;
+
+	ImGui::SetNextWindowPos(viewport->WorkPos);
+	ImGui::SetNextWindowSize(viewport->WorkSize);
+
+	if (ImGui::Begin("ZenithBar",nullptr, windowFlags)) {
+		ImGui::SameLine(10.0, 5.0);
+		if (ImGui::Button("Close", ImVec2(100,50)))
+			_window->close();
+
+	};
+	ImGui::End();
+
+	_window->clear();
+	ImGui::SFML::Render(*_window);
+	_window->display();
+}
+
 sf::RenderWindow& ZenithBar::GetWindow() const { return *_window; }
 
 const UiEventList& ZenithBar::GetUiEventList() const { return _eventList; }
@@ -18,7 +46,7 @@ const UiEventList& ZenithBar::GetUiEventList() const { return _eventList; }
 void ZenithBar::InitWindow()
 {
 	_dynamicResolution = sf::VideoMode::getDesktopMode();
-	_dynamicResolution.height /= 10; //TODO temp 10% heigh;
+	_dynamicResolution.height /= 5; //TODO temp 5% heigh;
 	
 	_window = std::make_unique<sf::RenderWindow>(
 		_dynamicResolution,

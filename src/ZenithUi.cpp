@@ -17,18 +17,10 @@ void ZenithUi::RenderLoop() {
 
 	ImGui::SFML::Init(_window);
 	while (_window.isOpen()) {
-		
 		ProcessEvents();
-
 		ImGui::SFML::Update(_window, deltaClock.restart());
-
-		//TODO _bar draw logic
-
-		_window.clear();
-		ImGui::SFML::Render(_window);
-		_window.display();
+		_bar.Render();
 	}
-
 	ImGui::SFML::Shutdown();
 }
 
