@@ -6,6 +6,7 @@ using namespace zenith;
 
 ZenithBar::ZenithBar() {
 	InitWindow();
+	SetupEvents();
 }
 
 ZenithBar::~ZenithBar() {}
