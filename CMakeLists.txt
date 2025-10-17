@@ -66,11 +66,11 @@ include(FetchContent)
 
 	# APP
 	set(APP_SOURCES
-		${CMAKE_SOURCE_DIR}/src/main.cpp
-		${CMAKE_SOURCE_DIR}/src/Timer.cpp
-		${CMAKE_SOURCE_DIR}/src/Exceptions.cpp
-		${CMAKE_SOURCE_DIR}/src/ZenithUi.cpp
-		${CMAKE_SOURCE_DIR}/src/ZenithBar.cpp
+		src/main.cpp
+		src/Timer.cpp
+		src/Exceptions.cpp
+		src/ZenithUi.cpp
+		src/ZenithBar.cpp
 	)
 
 	set(APP_LIBS
