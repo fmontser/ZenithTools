@@ -1,6 +1,8 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "imgui.h"
+#include "imgui-SFML.h"
 #include <memory>
 #include <vector>
 #include <functional>
@@ -13,7 +15,7 @@ namespace zenith {
 			ZenithBar();
 			~ZenithBar();
 
-			sf::RenderWindow& GetWindow() const;
+			sf::RenderWindow& GetRenderWindow() const;
 			void Render();
 
 		private:
@@ -21,7 +23,9 @@ namespace zenith {
 			Timer _currentTimer;
 
 			void InitViewport();
-			void SetControls();
+			void SetWindows();
+			void SetPomodoroWindow(ImGuiViewport* viewport);
+			void SetNoiseGeneratorWindow(ImGuiViewport* viewport);
 			void SetDynamicResolution();
 	};
 }
