@@ -6,7 +6,6 @@ using namespace zenith;
 
 ZenithBar::ZenithBar() {
 	InitWindow();
-	SetupEvents();
 }
 
 ZenithBar::~ZenithBar() {}
@@ -41,8 +40,6 @@ void ZenithBar::Render() {
 
 sf::RenderWindow& ZenithBar::GetWindow() const { return *_window; }
 
-const UiEventList& ZenithBar::GetUiEventList() const { return _eventList; }
-
 void ZenithBar::InitWindow()
 {
 	_dynamicResolution = sf::VideoMode::getDesktopMode();
@@ -59,11 +56,3 @@ void ZenithBar::InitWindow()
 	ImGui::SFML::Init(*_window);
 }
 
-void ZenithBar::SetupEvents() {
-
-	_eventList.push_back([this](sf::Event e){
-		if (e.type == sf::Event::Closed)
-			_window->close();
-	});
-
-}

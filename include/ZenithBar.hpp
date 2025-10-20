@@ -7,24 +7,18 @@
 
 namespace zenith {
 
-	using UiWindow = std::unique_ptr<sf::RenderWindow>;
-	using UiEventList = std::vector<std::function<void (sf::Event e)>>;
-	
 	class ZenithBar {
 		public:
 			ZenithBar();
 			~ZenithBar();
 
 			sf::RenderWindow& GetWindow() const;
-			const UiEventList& GetUiEventList() const;
 			void Render();
 
 		private:
 			sf::VideoMode _dynamicResolution;
-			UiWindow _window;
-			UiEventList _eventList;
+			std::unique_ptr<sf::RenderWindow> _window;
 
 			void InitWindow();
-			void SetupEvents();
 	};
 }

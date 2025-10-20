@@ -4,6 +4,8 @@
 
 namespace zenith {
 
+	using UiEventList = std::vector<std::function<void (sf::Event e)>>;
+	
 	class ZenithUi {
 		public:
 			ZenithUi();
@@ -12,9 +14,10 @@ namespace zenith {
 
 		private:
 			ZenithBar _bar;
-			sf::RenderWindow& _window;
+			UiEventList _eventList;
 
 			void RenderLoop();
-			void ProcessEvents();
+			void SetupEvents();
+			void ProcessEvents(sf::RenderWindow& window);
 	};
 }

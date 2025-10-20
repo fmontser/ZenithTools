@@ -5,31 +5,43 @@
 
 using namespace zenith;
 
-ZenithUi::ZenithUi() : _window(_bar.GetWindow()) {}
+ZenithUi::ZenithUi() {}
 
 void ZenithUi::Run() {
+	SetupEvents();
 	RenderLoop();
 }
 
 void ZenithUi::RenderLoop() {
-	
+	auto& window = _bar.GetWindow();
+
 	sf::Clock deltaClock;
 
-	ImGui::SFML::Init(_window);
-	while (_window.isOpen()) {
-		ProcessEvents();
-		ImGui::SFML::Update(_window, deltaClock.restart());
+	ImGui::SFML::Init(window);
+	while (window.isOpen()) {
+		ProcessEvents(window);
+		ImGui::SFML::Update(window, deltaClock.restart());
 		_bar.Render();
 	}
 	ImGui::SFML::Shutdown();
 }
 
-void zenith::ZenithUi::ProcessEvents()
-{
+void ZenithUi::SetupEvents() {
+	auto& window = _bar.GetWindow();
+
+	_eventList.push_back([&, this](sf::Event e){
+		if (e.type == sf::Event::Closed)
+			window.close();
+	});
+
+}
+
+void ZenithUi::ProcessEvents(sf::RenderWindow& window) {
 	sf::Event event;
-	while (_window.pollEvent(event)) {
-		ImGui::SFML::ProcessEvent(_window, event);
-		for (const auto& f : _bar.GetUiEventList())
+	while (window.pollEvent(event)) {
+		ImGui::SFML::ProcessEvent(window, event);
+		for (const auto& f : _eventList)
 			f(event);
 	}
 }
+
