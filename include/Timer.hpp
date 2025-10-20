@@ -56,6 +56,7 @@ namespace zenith {
 			 * @param seconds The seconds part of the timer's duration.
 			 */
 			Timer(Minutes minutes, Seconds seconds);
+			Timer(unsigned int minutes, unsigned int seconds);
 
 			/**
 			 * @brief Destructor that ensures the background thread is properly handled.

@@ -5,7 +5,7 @@
 
 using namespace zenith;
 
-ZenithBar::ZenithBar() {
+ZenithBar::ZenithBar() : _currentTimer(Timer(25,0)){
 	InitViewport();
 }
 
@@ -54,9 +54,32 @@ void ZenithBar::SetControls() {
 		| ImGuiWindowFlags_NoSavedSettings;
 
 	if (ImGui::Begin("ZenithBar",nullptr, windowFlags)) {
-		ImGui::SameLine(10.0, 5.0);
+		
+		ImGui::SameLine(10, 0);
+		if (ImGui::Button("M", ImVec2(50,50)))
+			_viewport->close();
+
+		ImGui::SameLine(viewport->WorkSize.x - 60, 0);
 		if (ImGui::Button("X", ImVec2(50,50)))
 			_viewport->close();
+
+		ImGui::Text(_currentTimer.GetStatus().remaining.c_str());
+
+
+		if (ImGui::Button("Start", ImVec2(50,50)))
+			_currentTimer.Start();
+
+		ImGui::SameLine(0, 5);
+		if (ImGui::Button("Pause", ImVec2(50,50)))
+			_currentTimer.Pause();
+
+		ImGui::SameLine(0, 5);
+		if (ImGui::Button("Resume", ImVec2(50,50)))
+			_currentTimer.Resume();
+
+		ImGui::SameLine(0, 5);
+		if (ImGui::Button("Reset", ImVec2(50,50)))
+			_currentTimer.Reset();
 
 		ImGui::End();
 	};
