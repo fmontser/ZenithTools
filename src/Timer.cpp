@@ -16,6 +16,14 @@ Timer::Timer(Minutes minutes,Seconds seconds) {
 	_status.elapsed = FormatTimer(Seconds::zero());
 }
 
+Timer::Timer(unsigned int minutes,unsigned int seconds) {
+	_remainingTime = Minutes(minutes) + Seconds(seconds);
+	_durationTime = _remainingTime;
+	_status.state = State::Stopped;
+	_status.remaining = FormatTimer(_remainingTime);
+	_status.elapsed = FormatTimer(Seconds::zero());
+}
+
 Timer::~Timer() {
 	{
 		std::lock_guard<std::mutex> lock(_statusMutex);
@@ -30,7 +38,7 @@ void Timer::Start() {
 
 	if (_status.state == State::Ended) {
 		if (_thread.joinable())
-			_thread.join();
+			_thread.detach();
 		_remainingTime = _durationTime;
 		_status.state = State::Stopped;
 	}
@@ -39,6 +47,8 @@ void Timer::Start() {
 		_startTime = Clock::now();
 		_targetTime = _startTime + _remainingTime;
 		_status.state = State::Running;
+		if (_thread.joinable())
+			_thread.detach();
 		_thread = std::thread(&Timer::Daemon, this);
 	}
 }

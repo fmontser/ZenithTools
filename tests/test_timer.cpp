@@ -1,7 +1,5 @@
 #include "gtest/gtest.h"
 #include "Timer.hpp"
-#include <thread>
-#include <chrono>
 
 namespace zenith {
 
@@ -137,5 +135,18 @@ namespace zenith {
 		EXPECT_EQ(status.state, Timer::State::Running);
 		EXPECT_EQ(status.remaining, "00:01");
 		EXPECT_EQ(status.elapsed, "00:01");
+	}
+
+	//Verify timer starts and reset succesion wont lock the thread
+	TEST(TimerTest, RapidStartResetDoesNotBlock) {
+		Timer timer(Minutes(1), Seconds(0));
+
+		for (int i = 0; i < 5; ++i) {
+			timer.Start();
+			std::this_thread::sleep_for(std::chrono::milliseconds(500));
+			timer.Reset();
+			std::this_thread::sleep_for(std::chrono::milliseconds(500));
+		}
+		EXPECT_EQ(timer.GetStatus().state, Timer::State::Stopped);
 	}
 }

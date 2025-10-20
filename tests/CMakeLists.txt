@@ -1,11 +1,17 @@
-add_executable(run_tests
+set(TEST_SOURCES
 	test_timer.cpp
+	${CMAKE_SOURCE_DIR}/src/Timer.cpp
+	${CMAKE_SOURCE_DIR}/src/Exceptions.cpp
 )
 
-target_link_libraries(run_tests PRIVATE
+add_executable(zenith_tests ${TEST_SOURCES})
+
+target_include_directories(zenith_tests PRIVATE ../include)
+
+target_link_libraries(zenith_tests PRIVATE
 	gtest_main
-	ZenithToolsLib
+	${APP_LIBS}
 )
 
 include(GoogleTest)
-gtest_discover_tests(run_tests)
+gtest_discover_tests(zenith_tests)
