@@ -93,6 +93,7 @@ const Timer::Status Timer::GetStatus(){
 
 	_status.remaining = FormatTimer(remainingTime);
 	_status.elapsed = FormatTimer(elapsedTime);
+	_status.progress = CalculateProgress(elapsedTime);
 	return _status;
 }
 
@@ -116,6 +117,10 @@ const Seconds Timer::FetchRemainingTime_locked() const {
 const Seconds Timer::FetchRemainingTime() {
 	std::lock_guard<std::mutex> lock(_statusMutex);
 	return FetchRemainingTime_locked();
+}
+
+float Timer::CalculateProgress(const Seconds& elapsedTime) {
+	return (float)(elapsedTime.count() / _durationTime.count());
 }
 
 const string Timer::FormatTimer(const Seconds& seconds) const {

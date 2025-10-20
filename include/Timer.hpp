@@ -48,6 +48,7 @@ namespace zenith {
 				State state;      ///< The current state of the timer.
 				string remaining; ///< Formatted string of the remaining time (e.g., "24:59").
 				string elapsed;   ///< Formatted string of the elapsed time.
+				float progress;   ///< 0.0 to 1.0 progress elapsed
 			};
 
 			/**
@@ -124,6 +125,12 @@ namespace zenith {
 			 * @return A string in "MM:SS" format.
 			 */
 			const string FormatTimer(const Seconds& seconds) const;
+
+			/**
+			 * @brief Returns progress with float
+			 * @return A float 0.0g to 1.0f 
+			 */
+			float CalculateProgress(const Seconds& elapsedTime);
 
 			/**
 			 * @brief The main function for the background thread.
