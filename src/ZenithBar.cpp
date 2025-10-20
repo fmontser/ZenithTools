@@ -1,52 +1,51 @@
 #include "ZenithBar.hpp"
 #include "imgui.h"
 #include "imgui-SFML.h"
+#include "Exceptions.hpp"
 
 using namespace zenith;
 
 ZenithBar::ZenithBar() {
-	InitWindow();
+	InitViewport();
 }
 
 ZenithBar::~ZenithBar() {}
 
 
 void ZenithBar::Render() {
-	SetViewport();
-	SetWindow();
-	_window->clear();
-	ImGui::SFML::Render(*_window);
-	_window->display();
+
+	SetControls();
+	_viewport->clear();
+	ImGui::SFML::Render(*_viewport);
+	_viewport->display();
 }
 
-sf::RenderWindow& ZenithBar::GetWindow() const { return *_window; }
+sf::RenderWindow& ZenithBar::GetWindow() const { return *_viewport; }
 
 
-void ZenithBar::InitWindow()
+void ZenithBar::InitViewport()
 {
-	//TODO move dynamic resolution to funcion (auto update)
-	_dynamicResolution = sf::VideoMode::getDesktopMode();
-	_dynamicResolution.height /= 5; //TODO temp 5% heigh;
-	
-	_window = std::make_unique<sf::RenderWindow>(
-		_dynamicResolution,
+	_viewport = std::make_unique<sf::RenderWindow>(
+		sf::VideoMode::getDesktopMode(),
 		"ZenithTools",
-		sf::Style::None | sf::Style::Close
+		sf::Style::None
 	);
-	_window->setFramerateLimit(60);
-	_window->setPosition(sf::Vector2i(0,0));
-	
-	ImGui::SFML::Init(*_window);
+
+	//TODO remove hardcoded values
+	_viewport->setFramerateLimit(60);
+	_viewport->setSize(sf::Vector2u(1080, 386));
+	_viewport->setPosition(sf::Vector2i(300,100));
+
+	ImGui::SFML::Init(*_viewport);
 }
 
-void ZenithBar::SetViewport() {
+void ZenithBar::SetControls() {
+
 	const ImGuiViewport* viewport = ImGui::GetMainViewport();
 
 	ImGui::SetNextWindowPos(viewport->WorkPos);
 	ImGui::SetNextWindowSize(viewport->WorkSize);
-}
 
-void ZenithBar::SetWindow() {
 	ImGuiWindowFlags windowFlags = 0
 		| ImGuiWindowFlags_NoTitleBar
 		| ImGuiWindowFlags_NoResize
@@ -56,9 +55,15 @@ void ZenithBar::SetWindow() {
 
 	if (ImGui::Begin("ZenithBar",nullptr, windowFlags)) {
 		ImGui::SameLine(10.0, 5.0);
-		if (ImGui::Button("Close", ImVec2(100,50)))
-			_window->close();
+		if (ImGui::Button("X", ImVec2(50,50)))
+			_viewport->close();
 
+		ImGui::End();
 	};
-	ImGui::End();
+}
+
+void ZenithBar::SetDynamicResolution()
+{
+	//TODO
+	throw NotImplementedException();
 }

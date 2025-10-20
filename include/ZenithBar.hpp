@@ -16,11 +16,10 @@ namespace zenith {
 			void Render();
 
 		private:
-			sf::VideoMode _dynamicResolution;
-			std::unique_ptr<sf::RenderWindow> _window;
+			std::unique_ptr<sf::RenderWindow> _viewport;
 
-			void InitWindow();
-			void SetViewport();
-			void SetWindow();
+			void InitViewport();
+			void SetControls();
+			void SetDynamicResolution();
 	};
 }
