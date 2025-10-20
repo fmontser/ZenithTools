@@ -16,21 +16,33 @@ PomodoroSession::PomodoroSession(uint32_t rounds, uint32_t workMinutes,
 				Timer(restTime, 0)
 			));
 		}
+
+		_status.actualRound = &_roundQueue.front();
 }
 
-const PomodoroSession::Round& PomodoroSession::GetActualRound() {
+const PomodoroSession::Status& PomodoroSession::GetStatus() {
 	UpdateRound();
-	return _roundQueue.front();
+	return _status;
 }
 
 void PomodoroSession::StartActualRound() {
-	//TODO
-	throw NotImplementedException();
+	Round& round = _roundQueue.front();
+	if (_status.state == State::IDLE)
+		_status.state = State::ONGOING;
+
+	if (round.state == RoundState::IDLE) {
+		round.workTimer.Start();
+		round.state = RoundState::WORKING;
+	}
 }
 
 void zenith::PomodoroSession::SetNextRound() {
-	//TODO
-	throw NotImplementedException();
+	Round& round = _roundQueue.front();
+	if (round.state == RoundState::COMPLETED) {
+		_roundQueue.pop();
+		if (_roundQueue.empty())
+			_status.state = State::COMPLETED;
+	}
 }
 
 void PomodoroSession::UpdateRound() {

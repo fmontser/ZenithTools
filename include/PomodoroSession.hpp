@@ -15,23 +15,34 @@ namespace zenith {
 				IDLE, WORKING, RESTING, COMPLETED
 			};
 
+			enum class State {
+				IDLE, ONGOING, COMPLETED
+			};
+
 			struct Round {
 				Timer& workTimer;
 				Timer& restTimer;
 				float progress = 0.0f;
 				RoundState state = RoundState::IDLE;
 				Round(Timer workTimer, Timer restTimer)
-					: workTimer(workTimer), restTimer(restTimer) {}
+				: workTimer(workTimer), restTimer(restTimer) {}
+			};
+			
+			struct Status {
+				State state = State::IDLE;
+				Round* actualRound = nullptr;
 			};
 
-			const Round& GetActualRound();
+			const Status& GetStatus();
 			void StartActualRound();
 			void SetNextRound();
-
-		private:
+			
+			private:
+			Status _status;
 			std::queue<Round> _roundQueue;
-
+			
 			void UpdateRound();
+
 
 	};
 }
