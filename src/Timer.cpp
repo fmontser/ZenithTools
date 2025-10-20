@@ -120,7 +120,7 @@ const Seconds Timer::FetchRemainingTime() {
 }
 
 float Timer::CalculateProgress(const Seconds& elapsedTime) {
-	return (float)(elapsedTime.count() / _durationTime.count());
+	return static_cast<float>(elapsedTime.count()) / _durationTime.count();
 }
 
 const string Timer::FormatTimer(const Seconds& seconds) const {
