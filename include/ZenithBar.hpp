@@ -20,5 +20,7 @@ namespace zenith {
 			std::unique_ptr<sf::RenderWindow> _window;
 
 			void InitWindow();
+			void SetViewport();
+			void SetWindow();
 	};
 }
