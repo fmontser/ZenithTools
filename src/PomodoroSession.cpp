@@ -31,6 +31,9 @@ void PomodoroSession::StartActualRound() {
 		_status.state = State::ONGOING;
 
 	if (round.state == RoundState::IDLE) {
+
+		//TODO @@@@@@@ thread problem!!!
+
 		round.workTimer.Start();
 		round.state = RoundState::WORKING;
 	}

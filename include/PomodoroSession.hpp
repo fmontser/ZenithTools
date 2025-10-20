@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Timer.hpp"
-#include <vector>
 #include <queue>
 
 namespace zenith {
