@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ZenithBar.hpp"
+#include <vector>
+#include <functional>
 
 namespace zenith {
 

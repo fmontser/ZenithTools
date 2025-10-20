@@ -71,6 +71,7 @@ include(FetchContent)
 		src/Exceptions.cpp
 		src/ZenithUi.cpp
 		src/ZenithBar.cpp
+		src/PomodoroSession.cpp
 	)
 
 	set(APP_LIBS

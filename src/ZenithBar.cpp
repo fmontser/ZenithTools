@@ -5,7 +5,8 @@
 
 using namespace zenith;
 
-ZenithBar::ZenithBar() : _currentTimer(Timer(25,0)){
+//TODO remove hardcoded values and test timer
+ZenithBar::ZenithBar() : _currentTimer(Timer(1,0)){
 	InitViewport();
 }
 
@@ -94,7 +95,7 @@ void ZenithBar::SetPomodoroWindow(ImGuiViewport* viewport) {
 		if (ImGui::Button("Reset", ImVec2(50,50)))
 			_currentTimer.Reset();
 
-		ImGui::ProgressBar(0.90, ImVec2(-1.0f, 0.0f),
+		ImGui::ProgressBar(_currentTimer.GetStatus().progress, ImVec2(-1.0f, 0.0f),
 			_currentTimer.GetStatus().remaining.c_str());
 
 		ImGui::End();

@@ -4,8 +4,6 @@
 #include "imgui.h"
 #include "imgui-SFML.h"
 #include <memory>
-#include <vector>
-#include <functional>
 #include "Timer.hpp"
 
 namespace zenith {
