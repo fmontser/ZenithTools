@@ -18,7 +18,6 @@ namespace zenith {
 
 		private:
 			std::unique_ptr<sf::RenderWindow> _viewport;
-			Timer _currentTimer;
 
 			void InitViewport();
 			void SetWindows();

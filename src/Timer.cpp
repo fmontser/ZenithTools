@@ -11,50 +11,42 @@ using std::stringstream;
 Timer::Timer(Minutes minutes,Seconds seconds) {
 	_remainingTime = minutes + seconds;
 	_durationTime = _remainingTime;
-	_status.state = State::Stopped;
-	_status.remaining = FormatTimer(_remainingTime);
-	_status.elapsed = FormatTimer(Seconds::zero());
-}
-
-Timer::Timer(unsigned int minutes,unsigned int seconds) {
-	_remainingTime = Minutes(minutes) + Seconds(seconds);
-	_durationTime = _remainingTime;
-	_status.state = State::Stopped;
+	_status.mode = Mode::Stopped;
 	_status.remaining = FormatTimer(_remainingTime);
 	_status.elapsed = FormatTimer(Seconds::zero());
 }
 
 void Timer::Start() {
-	if (_status.state == State::Ended) {
+	if (_status.mode == Mode::Ended) {
 		_remainingTime = _durationTime;
-		_status.state = State::Stopped;
+		_status.mode = Mode::Stopped;
 	}
 
-	if (_status.state == State::Stopped) {
+	if (_status.mode == Mode::Stopped) {
 		_startTime = Clock::now();
 		_targetTime = _startTime + _remainingTime;
-		_status.state = State::Running;
+		_status.mode = Mode::Running;
 	}
 }
 
 void Timer::Pause() {
-	if (_status.state == State::Running) {
+	if (_status.mode == Mode::Running) {
 		_remainingTime = FetchRemainingTime();
-		_status.state = State::Paused;
+		_status.mode = Mode::Paused;
 	}
 }
 
 void Timer::Resume() {
-	if (_status.state == State::Paused) {
+	if (_status.mode == Mode::Paused) {
 		_targetTime = Clock::now() + _remainingTime;
-		_status.state = State::Running;
+		_status.mode = Mode::Running;
 	}
 }
 
 void Timer::Reset() {
-	if (_status.state != State::Stopped) {
+	if (_status.mode != Mode::Stopped) {
 		_remainingTime = _durationTime;
-		_status.state = State::Stopped;
+		_status.mode = Mode::Stopped;
 	}
 }
 
@@ -62,7 +54,7 @@ const Timer::Status Timer::GetStatus(){
 	auto remainingTime = FetchRemainingTime();
 	if (remainingTime <= Seconds::zero()) {
 		remainingTime = Seconds::zero();
-		_status.state = State::Ended;
+		_status.mode = Mode::Ended;
 	}
 
 	auto elapsedTime = _durationTime - remainingTime;
@@ -76,19 +68,19 @@ const Timer::Status Timer::GetStatus(){
 }
 
 const Seconds Timer::FetchRemainingTime() const {
-	switch (_status.state)
+	switch (_status.mode)
 	{
-		case State::Stopped:
+		case Mode::Stopped:
 			return _durationTime;
-		case State::Paused:
+		case Mode::Paused:
 			return _remainingTime;
-		case State::Running:
+		case Mode::Running:
 			return std::chrono::round<Seconds>(
 			_targetTime - Clock::now());
-		case State::Ended:
+		case Mode::Ended:
 			return Seconds::zero();
 		default:
-			throw InvalidStateException();
+			throw InvalidModeException();
 	}
 }
 

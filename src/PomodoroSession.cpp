@@ -3,70 +3,74 @@
 
 using namespace zenith;
 
-PomodoroSession::PomodoroSession(uint32_t rounds, uint32_t workMinutes,
-	uint32_t restMinutes, uint32_t largeRestMinutes) {
+PomodoroSession::PomodoroSession(uint rounds, Seconds workTime,
+	Seconds restTime, Seconds largeRestTime) {
 
 		for (int i = 0; i < rounds; ++i) {
-			auto restTime = restMinutes;
-			if (i == (rounds / 2))
-				restTime = largeRestMinutes;
+			auto restSeconds = restTime;
+			if (i == (rounds / 2) && rounds > 1)
+				restSeconds = largeRestTime;
 
 			_roundQueue.push(Round(
-				Timer(workMinutes, 0),
-				Timer(restTime, 0)
+				Timer(Minutes::zero(), workTime),
+				Timer(Minutes::zero(), restSeconds)
 			));
 		}
-
-		_status.actualRound = &_roundQueue.front();
 }
 
 const PomodoroSession::Status& PomodoroSession::GetStatus() {
-	UpdateRound();
+	if (!_roundQueue.empty())
+		UpdateRound();
 	return _status;
 }
 
 void PomodoroSession::StartActualRound() {
 	Round& round = _roundQueue.front();
-	if (_status.state == State::IDLE)
-		_status.state = State::ONGOING;
+	if (_status.mode == Mode::IDLE)
+		_status.mode = Mode::ONGOING;
 
-	if (round.state == RoundState::IDLE) {
-		round.state = RoundState::WORKING;
+	if (round.mode == RoundMode::IDLE) {
+		round.mode = RoundMode::WORKING;
 		round.workTimer.Start();
 	}
 }
 
+
 void zenith::PomodoroSession::SetNextRound() {
 	Round& round = _roundQueue.front();
-	if (round.state == RoundState::COMPLETED) {
+	if (round.mode == RoundMode::COMPLETED) {
 		_roundQueue.pop();
-		if (_roundQueue.empty())
-			_status.state = State::COMPLETED;
+		if (_roundQueue.empty()) {
+			_status.mode = Mode::COMPLETED;
+		}
 	}
 }
 
 void PomodoroSession::UpdateRound() {
 	Round& round = _roundQueue.front();
 
-	switch (round.state)
+	switch (round.mode)
 	{
-		case RoundState::IDLE:
+		case RoundMode::IDLE:
 			break;
-		case RoundState::WORKING:
+		case RoundMode::WORKING:
 			round.progress = round.workTimer.GetStatus().progress;
-			if (round.workTimer.GetStatus().state == Timer::State::Ended)
-				round.state = RoundState::RESTING;
+			if (round.workTimer.GetStatus().mode == Timer::Mode::Ended) {
+				round.mode = RoundMode::RESTING;
+				round.restTimer.Start();
+			}
 			break;
-		case RoundState::RESTING:
+		case RoundMode::RESTING:
 			round.progress = round.restTimer.GetStatus().progress;
-			if (round.restTimer.GetStatus().state == Timer::State::Ended)
-				round.state = RoundState::COMPLETED;
+			if (round.restTimer.GetStatus().mode == Timer::Mode::Ended) {
+				round.mode = RoundMode::COMPLETED;
+				SetNextRound();
+			}
 			break;
-		case RoundState::COMPLETED:
-			SetNextRound();
-			break;	
+		case RoundMode::COMPLETED:
+			break;
 		default:
-			throw InvalidStateException();
+			throw InvalidModeException();
 			return;
 	}
 }

@@ -6,7 +6,7 @@
 using namespace zenith;
 
 //TODO remove hardcoded values and test timer
-ZenithBar::ZenithBar() : _currentTimer(Timer(1,0)){
+ZenithBar::ZenithBar() {
 	InitViewport();
 }
 
@@ -80,7 +80,7 @@ void ZenithBar::SetPomodoroWindow(ImGuiViewport* viewport) {
 		ImGui::RadioButton(" ", false);
 		ImGui::EndDisabled();
 
-		if (ImGui::Button("Start", ImVec2(50,50)))
+/* 		if (ImGui::Button("Start", ImVec2(50,50)))
 			_currentTimer.Start();
 
 		ImGui::SameLine(0, 5);
@@ -97,7 +97,7 @@ void ZenithBar::SetPomodoroWindow(ImGuiViewport* viewport) {
 
 		ImGui::ProgressBar(_currentTimer.GetStatus().progress, ImVec2(-1.0f, 0.0f),
 			_currentTimer.GetStatus().remaining.c_str());
-
+ */
 		ImGui::End();
 	};
 

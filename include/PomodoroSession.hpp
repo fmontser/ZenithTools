@@ -7,14 +7,15 @@ namespace zenith {
 
 	class PomodoroSession {
 		public:
-			PomodoroSession(uint32_t rounds, uint32_t workMinutes,
-				uint32_t restMinutes, uint32_t largeRestMinutes);
+		
+			PomodoroSession(uint rounds, Seconds workTime,
+				Seconds restTime, Seconds largeRestTime);
 
-			enum class RoundState {
+			enum class RoundMode {
 				IDLE, WORKING, RESTING, COMPLETED
 			};
 
-			enum class State {
+			enum class Mode {
 				IDLE, ONGOING, COMPLETED
 			};
 
@@ -22,14 +23,13 @@ namespace zenith {
 				Timer workTimer;
 				Timer restTimer;
 				float progress = 0.0f;
-				RoundState state = RoundState::IDLE;
+				RoundMode mode = RoundMode::IDLE;
 				Round(Timer workTimer, Timer restTimer)
 				: workTimer(workTimer), restTimer(restTimer) {}
 			};
 			
 			struct Status {
-				State state = State::IDLE;
-				Round* actualRound = nullptr;
+				Mode mode = Mode::IDLE;
 			};
 
 			const Status& GetStatus();

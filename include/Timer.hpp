@@ -30,9 +30,9 @@ namespace zenith {
 	class Timer {
 		public:
 			/**
-			 * @brief Represents the possible states of the Timer.
+			 * @brief Represents the possible modes of the Timer.
 			 */
-			enum class State {
+			enum class Mode {
 				Stopped, ///< The timer is not started.
 				Paused,  ///< The timer is paused.
 				Running, ///< The timer is actively counting down.
@@ -43,7 +43,7 @@ namespace zenith {
 			 * @brief A snapshot of the timer's current status.
 			 */
 			struct Status {
-				State state;             ///< The current state of the timer.
+				Mode mode;             ///< The current mode of the timer.
 				string remaining;        ///< Formatted string of the remaining time (e.g., "24:59").
 				string elapsed;          ///< Formatted string of the elapsed time.
 				float progress = 0.0f;   ///< 0.0 to 1.0 progress elapsed
@@ -55,13 +55,6 @@ namespace zenith {
 			 * @param seconds The seconds part of the timer's duration.
 			 */
 			Timer(Minutes minutes, Seconds seconds);
-
-			/**
-			 * @brief Constructs a new Timer with a specific duration.
-			 * @param minutes The minutes part of the timer's duration (int).
-			 * @param seconds The seconds part of the timer's duration (int).
-			 */
-			Timer(unsigned int minutes, unsigned int seconds);
 
 			/**
 			 * @brief Starts the timer countdown.
@@ -88,7 +81,7 @@ namespace zenith {
 
 			/**
 			 * @brief Retrieves a snapshot of the timer's current status.
-			 * @return A const Status struct containing the state, remaining time, elapsed time and progress.
+			 * @return A const Status struct containing the mode, remaining time, elapsed time and progress.
 			 * @note Status is only update when calling this function.
 			 */
 			const Status GetStatus();
