@@ -31,11 +31,8 @@ void PomodoroSession::StartActualRound() {
 		_status.state = State::ONGOING;
 
 	if (round.state == RoundState::IDLE) {
-
-		//TODO @@@@@@@ thread problem!!!
-
-		round.workTimer.Start();
 		round.state = RoundState::WORKING;
+		round.workTimer.Start();
 	}
 }
 
@@ -57,11 +54,16 @@ void PomodoroSession::UpdateRound() {
 			break;
 		case RoundState::WORKING:
 			round.progress = round.workTimer.GetStatus().progress;
+			if (round.workTimer.GetStatus().state == Timer::State::Ended)
+				round.state = RoundState::RESTING;
 			break;
 		case RoundState::RESTING:
 			round.progress = round.restTimer.GetStatus().progress;
+			if (round.restTimer.GetStatus().state == Timer::State::Ended)
+				round.state = RoundState::COMPLETED;
 			break;
 		case RoundState::COMPLETED:
+			SetNextRound();
 			break;	
 		default:
 			throw InvalidStateException();

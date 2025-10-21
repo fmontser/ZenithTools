@@ -19,8 +19,8 @@ namespace zenith {
 			};
 
 			struct Round {
-				Timer& workTimer;
-				Timer& restTimer;
+				Timer workTimer;
+				Timer restTimer;
 				float progress = 0.0f;
 				RoundState state = RoundState::IDLE;
 				Round(Timer workTimer, Timer restTimer)

@@ -6,10 +6,8 @@
 
 #pragma once
 
-#include <thread>
 #include <chrono>
 #include <string>
-#include <mutex>
 
 using std::string;
 
@@ -25,7 +23,7 @@ namespace zenith {
 	using Minutes = std::chrono::minutes;
 
 	/**
-	 * @brief Manages a thread based timer with minutes and seconds.
+	 * @brief Manages a timer with minutes and seconds.
 	 * 
 	 * Allows to start, pause, resume and stop a timer.
 	 */
@@ -124,7 +122,7 @@ namespace zenith {
 			 * @brief Returns progress with float
 			 * @return A float 0.0g to 1.0f 
 			 */
-			float CalculateProgress(const Seconds& elapsedTime);
+			float CalculateProgress(const Seconds& elapsedTime) const;
 	};
 
 }

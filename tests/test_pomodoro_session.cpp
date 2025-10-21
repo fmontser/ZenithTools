@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "PomodoroSession.hpp"
+#include <thread>
 
 namespace zenith {
 
@@ -18,7 +19,7 @@ namespace zenith {
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		EXPECT_EQ(session.GetStatus().state, PomodoroSession::State::ONGOING);
 	}
-
+ 
 	// Verify completed state
 	TEST(PomodoroSessionTest, SwitchesToCompleted) {
 		PomodoroSession session = PomodoroSession(1,1,0,0);
@@ -27,6 +28,9 @@ namespace zenith {
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		EXPECT_EQ(session.GetStatus().state, PomodoroSession::State::ONGOING);
 		std::this_thread::sleep_for(std::chrono::minutes(1));
+		
+		//TODO @@@@@ completar test...
+
 		EXPECT_EQ(session.GetStatus().state, PomodoroSession::State::COMPLETED);
 	}
 
