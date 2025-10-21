@@ -27,7 +27,7 @@ namespace zenith {
 	/**
 	 * @brief Manages a thread based timer with minutes and seconds.
 	 * 
-	 * Allows to start, pause, resume and stop a timer. Concurrency safe.
+	 * Allows to start, pause, resume and stop a timer.
 	 */
 	class Timer {
 		public:
@@ -45,10 +45,10 @@ namespace zenith {
 			 * @brief A snapshot of the timer's current status.
 			 */
 			struct Status {
-				State state;      ///< The current state of the timer.
-				string remaining; ///< Formatted string of the remaining time (e.g., "24:59").
-				string elapsed;   ///< Formatted string of the elapsed time.
-				float progress;   ///< 0.0 to 1.0 progress elapsed
+				State state;             ///< The current state of the timer.
+				string remaining;        ///< Formatted string of the remaining time (e.g., "24:59").
+				string elapsed;          ///< Formatted string of the elapsed time.
+				float progress = 0.0f;   ///< 0.0 to 1.0 progress elapsed
 			};
 
 			/**
@@ -57,67 +57,61 @@ namespace zenith {
 			 * @param seconds The seconds part of the timer's duration.
 			 */
 			Timer(Minutes minutes, Seconds seconds);
-			Timer(unsigned int minutes, unsigned int seconds);
 
 			/**
-			 * @brief Destructor that ensures the background thread is properly handled.
+			 * @brief Constructs a new Timer with a specific duration.
+			 * @param minutes The minutes part of the timer's duration (int).
+			 * @param seconds The seconds part of the timer's duration (int).
 			 */
-			~Timer();
+			Timer(unsigned int minutes, unsigned int seconds);
 
 			/**
 			 * @brief Starts the timer countdown.
 			 * @note If the timer was already running, it will be reset and started again.
-			 *       This method is thread-safe.
 			 */
 			void Start();
 
 			/**
 			 * @brief Pauses the timer's countdown.
 			 * @note If the timer is not running, this method has no effect.
-			 *       This method is thread-safe.
 			 */
 			void Pause();
 
 			/**
 			 * @brief Resumes the timer's countdown from where it was paused.
 			 * @note If the timer was not paused, this method has no effect.
-			 *       This method is thread-safe.
 			 */
 			void Resume();
 
 			/**
 			 * @brief Resets the timer to its initial duration and stops it.
-			 * @note This method is thread-safe.
 			 */
 			void Reset();
 
 			/**
 			 * @brief Retrieves a snapshot of the timer's current status.
-			 * @return A const Status struct containing the state, remaining time, and elapsed time.
-			 * @note This method is thread-safe.
+			 * @return A const Status struct containing the state, remaining time, elapsed time and progress.
+			 * @note Status is only update when calling this function.
 			 */
 			const Status GetStatus();
 
 		private:
-			Status _status; ///< Holds the current snapshot of the timer's status.
-			std::thread _thread; ///< The background thread that runs the Daemon function.
-			std::mutex _statusMutex; ///< Mutex to protect shared access to timer data.
-			Seconds _durationTime; ///< The total duration the timer was set for.
-			Seconds _remainingTime; ///< The time remaining when paused.
-			TimePoint _startTime; ///< The time point when the timer was last (re)started.
-			TimePoint _targetTime; ///< The time point when the timer is scheduled to end.
+			Status _status;           ///< Holds the current snapshot of the timer's status.
+			Seconds _durationTime;    ///< The total duration the timer was set for.
+			Seconds _remainingTime;   ///< The time remaining when paused.
+			TimePoint _startTime;     ///< The time point when the timer was last (re)started.
+			TimePoint _targetTime;    ///< The time point when the timer is scheduled to end.
 
 			/**
 			 * @brief Calculates the remaining time based on the current time (internal, non-locking).
 			 * @return The remaining seconds.
 			 */
-			const Seconds FetchRemainingTime_locked() const;
 
 			/**
 			 * @brief Acquires a lock and calculates the remaining time.
 			 * @return The remaining seconds.
 			 */
-			const Seconds FetchRemainingTime();
+			const Seconds FetchRemainingTime() const;
 
 			/**
 			 * @brief Formats a duration in seconds into a MM:SS string.
@@ -131,11 +125,6 @@ namespace zenith {
 			 * @return A float 0.0g to 1.0f 
 			 */
 			float CalculateProgress(const Seconds& elapsedTime);
-
-			/**
-			 * @brief The main function for the background thread.
-			 */
-			void Daemon();
 	};
 
 }

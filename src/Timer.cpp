@@ -24,21 +24,8 @@ Timer::Timer(unsigned int minutes,unsigned int seconds) {
 	_status.elapsed = FormatTimer(Seconds::zero());
 }
 
-Timer::~Timer() {
-	{
-		std::lock_guard<std::mutex> lock(_statusMutex);
-		_status.state = State::Ended;
-	}
-	if (_thread.joinable())
-		_thread.join();
-}
-
 void Timer::Start() {
-	std::lock_guard<std::mutex> lock(_statusMutex);
-
 	if (_status.state == State::Ended) {
-		if (_thread.joinable())
-			_thread.detach();
 		_remainingTime = _durationTime;
 		_status.state = State::Stopped;
 	}
@@ -47,24 +34,17 @@ void Timer::Start() {
 		_startTime = Clock::now();
 		_targetTime = _startTime + _remainingTime;
 		_status.state = State::Running;
-		if (_thread.joinable())
-			_thread.detach();
-		_thread = std::thread(&Timer::Daemon, this);
 	}
 }
 
 void Timer::Pause() {
-	std::lock_guard<std::mutex> lock(_statusMutex);
-
 	if (_status.state == State::Running) {
-		_remainingTime = FetchRemainingTime_locked();
+		_remainingTime = FetchRemainingTime();
 		_status.state = State::Paused;
 	}
 }
 
 void Timer::Resume() {
-	std::lock_guard<std::mutex> lock(_statusMutex);
-
 	if (_status.state == State::Paused) {
 		_targetTime = Clock::now() + _remainingTime;
 		_status.state = State::Running;
@@ -72,8 +52,6 @@ void Timer::Resume() {
 }
 
 void Timer::Reset() {
-	std::lock_guard<std::mutex> lock(_statusMutex);
-
 	if (_status.state != State::Stopped) {
 		_remainingTime = _durationTime;
 		_status.state = State::Stopped;
@@ -81,11 +59,11 @@ void Timer::Reset() {
 }
 
 const Timer::Status Timer::GetStatus(){
-	std::lock_guard<std::mutex> lock(_statusMutex);
-
-	auto remainingTime = FetchRemainingTime_locked();
-	if (remainingTime <= Seconds::zero())
+	auto remainingTime = FetchRemainingTime();
+	if (remainingTime <= Seconds::zero()) {
 		remainingTime = Seconds::zero();
+		_status.state = State::Ended;
+	}
 
 	auto elapsedTime = _durationTime - remainingTime;
 	if (elapsedTime > _durationTime)
@@ -97,7 +75,7 @@ const Timer::Status Timer::GetStatus(){
 	return _status;
 }
 
-const Seconds Timer::FetchRemainingTime_locked() const {
+const Seconds Timer::FetchRemainingTime() const {
 	switch (_status.state)
 	{
 		case State::Stopped:
@@ -114,11 +92,6 @@ const Seconds Timer::FetchRemainingTime_locked() const {
 	}
 }
 
-const Seconds Timer::FetchRemainingTime() {
-	std::lock_guard<std::mutex> lock(_statusMutex);
-	return FetchRemainingTime_locked();
-}
-
 float Timer::CalculateProgress(const Seconds& elapsedTime) {
 	return static_cast<float>(elapsedTime.count()) / _durationTime.count();
 }
@@ -133,16 +106,4 @@ const string Timer::FormatTimer(const Seconds& seconds) const {
 			<< (seconds - minutes).count();
 
 	return timeSS.str();
-}
-
-void Timer::Daemon() {
-	while(_status.state != State::Ended && _status.state != State::Stopped) {
-		std::this_thread::sleep_for(Seconds(1));
-
-		std::lock_guard<std::mutex> lock(_statusMutex);
-
-		auto remainingTime = FetchRemainingTime_locked();
-		if (remainingTime <= Seconds::zero())
-			_status.state = State::Ended;
-	}
 }
