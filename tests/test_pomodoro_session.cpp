@@ -33,4 +33,58 @@ namespace zenith {
 		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::COMPLETED);
 	}
 
+	// Verify completed mode
+	TEST(PomodoroSessionTest, SessionRoundsToCompleted) {
+		PomodoroSession session = PomodoroSession(2,Seconds(2),Seconds(2),Seconds(0));
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE );
+		session.StartActualRound();
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
+
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE );
+		session.StartActualRound();
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
+		
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::COMPLETED);
+	}
+
+	// Verify largerest to completed
+	TEST(PomodoroSessionTest, SessionLargeRestToCompleted) {
+		PomodoroSession session = PomodoroSession(4,Seconds(2),Seconds(2),Seconds(3));
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE );
+		session.StartActualRound();
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
+
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE );
+		session.StartActualRound();
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		std::this_thread::sleep_for(std::chrono::milliseconds(3100));
+
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE );
+		session.StartActualRound();
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
+
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE );
+		session.StartActualRound();
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
+
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::COMPLETED);
+	}
+
 }

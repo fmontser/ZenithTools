@@ -6,9 +6,9 @@ using namespace zenith;
 PomodoroSession::PomodoroSession(uint rounds, Seconds workTime,
 	Seconds restTime, Seconds largeRestTime) {
 
-		for (int i = 0; i < rounds; ++i) {
+		for (uint i = 0; i < rounds; ++i) {
 			auto restSeconds = restTime;
-			if (i == (rounds / 2) && rounds > 1)
+			if (IsHalfSessionRound(rounds, i))
 				restSeconds = largeRestTime;
 
 			_roundQueue.push(Round(
@@ -40,9 +40,10 @@ void zenith::PomodoroSession::SetNextRound() {
 	Round& round = _roundQueue.front();
 	if (round.mode == RoundMode::COMPLETED) {
 		_roundQueue.pop();
-		if (_roundQueue.empty()) {
+		if (_roundQueue.empty())
 			_status.mode = Mode::COMPLETED;
-		}
+		else
+			_status.mode = Mode::IDLE;
 	}
 }
 
@@ -73,4 +74,9 @@ void PomodoroSession::UpdateRound() {
 			throw InvalidModeException();
 			return;
 	}
+}
+
+bool PomodoroSession::IsHalfSessionRound(uint rounds, uint index) {
+	const uint IDX_OFFSET = 1;
+	return ((index + IDX_OFFSET) == (rounds / 2) && rounds > 1);
 }

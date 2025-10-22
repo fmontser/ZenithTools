@@ -41,6 +41,7 @@ namespace zenith {
 			std::queue<Round> _roundQueue;
 			
 			void UpdateRound();
+			bool IsHalfSessionRound(uint rounds, uint index);
 
 
 	};
