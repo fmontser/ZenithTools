@@ -12,12 +12,29 @@ _This project is under development. No releases yet._
 
 ZenithTools aims to be a multi-platform toolset for concentration and productivity enhancing.
 
-Free, open source, resource efficient and safe.
+## Features
 
-## Requirements
+*   Customizable pomodoro technique sessions, number of rounds, work and rest time.
+*   Custom noise generation (white noise/others) to mask enviormental noise and keep focused.
+
+## Releases
+
+*   No releases yet, this project is work in progress. Expect Binaries for Linux, MacOs and Windows.
+
+## Documentation
+
+*   Project has been documented with Doxygen, refer to docs/index.html
+
+## Used external libraries
+
+*   GoogleTests for unitary tests
+*   SFML as GUI backend
+*   ImGui for user interface using SFML-imgui lib.
+
+## Compiling requirements
 
 *   A C++17 compliant compiler (e.g., GCC 7+, Clang 5+, MSVC 2017+).
-*   CMake (version 3.10 or higher).
+*   CMake (version 3.31 or higher).
 
 ## Building
 
