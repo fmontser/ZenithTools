@@ -1,0 +1,615 @@
+\doxysubsubsubsection{FLAC/metadata.h\+: metadata level 1 interface}
+\hypertarget{group__flac__metadata__level1}{}\label{group__flac__metadata__level1}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}
+
+
+The level 1 interface provides read-\/write access to FLAC file metadata and operates directly on the FLAC file.  
+
+
+Collaboration diagram for FLAC/metadata.h\+: metadata level 1 interface\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__flac__metadata__level1}
+\end{center}
+\end{figure}
+\doxysubsubsubsubsubsection*{Topics}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group__flac__metadata__level2}{FLAC/metadata.\+h\+: metadata level 2 interface}}
+\begin{DoxyCompactList}\small\item\em The level 2 interface provides read-\/write access to FLAC file metadata; all metadata is read into memory, operated on in memory, and then written to file, which is more efficient than level 1 when editing multiple blocks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsubsubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}}
+\end{DoxyCompactItemize}
+\doxysubsubsubsubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{group__flac__metadata__level1_gac926e7d2773a05066115cac9048bbec9}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator\+Status}} \{ \newline
+\mbox{\hyperlink{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a33aadd73194c0d7e307d643237e0ddcd}{FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+OK}} = 0
+, \mbox{\hyperlink{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a0a3933cb38c8957a8d5c3d1afb4766f9}{FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+ILLEGAL\+\_\+\+INPUT}}
+, \mbox{\hyperlink{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a20e835bbb74b4d039e598617f68d2af6}{FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+ERROR\+\_\+\+OPENING\+\_\+\+FILE}}
+, \mbox{\hyperlink{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a7785f77a612be8956fbe7cab73497220}{FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+NOT\+\_\+\+A\+\_\+\+FLAC\+\_\+\+FILE}}
+, \newline
+\mbox{\hyperlink{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9af055d8c0c663e72134fe2db8037b6880}{FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+NOT\+\_\+\+WRITABLE}}
+, \mbox{\hyperlink{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a14c897124887858109200723826f85b7}{FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+BAD\+\_\+\+METADATA}}
+, \mbox{\hyperlink{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a088df964f0852dd7e19304e920c3ee8e}{FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+READ\+\_\+\+ERROR}}
+, \mbox{\hyperlink{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a2ad85a32e291d1e918692d68cc22fd40}{FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+SEEK\+\_\+\+ERROR}}
+, \newline
+\mbox{\hyperlink{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9ac2337299c2347ca311caeaa7d71d857c}{FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+WRITE\+\_\+\+ERROR}}
+, \mbox{\hyperlink{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a2e073843fa99419d76a0b210da96ceb6}{FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+RENAME\+\_\+\+ERROR}}
+, \mbox{\hyperlink{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a4f855433038c576da127fc1de9d18f9b}{FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+UNLINK\+\_\+\+ERROR}}
+, \mbox{\hyperlink{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9aa8386ed0a20d7e91b0022d203ec3cdec}{FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+MEMORY\+\_\+\+ALLOCATION\+\_\+\+ERROR}}
+, \newline
+\mbox{\hyperlink{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a9d821ae65a1c5de619daa88c850906df}{FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+INTERNAL\+\_\+\+ERROR}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+FLAC\+\_\+\+API \mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{group__flac__metadata__level1_gad37c37ce49a1757ca007353c72713f04}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+new}} (void)
+\item 
+FLAC\+\_\+\+API void \mbox{\hyperlink{group__flac__metadata__level1_ga46e64734300a022bb9616b26228b0348}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+delete}} (\mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}iterator)
+\item 
+FLAC\+\_\+\+API \mbox{\hyperlink{group__flac__metadata__level1_gac926e7d2773a05066115cac9048bbec9}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator\+Status}} \mbox{\hyperlink{group__flac__metadata__level1_ga68cfafa2323154f3ee1d3061eafe109f}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+status}} (\mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}iterator)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__level1_ga2a055cca4e6e06ae62517c8b0fa6e8a3}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+init}} (\mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}iterator, const char \texorpdfstring{$\ast$}{*}filename, FLAC\+\_\+\+\_\+bool read\+\_\+only, FLAC\+\_\+\+\_\+bool preserve\+\_\+file\+\_\+stats)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__level1_gadc654c1361b53737bab20efa3e75a0fc}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+is\+\_\+writable}} (const \mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}iterator)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__level1_gacac860d14fc0ff37cc2c034d3f972320}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+next}} (\mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}iterator)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__level1_ga49f495dec0f44116d66e1b79356a1160}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+prev}} (\mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}iterator)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__level1_ga4dd81539fb698163209d05af13a2ec3c}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+is\+\_\+last}} (const \mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}iterator)
+\item 
+FLAC\+\_\+\+API off\+\_\+t \mbox{\hyperlink{group__flac__metadata__level1_ga46e158a3f70c0e39db9c68a9ff9a2621}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+get\+\_\+block\+\_\+offset}} (const \mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}iterator)
+\item 
+FLAC\+\_\+\+API \mbox{\hyperlink{group__flac__format_gac71714ba8ddbbd66d26bb78a427fac01}{FLAC\+\_\+\+\_\+\+Metadata\+Type}} \mbox{\hyperlink{group__flac__metadata__level1_ga4649a49d230ac8bfc3ec88f5196205bb}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+get\+\_\+block\+\_\+type}} (const \mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}iterator)
+\item 
+FLAC\+\_\+\+API unsigned \mbox{\hyperlink{group__flac__metadata__level1_gaad69b5d6c58c48e08dcfb3f1018c2602}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+get\+\_\+block\+\_\+length}} (const \mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}iterator)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__level1_gaf2db2a96f7c60100d620a2eefb8360bc}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+get\+\_\+application\+\_\+id}} (\mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}iterator, FLAC\+\_\+\+\_\+byte \texorpdfstring{$\ast$}{*}id)
+\item 
+FLAC\+\_\+\+API \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{group__flac__metadata__level1_gad5ed392fd8b9abd6888e72691ff40774}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+get\+\_\+block}} (\mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}iterator)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__level1_ga7d1ceb2db292c968ae6ac18ecb15c356}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+set\+\_\+block}} (\mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}iterator, \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}block, FLAC\+\_\+\+\_\+bool use\+\_\+padding)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__level1_ga1239ccc5ae1dc3f7cb0e1a61707fafc6}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+insert\+\_\+block\+\_\+after}} (\mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}iterator, \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}block, FLAC\+\_\+\+\_\+bool use\+\_\+padding)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__level1_gaf0a1823f95f8097f0d2ff3f67ae30a88}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+delete\+\_\+block}} (\mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}iterator, FLAC\+\_\+\+\_\+bool use\+\_\+padding)
+\end{DoxyCompactItemize}
+\doxysubsubsubsubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+FLAC\+\_\+\+API const char \texorpdfstring{$\ast$}{*}const \mbox{\hyperlink{group__flac__metadata__level1_ga28ea4a13fcbe97a732fafb13417036bb}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator\+Status\+String}} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsubsubsection{Detailed Description}
+The level 1 interface provides read-\/write access to FLAC file metadata and operates directly on the FLAC file. 
+
+The general usage of this interface is\+:
+
+
+\begin{DoxyItemize}
+\item Create an iterator using \doxylink{group__flac__metadata__level1_gad37c37ce49a1757ca007353c72713f04}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+new()}
+\item Attach it to a file using \doxylink{group__flac__metadata__level1_ga2a055cca4e6e06ae62517c8b0fa6e8a3}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+init()} and check the exit code. Call \doxylink{group__flac__metadata__level1_gadc654c1361b53737bab20efa3e75a0fc}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+is\+\_\+writable()} to see if the file is writable, or only read access is allowed.
+\item Use \doxylink{group__flac__metadata__level1_gacac860d14fc0ff37cc2c034d3f972320}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+next()} and \doxylink{group__flac__metadata__level1_ga49f495dec0f44116d66e1b79356a1160}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+prev()} to traverse the blocks. This is does not read the actual blocks themselves. \doxylink{group__flac__metadata__level1_gacac860d14fc0ff37cc2c034d3f972320}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+next()} is relatively fast. \doxylink{group__flac__metadata__level1_ga49f495dec0f44116d66e1b79356a1160}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+prev()} is slower since it needs to search forward from the front of the file.
+\item Use \doxylink{group__flac__metadata__level1_ga4649a49d230ac8bfc3ec88f5196205bb}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+get\+\_\+block\+\_\+type()} or \doxylink{group__flac__metadata__level1_gad5ed392fd8b9abd6888e72691ff40774}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+get\+\_\+block()} to access the actual data at the current iterator position. The returned object is yours to modify and free.
+\item Use \doxylink{group__flac__metadata__level1_ga7d1ceb2db292c968ae6ac18ecb15c356}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+set\+\_\+block()} to write a modified block back. You must have write permission to the original file. Make sure to read the whole comment to \doxylink{group__flac__metadata__level1_ga7d1ceb2db292c968ae6ac18ecb15c356}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+set\+\_\+block()} below.
+\item Use \doxylink{group__flac__metadata__level1_ga1239ccc5ae1dc3f7cb0e1a61707fafc6}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+insert\+\_\+block\+\_\+after()} to add new blocks. Use the object creation functions from \doxylink{group__flac__metadata__object}{here } to generate new objects.
+\item Use \doxylink{group__flac__metadata__level1_gaf0a1823f95f8097f0d2ff3f67ae30a88}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+delete\+\_\+block()} to remove the block currently referred to by the iterator, or replace it with padding.
+\item Destroy the iterator with \doxylink{group__flac__metadata__level1_ga46e64734300a022bb9616b26228b0348}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+delete()} when finished.
+\end{DoxyItemize}
+
+\begin{DoxyNote}{Note}
+The FLAC file remains open the whole time between \doxylink{group__flac__metadata__level1_ga2a055cca4e6e06ae62517c8b0fa6e8a3}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+init()} and \doxylink{group__flac__metadata__level1_ga46e64734300a022bb9616b26228b0348}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+delete()}, so make sure you are not altering the file during this time.
+
+Do not modify the {\itshape is\+\_\+last}, {\itshape length}, or {\itshape type} fields of returned \doxylink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata} objects. These are managed automatically.
+
+If any of the modification functions (\doxylink{group__flac__metadata__level1_ga7d1ceb2db292c968ae6ac18ecb15c356}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+set\+\_\+block()}, \doxylink{group__flac__metadata__level1_gaf0a1823f95f8097f0d2ff3f67ae30a88}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+delete\+\_\+block()}, \doxylink{group__flac__metadata__level1_ga1239ccc5ae1dc3f7cb0e1a61707fafc6}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+insert\+\_\+block\+\_\+after()}, etc.) return {\ttfamily false}, you should delete the iterator as it may no longer be valid. 
+\end{DoxyNote}
+
+
+\doxysubsubsubsubsection{Typedef Documentation}
+\Hypertarget{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_Metadata\_SimpleIterator@{FLAC\_\_Metadata\_SimpleIterator}}
+\index{FLAC\_\_Metadata\_SimpleIterator@{FLAC\_\_Metadata\_SimpleIterator}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}
+\doxysubsubsubsubsubsection{\texorpdfstring{FLAC\_\_Metadata\_SimpleIterator}{FLAC\_\_Metadata\_SimpleIterator}}
+{\footnotesize\ttfamily \label{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a} 
+typedef struct \mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}}}
+
+The opaque structure definition for the level 1 iterator type. See the \doxylink{group__flac__metadata__level1}{metadata level 1 module } for a detailed description. 
+
+\doxysubsubsubsubsection{Enumeration Type Documentation}
+\Hypertarget{group__flac__metadata__level1_gac926e7d2773a05066115cac9048bbec9}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_Metadata\_SimpleIteratorStatus@{FLAC\_\_Metadata\_SimpleIteratorStatus}}
+\index{FLAC\_\_Metadata\_SimpleIteratorStatus@{FLAC\_\_Metadata\_SimpleIteratorStatus}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}
+\doxysubsubsubsubsubsection{\texorpdfstring{FLAC\_\_Metadata\_SimpleIteratorStatus}{FLAC\_\_Metadata\_SimpleIteratorStatus}}
+{\footnotesize\ttfamily \label{group__flac__metadata__level1_gac926e7d2773a05066115cac9048bbec9} 
+enum \mbox{\hyperlink{group__flac__metadata__level1_gac926e7d2773a05066115cac9048bbec9}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator\+Status}}}
+
+Status type for \doxylink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}.
+
+The iterator\textquotesingle{}s current status can be obtained by calling \doxylink{group__flac__metadata__level1_ga68cfafa2323154f3ee1d3061eafe109f}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+status()}. \begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_OK@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_OK}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_OK@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_OK}}}\Hypertarget{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a33aadd73194c0d7e307d643237e0ddcd}\label{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a33aadd73194c0d7e307d643237e0ddcd} 
+FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+OK&The iterator is in the normal OK state \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_ILLEGAL\_INPUT@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_ILLEGAL\_INPUT}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_ILLEGAL\_INPUT@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_ILLEGAL\_INPUT}}}\Hypertarget{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a0a3933cb38c8957a8d5c3d1afb4766f9}\label{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a0a3933cb38c8957a8d5c3d1afb4766f9} 
+FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+ILLEGAL\+\_\+\+INPUT&The data passed into a function violated the function\textquotesingle{}s usage criteria \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_ERROR\_OPENING\_FILE@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_ERROR\_OPENING\_FILE}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_ERROR\_OPENING\_FILE@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_ERROR\_OPENING\_FILE}}}\Hypertarget{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a20e835bbb74b4d039e598617f68d2af6}\label{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a20e835bbb74b4d039e598617f68d2af6} 
+FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+ERROR\+\_\+\+OPENING\+\_\+\+FILE&The iterator could not open the target file \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_NOT\_A\_FLAC\_FILE@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_NOT\_A\_FLAC\_FILE}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_NOT\_A\_FLAC\_FILE@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_NOT\_A\_FLAC\_FILE}}}\Hypertarget{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a7785f77a612be8956fbe7cab73497220}\label{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a7785f77a612be8956fbe7cab73497220} 
+FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+NOT\+\_\+\+A\+\_\+\+FLAC\+\_\+\+FILE&The iterator could not find the FLAC signature at the start of the file \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_NOT\_WRITABLE@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_NOT\_WRITABLE}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_NOT\_WRITABLE@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_NOT\_WRITABLE}}}\Hypertarget{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9af055d8c0c663e72134fe2db8037b6880}\label{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9af055d8c0c663e72134fe2db8037b6880} 
+FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+NOT\+\_\+\+WRITABLE&The iterator tried to write to a file that was not writable \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_BAD\_METADATA@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_BAD\_METADATA}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_BAD\_METADATA@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_BAD\_METADATA}}}\Hypertarget{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a14c897124887858109200723826f85b7}\label{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a14c897124887858109200723826f85b7} 
+FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+BAD\+\_\+\+METADATA&The iterator encountered input that does not conform to the FLAC metadata specification \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_READ\_ERROR@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_READ\_ERROR}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_READ\_ERROR@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_READ\_ERROR}}}\Hypertarget{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a088df964f0852dd7e19304e920c3ee8e}\label{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a088df964f0852dd7e19304e920c3ee8e} 
+FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+READ\+\_\+\+ERROR&The iterator encountered an error while reading the FLAC file \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_SEEK\_ERROR@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_SEEK\_ERROR}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_SEEK\_ERROR@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_SEEK\_ERROR}}}\Hypertarget{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a2ad85a32e291d1e918692d68cc22fd40}\label{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a2ad85a32e291d1e918692d68cc22fd40} 
+FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+SEEK\+\_\+\+ERROR&The iterator encountered an error while seeking in the FLAC file \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_WRITE\_ERROR@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_WRITE\_ERROR}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_WRITE\_ERROR@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_WRITE\_ERROR}}}\Hypertarget{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9ac2337299c2347ca311caeaa7d71d857c}\label{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9ac2337299c2347ca311caeaa7d71d857c} 
+FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+WRITE\+\_\+\+ERROR&The iterator encountered an error while writing the FLAC file \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_RENAME\_ERROR@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_RENAME\_ERROR}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_RENAME\_ERROR@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_RENAME\_ERROR}}}\Hypertarget{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a2e073843fa99419d76a0b210da96ceb6}\label{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a2e073843fa99419d76a0b210da96ceb6} 
+FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+RENAME\+\_\+\+ERROR&The iterator encountered an error renaming the FLAC file \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_UNLINK\_ERROR@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_UNLINK\_ERROR}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_UNLINK\_ERROR@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_UNLINK\_ERROR}}}\Hypertarget{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a4f855433038c576da127fc1de9d18f9b}\label{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a4f855433038c576da127fc1de9d18f9b} 
+FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+UNLINK\+\_\+\+ERROR&The iterator encountered an error removing the temporary file \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_MEMORY\_ALLOCATION\_ERROR@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_MEMORY\_ALLOCATION\_ERROR}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_MEMORY\_ALLOCATION\_ERROR@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_MEMORY\_ALLOCATION\_ERROR}}}\Hypertarget{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9aa8386ed0a20d7e91b0022d203ec3cdec}\label{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9aa8386ed0a20d7e91b0022d203ec3cdec} 
+FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+MEMORY\+\_\+\+ALLOCATION\+\_\+\+ERROR&Memory allocation failed \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_INTERNAL\_ERROR@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_INTERNAL\_ERROR}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_INTERNAL\_ERROR@{FLAC\_\_METADATA\_SIMPLE\_ITERATOR\_STATUS\_INTERNAL\_ERROR}}}\Hypertarget{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a9d821ae65a1c5de619daa88c850906df}\label{group__flac__metadata__level1_ggac926e7d2773a05066115cac9048bbec9a9d821ae65a1c5de619daa88c850906df} 
+FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+INTERNAL\+\_\+\+ERROR&The caller violated an assertion or an unexpected error occurred \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsubsubsubsection{Function Documentation}
+\Hypertarget{group__flac__metadata__level1_ga46e64734300a022bb9616b26228b0348}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_metadata\_simple\_iterator\_delete@{FLAC\_\_metadata\_simple\_iterator\_delete}}
+\index{FLAC\_\_metadata\_simple\_iterator\_delete@{FLAC\_\_metadata\_simple\_iterator\_delete}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}
+\doxysubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_simple\_iterator\_delete()}{FLAC\_\_metadata\_simple\_iterator\_delete()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__level1_ga46e64734300a022bb9616b26228b0348} 
+FLAC\+\_\+\+API void FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+delete (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}}]{iterator}{}\end{DoxyParamCaption})}
+
+Free an iterator instance. Deletes the object pointed to by {\itshape iterator}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em iterator} & A pointer to an existing iterator. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{iterator\ !=\ NULL\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__flac__metadata__level1_gaf0a1823f95f8097f0d2ff3f67ae30a88}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_metadata\_simple\_iterator\_delete\_block@{FLAC\_\_metadata\_simple\_iterator\_delete\_block}}
+\index{FLAC\_\_metadata\_simple\_iterator\_delete\_block@{FLAC\_\_metadata\_simple\_iterator\_delete\_block}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}
+\doxysubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_simple\_iterator\_delete\_block()}{FLAC\_\_metadata\_simple\_iterator\_delete\_block()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__level1_gaf0a1823f95f8097f0d2ff3f67ae30a88} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+delete\+\_\+block (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}}]{iterator}{, }\item[{FLAC\+\_\+\+\_\+bool}]{use\+\_\+padding}{}\end{DoxyParamCaption})}
+
+Deletes the block at the current position. This will cause the entire FLAC file to be rewritten, unless {\itshape use\+\_\+padding} is {\ttfamily true}, in which case the block will be replaced by an equal-\/sized PADDING block. The iterator will be left pointing to the block before the one just deleted.
+
+You may not delete the STREAMINFO block.
+
+
+\begin{DoxyParams}{Parameters}
+{\em iterator} & A pointer to an existing initialized iterator. \\
+\hline
+{\em use\+\_\+padding} & See above. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{iterator\ !=\ NULL\ }
+
+\end{DoxyCode}
+ {\itshape iterator} has been successfully initialized with \doxylink{group__flac__metadata__level1_ga2a055cca4e6e06ae62517c8b0fa6e8a3}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+init()} \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily true} if successful, else {\ttfamily false}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__level1_gaf2db2a96f7c60100d620a2eefb8360bc}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_metadata\_simple\_iterator\_get\_application\_id@{FLAC\_\_metadata\_simple\_iterator\_get\_application\_id}}
+\index{FLAC\_\_metadata\_simple\_iterator\_get\_application\_id@{FLAC\_\_metadata\_simple\_iterator\_get\_application\_id}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}
+\doxysubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_simple\_iterator\_get\_application\_id()}{FLAC\_\_metadata\_simple\_iterator\_get\_application\_id()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__level1_gaf2db2a96f7c60100d620a2eefb8360bc} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+get\+\_\+application\+\_\+id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}}]{iterator}{, }\item[{FLAC\+\_\+\+\_\+byte \texorpdfstring{$\ast$}{*}}]{id}{}\end{DoxyParamCaption})}
+
+Get the application ID of the {\ttfamily APPLICATION} block at the current position. This avoids reading the actual block data which can save time for large blocks.
+
+
+\begin{DoxyParams}{Parameters}
+{\em iterator} & A pointer to an existing initialized iterator. \\
+\hline
+{\em id} & A pointer to a buffer of at least {\ttfamily 4} bytes where the ID will be stored. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{iterator\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{id}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ {\itshape iterator} has been successfully initialized with \doxylink{group__flac__metadata__level1_ga2a055cca4e6e06ae62517c8b0fa6e8a3}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+init()} \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily true} if the ID was successfully read, else {\ttfamily false}, in which case you should check \doxylink{group__flac__metadata__level1_ga68cfafa2323154f3ee1d3061eafe109f}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+status()} to find out why. If the status is {\ttfamily FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+ILLEGAL\+\_\+\+INPUT}, then the current metadata block is not an {\ttfamily APPLICATION} block. Otherwise if the status is {\ttfamily FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+READ\+\_\+\+ERROR} or {\ttfamily FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+SEEK\+\_\+\+ERROR}, an I/O error occurred and the iterator can no longer be used. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__level1_gad5ed392fd8b9abd6888e72691ff40774}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_metadata\_simple\_iterator\_get\_block@{FLAC\_\_metadata\_simple\_iterator\_get\_block}}
+\index{FLAC\_\_metadata\_simple\_iterator\_get\_block@{FLAC\_\_metadata\_simple\_iterator\_get\_block}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}
+\doxysubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_simple\_iterator\_get\_block()}{FLAC\_\_metadata\_simple\_iterator\_get\_block()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__level1_gad5ed392fd8b9abd6888e72691ff40774} 
+FLAC\+\_\+\+API \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*} FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+get\+\_\+block (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}}]{iterator}{}\end{DoxyParamCaption})}
+
+Get the metadata block at the current position. You can modify the block but must use \doxylink{group__flac__metadata__level1_ga7d1ceb2db292c968ae6ac18ecb15c356}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+set\+\_\+block()} to write it back to the FLAC file.
+
+You must call \doxylink{group__flac__metadata__object_ga66bbe27dba68ba77be5af83986a280ea}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+delete()} on the returned object when you are finished with it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em iterator} & A pointer to an existing initialized iterator. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{iterator\ !=\ NULL\ }
+
+\end{DoxyCode}
+ {\itshape iterator} has been successfully initialized with \doxylink{group__flac__metadata__level1_ga2a055cca4e6e06ae62517c8b0fa6e8a3}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+init()} \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+\+Stream\+Metadata\texorpdfstring{$\ast$}{*}} & The current metadata block, or {\ttfamily NULL} if there was a memory allocation error. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__level1_gaad69b5d6c58c48e08dcfb3f1018c2602}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_metadata\_simple\_iterator\_get\_block\_length@{FLAC\_\_metadata\_simple\_iterator\_get\_block\_length}}
+\index{FLAC\_\_metadata\_simple\_iterator\_get\_block\_length@{FLAC\_\_metadata\_simple\_iterator\_get\_block\_length}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}
+\doxysubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_simple\_iterator\_get\_block\_length()}{FLAC\_\_metadata\_simple\_iterator\_get\_block\_length()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__level1_gaad69b5d6c58c48e08dcfb3f1018c2602} 
+FLAC\+\_\+\+API unsigned FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+get\+\_\+block\+\_\+length (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}}]{iterator}{}\end{DoxyParamCaption})}
+
+Get the length of the metadata block at the current position. This avoids reading the actual block data which can save time for large blocks.
+
+
+\begin{DoxyParams}{Parameters}
+{\em iterator} & A pointer to an existing initialized iterator. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{iterator\ !=\ NULL\ }
+
+\end{DoxyCode}
+ {\itshape iterator} has been successfully initialized with \doxylink{group__flac__metadata__level1_ga2a055cca4e6e06ae62517c8b0fa6e8a3}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+init()} \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em unsigned} & The length of the metadata block at the current iterator position. The is same length as that in the \href{http://flac.sourceforge.net/format.html\#metadata_block_header}{\texttt{ metadata block header}}, i.\+e. the length of the metadata body that follows the header. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__level1_ga46e158a3f70c0e39db9c68a9ff9a2621}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_metadata\_simple\_iterator\_get\_block\_offset@{FLAC\_\_metadata\_simple\_iterator\_get\_block\_offset}}
+\index{FLAC\_\_metadata\_simple\_iterator\_get\_block\_offset@{FLAC\_\_metadata\_simple\_iterator\_get\_block\_offset}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}
+\doxysubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_simple\_iterator\_get\_block\_offset()}{FLAC\_\_metadata\_simple\_iterator\_get\_block\_offset()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__level1_ga46e158a3f70c0e39db9c68a9ff9a2621} 
+FLAC\+\_\+\+API off\+\_\+t FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+get\+\_\+block\+\_\+offset (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}}]{iterator}{}\end{DoxyParamCaption})}
+
+Get the offset of the metadata block at the current position. This avoids reading the actual block data which can save time for large blocks.
+
+
+\begin{DoxyParams}{Parameters}
+{\em iterator} & A pointer to an existing initialized iterator. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{iterator\ !=\ NULL\ }
+
+\end{DoxyCode}
+ {\itshape iterator} has been successfully initialized with \doxylink{group__flac__metadata__level1_ga2a055cca4e6e06ae62517c8b0fa6e8a3}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+init()} \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em off\+\_\+t} & The offset of the metadata block at the current iterator position. This is the byte offset relative to the beginning of the file of the current metadata block\textquotesingle{}s header. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__level1_ga4649a49d230ac8bfc3ec88f5196205bb}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_metadata\_simple\_iterator\_get\_block\_type@{FLAC\_\_metadata\_simple\_iterator\_get\_block\_type}}
+\index{FLAC\_\_metadata\_simple\_iterator\_get\_block\_type@{FLAC\_\_metadata\_simple\_iterator\_get\_block\_type}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}
+\doxysubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_simple\_iterator\_get\_block\_type()}{FLAC\_\_metadata\_simple\_iterator\_get\_block\_type()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__level1_ga4649a49d230ac8bfc3ec88f5196205bb} 
+FLAC\+\_\+\+API \mbox{\hyperlink{group__flac__format_gac71714ba8ddbbd66d26bb78a427fac01}{FLAC\+\_\+\+\_\+\+Metadata\+Type}} FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+get\+\_\+block\+\_\+type (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}}]{iterator}{}\end{DoxyParamCaption})}
+
+Get the type of the metadata block at the current position. This avoids reading the actual block data which can save time for large blocks.
+
+
+\begin{DoxyParams}{Parameters}
+{\em iterator} & A pointer to an existing initialized iterator. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{iterator\ !=\ NULL\ }
+
+\end{DoxyCode}
+ {\itshape iterator} has been successfully initialized with \doxylink{group__flac__metadata__level1_ga2a055cca4e6e06ae62517c8b0fa6e8a3}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+init()} \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em \doxylink{group__flac__format_gac71714ba8ddbbd66d26bb78a427fac01}{FLAC\+\_\+\+\_\+\+Metadata\+Type}} & The type of the metadata block at the current iterator position. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__level1_ga2a055cca4e6e06ae62517c8b0fa6e8a3}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_metadata\_simple\_iterator\_init@{FLAC\_\_metadata\_simple\_iterator\_init}}
+\index{FLAC\_\_metadata\_simple\_iterator\_init@{FLAC\_\_metadata\_simple\_iterator\_init}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}
+\doxysubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_simple\_iterator\_init()}{FLAC\_\_metadata\_simple\_iterator\_init()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__level1_ga2a055cca4e6e06ae62517c8b0fa6e8a3} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}}]{iterator}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{filename}{, }\item[{FLAC\+\_\+\+\_\+bool}]{read\+\_\+only}{, }\item[{FLAC\+\_\+\+\_\+bool}]{preserve\+\_\+file\+\_\+stats}{}\end{DoxyParamCaption})}
+
+Initialize the iterator to point to the first metadata block in the given FLAC file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em iterator} & A pointer to an existing iterator. \\
+\hline
+{\em filename} & The path to the FLAC file. \\
+\hline
+{\em read\+\_\+only} & If {\ttfamily true}, the FLAC file will be opened in read-\/only mode; if {\ttfamily false}, the FLAC file will be opened for edit even if no edits are performed. \\
+\hline
+{\em preserve\+\_\+file\+\_\+stats} & If {\ttfamily true}, the owner and modification time will be preserved even if the FLAC file is written to. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{iterator\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{filename\ !=\ NULL\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if a memory allocation error occurs, the file can\textquotesingle{}t be opened, or another error occurs, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__level1_ga1239ccc5ae1dc3f7cb0e1a61707fafc6}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_metadata\_simple\_iterator\_insert\_block\_after@{FLAC\_\_metadata\_simple\_iterator\_insert\_block\_after}}
+\index{FLAC\_\_metadata\_simple\_iterator\_insert\_block\_after@{FLAC\_\_metadata\_simple\_iterator\_insert\_block\_after}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}
+\doxysubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_simple\_iterator\_insert\_block\_after()}{FLAC\_\_metadata\_simple\_iterator\_insert\_block\_after()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__level1_ga1239ccc5ae1dc3f7cb0e1a61707fafc6} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+insert\+\_\+block\+\_\+after (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}}]{iterator}{, }\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{block}{, }\item[{FLAC\+\_\+\+\_\+bool}]{use\+\_\+padding}{}\end{DoxyParamCaption})}
+
+This is similar to \doxylink{group__flac__metadata__level1_ga7d1ceb2db292c968ae6ac18ecb15c356}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+set\+\_\+block()} except that instead of writing over an existing block, it appends a block after the existing block. {\itshape use\+\_\+padding} is again used to tell the function to try an expand into following padding in an attempt to avoid rewriting the entire file.
+
+This function will fail and return {\ttfamily false} if given a STREAMINFO block.
+
+After writing the block, the iterator will be pointing to the new block.
+
+
+\begin{DoxyParams}{Parameters}
+{\em iterator} & A pointer to an existing initialized iterator. \\
+\hline
+{\em block} & The block to set. \\
+\hline
+{\em use\+\_\+padding} & See above. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{iterator\ !=\ NULL\ }
+
+\end{DoxyCode}
+ {\itshape iterator} has been successfully initialized with \doxylink{group__flac__metadata__level1_ga2a055cca4e6e06ae62517c8b0fa6e8a3}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+init()} 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{block\ !=\ NULL\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily true} if successful, else {\ttfamily false}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__level1_ga4dd81539fb698163209d05af13a2ec3c}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_metadata\_simple\_iterator\_is\_last@{FLAC\_\_metadata\_simple\_iterator\_is\_last}}
+\index{FLAC\_\_metadata\_simple\_iterator\_is\_last@{FLAC\_\_metadata\_simple\_iterator\_is\_last}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}
+\doxysubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_simple\_iterator\_is\_last()}{FLAC\_\_metadata\_simple\_iterator\_is\_last()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__level1_ga4dd81539fb698163209d05af13a2ec3c} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+is\+\_\+last (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}}]{iterator}{}\end{DoxyParamCaption})}
+
+Returns a flag telling if the current metadata block is the last.
+
+
+\begin{DoxyParams}{Parameters}
+{\em iterator} & A pointer to an existing initialized iterator. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{iterator\ !=\ NULL\ }
+
+\end{DoxyCode}
+ {\itshape iterator} has been successfully initialized with \doxylink{group__flac__metadata__level1_ga2a055cca4e6e06ae62517c8b0fa6e8a3}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+init()} \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily true} if the current metadata block is the last in the file, else {\ttfamily false}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__level1_gadc654c1361b53737bab20efa3e75a0fc}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_metadata\_simple\_iterator\_is\_writable@{FLAC\_\_metadata\_simple\_iterator\_is\_writable}}
+\index{FLAC\_\_metadata\_simple\_iterator\_is\_writable@{FLAC\_\_metadata\_simple\_iterator\_is\_writable}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}
+\doxysubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_simple\_iterator\_is\_writable()}{FLAC\_\_metadata\_simple\_iterator\_is\_writable()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__level1_gadc654c1361b53737bab20efa3e75a0fc} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+is\+\_\+writable (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}}]{iterator}{}\end{DoxyParamCaption})}
+
+Returns {\ttfamily true} if the FLAC file is writable. If {\ttfamily false}, calls to \doxylink{group__flac__metadata__level1_ga7d1ceb2db292c968ae6ac18ecb15c356}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+set\+\_\+block()} and \doxylink{group__flac__metadata__level1_ga1239ccc5ae1dc3f7cb0e1a61707fafc6}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+insert\+\_\+block\+\_\+after()} will fail.
+
+
+\begin{DoxyParams}{Parameters}
+{\em iterator} & A pointer to an existing iterator. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{iterator\ !=\ NULL\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & See above. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__level1_gad37c37ce49a1757ca007353c72713f04}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_metadata\_simple\_iterator\_new@{FLAC\_\_metadata\_simple\_iterator\_new}}
+\index{FLAC\_\_metadata\_simple\_iterator\_new@{FLAC\_\_metadata\_simple\_iterator\_new}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}
+\doxysubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_simple\_iterator\_new()}{FLAC\_\_metadata\_simple\_iterator\_new()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__level1_gad37c37ce49a1757ca007353c72713f04} 
+FLAC\+\_\+\+API \mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*} FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+new (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+Create a new iterator instance.
+
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator\texorpdfstring{$\ast$}{*}} & {\ttfamily NULL} if there was an error allocating memory, else the new instance. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__level1_gacac860d14fc0ff37cc2c034d3f972320}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_metadata\_simple\_iterator\_next@{FLAC\_\_metadata\_simple\_iterator\_next}}
+\index{FLAC\_\_metadata\_simple\_iterator\_next@{FLAC\_\_metadata\_simple\_iterator\_next}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}
+\doxysubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_simple\_iterator\_next()}{FLAC\_\_metadata\_simple\_iterator\_next()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__level1_gacac860d14fc0ff37cc2c034d3f972320} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+next (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}}]{iterator}{}\end{DoxyParamCaption})}
+
+Moves the iterator forward one metadata block, returning {\ttfamily false} if already at the end.
+
+
+\begin{DoxyParams}{Parameters}
+{\em iterator} & A pointer to an existing initialized iterator. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{iterator\ !=\ NULL\ }
+
+\end{DoxyCode}
+ {\itshape iterator} has been successfully initialized with \doxylink{group__flac__metadata__level1_ga2a055cca4e6e06ae62517c8b0fa6e8a3}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+init()} \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if already at the last metadata block of the chain, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__level1_ga49f495dec0f44116d66e1b79356a1160}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_metadata\_simple\_iterator\_prev@{FLAC\_\_metadata\_simple\_iterator\_prev}}
+\index{FLAC\_\_metadata\_simple\_iterator\_prev@{FLAC\_\_metadata\_simple\_iterator\_prev}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}
+\doxysubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_simple\_iterator\_prev()}{FLAC\_\_metadata\_simple\_iterator\_prev()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__level1_ga49f495dec0f44116d66e1b79356a1160} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+prev (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}}]{iterator}{}\end{DoxyParamCaption})}
+
+Moves the iterator backward one metadata block, returning {\ttfamily false} if already at the beginning.
+
+
+\begin{DoxyParams}{Parameters}
+{\em iterator} & A pointer to an existing initialized iterator. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{iterator\ !=\ NULL\ }
+
+\end{DoxyCode}
+ {\itshape iterator} has been successfully initialized with \doxylink{group__flac__metadata__level1_ga2a055cca4e6e06ae62517c8b0fa6e8a3}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+init()} \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if already at the first metadata block of the chain, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__level1_ga7d1ceb2db292c968ae6ac18ecb15c356}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_metadata\_simple\_iterator\_set\_block@{FLAC\_\_metadata\_simple\_iterator\_set\_block}}
+\index{FLAC\_\_metadata\_simple\_iterator\_set\_block@{FLAC\_\_metadata\_simple\_iterator\_set\_block}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}
+\doxysubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_simple\_iterator\_set\_block()}{FLAC\_\_metadata\_simple\_iterator\_set\_block()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__level1_ga7d1ceb2db292c968ae6ac18ecb15c356} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+set\+\_\+block (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}}]{iterator}{, }\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{block}{, }\item[{FLAC\+\_\+\+\_\+bool}]{use\+\_\+padding}{}\end{DoxyParamCaption})}
+
+Write a block back to the FLAC file. This function tries to be as efficient as possible; how the block is actually written is shown by the following\+:
+
+Existing block is a STREAMINFO block and the new block is a STREAMINFO block\+: the new block is written in place. Make sure you know what you\textquotesingle{}re doing when changing the values of a STREAMINFO block.
+
+Existing block is a STREAMINFO block and the new block is a not a STREAMINFO block\+: this is an error since the first block must be a STREAMINFO block. Returns {\ttfamily false} without altering the file.
+
+Existing block is not a STREAMINFO block and the new block is a STREAMINFO block\+: this is an error since there may be only one STREAMINFO block. Returns {\ttfamily false} without altering the file.
+
+Existing block and new block are the same length\+: the existing block will be replaced by the new block, written in place.
+
+Existing block is longer than new block\+: if use\+\_\+padding is {\ttfamily true}, the existing block will be overwritten in place with the new block followed by a PADDING block, if possible, to make the total size the same as the existing block. Remember that a padding block requires at least four bytes so if the difference in size between the new block and existing block is less than that, the entire file will have to be rewritten, using the new block\textquotesingle{}s exact size. If use\+\_\+padding is {\ttfamily false}, the entire file will be rewritten, replacing the existing block by the new block.
+
+Existing block is shorter than new block\+: if use\+\_\+padding is {\ttfamily true}, the function will try and expand the new block into the following PADDING block, if it exists and doing so won\textquotesingle{}t shrink the PADDING block to less than 4 bytes. If there is no following PADDING block, or it will shrink to less than 4 bytes, or use\+\_\+padding is {\ttfamily false}, the entire file is rewritten, replacing the existing block with the new block. Note that in this case any following PADDING block is preserved as is.
+
+After writing the block, the iterator will remain in the same place, i.\+e. pointing to the new block.
+
+
+\begin{DoxyParams}{Parameters}
+{\em iterator} & A pointer to an existing initialized iterator. \\
+\hline
+{\em block} & The block to set. \\
+\hline
+{\em use\+\_\+padding} & See above. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{iterator\ !=\ NULL\ }
+
+\end{DoxyCode}
+ {\itshape iterator} has been successfully initialized with \doxylink{group__flac__metadata__level1_ga2a055cca4e6e06ae62517c8b0fa6e8a3}{FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+init()} 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{block\ !=\ NULL\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily true} if successful, else {\ttfamily false}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__level1_ga68cfafa2323154f3ee1d3061eafe109f}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_metadata\_simple\_iterator\_status@{FLAC\_\_metadata\_simple\_iterator\_status}}
+\index{FLAC\_\_metadata\_simple\_iterator\_status@{FLAC\_\_metadata\_simple\_iterator\_status}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}
+\doxysubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_simple\_iterator\_status()}{FLAC\_\_metadata\_simple\_iterator\_status()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__level1_ga68cfafa2323154f3ee1d3061eafe109f} 
+FLAC\+\_\+\+API \mbox{\hyperlink{group__flac__metadata__level1_gac926e7d2773a05066115cac9048bbec9}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator\+Status}} FLAC\+\_\+\+\_\+metadata\+\_\+simple\+\_\+iterator\+\_\+status (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__flac__metadata__level1_ga6accccddbb867dfc2eece9ee3ffecb3a}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator}} \texorpdfstring{$\ast$}{*}}]{iterator}{}\end{DoxyParamCaption})}
+
+Get the current status of the iterator. Call this after a function returns {\ttfamily false} to get the reason for the error. Also resets the status to FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+SIMPLE\+\_\+\+ITERATOR\+\_\+\+STATUS\+\_\+\+OK.
+
+
+\begin{DoxyParams}{Parameters}
+{\em iterator} & A pointer to an existing iterator. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{iterator\ !=\ NULL\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em \doxylink{group__flac__metadata__level1_gac926e7d2773a05066115cac9048bbec9}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator\+Status}} & The current status of the iterator. \\
+\hline
+\end{DoxyRetVals}
+
+
+\doxysubsubsubsubsection{Variable Documentation}
+\Hypertarget{group__flac__metadata__level1_ga28ea4a13fcbe97a732fafb13417036bb}\index{FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}!FLAC\_\_Metadata\_SimpleIteratorStatusString@{FLAC\_\_Metadata\_SimpleIteratorStatusString}}
+\index{FLAC\_\_Metadata\_SimpleIteratorStatusString@{FLAC\_\_Metadata\_SimpleIteratorStatusString}!FLAC/metadata.h: metadata level 1 interface@{FLAC/metadata.h: metadata level 1 interface}}
+\doxysubsubsubsubsubsection{\texorpdfstring{FLAC\_\_Metadata\_SimpleIteratorStatusString}{FLAC\_\_Metadata\_SimpleIteratorStatusString}}
+{\footnotesize\ttfamily \label{group__flac__metadata__level1_ga28ea4a13fcbe97a732fafb13417036bb} 
+FLAC\+\_\+\+API const char\texorpdfstring{$\ast$}{*} const FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator\+Status\+String\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
+
+Maps a \doxylink{group__flac__metadata__level1_gac926e7d2773a05066115cac9048bbec9}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator\+Status} to a C string.
+
+Using a \doxylink{group__flac__metadata__level1_gac926e7d2773a05066115cac9048bbec9}{FLAC\+\_\+\+\_\+\+Metadata\+\_\+\+Simple\+Iterator\+Status} as the index to this array will give the string equivalent. The contents should not be modified. \input{group__flac__metadata__level2}

@@ -1,0 +1,82 @@
+\doxysection{SFOpen\+GLView(mouse) Category Reference}
+\hypertarget{categorySFOpenGLView_07mouse_08}{}\label{categorySFOpenGLView_07mouse_08}\index{SFOpenGLView(mouse)@{SFOpenGLView(mouse)}}
+\doxysubsubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{categorySFOpenGLView_07mouse_08_a8ab77c8f844f3862fbbffa42d49f5403}\label{categorySFOpenGLView_07mouse_08_a8ab77c8f844f3862fbbffa42d49f5403} 
+(void) -\/ {\bfseries set\+Cursor\+:}
+\begin{DoxyCompactList}\small\item\em Set the system cursor for the window area. \end{DoxyCompactList}\item 
+(NSPoint) -\/ \mbox{\hyperlink{categorySFOpenGLView_07mouse_08_a53f3b5ed28bb36a593dfbfd587fb70b8}{cursor\+Position\+From\+Event\+:}}
+\begin{DoxyCompactList}\small\item\em Compute the position of the cursor. \end{DoxyCompactList}\item 
+(BOOL) -\/ \mbox{\hyperlink{categorySFOpenGLView_07mouse_08_ada1cb486f68540ca5416f066f41b6ccb}{is\+Mouse\+Inside}}
+\begin{DoxyCompactList}\small\item\em Determine where the mouse is. \end{DoxyCompactList}\item 
+(void) -\/ \mbox{\hyperlink{categorySFOpenGLView_07mouse_08_ae258351b594db0553b61de209250a3f6}{set\+Cursor\+Grabbed\+:}}
+\item 
+(void) -\/ \mbox{\hyperlink{categorySFOpenGLView_07mouse_08_aeabf7b6ebb2af77f128fb7292a5ea14b}{update\+Cursor\+Grabbed}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+In this file, we implement mouse handling for \doxylink{interfaceSFOpenGLView}{SFOpen\+GLView} 
+
+\doxysubsection{Method Documentation}
+\Hypertarget{categorySFOpenGLView_07mouse_08_a53f3b5ed28bb36a593dfbfd587fb70b8}\index{SFOpenGLView(mouse)@{SFOpenGLView(mouse)}!cursorPositionFromEvent:@{cursorPositionFromEvent:}}
+\index{cursorPositionFromEvent:@{cursorPositionFromEvent:}!SFOpenGLView(mouse)@{SFOpenGLView(mouse)}}
+\doxysubsubsection{\texorpdfstring{cursorPositionFromEvent:}{cursorPositionFromEvent:}}
+{\footnotesize\ttfamily \label{categorySFOpenGLView_07mouse_08_a53f3b5ed28bb36a593dfbfd587fb70b8} 
+-\/ (NSPoint) cursor\+Position\+From\+Event\+: \begin{DoxyParamCaption}\item[{(NSEvent\texorpdfstring{$\ast$}{*})}]{event\+Or\+Nil}{}\end{DoxyParamCaption}}
+
+
+
+Compute the position of the cursor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event\+Or\+Nil} & if nil the cursor position is the current one\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the mouse position in SFML coord system 
+\end{DoxyReturn}
+\Hypertarget{categorySFOpenGLView_07mouse_08_ada1cb486f68540ca5416f066f41b6ccb}\index{SFOpenGLView(mouse)@{SFOpenGLView(mouse)}!isMouseInside@{isMouseInside}}
+\index{isMouseInside@{isMouseInside}!SFOpenGLView(mouse)@{SFOpenGLView(mouse)}}
+\doxysubsubsection{\texorpdfstring{isMouseInside}{isMouseInside}}
+{\footnotesize\ttfamily \label{categorySFOpenGLView_07mouse_08_ada1cb486f68540ca5416f066f41b6ccb} 
+-\/ (BOOL) is\+Mouse\+Inside \begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}}
+
+
+
+Determine where the mouse is. 
+
+\begin{DoxyReturn}{Returns}
+true when the mouse is inside the Open\+GL view, false otherwise 
+\end{DoxyReturn}
+\Hypertarget{categorySFOpenGLView_07mouse_08_ae258351b594db0553b61de209250a3f6}\index{SFOpenGLView(mouse)@{SFOpenGLView(mouse)}!setCursorGrabbed:@{setCursorGrabbed:}}
+\index{setCursorGrabbed:@{setCursorGrabbed:}!SFOpenGLView(mouse)@{SFOpenGLView(mouse)}}
+\doxysubsubsection{\texorpdfstring{setCursorGrabbed:}{setCursorGrabbed:}}
+{\footnotesize\ttfamily \label{categorySFOpenGLView_07mouse_08_ae258351b594db0553b61de209250a3f6} 
+-\/ (void) set\+Cursor\+Grabbed\+: \begin{DoxyParamCaption}\item[{(BOOL)}]{grabbed}{}\end{DoxyParamCaption}}
+
+Clips or releases the mouse cursor
+
+Generate a Mouse\+Entered event when it makes sense.
+
+
+\begin{DoxyParams}{Parameters}
+{\em grabbed} & YES to grab, NO to release \\
+\hline
+\end{DoxyParams}
+\Hypertarget{categorySFOpenGLView_07mouse_08_aeabf7b6ebb2af77f128fb7292a5ea14b}\index{SFOpenGLView(mouse)@{SFOpenGLView(mouse)}!updateCursorGrabbed@{updateCursorGrabbed}}
+\index{updateCursorGrabbed@{updateCursorGrabbed}!SFOpenGLView(mouse)@{SFOpenGLView(mouse)}}
+\doxysubsubsection{\texorpdfstring{updateCursorGrabbed}{updateCursorGrabbed}}
+{\footnotesize\ttfamily \label{categorySFOpenGLView_07mouse_08_aeabf7b6ebb2af77f128fb7292a5ea14b} 
+-\/ (void) update\+Cursor\+Grabbed \begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}}
+
+Update the cursor position according to the grabbing behaviour
+
+This function has to be called when the window\textquotesingle{}s state change 
+
+The documentation for this category was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+Window/\+OSX/SFOpen\+GLView+mouse.\+mm\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+Window/\+OSX/SFOpen\+GLView.\+h\end{DoxyCompactItemize}

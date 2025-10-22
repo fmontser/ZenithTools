@@ -1,0 +1,126 @@
+\doxysection{sf\+::priv\+::Thread\+Local\+Impl Class Reference}
+\hypertarget{classsf_1_1priv_1_1ThreadLocalImpl}{}\label{classsf_1_1priv_1_1ThreadLocalImpl}\index{sf::priv::ThreadLocalImpl@{sf::priv::ThreadLocalImpl}}
+
+
+Unix implementation of thread-\/local storage.  
+
+
+
+
+{\ttfamily \#include $<$Thread\+Local\+Impl.\+hpp$>$}
+
+
+
+Inheritance diagram for sf\+::priv\+::Thread\+Local\+Impl\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=204pt]{classsf_1_1priv_1_1ThreadLocalImpl__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for sf\+::priv\+::Thread\+Local\+Impl\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=204pt]{classsf_1_1priv_1_1ThreadLocalImpl__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classsf_1_1priv_1_1ThreadLocalImpl_a38c4e5663e724d06a8e1d946c4a1040e}\label{classsf_1_1priv_1_1ThreadLocalImpl_a38c4e5663e724d06a8e1d946c4a1040e} 
+{\bfseries Thread\+Local\+Impl} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -- allocate the storage. \end{DoxyCompactList}\item 
+\Hypertarget{classsf_1_1priv_1_1ThreadLocalImpl_aeea8cb1c8f3a5711ade20bc017a39568}\label{classsf_1_1priv_1_1ThreadLocalImpl_aeea8cb1c8f3a5711ade20bc017a39568} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Thread\+Local\+Impl} ()
+\begin{DoxyCompactList}\small\item\em Destructor -- free the storage. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1priv_1_1ThreadLocalImpl_ac0f5adad04d42127027b30894c72bc6f}{set\+Value}} (void \texorpdfstring{$\ast$}{*}value)
+\begin{DoxyCompactList}\small\item\em Set the thread-\/specific value of the variable. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classsf_1_1priv_1_1ThreadLocalImpl_a6a844105a0a4f3261b35085bb1071a81}{get\+Value}} () const
+\begin{DoxyCompactList}\small\item\em Retrieve the thread-\/specific value of the variable. \end{DoxyCompactList}\item 
+\Hypertarget{classsf_1_1priv_1_1ThreadLocalImpl_a38c4e5663e724d06a8e1d946c4a1040e}\label{classsf_1_1priv_1_1ThreadLocalImpl_a38c4e5663e724d06a8e1d946c4a1040e} 
+{\bfseries Thread\+Local\+Impl} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -- allocate the storage. \end{DoxyCompactList}\item 
+\Hypertarget{classsf_1_1priv_1_1ThreadLocalImpl_aeea8cb1c8f3a5711ade20bc017a39568}\label{classsf_1_1priv_1_1ThreadLocalImpl_aeea8cb1c8f3a5711ade20bc017a39568} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Thread\+Local\+Impl} ()
+\begin{DoxyCompactList}\small\item\em Destructor -- free the storage. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1priv_1_1ThreadLocalImpl_ac0f5adad04d42127027b30894c72bc6f}{set\+Value}} (void \texorpdfstring{$\ast$}{*}value)
+\begin{DoxyCompactList}\small\item\em Set the thread-\/specific value of the variable. \end{DoxyCompactList}\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classsf_1_1priv_1_1ThreadLocalImpl_a6a844105a0a4f3261b35085bb1071a81}{get\+Value}} () const
+\begin{DoxyCompactList}\small\item\em Retrieve the thread-\/specific value of the variable. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Unix implementation of thread-\/local storage. 
+
+Windows implementation of thread-\/local storage. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsf_1_1priv_1_1ThreadLocalImpl_a6a844105a0a4f3261b35085bb1071a81}\index{sf::priv::ThreadLocalImpl@{sf::priv::ThreadLocalImpl}!getValue@{getValue}}
+\index{getValue@{getValue}!sf::priv::ThreadLocalImpl@{sf::priv::ThreadLocalImpl}}
+\doxysubsubsection{\texorpdfstring{getValue()}{getValue()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1ThreadLocalImpl_a6a844105a0a4f3261b35085bb1071a81} 
+void \texorpdfstring{$\ast$}{*} sf\+::priv\+::\+Thread\+Local\+Impl\+::get\+Value (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Retrieve the thread-\/specific value of the variable. 
+
+\begin{DoxyReturn}{Returns}
+Value of the variable for this thread 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1priv_1_1ThreadLocalImpl_a6a844105a0a4f3261b35085bb1071a81}\index{sf::priv::ThreadLocalImpl@{sf::priv::ThreadLocalImpl}!getValue@{getValue}}
+\index{getValue@{getValue}!sf::priv::ThreadLocalImpl@{sf::priv::ThreadLocalImpl}}
+\doxysubsubsection{\texorpdfstring{getValue()}{getValue()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1ThreadLocalImpl_a6a844105a0a4f3261b35085bb1071a81} 
+void \texorpdfstring{$\ast$}{*} sf\+::priv\+::\+Thread\+Local\+Impl\+::get\+Value (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Retrieve the thread-\/specific value of the variable. 
+
+\begin{DoxyReturn}{Returns}
+Value of the variable for this thread 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1priv_1_1ThreadLocalImpl_ac0f5adad04d42127027b30894c72bc6f}\index{sf::priv::ThreadLocalImpl@{sf::priv::ThreadLocalImpl}!setValue@{setValue}}
+\index{setValue@{setValue}!sf::priv::ThreadLocalImpl@{sf::priv::ThreadLocalImpl}}
+\doxysubsubsection{\texorpdfstring{setValue()}{setValue()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1ThreadLocalImpl_ac0f5adad04d42127027b30894c72bc6f} 
+void sf\+::priv\+::\+Thread\+Local\+Impl\+::set\+Value (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Set the thread-\/specific value of the variable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Value of the variable for this thread \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classsf_1_1priv_1_1ThreadLocalImpl_ac0f5adad04d42127027b30894c72bc6f}\index{sf::priv::ThreadLocalImpl@{sf::priv::ThreadLocalImpl}!setValue@{setValue}}
+\index{setValue@{setValue}!sf::priv::ThreadLocalImpl@{sf::priv::ThreadLocalImpl}}
+\doxysubsubsection{\texorpdfstring{setValue()}{setValue()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1ThreadLocalImpl_ac0f5adad04d42127027b30894c72bc6f} 
+void sf\+::priv\+::\+Thread\+Local\+Impl\+::set\+Value (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Set the thread-\/specific value of the variable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Value of the variable for this thread \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+System/\+Unix/Thread\+Local\+Impl.\+hpp\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+System/\+Win32/Thread\+Local\+Impl.\+hpp\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+System/\+Unix/Thread\+Local\+Impl.\+cpp\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+System/\+Win32/Thread\+Local\+Impl.\+cpp\end{DoxyCompactItemize}

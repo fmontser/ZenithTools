@@ -1,0 +1,243 @@
+\doxysection{ftrender.\+h}
+\hypertarget{ftrender_8h_source}{}\label{ftrender_8h_source}\index{build/\_deps/sfml-\/src/extlibs/headers/freetype2/ftrender.h@{build/\_deps/sfml-\/src/extlibs/headers/freetype2/ftrender.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00003\ \textcolor{comment}{/*\ \ ftrender.h\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00005\ \textcolor{comment}{/*\ \ \ \ FreeType\ renderer\ modules\ public\ interface\ (specification).\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00007\ \textcolor{comment}{/*\ \ Copyright\ 1996-\/2001,\ 2005,\ 2006,\ 2010\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ \ David\ Turner,\ Robert\ Wilhelm,\ and\ Werner\ Lemberg.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00010\ \textcolor{comment}{/*\ \ This\ file\ is\ part\ of\ the\ FreeType\ project,\ and\ may\ only\ be\ used,\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*\ \ modified,\ and\ distributed\ under\ the\ terms\ of\ the\ FreeType\ project\ \ \ \ \ \ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*\ \ license,\ LICENSE.TXT.\ \ By\ continuing\ to\ use,\ modify,\ or\ distribute\ \ \ \ \ */}}
+\DoxyCodeLine{00013\ \textcolor{comment}{/*\ \ this\ file\ you\ indicate\ that\ you\ have\ read\ the\ license\ and\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00014\ \textcolor{comment}{/*\ \ understand\ and\ accept\ it\ fully.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00015\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00016\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ \_\_FTRENDER\_H\_\_}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ \_\_FTRENDER\_H\_\_}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <ft2build.h>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ FT\_MODULE\_H}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ FT\_GLYPH\_H}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ FT\_BEGIN\_HEADER}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00032\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00033\ \ \ \textcolor{comment}{/*\ <Section>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00034\ \ \ \textcolor{comment}{/*\ \ \ \ module\_management\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00035\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00036\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \textcolor{comment}{/*\ create\ a\ new\ glyph\ object\ */}}
+\DoxyCodeLine{00040\ \ \ \textcolor{keyword}{typedef}\ FT\_Error}
+\DoxyCodeLine{00041\ \ \ (*FT\_Glyph\_InitFunc)(\ FT\_Glyph\ \ \ \ \ \ glyph,}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_GlyphSlot\ \ slot\ );}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \textcolor{comment}{/*\ destroys\ a\ given\ glyph\ object\ */}}
+\DoxyCodeLine{00045\ \ \ \textcolor{keyword}{typedef}\ void}
+\DoxyCodeLine{00046\ \ \ (*FT\_Glyph\_DoneFunc)(\ FT\_Glyph\ \ glyph\ );}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \textcolor{keyword}{typedef}\ void}
+\DoxyCodeLine{00049\ \ \ (*FT\_Glyph\_TransformFunc)(\ FT\_Glyph\ \ \ \ \ \ \ \ \ \ glyph,}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ FT\_Matrix*\ \ matrix,}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ FT\_Vector*\ \ delta\ );}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \textcolor{keyword}{typedef}\ void}
+\DoxyCodeLine{00054\ \ \ (*FT\_Glyph\_GetBBoxFunc)(\ FT\_Glyph\ \ glyph,}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_BBox*\ \ abbox\ );}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \textcolor{keyword}{typedef}\ FT\_Error}
+\DoxyCodeLine{00058\ \ \ (*FT\_Glyph\_CopyFunc)(\ FT\_Glyph\ \ \ source,}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Glyph\ \ \ target\ );}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \textcolor{keyword}{typedef}\ FT\_Error}
+\DoxyCodeLine{00062\ \ \ (*FT\_Glyph\_PrepareFunc)(\ FT\_Glyph\ \ \ \ \ \ glyph,}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_GlyphSlot\ \ slot\ );}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{comment}{/*\ deprecated\ */}}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#define\ FT\_Glyph\_Init\_Func\ \ \ \ \ \ \ FT\_Glyph\_InitFunc}}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#define\ FT\_Glyph\_Done\_Func\ \ \ \ \ \ \ FT\_Glyph\_DoneFunc}}
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#define\ FT\_Glyph\_Transform\_Func\ \ FT\_Glyph\_TransformFunc}}
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#define\ FT\_Glyph\_BBox\_Func\ \ \ \ \ \ \ FT\_Glyph\_GetBBoxFunc}}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#define\ FT\_Glyph\_Copy\_Func\ \ \ \ \ \ \ FT\_Glyph\_CopyFunc}}
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#define\ FT\_Glyph\_Prepare\_Func\ \ \ \ FT\_Glyph\_PrepareFunc}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \textcolor{keyword}{struct\ \ }\mbox{\hyperlink{structFT__Glyph__Class__}{FT\_Glyph\_Class\_}}}
+\DoxyCodeLine{00075\ \ \ \{}
+\DoxyCodeLine{00076\ \ \ \ \ FT\_Long\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ glyph\_size;}
+\DoxyCodeLine{00077\ \ \ \ \ FT\_Glyph\_Format\ \ \ \ \ \ \ \ \ glyph\_format;}
+\DoxyCodeLine{00078\ \ \ \ \ FT\_Glyph\_InitFunc\ \ \ \ \ \ \ glyph\_init;}
+\DoxyCodeLine{00079\ \ \ \ \ FT\_Glyph\_DoneFunc\ \ \ \ \ \ \ glyph\_done;}
+\DoxyCodeLine{00080\ \ \ \ \ FT\_Glyph\_CopyFunc\ \ \ \ \ \ \ glyph\_copy;}
+\DoxyCodeLine{00081\ \ \ \ \ FT\_Glyph\_TransformFunc\ \ glyph\_transform;}
+\DoxyCodeLine{00082\ \ \ \ \ FT\_Glyph\_GetBBoxFunc\ \ \ \ glyph\_bbox;}
+\DoxyCodeLine{00083\ \ \ \ \ FT\_Glyph\_PrepareFunc\ \ \ \ glyph\_prepare;}
+\DoxyCodeLine{00084\ \ \ \};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \textcolor{keyword}{typedef}\ FT\_Error}
+\DoxyCodeLine{00088\ \ \ (*FT\_Renderer\_RenderFunc)(\ FT\_Renderer\ \ \ \ \ \ \ renderer,}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_GlyphSlot\ \ \ \ \ \ slot,}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_UInt\ \ \ \ \ \ \ \ \ \ \ mode,}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ FT\_Vector*\ \ origin\ );}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \textcolor{keyword}{typedef}\ FT\_Error}
+\DoxyCodeLine{00094\ \ \ (*FT\_Renderer\_TransformFunc)(\ FT\_Renderer\ \ \ \ \ \ \ renderer,}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_GlyphSlot\ \ \ \ \ \ slot,}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ FT\_Matrix*\ \ matrix,}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ FT\_Vector*\ \ delta\ );}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \textcolor{keyword}{typedef}\ void}
+\DoxyCodeLine{00101\ \ \ (*FT\_Renderer\_GetCBoxFunc)(\ FT\_Renderer\ \ \ renderer,}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_GlyphSlot\ \ slot,}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_BBox*\ \ \ \ \ \ cbox\ );}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \textcolor{keyword}{typedef}\ FT\_Error}
+\DoxyCodeLine{00107\ \ \ (*FT\_Renderer\_SetModeFunc)(\ FT\_Renderer\ \ renderer,}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_ULong\ \ \ \ \ mode\_tag,}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Pointer\ \ \ mode\_ptr\ );}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \textcolor{comment}{/*\ deprecated\ identifiers\ */}}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#define\ FTRenderer\_render\ \ FT\_Renderer\_RenderFunc}}
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\#define\ FTRenderer\_transform\ \ FT\_Renderer\_TransformFunc}}
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#define\ FTRenderer\_getCBox\ \ FT\_Renderer\_GetCBoxFunc}}
+\DoxyCodeLine{00115\ \textcolor{preprocessor}{\#define\ FTRenderer\_setMode\ \ FT\_Renderer\_SetModeFunc}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00119\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00120\ \ \ \textcolor{comment}{/*\ <Struct>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00121\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_Renderer\_Class\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00122\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00123\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00124\ \ \ \textcolor{comment}{/*\ \ \ \ The\ renderer\ module\ class\ descriptor.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00125\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00126\ \ \ \textcolor{comment}{/*\ <Fields>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00127\ \ \ \textcolor{comment}{/*\ \ \ \ root\ \ \ \ \ \ \ \ \ \ \ \ ::\ The\ root\ @FT\_Module\_Class\ fields.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00128\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00129\ \ \ \textcolor{comment}{/*\ \ \ \ glyph\_format\ \ \ \ ::\ The\ glyph\ image\ format\ this\ renderer\ handles.\ \ \ */}}
+\DoxyCodeLine{00130\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00131\ \ \ \textcolor{comment}{/*\ \ \ \ render\_glyph\ \ \ \ ::\ A\ method\ used\ to\ render\ the\ image\ that\ is\ in\ a\ \ */}}
+\DoxyCodeLine{00132\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ given\ glyph\ slot\ into\ a\ bitmap.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00133\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00134\ \ \ \textcolor{comment}{/*\ \ \ \ transform\_glyph\ ::\ A\ method\ used\ to\ transform\ the\ image\ that\ is\ in\ */}}
+\DoxyCodeLine{00135\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ a\ given\ glyph\ slot.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00136\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00137\ \ \ \textcolor{comment}{/*\ \ \ \ get\_glyph\_cbox\ \ ::\ A\ method\ used\ to\ access\ the\ glyph's\ cbox.\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00138\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00139\ \ \ \textcolor{comment}{/*\ \ \ \ set\_mode\ \ \ \ \ \ \ \ ::\ A\ method\ used\ to\ pass\ additional\ parameters.\ \ \ \ */}}
+\DoxyCodeLine{00140\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00141\ \ \ \textcolor{comment}{/*\ \ \ \ raster\_class\ \ \ \ ::\ For\ @FT\_GLYPH\_FORMAT\_OUTLINE\ renderers\ only.\ \ \ \ */}}
+\DoxyCodeLine{00142\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ This\ is\ a\ pointer\ to\ its\ raster's\ class.\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00143\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00144\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ \ }\mbox{\hyperlink{structFT__Renderer__Class__}{FT\_Renderer\_Class\_}}}
+\DoxyCodeLine{00145\ \ \ \{}
+\DoxyCodeLine{00146\ \ \ \ \ FT\_Module\_Class\ \ \ \ \ \ \ \ \ \ \ \ root;}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \ \ FT\_Glyph\_Format\ \ \ \ \ \ \ \ \ \ \ \ glyph\_format;}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \ \ FT\_Renderer\_RenderFunc\ \ \ \ \ render\_glyph;}
+\DoxyCodeLine{00151\ \ \ \ \ FT\_Renderer\_TransformFunc\ \ transform\_glyph;}
+\DoxyCodeLine{00152\ \ \ \ \ FT\_Renderer\_GetCBoxFunc\ \ \ \ get\_glyph\_cbox;}
+\DoxyCodeLine{00153\ \ \ \ \ FT\_Renderer\_SetModeFunc\ \ \ \ set\_mode;}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \ \ \ \ FT\_Raster\_Funcs*\ \ \ \ \ \ \ \ \ \ \ raster\_class;}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \}\ FT\_Renderer\_Class;}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00161\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00162\ \ \ \textcolor{comment}{/*\ <Function>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00163\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_Get\_Renderer\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00164\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00165\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00166\ \ \ \textcolor{comment}{/*\ \ \ \ Retrieve\ the\ current\ renderer\ for\ a\ given\ glyph\ format.\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00167\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00168\ \ \ \textcolor{comment}{/*\ <Input>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00169\ \ \ \textcolor{comment}{/*\ \ \ \ library\ ::\ A\ handle\ to\ the\ library\ object.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00170\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00171\ \ \ \textcolor{comment}{/*\ \ \ \ format\ \ ::\ The\ glyph\ format.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00172\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00173\ \ \ \textcolor{comment}{/*\ <Return>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00174\ \ \ \textcolor{comment}{/*\ \ \ \ A\ renderer\ handle.\ \ 0\string~if\ none\ found.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00175\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00176\ \ \ \textcolor{comment}{/*\ <Note>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00177\ \ \ \textcolor{comment}{/*\ \ \ \ An\ error\ will\ be\ returned\ if\ a\ module\ already\ exists\ by\ that\ name,\ */}}
+\DoxyCodeLine{00178\ \ \ \textcolor{comment}{/*\ \ \ \ or\ if\ the\ module\ requires\ a\ version\ of\ FreeType\ that\ is\ too\ great.\ */}}
+\DoxyCodeLine{00179\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00180\ \ \ \textcolor{comment}{/*\ \ \ \ To\ add\ a\ new\ renderer,\ simply\ use\ @FT\_Add\_Module.\ \ To\ retrieve\ a\ \ \ */}}
+\DoxyCodeLine{00181\ \ \ \textcolor{comment}{/*\ \ \ \ renderer\ by\ its\ name,\ use\ @FT\_Get\_Module.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00182\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00183\ \ \ FT\_EXPORT(\ FT\_Renderer\ )}
+\DoxyCodeLine{00184\ \ \ FT\_Get\_Renderer(\ FT\_Library\ \ \ \ \ \ \ library,}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Glyph\_Format\ \ format\ );}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00189\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00190\ \ \ \textcolor{comment}{/*\ <Function>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00191\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_Set\_Renderer\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00192\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00193\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00194\ \ \ \textcolor{comment}{/*\ \ \ \ Set\ the\ current\ renderer\ to\ use,\ and\ set\ additional\ mode.\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00195\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00196\ \ \ \textcolor{comment}{/*\ <InOut>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00197\ \ \ \textcolor{comment}{/*\ \ \ \ library\ \ \ \ ::\ A\ handle\ to\ the\ library\ object.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00198\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00199\ \ \ \textcolor{comment}{/*\ <Input>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00200\ \ \ \textcolor{comment}{/*\ \ \ \ renderer\ \ \ ::\ A\ handle\ to\ the\ renderer\ object.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00201\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00202\ \ \ \textcolor{comment}{/*\ \ \ \ num\_params\ ::\ The\ number\ of\ additional\ parameters.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00203\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00204\ \ \ \textcolor{comment}{/*\ \ \ \ parameters\ ::\ Additional\ parameters.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00205\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00206\ \ \ \textcolor{comment}{/*\ <Return>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00207\ \ \ \textcolor{comment}{/*\ \ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00208\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00209\ \ \ \textcolor{comment}{/*\ <Note>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00210\ \ \ \textcolor{comment}{/*\ \ \ \ In\ case\ of\ success,\ the\ renderer\ will\ be\ used\ to\ convert\ glyph\ \ \ \ \ */}}
+\DoxyCodeLine{00211\ \ \ \textcolor{comment}{/*\ \ \ \ images\ in\ the\ renderer's\ known\ format\ into\ bitmaps.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00212\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00213\ \ \ \textcolor{comment}{/*\ \ \ \ This\ doesn't\ change\ the\ current\ renderer\ for\ other\ formats.\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00214\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00215\ \ \ \textcolor{comment}{/*\ \ \ \ Currently,\ only\ the\ B/W\ renderer,\ if\ compiled\ with\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00216\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_RASTER\_OPTION\_ANTI\_ALIASING\ (providing\ a\ 5-\/levels\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00217\ \ \ \textcolor{comment}{/*\ \ \ \ anti-\/aliasing\ mode;\ this\ option\ must\ be\ set\ directly\ in\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00218\ \ \ \textcolor{comment}{/*\ \ \ \ \`{}ftraster.c'\ and\ is\ undefined\ by\ default)\ accepts\ a\ single\ tag\ \ \ \ \ */}}
+\DoxyCodeLine{00219\ \ \ \textcolor{comment}{/*\ \ \ \ \`{}pal5'\ to\ set\ its\ gray\ palette\ as\ a\ character\ string\ with\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00220\ \ \ \textcolor{comment}{/*\ \ \ \ 5\string~elements.\ \ Consequently,\ the\ third\ and\ fourth\ argument\ are\ zero\ \ */}}
+\DoxyCodeLine{00221\ \ \ \textcolor{comment}{/*\ \ \ \ normally.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00222\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00223\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{00224\ \ \ FT\_Set\_Renderer(\ FT\_Library\ \ \ \ \ library,}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Renderer\ \ \ \ renderer,}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_UInt\ \ \ \ \ \ \ \ num\_params,}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Parameter*\ \ parameters\ );}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00229\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00232\ FT\_END\_HEADER}
+\DoxyCodeLine{00233\ }
+\DoxyCodeLine{00234\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_FTRENDER\_H\_\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \textcolor{comment}{/*\ END\ */}}
+
+\end{DoxyCode}

@@ -1,0 +1,121 @@
+\doxysection{sf\+::Mutex Class Reference}
+\hypertarget{classsf_1_1Mutex}{}\label{classsf_1_1Mutex}\index{sf::Mutex@{sf::Mutex}}
+
+
+Blocks concurrent access to shared resources from multiple threads.  
+
+
+
+
+{\ttfamily \#include $<$Mutex.\+hpp$>$}
+
+
+
+Inheritance diagram for sf\+::Mutex\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{classsf_1_1Mutex__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for sf\+::Mutex\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{classsf_1_1Mutex__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classsf_1_1Mutex_a9bd52a48320fd7b6db8a78037aad276e}\label{classsf_1_1Mutex_a9bd52a48320fd7b6db8a78037aad276e} 
+{\bfseries Mutex} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\Hypertarget{classsf_1_1Mutex_a9f76a67b7b6d3918131a692179b4e3f2}\label{classsf_1_1Mutex_a9f76a67b7b6d3918131a692179b4e3f2} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Mutex} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1Mutex_a1a16956a6bbea764480c1b80f2e45763}{lock}} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{classsf_1_1Lock}{Lock} the mutex. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1Mutex_ade71268ffc5e80756652058b01c23c33}{unlock}} ()
+\begin{DoxyCompactList}\small\item\em Unlock the mutex. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Blocks concurrent access to shared resources from multiple threads. 
+
+\doxylink{classsf_1_1Mutex}{Mutex} stands for "{}\+MUTual EXclusion"{}. A mutex is a synchronization object, used when multiple threads are involved.
+
+When you want to protect a part of the code from being accessed simultaneously by multiple threads, you typically use a mutex. When a thread is locked by a mutex, any other thread trying to lock it will be blocked until the mutex is released by the thread that locked it. This way, you can allow only one thread at a time to access a critical region of your code.
+
+Usage example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Database\ database;\ \textcolor{comment}{//\ this\ is\ a\ critical\ resource\ that\ needs\ some\ protection}}
+\DoxyCodeLine{sf::Mutex\ mutex;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ thread1()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ mutex.\mbox{\hyperlink{classsf_1_1Mutex_a1a16956a6bbea764480c1b80f2e45763}{lock}}();\ \textcolor{comment}{//\ this\ call\ will\ block\ the\ thread\ if\ the\ mutex\ is\ already\ locked\ by\ thread2}}
+\DoxyCodeLine{\ \ \ \ database.write(...);}
+\DoxyCodeLine{\ \ \ \ mutex.\mbox{\hyperlink{classsf_1_1Mutex_ade71268ffc5e80756652058b01c23c33}{unlock}}();\ \textcolor{comment}{//\ if\ thread2\ was\ waiting,\ it\ will\ now\ be\ unblocked}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ thread2()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ mutex.\mbox{\hyperlink{classsf_1_1Mutex_a1a16956a6bbea764480c1b80f2e45763}{lock}}();\ \textcolor{comment}{//\ this\ call\ will\ block\ the\ thread\ if\ the\ mutex\ is\ already\ locked\ by\ thread1}}
+\DoxyCodeLine{\ \ \ \ database.write(...);}
+\DoxyCodeLine{\ \ \ \ mutex.\mbox{\hyperlink{classsf_1_1Mutex_ade71268ffc5e80756652058b01c23c33}{unlock}}();\ \textcolor{comment}{//\ if\ thread1\ was\ waiting,\ it\ will\ now\ be\ unblocked}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Be very careful with mutexes. A bad usage can lead to bad problems, like deadlocks (two threads are waiting for each other and the application is globally stuck).
+
+To make the usage of mutexes more robust, particularly in environments where exceptions can be thrown, you should use the helper class \doxylink{classsf_1_1Lock}{sf\+::\+Lock} to lock/unlock mutexes.
+
+SFML mutexes are recursive, which means that you can lock a mutex multiple times in the same thread without creating a deadlock. In this case, the first call to \doxylink{classsf_1_1Mutex_a1a16956a6bbea764480c1b80f2e45763}{lock()} behaves as usual, and the following ones have no effect. However, you must call \doxylink{classsf_1_1Mutex_ade71268ffc5e80756652058b01c23c33}{unlock()} exactly as many times as you called \doxylink{classsf_1_1Mutex_a1a16956a6bbea764480c1b80f2e45763}{lock()}. If you don\textquotesingle{}t, the mutex won\textquotesingle{}t be released.
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Lock}{sf\+::\+Lock} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsf_1_1Mutex_a1a16956a6bbea764480c1b80f2e45763}\index{sf::Mutex@{sf::Mutex}!lock@{lock}}
+\index{lock@{lock}!sf::Mutex@{sf::Mutex}}
+\doxysubsubsection{\texorpdfstring{lock()}{lock()}}
+{\footnotesize\ttfamily \label{classsf_1_1Mutex_a1a16956a6bbea764480c1b80f2e45763} 
+void sf\+::\+Mutex\+::lock (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxylink{classsf_1_1Lock}{Lock} the mutex. 
+
+If the mutex is already locked in another thread, this call will block the execution until the mutex is released.
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Mutex_ade71268ffc5e80756652058b01c23c33}{unlock} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1Mutex_ade71268ffc5e80756652058b01c23c33}\index{sf::Mutex@{sf::Mutex}!unlock@{unlock}}
+\index{unlock@{unlock}!sf::Mutex@{sf::Mutex}}
+\doxysubsubsection{\texorpdfstring{unlock()}{unlock()}}
+{\footnotesize\ttfamily \label{classsf_1_1Mutex_ade71268ffc5e80756652058b01c23c33} 
+void sf\+::\+Mutex\+::unlock (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Unlock the mutex. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Mutex_a1a16956a6bbea764480c1b80f2e45763}{lock} 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/include/\+SFML/\+System/Mutex.\+hpp\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+System/Mutex.\+cpp\end{DoxyCompactItemize}

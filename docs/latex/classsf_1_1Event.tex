@@ -1,0 +1,266 @@
+\doxysection{sf\+::Event Class Reference}
+\hypertarget{classsf_1_1Event}{}\label{classsf_1_1Event}\index{sf::Event@{sf::Event}}
+
+
+Defines a system event and its parameters.  
+
+
+
+
+{\ttfamily \#include $<$Event.\+hpp$>$}
+
+
+
+Collaboration diagram for sf\+::Event\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsf_1_1Event__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structsf_1_1Event_1_1JoystickButtonEvent}{Joystick\+Button\+Event}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classsf_1_1Joystick}{Joystick} buttons events parameters (Joystick\+Button\+Pressed, Joystick\+Button\+Released) \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structsf_1_1Event_1_1JoystickConnectEvent}{Joystick\+Connect\+Event}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classsf_1_1Joystick}{Joystick} connection events parameters (Joystick\+Connected, Joystick\+Disconnected) \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structsf_1_1Event_1_1JoystickMoveEvent}{Joystick\+Move\+Event}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classsf_1_1Joystick}{Joystick} axis move event parameters (Joystick\+Moved) \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structsf_1_1Event_1_1KeyEvent}{Key\+Event}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classsf_1_1Keyboard}{Keyboard} event parameters (Key\+Pressed, Key\+Released) \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structsf_1_1Event_1_1MouseButtonEvent}{Mouse\+Button\+Event}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classsf_1_1Mouse}{Mouse} buttons events parameters (Mouse\+Button\+Pressed, Mouse\+Button\+Released) \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structsf_1_1Event_1_1MouseMoveEvent}{Mouse\+Move\+Event}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classsf_1_1Mouse}{Mouse} move event parameters (Mouse\+Moved) \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structsf_1_1Event_1_1MouseWheelEvent}{Mouse\+Wheel\+Event}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classsf_1_1Mouse}{Mouse} wheel events parameters (Mouse\+Wheel\+Moved) \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structsf_1_1Event_1_1MouseWheelScrollEvent}{Mouse\+Wheel\+Scroll\+Event}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classsf_1_1Mouse}{Mouse} wheel events parameters (Mouse\+Wheel\+Scrolled) \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structsf_1_1Event_1_1SensorEvent}{Sensor\+Event}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classsf_1_1Sensor}{Sensor} event parameters (Sensor\+Changed) \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structsf_1_1Event_1_1SizeEvent}{Size\+Event}}
+\begin{DoxyCompactList}\small\item\em Size events parameters (Resized) \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structsf_1_1Event_1_1TextEvent}{Text\+Event}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classsf_1_1Text}{Text} event parameters (Text\+Entered) \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structsf_1_1Event_1_1TouchEvent}{Touch\+Event}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classsf_1_1Touch}{Touch} events parameters (Touch\+Began, Touch\+Moved, Touch\+Ended) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4a}{Event\+Type}} \{ \newline
+\mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa316e4212e083f1dce79efd8d9e9c0a95}{Closed}}
+, \mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa67fd26d7e520bc6722db3ff47ef24941}{Resized}}
+, \mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aabd7877b5011a337268357c973e8347bd}{Lost\+Focus}}
+, \mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa8c5003ced508499933d540df8a6023ec}{Gained\+Focus}}
+, \newline
+\mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa7e09871dc984080ff528e4f7e073e874}{Text\+Entered}}
+, \mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aac3c7abfaa98c73bfe6be0b57df09c71b}{Key\+Pressed}}
+, \mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aaa5bcc1e603d5a6f4c137af39558bd5d1}{Key\+Released}}
+, \mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa5cc9d3941af2a36049f4f9922c934a80}{Mouse\+Wheel\+Moved}}
+, \newline
+\mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa2fb6925eb3e7f3d468faf639dbd129ad}{Mouse\+Wheel\+Scrolled}}
+, \mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa55a3dcc8bf6c40e37f9ff2cdf606481f}{Mouse\+Button\+Pressed}}
+, \mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa9be69ecc07e484467ebbb133182fe5c1}{Mouse\+Button\+Released}}
+, \mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa4ff4fc3b3dc857e3617a63feb54be209}{Mouse\+Moved}}
+, \newline
+\mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa50d98590a953e74c7ccf3dabadb22067}{Mouse\+Entered}}
+, \mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aaa90b8526b328e0246d04b026de17c6e7}{Mouse\+Left}}
+, \mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa6d46855f0253f065689b69cd09437222}{Joystick\+Button\+Pressed}}
+, \mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa2246ef5ee33f7fa4b2a53f042ceeac3d}{Joystick\+Button\+Released}}
+, \newline
+\mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa4d6ad228485c135967831be16ec074dd}{Joystick\+Moved}}
+, \mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aaabb8877ec2f0c92904170deded09321e}{Joystick\+Connected}}
+, \mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aab6e161dab7abaf154cc1c7b554558cb6}{Joystick\+Disconnected}}
+, \mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aae6f8231ad6013d063929a09b6c28f515}{Touch\+Began}}
+, \newline
+\mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa9524b7d7665212c6d56f623b5b8311a9}{Touch\+Moved}}
+, \mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aabc7123492dbca320da5c03fea1a141e5}{Touch\+Ended}}
+, \mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aaadf9a44c788eb9467a83c074fbf12613}{Sensor\+Changed}}
+, \mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aae51749211243cab2ab270b29cdc32a70}{Count}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeration of the different types of events. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classsf_1_1Event_adf2f8044f713fd9d6019077b0d1ffe0a}\label{classsf_1_1Event_adf2f8044f713fd9d6019077b0d1ffe0a} 
+\mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4a}{Event\+Type}} {\bfseries type}
+\begin{DoxyCompactList}\small\item\em Type of the event. \end{DoxyCompactList}\item 
+\Hypertarget{classsf_1_1Event_aeb3d24f6c56827d98249e138b6474fc6}\label{classsf_1_1Event_aeb3d24f6c56827d98249e138b6474fc6} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>\mbox{\hyperlink{structsf_1_1Event_1_1SizeEvent}{SizeEvent}} {\bfseries size}\\
+\>\>{\em Size event parameters (\doxylink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa67fd26d7e520bc6722db3ff47ef24941}{Event::Resized}) }\\
+\>\mbox{\hyperlink{structsf_1_1Event_1_1KeyEvent}{KeyEvent}} {\bfseries key}\\
+\>\>{\em Key event parameters (\doxylink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aac3c7abfaa98c73bfe6be0b57df09c71b}{Event::KeyPressed}, \doxylink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aaa5bcc1e603d5a6f4c137af39558bd5d1}{Event::KeyReleased}) }\\
+\>\mbox{\hyperlink{structsf_1_1Event_1_1TextEvent}{TextEvent}} {\bfseries text}\\
+\>\>{\em \doxylink{classsf_1_1Text}{Text} event parameters (\doxylink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa7e09871dc984080ff528e4f7e073e874}{Event::TextEntered}) }\\
+\>\mbox{\hyperlink{structsf_1_1Event_1_1MouseMoveEvent}{MouseMoveEvent}} {\bfseries mouseMove}\\
+\>\>{\em \doxylink{classsf_1_1Mouse}{Mouse} move event parameters (\doxylink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa4ff4fc3b3dc857e3617a63feb54be209}{Event::MouseMoved}) }\\
+\>\mbox{\hyperlink{structsf_1_1Event_1_1MouseButtonEvent}{MouseButtonEvent}} {\bfseries mouseButton}\\
+\>\>{\em \doxylink{classsf_1_1Mouse}{Mouse} button event parameters (\doxylink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa55a3dcc8bf6c40e37f9ff2cdf606481f}{Event::MouseButtonPressed}, \doxylink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa9be69ecc07e484467ebbb133182fe5c1}{Event::MouseButtonReleased}) }\\
+\>\mbox{\hyperlink{structsf_1_1Event_1_1MouseWheelEvent}{MouseWheelEvent}} {\bfseries mouseWheel}\\
+\>\>{\em \doxylink{classsf_1_1Mouse}{Mouse} wheel event parameters (\doxylink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa5cc9d3941af2a36049f4f9922c934a80}{Event::MouseWheelMoved}) (deprecated) }\\
+\>\mbox{\hyperlink{structsf_1_1Event_1_1MouseWheelScrollEvent}{MouseWheelScrollEvent}} {\bfseries mouseWheelScroll}\\
+\>\>{\em \doxylink{classsf_1_1Mouse}{Mouse} wheel event parameters (\doxylink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa2fb6925eb3e7f3d468faf639dbd129ad}{Event::MouseWheelScrolled}) }\\
+\>\mbox{\hyperlink{structsf_1_1Event_1_1JoystickMoveEvent}{JoystickMoveEvent}} {\bfseries joystickMove}\\
+\>\>{\em \doxylink{classsf_1_1Joystick}{Joystick} move event parameters (\doxylink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa4d6ad228485c135967831be16ec074dd}{Event::JoystickMoved}) }\\
+\>\mbox{\hyperlink{structsf_1_1Event_1_1JoystickButtonEvent}{JoystickButtonEvent}} {\bfseries joystickButton}\\
+\>\>{\em \doxylink{classsf_1_1Joystick}{Joystick} button event parameters (\doxylink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa6d46855f0253f065689b69cd09437222}{Event::JoystickButtonPressed}, \doxylink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa2246ef5ee33f7fa4b2a53f042ceeac3d}{Event::JoystickButtonReleased}) }\\
+\>\mbox{\hyperlink{structsf_1_1Event_1_1JoystickConnectEvent}{JoystickConnectEvent}} {\bfseries joystickConnect}\\
+\>\>{\em \doxylink{classsf_1_1Joystick}{Joystick} (dis)connect event parameters (\doxylink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aaabb8877ec2f0c92904170deded09321e}{Event::JoystickConnected}, \doxylink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aab6e161dab7abaf154cc1c7b554558cb6}{Event::JoystickDisconnected}) }\\
+\>\mbox{\hyperlink{structsf_1_1Event_1_1TouchEvent}{TouchEvent}} {\bfseries touch}\\
+\>\>{\em \doxylink{classsf_1_1Touch}{Touch} events parameters (\doxylink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aae6f8231ad6013d063929a09b6c28f515}{Event::TouchBegan}, \doxylink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa9524b7d7665212c6d56f623b5b8311a9}{Event::TouchMoved}, \doxylink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aabc7123492dbca320da5c03fea1a141e5}{Event::TouchEnded}) }\\
+\>\mbox{\hyperlink{structsf_1_1Event_1_1SensorEvent}{SensorEvent}} {\bfseries sensor}\\
+\>\>{\em \doxylink{classsf_1_1Sensor}{Sensor} event parameters (\doxylink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aaadf9a44c788eb9467a83c074fbf12613}{Event::SensorChanged}) }\\
+\}; \\
+
+\end{tabbing}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines a system event and its parameters. 
+
+\doxylink{classsf_1_1Event}{sf\+::\+Event} holds all the informations about a system event that just happened. Events are retrieved using the \doxylink{classsf_1_1WindowBase_a6a143de089c8716bd42c38c781268f7f}{sf\+::\+Window\+::poll\+Event} and \doxylink{classsf_1_1WindowBase_aa1c100a69b5bc0c84e23a4652d51ac41}{sf\+::\+Window\+::wait\+Event} functions.
+
+A \doxylink{classsf_1_1Event}{sf\+::\+Event} instance contains the type of the event (mouse moved, key pressed, window closed, ...) as well as the details about this particular event. Please note that the event parameters are defined in a union, which means that only the member matching the type of the event will be properly filled; all other members will have undefined values and must not be read if the type of the event doesn\textquotesingle{}t match. For example, if you received a Key\+Pressed event, then you must read the event.\+key member, all other members such as event.\+mouse\+Move or event.\+text will have undefined values.
+
+Usage example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sf::Event\ event;}
+\DoxyCodeLine{\textcolor{keywordflow}{while}\ (window.pollEvent(event))}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Request\ for\ closing\ the\ window}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (event.\mbox{\hyperlink{classsf_1_1Event_adf2f8044f713fd9d6019077b0d1ffe0a}{type}}\ ==\ \mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa316e4212e083f1dce79efd8d9e9c0a95}{sf::Event::Closed}})}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ window.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ The\ escape\ key\ was\ pressed}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ ((event.\mbox{\hyperlink{classsf_1_1Event_adf2f8044f713fd9d6019077b0d1ffe0a}{type}}\ ==\ \mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aac3c7abfaa98c73bfe6be0b57df09c71b}{sf::Event::KeyPressed}})\ \&\&\ (event.\mbox{\hyperlink{classsf_1_1Event_a45b92fc6757ca7c193f06b302e424ab0}{key}}.\mbox{\hyperlink{structsf_1_1Event_1_1KeyEvent_a2879fdab8a68cb1c6ecc45730a2d0e61}{code}}\ ==\ \mbox{\hyperlink{classsf_1_1Keyboard_acb4cacd7cc5802dec45724cf3314a142a64b7ecb543c5d03bec8383dde123c95d}{sf::Keyboard::Escape}}))}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ window.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ The\ window\ was\ resized}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (event.\mbox{\hyperlink{classsf_1_1Event_adf2f8044f713fd9d6019077b0d1ffe0a}{type}}\ ==\ \mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa67fd26d7e520bc6722db3ff47ef24941}{sf::Event::Resized}})}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ doSomethingWithTheNewSize(event.\mbox{\hyperlink{classsf_1_1Event_a85dae56a377eeffd39183c3f6fc96cb9}{size}}.\mbox{\hyperlink{structsf_1_1Event_1_1SizeEvent_a20ea1b78c9bb1604432f8f0067bbfd94}{width}},\ event.\mbox{\hyperlink{classsf_1_1Event_a85dae56a377eeffd39183c3f6fc96cb9}{size}}.\mbox{\hyperlink{structsf_1_1Event_1_1SizeEvent_af0f76a599d5f48189cb8d78d4e5facdb}{height}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ etc\ ...}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4a}\index{sf::Event@{sf::Event}!EventType@{EventType}}
+\index{EventType@{EventType}!sf::Event@{sf::Event}}
+\doxysubsubsection{\texorpdfstring{EventType}{EventType}}
+{\footnotesize\ttfamily \label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4a} 
+enum \mbox{\hyperlink{classsf_1_1Event_af41fa9ed45c02449030699f671331d4a}{sf\+::\+Event\+::\+Event\+Type}}}
+
+
+
+Enumeration of the different types of events. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Closed@{Closed}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!Closed@{Closed}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa316e4212e083f1dce79efd8d9e9c0a95}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa316e4212e083f1dce79efd8d9e9c0a95} 
+Closed&The window requested to be closed (no data) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Resized@{Resized}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!Resized@{Resized}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa67fd26d7e520bc6722db3ff47ef24941}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa67fd26d7e520bc6722db3ff47ef24941} 
+Resized&The window was resized (data in event.\+size) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LostFocus@{LostFocus}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!LostFocus@{LostFocus}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aabd7877b5011a337268357c973e8347bd}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aabd7877b5011a337268357c973e8347bd} 
+Lost\+Focus&The window lost the focus (no data) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GainedFocus@{GainedFocus}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!GainedFocus@{GainedFocus}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa8c5003ced508499933d540df8a6023ec}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa8c5003ced508499933d540df8a6023ec} 
+Gained\+Focus&The window gained the focus (no data) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TextEntered@{TextEntered}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!TextEntered@{TextEntered}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa7e09871dc984080ff528e4f7e073e874}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa7e09871dc984080ff528e4f7e073e874} 
+Text\+Entered&A character was entered (data in event.\+text) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{KeyPressed@{KeyPressed}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!KeyPressed@{KeyPressed}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aac3c7abfaa98c73bfe6be0b57df09c71b}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aac3c7abfaa98c73bfe6be0b57df09c71b} 
+Key\+Pressed&A key was pressed (data in event.\+key) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{KeyReleased@{KeyReleased}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!KeyReleased@{KeyReleased}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aaa5bcc1e603d5a6f4c137af39558bd5d1}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aaa5bcc1e603d5a6f4c137af39558bd5d1} 
+Key\+Released&A key was released (data in event.\+key) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MouseWheelMoved@{MouseWheelMoved}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!MouseWheelMoved@{MouseWheelMoved}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa5cc9d3941af2a36049f4f9922c934a80}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa5cc9d3941af2a36049f4f9922c934a80} 
+Mouse\+Wheel\+Moved&The mouse wheel was scrolled (data in event.\+mouse\+Wheel) (deprecated) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MouseWheelScrolled@{MouseWheelScrolled}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!MouseWheelScrolled@{MouseWheelScrolled}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa2fb6925eb3e7f3d468faf639dbd129ad}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa2fb6925eb3e7f3d468faf639dbd129ad} 
+Mouse\+Wheel\+Scrolled&The mouse wheel was scrolled (data in event.\+mouse\+Wheel\+Scroll) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MouseButtonPressed@{MouseButtonPressed}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!MouseButtonPressed@{MouseButtonPressed}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa55a3dcc8bf6c40e37f9ff2cdf606481f}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa55a3dcc8bf6c40e37f9ff2cdf606481f} 
+Mouse\+Button\+Pressed&A mouse button was pressed (data in event.\+mouse\+Button) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MouseButtonReleased@{MouseButtonReleased}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!MouseButtonReleased@{MouseButtonReleased}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa9be69ecc07e484467ebbb133182fe5c1}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa9be69ecc07e484467ebbb133182fe5c1} 
+Mouse\+Button\+Released&A mouse button was released (data in event.\+mouse\+Button) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MouseMoved@{MouseMoved}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!MouseMoved@{MouseMoved}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa4ff4fc3b3dc857e3617a63feb54be209}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa4ff4fc3b3dc857e3617a63feb54be209} 
+Mouse\+Moved&The mouse cursor moved (data in event.\+mouse\+Move) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MouseEntered@{MouseEntered}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!MouseEntered@{MouseEntered}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa50d98590a953e74c7ccf3dabadb22067}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa50d98590a953e74c7ccf3dabadb22067} 
+Mouse\+Entered&The mouse cursor entered the area of the window (no data) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MouseLeft@{MouseLeft}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!MouseLeft@{MouseLeft}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aaa90b8526b328e0246d04b026de17c6e7}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aaa90b8526b328e0246d04b026de17c6e7} 
+Mouse\+Left&The mouse cursor left the area of the window (no data) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{JoystickButtonPressed@{JoystickButtonPressed}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!JoystickButtonPressed@{JoystickButtonPressed}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa6d46855f0253f065689b69cd09437222}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa6d46855f0253f065689b69cd09437222} 
+Joystick\+Button\+Pressed&A joystick button was pressed (data in event.\+joystick\+Button) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{JoystickButtonReleased@{JoystickButtonReleased}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!JoystickButtonReleased@{JoystickButtonReleased}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa2246ef5ee33f7fa4b2a53f042ceeac3d}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa2246ef5ee33f7fa4b2a53f042ceeac3d} 
+Joystick\+Button\+Released&A joystick button was released (data in event.\+joystick\+Button) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{JoystickMoved@{JoystickMoved}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!JoystickMoved@{JoystickMoved}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa4d6ad228485c135967831be16ec074dd}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa4d6ad228485c135967831be16ec074dd} 
+Joystick\+Moved&The joystick moved along an axis (data in event.\+joystick\+Move) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{JoystickConnected@{JoystickConnected}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!JoystickConnected@{JoystickConnected}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aaabb8877ec2f0c92904170deded09321e}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aaabb8877ec2f0c92904170deded09321e} 
+Joystick\+Connected&A joystick was connected (data in event.\+joystick\+Connect) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{JoystickDisconnected@{JoystickDisconnected}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!JoystickDisconnected@{JoystickDisconnected}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aab6e161dab7abaf154cc1c7b554558cb6}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aab6e161dab7abaf154cc1c7b554558cb6} 
+Joystick\+Disconnected&A joystick was disconnected (data in event.\+joystick\+Connect) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TouchBegan@{TouchBegan}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!TouchBegan@{TouchBegan}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aae6f8231ad6013d063929a09b6c28f515}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aae6f8231ad6013d063929a09b6c28f515} 
+Touch\+Began&A touch event began (data in event.\+touch) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TouchMoved@{TouchMoved}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!TouchMoved@{TouchMoved}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa9524b7d7665212c6d56f623b5b8311a9}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aa9524b7d7665212c6d56f623b5b8311a9} 
+Touch\+Moved&A touch moved (data in event.\+touch) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TouchEnded@{TouchEnded}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!TouchEnded@{TouchEnded}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aabc7123492dbca320da5c03fea1a141e5}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aabc7123492dbca320da5c03fea1a141e5} 
+Touch\+Ended&A touch event ended (data in event.\+touch) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SensorChanged@{SensorChanged}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!SensorChanged@{SensorChanged}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aaadf9a44c788eb9467a83c074fbf12613}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aaadf9a44c788eb9467a83c074fbf12613} 
+Sensor\+Changed&A sensor value changed (data in event.\+sensor) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Count@{Count}!sf::Event@{sf::Event}}\index{sf::Event@{sf::Event}!Count@{Count}}}\Hypertarget{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aae51749211243cab2ab270b29cdc32a70}\label{classsf_1_1Event_af41fa9ed45c02449030699f671331d4aae51749211243cab2ab270b29cdc32a70} 
+Count&Keep last -- the total number of event types. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/include/\+SFML/\+Window/Event.\+hpp\end{DoxyCompactItemize}

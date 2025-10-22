@@ -1,0 +1,62 @@
+\doxysection{Sensor\+Impl.\+hpp}
+\hypertarget{Win32_2SensorImpl_8hpp_source}{}\label{Win32_2SensorImpl_8hpp_source}\index{build/\_deps/sfml-\/src/src/SFML/Window/Win32/SensorImpl.hpp@{build/\_deps/sfml-\/src/src/SFML/Window/Win32/SensorImpl.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ SFML\_SENSORIMPLWIN32\_HPP}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ SFML\_SENSORIMPLWIN32\_HPP}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{00030\ \{}
+\DoxyCodeLine{00031\ \textcolor{keyword}{namespace\ }priv}
+\DoxyCodeLine{00032\ \{}
+\DoxyCodeLine{00037\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1priv_1_1SensorImpl}{SensorImpl}}}
+\DoxyCodeLine{00038\ \{}
+\DoxyCodeLine{00039\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1SensorImpl_a2a4b27419e6d216be4878d4f8c0a8e30}{initialize}}();}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1SensorImpl_a49b6b0b58eeaaf40f4204bc70f248850}{cleanup}}();}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1SensorImpl_af7cf0a28197b18fd52a29332cf678dfb}{isAvailable}}(\mbox{\hyperlink{classsf_1_1Sensor_a687375af3ab77b818fca73735bcaea84}{Sensor::Type}}\ sensor);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1SensorImpl_a56f215f6e50f2ba7a09ed9a8aa5b1fe9}{open}}(\mbox{\hyperlink{classsf_1_1Sensor_a687375af3ab77b818fca73735bcaea84}{Sensor::Type}}\ sensor);}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1SensorImpl_a60dd0056d9ab4d27dcbebfc0428bd982}{close}}();}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00085\ \ \ \ \ Vector3f\ \mbox{\hyperlink{classsf_1_1priv_1_1SensorImpl_acc9e72689184fb6ecca7c69c60cf8922}{update}}();}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1SensorImpl_a109e0ac8ff6605f8d1e22c6d8b64903c}{setEnabled}}(\textcolor{keywordtype}{bool}\ enabled);}
+\DoxyCodeLine{00094\ \};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \}\ \textcolor{comment}{//\ namespace\ priv}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SFML\_SENSORIMPLWIN32\_HPP}}
+
+\end{DoxyCode}

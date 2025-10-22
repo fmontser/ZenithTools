@@ -1,0 +1,319 @@
+\doxysection{stream\+\_\+encoder.\+h}
+\hypertarget{stream__encoder_8h_source}{}\label{stream__encoder_8h_source}\index{build/\_deps/sfml-\/src/extlibs/headers/FLAC/stream\_encoder.h@{build/\_deps/sfml-\/src/extlibs/headers/FLAC/stream\_encoder.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ libFLAC\ -\/\ Free\ Lossless\ Audio\ Codec\ library}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2000-\/2009\ \ Josh\ Coalson}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2011-\/2013\ \ Xiph.Org\ Foundation}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ Redistribution\ and\ use\ in\ source\ and\ binary\ forms,\ with\ or\ without}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ modification,\ are\ permitted\ provided\ that\ the\ following\ conditions}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ are\ met:}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ -\/\ Redistributions\ of\ source\ code\ must\ retain\ the\ above\ copyright}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ notice,\ this\ list\ of\ conditions\ and\ the\ following\ disclaimer.}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ -\/\ Redistributions\ in\ binary\ form\ must\ reproduce\ the\ above\ copyright}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *\ notice,\ this\ list\ of\ conditions\ and\ the\ following\ disclaimer\ in\ the}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ documentation\ and/or\ other\ materials\ provided\ with\ the\ distribution.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ -\/\ Neither\ the\ name\ of\ the\ Xiph.org\ Foundation\ nor\ the\ names\ of\ its}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ contributors\ may\ be\ used\ to\ endorse\ or\ promote\ products\ derived\ from}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ this\ software\ without\ specific\ prior\ written\ permission.}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ THIS\ SOFTWARE\ IS\ PROVIDED\ BY\ THE\ COPYRIGHT\ HOLDERS\ AND\ CONTRIBUTORS}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *\ \`{}\`{}AS\ IS''\ AND\ ANY\ EXPRESS\ OR\ IMPLIED\ WARRANTIES,\ INCLUDING,\ BUT\ NOT}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ LIMITED\ TO,\ THE\ IMPLIED\ WARRANTIES\ OF\ MERCHANTABILITY\ AND\ FITNESS\ FOR}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ A\ PARTICULAR\ PURPOSE\ ARE\ DISCLAIMED.\ \ IN\ NO\ EVENT\ SHALL\ THE\ FOUNDATION\ OR}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ CONTRIBUTORS\ BE\ LIABLE\ FOR\ ANY\ DIRECT,\ INDIRECT,\ INCIDENTAL,\ SPECIAL,}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ EXEMPLARY,\ OR\ CONSEQUENTIAL\ DAMAGES\ (INCLUDING,\ BUT\ NOT\ LIMITED\ TO,}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ PROCUREMENT\ OF\ SUBSTITUTE\ GOODS\ OR\ SERVICES;\ LOSS\ OF\ USE,\ DATA,\ OR}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ *\ PROFITS;\ OR\ BUSINESS\ INTERRUPTION)\ HOWEVER\ CAUSED\ AND\ ON\ ANY\ THEORY\ OF}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ *\ LIABILITY,\ WHETHER\ IN\ CONTRACT,\ STRICT\ LIABILITY,\ OR\ TORT\ (INCLUDING}}
+\DoxyCodeLine{00029\ \textcolor{comment}{\ *\ NEGLIGENCE\ OR\ OTHERWISE)\ ARISING\ IN\ ANY\ WAY\ OUT\ OF\ THE\ USE\ OF\ THIS}}
+\DoxyCodeLine{00030\ \textcolor{comment}{\ *\ SOFTWARE,\ EVEN\ IF\ ADVISED\ OF\ THE\ POSSIBILITY\ OF\ SUCH\ DAMAGE.}}
+\DoxyCodeLine{00031\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#ifndef\ FLAC\_\_STREAM\_ENCODER\_H}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ FLAC\_\_STREAM\_ENCODER\_H}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#include\ <stdio.h>}\ \textcolor{comment}{/*\ for\ FILE\ */}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#include\ "{}export.h"{}}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#include\ "{}format.h"{}}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#include\ "{}stream\_decoder.h"{}}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00042\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00241\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00243\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_ggac5e9db4fc32ca2fa74abd9c8a87c02a5a3a6666ae61a64d955341cec285695bf6}{FLAC\_\_STREAM\_ENCODER\_OK}}\ =\ 0,}
+\DoxyCodeLine{00245\ }
+\DoxyCodeLine{00246\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_ggac5e9db4fc32ca2fa74abd9c8a87c02a5a04912e04a3c57d3c53de34742f96d635}{FLAC\_\_STREAM\_ENCODER\_UNINITIALIZED}},}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00252\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_ggac5e9db4fc32ca2fa74abd9c8a87c02a5abb312cc8318c7a541cadacd23ceb3bbb}{FLAC\_\_STREAM\_ENCODER\_OGG\_ERROR}},}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00255\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_ggac5e9db4fc32ca2fa74abd9c8a87c02a5a4cb80be4f83eb71f04e74968af1d259e}{FLAC\_\_STREAM\_ENCODER\_VERIFY\_DECODER\_ERROR}},}
+\DoxyCodeLine{00259\ }
+\DoxyCodeLine{00260\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_ggac5e9db4fc32ca2fa74abd9c8a87c02a5a011e3d8b2d02a940bfd0e59c05cf5ae0}{FLAC\_\_STREAM\_ENCODER\_VERIFY\_MISMATCH\_IN\_AUDIO\_DATA}},}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00265\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_ggac5e9db4fc32ca2fa74abd9c8a87c02a5a8c2b2e9efb43a4f9b25b1d2bd9af5f23}{FLAC\_\_STREAM\_ENCODER\_CLIENT\_ERROR}},}
+\DoxyCodeLine{00267\ }
+\DoxyCodeLine{00268\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_ggac5e9db4fc32ca2fa74abd9c8a87c02a5af0e4738522e05a7248435c7148f58f91}{FLAC\_\_STREAM\_ENCODER\_IO\_ERROR}},}
+\DoxyCodeLine{00272\ }
+\DoxyCodeLine{00273\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_ggac5e9db4fc32ca2fa74abd9c8a87c02a5a2c2937b7f1600a4ac7c84fc70ab34cf1}{FLAC\_\_STREAM\_ENCODER\_FRAMING\_ERROR}},}
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00278\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_ggac5e9db4fc32ca2fa74abd9c8a87c02a5a35db99d9958bd6c2301a04715fbc44fd}{FLAC\_\_STREAM\_ENCODER\_MEMORY\_ALLOCATION\_ERROR}}}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \}\ \mbox{\hyperlink{group__flac__stream__encoder_gac5e9db4fc32ca2fa74abd9c8a87c02a5}{FLAC\_\_StreamEncoderState}};}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00288\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ \mbox{\hyperlink{group__flac__stream__encoder_ga421c1d86de745d3095b4c5d9af1ef0de}{FLAC\_\_StreamEncoderStateString}}[];}
+\DoxyCodeLine{00289\ }
+\DoxyCodeLine{00290\ }
+\DoxyCodeLine{00293\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00294\ }
+\DoxyCodeLine{00295\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_gga3bb869620af2b188d77982a5c30b047da20501dce552da74c5df935eeaa0c9ee3}{FLAC\_\_STREAM\_ENCODER\_INIT\_STATUS\_OK}}\ =\ 0,}
+\DoxyCodeLine{00297\ }
+\DoxyCodeLine{00298\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_gga3bb869620af2b188d77982a5c30b047da9c64e5f9020d8799e1cd9d39d50e6955}{FLAC\_\_STREAM\_ENCODER\_INIT\_STATUS\_ENCODER\_ERROR}},}
+\DoxyCodeLine{00300\ }
+\DoxyCodeLine{00301\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_gga3bb869620af2b188d77982a5c30b047da8a822b011de88b67c114505ffef39327}{FLAC\_\_STREAM\_ENCODER\_INIT\_STATUS\_UNSUPPORTED\_CONTAINER}},}
+\DoxyCodeLine{00305\ }
+\DoxyCodeLine{00306\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_gga3bb869620af2b188d77982a5c30b047dac2cf461f02e20513003b8cadeae03f9f}{FLAC\_\_STREAM\_ENCODER\_INIT\_STATUS\_INVALID\_CALLBACKS}},}
+\DoxyCodeLine{00308\ }
+\DoxyCodeLine{00309\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_gga3bb869620af2b188d77982a5c30b047da0541c4f827f081b9f1c54c9441e4aa65}{FLAC\_\_STREAM\_ENCODER\_INIT\_STATUS\_INVALID\_NUMBER\_OF\_CHANNELS}},}
+\DoxyCodeLine{00311\ }
+\DoxyCodeLine{00312\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_gga3bb869620af2b188d77982a5c30b047dad6d2631f464183c0c165155200882e6b}{FLAC\_\_STREAM\_ENCODER\_INIT\_STATUS\_INVALID\_BITS\_PER\_SAMPLE}},}
+\DoxyCodeLine{00317\ }
+\DoxyCodeLine{00318\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_gga3bb869620af2b188d77982a5c30b047da6fdcde9e18c37450c79e8f12b9d9c134}{FLAC\_\_STREAM\_ENCODER\_INIT\_STATUS\_INVALID\_SAMPLE\_RATE}},}
+\DoxyCodeLine{00320\ }
+\DoxyCodeLine{00321\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_gga3bb869620af2b188d77982a5c30b047da652c445f1bd8b6cfb963a30bf416c95a}{FLAC\_\_STREAM\_ENCODER\_INIT\_STATUS\_INVALID\_BLOCK\_SIZE}},}
+\DoxyCodeLine{00323\ }
+\DoxyCodeLine{00324\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_gga3bb869620af2b188d77982a5c30b047da38a69e94b3333e4ba779d2ff8f43f64e}{FLAC\_\_STREAM\_ENCODER\_INIT\_STATUS\_INVALID\_MAX\_LPC\_ORDER}},}
+\DoxyCodeLine{00326\ }
+\DoxyCodeLine{00327\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_gga3bb869620af2b188d77982a5c30b047da5be80403bd7a43450139442e0f34ad7e}{FLAC\_\_STREAM\_ENCODER\_INIT\_STATUS\_INVALID\_QLP\_COEFF\_PRECISION}},}
+\DoxyCodeLine{00329\ }
+\DoxyCodeLine{00330\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_gga3bb869620af2b188d77982a5c30b047da62a17a3ed3c05ddf8ea7f6fecbd4e4a1}{FLAC\_\_STREAM\_ENCODER\_INIT\_STATUS\_BLOCK\_SIZE\_TOO\_SMALL\_FOR\_LPC\_ORDER}},}
+\DoxyCodeLine{00332\ }
+\DoxyCodeLine{00333\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_gga3bb869620af2b188d77982a5c30b047daa793405c858c7606539082750080a47e}{FLAC\_\_STREAM\_ENCODER\_INIT\_STATUS\_NOT\_STREAMABLE}},}
+\DoxyCodeLine{00335\ }
+\DoxyCodeLine{00336\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_gga3bb869620af2b188d77982a5c30b047daa85afdd1849c75a19594416cef63e3e9}{FLAC\_\_STREAM\_ENCODER\_INIT\_STATUS\_INVALID\_METADATA}},}
+\DoxyCodeLine{00344\ }
+\DoxyCodeLine{00345\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_gga3bb869620af2b188d77982a5c30b047dab4e7b50d176a127575df90383cb15e1d}{FLAC\_\_STREAM\_ENCODER\_INIT\_STATUS\_ALREADY\_INITIALIZED}}}
+\DoxyCodeLine{00350\ }
+\DoxyCodeLine{00351\ \}\ \mbox{\hyperlink{group__flac__stream__encoder_ga3bb869620af2b188d77982a5c30b047d}{FLAC\_\_StreamEncoderInitStatus}};}
+\DoxyCodeLine{00352\ }
+\DoxyCodeLine{00358\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ \mbox{\hyperlink{group__flac__stream__encoder_ga05203d2cf0390dfbbc2b57b0f0b8e2df}{FLAC\_\_StreamEncoderInitStatusString}}[];}
+\DoxyCodeLine{00359\ }
+\DoxyCodeLine{00360\ }
+\DoxyCodeLine{00363\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00364\ }
+\DoxyCodeLine{00365\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_gga2e81f007fb0a7414c0bbb453f37ea37fa4bdd691d3666f19ec96ff99402347a2e}{FLAC\_\_STREAM\_ENCODER\_READ\_STATUS\_CONTINUE}},}
+\DoxyCodeLine{00367\ }
+\DoxyCodeLine{00368\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_gga2e81f007fb0a7414c0bbb453f37ea37fa562fef84bf86a9a39682e23066d9cfee}{FLAC\_\_STREAM\_ENCODER\_READ\_STATUS\_END\_OF\_STREAM}},}
+\DoxyCodeLine{00370\ }
+\DoxyCodeLine{00371\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_gga2e81f007fb0a7414c0bbb453f37ea37fa69b94eeab60e07d5fd33f2b3c8b85759}{FLAC\_\_STREAM\_ENCODER\_READ\_STATUS\_ABORT}},}
+\DoxyCodeLine{00373\ }
+\DoxyCodeLine{00374\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_gga2e81f007fb0a7414c0bbb453f37ea37fa9bb730b8f6354cc1e810017a2f700316}{FLAC\_\_STREAM\_ENCODER\_READ\_STATUS\_UNSUPPORTED}}}
+\DoxyCodeLine{00376\ }
+\DoxyCodeLine{00377\ \}\ \mbox{\hyperlink{group__flac__stream__encoder_ga2e81f007fb0a7414c0bbb453f37ea37f}{FLAC\_\_StreamEncoderReadStatus}};}
+\DoxyCodeLine{00378\ }
+\DoxyCodeLine{00384\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ \mbox{\hyperlink{group__flac__stream__encoder_ga056c12d2a27c562d352eb575d4cb9086}{FLAC\_\_StreamEncoderReadStatusString}}[];}
+\DoxyCodeLine{00385\ }
+\DoxyCodeLine{00386\ }
+\DoxyCodeLine{00389\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00390\ }
+\DoxyCodeLine{00391\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_gga3737471fd49730bb8cf9b182bdeda05ea5622e0199f0203c402fcb7b4ca76f808}{FLAC\_\_STREAM\_ENCODER\_WRITE\_STATUS\_OK}}\ =\ 0,}
+\DoxyCodeLine{00393\ }
+\DoxyCodeLine{00394\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_gga3737471fd49730bb8cf9b182bdeda05ea18e7cd6a443fb8bd303c3ba89946bc85}{FLAC\_\_STREAM\_ENCODER\_WRITE\_STATUS\_FATAL\_ERROR}}}
+\DoxyCodeLine{00396\ }
+\DoxyCodeLine{00397\ \}\ \mbox{\hyperlink{group__flac__stream__encoder_ga3737471fd49730bb8cf9b182bdeda05e}{FLAC\_\_StreamEncoderWriteStatus}};}
+\DoxyCodeLine{00398\ }
+\DoxyCodeLine{00404\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ \mbox{\hyperlink{group__flac__stream__encoder_ga00e6218364ced330f52c625061dfa485}{FLAC\_\_StreamEncoderWriteStatusString}}[];}
+\DoxyCodeLine{00405\ }
+\DoxyCodeLine{00406\ }
+\DoxyCodeLine{00409\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00410\ }
+\DoxyCodeLine{00411\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_gga6d5be3489f45fcf0c252022c65d87acaa99853066610d798627888ec2e5afa667}{FLAC\_\_STREAM\_ENCODER\_SEEK\_STATUS\_OK}},}
+\DoxyCodeLine{00413\ }
+\DoxyCodeLine{00414\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_gga6d5be3489f45fcf0c252022c65d87acaabf93227938b4e1bf3656fe4ba4159c60}{FLAC\_\_STREAM\_ENCODER\_SEEK\_STATUS\_ERROR}},}
+\DoxyCodeLine{00416\ }
+\DoxyCodeLine{00417\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_gga6d5be3489f45fcf0c252022c65d87acaa8930179a426134caf30a70147448f037}{FLAC\_\_STREAM\_ENCODER\_SEEK\_STATUS\_UNSUPPORTED}}}
+\DoxyCodeLine{00419\ }
+\DoxyCodeLine{00420\ \}\ \mbox{\hyperlink{group__flac__stream__encoder_ga6d5be3489f45fcf0c252022c65d87aca}{FLAC\_\_StreamEncoderSeekStatus}};}
+\DoxyCodeLine{00421\ }
+\DoxyCodeLine{00427\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ \mbox{\hyperlink{group__flac__stream__encoder_gaf38671371a395919b6baee141ad90642}{FLAC\_\_StreamEncoderSeekStatusString}}[];}
+\DoxyCodeLine{00428\ }
+\DoxyCodeLine{00429\ }
+\DoxyCodeLine{00432\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00433\ }
+\DoxyCodeLine{00434\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_ggab628f63181250eb977a28bf12b7dd9ffa48e071d89494ac8f5471e7c0d7a6f43b}{FLAC\_\_STREAM\_ENCODER\_TELL\_STATUS\_OK}},}
+\DoxyCodeLine{00436\ }
+\DoxyCodeLine{00437\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_ggab628f63181250eb977a28bf12b7dd9ffaf638882e04d7c58e6c29dcc7f410864b}{FLAC\_\_STREAM\_ENCODER\_TELL\_STATUS\_ERROR}},}
+\DoxyCodeLine{00439\ }
+\DoxyCodeLine{00440\ \ \ \ \ \mbox{\hyperlink{group__flac__stream__encoder_ggab628f63181250eb977a28bf12b7dd9ffa9d6bbd317f85fd2d6fc72f64e3cb56e7}{FLAC\_\_STREAM\_ENCODER\_TELL\_STATUS\_UNSUPPORTED}}}
+\DoxyCodeLine{00442\ }
+\DoxyCodeLine{00443\ \}\ \mbox{\hyperlink{group__flac__stream__encoder_gab628f63181250eb977a28bf12b7dd9ff}{FLAC\_\_StreamEncoderTellStatus}};}
+\DoxyCodeLine{00444\ }
+\DoxyCodeLine{00450\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ \mbox{\hyperlink{group__flac__stream__encoder_ga53ed1172a97be80e75f493c060eff8d4}{FLAC\_\_StreamEncoderTellStatusString}}[];}
+\DoxyCodeLine{00451\ }
+\DoxyCodeLine{00452\ }
+\DoxyCodeLine{00453\ \textcolor{comment}{/***********************************************************************}}
+\DoxyCodeLine{00454\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00455\ \textcolor{comment}{\ *\ class\ FLAC\_\_StreamEncoder}}
+\DoxyCodeLine{00456\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00457\ \textcolor{comment}{\ ***********************************************************************/}}
+\DoxyCodeLine{00458\ }
+\DoxyCodeLine{00459\ \textcolor{keyword}{struct\ }FLAC\_\_StreamEncoderProtected;}
+\DoxyCodeLine{00460\ \textcolor{keyword}{struct\ }FLAC\_\_StreamEncoderPrivate;}
+\DoxyCodeLine{00465\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00466\ \ \ \ \ \textcolor{keyword}{struct\ }FLAC\_\_StreamEncoderProtected\ *protected\_;\ \textcolor{comment}{/*\ avoid\ the\ C++\ keyword\ 'protected'\ */}}
+\DoxyCodeLine{00467\ \ \ \ \ \textcolor{keyword}{struct\ }FLAC\_\_StreamEncoderPrivate\ *private\_;\ \textcolor{comment}{/*\ avoid\ the\ C++\ keyword\ 'private'\ */}}
+\DoxyCodeLine{00468\ \}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}};}
+\DoxyCodeLine{00469\ }
+\DoxyCodeLine{00519\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{group__flac__stream__encoder_ga2e81f007fb0a7414c0bbb453f37ea37f}{FLAC\_\_StreamEncoderReadStatus}}\ (*\mbox{\hyperlink{group__flac__stream__encoder_ga18b7941b93bae067192732e913536d44}{FLAC\_\_StreamEncoderReadCallback}})(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ FLAC\_\_byte\ buffer[],\ \textcolor{keywordtype}{size\_t}\ *bytes,\ \textcolor{keywordtype}{void}\ *client\_data);}
+\DoxyCodeLine{00520\ }
+\DoxyCodeLine{00557\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{group__flac__stream__encoder_ga3737471fd49730bb8cf9b182bdeda05e}{FLAC\_\_StreamEncoderWriteStatus}}\ (*\mbox{\hyperlink{group__flac__stream__encoder_ga50865125fd57c40fab6eb2f062651429}{FLAC\_\_StreamEncoderWriteCallback}})(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ \textcolor{keyword}{const}\ FLAC\_\_byte\ buffer[],\ \textcolor{keywordtype}{size\_t}\ bytes,\ \textcolor{keywordtype}{unsigned}\ samples,\ \textcolor{keywordtype}{unsigned}\ current\_frame,\ \textcolor{keywordtype}{void}\ *client\_data);}
+\DoxyCodeLine{00558\ }
+\DoxyCodeLine{00591\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{group__flac__stream__encoder_ga6d5be3489f45fcf0c252022c65d87aca}{FLAC\_\_StreamEncoderSeekStatus}}\ (*\mbox{\hyperlink{group__flac__stream__encoder_ga70b85349d5242e4401c4d8ddf6d9bbca}{FLAC\_\_StreamEncoderSeekCallback}})(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ FLAC\_\_uint64\ absolute\_byte\_offset,\ \textcolor{keywordtype}{void}\ *client\_data);}
+\DoxyCodeLine{00592\ }
+\DoxyCodeLine{00636\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{group__flac__stream__encoder_gab628f63181250eb977a28bf12b7dd9ff}{FLAC\_\_StreamEncoderTellStatus}}\ (*\mbox{\hyperlink{group__flac__stream__encoder_gabefdf2279e1d0347d9f98f46da4e415b}{FLAC\_\_StreamEncoderTellCallback}})(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ FLAC\_\_uint64\ *absolute\_byte\_offset,\ \textcolor{keywordtype}{void}\ *client\_data);}
+\DoxyCodeLine{00637\ }
+\DoxyCodeLine{00655\ \textcolor{keyword}{typedef}\ void\ (*\mbox{\hyperlink{group__flac__stream__encoder_ga091fbf3340d85bcbda1090c31bc320cf}{FLAC\_\_StreamEncoderMetadataCallback}})(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\_\_StreamMetadata}}\ *metadata,\ \textcolor{keywordtype}{void}\ *client\_data);}
+\DoxyCodeLine{00656\ }
+\DoxyCodeLine{00678\ \textcolor{keyword}{typedef}\ void\ (*\mbox{\hyperlink{group__flac__stream__encoder_ga6e051c0e5837433f9e7cd56cd42ca6ba}{FLAC\_\_StreamEncoderProgressCallback}})(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ FLAC\_\_uint64\ bytes\_written,\ FLAC\_\_uint64\ samples\_written,\ \textcolor{keywordtype}{unsigned}\ frames\_written,\ \textcolor{keywordtype}{unsigned}\ total\_frames\_estimate,\ \textcolor{keywordtype}{void}\ *client\_data);}
+\DoxyCodeLine{00679\ }
+\DoxyCodeLine{00680\ }
+\DoxyCodeLine{00681\ \textcolor{comment}{/***********************************************************************}}
+\DoxyCodeLine{00682\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00683\ \textcolor{comment}{\ *\ Class\ constructor/destructor}}
+\DoxyCodeLine{00684\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00685\ \textcolor{comment}{\ ***********************************************************************/}}
+\DoxyCodeLine{00686\ }
+\DoxyCodeLine{00694\ FLAC\_API\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *\mbox{\hyperlink{group__flac__stream__encoder_ga3dec8f635821540423aff9792c5cc933}{FLAC\_\_stream\_encoder\_new}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00695\ }
+\DoxyCodeLine{00702\ FLAC\_API\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group__flac__stream__encoder_ga9c9956af42bebe923da59437628aa9ea}{FLAC\_\_stream\_encoder\_delete}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder);}
+\DoxyCodeLine{00703\ }
+\DoxyCodeLine{00704\ }
+\DoxyCodeLine{00705\ \textcolor{comment}{/***********************************************************************}}
+\DoxyCodeLine{00706\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00707\ \textcolor{comment}{\ *\ Public\ class\ method\ prototypes}}
+\DoxyCodeLine{00708\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00709\ \textcolor{comment}{\ ***********************************************************************/}}
+\DoxyCodeLine{00710\ }
+\DoxyCodeLine{00728\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_ga646c9800d42620a6c504fbdfbd092666}{FLAC\_\_stream\_encoder\_set\_ogg\_serial\_number}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ \textcolor{keywordtype}{long}\ serial\_number);}
+\DoxyCodeLine{00729\ }
+\DoxyCodeLine{00744\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_ga5f4ac18a7207d2864fed72d284486f9e}{FLAC\_\_stream\_encoder\_set\_verify}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ FLAC\_\_bool\ value);}
+\DoxyCodeLine{00745\ }
+\DoxyCodeLine{00762\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_ga163f1acfe8b6b8ae849f0f4f7c0708f4}{FLAC\_\_stream\_encoder\_set\_streamable\_subset}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ FLAC\_\_bool\ value);}
+\DoxyCodeLine{00763\ }
+\DoxyCodeLine{00774\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_gabfc9c883c124a849b5b42a87c30e10a5}{FLAC\_\_stream\_encoder\_set\_channels}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ \textcolor{keywordtype}{unsigned}\ value);}
+\DoxyCodeLine{00775\ }
+\DoxyCodeLine{00790\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_ga5a21cf7f86a81df6ba72714a6b917aa3}{FLAC\_\_stream\_encoder\_set\_bits\_per\_sample}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ \textcolor{keywordtype}{unsigned}\ value);}
+\DoxyCodeLine{00791\ }
+\DoxyCodeLine{00802\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_ga108c3f4fbdcaa744ddbb125f91cb3838}{FLAC\_\_stream\_encoder\_set\_sample\_rate}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ \textcolor{keywordtype}{unsigned}\ value);}
+\DoxyCodeLine{00803\ }
+\DoxyCodeLine{00865\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_ga03495bcd0aae71116c701b0dcf311c4b}{FLAC\_\_stream\_encoder\_set\_compression\_level}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ \textcolor{keywordtype}{unsigned}\ value);}
+\DoxyCodeLine{00866\ }
+\DoxyCodeLine{00880\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_gae6c001cd7601192334c58ee3631b571f}{FLAC\_\_stream\_encoder\_set\_blocksize}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ \textcolor{keywordtype}{unsigned}\ value);}
+\DoxyCodeLine{00881\ }
+\DoxyCodeLine{00894\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_gadbd1084da109cf0ddd007a5c64027504}{FLAC\_\_stream\_encoder\_set\_do\_mid\_side\_stereo}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ FLAC\_\_bool\ value);}
+\DoxyCodeLine{00895\ }
+\DoxyCodeLine{00910\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_ga7b7d294dccd5df7c6c67e75f59798f48}{FLAC\_\_stream\_encoder\_set\_loose\_mid\_side\_stereo}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ FLAC\_\_bool\ value);}
+\DoxyCodeLine{00911\ }
+\DoxyCodeLine{00955\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_ga83d38fd6fca7abbf8363bdc2536a299e}{FLAC\_\_stream\_encoder\_set\_apodization}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *specification);}
+\DoxyCodeLine{00956\ }
+\DoxyCodeLine{00967\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_gac3bde5abdaa340674c5659e2e85d2611}{FLAC\_\_stream\_encoder\_set\_max\_lpc\_order}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ \textcolor{keywordtype}{unsigned}\ value);}
+\DoxyCodeLine{00968\ }
+\DoxyCodeLine{00985\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_ga0888d739c952ff73456bf90e48634514}{FLAC\_\_stream\_encoder\_set\_qlp\_coeff\_precision}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ \textcolor{keywordtype}{unsigned}\ value);}
+\DoxyCodeLine{00986\ }
+\DoxyCodeLine{00999\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_ga3aa94a1aec1cf40c37e54434c86bb50d}{FLAC\_\_stream\_encoder\_set\_do\_qlp\_coeff\_prec\_search}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ FLAC\_\_bool\ value);}
+\DoxyCodeLine{01000\ }
+\DoxyCodeLine{01011\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_gaa839d19b6d1b30ba0407d419bdb6fe67}{FLAC\_\_stream\_encoder\_set\_do\_escape\_coding}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ FLAC\_\_bool\ value);}
+\DoxyCodeLine{01012\ }
+\DoxyCodeLine{01025\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_ga7fbc05ec9abd249a400fccb9f189e55e}{FLAC\_\_stream\_encoder\_set\_do\_exhaustive\_model\_search}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ FLAC\_\_bool\ value);}
+\DoxyCodeLine{01026\ }
+\DoxyCodeLine{01048\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_gae3e2dd204f276d051bf1a118383bfda2}{FLAC\_\_stream\_encoder\_set\_min\_residual\_partition\_order}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ \textcolor{keywordtype}{unsigned}\ value);}
+\DoxyCodeLine{01049\ }
+\DoxyCodeLine{01071\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_ga6de153da5a8eeeb1be2271c27fa58b37}{FLAC\_\_stream\_encoder\_set\_max\_residual\_partition\_order}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ \textcolor{keywordtype}{unsigned}\ value);}
+\DoxyCodeLine{01072\ }
+\DoxyCodeLine{01083\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_ga668de93e7061bce21475c062ffab3e18}{FLAC\_\_stream\_encoder\_set\_rice\_parameter\_search\_dist}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ \textcolor{keywordtype}{unsigned}\ value);}
+\DoxyCodeLine{01084\ }
+\DoxyCodeLine{01099\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_ga0d3f45052f2f7379c73e2b027c7f956c}{FLAC\_\_stream\_encoder\_set\_total\_samples\_estimate}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ FLAC\_\_uint64\ value);}
+\DoxyCodeLine{01100\ }
+\DoxyCodeLine{01182\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_ga67b30b1a67a9274f7708a22154b225f6}{FLAC\_\_stream\_encoder\_set\_metadata}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\_\_StreamMetadata}}\ **metadata,\ \textcolor{keywordtype}{unsigned}\ num\_blocks);}
+\DoxyCodeLine{01183\ }
+\DoxyCodeLine{01192\ FLAC\_API\ \mbox{\hyperlink{group__flac__stream__encoder_gac5e9db4fc32ca2fa74abd9c8a87c02a5}{FLAC\_\_StreamEncoderState}}\ \mbox{\hyperlink{group__flac__stream__encoder_gaff7284e55f01b59ed8f03317df510992}{FLAC\_\_stream\_encoder\_get\_state}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder);}
+\DoxyCodeLine{01193\ }
+\DoxyCodeLine{01204\ FLAC\_API\ \mbox{\hyperlink{group__flac__stream__decoder_ga3adb6891c5871a87cd5bbae6c770ba2d}{FLAC\_\_StreamDecoderState}}\ \mbox{\hyperlink{group__flac__stream__encoder_gac613bebe4181568e7ca59cca30294e52}{FLAC\_\_stream\_encoder\_get\_verify\_decoder\_state}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder);}
+\DoxyCodeLine{01205\ }
+\DoxyCodeLine{01217\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{group__flac__stream__encoder_gafd3324a31c36de1eda05c3bc0c7f6176}{FLAC\_\_stream\_encoder\_get\_resolved\_state\_string}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder);}
+\DoxyCodeLine{01218\ }
+\DoxyCodeLine{01236\ FLAC\_API\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group__flac__stream__encoder_ga3e3f5a9267eb998f74caa10865991bd5}{FLAC\_\_stream\_encoder\_get\_verify\_decoder\_error\_stats}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ FLAC\_\_uint64\ *absolute\_sample,\ \textcolor{keywordtype}{unsigned}\ *frame\_number,\ \textcolor{keywordtype}{unsigned}\ *channel,\ \textcolor{keywordtype}{unsigned}\ *sample,\ FLAC\_\_int32\ *expected,\ FLAC\_\_int32\ *got);}
+\DoxyCodeLine{01237\ }
+\DoxyCodeLine{01246\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_ga044d18f93fa8faa6a85eec4fa7cf86f2}{FLAC\_\_stream\_encoder\_get\_verify}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder);}
+\DoxyCodeLine{01247\ }
+\DoxyCodeLine{01256\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_gabafaf69ed39c25c5b1c03044c1a91d66}{FLAC\_\_stream\_encoder\_get\_streamable\_subset}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder);}
+\DoxyCodeLine{01257\ }
+\DoxyCodeLine{01266\ FLAC\_API\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__stream__encoder_ga4e94f87c0dc9bfc95d57217349aa5c82}{FLAC\_\_stream\_encoder\_get\_channels}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder);}
+\DoxyCodeLine{01267\ }
+\DoxyCodeLine{01276\ FLAC\_API\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__stream__encoder_gacbd84a241c6718ed4c2688fd558efdcd}{FLAC\_\_stream\_encoder\_get\_bits\_per\_sample}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder);}
+\DoxyCodeLine{01277\ }
+\DoxyCodeLine{01286\ FLAC\_API\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__stream__encoder_gacc8f4820dea783cc0fc2906b6078b333}{FLAC\_\_stream\_encoder\_get\_sample\_rate}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder);}
+\DoxyCodeLine{01287\ }
+\DoxyCodeLine{01296\ FLAC\_API\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__stream__encoder_ga75bbef3f55b0e1e18642dd0091ad393e}{FLAC\_\_stream\_encoder\_get\_blocksize}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder);}
+\DoxyCodeLine{01297\ }
+\DoxyCodeLine{01306\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_ga3308e73db9d0ae4803485c35d2a54a2d}{FLAC\_\_stream\_encoder\_get\_do\_mid\_side\_stereo}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder);}
+\DoxyCodeLine{01307\ }
+\DoxyCodeLine{01316\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_ga539ac36925671ac84371a745f8acce17}{FLAC\_\_stream\_encoder\_get\_loose\_mid\_side\_stereo}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder);}
+\DoxyCodeLine{01317\ }
+\DoxyCodeLine{01326\ FLAC\_API\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__stream__encoder_ga283e0a80301d38295242f9b57ade15cf}{FLAC\_\_stream\_encoder\_get\_max\_lpc\_order}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder);}
+\DoxyCodeLine{01327\ }
+\DoxyCodeLine{01336\ FLAC\_API\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__stream__encoder_ga40ae31529071b3be2f39968d4265c663}{FLAC\_\_stream\_encoder\_get\_qlp\_coeff\_precision}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder);}
+\DoxyCodeLine{01337\ }
+\DoxyCodeLine{01346\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_gaa258ce03d970b397f5b698c63636d985}{FLAC\_\_stream\_encoder\_get\_do\_qlp\_coeff\_prec\_search}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder);}
+\DoxyCodeLine{01347\ }
+\DoxyCodeLine{01356\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_ga06a8e154139880a2def5f54b6c2700d6}{FLAC\_\_stream\_encoder\_get\_do\_escape\_coding}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder);}
+\DoxyCodeLine{01357\ }
+\DoxyCodeLine{01366\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_gad429e31c7062baff987571d935b889f4}{FLAC\_\_stream\_encoder\_get\_do\_exhaustive\_model\_search}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder);}
+\DoxyCodeLine{01367\ }
+\DoxyCodeLine{01376\ FLAC\_API\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__stream__encoder_gace80859226b77f40b7b06314b26aa478}{FLAC\_\_stream\_encoder\_get\_min\_residual\_partition\_order}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder);}
+\DoxyCodeLine{01377\ }
+\DoxyCodeLine{01386\ FLAC\_API\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__stream__encoder_ga8f96ce37192b7d062394d710fc01b59e}{FLAC\_\_stream\_encoder\_get\_max\_residual\_partition\_order}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder);}
+\DoxyCodeLine{01387\ }
+\DoxyCodeLine{01396\ FLAC\_API\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__stream__encoder_ga6780c051c176a3dcc4dd1a83a6309bd7}{FLAC\_\_stream\_encoder\_get\_rice\_parameter\_search\_dist}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder);}
+\DoxyCodeLine{01397\ }
+\DoxyCodeLine{01409\ FLAC\_API\ FLAC\_\_uint64\ \mbox{\hyperlink{group__flac__stream__encoder_ga8b206187a5b2a261ad4b5067fa43525b}{FLAC\_\_stream\_encoder\_get\_total\_samples\_estimate}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder);}
+\DoxyCodeLine{01410\ }
+\DoxyCodeLine{01472\ FLAC\_API\ \mbox{\hyperlink{group__flac__stream__encoder_ga3bb869620af2b188d77982a5c30b047d}{FLAC\_\_StreamEncoderInitStatus}}\ \mbox{\hyperlink{group__flac__stream__encoder_ga85221c4ceb9f22dfd4983d8f07a9a35b}{FLAC\_\_stream\_encoder\_init\_stream}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ \mbox{\hyperlink{group__flac__stream__encoder_ga50865125fd57c40fab6eb2f062651429}{FLAC\_\_StreamEncoderWriteCallback}}\ write\_callback,\ \mbox{\hyperlink{group__flac__stream__encoder_ga70b85349d5242e4401c4d8ddf6d9bbca}{FLAC\_\_StreamEncoderSeekCallback}}\ seek\_callback,\ \mbox{\hyperlink{group__flac__stream__encoder_gabefdf2279e1d0347d9f98f46da4e415b}{FLAC\_\_StreamEncoderTellCallback}}\ tell\_callback,\ \mbox{\hyperlink{group__flac__stream__encoder_ga091fbf3340d85bcbda1090c31bc320cf}{FLAC\_\_StreamEncoderMetadataCallback}}\ metadata\_callback,\ \textcolor{keywordtype}{void}\ *client\_data);}
+\DoxyCodeLine{01473\ }
+\DoxyCodeLine{01540\ FLAC\_API\ \mbox{\hyperlink{group__flac__stream__encoder_ga3bb869620af2b188d77982a5c30b047d}{FLAC\_\_StreamEncoderInitStatus}}\ \mbox{\hyperlink{group__flac__stream__encoder_ga87af71d74c09f7d482f9f420ef9bf826}{FLAC\_\_stream\_encoder\_init\_ogg\_stream}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ \mbox{\hyperlink{group__flac__stream__encoder_ga18b7941b93bae067192732e913536d44}{FLAC\_\_StreamEncoderReadCallback}}\ read\_callback,\ \mbox{\hyperlink{group__flac__stream__encoder_ga50865125fd57c40fab6eb2f062651429}{FLAC\_\_StreamEncoderWriteCallback}}\ write\_callback,\ \mbox{\hyperlink{group__flac__stream__encoder_ga70b85349d5242e4401c4d8ddf6d9bbca}{FLAC\_\_StreamEncoderSeekCallback}}\ seek\_callback,\ \mbox{\hyperlink{group__flac__stream__encoder_gabefdf2279e1d0347d9f98f46da4e415b}{FLAC\_\_StreamEncoderTellCallback}}\ tell\_callback,\ \mbox{\hyperlink{group__flac__stream__encoder_ga091fbf3340d85bcbda1090c31bc320cf}{FLAC\_\_StreamEncoderMetadataCallback}}\ metadata\_callback,\ \textcolor{keywordtype}{void}\ *client\_data);}
+\DoxyCodeLine{01541\ }
+\DoxyCodeLine{01575\ FLAC\_API\ \mbox{\hyperlink{group__flac__stream__encoder_ga3bb869620af2b188d77982a5c30b047d}{FLAC\_\_StreamEncoderInitStatus}}\ \mbox{\hyperlink{group__flac__stream__encoder_ga78653fea5d9bc490fff34e3ef86de944}{FLAC\_\_stream\_encoder\_init\_FILE}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ FILE\ *file,\ \mbox{\hyperlink{group__flac__stream__encoder_ga6e051c0e5837433f9e7cd56cd42ca6ba}{FLAC\_\_StreamEncoderProgressCallback}}\ progress\_callback,\ \textcolor{keywordtype}{void}\ *client\_data);}
+\DoxyCodeLine{01576\ }
+\DoxyCodeLine{01610\ FLAC\_API\ \mbox{\hyperlink{group__flac__stream__encoder_ga3bb869620af2b188d77982a5c30b047d}{FLAC\_\_StreamEncoderInitStatus}}\ \mbox{\hyperlink{group__flac__stream__encoder_gab44c7f51a61826e04abd8cdf5c1ceac2}{FLAC\_\_stream\_encoder\_init\_ogg\_FILE}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ FILE\ *file,\ \mbox{\hyperlink{group__flac__stream__encoder_ga6e051c0e5837433f9e7cd56cd42ca6ba}{FLAC\_\_StreamEncoderProgressCallback}}\ progress\_callback,\ \textcolor{keywordtype}{void}\ *client\_data);}
+\DoxyCodeLine{01611\ }
+\DoxyCodeLine{01642\ FLAC\_API\ \mbox{\hyperlink{group__flac__stream__encoder_ga3bb869620af2b188d77982a5c30b047d}{FLAC\_\_StreamEncoderInitStatus}}\ \mbox{\hyperlink{group__flac__stream__encoder_ga693bb5ed30d912822e0e6c7c0404428c}{FLAC\_\_stream\_encoder\_init\_file}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *filename,\ \mbox{\hyperlink{group__flac__stream__encoder_ga6e051c0e5837433f9e7cd56cd42ca6ba}{FLAC\_\_StreamEncoderProgressCallback}}\ progress\_callback,\ \textcolor{keywordtype}{void}\ *client\_data);}
+\DoxyCodeLine{01643\ }
+\DoxyCodeLine{01674\ FLAC\_API\ \mbox{\hyperlink{group__flac__stream__encoder_ga3bb869620af2b188d77982a5c30b047d}{FLAC\_\_StreamEncoderInitStatus}}\ \mbox{\hyperlink{group__flac__stream__encoder_ga51eb79f04e9a676cd1ce0c94729252e4}{FLAC\_\_stream\_encoder\_init\_ogg\_file}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *filename,\ \mbox{\hyperlink{group__flac__stream__encoder_ga6e051c0e5837433f9e7cd56cd42ca6ba}{FLAC\_\_StreamEncoderProgressCallback}}\ progress\_callback,\ \textcolor{keywordtype}{void}\ *client\_data);}
+\DoxyCodeLine{01675\ }
+\DoxyCodeLine{01702\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_gab2c1e5477c1e3fe9ad0d722ff8eecda2}{FLAC\_\_stream\_encoder\_finish}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder);}
+\DoxyCodeLine{01703\ }
+\DoxyCodeLine{01729\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_gae187ec4f6cab3ca109637996ee23272d}{FLAC\_\_stream\_encoder\_process}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ \textcolor{keyword}{const}\ FLAC\_\_int32\ *\ \textcolor{keyword}{const}\ buffer[],\ \textcolor{keywordtype}{unsigned}\ samples);}
+\DoxyCodeLine{01730\ }
+\DoxyCodeLine{01761\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__stream__encoder_ga67c2ff5b23b945180797de420b1f27c0}{FLAC\_\_stream\_encoder\_process\_interleaved}}(\mbox{\hyperlink{structFLAC____StreamEncoder}{FLAC\_\_StreamEncoder}}\ *encoder,\ \textcolor{keyword}{const}\ FLAC\_\_int32\ buffer[],\ \textcolor{keywordtype}{unsigned}\ samples);}
+\DoxyCodeLine{01762\ }
+\DoxyCodeLine{01763\ \textcolor{comment}{/*\ \(\backslash\)\}\ */}}
+\DoxyCodeLine{01764\ }
+\DoxyCodeLine{01765\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{01766\ \}}
+\DoxyCodeLine{01767\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01768\ }
+\DoxyCodeLine{01769\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

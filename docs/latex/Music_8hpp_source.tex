@@ -1,0 +1,117 @@
+\doxysection{Music.\+hpp}
+\hypertarget{Music_8hpp_source}{}\label{Music_8hpp_source}\index{build/\_deps/sfml-\/src/include/SFML/Audio/Music.hpp@{build/\_deps/sfml-\/src/include/SFML/Audio/Music.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ SFML\_MUSIC\_HPP}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ SFML\_MUSIC\_HPP}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <SFML/Audio/Export.hpp>}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <SFML/Audio/SoundStream.hpp>}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ <SFML/Audio/InputSoundFile.hpp>}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ <SFML/System/Mutex.hpp>}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#include\ <SFML/System/Time.hpp>}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{00041\ \{}
+\DoxyCodeLine{00042\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1InputStream}{InputStream}};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{class\ }SFML\_AUDIO\_API\ \mbox{\hyperlink{classsf_1_1Music_a0bc787d8e022b3a9b89cf2c28befd42e}{Music}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classsf_1_1SoundStream_a769d08f4c3c6b4340ef3a838329d2e5c}{SoundStream}}}
+\DoxyCodeLine{00049\ \{}
+\DoxyCodeLine{00050\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsf_1_1Music_1_1Span_a71e6200a586f650ce002e7e99929ae85}{Span}}}
+\DoxyCodeLine{00058\ \ \ \ \ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structsf_1_1Music_1_1Span_a71e6200a586f650ce002e7e99929ae85}{Span}}()}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structsf_1_1Music_1_1Span_a935db12207fa3da4c2461cd5e1f9fa0d}{Span}}(T\ off,\ T\ len):}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structsf_1_1Music_1_1Span_a49bb6a3c4239288cf47c1298c3e5e1a3}{offset}}(off),}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structsf_1_1Music_1_1Span_a509fdbef69a8fc0f8430ecb7b9e76221}{length}}(len)}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ T\ \mbox{\hyperlink{structsf_1_1Music_1_1Span_a49bb6a3c4239288cf47c1298c3e5e1a3}{offset}};\ }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ T\ \mbox{\hyperlink{structsf_1_1Music_1_1Span_a509fdbef69a8fc0f8430ecb7b9e76221}{length}};\ }
+\DoxyCodeLine{00084\ \ \ \ \ \};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{comment}{//\ Define\ the\ relevant\ Span\ types}}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{structsf_1_1Music_1_1Span}{Span<Time>}}\ TimeSpan;}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00093\ \ \ \ \ \mbox{\hyperlink{classsf_1_1Music_a0bc787d8e022b3a9b89cf2c28befd42e}{Music}}();}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00099\ \ \ \ \ \mbox{\hyperlink{classsf_1_1Music_a0bc787d8e022b3a9b89cf2c28befd42e}{\string~Music}}();}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1Music_a3edc66e5f5b3f11e84b90eaec9c7d7c0}{openFromFile}}(\textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1Music_ae93b21bcf28ff0b5fec458039111386e}{openFromMemory}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ data,\ std::size\_t\ sizeInBytes);}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1Music_a4e55d1910a26858b44778c26b237d673}{openFromStream}}(\mbox{\hyperlink{classsf_1_1InputStream}{InputStream}}\&\ stream);}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00172\ \ \ \ \ \mbox{\hyperlink{classsf_1_1Time}{Time}}\ \mbox{\hyperlink{classsf_1_1Music_a288ef6f552a136b0e56952dcada3d672}{getDuration}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00189\ \ \ \ \ TimeSpan\ \mbox{\hyperlink{classsf_1_1Music_ac8bb666f2262554d3a9c4335dcef9ba2}{getLoopPoints}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00211\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Music_ae7b339f0a957dfad045f3f28083a015e}{setLoopPoints}}(TimeSpan\ timePoints);}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00226\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1Music_a6d8c4c7cbca25f20628096781f220aa0}{onGetData}}(\mbox{\hyperlink{structsf_1_1SoundStream_1_1Chunk}{Chunk}}\&\ data);}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00234\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Music_a4a77582ab9c09082eaeb8153d01813a0}{onSeek}}(\mbox{\hyperlink{classsf_1_1Time}{Time}}\ timeOffset);}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{keyword}{virtual}\ Int64\ \mbox{\hyperlink{classsf_1_1Music_a67dd5131f1660f80e26bff778866a29e}{onLoop}}();}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00249\ }
+\DoxyCodeLine{00254\ \ \ \ \ \textcolor{keywordtype}{void}\ initialize();}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00264\ \ \ \ \ Uint64\ timeToSamples(\mbox{\hyperlink{classsf_1_1Time}{Time}}\ position)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00274\ \ \ \ \ \mbox{\hyperlink{classsf_1_1Time}{Time}}\ samplesToTime(Uint64\ samples)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00275\ }
+\DoxyCodeLine{00277\ \ \ \ \ \textcolor{comment}{//\ Member\ data}}
+\DoxyCodeLine{00279\ \ \ \ \ \mbox{\hyperlink{classsf_1_1InputSoundFile}{InputSoundFile}}\ \ \ \ \ m\_file;\ \ \ \ \ }
+\DoxyCodeLine{00280\ \ \ \ \ std::vector<Int16>\ m\_samples;\ \ }
+\DoxyCodeLine{00281\ \ \ \ \ \mbox{\hyperlink{classsf_1_1Mutex}{Mutex}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_mutex;\ \ \ \ }
+\DoxyCodeLine{00282\ \ \ \ \ \mbox{\hyperlink{structsf_1_1Music_1_1Span}{Span<Uint64>}}\ \ \ \ \ \ \ m\_loopSpan;\ }
+\DoxyCodeLine{00283\ \};}
+\DoxyCodeLine{00284\ }
+\DoxyCodeLine{00285\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00287\ }
+\DoxyCodeLine{00288\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SFML\_MUSIC\_HPP}}
+\DoxyCodeLine{00289\ }
+\DoxyCodeLine{00290\ }
+
+\end{DoxyCode}

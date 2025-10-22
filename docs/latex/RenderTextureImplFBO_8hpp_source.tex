@@ -1,0 +1,89 @@
+\doxysection{Render\+Texture\+Impl\+FBO.\+hpp}
+\hypertarget{RenderTextureImplFBO_8hpp_source}{}\label{RenderTextureImplFBO_8hpp_source}\index{build/\_deps/sfml-\/src/src/SFML/Graphics/RenderTextureImplFBO.hpp@{build/\_deps/sfml-\/src/src/SFML/Graphics/RenderTextureImplFBO.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ SFML\_RENDERTEXTUREIMPLFBO\_HPP}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ SFML\_RENDERTEXTUREIMPLFBO\_HPP}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/RenderTextureImpl.hpp>}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <SFML/Window/Context.hpp>}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ <SFML/Window/GlResource.hpp>}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{00038\ \{}
+\DoxyCodeLine{00039\ \textcolor{keyword}{namespace\ }priv}
+\DoxyCodeLine{00040\ \{}
+\DoxyCodeLine{00046\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1priv_1_1RenderTextureImplFBO_ab140f18ba82777dc6a0b3536a6ac45fa}{RenderTextureImplFBO}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classsf_1_1priv_1_1RenderTextureImpl}{RenderTextureImpl}},\ \mbox{\hyperlink{classsf_1_1GlResource_ad8fb7a0674f0f77e530dacc2a3b0dc6a}{GlResource}}}
+\DoxyCodeLine{00047\ \{}
+\DoxyCodeLine{00048\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1RenderTextureImplFBO_ab140f18ba82777dc6a0b3536a6ac45fa}{RenderTextureImplFBO}}();}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1RenderTextureImplFBO_aa81882a241bb72764c343d83f7ce6767}{\string~RenderTextureImplFBO}}();}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1RenderTextureImplFBO_aff593bebeb1cd3b617733464c41d0252}{isAvailable}}();}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classsf_1_1priv_1_1RenderTextureImplFBO_a6be14d1c3045b0687a2e1cab5481cb89}{getMaximumAntialiasingLevel}}();}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1RenderTextureImplFBO_af90c7cd4b3a1e41be7f45a97daba9a4f}{unbind}}();}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ create(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ height,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ textureId,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structsf_1_1ContextSettings}{ContextSettings}}\&\ settings);}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{bool}\ createFrameBuffer();}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ activate(\textcolor{keywordtype}{bool}\ active);}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ isSrgb()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ updateTexture(\textcolor{keywordtype}{unsigned}\ textureId);}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{comment}{//\ Member\ data}}
+\DoxyCodeLine{00139\ \ \ \ \ std::map<Uint64,\ unsigned\ int>\ m\_frameBuffers;\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00140\ \ \ \ \ std::map<Uint64,\ unsigned\ int>\ m\_multisampleFrameBuffers;\ }
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_depthStencilBuffer;\ \ \ \ \ \ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_colorBuffer;\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_width;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_height;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00145\ \ \ \ \ \mbox{\hyperlink{classsf_1_1Context}{Context}}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_context;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_textureId;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_multisample;\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_stencil;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_sRgb;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00150\ \};}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \}\ \textcolor{comment}{//\ namespace\ priv}}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SFML\_RENDERTEXTUREIMPLFBO\_HPP}}
+
+\end{DoxyCode}

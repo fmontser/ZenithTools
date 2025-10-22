@@ -1,0 +1,24 @@
+\doxysection{sf\+::Utf\texorpdfstring{$<$}{<} N \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classsf_1_1Utf}{}\label{classsf_1_1Utf}\index{sf::Utf$<$ N $>$@{sf::Utf$<$ N $>$}}
+
+
+{\ttfamily \#include $<$Utf.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$unsigned int N$>$\newline
+class sf\+::\+Utf$<$ N $>$}
+Utility class providing generic functions for UTF conversions.
+
+\doxylink{classsf_1_1Utf}{sf\+::\+Utf} is a low-\/level, generic interface for counting, iterating, encoding and decoding Unicode characters and strings. It is able to handle ANSI, wide, latin-\/1, UTF-\/8, UTF-\/16 and UTF-\/32 encodings.
+
+\doxylink{classsf_1_1Utf}{sf\+::\+Utf$<$\+X$>$} functions are all static, these classes are not meant to be instantiated. All the functions are template, so that you can use any character / string type for a given encoding.
+
+It has 3 specializations\+: \begin{DoxyItemize}
+\item sf\+::\+Utf$<$8$>$ (typedef\textquotesingle{}d to sf\+::\+Utf8) \item sf\+::\+Utf$<$16$>$ (typedef\textquotesingle{}d to sf\+::\+Utf16) \item sf\+::\+Utf$<$32$>$ (typedef\textquotesingle{}d to sf\+::\+Utf32) \end{DoxyItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/include/\+SFML/\+System/Utf.\+hpp\end{DoxyCompactItemize}

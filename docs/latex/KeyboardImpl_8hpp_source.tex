@@ -1,0 +1,65 @@
+\doxysection{Keyboard\+Impl.\+hpp}
+\hypertarget{KeyboardImpl_8hpp_source}{}\label{KeyboardImpl_8hpp_source}\index{build/\_deps/sfml-\/src/src/SFML/Window/Unix/KeyboardImpl.hpp@{build/\_deps/sfml-\/src/src/SFML/Window/Unix/KeyboardImpl.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ SFML\_KEYBOARD\_IMPL\_HPP}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ SFML\_KEYBOARD\_IMPL\_HPP}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <SFML/Window/Keyboard.hpp>}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <X11/Xlib.h>}\ \textcolor{comment}{//\ XKeyEvent}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{00036\ \{}
+\DoxyCodeLine{00037\ \textcolor{keyword}{namespace\ }priv}
+\DoxyCodeLine{00038\ \{}
+\DoxyCodeLine{00045\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1priv_1_1KeyboardImpl}{KeyboardImpl}}}
+\DoxyCodeLine{00046\ \{}
+\DoxyCodeLine{00047\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1KeyboardImpl_ab44cbdd3f1e610de973d62429de0dd83}{isKeyPressed}}(\mbox{\hyperlink{classsf_1_1Keyboard_acb4cacd7cc5802dec45724cf3314a142}{Keyboard::Key}}\ key);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1KeyboardImpl_ab44cbdd3f1e610de973d62429de0dd83}{isKeyPressed}}(Keyboard::Scancode\ code);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{static}\ Keyboard::Scancode\ \mbox{\hyperlink{classsf_1_1priv_1_1KeyboardImpl_aea30ce310aadadd2d7193fbb6e4b8b87}{delocalize}}(\mbox{\hyperlink{classsf_1_1Keyboard_acb4cacd7cc5802dec45724cf3314a142}{Keyboard::Key}}\ key);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classsf_1_1Keyboard_acb4cacd7cc5802dec45724cf3314a142}{Keyboard::Key}}\ \mbox{\hyperlink{classsf_1_1priv_1_1KeyboardImpl_aa4034bec4c157a049dea9af13f1db4ce}{localize}}(Keyboard::Scancode\ code);}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classsf_1_1String}{String}}\ \mbox{\hyperlink{classsf_1_1priv_1_1KeyboardImpl_a815d9dc9db93a9704c075897d5aa1ff0}{getDescription}}(Keyboard::Scancode\ code);}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classsf_1_1Keyboard_acb4cacd7cc5802dec45724cf3314a142}{Keyboard::Key}}\ \mbox{\hyperlink{classsf_1_1priv_1_1KeyboardImpl_ae298d8605648fc3486550bb5eaafebb4}{getKeyFromEvent}}(XKeyEvent\&\ event);}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keyword}{static}\ Keyboard::Scancode\ \mbox{\hyperlink{classsf_1_1priv_1_1KeyboardImpl_ae0e648bb9bb3767acbb9a8049c4fa500}{getScancodeFromEvent}}(XKeyEvent\&\ event);}
+\DoxyCodeLine{00098\ \};}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \}\ \textcolor{comment}{//\ namespace\ priv}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SFML\_KEYBOARD\_IMPL\_HPP}}
+
+\end{DoxyCode}

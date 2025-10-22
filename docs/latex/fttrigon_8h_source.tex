@@ -1,0 +1,356 @@
+\doxysection{fttrigon.\+h}
+\hypertarget{fttrigon_8h_source}{}\label{fttrigon_8h_source}\index{build/\_deps/sfml-\/src/extlibs/headers/freetype2/fttrigon.h@{build/\_deps/sfml-\/src/extlibs/headers/freetype2/fttrigon.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00003\ \textcolor{comment}{/*\ \ fttrigon.h\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00005\ \textcolor{comment}{/*\ \ \ \ FreeType\ trigonometric\ functions\ (specification).\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00007\ \textcolor{comment}{/*\ \ Copyright\ 2001,\ 2003,\ 2005,\ 2007,\ 2013\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ \ David\ Turner,\ Robert\ Wilhelm,\ and\ Werner\ Lemberg.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00010\ \textcolor{comment}{/*\ \ This\ file\ is\ part\ of\ the\ FreeType\ project,\ and\ may\ only\ be\ used,\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*\ \ modified,\ and\ distributed\ under\ the\ terms\ of\ the\ FreeType\ project\ \ \ \ \ \ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*\ \ license,\ LICENSE.TXT.\ \ By\ continuing\ to\ use,\ modify,\ or\ distribute\ \ \ \ \ */}}
+\DoxyCodeLine{00013\ \textcolor{comment}{/*\ \ this\ file\ you\ indicate\ that\ you\ have\ read\ the\ license\ and\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00014\ \textcolor{comment}{/*\ \ understand\ and\ accept\ it\ fully.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00015\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00016\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ \_\_FTTRIGON\_H\_\_}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ \_\_FTTRIGON\_H\_\_}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ FT\_FREETYPE\_H}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#ifdef\ FREETYPE\_H}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#error\ "{}freetype.h\ of\ FreeType\ 1\ has\ been\ loaded!"{}}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#error\ "{}Please\ fix\ the\ directory\ search\ order\ for\ header\ files"{}}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#error\ "{}so\ that\ freetype.h\ of\ FreeType\ 2\ is\ found\ first."{}}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ FT\_BEGIN\_HEADER}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00035\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00036\ \ \ \textcolor{comment}{/*\ <Section>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00037\ \ \ \textcolor{comment}{/*\ \ \ computations\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00038\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00039\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00043\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00044\ \textcolor{comment}{\ \ \ *\ @type:}}
+\DoxyCodeLine{00045\ \textcolor{comment}{\ \ \ *\ \ \ FT\_Angle}}
+\DoxyCodeLine{00046\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00047\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00048\ \textcolor{comment}{\ \ \ *\ \ \ This\ type\ is\ used\ to\ model\ angle\ values\ in\ FreeType.\ \ Note\ that\ the}}
+\DoxyCodeLine{00049\ \textcolor{comment}{\ \ \ *\ \ \ angle\ is\ a\ 16.16\ fixed-\/point\ value\ expressed\ in\ degrees.}}
+\DoxyCodeLine{00050\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00051\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00052\ \ \ \textcolor{keyword}{typedef}\ FT\_Fixed\ \ FT\_Angle;}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00056\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00057\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00058\ \textcolor{comment}{\ \ \ *\ \ \ FT\_ANGLE\_PI}}
+\DoxyCodeLine{00059\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00060\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00061\ \textcolor{comment}{\ \ \ *\ \ \ The\ angle\ pi\ expressed\ in\ @FT\_Angle\ units.}}
+\DoxyCodeLine{00062\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00063\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#define\ FT\_ANGLE\_PI\ \ (\ 180L\ <<\ 16\ )}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00068\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00069\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00070\ \textcolor{comment}{\ \ \ *\ \ \ FT\_ANGLE\_2PI}}
+\DoxyCodeLine{00071\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00072\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00073\ \textcolor{comment}{\ \ \ *\ \ \ The\ angle\ 2*pi\ expressed\ in\ @FT\_Angle\ units.}}
+\DoxyCodeLine{00074\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00075\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#define\ FT\_ANGLE\_2PI\ \ (\ FT\_ANGLE\_PI\ *\ 2\ )}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00080\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00081\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00082\ \textcolor{comment}{\ \ \ *\ \ \ FT\_ANGLE\_PI2}}
+\DoxyCodeLine{00083\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00084\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00085\ \textcolor{comment}{\ \ \ *\ \ \ The\ angle\ pi/2\ expressed\ in\ @FT\_Angle\ units.}}
+\DoxyCodeLine{00086\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00087\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#define\ FT\_ANGLE\_PI2\ \ (\ FT\_ANGLE\_PI\ /\ 2\ )}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00092\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00093\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00094\ \textcolor{comment}{\ \ \ *\ \ \ FT\_ANGLE\_PI4}}
+\DoxyCodeLine{00095\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00096\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00097\ \textcolor{comment}{\ \ \ *\ \ \ The\ angle\ pi/4\ expressed\ in\ @FT\_Angle\ units.}}
+\DoxyCodeLine{00098\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00099\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#define\ FT\_ANGLE\_PI4\ \ (\ FT\_ANGLE\_PI\ /\ 4\ )}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00104\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00105\ \textcolor{comment}{\ \ \ *\ @function:}}
+\DoxyCodeLine{00106\ \textcolor{comment}{\ \ \ *\ \ \ FT\_Sin}}
+\DoxyCodeLine{00107\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00108\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00109\ \textcolor{comment}{\ \ \ *\ \ \ Return\ the\ sinus\ of\ a\ given\ angle\ in\ fixed-\/point\ format.}}
+\DoxyCodeLine{00110\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00111\ \textcolor{comment}{\ \ \ *\ @input:}}
+\DoxyCodeLine{00112\ \textcolor{comment}{\ \ \ *\ \ \ angle\ ::}}
+\DoxyCodeLine{00113\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ input\ angle.}}
+\DoxyCodeLine{00114\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00115\ \textcolor{comment}{\ \ \ *\ @return:}}
+\DoxyCodeLine{00116\ \textcolor{comment}{\ \ \ *\ \ \ The\ sinus\ value.}}
+\DoxyCodeLine{00117\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00118\ \textcolor{comment}{\ \ \ *\ @note:}}
+\DoxyCodeLine{00119\ \textcolor{comment}{\ \ \ *\ \ \ If\ you\ need\ both\ the\ sinus\ and\ cosinus\ for\ a\ given\ angle,\ use\ the}}
+\DoxyCodeLine{00120\ \textcolor{comment}{\ \ \ *\ \ \ function\ @FT\_Vector\_Unit.}}
+\DoxyCodeLine{00121\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00122\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00123\ \ \ FT\_EXPORT(\ FT\_Fixed\ )}
+\DoxyCodeLine{00124\ \ \ FT\_Sin(\ FT\_Angle\ \ angle\ );}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00128\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00129\ \textcolor{comment}{\ \ \ *\ @function:}}
+\DoxyCodeLine{00130\ \textcolor{comment}{\ \ \ *\ \ \ FT\_Cos}}
+\DoxyCodeLine{00131\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00132\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00133\ \textcolor{comment}{\ \ \ *\ \ \ Return\ the\ cosinus\ of\ a\ given\ angle\ in\ fixed-\/point\ format.}}
+\DoxyCodeLine{00134\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00135\ \textcolor{comment}{\ \ \ *\ @input:}}
+\DoxyCodeLine{00136\ \textcolor{comment}{\ \ \ *\ \ \ angle\ ::}}
+\DoxyCodeLine{00137\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ input\ angle.}}
+\DoxyCodeLine{00138\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00139\ \textcolor{comment}{\ \ \ *\ @return:}}
+\DoxyCodeLine{00140\ \textcolor{comment}{\ \ \ *\ \ \ The\ cosinus\ value.}}
+\DoxyCodeLine{00141\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00142\ \textcolor{comment}{\ \ \ *\ @note:}}
+\DoxyCodeLine{00143\ \textcolor{comment}{\ \ \ *\ \ \ If\ you\ need\ both\ the\ sinus\ and\ cosinus\ for\ a\ given\ angle,\ use\ the}}
+\DoxyCodeLine{00144\ \textcolor{comment}{\ \ \ *\ \ \ function\ @FT\_Vector\_Unit.}}
+\DoxyCodeLine{00145\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00146\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00147\ \ \ FT\_EXPORT(\ FT\_Fixed\ )}
+\DoxyCodeLine{00148\ \ \ FT\_Cos(\ FT\_Angle\ \ angle\ );}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00152\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00153\ \textcolor{comment}{\ \ \ *\ @function:}}
+\DoxyCodeLine{00154\ \textcolor{comment}{\ \ \ *\ \ \ FT\_Tan}}
+\DoxyCodeLine{00155\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00156\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00157\ \textcolor{comment}{\ \ \ *\ \ \ Return\ the\ tangent\ of\ a\ given\ angle\ in\ fixed-\/point\ format.}}
+\DoxyCodeLine{00158\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00159\ \textcolor{comment}{\ \ \ *\ @input:}}
+\DoxyCodeLine{00160\ \textcolor{comment}{\ \ \ *\ \ \ angle\ ::}}
+\DoxyCodeLine{00161\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ input\ angle.}}
+\DoxyCodeLine{00162\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00163\ \textcolor{comment}{\ \ \ *\ @return:}}
+\DoxyCodeLine{00164\ \textcolor{comment}{\ \ \ *\ \ \ The\ tangent\ value.}}
+\DoxyCodeLine{00165\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00166\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00167\ \ \ FT\_EXPORT(\ FT\_Fixed\ )}
+\DoxyCodeLine{00168\ \ \ FT\_Tan(\ FT\_Angle\ \ angle\ );}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00172\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00173\ \textcolor{comment}{\ \ \ *\ @function:}}
+\DoxyCodeLine{00174\ \textcolor{comment}{\ \ \ *\ \ \ FT\_Atan2}}
+\DoxyCodeLine{00175\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00176\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00177\ \textcolor{comment}{\ \ \ *\ \ \ Return\ the\ arc-\/tangent\ corresponding\ to\ a\ given\ vector\ (x,y)\ in}}
+\DoxyCodeLine{00178\ \textcolor{comment}{\ \ \ *\ \ \ the\ 2d\ plane.}}
+\DoxyCodeLine{00179\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00180\ \textcolor{comment}{\ \ \ *\ @input:}}
+\DoxyCodeLine{00181\ \textcolor{comment}{\ \ \ *\ \ \ x\ ::}}
+\DoxyCodeLine{00182\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ horizontal\ vector\ coordinate.}}
+\DoxyCodeLine{00183\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00184\ \textcolor{comment}{\ \ \ *\ \ \ y\ ::}}
+\DoxyCodeLine{00185\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ vertical\ vector\ coordinate.}}
+\DoxyCodeLine{00186\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00187\ \textcolor{comment}{\ \ \ *\ @return:}}
+\DoxyCodeLine{00188\ \textcolor{comment}{\ \ \ *\ \ \ The\ arc-\/tangent\ value\ (i.e.\ angle).}}
+\DoxyCodeLine{00189\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00190\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00191\ \ \ FT\_EXPORT(\ FT\_Angle\ )}
+\DoxyCodeLine{00192\ \ \ FT\_Atan2(\ FT\_Fixed\ \ x,}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Fixed\ \ y\ );}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00197\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00198\ \textcolor{comment}{\ \ \ *\ @function:}}
+\DoxyCodeLine{00199\ \textcolor{comment}{\ \ \ *\ \ \ FT\_Angle\_Diff}}
+\DoxyCodeLine{00200\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00201\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00202\ \textcolor{comment}{\ \ \ *\ \ \ Return\ the\ difference\ between\ two\ angles.\ \ The\ result\ is\ always}}
+\DoxyCodeLine{00203\ \textcolor{comment}{\ \ \ *\ \ \ constrained\ to\ the\ ]-\/PI..PI]\ interval.}}
+\DoxyCodeLine{00204\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00205\ \textcolor{comment}{\ \ \ *\ @input:}}
+\DoxyCodeLine{00206\ \textcolor{comment}{\ \ \ *\ \ \ angle1\ ::}}
+\DoxyCodeLine{00207\ \textcolor{comment}{\ \ \ *\ \ \ \ \ First\ angle.}}
+\DoxyCodeLine{00208\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00209\ \textcolor{comment}{\ \ \ *\ \ \ angle2\ ::}}
+\DoxyCodeLine{00210\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Second\ angle.}}
+\DoxyCodeLine{00211\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00212\ \textcolor{comment}{\ \ \ *\ @return:}}
+\DoxyCodeLine{00213\ \textcolor{comment}{\ \ \ *\ \ \ Constrained\ value\ of\ \`{}value2-\/value1'.}}
+\DoxyCodeLine{00214\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00215\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00216\ \ \ FT\_EXPORT(\ FT\_Angle\ )}
+\DoxyCodeLine{00217\ \ \ FT\_Angle\_Diff(\ FT\_Angle\ \ angle1,}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Angle\ \ angle2\ );}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00221\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00222\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00223\ \textcolor{comment}{\ \ \ *\ @function:}}
+\DoxyCodeLine{00224\ \textcolor{comment}{\ \ \ *\ \ \ FT\_Vector\_Unit}}
+\DoxyCodeLine{00225\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00226\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00227\ \textcolor{comment}{\ \ \ *\ \ \ Return\ the\ unit\ vector\ corresponding\ to\ a\ given\ angle.\ \ After\ the}}
+\DoxyCodeLine{00228\ \textcolor{comment}{\ \ \ *\ \ \ call,\ the\ value\ of\ \`{}vec.x'\ will\ be\ \`{}sin(angle)',\ and\ the\ value\ of}}
+\DoxyCodeLine{00229\ \textcolor{comment}{\ \ \ *\ \ \ \`{}vec.y'\ will\ be\ \`{}cos(angle)'.}}
+\DoxyCodeLine{00230\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00231\ \textcolor{comment}{\ \ \ *\ \ \ This\ function\ is\ useful\ to\ retrieve\ both\ the\ sinus\ and\ cosinus\ of\ a}}
+\DoxyCodeLine{00232\ \textcolor{comment}{\ \ \ *\ \ \ given\ angle\ quickly.}}
+\DoxyCodeLine{00233\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00234\ \textcolor{comment}{\ \ \ *\ @output:}}
+\DoxyCodeLine{00235\ \textcolor{comment}{\ \ \ *\ \ \ vec\ ::}}
+\DoxyCodeLine{00236\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ address\ of\ target\ vector.}}
+\DoxyCodeLine{00237\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00238\ \textcolor{comment}{\ \ \ *\ @input:}}
+\DoxyCodeLine{00239\ \textcolor{comment}{\ \ \ *\ \ \ angle\ ::}}
+\DoxyCodeLine{00240\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ input\ angle.}}
+\DoxyCodeLine{00241\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00242\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00243\ \ \ FT\_EXPORT(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{00244\ \ \ FT\_Vector\_Unit(\ FT\_Vector*\ \ vec,}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Angle\ \ \ \ angle\ );}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00249\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00250\ \textcolor{comment}{\ \ \ *\ @function:}}
+\DoxyCodeLine{00251\ \textcolor{comment}{\ \ \ *\ \ \ FT\_Vector\_Rotate}}
+\DoxyCodeLine{00252\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00253\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00254\ \textcolor{comment}{\ \ \ *\ \ \ Rotate\ a\ vector\ by\ a\ given\ angle.}}
+\DoxyCodeLine{00255\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00256\ \textcolor{comment}{\ \ \ *\ @inout:}}
+\DoxyCodeLine{00257\ \textcolor{comment}{\ \ \ *\ \ \ vec\ ::}}
+\DoxyCodeLine{00258\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ address\ of\ target\ vector.}}
+\DoxyCodeLine{00259\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00260\ \textcolor{comment}{\ \ \ *\ @input:}}
+\DoxyCodeLine{00261\ \textcolor{comment}{\ \ \ *\ \ \ angle\ ::}}
+\DoxyCodeLine{00262\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ input\ angle.}}
+\DoxyCodeLine{00263\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00264\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00265\ \ \ FT\_EXPORT(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{00266\ \ \ FT\_Vector\_Rotate(\ FT\_Vector*\ \ vec,}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Angle\ \ \ \ angle\ );}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ }
+\DoxyCodeLine{00270\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00271\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00272\ \textcolor{comment}{\ \ \ *\ @function:}}
+\DoxyCodeLine{00273\ \textcolor{comment}{\ \ \ *\ \ \ FT\_Vector\_Length}}
+\DoxyCodeLine{00274\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00275\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00276\ \textcolor{comment}{\ \ \ *\ \ \ Return\ the\ length\ of\ a\ given\ vector.}}
+\DoxyCodeLine{00277\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00278\ \textcolor{comment}{\ \ \ *\ @input:}}
+\DoxyCodeLine{00279\ \textcolor{comment}{\ \ \ *\ \ \ vec\ ::}}
+\DoxyCodeLine{00280\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ address\ of\ target\ vector.}}
+\DoxyCodeLine{00281\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00282\ \textcolor{comment}{\ \ \ *\ @return:}}
+\DoxyCodeLine{00283\ \textcolor{comment}{\ \ \ *\ \ \ The\ vector\ length,\ expressed\ in\ the\ same\ units\ that\ the\ original}}
+\DoxyCodeLine{00284\ \textcolor{comment}{\ \ \ *\ \ \ vector\ coordinates.}}
+\DoxyCodeLine{00285\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00286\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00287\ \ \ FT\_EXPORT(\ FT\_Fixed\ )}
+\DoxyCodeLine{00288\ \ \ FT\_Vector\_Length(\ FT\_Vector*\ \ vec\ );}
+\DoxyCodeLine{00289\ }
+\DoxyCodeLine{00290\ }
+\DoxyCodeLine{00291\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00292\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00293\ \textcolor{comment}{\ \ \ *\ @function:}}
+\DoxyCodeLine{00294\ \textcolor{comment}{\ \ \ *\ \ \ FT\_Vector\_Polarize}}
+\DoxyCodeLine{00295\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00296\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00297\ \textcolor{comment}{\ \ \ *\ \ \ Compute\ both\ the\ length\ and\ angle\ of\ a\ given\ vector.}}
+\DoxyCodeLine{00298\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00299\ \textcolor{comment}{\ \ \ *\ @input:}}
+\DoxyCodeLine{00300\ \textcolor{comment}{\ \ \ *\ \ \ vec\ ::}}
+\DoxyCodeLine{00301\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ address\ of\ source\ vector.}}
+\DoxyCodeLine{00302\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00303\ \textcolor{comment}{\ \ \ *\ @output:}}
+\DoxyCodeLine{00304\ \textcolor{comment}{\ \ \ *\ \ \ length\ ::}}
+\DoxyCodeLine{00305\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ vector\ length.}}
+\DoxyCodeLine{00306\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00307\ \textcolor{comment}{\ \ \ *\ \ \ angle\ ::}}
+\DoxyCodeLine{00308\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ vector\ angle.}}
+\DoxyCodeLine{00309\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00310\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00311\ \ \ FT\_EXPORT(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{00312\ \ \ FT\_Vector\_Polarize(\ FT\_Vector*\ \ vec,}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Fixed\ \ \ *length,}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Angle\ \ \ *angle\ );}
+\DoxyCodeLine{00315\ }
+\DoxyCodeLine{00316\ }
+\DoxyCodeLine{00317\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00318\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00319\ \textcolor{comment}{\ \ \ *\ @function:}}
+\DoxyCodeLine{00320\ \textcolor{comment}{\ \ \ *\ \ \ FT\_Vector\_From\_Polar}}
+\DoxyCodeLine{00321\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00322\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00323\ \textcolor{comment}{\ \ \ *\ \ \ Compute\ vector\ coordinates\ from\ a\ length\ and\ angle.}}
+\DoxyCodeLine{00324\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00325\ \textcolor{comment}{\ \ \ *\ @output:}}
+\DoxyCodeLine{00326\ \textcolor{comment}{\ \ \ *\ \ \ vec\ ::}}
+\DoxyCodeLine{00327\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ address\ of\ source\ vector.}}
+\DoxyCodeLine{00328\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00329\ \textcolor{comment}{\ \ \ *\ @input:}}
+\DoxyCodeLine{00330\ \textcolor{comment}{\ \ \ *\ \ \ length\ ::}}
+\DoxyCodeLine{00331\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ vector\ length.}}
+\DoxyCodeLine{00332\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00333\ \textcolor{comment}{\ \ \ *\ \ \ angle\ ::}}
+\DoxyCodeLine{00334\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ vector\ angle.}}
+\DoxyCodeLine{00335\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00336\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00337\ \ \ FT\_EXPORT(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{00338\ \ \ FT\_Vector\_From\_Polar(\ FT\_Vector*\ \ vec,}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Fixed\ \ \ \ length,}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Angle\ \ \ \ angle\ );}
+\DoxyCodeLine{00341\ }
+\DoxyCodeLine{00342\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{00343\ }
+\DoxyCodeLine{00344\ }
+\DoxyCodeLine{00345\ FT\_END\_HEADER}
+\DoxyCodeLine{00346\ }
+\DoxyCodeLine{00347\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_FTTRIGON\_H\_\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00348\ }
+\DoxyCodeLine{00349\ }
+\DoxyCodeLine{00350\ \textcolor{comment}{/*\ END\ */}}
+
+\end{DoxyCode}

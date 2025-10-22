@@ -1,0 +1,456 @@
+\doxysection{ftconfig.\+h}
+\hypertarget{ftconfig_8h_source}{}\label{ftconfig_8h_source}\index{build/\_deps/sfml-\/src/extlibs/headers/freetype2/config/ftconfig.h@{build/\_deps/sfml-\/src/extlibs/headers/freetype2/config/ftconfig.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00003\ \textcolor{comment}{/*\ \ ftconfig.h\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00005\ \textcolor{comment}{/*\ \ \ \ ANSI-\/specific\ configuration\ file\ (specification\ only).\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00007\ \textcolor{comment}{/*\ \ Copyright\ 1996-\/2004,\ 2006-\/2008,\ 2010-\/2011,\ 2013,\ 2014\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ \ David\ Turner,\ Robert\ Wilhelm,\ and\ Werner\ Lemberg.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00010\ \textcolor{comment}{/*\ \ This\ file\ is\ part\ of\ the\ FreeType\ project,\ and\ may\ only\ be\ used,\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*\ \ modified,\ and\ distributed\ under\ the\ terms\ of\ the\ FreeType\ project\ \ \ \ \ \ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*\ \ license,\ LICENSE.TXT.\ \ By\ continuing\ to\ use,\ modify,\ or\ distribute\ \ \ \ \ */}}
+\DoxyCodeLine{00013\ \textcolor{comment}{/*\ \ this\ file\ you\ indicate\ that\ you\ have\ read\ the\ license\ and\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00014\ \textcolor{comment}{/*\ \ understand\ and\ accept\ it\ fully.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00015\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00016\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00020\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00021\ \ \ \textcolor{comment}{/*\ This\ header\ file\ contains\ a\ number\ of\ macro\ definitions\ that\ are\ used\ */}}
+\DoxyCodeLine{00022\ \ \ \textcolor{comment}{/*\ by\ the\ rest\ of\ the\ engine.\ \ Most\ of\ the\ macros\ here\ are\ automatically\ */}}
+\DoxyCodeLine{00023\ \ \ \textcolor{comment}{/*\ determined\ at\ compile\ time,\ and\ you\ should\ not\ need\ to\ change\ it\ to\ \ \ */}}
+\DoxyCodeLine{00024\ \ \ \textcolor{comment}{/*\ port\ FreeType,\ except\ to\ compile\ the\ library\ with\ a\ non-\/ANSI\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00025\ \ \ \textcolor{comment}{/*\ compiler.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00026\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00027\ \ \ \textcolor{comment}{/*\ Note\ however\ that\ if\ some\ specific\ modifications\ are\ needed,\ we\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00028\ \ \ \textcolor{comment}{/*\ advise\ you\ to\ place\ a\ modified\ copy\ in\ your\ build\ directory.\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00029\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00030\ \ \ \textcolor{comment}{/*\ The\ build\ directory\ is\ usually\ \`{}builds/<system>',\ and\ contains\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00031\ \ \ \textcolor{comment}{/*\ system-\/specific\ files\ that\ are\ always\ included\ first\ when\ building\ \ \ \ */}}
+\DoxyCodeLine{00032\ \ \ \textcolor{comment}{/*\ the\ library.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00033\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00034\ \ \ \textcolor{comment}{/*\ This\ ANSI\ version\ should\ stay\ in\ \`{}include/config/'.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00035\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00036\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#ifndef\ \_\_FTCONFIG\_H\_\_}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ \_\_FTCONFIG\_H\_\_}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#include\ <ft2build.h>}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#include\ FT\_CONFIG\_OPTIONS\_H}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#include\ FT\_CONFIG\_STANDARD\_LIBRARY\_H}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ FT\_BEGIN\_HEADER}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00050\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00051\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ PLATFORM-\/SPECIFIC\ CONFIGURATION\ MACROS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00052\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00053\ \ \ \textcolor{comment}{/*\ These\ macros\ can\ be\ toggled\ to\ suit\ a\ specific\ system.\ \ The\ current\ \ \ */}}
+\DoxyCodeLine{00054\ \ \ \textcolor{comment}{/*\ ones\ are\ defaults\ used\ to\ compile\ FreeType\ in\ an\ ANSI\ C\ environment\ \ \ */}}
+\DoxyCodeLine{00055\ \ \ \textcolor{comment}{/*\ (16bit\ compilers\ are\ also\ supported).\ \ Copy\ this\ file\ to\ your\ own\ \ \ \ \ */}}
+\DoxyCodeLine{00056\ \ \ \textcolor{comment}{/*\ \`{}builds/<system>'\ directory,\ and\ edit\ it\ to\ port\ the\ engine.\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00057\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00058\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \textcolor{comment}{/*\ There\ are\ systems\ (like\ the\ Texas\ Instruments\ 'C54x)\ where\ a\ \`{}char'\ */}}
+\DoxyCodeLine{00062\ \ \ \textcolor{comment}{/*\ has\ 16\ bits.\ \ ANSI\ C\ says\ that\ sizeof(char)\ is\ always\ 1.\ \ Since\ an\ \ */}}
+\DoxyCodeLine{00063\ \ \ \textcolor{comment}{/*\ \`{}int'\ has\ 16\ bits\ also\ for\ this\ system,\ sizeof(int)\ gives\ 1\ which\ \ \ */}}
+\DoxyCodeLine{00064\ \ \ \textcolor{comment}{/*\ is\ probably\ unexpected.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00065\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00066\ \ \ \textcolor{comment}{/*\ \`{}CHAR\_BIT'\ (defined\ in\ limits.h)\ gives\ the\ number\ of\ bits\ in\ a\ \ \ \ \ \ */}}
+\DoxyCodeLine{00067\ \ \ \textcolor{comment}{/*\ \`{}char'\ type.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#ifndef\ FT\_CHAR\_BIT}}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#define\ FT\_CHAR\_BIT\ \ CHAR\_BIT}}
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \textcolor{comment}{/*\ The\ size\ of\ an\ \`{}int'\ type.\ \ */}}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#if\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_UINT\_MAX\ ==\ 0xFFFFUL}}
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#define\ FT\_SIZEOF\_INT\ \ (16\ /\ FT\_CHAR\_BIT)}}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#elif\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_UINT\_MAX\ ==\ 0xFFFFFFFFUL}}
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#define\ FT\_SIZEOF\_INT\ \ (32\ /\ FT\_CHAR\_BIT)}}
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#elif\ FT\_UINT\_MAX\ >\ 0xFFFFFFFFUL\ \&\&\ FT\_UINT\_MAX\ ==\ 0xFFFFFFFFFFFFFFFFUL}}
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#define\ FT\_SIZEOF\_INT\ \ (64\ /\ FT\_CHAR\_BIT)}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#error\ "{}Unsupported\ size\ of\ \`{}int'\ type!"{}}}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \textcolor{comment}{/*\ The\ size\ of\ a\ \`{}long'\ type.\ \ A\ five-\/byte\ \`{}long'\ (as\ used\ e.g.\ on\ the\ */}}
+\DoxyCodeLine{00086\ \ \ \textcolor{comment}{/*\ DM642)\ is\ recognized\ but\ avoided.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#if\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_ULONG\_MAX\ ==\ 0xFFFFFFFFUL}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#define\ FT\_SIZEOF\_LONG\ \ (32\ /\ FT\_CHAR\_BIT)}}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#elif\ FT\_ULONG\_MAX\ >\ 0xFFFFFFFFUL\ \&\&\ FT\_ULONG\_MAX\ ==\ 0xFFFFFFFFFFUL}}
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#define\ FT\_SIZEOF\_LONG\ \ (32\ /\ FT\_CHAR\_BIT)}}
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#elif\ FT\_ULONG\_MAX\ >\ 0xFFFFFFFFUL\ \&\&\ FT\_ULONG\_MAX\ ==\ 0xFFFFFFFFFFFFFFFFUL}}
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#define\ FT\_SIZEOF\_LONG\ \ (64\ /\ FT\_CHAR\_BIT)}}
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#error\ "{}Unsupported\ size\ of\ \`{}long'\ type!"{}}}
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \textcolor{comment}{/*\ FT\_UNUSED\ is\ a\ macro\ used\ to\ indicate\ that\ a\ given\ parameter\ is\ not\ \ */}}
+\DoxyCodeLine{00099\ \ \ \textcolor{comment}{/*\ used\ -\/-\/\ this\ is\ only\ used\ to\ get\ rid\ of\ unpleasant\ compiler\ warnings\ */}}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#ifndef\ FT\_UNUSED}}
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#define\ FT\_UNUSED(\ arg\ )\ \ (\ (arg)\ =\ (arg)\ )}}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00106\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00107\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ AUTOMATIC\ CONFIGURATION\ MACROS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00108\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00109\ \ \ \textcolor{comment}{/*\ These\ macros\ are\ computed\ from\ the\ ones\ defined\ above.\ \ Don't\ touch\ \ \ */}}
+\DoxyCodeLine{00110\ \ \ \textcolor{comment}{/*\ their\ definition,\ unless\ you\ know\ precisely\ what\ you\ are\ doing.\ \ No\ \ \ */}}
+\DoxyCodeLine{00111\ \ \ \textcolor{comment}{/*\ porter\ should\ need\ to\ mess\ with\ them.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00112\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00113\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00117\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00118\ \ \ \textcolor{comment}{/*\ Mac\ support\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00119\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00120\ \ \ \textcolor{comment}{/*\ \ \ This\ is\ the\ only\ necessary\ change,\ so\ it\ is\ defined\ here\ instead\ \ \ \ */}}
+\DoxyCodeLine{00121\ \ \ \textcolor{comment}{/*\ \ \ providing\ a\ new\ configuration\ file.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00122\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00123\ \textcolor{preprocessor}{\#if\ defined(\ \_\_APPLE\_\_\ )\ ||\ (\ defined(\ \_\_MWERKS\_\_\ )\ \&\&\ defined(\ macintosh\ )\ )}}
+\DoxyCodeLine{00124\ \ \ \textcolor{comment}{/*\ no\ Carbon\ frameworks\ for\ 64bit\ 10.4.x\ */}}
+\DoxyCodeLine{00125\ \ \ \textcolor{comment}{/*\ AvailabilityMacros.h\ is\ available\ since\ Mac\ OS\ X\ 10.2,\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00126\ \ \ \textcolor{comment}{/*\ so\ guess\ the\ system\ version\ by\ maximum\ errno\ before\ inclusion\ */}}
+\DoxyCodeLine{00127\ \textcolor{preprocessor}{\#include\ <errno.h>}}
+\DoxyCodeLine{00128\ \textcolor{preprocessor}{\#ifdef\ ECANCELED\ }\textcolor{comment}{/*\ defined\ since\ 10.2\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00129\ \textcolor{preprocessor}{\#include\ "{}AvailabilityMacros.h"{}}}
+\DoxyCodeLine{00130\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00131\ \textcolor{preprocessor}{\#if\ defined(\ \_\_LP64\_\_\ )\ \&\&\ \(\backslash\)}}
+\DoxyCodeLine{00132\ \textcolor{preprocessor}{\ \ \ \ (\ MAC\_OS\_X\_VERSION\_MIN\_REQUIRED\ <=\ MAC\_OS\_X\_VERSION\_10\_4\ )}}
+\DoxyCodeLine{00133\ \textcolor{preprocessor}{\#undef\ FT\_MACINTOSH}}
+\DoxyCodeLine{00134\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \textcolor{preprocessor}{\#elif\ defined(\ \_\_SC\_\_\ )\ ||\ defined(\ \_\_MRC\_\_\ )}}
+\DoxyCodeLine{00137\ \ \ \textcolor{comment}{/*\ Classic\ MacOS\ compilers\ */}}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#include\ "{}ConditionalMacros.h"{}}}
+\DoxyCodeLine{00139\ \textcolor{preprocessor}{\#if\ TARGET\_OS\_MAC}}
+\DoxyCodeLine{00140\ \textcolor{preprocessor}{\#define\ FT\_MACINTOSH\ 1}}
+\DoxyCodeLine{00141\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00147\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00148\ \ \ \textcolor{comment}{/*\ <Section>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00149\ \ \ \textcolor{comment}{/*\ \ \ \ basic\_types\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00150\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00151\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00155\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00156\ \ \ \textcolor{comment}{/*\ <Type>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00157\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_Int16\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00158\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00159\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00160\ \ \ \textcolor{comment}{/*\ \ \ \ A\ typedef\ for\ a\ 16bit\ signed\ integer\ type.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00161\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00162\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{signed}\ \textcolor{keywordtype}{short}\ \ FT\_Int16;}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00166\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00167\ \ \ \textcolor{comment}{/*\ <Type>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00168\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_UInt16\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00169\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00170\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00171\ \ \ \textcolor{comment}{/*\ \ \ \ A\ typedef\ for\ a\ 16bit\ unsigned\ integer\ type.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00172\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00173\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ \ FT\_UInt16;}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \ \ \textcolor{comment}{/*\ this\ \#if\ 0\ ...\ \#endif\ clause\ is\ for\ documentation\ purposes\ */}}
+\DoxyCodeLine{00179\ \textcolor{preprocessor}{\#if\ 0}}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00182\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00183\ \ \ \textcolor{comment}{/*\ <Type>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00184\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_Int32\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00185\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00186\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00187\ \ \ \textcolor{comment}{/*\ \ \ \ A\ typedef\ for\ a\ 32bit\ signed\ integer\ type.\ \ The\ size\ depends\ on\ \ \ \ */}}
+\DoxyCodeLine{00188\ \ \ \textcolor{comment}{/*\ \ \ \ the\ configuration.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00189\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00190\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{signed}\ XXX\ \ FT\_Int32;}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00194\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00195\ \ \ \textcolor{comment}{/*\ <Type>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00196\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_UInt32\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00197\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00198\ \ \ \textcolor{comment}{/*\ \ \ \ A\ typedef\ for\ a\ 32bit\ unsigned\ integer\ type.\ \ The\ size\ depends\ on\ \ */}}
+\DoxyCodeLine{00199\ \ \ \textcolor{comment}{/*\ \ \ \ the\ configuration.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00200\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00201\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ XXX\ \ FT\_UInt32;}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00205\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00206\ \ \ \textcolor{comment}{/*\ <Type>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00207\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_Int64\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00208\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00209\ \ \ \textcolor{comment}{/*\ \ \ \ A\ typedef\ for\ a\ 64bit\ signed\ integer\ type.\ \ The\ size\ depends\ on\ \ \ \ */}}
+\DoxyCodeLine{00210\ \ \ \textcolor{comment}{/*\ \ \ \ the\ configuration.\ \ Only\ defined\ if\ there\ is\ real\ 64bit\ support;\ \ \ */}}
+\DoxyCodeLine{00211\ \ \ \textcolor{comment}{/*\ \ \ \ otherwise,\ it\ gets\ emulated\ with\ a\ structure\ (if\ necessary).\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00212\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00213\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{signed}\ XXX\ \ FT\_Int64;}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00217\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00218\ \ \ \textcolor{comment}{/*\ <Type>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00219\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_UInt64\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00220\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00221\ \ \ \textcolor{comment}{/*\ \ \ \ A\ typedef\ for\ a\ 64bit\ unsigned\ integer\ type.\ \ The\ size\ depends\ on\ \ */}}
+\DoxyCodeLine{00222\ \ \ \textcolor{comment}{/*\ \ \ \ the\ configuration.\ \ Only\ defined\ if\ there\ is\ real\ 64bit\ support;\ \ \ */}}
+\DoxyCodeLine{00223\ \ \ \textcolor{comment}{/*\ \ \ \ otherwise,\ it\ gets\ emulated\ with\ a\ structure\ (if\ necessary).\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00224\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00225\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ XXX\ \ FT\_UInt64;}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00227\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00229\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00231\ \textcolor{preprocessor}{\#if\ FT\_SIZEOF\_INT\ ==\ (32\ /\ FT\_CHAR\_BIT)}}
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00233\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{signed}\ \textcolor{keywordtype}{int}\ \ \ \ \ \ FT\_Int32;}
+\DoxyCodeLine{00234\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \ \ \ FT\_UInt32;}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00236\ \textcolor{preprocessor}{\#elif\ FT\_SIZEOF\_LONG\ ==\ (32\ /\ FT\_CHAR\_BIT)}}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00238\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{signed}\ \textcolor{keywordtype}{long}\ \ \ \ \ FT\_Int32;}
+\DoxyCodeLine{00239\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \ \ FT\_UInt32;}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00242\ \textcolor{preprocessor}{\#error\ "{}no\ 32bit\ type\ found\ -\/-\/\ please\ check\ your\ configuration\ files"{}}}
+\DoxyCodeLine{00243\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00245\ }
+\DoxyCodeLine{00246\ \ \ \textcolor{comment}{/*\ look\ up\ an\ integer\ type\ that\ is\ at\ least\ 32\ bits\ */}}
+\DoxyCodeLine{00247\ \textcolor{preprocessor}{\#if\ FT\_SIZEOF\_INT\ >=\ (32\ /\ FT\_CHAR\_BIT)}}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ FT\_Fast;}
+\DoxyCodeLine{00250\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \ \ FT\_UFast;}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00252\ \textcolor{preprocessor}{\#elif\ FT\_SIZEOF\_LONG\ >=\ (32\ /\ FT\_CHAR\_BIT)}}
+\DoxyCodeLine{00253\ }
+\DoxyCodeLine{00254\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{long}\ \ \ \ \ \ \ \ \ \ \ FT\_Fast;}
+\DoxyCodeLine{00255\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \ FT\_UFast;}
+\DoxyCodeLine{00256\ }
+\DoxyCodeLine{00257\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00259\ }
+\DoxyCodeLine{00260\ \ \ \textcolor{comment}{/*\ determine\ whether\ we\ have\ a\ 64-\/bit\ int\ type\ for\ platforms\ without\ */}}
+\DoxyCodeLine{00261\ \ \ \textcolor{comment}{/*\ Autoconf\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00262\ \textcolor{preprocessor}{\#if\ FT\_SIZEOF\_LONG\ ==\ (64\ /\ FT\_CHAR\_BIT)}}
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00264\ \ \ \textcolor{comment}{/*\ FT\_LONG64\ must\ be\ defined\ if\ a\ 64-\/bit\ type\ is\ available\ */}}
+\DoxyCodeLine{00265\ \textcolor{preprocessor}{\#define\ FT\_LONG64}}
+\DoxyCodeLine{00266\ \textcolor{preprocessor}{\#define\ FT\_INT64\ \ \ long}}
+\DoxyCodeLine{00267\ \textcolor{preprocessor}{\#define\ FT\_UINT64\ \ unsigned\ long}}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00270\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00271\ \ \ \textcolor{comment}{/*\ A\ 64-\/bit\ data\ type\ may\ create\ compilation\ problems\ if\ you\ compile\ \ \ \ \ */}}
+\DoxyCodeLine{00272\ \ \ \textcolor{comment}{/*\ in\ strict\ ANSI\ mode.\ \ To\ avoid\ them,\ we\ disable\ other\ 64-\/bit\ data\ \ \ \ \ */}}
+\DoxyCodeLine{00273\ \ \ \textcolor{comment}{/*\ types\ if\ \_\_STDC\_\_\ is\ defined.\ \ You\ can\ however\ ignore\ this\ rule\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00274\ \ \ \textcolor{comment}{/*\ by\ defining\ the\ FT\_CONFIG\_OPTION\_FORCE\_INT64\ configuration\ macro.\ \ \ \ \ */}}
+\DoxyCodeLine{00275\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00276\ \textcolor{preprocessor}{\#elif\ !defined(\ \_\_STDC\_\_\ )\ ||\ defined(\ FT\_CONFIG\_OPTION\_FORCE\_INT64\ )}}
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00278\ \textcolor{preprocessor}{\#if\ defined(\ \_MSC\_VER\ )\ \&\&\ \_MSC\_VER\ >=\ 900\ \ }\textcolor{comment}{/*\ Visual\ C++\ (and\ Intel\ C++)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00279\ }
+\DoxyCodeLine{00280\ \ \ \textcolor{comment}{/*\ this\ compiler\ provides\ the\ \_\_int64\ type\ */}}
+\DoxyCodeLine{00281\ \textcolor{preprocessor}{\#define\ FT\_LONG64}}
+\DoxyCodeLine{00282\ \textcolor{preprocessor}{\#define\ FT\_INT64\ \ \ \_\_int64}}
+\DoxyCodeLine{00283\ \textcolor{preprocessor}{\#define\ FT\_UINT64\ \ unsigned\ \_\_int64}}
+\DoxyCodeLine{00284\ }
+\DoxyCodeLine{00285\ \textcolor{preprocessor}{\#elif\ defined(\ \_\_BORLANDC\_\_\ )\ \ }\textcolor{comment}{/*\ Borland\ C++\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00287\ \ \ \textcolor{comment}{/*\ XXXX:\ We\ should\ probably\ check\ the\ value\ of\ \_\_BORLANDC\_\_\ in\ order\ */}}
+\DoxyCodeLine{00288\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ to\ test\ the\ compiler\ version.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00289\ }
+\DoxyCodeLine{00290\ \ \ \textcolor{comment}{/*\ this\ compiler\ provides\ the\ \_\_int64\ type\ */}}
+\DoxyCodeLine{00291\ \textcolor{preprocessor}{\#define\ FT\_LONG64}}
+\DoxyCodeLine{00292\ \textcolor{preprocessor}{\#define\ FT\_INT64\ \ \ \_\_int64}}
+\DoxyCodeLine{00293\ \textcolor{preprocessor}{\#define\ FT\_UINT64\ \ unsigned\ \_\_int64}}
+\DoxyCodeLine{00294\ }
+\DoxyCodeLine{00295\ \textcolor{preprocessor}{\#elif\ defined(\ \_\_WATCOMC\_\_\ )\ \ \ }\textcolor{comment}{/*\ Watcom\ C++\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00296\ }
+\DoxyCodeLine{00297\ \ \ \textcolor{comment}{/*\ Watcom\ doesn't\ provide\ 64-\/bit\ data\ types\ */}}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00299\ \textcolor{preprocessor}{\#elif\ defined(\ \_\_MWERKS\_\_\ )\ \ \ \ }\textcolor{comment}{/*\ Metrowerks\ CodeWarrior\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00300\ }
+\DoxyCodeLine{00301\ \textcolor{preprocessor}{\#define\ FT\_LONG64}}
+\DoxyCodeLine{00302\ \textcolor{preprocessor}{\#define\ FT\_INT64\ \ \ long\ long\ int}}
+\DoxyCodeLine{00303\ \textcolor{preprocessor}{\#define\ FT\_UINT64\ \ unsigned\ long\ long\ int}}
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00305\ \textcolor{preprocessor}{\#elif\ defined(\ \_\_GNUC\_\_\ )}}
+\DoxyCodeLine{00306\ }
+\DoxyCodeLine{00307\ \ \ \textcolor{comment}{/*\ GCC\ provides\ the\ \`{}long\ long'\ type\ */}}
+\DoxyCodeLine{00308\ \textcolor{preprocessor}{\#define\ FT\_LONG64}}
+\DoxyCodeLine{00309\ \textcolor{preprocessor}{\#define\ FT\_INT64\ \ \ long\ long\ int}}
+\DoxyCodeLine{00310\ \textcolor{preprocessor}{\#define\ FT\_UINT64\ \ unsigned\ long\ long\ int}}
+\DoxyCodeLine{00311\ }
+\DoxyCodeLine{00312\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_MSC\_VER\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00313\ }
+\DoxyCodeLine{00314\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FT\_SIZEOF\_LONG\ ==\ (64\ /\ FT\_CHAR\_BIT)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00315\ }
+\DoxyCodeLine{00316\ \textcolor{preprocessor}{\#ifdef\ FT\_LONG64}}
+\DoxyCodeLine{00317\ \ \ \textcolor{keyword}{typedef}\ FT\_INT64\ \ \ FT\_Int64;}
+\DoxyCodeLine{00318\ \ \ \textcolor{keyword}{typedef}\ FT\_UINT64\ \ FT\_UInt64;}
+\DoxyCodeLine{00319\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00320\ }
+\DoxyCodeLine{00321\ }
+\DoxyCodeLine{00322\ \textcolor{preprocessor}{\#define\ FT\_BEGIN\_STMNT\ \ do\ \{}}
+\DoxyCodeLine{00323\ \textcolor{preprocessor}{\#define\ FT\_END\_STMNT\ \ \ \ \}\ while\ (\ 0\ )}}
+\DoxyCodeLine{00324\ \textcolor{preprocessor}{\#define\ FT\_DUMMY\_STMNT\ \ FT\_BEGIN\_STMNT\ FT\_END\_STMNT}}
+\DoxyCodeLine{00325\ }
+\DoxyCodeLine{00326\ }
+\DoxyCodeLine{00327\ \textcolor{preprocessor}{\#ifdef\ FT\_MAKE\_OPTION\_SINGLE\_OBJECT}}
+\DoxyCodeLine{00328\ }
+\DoxyCodeLine{00329\ \textcolor{preprocessor}{\#define\ FT\_LOCAL(\ x\ )\ \ \ \ \ \ static\ \ x}}
+\DoxyCodeLine{00330\ \textcolor{preprocessor}{\#define\ FT\_LOCAL\_DEF(\ x\ )\ \ static\ \ x}}
+\DoxyCodeLine{00331\ }
+\DoxyCodeLine{00332\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00333\ }
+\DoxyCodeLine{00334\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00335\ \textcolor{preprocessor}{\#define\ FT\_LOCAL(\ x\ )\ \ \ \ \ \ extern\ "{}C"{}\ \ x}}
+\DoxyCodeLine{00336\ \textcolor{preprocessor}{\#define\ FT\_LOCAL\_DEF(\ x\ )\ \ extern\ "{}C"{}\ \ x}}
+\DoxyCodeLine{00337\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00338\ \textcolor{preprocessor}{\#define\ FT\_LOCAL(\ x\ )\ \ \ \ \ \ extern\ \ x}}
+\DoxyCodeLine{00339\ \textcolor{preprocessor}{\#define\ FT\_LOCAL\_DEF(\ x\ )\ \ x}}
+\DoxyCodeLine{00340\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00341\ }
+\DoxyCodeLine{00342\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FT\_MAKE\_OPTION\_SINGLE\_OBJECT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00343\ }
+\DoxyCodeLine{00344\ \textcolor{preprocessor}{\#define\ FT\_LOCAL\_ARRAY(\ x\ )\ \ \ \ \ \ extern\ const\ \ x}}
+\DoxyCodeLine{00345\ \textcolor{preprocessor}{\#define\ FT\_LOCAL\_ARRAY\_DEF(\ x\ )\ \ const\ \ x}}
+\DoxyCodeLine{00346\ }
+\DoxyCodeLine{00347\ }
+\DoxyCodeLine{00348\ \textcolor{preprocessor}{\#ifndef\ FT\_BASE}}
+\DoxyCodeLine{00349\ }
+\DoxyCodeLine{00350\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00351\ \textcolor{preprocessor}{\#define\ FT\_BASE(\ x\ )\ \ extern\ "{}C"{}\ \ x}}
+\DoxyCodeLine{00352\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00353\ \textcolor{preprocessor}{\#define\ FT\_BASE(\ x\ )\ \ extern\ \ x}}
+\DoxyCodeLine{00354\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00355\ }
+\DoxyCodeLine{00356\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !FT\_BASE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00357\ }
+\DoxyCodeLine{00358\ }
+\DoxyCodeLine{00359\ \textcolor{preprocessor}{\#ifndef\ FT\_BASE\_DEF}}
+\DoxyCodeLine{00360\ }
+\DoxyCodeLine{00361\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00362\ \textcolor{preprocessor}{\#define\ FT\_BASE\_DEF(\ x\ )\ \ x}}
+\DoxyCodeLine{00363\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00364\ \textcolor{preprocessor}{\#define\ FT\_BASE\_DEF(\ x\ )\ \ x}}
+\DoxyCodeLine{00365\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00366\ }
+\DoxyCodeLine{00367\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !FT\_BASE\_DEF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00368\ }
+\DoxyCodeLine{00369\ }
+\DoxyCodeLine{00370\ \textcolor{preprocessor}{\#ifndef\ FT\_EXPORT}}
+\DoxyCodeLine{00371\ }
+\DoxyCodeLine{00372\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00373\ \textcolor{preprocessor}{\#define\ FT\_EXPORT(\ x\ )\ \ extern\ "{}C"{}\ \ x}}
+\DoxyCodeLine{00374\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00375\ \textcolor{preprocessor}{\#define\ FT\_EXPORT(\ x\ )\ \ extern\ \ x}}
+\DoxyCodeLine{00376\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00377\ }
+\DoxyCodeLine{00378\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !FT\_EXPORT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00379\ }
+\DoxyCodeLine{00380\ }
+\DoxyCodeLine{00381\ \textcolor{preprocessor}{\#ifndef\ FT\_EXPORT\_DEF}}
+\DoxyCodeLine{00382\ }
+\DoxyCodeLine{00383\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00384\ \textcolor{preprocessor}{\#define\ FT\_EXPORT\_DEF(\ x\ )\ \ extern\ "{}C"{}\ \ x}}
+\DoxyCodeLine{00385\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00386\ \textcolor{preprocessor}{\#define\ FT\_EXPORT\_DEF(\ x\ )\ \ extern\ \ x}}
+\DoxyCodeLine{00387\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00388\ }
+\DoxyCodeLine{00389\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !FT\_EXPORT\_DEF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00390\ }
+\DoxyCodeLine{00391\ }
+\DoxyCodeLine{00392\ \textcolor{preprocessor}{\#ifndef\ FT\_EXPORT\_VAR}}
+\DoxyCodeLine{00393\ }
+\DoxyCodeLine{00394\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00395\ \textcolor{preprocessor}{\#define\ FT\_EXPORT\_VAR(\ x\ )\ \ extern\ "{}C"{}\ \ x}}
+\DoxyCodeLine{00396\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00397\ \textcolor{preprocessor}{\#define\ FT\_EXPORT\_VAR(\ x\ )\ \ extern\ \ x}}
+\DoxyCodeLine{00398\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00399\ }
+\DoxyCodeLine{00400\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !FT\_EXPORT\_VAR\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00401\ }
+\DoxyCodeLine{00402\ \ \ \textcolor{comment}{/*\ The\ following\ macros\ are\ needed\ to\ compile\ the\ library\ with\ a\ \ \ */}}
+\DoxyCodeLine{00403\ \ \ \textcolor{comment}{/*\ C++\ compiler\ and\ with\ 16bit\ compilers.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00404\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00405\ }
+\DoxyCodeLine{00406\ \ \ \textcolor{comment}{/*\ This\ is\ special.\ \ Within\ C++,\ you\ must\ specify\ \`{}extern\ "{}C"{}'\ for\ */}}
+\DoxyCodeLine{00407\ \ \ \textcolor{comment}{/*\ functions\ which\ are\ used\ via\ function\ pointers,\ and\ you\ also\ \ \ \ */}}
+\DoxyCodeLine{00408\ \ \ \textcolor{comment}{/*\ must\ do\ that\ for\ structures\ which\ contain\ function\ pointers\ to\ \ */}}
+\DoxyCodeLine{00409\ \ \ \textcolor{comment}{/*\ assure\ C\ linkage\ -\/-\/\ it's\ not\ possible\ to\ have\ (local)\ anonymous\ */}}
+\DoxyCodeLine{00410\ \ \ \textcolor{comment}{/*\ functions\ which\ are\ accessed\ by\ (global)\ function\ pointers.\ \ \ \ \ */}}
+\DoxyCodeLine{00411\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00412\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00413\ \ \ \textcolor{comment}{/*\ FT\_CALLBACK\_DEF\ is\ used\ to\ \_define\_\ a\ callback\ function.\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00414\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00415\ \ \ \textcolor{comment}{/*\ FT\_CALLBACK\_TABLE\ is\ used\ to\ \_declare\_\ a\ constant\ variable\ that\ */}}
+\DoxyCodeLine{00416\ \ \ \textcolor{comment}{/*\ contains\ pointers\ to\ callback\ functions.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00417\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00418\ \ \ \textcolor{comment}{/*\ FT\_CALLBACK\_TABLE\_DEF\ is\ used\ to\ \_define\_\ a\ constant\ variable\ \ \ */}}
+\DoxyCodeLine{00419\ \ \ \textcolor{comment}{/*\ that\ contains\ pointers\ to\ callback\ functions.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00420\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00421\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00422\ \ \ \textcolor{comment}{/*\ Some\ 16bit\ compilers\ have\ to\ redefine\ these\ macros\ to\ insert\ \ \ \ */}}
+\DoxyCodeLine{00423\ \ \ \textcolor{comment}{/*\ the\ infamous\ \`{}\_cdecl'\ or\ \`{}\_\_fastcall'\ declarations.\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00424\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00425\ \textcolor{preprocessor}{\#ifndef\ FT\_CALLBACK\_DEF}}
+\DoxyCodeLine{00426\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00427\ \textcolor{preprocessor}{\#define\ FT\_CALLBACK\_DEF(\ x\ )\ \ extern\ "{}C"{}\ \ x}}
+\DoxyCodeLine{00428\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00429\ \textcolor{preprocessor}{\#define\ FT\_CALLBACK\_DEF(\ x\ )\ \ static\ \ x}}
+\DoxyCodeLine{00430\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00431\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FT\_CALLBACK\_DEF\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00432\ }
+\DoxyCodeLine{00433\ \textcolor{preprocessor}{\#ifndef\ FT\_CALLBACK\_TABLE}}
+\DoxyCodeLine{00434\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00435\ \textcolor{preprocessor}{\#define\ FT\_CALLBACK\_TABLE\ \ \ \ \ \ extern\ "{}C"{}}}
+\DoxyCodeLine{00436\ \textcolor{preprocessor}{\#define\ FT\_CALLBACK\_TABLE\_DEF\ \ extern\ "{}C"{}}}
+\DoxyCodeLine{00437\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00438\ \textcolor{preprocessor}{\#define\ FT\_CALLBACK\_TABLE\ \ \ \ \ \ extern}}
+\DoxyCodeLine{00439\ \textcolor{preprocessor}{\#define\ FT\_CALLBACK\_TABLE\_DEF\ \ }\textcolor{comment}{/*\ nothing\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00440\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00441\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FT\_CALLBACK\_TABLE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00442\ }
+\DoxyCodeLine{00443\ }
+\DoxyCodeLine{00444\ FT\_END\_HEADER}
+\DoxyCodeLine{00445\ }
+\DoxyCodeLine{00446\ }
+\DoxyCodeLine{00447\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_FTCONFIG\_H\_\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00448\ }
+\DoxyCodeLine{00449\ }
+\DoxyCodeLine{00450\ \textcolor{comment}{/*\ END\ */}}
+
+\end{DoxyCode}

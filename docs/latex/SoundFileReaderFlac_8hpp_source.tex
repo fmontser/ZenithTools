@@ -1,0 +1,88 @@
+\doxysection{Sound\+File\+Reader\+Flac.\+hpp}
+\hypertarget{SoundFileReaderFlac_8hpp_source}{}\label{SoundFileReaderFlac_8hpp_source}\index{build/\_deps/sfml-\/src/src/SFML/Audio/SoundFileReaderFlac.hpp@{build/\_deps/sfml-\/src/src/SFML/Audio/SoundFileReaderFlac.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ SFML\_SOUNDFILEREADERFLAC\_HPP}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ SFML\_SOUNDFILEREADERFLAC\_HPP}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <SFML/Audio/SoundFileReader.hpp>}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <FLAC/stream\_decoder.h>}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{00038\ \{}
+\DoxyCodeLine{00039\ \textcolor{keyword}{namespace\ }priv}
+\DoxyCodeLine{00040\ \{}
+\DoxyCodeLine{00045\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1priv_1_1SoundFileReaderFlac_a01cc3547a3835e99d0a855f0653bb656}{SoundFileReaderFlac}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classsf_1_1SoundFileReader}{SoundFileReader}}}
+\DoxyCodeLine{00046\ \{}
+\DoxyCodeLine{00047\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1SoundFileReaderFlac_acbc84cb9b7644506e09174277b47e54b}{check}}(\mbox{\hyperlink{classsf_1_1InputStream}{InputStream}}\&\ stream);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1SoundFileReaderFlac_a01cc3547a3835e99d0a855f0653bb656}{SoundFileReaderFlac}}();}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1SoundFileReaderFlac_a73ed51254cb82decb244032dce6fcf8f}{\string~SoundFileReaderFlac}}();}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1SoundFileReaderFlac_a7fdf7aa03a6ff4c7a19f6c53cb4fc0ba}{open}}(\mbox{\hyperlink{classsf_1_1InputStream}{sf::InputStream}}\&\ stream,\ \mbox{\hyperlink{structsf_1_1SoundFileReader_1_1Info}{Info}}\&\ info);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1SoundFileReaderFlac_a204e8c452a68472fd7c821237465085d}{seek}}(Uint64\ sampleOffset);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keyword}{virtual}\ Uint64\ \mbox{\hyperlink{classsf_1_1priv_1_1SoundFileReaderFlac_a8d875824393da5741d3a036594a351c7}{read}}(Int16*\ samples,\ Uint64\ maxCount);}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsf_1_1priv_1_1SoundFileReaderFlac_1_1ClientData}{ClientData}}}
+\DoxyCodeLine{00115\ \ \ \ \ \{}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classsf_1_1InputStream}{InputStream}}*\ \ \ \ \ \ \ \ \ \ stream;}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structsf_1_1SoundFileReader_1_1Info}{SoundFileReader::Info}}\ info;}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ Int16*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ buffer;}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ Uint64\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ remaining;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ std::vector<Int16>\ \ \ \ leftovers;}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error;}
+\DoxyCodeLine{00122\ \ \ \ \ \};}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{void}\ close();}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{comment}{//\ Member\ data}}
+\DoxyCodeLine{00135\ \ \ \ \ \mbox{\hyperlink{structFLAC____StreamDecoder}{FLAC\_\_StreamDecoder}}*\ m\_decoder;\ \ \ \ }
+\DoxyCodeLine{00136\ \ \ \ \ \mbox{\hyperlink{structsf_1_1priv_1_1SoundFileReaderFlac_1_1ClientData}{ClientData}}\ \ \ \ \ \ \ \ \ \ \ m\_clientData;\ }
+\DoxyCodeLine{00137\ \};}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \}\ \textcolor{comment}{//\ namespace\ priv}}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SFML\_SOUNDFILEREADERFLAC\_HPP}}
+
+\end{DoxyCode}

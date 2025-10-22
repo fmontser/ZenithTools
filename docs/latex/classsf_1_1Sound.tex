@@ -1,0 +1,397 @@
+\doxysection{sf\+::Sound Class Reference}
+\hypertarget{classsf_1_1Sound}{}\label{classsf_1_1Sound}\index{sf::Sound@{sf::Sound}}
+
+
+Regular sound that can be played in the audio environment.  
+
+
+
+
+{\ttfamily \#include $<$Sound.\+hpp$>$}
+
+
+
+Inheritance diagram for sf\+::Sound\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=169pt]{classsf_1_1Sound__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for sf\+::Sound\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=169pt]{classsf_1_1Sound__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classsf_1_1Sound_a36ab74beaaa953d9879c933ddd246282}\label{classsf_1_1Sound_a36ab74beaaa953d9879c933ddd246282} 
+{\bfseries Sound} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Sound_a3b1cfc19a856d4ff8c079ee41bb78e69}{Sound}} (const \mbox{\hyperlink{classsf_1_1SoundBuffer}{Sound\+Buffer}} \&buffer)
+\begin{DoxyCompactList}\small\item\em Construct the sound with a buffer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Sound_ae05eeed6377932694d86b3011be366c0}{Sound}} (const \mbox{\hyperlink{classsf_1_1Sound}{Sound}} \&copy)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\Hypertarget{classsf_1_1Sound_ad0792c35310eba2dffd8489c80fad076}\label{classsf_1_1Sound_ad0792c35310eba2dffd8489c80fad076} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Sound} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1Sound_a2953ffe632536e72e696fd880ced2532}{play}} ()
+\begin{DoxyCompactList}\small\item\em Start or resume playing the sound. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1Sound_a5eeb25815bfa8cdc4a6cc000b7b19ad5}{pause}} ()
+\begin{DoxyCompactList}\small\item\em Pause the sound. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1Sound_aa9c91c34f7c6d344d5ee9b997511f754}{stop}} ()
+\begin{DoxyCompactList}\small\item\em stop playing the sound \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1Sound_a8b395e9713d0efa48a18628c8ec1972e}{set\+Buffer}} (const \mbox{\hyperlink{classsf_1_1SoundBuffer}{Sound\+Buffer}} \&buffer)
+\begin{DoxyCompactList}\small\item\em Set the source buffer containing the audio data to play. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1Sound_af23ab4f78f975bbabac031102321612b}{set\+Loop}} (bool loop)
+\begin{DoxyCompactList}\small\item\em Set whether or not the sound should loop after reaching the end. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1Sound_ab905677846558042022dd6ab15cddff0}{set\+Playing\+Offset}} (\mbox{\hyperlink{classsf_1_1Time}{Time}} time\+Offset)
+\begin{DoxyCompactList}\small\item\em Change the current playing position of the sound. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classsf_1_1SoundBuffer}{Sound\+Buffer}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classsf_1_1Sound_a7c0f6033856909eeefa2e6696db96ef2}{get\+Buffer}} () const
+\begin{DoxyCompactList}\small\item\em Get the audio buffer attached to the sound. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classsf_1_1Sound_a054da07266ce8f39229495146e3041eb}{get\+Loop}} () const
+\begin{DoxyCompactList}\small\item\em Tell whether or not the sound is in loop mode. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Time}{Time}} \mbox{\hyperlink{classsf_1_1Sound_a559bc3aea581107bcb380fdbe523aa08}{get\+Playing\+Offset}} () const
+\begin{DoxyCompactList}\small\item\em Get the current playing position of the sound. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1SoundSource_ac43af72c98c077500b239bc75b812f03}{Status}} \mbox{\hyperlink{classsf_1_1Sound_ab720bf34c4eb82c61af7b668e7485425}{get\+Status}} () const
+\begin{DoxyCompactList}\small\item\em Get the current status of the sound (stopped, paused, playing) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Sound}{Sound}} \& \mbox{\hyperlink{classsf_1_1Sound_a8eee9197359bfdf20d399544a894af8b}{operator=}} (const \mbox{\hyperlink{classsf_1_1Sound}{Sound}} \&right)
+\begin{DoxyCompactList}\small\item\em Overload of assignment operator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1Sound_acb7289d45e06fb76b8292ac84beb82a7}{reset\+Buffer}} ()
+\begin{DoxyCompactList}\small\item\em Reset the internal buffer of the sound. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classsf_1_1SoundSource}{sf\+::\+Sound\+Source}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsf_1_1SoundSource_ae0c7728c1449fdebe65749ab6fcb3170}{Sound\+Source}} (const \mbox{\hyperlink{classsf_1_1SoundSource}{Sound\+Source}} \&copy)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Sound\+Source} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1SoundSource_a72a13695ed48b7f7b55e7cd4431f4bb6}{set\+Pitch}} (float pitch)
+\begin{DoxyCompactList}\small\item\em Set the pitch of the sound. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1SoundSource_a2f192f2b49fb8e2b82f3498d3663fcc2}{set\+Volume}} (float volume)
+\begin{DoxyCompactList}\small\item\em Set the volume of the sound. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1SoundSource_a0480257ea25d986eba6cc3c1a6f8d7c2}{set\+Position}} (float x, float y, float z)
+\begin{DoxyCompactList}\small\item\em Set the 3D position of the sound in the audio scene. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1SoundSource_a17ba9ed01925395652181a7b2a7d3aef}{set\+Position}} (const \mbox{\hyperlink{classsf_1_1Vector3}{Vector3f}} \&position)
+\begin{DoxyCompactList}\small\item\em Set the 3D position of the sound in the audio scene. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1SoundSource_ac478a8b813faf7dd575635b102081d0d}{set\+Relative\+To\+Listener}} (bool relative)
+\begin{DoxyCompactList}\small\item\em Make the sound\textquotesingle{}s position relative to the listener or absolute. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1SoundSource_a75bbc2c34addc8b25a14edb908508afe}{set\+Min\+Distance}} (float distance)
+\begin{DoxyCompactList}\small\item\em Set the minimum distance of the sound. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1SoundSource_aa2adff44cd2f8b4e3c7315d7c2a45626}{set\+Attenuation}} (float attenuation)
+\begin{DoxyCompactList}\small\item\em Set the attenuation factor of the sound. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classsf_1_1SoundSource_a4736acc2c802f927544c9ce52a44a9e4}{get\+Pitch}} () const
+\begin{DoxyCompactList}\small\item\em Get the pitch of the sound. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classsf_1_1SoundSource_a04243fb5edf64561689b1d58953fc4ce}{get\+Volume}} () const
+\begin{DoxyCompactList}\small\item\em Get the volume of the sound. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Vector3}{Vector3f}} \mbox{\hyperlink{classsf_1_1SoundSource_a8d199521f55550c7a3b2b0f6950dffa1}{get\+Position}} () const
+\begin{DoxyCompactList}\small\item\em Get the 3D position of the sound in the audio scene. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classsf_1_1SoundSource_adcdb4ef32c2f4481d34aff0b5c31534b}{is\+Relative\+To\+Listener}} () const
+\begin{DoxyCompactList}\small\item\em Tell whether the sound\textquotesingle{}s position is relative to the listener or is absolute. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classsf_1_1SoundSource_a605ca7f359ec1c36fcccdcd4696562ac}{get\+Min\+Distance}} () const
+\begin{DoxyCompactList}\small\item\em Get the minimum distance of the sound. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classsf_1_1SoundSource_a8ad7dafb4f1b4afbc638cebe24f48cc9}{get\+Attenuation}} () const
+\begin{DoxyCompactList}\small\item\em Get the attenuation factor of the sound. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1SoundSource}{Sound\+Source}} \& \mbox{\hyperlink{classsf_1_1SoundSource_a4b494e4a0b819bae9cd99b43e2f3f59d}{operator=}} (const \mbox{\hyperlink{classsf_1_1SoundSource}{Sound\+Source}} \&right)
+\begin{DoxyCompactList}\small\item\em Overload of assignment operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{classsf_1_1SoundSource}{sf\+::\+Sound\+Source}}}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classsf_1_1SoundSource_ac43af72c98c077500b239bc75b812f03}{Status}} \{ \mbox{\hyperlink{classsf_1_1SoundSource_ac43af72c98c077500b239bc75b812f03adabb01e8aa85b2f54b344890addf764a}{Stopped}}
+, \mbox{\hyperlink{classsf_1_1SoundSource_ac43af72c98c077500b239bc75b812f03ac3ca1fcc0394267c9bdbe3dc0a8a7e41}{Paused}}
+, \mbox{\hyperlink{classsf_1_1SoundSource_ac43af72c98c077500b239bc75b812f03af07bdea9f70ef7606dfc9f955beeee18}{Playing}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeration of the sound source states. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classsf_1_1SoundSource}{sf\+::\+Sound\+Source}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsf_1_1SoundSource_aefa4bd4460f387d81a0637d293979436}{Sound\+Source}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classsf_1_1SoundSource}{sf\+::\+Sound\+Source}}}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int {\bfseries m\+\_\+source}
+\begin{DoxyCompactList}\small\item\em Open\+AL source identifier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Regular sound that can be played in the audio environment. 
+
+\doxylink{classsf_1_1Sound}{sf\+::\+Sound} is the class to use to play sounds. It provides\+: \begin{DoxyItemize}
+\item Control (play, pause, stop) \item Ability to modify output parameters in real-\/time (pitch, volume, ...) \item 3D spatial features (position, attenuation, ...).\end{DoxyItemize}
+\doxylink{classsf_1_1Sound}{sf\+::\+Sound} is perfect for playing short sounds that can fit in memory and require no latency, like foot steps or gun shots. For longer sounds, like background musics or long speeches, rather see \doxylink{classsf_1_1Music}{sf\+::\+Music} (which is based on streaming).
+
+In order to work, a sound must be given a buffer of audio data to play. Audio data (samples) is stored in \doxylink{classsf_1_1SoundBuffer}{sf\+::\+Sound\+Buffer}, and attached to a sound with the \doxylink{classsf_1_1Sound_a8b395e9713d0efa48a18628c8ec1972e}{set\+Buffer()} function. The buffer object attached to a sound must remain alive as long as the sound uses it. Note that multiple sounds can use the same sound buffer at the same time.
+
+Usage example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sf::SoundBuffer\ buffer;}
+\DoxyCodeLine{buffer.loadFromFile(\textcolor{stringliteral}{"{}sound.wav"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{sf::Sound\ sound;}
+\DoxyCodeLine{sound.\mbox{\hyperlink{classsf_1_1Sound_a8b395e9713d0efa48a18628c8ec1972e}{setBuffer}}(buffer);}
+\DoxyCodeLine{sound.\mbox{\hyperlink{classsf_1_1Sound_a2953ffe632536e72e696fd880ced2532}{play}}();}
+
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1SoundBuffer}{sf\+::\+Sound\+Buffer}, \doxylink{classsf_1_1Music}{sf\+::\+Music} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classsf_1_1Sound_a3b1cfc19a856d4ff8c079ee41bb78e69}\index{sf::Sound@{sf::Sound}!Sound@{Sound}}
+\index{Sound@{Sound}!sf::Sound@{sf::Sound}}
+\doxysubsubsection{\texorpdfstring{Sound()}{Sound()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classsf_1_1Sound_a3b1cfc19a856d4ff8c079ee41bb78e69} 
+sf\+::\+Sound\+::\+Sound (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classsf_1_1SoundBuffer}{Sound\+Buffer}} \&}]{buffer}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct the sound with a buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & \doxylink{classsf_1_1Sound}{Sound} buffer containing the audio data to play with the sound \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classsf_1_1Sound_ae05eeed6377932694d86b3011be366c0}\index{sf::Sound@{sf::Sound}!Sound@{Sound}}
+\index{Sound@{Sound}!sf::Sound@{sf::Sound}}
+\doxysubsubsection{\texorpdfstring{Sound()}{Sound()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classsf_1_1Sound_ae05eeed6377932694d86b3011be366c0} 
+sf\+::\+Sound\+::\+Sound (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classsf_1_1Sound}{Sound}} \&}]{copy}{}\end{DoxyParamCaption})}
+
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em copy} & Instance to copy \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsf_1_1Sound_a7c0f6033856909eeefa2e6696db96ef2}\index{sf::Sound@{sf::Sound}!getBuffer@{getBuffer}}
+\index{getBuffer@{getBuffer}!sf::Sound@{sf::Sound}}
+\doxysubsubsection{\texorpdfstring{getBuffer()}{getBuffer()}}
+{\footnotesize\ttfamily \label{classsf_1_1Sound_a7c0f6033856909eeefa2e6696db96ef2} 
+const \mbox{\hyperlink{classsf_1_1SoundBuffer}{Sound\+Buffer}} \texorpdfstring{$\ast$}{*} sf\+::\+Sound\+::get\+Buffer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get the audio buffer attached to the sound. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{classsf_1_1Sound}{Sound} buffer attached to the sound (can be NULL) 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1Sound_a054da07266ce8f39229495146e3041eb}\index{sf::Sound@{sf::Sound}!getLoop@{getLoop}}
+\index{getLoop@{getLoop}!sf::Sound@{sf::Sound}}
+\doxysubsubsection{\texorpdfstring{getLoop()}{getLoop()}}
+{\footnotesize\ttfamily \label{classsf_1_1Sound_a054da07266ce8f39229495146e3041eb} 
+bool sf\+::\+Sound\+::get\+Loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Tell whether or not the sound is in loop mode. 
+
+\begin{DoxyReturn}{Returns}
+True if the sound is looping, false otherwise
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Sound_af23ab4f78f975bbabac031102321612b}{set\+Loop} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1Sound_a559bc3aea581107bcb380fdbe523aa08}\index{sf::Sound@{sf::Sound}!getPlayingOffset@{getPlayingOffset}}
+\index{getPlayingOffset@{getPlayingOffset}!sf::Sound@{sf::Sound}}
+\doxysubsubsection{\texorpdfstring{getPlayingOffset()}{getPlayingOffset()}}
+{\footnotesize\ttfamily \label{classsf_1_1Sound_a559bc3aea581107bcb380fdbe523aa08} 
+\mbox{\hyperlink{classsf_1_1Time}{Time}} sf\+::\+Sound\+::get\+Playing\+Offset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get the current playing position of the sound. 
+
+\begin{DoxyReturn}{Returns}
+Current playing position, from the beginning of the sound
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Sound_ab905677846558042022dd6ab15cddff0}{set\+Playing\+Offset} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1Sound_ab720bf34c4eb82c61af7b668e7485425}\index{sf::Sound@{sf::Sound}!getStatus@{getStatus}}
+\index{getStatus@{getStatus}!sf::Sound@{sf::Sound}}
+\doxysubsubsection{\texorpdfstring{getStatus()}{getStatus()}}
+{\footnotesize\ttfamily \label{classsf_1_1Sound_ab720bf34c4eb82c61af7b668e7485425} 
+\mbox{\hyperlink{classsf_1_1SoundSource_ac43af72c98c077500b239bc75b812f03}{Sound\+::\+Status}} sf\+::\+Sound\+::get\+Status (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the current status of the sound (stopped, paused, playing) 
+
+\begin{DoxyReturn}{Returns}
+Current status of the sound 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classsf_1_1SoundSource_a50e869786f0df43ac6a70ce4241444cc}{sf\+::\+Sound\+Source}}.
+
+\Hypertarget{classsf_1_1Sound_a8eee9197359bfdf20d399544a894af8b}\index{sf::Sound@{sf::Sound}!operator=@{operator=}}
+\index{operator=@{operator=}!sf::Sound@{sf::Sound}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{classsf_1_1Sound_a8eee9197359bfdf20d399544a894af8b} 
+\mbox{\hyperlink{classsf_1_1Sound}{Sound}} \& sf\+::\+Sound\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classsf_1_1Sound}{Sound}} \&}]{right}{}\end{DoxyParamCaption})}
+
+
+
+Overload of assignment operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em right} & Instance to assign\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to self 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1Sound_a5eeb25815bfa8cdc4a6cc000b7b19ad5}\index{sf::Sound@{sf::Sound}!pause@{pause}}
+\index{pause@{pause}!sf::Sound@{sf::Sound}}
+\doxysubsubsection{\texorpdfstring{pause()}{pause()}}
+{\footnotesize\ttfamily \label{classsf_1_1Sound_a5eeb25815bfa8cdc4a6cc000b7b19ad5} 
+void sf\+::\+Sound\+::pause (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Pause the sound. 
+
+This function pauses the sound if it was playing, otherwise (sound already paused or stopped) it has no effect.
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Sound_a2953ffe632536e72e696fd880ced2532}{play}, \doxylink{classsf_1_1Sound_aa9c91c34f7c6d344d5ee9b997511f754}{stop} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classsf_1_1SoundSource_a21553d4e8fcf136231dd8c7ad4630aba}{sf\+::\+Sound\+Source}}.
+
+\Hypertarget{classsf_1_1Sound_a2953ffe632536e72e696fd880ced2532}\index{sf::Sound@{sf::Sound}!play@{play}}
+\index{play@{play}!sf::Sound@{sf::Sound}}
+\doxysubsubsection{\texorpdfstring{play()}{play()}}
+{\footnotesize\ttfamily \label{classsf_1_1Sound_a2953ffe632536e72e696fd880ced2532} 
+void sf\+::\+Sound\+::play (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Start or resume playing the sound. 
+
+This function starts the stream if it was stopped, resumes it if it was paused, and restarts it from beginning if it was it already playing. This function uses its own thread so that it doesn\textquotesingle{}t block the rest of the program while the sound is played.
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Sound_a5eeb25815bfa8cdc4a6cc000b7b19ad5}{pause}, \doxylink{classsf_1_1Sound_aa9c91c34f7c6d344d5ee9b997511f754}{stop} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classsf_1_1SoundSource_a6e1bbb1f247ed8743faf3b1ed6f2bc21}{sf\+::\+Sound\+Source}}.
+
+\Hypertarget{classsf_1_1Sound_acb7289d45e06fb76b8292ac84beb82a7}\index{sf::Sound@{sf::Sound}!resetBuffer@{resetBuffer}}
+\index{resetBuffer@{resetBuffer}!sf::Sound@{sf::Sound}}
+\doxysubsubsection{\texorpdfstring{resetBuffer()}{resetBuffer()}}
+{\footnotesize\ttfamily \label{classsf_1_1Sound_acb7289d45e06fb76b8292ac84beb82a7} 
+void sf\+::\+Sound\+::reset\+Buffer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Reset the internal buffer of the sound. 
+
+This function is for internal use only, you don\textquotesingle{}t have to use it. It is called by the \doxylink{classsf_1_1SoundBuffer}{sf\+::\+Sound\+Buffer} that this sound uses, when it is destroyed in order to prevent the sound from using a dead buffer. \Hypertarget{classsf_1_1Sound_a8b395e9713d0efa48a18628c8ec1972e}\index{sf::Sound@{sf::Sound}!setBuffer@{setBuffer}}
+\index{setBuffer@{setBuffer}!sf::Sound@{sf::Sound}}
+\doxysubsubsection{\texorpdfstring{setBuffer()}{setBuffer()}}
+{\footnotesize\ttfamily \label{classsf_1_1Sound_a8b395e9713d0efa48a18628c8ec1972e} 
+void sf\+::\+Sound\+::set\+Buffer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classsf_1_1SoundBuffer}{Sound\+Buffer}} \&}]{buffer}{}\end{DoxyParamCaption})}
+
+
+
+Set the source buffer containing the audio data to play. 
+
+It is important to note that the sound buffer is not copied, thus the \doxylink{classsf_1_1SoundBuffer}{sf\+::\+Sound\+Buffer} instance must remain alive as long as it is attached to the sound.
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & \doxylink{classsf_1_1Sound}{Sound} buffer to attach to the sound\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Sound_a7c0f6033856909eeefa2e6696db96ef2}{get\+Buffer} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1Sound_af23ab4f78f975bbabac031102321612b}\index{sf::Sound@{sf::Sound}!setLoop@{setLoop}}
+\index{setLoop@{setLoop}!sf::Sound@{sf::Sound}}
+\doxysubsubsection{\texorpdfstring{setLoop()}{setLoop()}}
+{\footnotesize\ttfamily \label{classsf_1_1Sound_af23ab4f78f975bbabac031102321612b} 
+void sf\+::\+Sound\+::set\+Loop (\begin{DoxyParamCaption}\item[{bool}]{loop}{}\end{DoxyParamCaption})}
+
+
+
+Set whether or not the sound should loop after reaching the end. 
+
+If set, the sound will restart from beginning after reaching the end and so on, until it is stopped or set\+Loop(false) is called. The default looping state for sound is false.
+
+
+\begin{DoxyParams}{Parameters}
+{\em loop} & True to play in loop, false to play once\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Sound_a054da07266ce8f39229495146e3041eb}{get\+Loop} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1Sound_ab905677846558042022dd6ab15cddff0}\index{sf::Sound@{sf::Sound}!setPlayingOffset@{setPlayingOffset}}
+\index{setPlayingOffset@{setPlayingOffset}!sf::Sound@{sf::Sound}}
+\doxysubsubsection{\texorpdfstring{setPlayingOffset()}{setPlayingOffset()}}
+{\footnotesize\ttfamily \label{classsf_1_1Sound_ab905677846558042022dd6ab15cddff0} 
+void sf\+::\+Sound\+::set\+Playing\+Offset (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classsf_1_1Time}{Time}}}]{time\+Offset}{}\end{DoxyParamCaption})}
+
+
+
+Change the current playing position of the sound. 
+
+The playing position can be changed when the sound is either paused or playing. Changing the playing position when the sound is stopped has no effect, since playing the sound will reset its position.
+
+
+\begin{DoxyParams}{Parameters}
+{\em time\+Offset} & New playing position, from the beginning of the sound\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Sound_a559bc3aea581107bcb380fdbe523aa08}{get\+Playing\+Offset} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1Sound_aa9c91c34f7c6d344d5ee9b997511f754}\index{sf::Sound@{sf::Sound}!stop@{stop}}
+\index{stop@{stop}!sf::Sound@{sf::Sound}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily \label{classsf_1_1Sound_aa9c91c34f7c6d344d5ee9b997511f754} 
+void sf\+::\+Sound\+::stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+stop playing the sound 
+
+This function stops the sound if it was playing or paused, and does nothing if it was already stopped. It also resets the playing position (unlike \doxylink{classsf_1_1Sound_a5eeb25815bfa8cdc4a6cc000b7b19ad5}{pause()}).
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Sound_a2953ffe632536e72e696fd880ced2532}{play}, \doxylink{classsf_1_1Sound_a5eeb25815bfa8cdc4a6cc000b7b19ad5}{pause} 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classsf_1_1SoundSource_a06501a25b12376befcc7ee1ed4865fda}{sf\+::\+Sound\+Source}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/include/\+SFML/\+Audio/Sound.\+hpp\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+Audio/Sound.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,216 @@
+\doxysection{ftbdf.\+h}
+\hypertarget{ftbdf_8h_source}{}\label{ftbdf_8h_source}\index{build/\_deps/sfml-\/src/extlibs/headers/freetype2/ftbdf.h@{build/\_deps/sfml-\/src/extlibs/headers/freetype2/ftbdf.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00003\ \textcolor{comment}{/*\ \ ftbdf.h\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00005\ \textcolor{comment}{/*\ \ \ \ FreeType\ API\ for\ accessing\ BDF-\/specific\ strings\ (specification).\ \ \ \ \ */}}
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00007\ \textcolor{comment}{/*\ \ Copyright\ 2002-\/2004,\ 2006,\ 2009,\ 2014\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ \ David\ Turner,\ Robert\ Wilhelm,\ and\ Werner\ Lemberg.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00010\ \textcolor{comment}{/*\ \ This\ file\ is\ part\ of\ the\ FreeType\ project,\ and\ may\ only\ be\ used,\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*\ \ modified,\ and\ distributed\ under\ the\ terms\ of\ the\ FreeType\ project\ \ \ \ \ \ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*\ \ license,\ LICENSE.TXT.\ \ By\ continuing\ to\ use,\ modify,\ or\ distribute\ \ \ \ \ */}}
+\DoxyCodeLine{00013\ \textcolor{comment}{/*\ \ this\ file\ you\ indicate\ that\ you\ have\ read\ the\ license\ and\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00014\ \textcolor{comment}{/*\ \ understand\ and\ accept\ it\ fully.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00015\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00016\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ \_\_FTBDF\_H\_\_}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ \_\_FTBDF\_H\_\_}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <ft2build.h>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ FT\_FREETYPE\_H}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifdef\ FREETYPE\_H}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#error\ "{}freetype.h\ of\ FreeType\ 1\ has\ been\ loaded!"{}}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#error\ "{}Please\ fix\ the\ directory\ search\ order\ for\ header\ files"{}}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#error\ "{}so\ that\ freetype.h\ of\ FreeType\ 2\ is\ found\ first."{}}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ FT\_BEGIN\_HEADER}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00036\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00037\ \ \ \textcolor{comment}{/*\ <Section>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00038\ \ \ \textcolor{comment}{/*\ \ \ \ bdf\_fonts\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00039\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00040\ \ \ \textcolor{comment}{/*\ <Title>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00041\ \ \ \textcolor{comment}{/*\ \ \ \ BDF\ and\ PCF\ Files\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00042\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00043\ \ \ \textcolor{comment}{/*\ <Abstract>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00044\ \ \ \textcolor{comment}{/*\ \ \ \ BDF\ and\ PCF\ specific\ API.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00045\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00046\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00047\ \ \ \textcolor{comment}{/*\ \ \ \ This\ section\ contains\ the\ declaration\ of\ functions\ specific\ to\ BDF\ */}}
+\DoxyCodeLine{00048\ \ \ \textcolor{comment}{/*\ \ \ \ and\ PCF\ fonts.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00049\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00050\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{comment}{\ \ /**********************************************************************}}
+\DoxyCodeLine{00054\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00055\ \textcolor{comment}{\ \ \ *\ @enum:}}
+\DoxyCodeLine{00056\ \textcolor{comment}{\ \ \ *\ \ \ \ BDF\_PropertyType}}
+\DoxyCodeLine{00057\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00058\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00059\ \textcolor{comment}{\ \ \ *\ \ \ \ A\ list\ of\ BDF\ property\ types.}}
+\DoxyCodeLine{00060\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00061\ \textcolor{comment}{\ \ \ *\ @values:}}
+\DoxyCodeLine{00062\ \textcolor{comment}{\ \ \ *\ \ \ \ BDF\_PROPERTY\_TYPE\_NONE\ ::}}
+\DoxyCodeLine{00063\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ Value\string~0\ is\ used\ to\ indicate\ a\ missing\ property.}}
+\DoxyCodeLine{00064\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00065\ \textcolor{comment}{\ \ \ *\ \ \ \ BDF\_PROPERTY\_TYPE\_ATOM\ ::}}
+\DoxyCodeLine{00066\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ Property\ is\ a\ string\ atom.}}
+\DoxyCodeLine{00067\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00068\ \textcolor{comment}{\ \ \ *\ \ \ \ BDF\_PROPERTY\_TYPE\_INTEGER\ ::}}
+\DoxyCodeLine{00069\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ Property\ is\ a\ 32-\/bit\ signed\ integer.}}
+\DoxyCodeLine{00070\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00071\ \textcolor{comment}{\ \ \ *\ \ \ \ BDF\_PROPERTY\_TYPE\_CARDINAL\ ::}}
+\DoxyCodeLine{00072\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ Property\ is\ a\ 32-\/bit\ unsigned\ integer.}}
+\DoxyCodeLine{00073\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00074\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \ BDF\_PropertyType\_}
+\DoxyCodeLine{00075\ \ \ \{}
+\DoxyCodeLine{00076\ \ \ \ \ BDF\_PROPERTY\_TYPE\_NONE\ \ \ \ \ =\ 0,}
+\DoxyCodeLine{00077\ \ \ \ \ BDF\_PROPERTY\_TYPE\_ATOM\ \ \ \ \ =\ 1,}
+\DoxyCodeLine{00078\ \ \ \ \ BDF\_PROPERTY\_TYPE\_INTEGER\ \ =\ 2,}
+\DoxyCodeLine{00079\ \ \ \ \ BDF\_PROPERTY\_TYPE\_CARDINAL\ =\ 3}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \}\ BDF\_PropertyType;}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{comment}{\ \ /**********************************************************************}}
+\DoxyCodeLine{00085\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00086\ \textcolor{comment}{\ \ \ *\ @type:}}
+\DoxyCodeLine{00087\ \textcolor{comment}{\ \ \ *\ \ \ \ BDF\_Property}}
+\DoxyCodeLine{00088\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00089\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00090\ \textcolor{comment}{\ \ \ *\ \ \ \ A\ handle\ to\ a\ @BDF\_PropertyRec\ structure\ to\ model\ a\ given}}
+\DoxyCodeLine{00091\ \textcolor{comment}{\ \ \ *\ \ \ \ BDF/PCF\ property.}}
+\DoxyCodeLine{00092\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00093\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structBDF__PropertyRec__}{BDF\_PropertyRec\_}}*\ \ BDF\_Property;}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{comment}{\ /**********************************************************************}}
+\DoxyCodeLine{00097\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00098\ \textcolor{comment}{\ \ *\ @struct:}}
+\DoxyCodeLine{00099\ \textcolor{comment}{\ \ *\ \ \ \ BDF\_PropertyRec}}
+\DoxyCodeLine{00100\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00101\ \textcolor{comment}{\ \ *\ @description:}}
+\DoxyCodeLine{00102\ \textcolor{comment}{\ \ *\ \ \ \ This\ structure\ models\ a\ given\ BDF/PCF\ property.}}
+\DoxyCodeLine{00103\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00104\ \textcolor{comment}{\ \ *\ @fields:}}
+\DoxyCodeLine{00105\ \textcolor{comment}{\ \ *\ \ \ \ type\ ::}}
+\DoxyCodeLine{00106\ \textcolor{comment}{\ \ *\ \ \ \ \ \ The\ property\ type.}}
+\DoxyCodeLine{00107\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00108\ \textcolor{comment}{\ \ *\ \ \ \ u.atom\ ::}}
+\DoxyCodeLine{00109\ \textcolor{comment}{\ \ *\ \ \ \ \ \ The\ atom\ string,\ if\ type\ is\ @BDF\_PROPERTY\_TYPE\_ATOM.\ \ May\ be}}
+\DoxyCodeLine{00110\ \textcolor{comment}{\ \ *\ \ \ \ \ \ NULL,\ indicating\ an\ empty\ string.}}
+\DoxyCodeLine{00111\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00112\ \textcolor{comment}{\ \ *\ \ \ \ u.integer\ ::}}
+\DoxyCodeLine{00113\ \textcolor{comment}{\ \ *\ \ \ \ \ \ A\ signed\ integer,\ if\ type\ is\ @BDF\_PROPERTY\_TYPE\_INTEGER.}}
+\DoxyCodeLine{00114\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00115\ \textcolor{comment}{\ \ *\ \ \ \ u.cardinal\ ::}}
+\DoxyCodeLine{00116\ \textcolor{comment}{\ \ *\ \ \ \ \ \ An\ unsigned\ integer,\ if\ type\ is\ @BDF\_PROPERTY\_TYPE\_CARDINAL.}}
+\DoxyCodeLine{00117\ \textcolor{comment}{\ \ */}}
+\DoxyCodeLine{00118\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ \ }\mbox{\hyperlink{structBDF__PropertyRec__}{BDF\_PropertyRec\_}}}
+\DoxyCodeLine{00119\ \ \ \{}
+\DoxyCodeLine{00120\ \ \ \ \ BDF\_PropertyType\ \ type;}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keyword}{union\ }\{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \ \ \ \ atom;}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ FT\_Int32\ \ \ \ \ \ \ \ integer;}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ FT\_UInt32\ \ \ \ \ \ \ cardinal;}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \ \ \}\ u;}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \}\ BDF\_PropertyRec;}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \textcolor{comment}{\ /**********************************************************************}}
+\DoxyCodeLine{00132\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00133\ \textcolor{comment}{\ \ *\ @function:}}
+\DoxyCodeLine{00134\ \textcolor{comment}{\ \ *\ \ \ \ FT\_Get\_BDF\_Charset\_ID}}
+\DoxyCodeLine{00135\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00136\ \textcolor{comment}{\ \ *\ @description:}}
+\DoxyCodeLine{00137\ \textcolor{comment}{\ \ *\ \ \ \ Retrieve\ a\ BDF\ font\ character\ set\ identity,\ according\ to}}
+\DoxyCodeLine{00138\ \textcolor{comment}{\ \ *\ \ \ \ the\ BDF\ specification.}}
+\DoxyCodeLine{00139\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00140\ \textcolor{comment}{\ \ *\ @input:}}
+\DoxyCodeLine{00141\ \textcolor{comment}{\ \ *\ \ \ \ face\ ::}}
+\DoxyCodeLine{00142\ \textcolor{comment}{\ \ *\ \ \ \ \ \ \ A\ handle\ to\ the\ input\ face.}}
+\DoxyCodeLine{00143\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00144\ \textcolor{comment}{\ \ *\ @output:}}
+\DoxyCodeLine{00145\ \textcolor{comment}{\ \ *\ \ \ \ acharset\_encoding\ ::}}
+\DoxyCodeLine{00146\ \textcolor{comment}{\ \ *\ \ \ \ \ \ \ Charset\ encoding,\ as\ a\ C\string~string,\ owned\ by\ the\ face.}}
+\DoxyCodeLine{00147\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00148\ \textcolor{comment}{\ \ *\ \ \ \ acharset\_registry\ ::}}
+\DoxyCodeLine{00149\ \textcolor{comment}{\ \ *\ \ \ \ \ \ \ Charset\ registry,\ as\ a\ C\string~string,\ owned\ by\ the\ face.}}
+\DoxyCodeLine{00150\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00151\ \textcolor{comment}{\ \ *\ @return:}}
+\DoxyCodeLine{00152\ \textcolor{comment}{\ \ *\ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.}}
+\DoxyCodeLine{00153\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00154\ \textcolor{comment}{\ \ *\ @note:}}
+\DoxyCodeLine{00155\ \textcolor{comment}{\ \ *\ \ \ This\ function\ only\ works\ with\ BDF\ faces,\ returning\ an\ error\ otherwise.}}
+\DoxyCodeLine{00156\ \textcolor{comment}{\ \ */}}
+\DoxyCodeLine{00157\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{00158\ \ \ FT\_Get\_BDF\_Charset\_ID(\ FT\_Face\ \ \ \ \ \ \ face,}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \ *acharset\_encoding,}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \ *acharset\_registry\ );}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \textcolor{comment}{\ /**********************************************************************}}
+\DoxyCodeLine{00164\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00165\ \textcolor{comment}{\ \ *\ @function:}}
+\DoxyCodeLine{00166\ \textcolor{comment}{\ \ *\ \ \ \ FT\_Get\_BDF\_Property}}
+\DoxyCodeLine{00167\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00168\ \textcolor{comment}{\ \ *\ @description:}}
+\DoxyCodeLine{00169\ \textcolor{comment}{\ \ *\ \ \ \ Retrieve\ a\ BDF\ property\ from\ a\ BDF\ or\ PCF\ font\ file.}}
+\DoxyCodeLine{00170\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00171\ \textcolor{comment}{\ \ *\ @input:}}
+\DoxyCodeLine{00172\ \textcolor{comment}{\ \ *\ \ \ \ face\ ::\ A\ handle\ to\ the\ input\ face.}}
+\DoxyCodeLine{00173\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00174\ \textcolor{comment}{\ \ *\ \ \ \ name\ ::\ The\ property\ name.}}
+\DoxyCodeLine{00175\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00176\ \textcolor{comment}{\ \ *\ @output:}}
+\DoxyCodeLine{00177\ \textcolor{comment}{\ \ *\ \ \ \ aproperty\ ::\ The\ property.}}
+\DoxyCodeLine{00178\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00179\ \textcolor{comment}{\ \ *\ @return:}}
+\DoxyCodeLine{00180\ \textcolor{comment}{\ \ *\ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.}}
+\DoxyCodeLine{00181\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00182\ \textcolor{comment}{\ \ *\ @note:}}
+\DoxyCodeLine{00183\ \textcolor{comment}{\ \ *\ \ \ This\ function\ works\ with\ BDF\ \_and\_\ PCF\ fonts.\ \ It\ returns\ an\ error}}
+\DoxyCodeLine{00184\ \textcolor{comment}{\ \ *\ \ \ otherwise.\ \ It\ also\ returns\ an\ error\ if\ the\ property\ is\ not\ in\ the}}
+\DoxyCodeLine{00185\ \textcolor{comment}{\ \ *\ \ \ font.}}
+\DoxyCodeLine{00186\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00187\ \textcolor{comment}{\ \ *\ \ \ A\ \`{}property'\ is\ a\ either\ key-\/value\ pair\ within\ the\ STARTPROPERTIES}}
+\DoxyCodeLine{00188\ \textcolor{comment}{\ \ *\ \ \ ...\ ENDPROPERTIES\ block\ of\ a\ BDF\ font\ or\ a\ key-\/value\ pair\ from\ the}}
+\DoxyCodeLine{00189\ \textcolor{comment}{\ \ *\ \ \ \`{}info-\/>props'\ array\ within\ a\ \`{}FontRec'\ structure\ of\ a\ PCF\ font.}}
+\DoxyCodeLine{00190\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00191\ \textcolor{comment}{\ \ *\ \ \ Integer\ properties\ are\ always\ stored\ as\ \`{}signed'\ within\ PCF\ fonts;}}
+\DoxyCodeLine{00192\ \textcolor{comment}{\ \ *\ \ \ consequently,\ @BDF\_PROPERTY\_TYPE\_CARDINAL\ is\ a\ possible\ return\ value}}
+\DoxyCodeLine{00193\ \textcolor{comment}{\ \ *\ \ \ for\ BDF\ fonts\ only.}}
+\DoxyCodeLine{00194\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00195\ \textcolor{comment}{\ \ *\ \ \ In\ case\ of\ error,\ \`{}aproperty-\/>type'\ is\ always\ set\ to}}
+\DoxyCodeLine{00196\ \textcolor{comment}{\ \ *\ \ \ @BDF\_PROPERTY\_TYPE\_NONE.}}
+\DoxyCodeLine{00197\ \textcolor{comment}{\ \ */}}
+\DoxyCodeLine{00198\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{00199\ \ \ FT\_Get\_BDF\_Property(\ FT\_Face\ \ \ \ \ \ \ \ \ \ \ face,}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \ \ \ \ \ \ prop\_name,}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ BDF\_PropertyRec\ \ *aproperty\ );}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ FT\_END\_HEADER}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_FTBDF\_H\_\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \textcolor{comment}{/*\ END\ */}}
+
+\end{DoxyCode}

@@ -1,0 +1,101 @@
+\doxysection{Pixelate Class Reference}
+\hypertarget{classPixelate}{}\label{classPixelate}\index{Pixelate@{Pixelate}}
+
+
+Inheritance diagram for Pixelate\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=152pt]{classPixelate__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Pixelate\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=152pt]{classPixelate__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classPixelate_a815d873c5d41fe57af715965b4f2fbbd}{on\+Load}} ()
+\item 
+void \mbox{\hyperlink{classPixelate_a78dd551e6e8cf39326acb1131b4964fe}{on\+Update}} (float, float x, float y)
+\item 
+void \mbox{\hyperlink{classPixelate_ad700c97025a7645098e3bdb7577ed939}{on\+Draw}} (\mbox{\hyperlink{classsf_1_1RenderTarget}{sf\+::\+Render\+Target}} \&target, \mbox{\hyperlink{classsf_1_1RenderStates}{sf\+::\+Render\+States}} states) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classEffect}{Effect}}}
+\begin{DoxyCompactItemize}
+\item 
+const std\+::string \& {\bfseries get\+Name} () const
+\item 
+void {\bfseries load} ()
+\item 
+void {\bfseries update} (float time, float x, float y)
+\item 
+void \mbox{\hyperlink{classEffect_a6a3a393e127581c7f84e1278b5be0438}{draw}} (\mbox{\hyperlink{classsf_1_1RenderTarget}{sf\+::\+Render\+Target}} \&target, \mbox{\hyperlink{classsf_1_1RenderStates}{sf\+::\+Render\+States}} states) const
+\begin{DoxyCompactList}\small\item\em Draw the object to a render target. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classsf_1_1Drawable}{sf\+::\+Drawable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Drawable} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classEffect}{Effect}}}
+\begin{DoxyCompactItemize}
+\item 
+static void {\bfseries set\+Font} (const \mbox{\hyperlink{classsf_1_1Font}{sf\+::\+Font}} \&font)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classEffect}{Effect}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Effect} (const std\+::string \&name)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Member Functions inherited from \mbox{\hyperlink{classEffect}{Effect}}}
+\begin{DoxyCompactItemize}
+\item 
+static const \mbox{\hyperlink{classsf_1_1Font}{sf\+::\+Font}} \& {\bfseries get\+Font} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classPixelate_ad700c97025a7645098e3bdb7577ed939}\index{Pixelate@{Pixelate}!onDraw@{onDraw}}
+\index{onDraw@{onDraw}!Pixelate@{Pixelate}}
+\doxysubsubsection{\texorpdfstring{onDraw()}{onDraw()}}
+{\footnotesize\ttfamily \label{classPixelate_ad700c97025a7645098e3bdb7577ed939} 
+void Pixelate\+::on\+Draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classsf_1_1RenderTarget}{sf\+::\+Render\+Target}} \&}]{target}{, }\item[{\mbox{\hyperlink{classsf_1_1RenderStates}{sf\+::\+Render\+States}}}]{states}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classEffect}{Effect}}.
+
+\Hypertarget{classPixelate_a815d873c5d41fe57af715965b4f2fbbd}\index{Pixelate@{Pixelate}!onLoad@{onLoad}}
+\index{onLoad@{onLoad}!Pixelate@{Pixelate}}
+\doxysubsubsection{\texorpdfstring{onLoad()}{onLoad()}}
+{\footnotesize\ttfamily \label{classPixelate_a815d873c5d41fe57af715965b4f2fbbd} 
+bool Pixelate\+::on\+Load (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classEffect}{Effect}}.
+
+\Hypertarget{classPixelate_a78dd551e6e8cf39326acb1131b4964fe}\index{Pixelate@{Pixelate}!onUpdate@{onUpdate}}
+\index{onUpdate@{onUpdate}!Pixelate@{Pixelate}}
+\doxysubsubsection{\texorpdfstring{onUpdate()}{onUpdate()}}
+{\footnotesize\ttfamily \label{classPixelate_a78dd551e6e8cf39326acb1131b4964fe} 
+void Pixelate\+::on\+Update (\begin{DoxyParamCaption}\item[{float}]{}{, }\item[{float}]{x}{, }\item[{float}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classEffect}{Effect}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/examples/shader/Shader.\+cpp\end{DoxyCompactItemize}

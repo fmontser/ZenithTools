@@ -1,0 +1,47 @@
+\doxysection{FLAC\+\_\+\+\_\+\+Stream\+Metadata Struct Reference}
+\hypertarget{structFLAC____StreamMetadata}{}\label{structFLAC____StreamMetadata}\index{FLAC\_\_StreamMetadata@{FLAC\_\_StreamMetadata}}
+
+
+{\ttfamily \#include $<$format.\+h$>$}
+
+
+
+Collaboration diagram for FLAC\+\_\+\+\_\+\+Stream\+Metadata\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structFLAC____StreamMetadata__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group__flac__format_gac71714ba8ddbbd66d26bb78a427fac01}{FLAC\+\_\+\+\_\+\+Metadata\+Type}} \mbox{\hyperlink{group__flac__format_ga39fd0655464f2cc7c9c37ae715088aec}{type}}
+\item 
+FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__format_gaef40bbf85abe12e035f66f2d54ed316c}{is\+\_\+last}}
+\item 
+unsigned \mbox{\hyperlink{group__flac__format_ga3fd615e41609837a5672f9081d9d2183}{length}}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>\mbox{\hyperlink{structFLAC____StreamMetadata__StreamInfo}{FLAC\_\_StreamMetadata\_StreamInfo}} {\bfseries stream\_info}\\
+\>\mbox{\hyperlink{structFLAC____StreamMetadata__Padding}{FLAC\_\_StreamMetadata\_Padding}} {\bfseries padding}\\
+\>\mbox{\hyperlink{structFLAC____StreamMetadata__Application}{FLAC\_\_StreamMetadata\_Application}} {\bfseries application}\\
+\>\mbox{\hyperlink{structFLAC____StreamMetadata__SeekTable}{FLAC\_\_StreamMetadata\_SeekTable}} {\bfseries seek\_table}\\
+\>\mbox{\hyperlink{structFLAC____StreamMetadata__VorbisComment}{FLAC\_\_StreamMetadata\_VorbisComment}} {\bfseries vorbis\_comment}\\
+\>\mbox{\hyperlink{structFLAC____StreamMetadata__CueSheet}{FLAC\_\_StreamMetadata\_CueSheet}} {\bfseries cue\_sheet}\\
+\>\mbox{\hyperlink{structFLAC____StreamMetadata__Picture}{FLAC\_\_StreamMetadata\_Picture}} {\bfseries picture}\\
+\>\mbox{\hyperlink{structFLAC____StreamMetadata__Unknown}{FLAC\_\_StreamMetadata\_Unknown}} {\bfseries unknown}\\
+\} \mbox{\hyperlink{group__flac__format_ga1b7b56cb6364c84c7c46992cb9970750}{data}}\\
+
+\end{tabbing}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+FLAC metadata block structure. (c.\+f. \href{../format.html\#metadata_block}{\texttt{ format specification}}) 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/extlibs/headers/\+FLAC/format.\+h\end{DoxyCompactItemize}

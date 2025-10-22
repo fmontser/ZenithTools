@@ -1,0 +1,29 @@
+\doxysection{testing\+::internal\+::Invoke\+Argument\+Action\texorpdfstring{$<$}{<} index, Params \texorpdfstring{$>$}{>} Struct Template Reference}
+\hypertarget{structtesting_1_1internal_1_1InvokeArgumentAction}{}\label{structtesting_1_1internal_1_1InvokeArgumentAction}\index{testing::internal::InvokeArgumentAction$<$ index, Params $>$@{testing::internal::InvokeArgumentAction$<$ index, Params $>$}}
+
+
+Collaboration diagram for testing\+::internal\+::Invoke\+Argument\+Action\texorpdfstring{$<$}{<} index, Params \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structtesting_1_1internal_1_1InvokeArgumentAction__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{structtesting_1_1internal_1_1InvokeArgumentAction_a18dd9d375e3a39d09df8aa52b008679c}\label{structtesting_1_1internal_1_1InvokeArgumentAction_a18dd9d375e3a39d09df8aa52b008679c} 
+{\footnotesize template$<$typename... Args, typename = typename std\+::enable\+\_\+if$<$(index $<$ sizeof...(\+Args))$>$\+::type$>$ }\\auto {\bfseries operator()} (Args \&\&... args) const -\/$>$ decltype(internal\+::\+Invoke\+Argument(std\+::get$<$ index $>$(std\+::forward\+\_\+as\+\_\+tuple(std\+::forward$<$ Args $>$(args)...)), std\+::declval$<$ const Params \& $>$()...))
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{structtesting_1_1internal_1_1InvokeArgumentAction_a7f5d847630b6bfc6474da4d174b30bd3}\label{structtesting_1_1internal_1_1InvokeArgumentAction_a7f5d847630b6bfc6474da4d174b30bd3} 
+\mbox{\hyperlink{classtesting_1_1internal_1_1FlatTuple}{internal\+::\+Flat\+Tuple}}$<$ Params... $>$ {\bfseries params}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/googletest-\/src/googlemock/include/gmock/gmock-\/more-\/actions.\+h\end{DoxyCompactItemize}

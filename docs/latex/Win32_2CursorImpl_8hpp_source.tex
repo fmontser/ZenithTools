@@ -1,0 +1,73 @@
+\doxysection{Cursor\+Impl.\+hpp}
+\hypertarget{Win32_2CursorImpl_8hpp_source}{}\label{Win32_2CursorImpl_8hpp_source}\index{build/\_deps/sfml-\/src/src/SFML/Window/Win32/CursorImpl.hpp@{build/\_deps/sfml-\/src/src/SFML/Window/Win32/CursorImpl.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ SFML\_CURSORIMPLWIN32\_HPP}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ SFML\_CURSORIMPLWIN32\_HPP}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <SFML/Window/Cursor.hpp>}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <SFML/System/NonCopyable.hpp>}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ <SFML/System/Vector2.hpp>}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#include\ <windows.h>}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{00038\ \{}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{keyword}{namespace\ }priv}
+\DoxyCodeLine{00041\ \{}
+\DoxyCodeLine{00046\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1priv_1_1CursorImpl}{CursorImpl}}\ :\ NonCopyable}
+\DoxyCodeLine{00047\ \{}
+\DoxyCodeLine{00048\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1CursorImpl_a2384a1fc01b2f12688d3253d2485cff6}{CursorImpl}}();}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1CursorImpl_a0b4f3a8c6739a7d9b913583c8f7bf8da}{\string~CursorImpl}}();}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1CursorImpl_a0b39f04e0035b7e51b4b30407b088ffb}{loadFromPixels}}(\textcolor{keyword}{const}\ Uint8*\ pixels,\ Vector2u\ size,\ Vector2u\ hotspot);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1CursorImpl_a660eabdfea85f2726e82ade718d8fa69}{loadFromSystem}}(\mbox{\hyperlink{classsf_1_1Cursor_ab9ab152aec1f8a4955e34ccae08f930a}{Cursor::Type}}\ type);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }WindowImplWin32;}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{void}\ release();}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{comment}{//\ Member\ data}}
+\DoxyCodeLine{00095\ \ \ \ \ HCURSOR\ m\_cursor;}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_systemCursor;}
+\DoxyCodeLine{00097\ \};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \}\ \textcolor{comment}{//\ namespace\ priv}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SFML\_CUSROSIMPLWIN32\_HPP}}
+\DoxyCodeLine{00104\ }
+
+\end{DoxyCode}

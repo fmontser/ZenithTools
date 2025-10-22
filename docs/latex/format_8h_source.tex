@@ -1,0 +1,584 @@
+\doxysection{format.\+h}
+\hypertarget{format_8h_source}{}\label{format_8h_source}\index{build/\_deps/sfml-\/src/extlibs/headers/FLAC/format.h@{build/\_deps/sfml-\/src/extlibs/headers/FLAC/format.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ libFLAC\ -\/\ Free\ Lossless\ Audio\ Codec\ library}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2000-\/2009\ \ Josh\ Coalson}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2011-\/2013\ \ Xiph.Org\ Foundation}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ Redistribution\ and\ use\ in\ source\ and\ binary\ forms,\ with\ or\ without}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ modification,\ are\ permitted\ provided\ that\ the\ following\ conditions}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ are\ met:}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ -\/\ Redistributions\ of\ source\ code\ must\ retain\ the\ above\ copyright}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ notice,\ this\ list\ of\ conditions\ and\ the\ following\ disclaimer.}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ -\/\ Redistributions\ in\ binary\ form\ must\ reproduce\ the\ above\ copyright}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *\ notice,\ this\ list\ of\ conditions\ and\ the\ following\ disclaimer\ in\ the}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ documentation\ and/or\ other\ materials\ provided\ with\ the\ distribution.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ -\/\ Neither\ the\ name\ of\ the\ Xiph.org\ Foundation\ nor\ the\ names\ of\ its}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ contributors\ may\ be\ used\ to\ endorse\ or\ promote\ products\ derived\ from}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ this\ software\ without\ specific\ prior\ written\ permission.}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ THIS\ SOFTWARE\ IS\ PROVIDED\ BY\ THE\ COPYRIGHT\ HOLDERS\ AND\ CONTRIBUTORS}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *\ \`{}\`{}AS\ IS''\ AND\ ANY\ EXPRESS\ OR\ IMPLIED\ WARRANTIES,\ INCLUDING,\ BUT\ NOT}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ LIMITED\ TO,\ THE\ IMPLIED\ WARRANTIES\ OF\ MERCHANTABILITY\ AND\ FITNESS\ FOR}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ A\ PARTICULAR\ PURPOSE\ ARE\ DISCLAIMED.\ \ IN\ NO\ EVENT\ SHALL\ THE\ FOUNDATION\ OR}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ CONTRIBUTORS\ BE\ LIABLE\ FOR\ ANY\ DIRECT,\ INDIRECT,\ INCIDENTAL,\ SPECIAL,}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ EXEMPLARY,\ OR\ CONSEQUENTIAL\ DAMAGES\ (INCLUDING,\ BUT\ NOT\ LIMITED\ TO,}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ PROCUREMENT\ OF\ SUBSTITUTE\ GOODS\ OR\ SERVICES;\ LOSS\ OF\ USE,\ DATA,\ OR}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ *\ PROFITS;\ OR\ BUSINESS\ INTERRUPTION)\ HOWEVER\ CAUSED\ AND\ ON\ ANY\ THEORY\ OF}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ *\ LIABILITY,\ WHETHER\ IN\ CONTRACT,\ STRICT\ LIABILITY,\ OR\ TORT\ (INCLUDING}}
+\DoxyCodeLine{00029\ \textcolor{comment}{\ *\ NEGLIGENCE\ OR\ OTHERWISE)\ ARISING\ IN\ ANY\ WAY\ OUT\ OF\ THE\ USE\ OF\ THIS}}
+\DoxyCodeLine{00030\ \textcolor{comment}{\ *\ SOFTWARE,\ EVEN\ IF\ ADVISED\ OF\ THE\ POSSIBILITY\ OF\ SUCH\ DAMAGE.}}
+\DoxyCodeLine{00031\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#ifndef\ FLAC\_\_FORMAT\_H}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ FLAC\_\_FORMAT\_H}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#include\ "{}export.h"{}}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#include\ "{}ordinals.h"{}}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00040\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00088\ \textcolor{comment}{\ \ \ \ Most\ of\ the\ values\ described\ in\ this\ file\ are\ defined\ by\ the\ FLAC}}
+\DoxyCodeLine{00089\ \textcolor{comment}{\ \ \ \ format\ specification.\ \ There\ is\ nothing\ to\ tune\ here.}}
+\DoxyCodeLine{00090\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#define\ FLAC\_\_MAX\_METADATA\_TYPE\_CODE\ (126u)}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\#define\ FLAC\_\_MIN\_BLOCK\_SIZE\ (16u)}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#define\ FLAC\_\_MAX\_BLOCK\_SIZE\ (65535u)}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00103\ \textcolor{preprocessor}{\#define\ FLAC\_\_SUBSET\_MAX\_BLOCK\_SIZE\_48000HZ\ (4608u)}}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#define\ FLAC\_\_MAX\_CHANNELS\ (8u)}}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\#define\ FLAC\_\_MIN\_BITS\_PER\_SAMPLE\ (4u)}}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#define\ FLAC\_\_MAX\_BITS\_PER\_SAMPLE\ (32u)}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00122\ \textcolor{preprocessor}{\#define\ FLAC\_\_REFERENCE\_CODEC\_MAX\_BITS\_PER\_SAMPLE\ (24u)}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00128\ \textcolor{preprocessor}{\#define\ FLAC\_\_MAX\_SAMPLE\_RATE\ (655350u)}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00131\ \textcolor{preprocessor}{\#define\ FLAC\_\_MAX\_LPC\_ORDER\ (32u)}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00135\ \textcolor{preprocessor}{\#define\ FLAC\_\_SUBSET\_MAX\_LPC\_ORDER\_48000HZ\ (12u)}}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00140\ \textcolor{preprocessor}{\#define\ FLAC\_\_MIN\_QLP\_COEFF\_PRECISION\ (5u)}}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00145\ \textcolor{preprocessor}{\#define\ FLAC\_\_MAX\_QLP\_COEFF\_PRECISION\ (15u)}}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00148\ \textcolor{preprocessor}{\#define\ FLAC\_\_MAX\_FIXED\_ORDER\ (4u)}}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00151\ \textcolor{preprocessor}{\#define\ FLAC\_\_MAX\_RICE\_PARTITION\_ORDER\ (15u)}}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00154\ \textcolor{preprocessor}{\#define\ FLAC\_\_SUBSET\_MAX\_RICE\_PARTITION\_ORDER\ (8u)}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00162\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{group__flac__format_ga1bd3aa4d4ce0393e51dd55bb3e48fbc1}{FLAC\_\_VERSION\_STRING}};}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00168\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{group__flac__format_gac05d5441acd3daad33d287165c450a05}{FLAC\_\_VENDOR\_STRING}};}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00171\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ FLAC\_\_byte\ \mbox{\hyperlink{group__flac__format_gab988d92256bae952bd337a55da5e89d0}{FLAC\_\_STREAM\_SYNC\_STRING}}[4];\ \textcolor{comment}{/*\ =\ "{}fLaC"{}\ */}}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00176\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga9c002aa5e3dd4f534be5309a6bcfd664}{FLAC\_\_STREAM\_SYNC}};\ \textcolor{comment}{/*\ =\ 0x664C6143\ */}}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00179\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga71d8c89809a47f79c8650a2e331436f0}{FLAC\_\_STREAM\_SYNC\_LEN}};\ \textcolor{comment}{/*\ =\ 32\ bits\ */}}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00182\ \textcolor{preprocessor}{\#define\ FLAC\_\_STREAM\_SYNC\_LENGTH\ (4u)}}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \textcolor{comment}{/*****************************************************************************}}
+\DoxyCodeLine{00186\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00187\ \textcolor{comment}{\ *\ Subframe\ structures}}
+\DoxyCodeLine{00188\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00189\ \textcolor{comment}{\ *****************************************************************************/}}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00191\ \textcolor{comment}{/*****************************************************************************/}}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00194\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00195\ \ \ \ \ \mbox{\hyperlink{group__flac__format_gga951733d2ea01943514290012cd622d3aa5253f8b8edc61220739f229a299775dd}{FLAC\_\_ENTROPY\_CODING\_METHOD\_PARTITIONED\_RICE}}\ =\ 0,}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \ \ \ \ \mbox{\hyperlink{group__flac__format_gga951733d2ea01943514290012cd622d3aa202960a608ee91f9f11c2575b9ecc5aa}{FLAC\_\_ENTROPY\_CODING\_METHOD\_PARTITIONED\_RICE2}}\ =\ 1}
+\DoxyCodeLine{00202\ \}\ \mbox{\hyperlink{group__flac__format_ga951733d2ea01943514290012cd622d3a}{FLAC\_\_EntropyCodingMethodType}};}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00209\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ \mbox{\hyperlink{group__flac__format_gaf4f3faf80000ebe7cc357af9bbbaa3b4}{FLAC\_\_EntropyCodingMethodTypeString}}[];}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00214\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ *\mbox{\hyperlink{group__flac__format_ga06e97d40923f195410a65da9311ab6a2}{parameters}};}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00219\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ *\mbox{\hyperlink{group__flac__format_ga915eb5369d39924bc29c948c29834279}{raw\_bits}};}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gabb60aca8d98bf9299558f230dfe83bc1}{capacity\_by\_order}};}
+\DoxyCodeLine{00229\ \}\ \mbox{\hyperlink{structFLAC____EntropyCodingMethod__PartitionedRiceContents}{FLAC\_\_EntropyCodingMethod\_PartitionedRiceContents}};}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00233\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00235\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga1e1c9049e31eab5113c245164b2c694a}{order}};}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____EntropyCodingMethod__PartitionedRiceContents}{FLAC\_\_EntropyCodingMethod\_PartitionedRiceContents}}\ *\mbox{\hyperlink{group__flac__format_ga2fbfa1bd5656bf620c0bb9f8ba77f579}{contents}};}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \}\ \mbox{\hyperlink{structFLAC____EntropyCodingMethod__PartitionedRice}{FLAC\_\_EntropyCodingMethod\_PartitionedRice}};}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00243\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga9839a3378f519e065a3599585e4a9588}{FLAC\_\_ENTROPY\_CODING\_METHOD\_PARTITIONED\_RICE\_ORDER\_LEN}};\ }
+\DoxyCodeLine{00244\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga1b66dd050e207a941555dd1a5dd184d3}{FLAC\_\_ENTROPY\_CODING\_METHOD\_PARTITIONED\_RICE\_PARAMETER\_LEN}};\ }
+\DoxyCodeLine{00245\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga9266ba16c700a7c7600d7ed57a1b0d8e}{FLAC\_\_ENTROPY\_CODING\_METHOD\_PARTITIONED\_RICE2\_PARAMETER\_LEN}};\ }
+\DoxyCodeLine{00246\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gac4552a7a6b9c771ee47ee51fa998ca5f}{FLAC\_\_ENTROPY\_CODING\_METHOD\_PARTITIONED\_RICE\_RAW\_LEN}};\ }
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga176b89e2ee2e08d0790bfbab2fa213a0}{FLAC\_\_ENTROPY\_CODING\_METHOD\_PARTITIONED\_RICE\_ESCAPE\_PARAMETER}};}
+\DoxyCodeLine{00250\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga08bc0c9e0fd088cbea13bc3b11c4d4d4}{FLAC\_\_ENTROPY\_CODING\_METHOD\_PARTITIONED\_RICE2\_ESCAPE\_PARAMETER}};}
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00255\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00256\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ga951733d2ea01943514290012cd622d3a}{FLAC\_\_EntropyCodingMethodType}}\ type;}
+\DoxyCodeLine{00257\ \ \ \ \ \textcolor{keyword}{union\ }\{}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structFLAC____EntropyCodingMethod__PartitionedRice}{FLAC\_\_EntropyCodingMethod\_PartitionedRice}}\ partitioned\_rice;}
+\DoxyCodeLine{00259\ \ \ \ \ \}\ data;}
+\DoxyCodeLine{00260\ \}\ \mbox{\hyperlink{structFLAC____EntropyCodingMethod}{FLAC\_\_EntropyCodingMethod}};}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00262\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga1d49716deb8775a027f78b059b61c2e0}{FLAC\_\_ENTROPY\_CODING\_METHOD\_TYPE\_LEN}};\ }
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00264\ \textcolor{comment}{/*****************************************************************************/}}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00267\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00268\ \ \ \ \ \mbox{\hyperlink{group__flac__format_gga1f431eaf213e74d7747589932d263348a9bf56d836aeffb11d614e29ea1cdf2a9}{FLAC\_\_SUBFRAME\_TYPE\_CONSTANT}}\ =\ 0,\ }
+\DoxyCodeLine{00269\ \ \ \ \ \mbox{\hyperlink{group__flac__format_gga1f431eaf213e74d7747589932d263348a8520596ef07d6c8577f07025f137657b}{FLAC\_\_SUBFRAME\_TYPE\_VERBATIM}}\ =\ 1,\ }
+\DoxyCodeLine{00270\ \ \ \ \ \mbox{\hyperlink{group__flac__format_gga1f431eaf213e74d7747589932d263348a6b3cce73039a513f9afefdc8e4f664a5}{FLAC\_\_SUBFRAME\_TYPE\_FIXED}}\ =\ 2,\ }
+\DoxyCodeLine{00271\ \ \ \ \ \mbox{\hyperlink{group__flac__format_gga1f431eaf213e74d7747589932d263348a31437462c3e4c3a5a214a91eff8cc3af}{FLAC\_\_SUBFRAME\_TYPE\_LPC}}\ =\ 3\ }
+\DoxyCodeLine{00272\ \}\ \mbox{\hyperlink{group__flac__format_ga1f431eaf213e74d7747589932d263348}{FLAC\_\_SubframeType}};}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00279\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ \mbox{\hyperlink{group__flac__format_gabc358f252630dfc52e875eb05c3b0fd9}{FLAC\_\_SubframeTypeString}}[];}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00284\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00285\ \ \ \ \ FLAC\_\_int32\ \mbox{\hyperlink{group__flac__format_gaf1bcfcbb17f1e1edb115b002fdbaa70e}{value}};\ }
+\DoxyCodeLine{00286\ \}\ \mbox{\hyperlink{structFLAC____Subframe__Constant}{FLAC\_\_Subframe\_Constant}};}
+\DoxyCodeLine{00287\ }
+\DoxyCodeLine{00288\ }
+\DoxyCodeLine{00291\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00292\ \ \ \ \ \textcolor{keyword}{const}\ FLAC\_\_int32\ *\mbox{\hyperlink{group__flac__format_ga6abc78689650804550ac517ada884584}{data}};\ }
+\DoxyCodeLine{00293\ \}\ \mbox{\hyperlink{structFLAC____Subframe__Verbatim}{FLAC\_\_Subframe\_Verbatim}};}
+\DoxyCodeLine{00294\ }
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00298\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00299\ \ \ \ \ \mbox{\hyperlink{structFLAC____EntropyCodingMethod}{FLAC\_\_EntropyCodingMethod}}\ \mbox{\hyperlink{group__flac__format_ga0f17f8f756cd2c8acc0262ef14c37088}{entropy\_coding\_method}};}
+\DoxyCodeLine{00301\ }
+\DoxyCodeLine{00302\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga73f6f3cce3f811c81532729dbad2df0d}{order}};}
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00305\ \ \ \ \ FLAC\_\_int32\ \mbox{\hyperlink{group__flac__format_ga0e9a40fb89b8aa45f83bf8979d200f1f}{warmup}}[\mbox{\hyperlink{group__flac__format_gabd0d5d6fe71b337244712b244ae7cb0f}{FLAC\_\_MAX\_FIXED\_ORDER}}];}
+\DoxyCodeLine{00307\ }
+\DoxyCodeLine{00308\ \ \ \ \ \textcolor{keyword}{const}\ FLAC\_\_int32\ *\mbox{\hyperlink{group__flac__format_gab91be48874aec97177106a4086163188}{residual}};}
+\DoxyCodeLine{00310\ \}\ \mbox{\hyperlink{structFLAC____Subframe__Fixed}{FLAC\_\_Subframe\_Fixed}};}
+\DoxyCodeLine{00311\ }
+\DoxyCodeLine{00312\ }
+\DoxyCodeLine{00315\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00316\ \ \ \ \ \mbox{\hyperlink{structFLAC____EntropyCodingMethod}{FLAC\_\_EntropyCodingMethod}}\ \mbox{\hyperlink{group__flac__format_gadb1401b2f8af05132420145a99f68c6e}{entropy\_coding\_method}};}
+\DoxyCodeLine{00318\ }
+\DoxyCodeLine{00319\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga0de317accaf8a9f86194f97c378b2f86}{order}};}
+\DoxyCodeLine{00321\ }
+\DoxyCodeLine{00322\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga6123b031203f603eba966b95fd2ad855}{qlp\_coeff\_precision}};}
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00325\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{group__flac__format_gaedcf1a3e5e62485e7ce250eda1f3e588}{quantization\_level}};}
+\DoxyCodeLine{00327\ }
+\DoxyCodeLine{00328\ \ \ \ \ FLAC\_\_int32\ \mbox{\hyperlink{group__flac__format_gad0b37ee925e2124a37fe3a513d5410b8}{qlp\_coeff}}[\mbox{\hyperlink{group__flac__format_ga16108d413f524329f338cff6e05f3aff}{FLAC\_\_MAX\_LPC\_ORDER}}];}
+\DoxyCodeLine{00330\ }
+\DoxyCodeLine{00331\ \ \ \ \ FLAC\_\_int32\ \mbox{\hyperlink{group__flac__format_ga91c6c71c6fc2b812da1d2a3761e29807}{warmup}}[\mbox{\hyperlink{group__flac__format_ga16108d413f524329f338cff6e05f3aff}{FLAC\_\_MAX\_LPC\_ORDER}}];}
+\DoxyCodeLine{00333\ }
+\DoxyCodeLine{00334\ \ \ \ \ \textcolor{keyword}{const}\ FLAC\_\_int32\ *\mbox{\hyperlink{group__flac__format_gacae4d0d439ea8900c5771eb967aec9bf}{residual}};}
+\DoxyCodeLine{00336\ \}\ \mbox{\hyperlink{structFLAC____Subframe__LPC}{FLAC\_\_Subframe\_LPC}};}
+\DoxyCodeLine{00337\ }
+\DoxyCodeLine{00338\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga1d983d775b492e968719457694737116}{FLAC\_\_SUBFRAME\_LPC\_QLP\_COEFF\_PRECISION\_LEN}};\ }
+\DoxyCodeLine{00339\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga07ee16744f0933eaa665cec8f2ec5631}{FLAC\_\_SUBFRAME\_LPC\_QLP\_SHIFT\_LEN}};\ }
+\DoxyCodeLine{00340\ }
+\DoxyCodeLine{00341\ }
+\DoxyCodeLine{00344\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00345\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ga1f431eaf213e74d7747589932d263348}{FLAC\_\_SubframeType}}\ type;}
+\DoxyCodeLine{00346\ \ \ \ \ \textcolor{keyword}{union\ }\{}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structFLAC____Subframe__Constant}{FLAC\_\_Subframe\_Constant}}\ constant;}
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structFLAC____Subframe__Fixed}{FLAC\_\_Subframe\_Fixed}}\ fixed;}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structFLAC____Subframe__LPC}{FLAC\_\_Subframe\_LPC}}\ lpc;}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structFLAC____Subframe__Verbatim}{FLAC\_\_Subframe\_Verbatim}}\ verbatim;}
+\DoxyCodeLine{00351\ \ \ \ \ \}\ data;}
+\DoxyCodeLine{00352\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ wasted\_bits;}
+\DoxyCodeLine{00353\ \}\ \mbox{\hyperlink{structFLAC____Subframe}{FLAC\_\_Subframe}};}
+\DoxyCodeLine{00354\ }
+\DoxyCodeLine{00362\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga11cc163e6aea53e590708bba61a01162}{FLAC\_\_SUBFRAME\_ZERO\_PAD\_LEN}};}
+\DoxyCodeLine{00363\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga1b8b7ac39c55c0fc7973821cd4297104}{FLAC\_\_SUBFRAME\_TYPE\_LEN}};\ }
+\DoxyCodeLine{00364\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga86d93adcc6b7f67eaecd19e5c3fbdfcf}{FLAC\_\_SUBFRAME\_WASTED\_BITS\_FLAG\_LEN}};\ }
+\DoxyCodeLine{00365\ }
+\DoxyCodeLine{00366\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gadbf7a91c50f42a246aa1db9bd61bac16}{FLAC\_\_SUBFRAME\_TYPE\_CONSTANT\_BYTE\_ALIGNED\_MASK}};\ }
+\DoxyCodeLine{00367\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga5855173f9bc3584b545b04cf6ba8f8f8}{FLAC\_\_SUBFRAME\_TYPE\_VERBATIM\_BYTE\_ALIGNED\_MASK}};\ }
+\DoxyCodeLine{00368\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gaf4ae885d07037bbcb46fb199f5f4d3a9}{FLAC\_\_SUBFRAME\_TYPE\_FIXED\_BYTE\_ALIGNED\_MASK}};\ }
+\DoxyCodeLine{00369\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gac5ee2d30e02fe8a3a2fe5417e1200434}{FLAC\_\_SUBFRAME\_TYPE\_LPC\_BYTE\_ALIGNED\_MASK}};\ }
+\DoxyCodeLine{00370\ }
+\DoxyCodeLine{00371\ \textcolor{comment}{/*****************************************************************************/}}
+\DoxyCodeLine{00372\ }
+\DoxyCodeLine{00373\ }
+\DoxyCodeLine{00374\ \textcolor{comment}{/*****************************************************************************}}
+\DoxyCodeLine{00375\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00376\ \textcolor{comment}{\ *\ Frame\ structures}}
+\DoxyCodeLine{00377\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00378\ \textcolor{comment}{\ *****************************************************************************/}}
+\DoxyCodeLine{00379\ }
+\DoxyCodeLine{00381\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00382\ \ \ \ \ \mbox{\hyperlink{group__flac__format_gga79855f8525672e37f299bbe02952ef9ca3c554e4c8512c2de31dfd3305f8b31b3}{FLAC\_\_CHANNEL\_ASSIGNMENT\_INDEPENDENT}}\ =\ 0,\ }
+\DoxyCodeLine{00383\ \ \ \ \ \mbox{\hyperlink{group__flac__format_gga79855f8525672e37f299bbe02952ef9ca28d41295b20593561dc9934cc977d5cb}{FLAC\_\_CHANNEL\_ASSIGNMENT\_LEFT\_SIDE}}\ =\ 1,\ }
+\DoxyCodeLine{00384\ \ \ \ \ \mbox{\hyperlink{group__flac__format_gga79855f8525672e37f299bbe02952ef9cad155b61582140b2b90362005f1a93e2e}{FLAC\_\_CHANNEL\_ASSIGNMENT\_RIGHT\_SIDE}}\ =\ 2,\ }
+\DoxyCodeLine{00385\ \ \ \ \ \mbox{\hyperlink{group__flac__format_gga79855f8525672e37f299bbe02952ef9ca85c1512c0473b5ede364a9943759a80c}{FLAC\_\_CHANNEL\_ASSIGNMENT\_MID\_SIDE}}\ =\ 3\ }
+\DoxyCodeLine{00386\ \}\ \mbox{\hyperlink{group__flac__format_ga79855f8525672e37f299bbe02952ef9c}{FLAC\_\_ChannelAssignment}};}
+\DoxyCodeLine{00387\ }
+\DoxyCodeLine{00393\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ \mbox{\hyperlink{group__flac__format_ga56e0484fe205ab9f699ba5413c8441a1}{FLAC\_\_ChannelAssignmentString}}[];}
+\DoxyCodeLine{00394\ }
+\DoxyCodeLine{00396\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00397\ \ \ \ \ \mbox{\hyperlink{group__flac__format_gga8fe9ebc78386cd2a3d23b7b8e3818e1ca0b9cbf3853f0ae105cf9b5360164f794}{FLAC\_\_FRAME\_NUMBER\_TYPE\_FRAME\_NUMBER}},\ }
+\DoxyCodeLine{00398\ \ \ \ \ \mbox{\hyperlink{group__flac__format_gga8fe9ebc78386cd2a3d23b7b8e3818e1ca9220ce93dcc151e5edd5db7e7155b35a}{FLAC\_\_FRAME\_NUMBER\_TYPE\_SAMPLE\_NUMBER}}\ }
+\DoxyCodeLine{00399\ \}\ \mbox{\hyperlink{group__flac__format_ga8fe9ebc78386cd2a3d23b7b8e3818e1c}{FLAC\_\_FrameNumberType}};}
+\DoxyCodeLine{00400\ }
+\DoxyCodeLine{00406\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ \mbox{\hyperlink{group__flac__format_ga79fbcf4b5c8dd457f83782479fe01222}{FLAC\_\_FrameNumberTypeString}}[];}
+\DoxyCodeLine{00407\ }
+\DoxyCodeLine{00408\ }
+\DoxyCodeLine{00411\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00412\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gace760def6dcbbde3d9d140e5bfda34b3}{blocksize}};}
+\DoxyCodeLine{00414\ }
+\DoxyCodeLine{00415\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gacc23daa576f4e75885bf4f2b69cee1be}{sample\_rate}};}
+\DoxyCodeLine{00417\ }
+\DoxyCodeLine{00418\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga5950c6e4f03ad81f4a03c8c6188b9bf5}{channels}};}
+\DoxyCodeLine{00420\ }
+\DoxyCodeLine{00421\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ga79855f8525672e37f299bbe02952ef9c}{FLAC\_\_ChannelAssignment}}\ \mbox{\hyperlink{group__flac__format_ga9a31f752e16da9d690f8d5ff85aed89c}{channel\_assignment}};}
+\DoxyCodeLine{00423\ }
+\DoxyCodeLine{00424\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gae1f4af58cbbb837adf670d12bc4e86f3}{bits\_per\_sample}};}
+\DoxyCodeLine{00426\ }
+\DoxyCodeLine{00427\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ga8fe9ebc78386cd2a3d23b7b8e3818e1c}{FLAC\_\_FrameNumberType}}\ \mbox{\hyperlink{group__flac__format_ga7a62ec09e6f3029297179ef65377265f}{number\_type}};}
+\DoxyCodeLine{00431\ }
+\DoxyCodeLine{00432\ \ \ \ \ \textcolor{keyword}{union\ }\{}
+\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ FLAC\_\_uint32\ frame\_number;}
+\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ FLAC\_\_uint64\ sample\_number;}
+\DoxyCodeLine{00435\ \ \ \ \ \}\ number;}
+\DoxyCodeLine{00438\ }
+\DoxyCodeLine{00439\ \ \ \ \ FLAC\_\_uint8\ \mbox{\hyperlink{group__flac__format_ga980438c380697df6f332cb27dc4672c4}{crc}};}
+\DoxyCodeLine{00444\ \}\ \mbox{\hyperlink{structFLAC____FrameHeader}{FLAC\_\_FrameHeader}};}
+\DoxyCodeLine{00445\ }
+\DoxyCodeLine{00446\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gaf8a0d3e8d4b884184d9c3989480748e9}{FLAC\_\_FRAME\_HEADER\_SYNC}};\ }
+\DoxyCodeLine{00447\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gaf8b98ef56e49b221414aadbea5baaaf0}{FLAC\_\_FRAME\_HEADER\_SYNC\_LEN}};\ }
+\DoxyCodeLine{00448\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga70f1f45eade9d2972370a4b35e937822}{FLAC\_\_FRAME\_HEADER\_RESERVED\_LEN}};\ }
+\DoxyCodeLine{00449\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga06bb43ed744b3d1c79628a8a9146c064}{FLAC\_\_FRAME\_HEADER\_BLOCKING\_STRATEGY\_LEN}};\ }
+\DoxyCodeLine{00450\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga32eacb5eab350bd660144035e2b566c8}{FLAC\_\_FRAME\_HEADER\_BLOCK\_SIZE\_LEN}};\ }
+\DoxyCodeLine{00451\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gaff504888e04725e4f448ac297c293b76}{FLAC\_\_FRAME\_HEADER\_SAMPLE\_RATE\_LEN}};\ }
+\DoxyCodeLine{00452\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga7a0fd74605d24347c4b486d2a62825bd}{FLAC\_\_FRAME\_HEADER\_CHANNEL\_ASSIGNMENT\_LEN}};\ }
+\DoxyCodeLine{00453\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gae4267632e12c4d6dc514f6bf139865c7}{FLAC\_\_FRAME\_HEADER\_BITS\_PER\_SAMPLE\_LEN}};\ }
+\DoxyCodeLine{00454\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga11aca6c74654d45939efafcbc3d225bf}{FLAC\_\_FRAME\_HEADER\_ZERO\_PAD\_LEN}};\ }
+\DoxyCodeLine{00455\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga85cca90abf67913469818af77256d32d}{FLAC\_\_FRAME\_HEADER\_CRC\_LEN}};\ }
+\DoxyCodeLine{00456\ }
+\DoxyCodeLine{00457\ }
+\DoxyCodeLine{00460\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00461\ \ \ \ \ FLAC\_\_uint16\ \mbox{\hyperlink{group__flac__format_gabdd6d64bf281c49c720b97b955d4eee7}{crc}};}
+\DoxyCodeLine{00466\ \}\ \mbox{\hyperlink{structFLAC____FrameFooter}{FLAC\_\_FrameFooter}};}
+\DoxyCodeLine{00467\ }
+\DoxyCodeLine{00468\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gad60e31ade8c94bae295828c8c6f74367}{FLAC\_\_FRAME\_FOOTER\_CRC\_LEN}};\ }
+\DoxyCodeLine{00469\ }
+\DoxyCodeLine{00470\ }
+\DoxyCodeLine{00473\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00474\ \ \ \ \ \mbox{\hyperlink{structFLAC____FrameHeader}{FLAC\_\_FrameHeader}}\ header;}
+\DoxyCodeLine{00475\ \ \ \ \ \mbox{\hyperlink{structFLAC____Subframe}{FLAC\_\_Subframe}}\ subframes[\mbox{\hyperlink{group__flac__format_ga488aa5678a58d08f984f5d39185b763d}{FLAC\_\_MAX\_CHANNELS}}];}
+\DoxyCodeLine{00476\ \ \ \ \ \mbox{\hyperlink{structFLAC____FrameFooter}{FLAC\_\_FrameFooter}}\ footer;}
+\DoxyCodeLine{00477\ \}\ \mbox{\hyperlink{structFLAC____Frame}{FLAC\_\_Frame}};}
+\DoxyCodeLine{00478\ }
+\DoxyCodeLine{00479\ \textcolor{comment}{/*****************************************************************************/}}
+\DoxyCodeLine{00480\ }
+\DoxyCodeLine{00481\ }
+\DoxyCodeLine{00482\ \textcolor{comment}{/*****************************************************************************}}
+\DoxyCodeLine{00483\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00484\ \textcolor{comment}{\ *\ Meta-\/data\ structures}}
+\DoxyCodeLine{00485\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00486\ \textcolor{comment}{\ *****************************************************************************/}}
+\DoxyCodeLine{00487\ }
+\DoxyCodeLine{00489\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00490\ }
+\DoxyCodeLine{00491\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01acffa517e969ba6a868dcf10e5da75c28}{FLAC\_\_METADATA\_TYPE\_STREAMINFO}}\ =\ 0,}
+\DoxyCodeLine{00493\ }
+\DoxyCodeLine{00494\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a6dcb741fc0aef389580f110e88beb896}{FLAC\_\_METADATA\_TYPE\_PADDING}}\ =\ 1,}
+\DoxyCodeLine{00496\ }
+\DoxyCodeLine{00497\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a2b287a22a1ac9440b309127884c8d41b}{FLAC\_\_METADATA\_TYPE\_APPLICATION}}\ =\ 2,}
+\DoxyCodeLine{00499\ }
+\DoxyCodeLine{00500\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a5f6323e489be1318f0e3747960ebdd91}{FLAC\_\_METADATA\_TYPE\_SEEKTABLE}}\ =\ 3,}
+\DoxyCodeLine{00502\ }
+\DoxyCodeLine{00503\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01ad013576bc5196b907547739518605520}{FLAC\_\_METADATA\_TYPE\_VORBIS\_COMMENT}}\ =\ 4,}
+\DoxyCodeLine{00505\ }
+\DoxyCodeLine{00506\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a0b3f07ae60609126562cd0233ce00a65}{FLAC\_\_METADATA\_TYPE\_CUESHEET}}\ =\ 5,}
+\DoxyCodeLine{00508\ }
+\DoxyCodeLine{00509\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01acf28ae2788366617c1aeab81d5961c6e}{FLAC\_\_METADATA\_TYPE\_PICTURE}}\ =\ 6,}
+\DoxyCodeLine{00511\ }
+\DoxyCodeLine{00512\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01acf6ac61fcc866608f5583c275dc34d47}{FLAC\_\_METADATA\_TYPE\_UNDEFINED}}\ =\ 7}
+\DoxyCodeLine{00514\ }
+\DoxyCodeLine{00515\ \}\ \mbox{\hyperlink{group__flac__format_gac71714ba8ddbbd66d26bb78a427fac01}{FLAC\_\_MetadataType}};}
+\DoxyCodeLine{00516\ }
+\DoxyCodeLine{00522\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ \mbox{\hyperlink{group__flac__format_gaf1ee427883bf9ecc219c25834e89a0ee}{FLAC\_\_MetadataTypeString}}[];}
+\DoxyCodeLine{00523\ }
+\DoxyCodeLine{00524\ }
+\DoxyCodeLine{00527\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00528\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ min\_blocksize,\ max\_blocksize;}
+\DoxyCodeLine{00529\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ min\_framesize,\ max\_framesize;}
+\DoxyCodeLine{00530\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ sample\_rate;}
+\DoxyCodeLine{00531\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ channels;}
+\DoxyCodeLine{00532\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ bits\_per\_sample;}
+\DoxyCodeLine{00533\ \ \ \ \ FLAC\_\_uint64\ total\_samples;}
+\DoxyCodeLine{00534\ \ \ \ \ FLAC\_\_byte\ md5sum[16];}
+\DoxyCodeLine{00535\ \}\ \mbox{\hyperlink{structFLAC____StreamMetadata__StreamInfo}{FLAC\_\_StreamMetadata\_StreamInfo}};}
+\DoxyCodeLine{00536\ }
+\DoxyCodeLine{00537\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga196acfb0e7311915ce5528279b717115}{FLAC\_\_STREAM\_METADATA\_STREAMINFO\_MIN\_BLOCK\_SIZE\_LEN}};\ }
+\DoxyCodeLine{00538\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga6f069aa2f887122aa88f65e5fae2f0e7}{FLAC\_\_STREAM\_METADATA\_STREAMINFO\_MAX\_BLOCK\_SIZE\_LEN}};\ }
+\DoxyCodeLine{00539\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga0bdf42bf21ece52817dbc3d70c3cf73f}{FLAC\_\_STREAM\_METADATA\_STREAMINFO\_MIN\_FRAME\_SIZE\_LEN}};\ }
+\DoxyCodeLine{00540\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gaa206d2c029642f1ad22b101f071d010b}{FLAC\_\_STREAM\_METADATA\_STREAMINFO\_MAX\_FRAME\_SIZE\_LEN}};\ }
+\DoxyCodeLine{00541\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gad0d8c637c666ef08cad2d9668f3e9ecf}{FLAC\_\_STREAM\_METADATA\_STREAMINFO\_SAMPLE\_RATE\_LEN}};\ }
+\DoxyCodeLine{00542\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gadc990fec49da063c33debfc2817c0e98}{FLAC\_\_STREAM\_METADATA\_STREAMINFO\_CHANNELS\_LEN}};\ }
+\DoxyCodeLine{00543\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga84c55a68f58fff56e23fda6d24bd3510}{FLAC\_\_STREAM\_METADATA\_STREAMINFO\_BITS\_PER\_SAMPLE\_LEN}};\ }
+\DoxyCodeLine{00544\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga061dcc54018329ac1b893d95b3970ebc}{FLAC\_\_STREAM\_METADATA\_STREAMINFO\_TOTAL\_SAMPLES\_LEN}};\ }
+\DoxyCodeLine{00545\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga35030375a8c77a3799bceea07f95b221}{FLAC\_\_STREAM\_METADATA\_STREAMINFO\_MD5SUM\_LEN}};\ }
+\DoxyCodeLine{00546\ }
+\DoxyCodeLine{00548\ \textcolor{preprocessor}{\#define\ FLAC\_\_STREAM\_METADATA\_STREAMINFO\_LENGTH\ (34u)}}
+\DoxyCodeLine{00549\ }
+\DoxyCodeLine{00552\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00553\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{group__flac__format_ga5214437fcba7d6abdc3b2435dcaa4124}{dummy}};}
+\DoxyCodeLine{00558\ \}\ \mbox{\hyperlink{structFLAC____StreamMetadata__Padding}{FLAC\_\_StreamMetadata\_Padding}};}
+\DoxyCodeLine{00559\ }
+\DoxyCodeLine{00560\ }
+\DoxyCodeLine{00563\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00564\ \ \ \ \ FLAC\_\_byte\ \textcolor{keywordtype}{id}[4];}
+\DoxyCodeLine{00565\ \ \ \ \ FLAC\_\_byte\ *data;}
+\DoxyCodeLine{00566\ \}\ \mbox{\hyperlink{structFLAC____StreamMetadata__Application}{FLAC\_\_StreamMetadata\_Application}};}
+\DoxyCodeLine{00567\ }
+\DoxyCodeLine{00568\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga8a1d1839a9e22692dfeaf9fce9cb9991}{FLAC\_\_STREAM\_METADATA\_APPLICATION\_ID\_LEN}};\ }
+\DoxyCodeLine{00569\ }
+\DoxyCodeLine{00572\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00573\ \ \ \ \ FLAC\_\_uint64\ \mbox{\hyperlink{group__flac__format_ga96a62923f1443fd3a5a3498e701e6ecf}{sample\_number}};}
+\DoxyCodeLine{00575\ }
+\DoxyCodeLine{00576\ \ \ \ \ FLAC\_\_uint64\ \mbox{\hyperlink{group__flac__format_ga6028398e99f937b002618af677d32c9f}{stream\_offset}};}
+\DoxyCodeLine{00579\ }
+\DoxyCodeLine{00580\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga247ce3f0d45a56c202e623742309fe61}{frame\_samples}};}
+\DoxyCodeLine{00582\ \}\ \mbox{\hyperlink{structFLAC____StreamMetadata__SeekPoint}{FLAC\_\_StreamMetadata\_SeekPoint}};}
+\DoxyCodeLine{00583\ }
+\DoxyCodeLine{00584\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga8fe65704a9be1ad13a1654e78ab80c32}{FLAC\_\_STREAM\_METADATA\_SEEKPOINT\_SAMPLE\_NUMBER\_LEN}};\ }
+\DoxyCodeLine{00585\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gac351fcf185d0a36ddf6f0d358258ed5c}{FLAC\_\_STREAM\_METADATA\_SEEKPOINT\_STREAM\_OFFSET\_LEN}};\ }
+\DoxyCodeLine{00586\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gadf07cc8895679fc151c2cc4609d8c394}{FLAC\_\_STREAM\_METADATA\_SEEKPOINT\_FRAME\_SAMPLES\_LEN}};\ }
+\DoxyCodeLine{00587\ }
+\DoxyCodeLine{00589\ \textcolor{preprocessor}{\#define\ FLAC\_\_STREAM\_METADATA\_SEEKPOINT\_LENGTH\ (18u)}}
+\DoxyCodeLine{00590\ }
+\DoxyCodeLine{00595\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ FLAC\_\_uint64\ \mbox{\hyperlink{group__flac__format_ga39373aa806e3132146c1f29f35a23877}{FLAC\_\_STREAM\_METADATA\_SEEKPOINT\_PLACEHOLDER}};}
+\DoxyCodeLine{00596\ }
+\DoxyCodeLine{00597\ }
+\DoxyCodeLine{00610\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00611\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ num\_points;}
+\DoxyCodeLine{00612\ \ \ \ \ \mbox{\hyperlink{structFLAC____StreamMetadata__SeekPoint}{FLAC\_\_StreamMetadata\_SeekPoint}}\ *points;}
+\DoxyCodeLine{00613\ \}\ \mbox{\hyperlink{structFLAC____StreamMetadata__SeekTable}{FLAC\_\_StreamMetadata\_SeekTable}};}
+\DoxyCodeLine{00614\ }
+\DoxyCodeLine{00615\ }
+\DoxyCodeLine{00622\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00623\ \ \ \ \ FLAC\_\_uint32\ length;}
+\DoxyCodeLine{00624\ \ \ \ \ FLAC\_\_byte\ *entry;}
+\DoxyCodeLine{00625\ \}\ \mbox{\hyperlink{structFLAC____StreamMetadata__VorbisComment__Entry}{FLAC\_\_StreamMetadata\_VorbisComment\_Entry}};}
+\DoxyCodeLine{00626\ }
+\DoxyCodeLine{00627\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga0153a5ed9577e276250dc8414e236172}{FLAC\_\_STREAM\_METADATA\_VORBIS\_COMMENT\_ENTRY\_LENGTH\_LEN}};\ }
+\DoxyCodeLine{00628\ }
+\DoxyCodeLine{00629\ }
+\DoxyCodeLine{00632\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00633\ \ \ \ \ \mbox{\hyperlink{structFLAC____StreamMetadata__VorbisComment__Entry}{FLAC\_\_StreamMetadata\_VorbisComment\_Entry}}\ vendor\_string;}
+\DoxyCodeLine{00634\ \ \ \ \ FLAC\_\_uint32\ num\_comments;}
+\DoxyCodeLine{00635\ \ \ \ \ \mbox{\hyperlink{structFLAC____StreamMetadata__VorbisComment__Entry}{FLAC\_\_StreamMetadata\_VorbisComment\_Entry}}\ *comments;}
+\DoxyCodeLine{00636\ \}\ \mbox{\hyperlink{structFLAC____StreamMetadata__VorbisComment}{FLAC\_\_StreamMetadata\_VorbisComment}};}
+\DoxyCodeLine{00637\ }
+\DoxyCodeLine{00638\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gaa45c45967901bd6002d2a0ccbb208e02}{FLAC\_\_STREAM\_METADATA\_VORBIS\_COMMENT\_NUM\_COMMENTS\_LEN}};\ }
+\DoxyCodeLine{00639\ }
+\DoxyCodeLine{00640\ }
+\DoxyCodeLine{00645\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00646\ \ \ \ \ FLAC\_\_uint64\ \mbox{\hyperlink{group__flac__format_gac221421bca83976925e2a41438157bb9}{offset}};}
+\DoxyCodeLine{00650\ }
+\DoxyCodeLine{00651\ \ \ \ \ FLAC\_\_byte\ \mbox{\hyperlink{group__flac__format_ga71edc33c19a749f1dfb3d1429e08c77a}{number}};}
+\DoxyCodeLine{00653\ \}\ \mbox{\hyperlink{structFLAC____StreamMetadata__CueSheet__Index}{FLAC\_\_StreamMetadata\_CueSheet\_Index}};}
+\DoxyCodeLine{00654\ }
+\DoxyCodeLine{00655\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga6579eee01a62ce96e3e243e3bd1ec478}{FLAC\_\_STREAM\_METADATA\_CUESHEET\_INDEX\_OFFSET\_LEN}};\ }
+\DoxyCodeLine{00656\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga1cbe4b28f16dd566feb74782f2728b0e}{FLAC\_\_STREAM\_METADATA\_CUESHEET\_INDEX\_NUMBER\_LEN}};\ }
+\DoxyCodeLine{00657\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gaa3266be1c92182925c0d02c660617feb}{FLAC\_\_STREAM\_METADATA\_CUESHEET\_INDEX\_RESERVED\_LEN}};\ }
+\DoxyCodeLine{00658\ }
+\DoxyCodeLine{00659\ }
+\DoxyCodeLine{00664\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00665\ \ \ \ \ FLAC\_\_uint64\ \mbox{\hyperlink{group__flac__format_ga40e1c888253a56b6dc4885a44138d1bf}{offset}};}
+\DoxyCodeLine{00667\ }
+\DoxyCodeLine{00668\ \ \ \ \ FLAC\_\_byte\ \mbox{\hyperlink{group__flac__format_ga429103d63c44d1861b4dc0762726701a}{number}};}
+\DoxyCodeLine{00670\ }
+\DoxyCodeLine{00671\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{group__flac__format_ga4990c8b13969f4c62683d915ebbf5744}{isrc}}[13];}
+\DoxyCodeLine{00673\ }
+\DoxyCodeLine{00674\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga848575fc7a7292867ce76a9b3705f6e7}{type}}:1;}
+\DoxyCodeLine{00676\ }
+\DoxyCodeLine{00677\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gab4a97e43166ee16d1d16cccd901ddc3a}{pre\_emphasis}}:1;}
+\DoxyCodeLine{00679\ }
+\DoxyCodeLine{00680\ \ \ \ \ FLAC\_\_byte\ \mbox{\hyperlink{group__flac__format_ga5f1c1d7e3ddc533938b83951c7b3dda5}{num\_indices}};}
+\DoxyCodeLine{00682\ }
+\DoxyCodeLine{00683\ \ \ \ \ \mbox{\hyperlink{structFLAC____StreamMetadata__CueSheet__Index}{FLAC\_\_StreamMetadata\_CueSheet\_Index}}\ *\mbox{\hyperlink{group__flac__format_ga14e0692a77b5b6689e208f48369edb90}{indices}};}
+\DoxyCodeLine{00685\ }
+\DoxyCodeLine{00686\ \}\ \mbox{\hyperlink{structFLAC____StreamMetadata__CueSheet__Track}{FLAC\_\_StreamMetadata\_CueSheet\_Track}};}
+\DoxyCodeLine{00687\ }
+\DoxyCodeLine{00688\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga2998481389f82ac8ec3c8aa1e405fb56}{FLAC\_\_STREAM\_METADATA\_CUESHEET\_TRACK\_OFFSET\_LEN}};\ }
+\DoxyCodeLine{00689\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga29c8c5cd71c4cc66ba322e3cf60c78a7}{FLAC\_\_STREAM\_METADATA\_CUESHEET\_TRACK\_NUMBER\_LEN}};\ }
+\DoxyCodeLine{00690\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gac3f768f4fa5d8ea1d10a3884c29f4a35}{FLAC\_\_STREAM\_METADATA\_CUESHEET\_TRACK\_ISRC\_LEN}};\ }
+\DoxyCodeLine{00691\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga214d2c105a5712dea76c0a9802843fba}{FLAC\_\_STREAM\_METADATA\_CUESHEET\_TRACK\_TYPE\_LEN}};\ }
+\DoxyCodeLine{00692\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gaa50843400f847963958b622e32c7afb1}{FLAC\_\_STREAM\_METADATA\_CUESHEET\_TRACK\_PRE\_EMPHASIS\_LEN}};\ }
+\DoxyCodeLine{00693\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga1a469393239653b050c7cc3484d33bef}{FLAC\_\_STREAM\_METADATA\_CUESHEET\_TRACK\_RESERVED\_LEN}};\ }
+\DoxyCodeLine{00694\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga34226e52846bbcba46b278f297880637}{FLAC\_\_STREAM\_METADATA\_CUESHEET\_TRACK\_NUM\_INDICES\_LEN}};\ }
+\DoxyCodeLine{00695\ }
+\DoxyCodeLine{00696\ }
+\DoxyCodeLine{00701\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00702\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{group__flac__format_ga776e6057ac7939fba52edecd44ec45bc}{media\_catalog\_number}}[129];}
+\DoxyCodeLine{00707\ }
+\DoxyCodeLine{00708\ \ \ \ \ FLAC\_\_uint64\ \mbox{\hyperlink{group__flac__format_ga43fdc0a538ef2c3e0926ee22814baf40}{lead\_in}};}
+\DoxyCodeLine{00710\ }
+\DoxyCodeLine{00711\ \ \ \ \ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__format_ga6af66f921aefc6f779fbc0ab6daeab8a}{is\_cd}};}
+\DoxyCodeLine{00713\ }
+\DoxyCodeLine{00714\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga6924f26a8e8fa9023f23539b959fe2ae}{num\_tracks}};}
+\DoxyCodeLine{00716\ }
+\DoxyCodeLine{00717\ \ \ \ \ \mbox{\hyperlink{structFLAC____StreamMetadata__CueSheet__Track}{FLAC\_\_StreamMetadata\_CueSheet\_Track}}\ *\mbox{\hyperlink{group__flac__format_ga5c0c3440b01b773684d56aeb1e424fab}{tracks}};}
+\DoxyCodeLine{00719\ }
+\DoxyCodeLine{00720\ \}\ \mbox{\hyperlink{structFLAC____StreamMetadata__CueSheet}{FLAC\_\_StreamMetadata\_CueSheet}};}
+\DoxyCodeLine{00721\ }
+\DoxyCodeLine{00722\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga2f453e18dc7e33456cdd744ee7926f83}{FLAC\_\_STREAM\_METADATA\_CUESHEET\_MEDIA\_CATALOG\_NUMBER\_LEN}};\ }
+\DoxyCodeLine{00723\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga5b9607000b777c7a7be84062754e0363}{FLAC\_\_STREAM\_METADATA\_CUESHEET\_LEAD\_IN\_LEN}};\ }
+\DoxyCodeLine{00724\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gacbd3c003cb8dd36e184b57257152cd16}{FLAC\_\_STREAM\_METADATA\_CUESHEET\_IS\_CD\_LEN}};\ }
+\DoxyCodeLine{00725\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga7f301f901b430c3acb334809f4641ded}{FLAC\_\_STREAM\_METADATA\_CUESHEET\_RESERVED\_LEN}};\ }
+\DoxyCodeLine{00726\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gac45ce3823397c3c2a5c56e86fc121e0f}{FLAC\_\_STREAM\_METADATA\_CUESHEET\_NUM\_TRACKS\_LEN}};\ }
+\DoxyCodeLine{00727\ }
+\DoxyCodeLine{00728\ }
+\DoxyCodeLine{00730\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00731\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggaf6d3e836cee023e0b8d897f1fdc9825dadd6d6af32499b1973e48c9e8f13357ce}{FLAC\_\_STREAM\_METADATA\_PICTURE\_TYPE\_OTHER}}\ =\ 0,\ }
+\DoxyCodeLine{00732\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggaf6d3e836cee023e0b8d897f1fdc9825da5eca52e5cfcb718f33f5fce9b1021a49}{FLAC\_\_STREAM\_METADATA\_PICTURE\_TYPE\_FILE\_ICON\_STANDARD}}\ =\ 1,\ }
+\DoxyCodeLine{00733\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggaf6d3e836cee023e0b8d897f1fdc9825daaf44b9d5fb75dde6941463e5029aa351}{FLAC\_\_STREAM\_METADATA\_PICTURE\_TYPE\_FILE\_ICON}}\ =\ 2,\ }
+\DoxyCodeLine{00734\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggaf6d3e836cee023e0b8d897f1fdc9825da3e20b405fd4e835ff3a4465b8bcb7c36}{FLAC\_\_STREAM\_METADATA\_PICTURE\_TYPE\_FRONT\_COVER}}\ =\ 3,\ }
+\DoxyCodeLine{00735\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggaf6d3e836cee023e0b8d897f1fdc9825da9ae132f2ee7d3baf35f94a9dc9640f62}{FLAC\_\_STREAM\_METADATA\_PICTURE\_TYPE\_BACK\_COVER}}\ =\ 4,\ }
+\DoxyCodeLine{00736\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggaf6d3e836cee023e0b8d897f1fdc9825dad3cb471b7925ae5034d9fd9ecfafb87a}{FLAC\_\_STREAM\_METADATA\_PICTURE\_TYPE\_LEAFLET\_PAGE}}\ =\ 5,\ }
+\DoxyCodeLine{00737\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggaf6d3e836cee023e0b8d897f1fdc9825dac994edc4166107ab5790e49f0b57ffd9}{FLAC\_\_STREAM\_METADATA\_PICTURE\_TYPE\_MEDIA}}\ =\ 6,\ }
+\DoxyCodeLine{00738\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggaf6d3e836cee023e0b8d897f1fdc9825da1282e252e20553c39907074052960f42}{FLAC\_\_STREAM\_METADATA\_PICTURE\_TYPE\_LEAD\_ARTIST}}\ =\ 7,\ }
+\DoxyCodeLine{00739\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggaf6d3e836cee023e0b8d897f1fdc9825da4cead70f8720f180fc220e6df8d55cce}{FLAC\_\_STREAM\_METADATA\_PICTURE\_TYPE\_ARTIST}}\ =\ 8,\ }
+\DoxyCodeLine{00740\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggaf6d3e836cee023e0b8d897f1fdc9825dae01a47af0b0c4d89500b755ebca866ce}{FLAC\_\_STREAM\_METADATA\_PICTURE\_TYPE\_CONDUCTOR}}\ =\ 9,\ }
+\DoxyCodeLine{00741\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggaf6d3e836cee023e0b8d897f1fdc9825da8515523b4c9ab65ffef7db98bc09ceb1}{FLAC\_\_STREAM\_METADATA\_PICTURE\_TYPE\_BAND}}\ =\ 10,\ }
+\DoxyCodeLine{00742\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggaf6d3e836cee023e0b8d897f1fdc9825da5ea1554bc96deb45731bc5897600d1c2}{FLAC\_\_STREAM\_METADATA\_PICTURE\_TYPE\_COMPOSER}}\ =\ 11,\ }
+\DoxyCodeLine{00743\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggaf6d3e836cee023e0b8d897f1fdc9825da86159eda8969514f5992b3e341103f22}{FLAC\_\_STREAM\_METADATA\_PICTURE\_TYPE\_LYRICIST}}\ =\ 12,\ }
+\DoxyCodeLine{00744\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggaf6d3e836cee023e0b8d897f1fdc9825dac96e810cdd81465709b4a3a03289e89c}{FLAC\_\_STREAM\_METADATA\_PICTURE\_TYPE\_RECORDING\_LOCATION}}\ =\ 13,\ }
+\DoxyCodeLine{00745\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggaf6d3e836cee023e0b8d897f1fdc9825da8cee3bb376ed1044b3a7e20b9c971ff1}{FLAC\_\_STREAM\_METADATA\_PICTURE\_TYPE\_DURING\_RECORDING}}\ =\ 14,\ }
+\DoxyCodeLine{00746\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggaf6d3e836cee023e0b8d897f1fdc9825da4d4dc6904984370501865988d948de3f}{FLAC\_\_STREAM\_METADATA\_PICTURE\_TYPE\_DURING\_PERFORMANCE}}\ =\ 15,\ }
+\DoxyCodeLine{00747\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggaf6d3e836cee023e0b8d897f1fdc9825da7adc2b194968b51768721de7bda39df9}{FLAC\_\_STREAM\_METADATA\_PICTURE\_TYPE\_VIDEO\_SCREEN\_CAPTURE}}\ =\ 16,\ }
+\DoxyCodeLine{00748\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggaf6d3e836cee023e0b8d897f1fdc9825dabbf0d7c519ae8ba8cec7d1f165f67b0f}{FLAC\_\_STREAM\_METADATA\_PICTURE\_TYPE\_FISH}}\ =\ 17,\ }
+\DoxyCodeLine{00749\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggaf6d3e836cee023e0b8d897f1fdc9825da89ba412c9d89c937c28afdab508d047a}{FLAC\_\_STREAM\_METADATA\_PICTURE\_TYPE\_ILLUSTRATION}}\ =\ 18,\ }
+\DoxyCodeLine{00750\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggaf6d3e836cee023e0b8d897f1fdc9825da751716a4528a78a8d53f435c816c4917}{FLAC\_\_STREAM\_METADATA\_PICTURE\_TYPE\_BAND\_LOGOTYPE}}\ =\ 19,\ }
+\DoxyCodeLine{00751\ \ \ \ \ \mbox{\hyperlink{group__flac__format_ggaf6d3e836cee023e0b8d897f1fdc9825da31d75150a4079482fe122e703eff9141}{FLAC\_\_STREAM\_METADATA\_PICTURE\_TYPE\_PUBLISHER\_LOGOTYPE}}\ =\ 20,\ }
+\DoxyCodeLine{00752\ \ \ \ \ FLAC\_\_STREAM\_METADATA\_PICTURE\_TYPE\_UNDEFINED}
+\DoxyCodeLine{00753\ \}\ \mbox{\hyperlink{group__flac__format_gaf6d3e836cee023e0b8d897f1fdc9825d}{FLAC\_\_StreamMetadata\_Picture\_Type}};}
+\DoxyCodeLine{00754\ }
+\DoxyCodeLine{00761\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ \mbox{\hyperlink{group__flac__format_gaddee484e4ef594f23402072a950e00fd}{FLAC\_\_StreamMetadata\_Picture\_TypeString}}[];}
+\DoxyCodeLine{00762\ }
+\DoxyCodeLine{00767\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00768\ \ \ \ \ \mbox{\hyperlink{group__flac__format_gaf6d3e836cee023e0b8d897f1fdc9825d}{FLAC\_\_StreamMetadata\_Picture\_Type}}\ \mbox{\hyperlink{group__flac__format_gaddc05a87a1da1ec7dd2301944ff2819c}{type}};}
+\DoxyCodeLine{00770\ }
+\DoxyCodeLine{00771\ \ \ \ \ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{group__flac__format_ga9b4af2e10b627c0e79abf4cdd79f80e0}{mime\_type}};}
+\DoxyCodeLine{00781\ }
+\DoxyCodeLine{00782\ \ \ \ \ FLAC\_\_byte\ *\mbox{\hyperlink{group__flac__format_ga5bbfb168b265edfb0b29cfdb71fb413c}{description}};}
+\DoxyCodeLine{00788\ }
+\DoxyCodeLine{00789\ \ \ \ \ FLAC\_\_uint32\ \mbox{\hyperlink{group__flac__format_ga18dc6cdef9fa6c815450671f631a1e04}{width}};}
+\DoxyCodeLine{00791\ }
+\DoxyCodeLine{00792\ \ \ \ \ FLAC\_\_uint32\ \mbox{\hyperlink{group__flac__format_ga76dbd1212d330807cda289660f5ee754}{height}};}
+\DoxyCodeLine{00794\ }
+\DoxyCodeLine{00795\ \ \ \ \ FLAC\_\_uint32\ \mbox{\hyperlink{group__flac__format_ga0f2092ddf28a6803e9c8adb7328c1967}{depth}};}
+\DoxyCodeLine{00797\ }
+\DoxyCodeLine{00798\ \ \ \ \ FLAC\_\_uint32\ \mbox{\hyperlink{group__flac__format_gaf17c1738bab67eba049ee101acfd36f0}{colors}};}
+\DoxyCodeLine{00802\ }
+\DoxyCodeLine{00803\ \ \ \ \ FLAC\_\_uint32\ \mbox{\hyperlink{group__flac__format_gacb893f63a196f70263468770a90580a4}{data\_length}};}
+\DoxyCodeLine{00805\ }
+\DoxyCodeLine{00806\ \ \ \ \ FLAC\_\_byte\ *\mbox{\hyperlink{group__flac__format_ga9c71b5d77920e6d3aee6893795c43605}{data}};}
+\DoxyCodeLine{00808\ }
+\DoxyCodeLine{00809\ \}\ \mbox{\hyperlink{structFLAC____StreamMetadata__Picture}{FLAC\_\_StreamMetadata\_Picture}};}
+\DoxyCodeLine{00810\ }
+\DoxyCodeLine{00811\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga6afbd9c5fe1936bd73fd75768419414e}{FLAC\_\_STREAM\_METADATA\_PICTURE\_TYPE\_LEN}};\ }
+\DoxyCodeLine{00812\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gadcaf6e90f8457929c7fa447d19c2b214}{FLAC\_\_STREAM\_METADATA\_PICTURE\_MIME\_TYPE\_LENGTH\_LEN}};\ }
+\DoxyCodeLine{00813\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gab3a293664bc479d1a1367631d7b776f7}{FLAC\_\_STREAM\_METADATA\_PICTURE\_DESCRIPTION\_LENGTH\_LEN}};\ }
+\DoxyCodeLine{00814\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga4e7491ae179e5c713e2246ac80cf36e6}{FLAC\_\_STREAM\_METADATA\_PICTURE\_WIDTH\_LEN}};\ }
+\DoxyCodeLine{00815\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gab072f764d249b491b42514c8a1d18d22}{FLAC\_\_STREAM\_METADATA\_PICTURE\_HEIGHT\_LEN}};\ }
+\DoxyCodeLine{00816\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gaf353f5e8c2a50d00e77f31b97fda078e}{FLAC\_\_STREAM\_METADATA\_PICTURE\_DEPTH\_LEN}};\ }
+\DoxyCodeLine{00817\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga3eb701d8a4cfab5c6b6e778a7a15cc95}{FLAC\_\_STREAM\_METADATA\_PICTURE\_COLORS\_LEN}};\ }
+\DoxyCodeLine{00818\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga30354d7318c03c9b272554eeb7d28719}{FLAC\_\_STREAM\_METADATA\_PICTURE\_DATA\_LENGTH\_LEN}};\ }
+\DoxyCodeLine{00819\ }
+\DoxyCodeLine{00820\ }
+\DoxyCodeLine{00825\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00826\ \ \ \ \ FLAC\_\_byte\ *data;}
+\DoxyCodeLine{00827\ \}\ \mbox{\hyperlink{structFLAC____StreamMetadata__Unknown}{FLAC\_\_StreamMetadata\_Unknown}};}
+\DoxyCodeLine{00828\ }
+\DoxyCodeLine{00829\ }
+\DoxyCodeLine{00832\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00833\ \ \ \ \ \mbox{\hyperlink{group__flac__format_gac71714ba8ddbbd66d26bb78a427fac01}{FLAC\_\_MetadataType}}\ \mbox{\hyperlink{group__flac__format_ga39fd0655464f2cc7c9c37ae715088aec}{type}};}
+\DoxyCodeLine{00837\ }
+\DoxyCodeLine{00838\ \ \ \ \ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__format_gaef40bbf85abe12e035f66f2d54ed316c}{is\_last}};}
+\DoxyCodeLine{00840\ }
+\DoxyCodeLine{00841\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga3fd615e41609837a5672f9081d9d2183}{length}};}
+\DoxyCodeLine{00843\ }
+\DoxyCodeLine{00844\ \ \ \ \ \textcolor{keyword}{union\ }\{}
+\DoxyCodeLine{00845\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structFLAC____StreamMetadata__StreamInfo}{FLAC\_\_StreamMetadata\_StreamInfo}}\ stream\_info;}
+\DoxyCodeLine{00846\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structFLAC____StreamMetadata__Padding}{FLAC\_\_StreamMetadata\_Padding}}\ padding;}
+\DoxyCodeLine{00847\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structFLAC____StreamMetadata__Application}{FLAC\_\_StreamMetadata\_Application}}\ application;}
+\DoxyCodeLine{00848\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structFLAC____StreamMetadata__SeekTable}{FLAC\_\_StreamMetadata\_SeekTable}}\ seek\_table;}
+\DoxyCodeLine{00849\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structFLAC____StreamMetadata__VorbisComment}{FLAC\_\_StreamMetadata\_VorbisComment}}\ vorbis\_comment;}
+\DoxyCodeLine{00850\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structFLAC____StreamMetadata__CueSheet}{FLAC\_\_StreamMetadata\_CueSheet}}\ cue\_sheet;}
+\DoxyCodeLine{00851\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structFLAC____StreamMetadata__Picture}{FLAC\_\_StreamMetadata\_Picture}}\ picture;}
+\DoxyCodeLine{00852\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structFLAC____StreamMetadata__Unknown}{FLAC\_\_StreamMetadata\_Unknown}}\ unknown;}
+\DoxyCodeLine{00853\ \ \ \ \ \}\ data;}
+\DoxyCodeLine{00856\ \}\ \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\_\_StreamMetadata}};}
+\DoxyCodeLine{00857\ }
+\DoxyCodeLine{00858\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga52249514c52427990483b9f5a0ca7f93}{FLAC\_\_STREAM\_METADATA\_IS\_LAST\_LEN}};\ }
+\DoxyCodeLine{00859\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga3804c687f8aef9c26369a63dd0a6b55c}{FLAC\_\_STREAM\_METADATA\_TYPE\_LEN}};\ }
+\DoxyCodeLine{00860\ \textcolor{keyword}{extern}\ FLAC\_API\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_ga4e565861db32c57c2f6bc71e9f1207a9}{FLAC\_\_STREAM\_METADATA\_LENGTH\_LEN}};\ }
+\DoxyCodeLine{00861\ }
+\DoxyCodeLine{00863\ \textcolor{preprocessor}{\#define\ FLAC\_\_STREAM\_METADATA\_HEADER\_LENGTH\ (4u)}}
+\DoxyCodeLine{00864\ }
+\DoxyCodeLine{00865\ \textcolor{comment}{/*****************************************************************************/}}
+\DoxyCodeLine{00866\ }
+\DoxyCodeLine{00867\ }
+\DoxyCodeLine{00868\ \textcolor{comment}{/*****************************************************************************}}
+\DoxyCodeLine{00869\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00870\ \textcolor{comment}{\ *\ Utility\ functions}}
+\DoxyCodeLine{00871\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00872\ \textcolor{comment}{\ *****************************************************************************/}}
+\DoxyCodeLine{00873\ }
+\DoxyCodeLine{00881\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__format_gaec1c46afe33c0bb200be68bb36e0dd32}{FLAC\_\_format\_sample\_rate\_is\_valid}}(\textcolor{keywordtype}{unsigned}\ sample\_rate);}
+\DoxyCodeLine{00882\ }
+\DoxyCodeLine{00893\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__format_gacc6258efc7b737f90ee0c32bdb6775ba}{FLAC\_\_format\_blocksize\_is\_subset}}(\textcolor{keywordtype}{unsigned}\ blocksize,\ \textcolor{keywordtype}{unsigned}\ sample\_rate);}
+\DoxyCodeLine{00894\ }
+\DoxyCodeLine{00904\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__format_ga996f8732a2502ad79a68bb4a9f945235}{FLAC\_\_format\_sample\_rate\_is\_subset}}(\textcolor{keywordtype}{unsigned}\ sample\_rate);}
+\DoxyCodeLine{00905\ }
+\DoxyCodeLine{00918\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__format_ga14980d2e4b0ff2cdd4f22fcf8e75b54c}{FLAC\_\_format\_vorbiscomment\_entry\_name\_is\_legal}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *name);}
+\DoxyCodeLine{00919\ }
+\DoxyCodeLine{00934\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__format_gae0707c9d46b2af02f1e145bdae331605}{FLAC\_\_format\_vorbiscomment\_entry\_value\_is\_legal}}(\textcolor{keyword}{const}\ FLAC\_\_byte\ *value,\ \textcolor{keywordtype}{unsigned}\ length);}
+\DoxyCodeLine{00935\ }
+\DoxyCodeLine{00951\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__format_ga6878e238052fc0f7109b55129d64b4e5}{FLAC\_\_format\_vorbiscomment\_entry\_is\_legal}}(\textcolor{keyword}{const}\ FLAC\_\_byte\ *entry,\ \textcolor{keywordtype}{unsigned}\ length);}
+\DoxyCodeLine{00952\ }
+\DoxyCodeLine{00963\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__format_ga02270d9b92dbe7617635c65a1d0f58ff}{FLAC\_\_format\_seektable\_is\_legal}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamMetadata__SeekTable}{FLAC\_\_StreamMetadata\_SeekTable}}\ *seek\_table);}
+\DoxyCodeLine{00964\ }
+\DoxyCodeLine{00977\ FLAC\_API\ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{group__flac__format_gad1b0090d45a6d65a696a81261bd7fbf6}{FLAC\_\_format\_seektable\_sort}}(\mbox{\hyperlink{structFLAC____StreamMetadata__SeekTable}{FLAC\_\_StreamMetadata\_SeekTable}}\ *seek\_table);}
+\DoxyCodeLine{00978\ }
+\DoxyCodeLine{00997\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__format_gae922cabe2dc3f81af10cb635cf996114}{FLAC\_\_format\_cuesheet\_is\_legal}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamMetadata__CueSheet}{FLAC\_\_StreamMetadata\_CueSheet}}\ *cue\_sheet,\ FLAC\_\_bool\ check\_cd\_da\_subset,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ **violation);}
+\DoxyCodeLine{00998\ }
+\DoxyCodeLine{01015\ FLAC\_API\ FLAC\_\_bool\ \mbox{\hyperlink{group__flac__format_gaf90af7bc6ece6f28063b08e9aa6b4077}{FLAC\_\_format\_picture\_is\_legal}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFLAC____StreamMetadata__Picture}{FLAC\_\_StreamMetadata\_Picture}}\ *picture,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ **violation);}
+\DoxyCodeLine{01016\ }
+\DoxyCodeLine{01017\ \textcolor{comment}{/*\ \(\backslash\)\}\ */}}
+\DoxyCodeLine{01018\ }
+\DoxyCodeLine{01019\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{01020\ \}}
+\DoxyCodeLine{01021\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01022\ }
+\DoxyCodeLine{01023\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,31 @@
+\doxysection{Zenith\+Ui.\+hpp}
+\hypertarget{ZenithUi_8hpp_source}{}\label{ZenithUi_8hpp_source}\index{include/ZenithUi.hpp@{include/ZenithUi.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}ZenithBar.hpp"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }zenith\ \{}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keyword}{using\ }UiEventList\ =\ std::vector<std::function<void\ (sf::Event\ e)>>;}
+\DoxyCodeLine{00010\ \ \ \ \ }
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{class\ }ZenithUi\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \ \ \ \ ZenithUi();}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Run();}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzenith_1_1ZenithBar}{ZenithBar}}\ \_bar;}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ UiEventList\ \_eventList;}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ RenderLoop();}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetupEvents();}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ ProcessEvents(sf::RenderWindow\&\ window);}
+\DoxyCodeLine{00024\ \ \ \ \ \};}
+\DoxyCodeLine{00025\ \}}
+
+\end{DoxyCode}

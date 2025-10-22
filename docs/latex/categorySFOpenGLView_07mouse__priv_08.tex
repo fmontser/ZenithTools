@@ -1,0 +1,115 @@
+\doxysection{SFOpen\+GLView(mouse\+\_\+priv) Category Reference}
+\hypertarget{categorySFOpenGLView_07mouse__priv_08}{}\label{categorySFOpenGLView_07mouse__priv_08}\index{SFOpenGLView(mouse\_priv)@{SFOpenGLView(mouse\_priv)}}
+
+
+{\ttfamily \#include $<$SFOpen\+GLView+mouse\+\_\+priv.\+h$>$}
+
+\doxysubsubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \mbox{\hyperlink{categorySFOpenGLView_07mouse__priv_08_a66fb2d1dedaa56ed04f1240932d31dce}{update\+Mouse\+State}}
+\begin{DoxyCompactList}\small\item\em Update the mouse state (in or out) \end{DoxyCompactList}\item 
+\Hypertarget{categorySFOpenGLView_07mouse__priv_08_a8c7467ff60bd2784b35bd1371aa4d500}\label{categorySFOpenGLView_07mouse__priv_08_a8c7467ff60bd2784b35bd1371aa4d500} 
+(void) -\/ {\bfseries handle\+Mouse\+Down\+:}
+\begin{DoxyCompactList}\small\item\em handle mouse down event \end{DoxyCompactList}\item 
+\Hypertarget{categorySFOpenGLView_07mouse__priv_08_aad813422f30f09fe4e1dc34e4ab60721}\label{categorySFOpenGLView_07mouse__priv_08_aad813422f30f09fe4e1dc34e4ab60721} 
+(void) -\/ {\bfseries handle\+Mouse\+Up\+:}
+\begin{DoxyCompactList}\small\item\em handle mouse up event \end{DoxyCompactList}\item 
+\Hypertarget{categorySFOpenGLView_07mouse__priv_08_a5b0e047a3d55ea0b4286ca0e25a4ce3b}\label{categorySFOpenGLView_07mouse__priv_08_a5b0e047a3d55ea0b4286ca0e25a4ce3b} 
+(void) -\/ {\bfseries handle\+Mouse\+Move\+:}
+\begin{DoxyCompactList}\small\item\em handle mouse move event \end{DoxyCompactList}\item 
+(BOOL) -\/ \mbox{\hyperlink{categorySFOpenGLView_07mouse__priv_08_a490a37c2df13608342527d638bc50f8c}{is\+Cursor\+Currently\+Grabbed}}
+\begin{DoxyCompactList}\small\item\em Check whether the cursor is grabbed or not. \end{DoxyCompactList}\item 
+\Hypertarget{categorySFOpenGLView_07mouse__priv_08_af86825f25efeefa82e2ce670ee57e78c}\label{categorySFOpenGLView_07mouse__priv_08_af86825f25efeefa82e2ce670ee57e78c} 
+(void) -\/ {\bfseries update\+Cursor\+Grabbed}
+\begin{DoxyCompactList}\small\item\em (Dis)connect the cursor\textquotesingle{}s movements from/to the system and project the cursor into the view \end{DoxyCompactList}\item 
+(void) -\/ \mbox{\hyperlink{categorySFOpenGLView_07mouse__priv_08_a3588e074ef8e16a79f00380adea0b8bd}{move\+Cursor\+To\+:}}
+\begin{DoxyCompactList}\small\item\em Move the cursor to the given location. \end{DoxyCompactList}\item 
+\Hypertarget{categorySFOpenGLView_07mouse__priv_08_a1b65d848db7e6948524bf2582b980074}\label{categorySFOpenGLView_07mouse__priv_08_a1b65d848db7e6948524bf2582b980074} 
+(CGDirect\+Display\+ID) -\/ {\bfseries display\+Id}
+\begin{DoxyCompactList}\small\item\em Get the display identifier on which the view is. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\mbox{\hyperlink{classsf_1_1Mouse_a4fb128be433f9aafe66bc0c605daaa90}{sf\+::\+Mouse\+::\+Button}}) + \mbox{\hyperlink{categorySFOpenGLView_07mouse__priv_08_a8b502cc62d1f541edd5796e6fb03c744}{mouse\+Button\+From\+Event\+:}}
+\begin{DoxyCompactList}\small\item\em Convert the NSEvent mouse button type to SFML type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Here are defined a few private messages for mouse handling in \doxylink{interfaceSFOpenGLView}{SFOpen\+GLView}. 
+
+\doxysubsection{Method Documentation}
+\Hypertarget{categorySFOpenGLView_07mouse__priv_08_a490a37c2df13608342527d638bc50f8c}\index{SFOpenGLView(mouse\_priv)@{SFOpenGLView(mouse\_priv)}!isCursorCurrentlyGrabbed@{isCursorCurrentlyGrabbed}}
+\index{isCursorCurrentlyGrabbed@{isCursorCurrentlyGrabbed}!SFOpenGLView(mouse\_priv)@{SFOpenGLView(mouse\_priv)}}
+\doxysubsubsection{\texorpdfstring{isCursorCurrentlyGrabbed}{isCursorCurrentlyGrabbed}}
+{\footnotesize\ttfamily \label{categorySFOpenGLView_07mouse__priv_08_a490a37c2df13608342527d638bc50f8c} 
+-\/ (BOOL) is\+Cursor\+Currently\+Grabbed \begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}}
+
+
+
+Check whether the cursor is grabbed or not. 
+
+The cursor is grabbed if the window is active (key) and the user wants to grab it. 
+
+Extends class \mbox{\hyperlink{interfaceSFOpenGLView_a490a37c2df13608342527d638bc50f8c}{SFOpen\+GLView}}.
+
+\Hypertarget{categorySFOpenGLView_07mouse__priv_08_a8b502cc62d1f541edd5796e6fb03c744}\index{SFOpenGLView(mouse\_priv)@{SFOpenGLView(mouse\_priv)}!mouseButtonFromEvent:@{mouseButtonFromEvent:}}
+\index{mouseButtonFromEvent:@{mouseButtonFromEvent:}!SFOpenGLView(mouse\_priv)@{SFOpenGLView(mouse\_priv)}}
+\doxysubsubsection{\texorpdfstring{mouseButtonFromEvent:}{mouseButtonFromEvent:}}
+{\footnotesize\ttfamily \label{categorySFOpenGLView_07mouse__priv_08_a8b502cc62d1f541edd5796e6fb03c744} 
++ Mouse\+: \begin{DoxyParamCaption}\item[{(NSEvent \texorpdfstring{$\ast$}{*})}]{event}{}\end{DoxyParamCaption}}
+
+
+
+Convert the NSEvent mouse button type to SFML type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & a mouse button event\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Left, Right, ..., or Button\+Count if the button is unknown 
+\end{DoxyReturn}
+
+
+Extends class \mbox{\hyperlink{interfaceSFOpenGLView_a8b502cc62d1f541edd5796e6fb03c744}{SFOpen\+GLView}}.
+
+\Hypertarget{categorySFOpenGLView_07mouse__priv_08_a3588e074ef8e16a79f00380adea0b8bd}\index{SFOpenGLView(mouse\_priv)@{SFOpenGLView(mouse\_priv)}!moveCursorTo:@{moveCursorTo:}}
+\index{moveCursorTo:@{moveCursorTo:}!SFOpenGLView(mouse\_priv)@{SFOpenGLView(mouse\_priv)}}
+\doxysubsubsection{\texorpdfstring{moveCursorTo:}{moveCursorTo:}}
+{\footnotesize\ttfamily \label{categorySFOpenGLView_07mouse__priv_08_a3588e074ef8e16a79f00380adea0b8bd} 
+-\/ (void) move\+Cursor\+To\+: \begin{DoxyParamCaption}\item[{(NSPoint)}]{loc}{}\end{DoxyParamCaption}}
+
+
+
+Move the cursor to the given location. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em loc} & location expressed in SFML coordinate system \\
+\hline
+\end{DoxyParams}
+
+
+Extends class \mbox{\hyperlink{interfaceSFOpenGLView_a3588e074ef8e16a79f00380adea0b8bd}{SFOpen\+GLView}}.
+
+\Hypertarget{categorySFOpenGLView_07mouse__priv_08_a66fb2d1dedaa56ed04f1240932d31dce}\index{SFOpenGLView(mouse\_priv)@{SFOpenGLView(mouse\_priv)}!updateMouseState@{updateMouseState}}
+\index{updateMouseState@{updateMouseState}!SFOpenGLView(mouse\_priv)@{SFOpenGLView(mouse\_priv)}}
+\doxysubsubsection{\texorpdfstring{updateMouseState}{updateMouseState}}
+{\footnotesize\ttfamily \label{categorySFOpenGLView_07mouse__priv_08_a66fb2d1dedaa56ed04f1240932d31dce} 
+-\/ (void) update\+Mouse\+State \begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}}
+
+
+
+Update the mouse state (in or out) 
+
+Fire an event if its state has changed. 
+
+Extends class \mbox{\hyperlink{interfaceSFOpenGLView_a66fb2d1dedaa56ed04f1240932d31dce}{SFOpen\+GLView}}.
+
+
+
+The documentation for this category was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+Window/\+OSX/SFOpen\+GLView+mouse\+\_\+priv.\+h\end{DoxyCompactItemize}

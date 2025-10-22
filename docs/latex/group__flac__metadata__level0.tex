@@ -1,0 +1,174 @@
+\doxysubsubsection{FLAC/metadata.h\+: metadata level 0 interface}
+\hypertarget{group__flac__metadata__level0}{}\label{group__flac__metadata__level0}\index{FLAC/metadata.h: metadata level 0 interface@{FLAC/metadata.h: metadata level 0 interface}}
+
+
+The level 0 interface consists of individual routines to read the STREAMINFO, VORBIS\+\_\+\+COMMENT, CUESHEET, and PICTURE blocks, requiring only a filename.  
+
+
+Collaboration diagram for FLAC/metadata.h\+: metadata level 0 interface\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__flac__metadata__level0}
+\end{center}
+\end{figure}
+\doxysubsubsubsubsection*{Topics}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group__flac__metadata__level1}{FLAC/metadata.\+h\+: metadata level 1 interface}}
+\begin{DoxyCompactList}\small\item\em The level 1 interface provides read-\/write access to FLAC file metadata and operates directly on the FLAC file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__level0_gaf248d1ccc8025b9e9d7f532b8af4ab07}{FLAC\+\_\+\+\_\+metadata\+\_\+get\+\_\+streaminfo}} (const char \texorpdfstring{$\ast$}{*}filename, \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}streaminfo)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__level0_gaf66469f31dca28837ffd3f8b0ec5c082}{FLAC\+\_\+\+\_\+metadata\+\_\+get\+\_\+tags}} (const char \texorpdfstring{$\ast$}{*}filename, \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}tags)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__level0_ga6ee2633dc179c2a0cb5fef5762faf0fd}{FLAC\+\_\+\+\_\+metadata\+\_\+get\+\_\+cuesheet}} (const char \texorpdfstring{$\ast$}{*}filename, \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}cuesheet)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__level0_gaa13138ab038694909964998a113817b4}{FLAC\+\_\+\+\_\+metadata\+\_\+get\+\_\+picture}} (const char \texorpdfstring{$\ast$}{*}filename, \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}picture, \mbox{\hyperlink{group__flac__format_gaf6d3e836cee023e0b8d897f1fdc9825d}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Picture\+\_\+\+Type}} type, const char \texorpdfstring{$\ast$}{*}mime\+\_\+type, const FLAC\+\_\+\+\_\+byte \texorpdfstring{$\ast$}{*}description, unsigned max\+\_\+width, unsigned max\+\_\+height, unsigned max\+\_\+depth, unsigned max\+\_\+colors)
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsubsection{Detailed Description}
+The level 0 interface consists of individual routines to read the STREAMINFO, VORBIS\+\_\+\+COMMENT, CUESHEET, and PICTURE blocks, requiring only a filename. 
+
+They try to skip any ID3v2 tag at the head of the file. 
+
+\doxysubsubsubsection{Function Documentation}
+\Hypertarget{group__flac__metadata__level0_ga6ee2633dc179c2a0cb5fef5762faf0fd}\index{FLAC/metadata.h: metadata level 0 interface@{FLAC/metadata.h: metadata level 0 interface}!FLAC\_\_metadata\_get\_cuesheet@{FLAC\_\_metadata\_get\_cuesheet}}
+\index{FLAC\_\_metadata\_get\_cuesheet@{FLAC\_\_metadata\_get\_cuesheet}!FLAC/metadata.h: metadata level 0 interface@{FLAC/metadata.h: metadata level 0 interface}}
+\doxysubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_get\_cuesheet()}{FLAC\_\_metadata\_get\_cuesheet()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__level0_ga6ee2633dc179c2a0cb5fef5762faf0fd} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+get\+\_\+cuesheet (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{filename}{, }\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{cuesheet}{}\end{DoxyParamCaption})}
+
+Read the CUESHEET metadata block of the given FLAC file. This function will try to skip any ID3v2 tag at the head of the file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The path to the FLAC file to read. \\
+\hline
+{\em cuesheet} & The address where the returned pointer will be stored. The {\itshape cuesheet} object must be deleted by the caller using \doxylink{group__flac__metadata__object_ga66bbe27dba68ba77be5af83986a280ea}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+delete()}. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{filename\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{cuesheet\ !=\ NULL\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily true} if a valid CUESHEET block was read from {\itshape filename}, and {\itshape \texorpdfstring{$\ast$}{*}cuesheet} will be set to the address of the metadata structure. Returns {\ttfamily false} if there was a memory allocation error, a file decoder error, or the file contained no CUESHEET block, and {\itshape \texorpdfstring{$\ast$}{*}cuesheet} will be set to {\ttfamily NULL}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__level0_gaa13138ab038694909964998a113817b4}\index{FLAC/metadata.h: metadata level 0 interface@{FLAC/metadata.h: metadata level 0 interface}!FLAC\_\_metadata\_get\_picture@{FLAC\_\_metadata\_get\_picture}}
+\index{FLAC\_\_metadata\_get\_picture@{FLAC\_\_metadata\_get\_picture}!FLAC/metadata.h: metadata level 0 interface@{FLAC/metadata.h: metadata level 0 interface}}
+\doxysubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_get\_picture()}{FLAC\_\_metadata\_get\_picture()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__level0_gaa13138ab038694909964998a113817b4} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+get\+\_\+picture (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{filename}{, }\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{picture}{, }\item[{\mbox{\hyperlink{group__flac__format_gaf6d3e836cee023e0b8d897f1fdc9825d}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Picture\+\_\+\+Type}}}]{type}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{mime\+\_\+type}{, }\item[{const FLAC\+\_\+\+\_\+byte \texorpdfstring{$\ast$}{*}}]{description}{, }\item[{unsigned}]{max\+\_\+width}{, }\item[{unsigned}]{max\+\_\+height}{, }\item[{unsigned}]{max\+\_\+depth}{, }\item[{unsigned}]{max\+\_\+colors}{}\end{DoxyParamCaption})}
+
+Read a PICTURE metadata block of the given FLAC file. This function will try to skip any ID3v2 tag at the head of the file. Since there can be more than one PICTURE block in a file, this function takes a number of parameters that act as constraints to the search. The PICTURE block with the largest area matching all the constraints will be returned, or {\itshape \texorpdfstring{$\ast$}{*}picture} will be set to {\ttfamily NULL} if there was no such block.
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The path to the FLAC file to read. \\
+\hline
+{\em picture} & The address where the returned pointer will be stored. The {\itshape picture} object must be deleted by the caller using \doxylink{group__flac__metadata__object_ga66bbe27dba68ba77be5af83986a280ea}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+delete()}. \\
+\hline
+{\em type} & The desired picture type. Use {\ttfamily -\/1} to mean "{}any type"{}. \\
+\hline
+{\em mime\+\_\+type} & The desired MIME type, e.\+g. "{}image/jpeg"{}. The string will be matched exactly. Use {\ttfamily NULL} to mean "{}any MIME type"{}. \\
+\hline
+{\em description} & The desired description. The string will be matched exactly. Use {\ttfamily NULL} to mean "{}any                    description"{}. \\
+\hline
+{\em max\+\_\+width} & The maximum width in pixels desired. Use {\ttfamily }(unsigned)(-\/1) to mean "{}any width"{}. \\
+\hline
+{\em max\+\_\+height} & The maximum height in pixels desired. Use {\ttfamily }(unsigned)(-\/1) to mean "{}any height"{}. \\
+\hline
+{\em max\+\_\+depth} & The maximum color depth in bits-\/per-\/pixel desired. Use {\ttfamily }(unsigned)(-\/1) to mean "{}any depth"{}. \\
+\hline
+{\em max\+\_\+colors} & The maximum number of colors desired. Use {\ttfamily }(unsigned)(-\/1) to mean "{}any number of colors"{}. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{filename\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{picture\ !=\ NULL\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily true} if a valid PICTURE block was read from {\itshape filename}, and {\itshape \texorpdfstring{$\ast$}{*}picture} will be set to the address of the metadata structure. Returns {\ttfamily false} if there was a memory allocation error, a file decoder error, or the file contained no PICTURE block, and {\itshape \texorpdfstring{$\ast$}{*}picture} will be set to {\ttfamily NULL}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__level0_gaf248d1ccc8025b9e9d7f532b8af4ab07}\index{FLAC/metadata.h: metadata level 0 interface@{FLAC/metadata.h: metadata level 0 interface}!FLAC\_\_metadata\_get\_streaminfo@{FLAC\_\_metadata\_get\_streaminfo}}
+\index{FLAC\_\_metadata\_get\_streaminfo@{FLAC\_\_metadata\_get\_streaminfo}!FLAC/metadata.h: metadata level 0 interface@{FLAC/metadata.h: metadata level 0 interface}}
+\doxysubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_get\_streaminfo()}{FLAC\_\_metadata\_get\_streaminfo()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__level0_gaf248d1ccc8025b9e9d7f532b8af4ab07} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+get\+\_\+streaminfo (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{filename}{, }\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{streaminfo}{}\end{DoxyParamCaption})}
+
+Read the STREAMINFO metadata block of the given FLAC file. This function will try to skip any ID3v2 tag at the head of the file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The path to the FLAC file to read. \\
+\hline
+{\em streaminfo} & A pointer to space for the STREAMINFO block. Since \doxylink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata} is a simple structure with no memory allocation involved, you pass the address of an existing structure. It need not be initialized. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{filename\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{streaminfo\ !=\ NULL\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily true} if a valid STREAMINFO block was read from {\itshape filename}. Returns {\ttfamily false} if there was a memory allocation error, a file decoder error, or the file contained no STREAMINFO block. (A memory allocation error is possible because this function must set up a file decoder.) \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__level0_gaf66469f31dca28837ffd3f8b0ec5c082}\index{FLAC/metadata.h: metadata level 0 interface@{FLAC/metadata.h: metadata level 0 interface}!FLAC\_\_metadata\_get\_tags@{FLAC\_\_metadata\_get\_tags}}
+\index{FLAC\_\_metadata\_get\_tags@{FLAC\_\_metadata\_get\_tags}!FLAC/metadata.h: metadata level 0 interface@{FLAC/metadata.h: metadata level 0 interface}}
+\doxysubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_get\_tags()}{FLAC\_\_metadata\_get\_tags()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__level0_gaf66469f31dca28837ffd3f8b0ec5c082} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+get\+\_\+tags (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{filename}{, }\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{tags}{}\end{DoxyParamCaption})}
+
+Read the VORBIS\+\_\+\+COMMENT metadata block of the given FLAC file. This function will try to skip any ID3v2 tag at the head of the file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The path to the FLAC file to read. \\
+\hline
+{\em tags} & The address where the returned pointer will be stored. The {\itshape tags} object must be deleted by the caller using \doxylink{group__flac__metadata__object_ga66bbe27dba68ba77be5af83986a280ea}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+delete()}. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{filename\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{tags\ !=\ NULL\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily true} if a valid VORBIS\+\_\+\+COMMENT block was read from {\itshape filename}, and {\itshape \texorpdfstring{$\ast$}{*}tags} will be set to the address of the metadata structure. Returns {\ttfamily false} if there was a memory allocation error, a file decoder error, or the file contained no VORBIS\+\_\+\+COMMENT block, and {\itshape \texorpdfstring{$\ast$}{*}tags} will be set to {\ttfamily NULL}. \\
+\hline
+\end{DoxyRetVals}
+\input{group__flac__metadata__level1}

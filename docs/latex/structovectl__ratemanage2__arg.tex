@@ -1,0 +1,69 @@
+\doxysection{ovectl\+\_\+ratemanage2\+\_\+arg Struct Reference}
+\hypertarget{structovectl__ratemanage2__arg}{}\label{structovectl__ratemanage2__arg}\index{ovectl\_ratemanage2\_arg@{ovectl\_ratemanage2\_arg}}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{structovectl__ratemanage2__arg_aca1f656373a1597177dac924578e375b}{management\+\_\+active}}
+\item 
+long \mbox{\hyperlink{structovectl__ratemanage2__arg_aeb53a17fff14ec50d143602adfdeabeb}{bitrate\+\_\+limit\+\_\+min\+\_\+kbps}}
+\item 
+long \mbox{\hyperlink{structovectl__ratemanage2__arg_a175691482003edd7d94592fa2bc993a9}{bitrate\+\_\+limit\+\_\+max\+\_\+kbps}}
+\item 
+long \mbox{\hyperlink{structovectl__ratemanage2__arg_a75e496acac882e156137de9d1200ebd7}{bitrate\+\_\+limit\+\_\+reservoir\+\_\+bits}}
+\item 
+double \mbox{\hyperlink{structovectl__ratemanage2__arg_a5567fde1798b1e80e40a77565b4b44f4}{bitrate\+\_\+limit\+\_\+reservoir\+\_\+bias}}
+\item 
+long \mbox{\hyperlink{structovectl__ratemanage2__arg_a1f6bab60d87143d5060dd6c59aad6e71}{bitrate\+\_\+average\+\_\+kbps}}
+\item 
+double \mbox{\hyperlink{structovectl__ratemanage2__arg_a1069e148a884d8706928cd2e39870720}{bitrate\+\_\+average\+\_\+damping}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structovectl__ratemanage2__arg_a1069e148a884d8706928cd2e39870720}\index{ovectl\_ratemanage2\_arg@{ovectl\_ratemanage2\_arg}!bitrate\_average\_damping@{bitrate\_average\_damping}}
+\index{bitrate\_average\_damping@{bitrate\_average\_damping}!ovectl\_ratemanage2\_arg@{ovectl\_ratemanage2\_arg}}
+\doxysubsubsection{\texorpdfstring{bitrate\_average\_damping}{bitrate\_average\_damping}}
+{\footnotesize\ttfamily \label{structovectl__ratemanage2__arg_a1069e148a884d8706928cd2e39870720} 
+double ovectl\+\_\+ratemanage2\+\_\+arg\+::bitrate\+\_\+average\+\_\+damping}
+
+Slew rate limit setting for average bitrate adjustment; sets the minimum time in seconds the bitrate tracker may swing from one extreme to the other when boosting or damping average bitrate. \Hypertarget{structovectl__ratemanage2__arg_a1f6bab60d87143d5060dd6c59aad6e71}\index{ovectl\_ratemanage2\_arg@{ovectl\_ratemanage2\_arg}!bitrate\_average\_kbps@{bitrate\_average\_kbps}}
+\index{bitrate\_average\_kbps@{bitrate\_average\_kbps}!ovectl\_ratemanage2\_arg@{ovectl\_ratemanage2\_arg}}
+\doxysubsubsection{\texorpdfstring{bitrate\_average\_kbps}{bitrate\_average\_kbps}}
+{\footnotesize\ttfamily \label{structovectl__ratemanage2__arg_a1f6bab60d87143d5060dd6c59aad6e71} 
+long ovectl\+\_\+ratemanage2\+\_\+arg\+::bitrate\+\_\+average\+\_\+kbps}
+
+Average bitrate setting in kilobits per second \Hypertarget{structovectl__ratemanage2__arg_a175691482003edd7d94592fa2bc993a9}\index{ovectl\_ratemanage2\_arg@{ovectl\_ratemanage2\_arg}!bitrate\_limit\_max\_kbps@{bitrate\_limit\_max\_kbps}}
+\index{bitrate\_limit\_max\_kbps@{bitrate\_limit\_max\_kbps}!ovectl\_ratemanage2\_arg@{ovectl\_ratemanage2\_arg}}
+\doxysubsubsection{\texorpdfstring{bitrate\_limit\_max\_kbps}{bitrate\_limit\_max\_kbps}}
+{\footnotesize\ttfamily \label{structovectl__ratemanage2__arg_a175691482003edd7d94592fa2bc993a9} 
+long ovectl\+\_\+ratemanage2\+\_\+arg\+::bitrate\+\_\+limit\+\_\+max\+\_\+kbps}
+
+Upper allowed bitrate limit in kilobits per second \Hypertarget{structovectl__ratemanage2__arg_aeb53a17fff14ec50d143602adfdeabeb}\index{ovectl\_ratemanage2\_arg@{ovectl\_ratemanage2\_arg}!bitrate\_limit\_min\_kbps@{bitrate\_limit\_min\_kbps}}
+\index{bitrate\_limit\_min\_kbps@{bitrate\_limit\_min\_kbps}!ovectl\_ratemanage2\_arg@{ovectl\_ratemanage2\_arg}}
+\doxysubsubsection{\texorpdfstring{bitrate\_limit\_min\_kbps}{bitrate\_limit\_min\_kbps}}
+{\footnotesize\ttfamily \label{structovectl__ratemanage2__arg_aeb53a17fff14ec50d143602adfdeabeb} 
+long ovectl\+\_\+ratemanage2\+\_\+arg\+::bitrate\+\_\+limit\+\_\+min\+\_\+kbps}
+
+Lower allowed bitrate limit in kilobits per second \Hypertarget{structovectl__ratemanage2__arg_a5567fde1798b1e80e40a77565b4b44f4}\index{ovectl\_ratemanage2\_arg@{ovectl\_ratemanage2\_arg}!bitrate\_limit\_reservoir\_bias@{bitrate\_limit\_reservoir\_bias}}
+\index{bitrate\_limit\_reservoir\_bias@{bitrate\_limit\_reservoir\_bias}!ovectl\_ratemanage2\_arg@{ovectl\_ratemanage2\_arg}}
+\doxysubsubsection{\texorpdfstring{bitrate\_limit\_reservoir\_bias}{bitrate\_limit\_reservoir\_bias}}
+{\footnotesize\ttfamily \label{structovectl__ratemanage2__arg_a5567fde1798b1e80e40a77565b4b44f4} 
+double ovectl\+\_\+ratemanage2\+\_\+arg\+::bitrate\+\_\+limit\+\_\+reservoir\+\_\+bias}
+
+Regulates the bitrate reservoir\textquotesingle{}s preferred fill level in a range from 0.\+0 to 1.\+0; 0.\+0 tries to bank bits to buffer against future bitrate spikes, 1.\+0 buffers against future sudden drops in instantaneous bitrate. Default is 0.\+1 \Hypertarget{structovectl__ratemanage2__arg_a75e496acac882e156137de9d1200ebd7}\index{ovectl\_ratemanage2\_arg@{ovectl\_ratemanage2\_arg}!bitrate\_limit\_reservoir\_bits@{bitrate\_limit\_reservoir\_bits}}
+\index{bitrate\_limit\_reservoir\_bits@{bitrate\_limit\_reservoir\_bits}!ovectl\_ratemanage2\_arg@{ovectl\_ratemanage2\_arg}}
+\doxysubsubsection{\texorpdfstring{bitrate\_limit\_reservoir\_bits}{bitrate\_limit\_reservoir\_bits}}
+{\footnotesize\ttfamily \label{structovectl__ratemanage2__arg_a75e496acac882e156137de9d1200ebd7} 
+long ovectl\+\_\+ratemanage2\+\_\+arg\+::bitrate\+\_\+limit\+\_\+reservoir\+\_\+bits}
+
+Size of the bitrate reservoir in bits \Hypertarget{structovectl__ratemanage2__arg_aca1f656373a1597177dac924578e375b}\index{ovectl\_ratemanage2\_arg@{ovectl\_ratemanage2\_arg}!management\_active@{management\_active}}
+\index{management\_active@{management\_active}!ovectl\_ratemanage2\_arg@{ovectl\_ratemanage2\_arg}}
+\doxysubsubsection{\texorpdfstring{management\_active}{management\_active}}
+{\footnotesize\ttfamily \label{structovectl__ratemanage2__arg_aca1f656373a1597177dac924578e375b} 
+int ovectl\+\_\+ratemanage2\+\_\+arg\+::management\+\_\+active}
+
+nonzero if bitrate management is active 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/extlibs/headers/vorbis/\mbox{\hyperlink{vorbisenc_8h}{vorbisenc.\+h}}\end{DoxyCompactItemize}

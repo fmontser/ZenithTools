@@ -1,0 +1,1063 @@
+\doxysection{ftcache.\+h}
+\hypertarget{ftcache_8h_source}{}\label{ftcache_8h_source}\index{build/\_deps/sfml-\/src/extlibs/headers/freetype2/ftcache.h@{build/\_deps/sfml-\/src/extlibs/headers/freetype2/ftcache.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00003\ \textcolor{comment}{/*\ \ ftcache.h\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00005\ \textcolor{comment}{/*\ \ \ \ FreeType\ Cache\ subsystem\ (specification).\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00007\ \textcolor{comment}{/*\ \ Copyright\ 1996-\/2008,\ 2010,\ 2013,\ 2014\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ \ David\ Turner,\ Robert\ Wilhelm,\ and\ Werner\ Lemberg.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00010\ \textcolor{comment}{/*\ \ This\ file\ is\ part\ of\ the\ FreeType\ project,\ and\ may\ only\ be\ used,\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*\ \ modified,\ and\ distributed\ under\ the\ terms\ of\ the\ FreeType\ project\ \ \ \ \ \ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*\ \ license,\ LICENSE.TXT.\ \ By\ continuing\ to\ use,\ modify,\ or\ distribute\ \ \ \ \ */}}
+\DoxyCodeLine{00013\ \textcolor{comment}{/*\ \ this\ file\ you\ indicate\ that\ you\ have\ read\ the\ license\ and\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00014\ \textcolor{comment}{/*\ \ understand\ and\ accept\ it\ fully.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00015\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00016\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ \_\_FTCACHE\_H\_\_}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ \_\_FTCACHE\_H\_\_}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <ft2build.h>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ FT\_GLYPH\_H}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ FT\_BEGIN\_HEADER}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00031\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00032\ \textcolor{comment}{\ \ \ *\ <Section>}}
+\DoxyCodeLine{00033\ \textcolor{comment}{\ \ \ *\ \ \ \ cache\_subsystem}}
+\DoxyCodeLine{00034\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00035\ \textcolor{comment}{\ \ \ *\ <Title>}}
+\DoxyCodeLine{00036\ \textcolor{comment}{\ \ \ *\ \ \ \ Cache\ Sub-\/System}}
+\DoxyCodeLine{00037\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00038\ \textcolor{comment}{\ \ \ *\ <Abstract>}}
+\DoxyCodeLine{00039\ \textcolor{comment}{\ \ \ *\ \ \ \ How\ to\ cache\ face,\ size,\ and\ glyph\ data\ with\ FreeType\string~2.}}
+\DoxyCodeLine{00040\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00041\ \textcolor{comment}{\ \ \ *\ <Description>}}
+\DoxyCodeLine{00042\ \textcolor{comment}{\ \ \ *\ \ \ This\ section\ describes\ the\ FreeType\string~2\ cache\ sub-\/system,\ which\ is\ used}}
+\DoxyCodeLine{00043\ \textcolor{comment}{\ \ \ *\ \ \ to\ limit\ the\ number\ of\ concurrently\ opened\ @FT\_Face\ and\ @FT\_Size}}
+\DoxyCodeLine{00044\ \textcolor{comment}{\ \ \ *\ \ \ objects,\ as\ well\ as\ caching\ information\ like\ character\ maps\ and\ glyph}}
+\DoxyCodeLine{00045\ \textcolor{comment}{\ \ \ *\ \ \ images\ while\ limiting\ their\ maximum\ memory\ usage.}}
+\DoxyCodeLine{00046\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00047\ \textcolor{comment}{\ \ \ *\ \ \ Note\ that\ all\ types\ and\ functions\ begin\ with\ the\ \`{}FTC\_'\ prefix.}}
+\DoxyCodeLine{00048\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00049\ \textcolor{comment}{\ \ \ *\ \ \ The\ cache\ is\ highly\ portable\ and\ thus\ doesn't\ know\ anything\ about\ the}}
+\DoxyCodeLine{00050\ \textcolor{comment}{\ \ \ *\ \ \ fonts\ installed\ on\ your\ system,\ or\ how\ to\ access\ them.\ \ This\ implies}}
+\DoxyCodeLine{00051\ \textcolor{comment}{\ \ \ *\ \ \ the\ following\ scheme:}}
+\DoxyCodeLine{00052\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00053\ \textcolor{comment}{\ \ \ *\ \ \ First,\ available\ or\ installed\ font\ faces\ are\ uniquely\ identified\ by}}
+\DoxyCodeLine{00054\ \textcolor{comment}{\ \ \ *\ \ \ @FTC\_FaceID\ values,\ provided\ to\ the\ cache\ by\ the\ client.\ \ Note\ that}}
+\DoxyCodeLine{00055\ \textcolor{comment}{\ \ \ *\ \ \ the\ cache\ only\ stores\ and\ compares\ these\ values,\ and\ doesn't\ try\ to}}
+\DoxyCodeLine{00056\ \textcolor{comment}{\ \ \ *\ \ \ interpret\ them\ in\ any\ way.}}
+\DoxyCodeLine{00057\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00058\ \textcolor{comment}{\ \ \ *\ \ \ Second,\ the\ cache\ calls,\ only\ when\ needed,\ a\ client-\/provided\ function}}
+\DoxyCodeLine{00059\ \textcolor{comment}{\ \ \ *\ \ \ to\ convert\ an\ @FTC\_FaceID\ into\ a\ new\ @FT\_Face\ object.\ \ The\ latter\ is}}
+\DoxyCodeLine{00060\ \textcolor{comment}{\ \ \ *\ \ \ then\ completely\ managed\ by\ the\ cache,\ including\ its\ termination}}
+\DoxyCodeLine{00061\ \textcolor{comment}{\ \ \ *\ \ \ through\ @FT\_Done\_Face.\ \ To\ monitor\ termination\ of\ face\ objects,\ the}}
+\DoxyCodeLine{00062\ \textcolor{comment}{\ \ \ *\ \ \ finalizer\ callback\ in\ the\ \`{}generic'\ field\ of\ the\ @FT\_Face\ object\ can}}
+\DoxyCodeLine{00063\ \textcolor{comment}{\ \ \ *\ \ \ be\ used,\ which\ might\ also\ be\ used\ to\ store\ the\ @FTC\_FaceID\ of\ the}}
+\DoxyCodeLine{00064\ \textcolor{comment}{\ \ \ *\ \ \ face.}}
+\DoxyCodeLine{00065\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00066\ \textcolor{comment}{\ \ \ *\ \ \ Clients\ are\ free\ to\ map\ face\ IDs\ to\ anything\ else.\ \ The\ most\ simple}}
+\DoxyCodeLine{00067\ \textcolor{comment}{\ \ \ *\ \ \ usage\ is\ to\ associate\ them\ to\ a\ (pathname,face\_index)\ pair\ that\ is}}
+\DoxyCodeLine{00068\ \textcolor{comment}{\ \ \ *\ \ \ used\ to\ call\ @FT\_New\_Face.\ \ However,\ more\ complex\ schemes\ are\ also}}
+\DoxyCodeLine{00069\ \textcolor{comment}{\ \ \ *\ \ \ possible.}}
+\DoxyCodeLine{00070\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00071\ \textcolor{comment}{\ \ \ *\ \ \ Note\ that\ for\ the\ cache\ to\ work\ correctly,\ the\ face\ ID\ values\ must\ be}}
+\DoxyCodeLine{00072\ \textcolor{comment}{\ \ \ *\ \ \ *persistent*,\ which\ means\ that\ the\ contents\ they\ point\ to\ should\ not}}
+\DoxyCodeLine{00073\ \textcolor{comment}{\ \ \ *\ \ \ change\ at\ runtime,\ or\ that\ their\ value\ should\ not\ become\ invalid.}}
+\DoxyCodeLine{00074\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00075\ \textcolor{comment}{\ \ \ *\ \ \ If\ this\ is\ unavoidable\ (e.g.,\ when\ a\ font\ is\ uninstalled\ at\ runtime),}}
+\DoxyCodeLine{00076\ \textcolor{comment}{\ \ \ *\ \ \ you\ should\ call\ @FTC\_Manager\_RemoveFaceID\ as\ soon\ as\ possible,\ to\ let}}
+\DoxyCodeLine{00077\ \textcolor{comment}{\ \ \ *\ \ \ the\ cache\ get\ rid\ of\ any\ references\ to\ the\ old\ @FTC\_FaceID\ it\ may}}
+\DoxyCodeLine{00078\ \textcolor{comment}{\ \ \ *\ \ \ keep\ internally.\ \ Failure\ to\ do\ so\ will\ lead\ to\ incorrect\ behaviour}}
+\DoxyCodeLine{00079\ \textcolor{comment}{\ \ \ *\ \ \ or\ even\ crashes.}}
+\DoxyCodeLine{00080\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00081\ \textcolor{comment}{\ \ \ *\ \ \ To\ use\ the\ cache,\ start\ with\ calling\ @FTC\_Manager\_New\ to\ create\ a\ new}}
+\DoxyCodeLine{00082\ \textcolor{comment}{\ \ \ *\ \ \ @FTC\_Manager\ object,\ which\ models\ a\ single\ cache\ instance.\ \ You\ can}}
+\DoxyCodeLine{00083\ \textcolor{comment}{\ \ \ *\ \ \ then\ look\ up\ @FT\_Face\ and\ @FT\_Size\ objects\ with}}
+\DoxyCodeLine{00084\ \textcolor{comment}{\ \ \ *\ \ \ @FTC\_Manager\_LookupFace\ and\ @FTC\_Manager\_LookupSize,\ respectively.}}
+\DoxyCodeLine{00085\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00086\ \textcolor{comment}{\ \ \ *\ \ \ If\ you\ want\ to\ use\ the\ charmap\ caching,\ call\ @FTC\_CMapCache\_New,\ then}}
+\DoxyCodeLine{00087\ \textcolor{comment}{\ \ \ *\ \ \ later\ use\ @FTC\_CMapCache\_Lookup\ to\ perform\ the\ equivalent\ of}}
+\DoxyCodeLine{00088\ \textcolor{comment}{\ \ \ *\ \ \ @FT\_Get\_Char\_Index,\ only\ much\ faster.}}
+\DoxyCodeLine{00089\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00090\ \textcolor{comment}{\ \ \ *\ \ \ If\ you\ want\ to\ use\ the\ @FT\_Glyph\ caching,\ call\ @FTC\_ImageCache,\ then}}
+\DoxyCodeLine{00091\ \textcolor{comment}{\ \ \ *\ \ \ later\ use\ @FTC\_ImageCache\_Lookup\ to\ retrieve\ the\ corresponding}}
+\DoxyCodeLine{00092\ \textcolor{comment}{\ \ \ *\ \ \ @FT\_Glyph\ objects\ from\ the\ cache.}}
+\DoxyCodeLine{00093\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00094\ \textcolor{comment}{\ \ \ *\ \ \ If\ you\ need\ lots\ of\ small\ bitmaps,\ it\ is\ much\ more\ memory\ efficient}}
+\DoxyCodeLine{00095\ \textcolor{comment}{\ \ \ *\ \ \ to\ call\ @FTC\_SBitCache\_New\ followed\ by\ @FTC\_SBitCache\_Lookup.\ \ This}}
+\DoxyCodeLine{00096\ \textcolor{comment}{\ \ \ *\ \ \ returns\ @FTC\_SBitRec\ structures,\ which\ are\ used\ to\ store\ small}}
+\DoxyCodeLine{00097\ \textcolor{comment}{\ \ \ *\ \ \ bitmaps\ directly.\ \ (A\ small\ bitmap\ is\ one\ whose\ metrics\ and}}
+\DoxyCodeLine{00098\ \textcolor{comment}{\ \ \ *\ \ \ dimensions\ all\ fit\ into\ 8-\/bit\ integers).}}
+\DoxyCodeLine{00099\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00100\ \textcolor{comment}{\ \ \ *\ \ \ We\ hope\ to\ also\ provide\ a\ kerning\ cache\ in\ the\ near\ future.}}
+\DoxyCodeLine{00101\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00102\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00103\ \textcolor{comment}{\ \ \ *\ <Order>}}
+\DoxyCodeLine{00104\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_Manager}}
+\DoxyCodeLine{00105\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_FaceID}}
+\DoxyCodeLine{00106\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_Face\_Requester}}
+\DoxyCodeLine{00107\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00108\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_Manager\_New}}
+\DoxyCodeLine{00109\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_Manager\_Reset}}
+\DoxyCodeLine{00110\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_Manager\_Done}}
+\DoxyCodeLine{00111\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_Manager\_LookupFace}}
+\DoxyCodeLine{00112\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_Manager\_LookupSize}}
+\DoxyCodeLine{00113\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_Manager\_RemoveFaceID}}
+\DoxyCodeLine{00114\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00115\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_Node}}
+\DoxyCodeLine{00116\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_Node\_Unref}}
+\DoxyCodeLine{00117\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00118\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_ImageCache}}
+\DoxyCodeLine{00119\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_ImageCache\_New}}
+\DoxyCodeLine{00120\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_ImageCache\_Lookup}}
+\DoxyCodeLine{00121\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00122\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_SBit}}
+\DoxyCodeLine{00123\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_SBitCache}}
+\DoxyCodeLine{00124\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_SBitCache\_New}}
+\DoxyCodeLine{00125\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_SBitCache\_Lookup}}
+\DoxyCodeLine{00126\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00127\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_CMapCache}}
+\DoxyCodeLine{00128\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_CMapCache\_New}}
+\DoxyCodeLine{00129\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_CMapCache\_Lookup}}
+\DoxyCodeLine{00130\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00131\ \textcolor{comment}{\ \ \ *************************************************************************/}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00135\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00136\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00137\ \textcolor{comment}{\ \ /*****\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *****/}}
+\DoxyCodeLine{00138\ \textcolor{comment}{\ \ /*****\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ BASIC\ TYPE\ DEFINITIONS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *****/}}
+\DoxyCodeLine{00139\ \textcolor{comment}{\ \ /*****\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *****/}}
+\DoxyCodeLine{00140\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00141\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00142\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00146\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00147\ \textcolor{comment}{\ \ \ *\ @type:\ FTC\_FaceID}}
+\DoxyCodeLine{00148\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00149\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00150\ \textcolor{comment}{\ \ \ *\ \ \ An\ opaque\ pointer\ type\ that\ is\ used\ to\ identity\ face\ objects.\ \ The}}
+\DoxyCodeLine{00151\ \textcolor{comment}{\ \ \ *\ \ \ contents\ of\ such\ objects\ is\ application-\/dependent.}}
+\DoxyCodeLine{00152\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00153\ \textcolor{comment}{\ \ \ *\ \ \ These\ pointers\ are\ typically\ used\ to\ point\ to\ a\ user-\/defined}}
+\DoxyCodeLine{00154\ \textcolor{comment}{\ \ \ *\ \ \ structure\ containing\ a\ font\ file\ path,\ and\ face\ index.}}
+\DoxyCodeLine{00155\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00156\ \textcolor{comment}{\ \ \ *\ @note:}}
+\DoxyCodeLine{00157\ \textcolor{comment}{\ \ \ *\ \ \ Never\ use\ NULL\ as\ a\ valid\ @FTC\_FaceID.}}
+\DoxyCodeLine{00158\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00159\ \textcolor{comment}{\ \ \ *\ \ \ Face\ IDs\ are\ passed\ by\ the\ client\ to\ the\ cache\ manager\ that\ calls,}}
+\DoxyCodeLine{00160\ \textcolor{comment}{\ \ \ *\ \ \ when\ needed,\ the\ @FTC\_Face\_Requester\ to\ translate\ them\ into\ new}}
+\DoxyCodeLine{00161\ \textcolor{comment}{\ \ \ *\ \ \ @FT\_Face\ objects.}}
+\DoxyCodeLine{00162\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00163\ \textcolor{comment}{\ \ \ *\ \ \ If\ the\ content\ of\ a\ given\ face\ ID\ changes\ at\ runtime,\ or\ if\ the\ value}}
+\DoxyCodeLine{00164\ \textcolor{comment}{\ \ \ *\ \ \ becomes\ invalid\ (e.g.,\ when\ uninstalling\ a\ font),\ you\ should}}
+\DoxyCodeLine{00165\ \textcolor{comment}{\ \ \ *\ \ \ immediately\ call\ @FTC\_Manager\_RemoveFaceID\ before\ any\ other\ cache}}
+\DoxyCodeLine{00166\ \textcolor{comment}{\ \ \ *\ \ \ function.}}
+\DoxyCodeLine{00167\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00168\ \textcolor{comment}{\ \ \ *\ \ \ Failure\ to\ do\ so\ will\ result\ in\ incorrect\ behaviour\ or\ even}}
+\DoxyCodeLine{00169\ \textcolor{comment}{\ \ \ *\ \ \ memory\ leaks\ and\ crashes.}}
+\DoxyCodeLine{00170\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00171\ \ \ \textcolor{keyword}{typedef}\ FT\_Pointer\ \ FTC\_FaceID;}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \textcolor{comment}{\ \ /************************************************************************}}
+\DoxyCodeLine{00175\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00176\ \textcolor{comment}{\ \ \ *\ @functype:}}
+\DoxyCodeLine{00177\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_Face\_Requester}}
+\DoxyCodeLine{00178\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00179\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00180\ \textcolor{comment}{\ \ \ *\ \ \ A\ callback\ function\ provided\ by\ client\ applications.\ \ It\ is\ used\ by}}
+\DoxyCodeLine{00181\ \textcolor{comment}{\ \ \ *\ \ \ the\ cache\ manager\ to\ translate\ a\ given\ @FTC\_FaceID\ into\ a\ new\ valid}}
+\DoxyCodeLine{00182\ \textcolor{comment}{\ \ \ *\ \ \ @FT\_Face\ object,\ on\ demand.}}
+\DoxyCodeLine{00183\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00184\ \textcolor{comment}{\ \ \ *\ <Input>}}
+\DoxyCodeLine{00185\ \textcolor{comment}{\ \ \ *\ \ \ face\_id\ ::}}
+\DoxyCodeLine{00186\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ face\ ID\ to\ resolve.}}
+\DoxyCodeLine{00187\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00188\ \textcolor{comment}{\ \ \ *\ \ \ library\ ::}}
+\DoxyCodeLine{00189\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ handle\ to\ a\ FreeType\ library\ object.}}
+\DoxyCodeLine{00190\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00191\ \textcolor{comment}{\ \ \ *\ \ \ req\_data\ ::}}
+\DoxyCodeLine{00192\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Application-\/provided\ request\ data\ (see\ note\ below).}}
+\DoxyCodeLine{00193\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00194\ \textcolor{comment}{\ \ \ *\ <Output>}}
+\DoxyCodeLine{00195\ \textcolor{comment}{\ \ \ *\ \ \ aface\ ::}}
+\DoxyCodeLine{00196\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ new\ @FT\_Face\ handle.}}
+\DoxyCodeLine{00197\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00198\ \textcolor{comment}{\ \ \ *\ <Return>}}
+\DoxyCodeLine{00199\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.}}
+\DoxyCodeLine{00200\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00201\ \textcolor{comment}{\ \ \ *\ <Note>}}
+\DoxyCodeLine{00202\ \textcolor{comment}{\ \ \ *\ \ \ The\ third\ parameter\ \`{}req\_data'\ is\ the\ same\ as\ the\ one\ passed\ by\ the}}
+\DoxyCodeLine{00203\ \textcolor{comment}{\ \ \ *\ \ \ client\ when\ @FTC\_Manager\_New\ is\ called.}}
+\DoxyCodeLine{00204\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00205\ \textcolor{comment}{\ \ \ *\ \ \ The\ face\ requester\ should\ not\ perform\ funny\ things\ on\ the\ returned}}
+\DoxyCodeLine{00206\ \textcolor{comment}{\ \ \ *\ \ \ face\ object,\ like\ creating\ a\ new\ @FT\_Size\ for\ it,\ or\ setting\ a}}
+\DoxyCodeLine{00207\ \textcolor{comment}{\ \ \ *\ \ \ transformation\ through\ @FT\_Set\_Transform!}}
+\DoxyCodeLine{00208\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00209\ \ \ \textcolor{keyword}{typedef}\ FT\_Error}
+\DoxyCodeLine{00210\ \ \ (*FTC\_Face\_Requester)(\ FTC\_FaceID\ \ face\_id,}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Library\ \ library,}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Pointer\ \ req\_data,}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Face*\ \ \ \ aface\ );}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00218\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00219\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00220\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00221\ \textcolor{comment}{\ \ /*****\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *****/}}
+\DoxyCodeLine{00222\ \textcolor{comment}{\ \ /*****\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CACHE\ MANAGER\ OBJECT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *****/}}
+\DoxyCodeLine{00223\ \textcolor{comment}{\ \ /*****\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *****/}}
+\DoxyCodeLine{00224\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00225\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00226\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00229\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00230\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00231\ \ \ \textcolor{comment}{/*\ <Type>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00232\ \ \ \textcolor{comment}{/*\ \ \ \ FTC\_Manager\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00233\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00234\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00235\ \ \ \textcolor{comment}{/*\ \ \ \ This\ object\ corresponds\ to\ one\ instance\ of\ the\ cache-\/subsystem.\ \ \ \ */}}
+\DoxyCodeLine{00236\ \ \ \textcolor{comment}{/*\ \ \ \ It\ is\ used\ to\ cache\ one\ or\ more\ @FT\_Face\ objects,\ along\ with\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00237\ \ \ \textcolor{comment}{/*\ \ \ \ corresponding\ @FT\_Size\ objects.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00238\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00239\ \ \ \textcolor{comment}{/*\ \ \ \ The\ manager\ intentionally\ limits\ the\ total\ number\ of\ opened\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00240\ \ \ \textcolor{comment}{/*\ \ \ \ @FT\_Face\ and\ @FT\_Size\ objects\ to\ control\ memory\ usage.\ \ See\ the\ \ \ \ */}}
+\DoxyCodeLine{00241\ \ \ \textcolor{comment}{/*\ \ \ \ \`{}max\_faces'\ and\ \`{}max\_sizes'\ parameters\ of\ @FTC\_Manager\_New.\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00242\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00243\ \ \ \textcolor{comment}{/*\ \ \ \ The\ manager\ is\ also\ used\ to\ cache\ \`{}nodes'\ of\ various\ types\ while\ \ \ */}}
+\DoxyCodeLine{00244\ \ \ \textcolor{comment}{/*\ \ \ \ limiting\ their\ total\ memory\ usage.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00245\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00246\ \ \ \textcolor{comment}{/*\ \ \ \ All\ limitations\ are\ enforced\ by\ keeping\ lists\ of\ managed\ objects\ \ \ */}}
+\DoxyCodeLine{00247\ \ \ \textcolor{comment}{/*\ \ \ \ in\ most-\/recently-\/used\ order,\ and\ flushing\ old\ nodes\ to\ make\ room\ \ \ */}}
+\DoxyCodeLine{00248\ \ \ \textcolor{comment}{/*\ \ \ \ for\ new\ ones.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00249\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00250\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }FTC\_ManagerRec\_*\ \ FTC\_Manager;}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00253\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00254\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00255\ \ \ \textcolor{comment}{/*\ <Type>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00256\ \ \ \textcolor{comment}{/*\ \ \ \ FTC\_Node\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00257\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00258\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00259\ \ \ \textcolor{comment}{/*\ \ \ \ An\ opaque\ handle\ to\ a\ cache\ node\ object.\ \ Each\ cache\ node\ is\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00260\ \ \ \textcolor{comment}{/*\ \ \ \ reference-\/counted.\ \ A\ node\ with\ a\ count\ of\string~0\ might\ be\ flushed\ \ \ \ \ \ */}}
+\DoxyCodeLine{00261\ \ \ \textcolor{comment}{/*\ \ \ \ out\ of\ a\ full\ cache\ whenever\ a\ lookup\ request\ is\ performed.\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00262\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00263\ \ \ \textcolor{comment}{/*\ \ \ \ If\ you\ look\ up\ nodes,\ you\ have\ the\ ability\ to\ \`{}acquire'\ them,\ \ \ \ \ \ */}}
+\DoxyCodeLine{00264\ \ \ \textcolor{comment}{/*\ \ \ \ i.e.,\ to\ increment\ their\ reference\ count.\ \ This\ will\ prevent\ the\ \ \ */}}
+\DoxyCodeLine{00265\ \ \ \textcolor{comment}{/*\ \ \ \ node\ from\ being\ flushed\ out\ of\ the\ cache\ until\ you\ explicitly\ \ \ \ \ \ */}}
+\DoxyCodeLine{00266\ \ \ \textcolor{comment}{/*\ \ \ \ \`{}release'\ it\ (see\ @FTC\_Node\_Unref).\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00267\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00268\ \ \ \textcolor{comment}{/*\ \ \ \ See\ also\ @FTC\_SBitCache\_Lookup\ and\ @FTC\_ImageCache\_Lookup.\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00269\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00270\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }FTC\_NodeRec\_*\ \ FTC\_Node;}
+\DoxyCodeLine{00271\ }
+\DoxyCodeLine{00272\ }
+\DoxyCodeLine{00273\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00274\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00275\ \ \ \textcolor{comment}{/*\ <Function>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00276\ \ \ \textcolor{comment}{/*\ \ \ \ FTC\_Manager\_New\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00277\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00278\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00279\ \ \ \textcolor{comment}{/*\ \ \ \ Create\ a\ new\ cache\ manager.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00280\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00281\ \ \ \textcolor{comment}{/*\ <Input>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00282\ \ \ \textcolor{comment}{/*\ \ \ \ library\ \ \ ::\ The\ parent\ FreeType\ library\ handle\ to\ use.\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00283\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00284\ \ \ \textcolor{comment}{/*\ \ \ \ max\_faces\ ::\ Maximum\ number\ of\ opened\ @FT\_Face\ objects\ managed\ by\ \ */}}
+\DoxyCodeLine{00285\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this\ cache\ instance.\ \ Use\string~0\ for\ defaults.\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00286\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00287\ \ \ \textcolor{comment}{/*\ \ \ \ max\_sizes\ ::\ Maximum\ number\ of\ opened\ @FT\_Size\ objects\ managed\ by\ \ */}}
+\DoxyCodeLine{00288\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this\ cache\ instance.\ \ Use\string~0\ for\ defaults.\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00289\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00290\ \ \ \textcolor{comment}{/*\ \ \ \ max\_bytes\ ::\ Maximum\ number\ of\ bytes\ to\ use\ for\ cached\ data\ nodes.\ */}}
+\DoxyCodeLine{00291\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Use\string~0\ for\ defaults.\ \ Note\ that\ this\ value\ does\ not\ \ \ \ */}}
+\DoxyCodeLine{00292\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ account\ for\ managed\ @FT\_Face\ and\ @FT\_Size\ objects.\ \ \ \ */}}
+\DoxyCodeLine{00293\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00294\ \ \ \textcolor{comment}{/*\ \ \ \ requester\ ::\ An\ application-\/provided\ callback\ used\ to\ translate\ \ \ \ */}}
+\DoxyCodeLine{00295\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ face\ IDs\ into\ real\ @FT\_Face\ objects.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00296\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00297\ \ \ \textcolor{comment}{/*\ \ \ \ req\_data\ \ ::\ A\ generic\ pointer\ that\ is\ passed\ to\ the\ requester\ \ \ \ \ */}}
+\DoxyCodeLine{00298\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ each\ time\ it\ is\ called\ (see\ @FTC\_Face\_Requester).\ \ \ \ \ */}}
+\DoxyCodeLine{00299\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00300\ \ \ \textcolor{comment}{/*\ <Output>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00301\ \ \ \textcolor{comment}{/*\ \ \ \ amanager\ \ ::\ A\ handle\ to\ a\ new\ manager\ object.\ \ 0\string~in\ case\ of\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00302\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ failure.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00303\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00304\ \ \ \textcolor{comment}{/*\ <Return>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00305\ \ \ \textcolor{comment}{/*\ \ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00306\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00307\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{00308\ \ \ FTC\_Manager\_New(\ FT\_Library\ \ \ \ \ \ \ \ \ \ library,}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_UInt\ \ \ \ \ \ \ \ \ \ \ \ \ max\_faces,}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_UInt\ \ \ \ \ \ \ \ \ \ \ \ \ max\_sizes,}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_ULong\ \ \ \ \ \ \ \ \ \ \ \ max\_bytes,}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTC\_Face\_Requester\ \ requester,}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Pointer\ \ \ \ \ \ \ \ \ \ req\_data,}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTC\_Manager\ \ \ \ \ \ \ \ *amanager\ );}
+\DoxyCodeLine{00315\ }
+\DoxyCodeLine{00316\ }
+\DoxyCodeLine{00317\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00318\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00319\ \ \ \textcolor{comment}{/*\ <Function>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00320\ \ \ \textcolor{comment}{/*\ \ \ \ FTC\_Manager\_Reset\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00321\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00322\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00323\ \ \ \textcolor{comment}{/*\ \ \ \ Empty\ a\ given\ cache\ manager.\ \ This\ simply\ gets\ rid\ of\ all\ the\ \ \ \ \ \ */}}
+\DoxyCodeLine{00324\ \ \ \textcolor{comment}{/*\ \ \ \ currently\ cached\ @FT\_Face\ and\ @FT\_Size\ objects\ within\ the\ manager.\ */}}
+\DoxyCodeLine{00325\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00326\ \ \ \textcolor{comment}{/*\ <InOut>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00327\ \ \ \textcolor{comment}{/*\ \ \ \ manager\ ::\ A\ handle\ to\ the\ manager.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00328\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00329\ \ \ FT\_EXPORT(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{00330\ \ \ FTC\_Manager\_Reset(\ FTC\_Manager\ \ manager\ );}
+\DoxyCodeLine{00331\ }
+\DoxyCodeLine{00332\ }
+\DoxyCodeLine{00333\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00334\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00335\ \ \ \textcolor{comment}{/*\ <Function>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00336\ \ \ \textcolor{comment}{/*\ \ \ \ FTC\_Manager\_Done\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00337\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00338\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00339\ \ \ \textcolor{comment}{/*\ \ \ \ Destroy\ a\ given\ manager\ after\ emptying\ it.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00340\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00341\ \ \ \textcolor{comment}{/*\ <Input>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00342\ \ \ \textcolor{comment}{/*\ \ \ \ manager\ ::\ A\ handle\ to\ the\ target\ cache\ manager\ object.\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00343\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00344\ \ \ FT\_EXPORT(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{00345\ \ \ FTC\_Manager\_Done(\ FTC\_Manager\ \ manager\ );}
+\DoxyCodeLine{00346\ }
+\DoxyCodeLine{00347\ }
+\DoxyCodeLine{00348\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00349\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00350\ \ \ \textcolor{comment}{/*\ <Function>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00351\ \ \ \textcolor{comment}{/*\ \ \ \ FTC\_Manager\_LookupFace\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00352\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00353\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00354\ \ \ \textcolor{comment}{/*\ \ \ \ Retrieve\ the\ @FT\_Face\ object\ that\ corresponds\ to\ a\ given\ face\ ID\ \ \ */}}
+\DoxyCodeLine{00355\ \ \ \textcolor{comment}{/*\ \ \ \ through\ a\ cache\ manager.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00356\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00357\ \ \ \textcolor{comment}{/*\ <Input>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00358\ \ \ \textcolor{comment}{/*\ \ \ \ manager\ ::\ A\ handle\ to\ the\ cache\ manager.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00359\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00360\ \ \ \textcolor{comment}{/*\ \ \ \ face\_id\ ::\ The\ ID\ of\ the\ face\ object.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00361\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00362\ \ \ \textcolor{comment}{/*\ <Output>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00363\ \ \ \textcolor{comment}{/*\ \ \ \ aface\ \ \ ::\ A\ handle\ to\ the\ face\ object.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00364\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00365\ \ \ \textcolor{comment}{/*\ <Return>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00366\ \ \ \textcolor{comment}{/*\ \ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00367\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00368\ \ \ \textcolor{comment}{/*\ <Note>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00369\ \ \ \textcolor{comment}{/*\ \ \ \ The\ returned\ @FT\_Face\ object\ is\ always\ owned\ by\ the\ manager.\ \ You\ \ */}}
+\DoxyCodeLine{00370\ \ \ \textcolor{comment}{/*\ \ \ \ should\ never\ try\ to\ discard\ it\ yourself.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00371\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00372\ \ \ \textcolor{comment}{/*\ \ \ \ The\ @FT\_Face\ object\ doesn't\ necessarily\ have\ a\ current\ size\ object\ */}}
+\DoxyCodeLine{00373\ \ \ \textcolor{comment}{/*\ \ \ \ (i.e.,\ face-\/>size\ can\ be\string~0).\ \ If\ you\ need\ a\ specific\ \`{}font\ size',\ \ */}}
+\DoxyCodeLine{00374\ \ \ \textcolor{comment}{/*\ \ \ \ use\ @FTC\_Manager\_LookupSize\ instead.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00375\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00376\ \ \ \textcolor{comment}{/*\ \ \ \ Never\ change\ the\ face's\ transformation\ matrix\ (i.e.,\ never\ call\ \ \ \ */}}
+\DoxyCodeLine{00377\ \ \ \textcolor{comment}{/*\ \ \ \ the\ @FT\_Set\_Transform\ function)\ on\ a\ returned\ face!\ \ If\ you\ need\ \ \ */}}
+\DoxyCodeLine{00378\ \ \ \textcolor{comment}{/*\ \ \ \ to\ transform\ glyphs,\ do\ it\ yourself\ after\ glyph\ loading.\ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00379\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00380\ \ \ \textcolor{comment}{/*\ \ \ \ When\ you\ perform\ a\ lookup,\ out-\/of-\/memory\ errors\ are\ detected\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00381\ \ \ \textcolor{comment}{/*\ \ \ \ \_within\_\ the\ lookup\ and\ force\ incremental\ flushes\ of\ the\ cache\ \ \ \ \ */}}
+\DoxyCodeLine{00382\ \ \ \textcolor{comment}{/*\ \ \ \ until\ enough\ memory\ is\ released\ for\ the\ lookup\ to\ succeed.\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00383\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00384\ \ \ \textcolor{comment}{/*\ \ \ \ If\ a\ lookup\ fails\ with\ \`{}FT\_Err\_Out\_Of\_Memory'\ the\ cache\ has\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00385\ \ \ \textcolor{comment}{/*\ \ \ \ already\ been\ completely\ flushed,\ and\ still\ no\ memory\ was\ available\ */}}
+\DoxyCodeLine{00386\ \ \ \textcolor{comment}{/*\ \ \ \ for\ the\ operation.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00387\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00388\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{00389\ \ \ FTC\_Manager\_LookupFace(\ FTC\_Manager\ \ manager,}
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTC\_FaceID\ \ \ face\_id,}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Face\ \ \ \ \ *aface\ );}
+\DoxyCodeLine{00392\ }
+\DoxyCodeLine{00393\ }
+\DoxyCodeLine{00394\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00395\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00396\ \ \ \textcolor{comment}{/*\ <Struct>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00397\ \ \ \textcolor{comment}{/*\ \ \ \ FTC\_ScalerRec\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00398\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00399\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00400\ \ \ \textcolor{comment}{/*\ \ \ \ A\ structure\ used\ to\ describe\ a\ given\ character\ size\ in\ either\ \ \ \ \ \ */}}
+\DoxyCodeLine{00401\ \ \ \textcolor{comment}{/*\ \ \ \ pixels\ or\ points\ to\ the\ cache\ manager.\ \ See\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00402\ \ \ \textcolor{comment}{/*\ \ \ \ @FTC\_Manager\_LookupSize.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00403\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00404\ \ \ \textcolor{comment}{/*\ <Fields>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00405\ \ \ \textcolor{comment}{/*\ \ \ \ face\_id\ ::\ The\ source\ face\ ID.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00406\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00407\ \ \ \textcolor{comment}{/*\ \ \ \ width\ \ \ ::\ The\ character\ width.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00408\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00409\ \ \ \textcolor{comment}{/*\ \ \ \ height\ \ ::\ The\ character\ height.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00410\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00411\ \ \ \textcolor{comment}{/*\ \ \ \ pixel\ \ \ ::\ A\ Boolean.\ \ If\ 1,\ the\ \`{}width'\ and\ \`{}height'\ fields\ are\ \ \ */}}
+\DoxyCodeLine{00412\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ interpreted\ as\ integer\ pixel\ character\ sizes.\ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00413\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Otherwise,\ they\ are\ expressed\ as\ 1/64th\ of\ points.\ \ \ \ \ \ */}}
+\DoxyCodeLine{00414\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00415\ \ \ \textcolor{comment}{/*\ \ \ \ x\_res\ \ \ ::\ Only\ used\ when\ \`{}pixel'\ is\ value\string~0\ to\ indicate\ the\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00416\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ horizontal\ resolution\ in\ dpi.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00417\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00418\ \ \ \textcolor{comment}{/*\ \ \ \ y\_res\ \ \ ::\ Only\ used\ when\ \`{}pixel'\ is\ value\string~0\ to\ indicate\ the\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00419\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vertical\ resolution\ in\ dpi.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00420\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00421\ \ \ \textcolor{comment}{/*\ <Note>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00422\ \ \ \textcolor{comment}{/*\ \ \ \ This\ type\ is\ mainly\ used\ to\ retrieve\ @FT\_Size\ objects\ through\ the\ \ */}}
+\DoxyCodeLine{00423\ \ \ \textcolor{comment}{/*\ \ \ \ cache\ manager.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00424\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00425\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ \ }\mbox{\hyperlink{structFTC__ScalerRec__}{FTC\_ScalerRec\_}}}
+\DoxyCodeLine{00426\ \ \ \{}
+\DoxyCodeLine{00427\ \ \ \ \ FTC\_FaceID\ \ face\_id;}
+\DoxyCodeLine{00428\ \ \ \ \ FT\_UInt\ \ \ \ \ width;}
+\DoxyCodeLine{00429\ \ \ \ \ FT\_UInt\ \ \ \ \ height;}
+\DoxyCodeLine{00430\ \ \ \ \ FT\_Int\ \ \ \ \ \ pixel;}
+\DoxyCodeLine{00431\ \ \ \ \ FT\_UInt\ \ \ \ \ x\_res;}
+\DoxyCodeLine{00432\ \ \ \ \ FT\_UInt\ \ \ \ \ y\_res;}
+\DoxyCodeLine{00433\ }
+\DoxyCodeLine{00434\ \ \ \}\ FTC\_ScalerRec;}
+\DoxyCodeLine{00435\ }
+\DoxyCodeLine{00436\ }
+\DoxyCodeLine{00437\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00438\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00439\ \ \ \textcolor{comment}{/*\ <Struct>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00440\ \ \ \textcolor{comment}{/*\ \ \ \ FTC\_Scaler\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00441\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00442\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00443\ \ \ \textcolor{comment}{/*\ \ \ \ A\ handle\ to\ an\ @FTC\_ScalerRec\ structure.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00444\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00445\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structFTC__ScalerRec__}{FTC\_ScalerRec\_}}*\ \ FTC\_Scaler;}
+\DoxyCodeLine{00446\ }
+\DoxyCodeLine{00447\ }
+\DoxyCodeLine{00448\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00449\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00450\ \ \ \textcolor{comment}{/*\ <Function>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00451\ \ \ \textcolor{comment}{/*\ \ \ \ FTC\_Manager\_LookupSize\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00452\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00453\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00454\ \ \ \textcolor{comment}{/*\ \ \ \ Retrieve\ the\ @FT\_Size\ object\ that\ corresponds\ to\ a\ given\ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00455\ \ \ \textcolor{comment}{/*\ \ \ \ @FTC\_ScalerRec\ pointer\ through\ a\ cache\ manager.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00456\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00457\ \ \ \textcolor{comment}{/*\ <Input>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00458\ \ \ \textcolor{comment}{/*\ \ \ \ manager\ ::\ A\ handle\ to\ the\ cache\ manager.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00459\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00460\ \ \ \textcolor{comment}{/*\ \ \ \ scaler\ \ ::\ A\ scaler\ handle.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00461\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00462\ \ \ \textcolor{comment}{/*\ <Output>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00463\ \ \ \textcolor{comment}{/*\ \ \ \ asize\ \ \ ::\ A\ handle\ to\ the\ size\ object.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00464\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00465\ \ \ \textcolor{comment}{/*\ <Return>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00466\ \ \ \textcolor{comment}{/*\ \ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00467\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00468\ \ \ \textcolor{comment}{/*\ <Note>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00469\ \ \ \textcolor{comment}{/*\ \ \ \ The\ returned\ @FT\_Size\ object\ is\ always\ owned\ by\ the\ manager.\ \ You\ \ */}}
+\DoxyCodeLine{00470\ \ \ \textcolor{comment}{/*\ \ \ \ should\ never\ try\ to\ discard\ it\ by\ yourself.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00471\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00472\ \ \ \textcolor{comment}{/*\ \ \ \ You\ can\ access\ the\ parent\ @FT\_Face\ object\ simply\ as\ \`{}size-\/>face'\ \ \ */}}
+\DoxyCodeLine{00473\ \ \ \textcolor{comment}{/*\ \ \ \ if\ you\ need\ it.\ \ Note\ that\ this\ object\ is\ also\ owned\ by\ the\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00474\ \ \ \textcolor{comment}{/*\ \ \ \ manager.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00475\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00476\ \ \ \textcolor{comment}{/*\ <Note>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00477\ \ \ \textcolor{comment}{/*\ \ \ \ When\ you\ perform\ a\ lookup,\ out-\/of-\/memory\ errors\ are\ detected\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00478\ \ \ \textcolor{comment}{/*\ \ \ \ \_within\_\ the\ lookup\ and\ force\ incremental\ flushes\ of\ the\ cache\ \ \ \ \ */}}
+\DoxyCodeLine{00479\ \ \ \textcolor{comment}{/*\ \ \ \ until\ enough\ memory\ is\ released\ for\ the\ lookup\ to\ succeed.\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00480\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00481\ \ \ \textcolor{comment}{/*\ \ \ \ If\ a\ lookup\ fails\ with\ \`{}FT\_Err\_Out\_Of\_Memory'\ the\ cache\ has\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00482\ \ \ \textcolor{comment}{/*\ \ \ \ already\ been\ completely\ flushed,\ and\ still\ no\ memory\ is\ available\ \ */}}
+\DoxyCodeLine{00483\ \ \ \textcolor{comment}{/*\ \ \ \ for\ the\ operation.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00484\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00485\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{00486\ \ \ FTC\_Manager\_LookupSize(\ FTC\_Manager\ \ manager,}
+\DoxyCodeLine{00487\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTC\_Scaler\ \ \ scaler,}
+\DoxyCodeLine{00488\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Size\ \ \ \ \ *asize\ );}
+\DoxyCodeLine{00489\ }
+\DoxyCodeLine{00490\ }
+\DoxyCodeLine{00491\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00492\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00493\ \ \ \textcolor{comment}{/*\ <Function>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00494\ \ \ \textcolor{comment}{/*\ \ \ \ FTC\_Node\_Unref\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00495\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00496\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00497\ \ \ \textcolor{comment}{/*\ \ \ \ Decrement\ a\ cache\ node's\ internal\ reference\ count.\ \ When\ the\ count\ */}}
+\DoxyCodeLine{00498\ \ \ \textcolor{comment}{/*\ \ \ \ reaches\ 0,\ it\ is\ not\ destroyed\ but\ becomes\ eligible\ for\ subsequent\ */}}
+\DoxyCodeLine{00499\ \ \ \textcolor{comment}{/*\ \ \ \ cache\ flushes.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00500\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00501\ \ \ \textcolor{comment}{/*\ <Input>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00502\ \ \ \textcolor{comment}{/*\ \ \ \ node\ \ \ \ ::\ The\ cache\ node\ handle.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00503\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00504\ \ \ \textcolor{comment}{/*\ \ \ \ manager\ ::\ The\ cache\ manager\ handle.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00505\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00506\ \ \ FT\_EXPORT(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{00507\ \ \ FTC\_Node\_Unref(\ FTC\_Node\ \ \ \ \ node,}
+\DoxyCodeLine{00508\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTC\_Manager\ \ manager\ );}
+\DoxyCodeLine{00509\ }
+\DoxyCodeLine{00510\ }
+\DoxyCodeLine{00511\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00512\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00513\ \textcolor{comment}{\ \ \ *\ @function:}}
+\DoxyCodeLine{00514\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_Manager\_RemoveFaceID}}
+\DoxyCodeLine{00515\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00516\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00517\ \textcolor{comment}{\ \ \ *\ \ \ A\ special\ function\ used\ to\ indicate\ to\ the\ cache\ manager\ that}}
+\DoxyCodeLine{00518\ \textcolor{comment}{\ \ \ *\ \ \ a\ given\ @FTC\_FaceID\ is\ no\ longer\ valid,\ either\ because\ its}}
+\DoxyCodeLine{00519\ \textcolor{comment}{\ \ \ *\ \ \ content\ changed,\ or\ because\ it\ was\ deallocated\ or\ uninstalled.}}
+\DoxyCodeLine{00520\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00521\ \textcolor{comment}{\ \ \ *\ @input:}}
+\DoxyCodeLine{00522\ \textcolor{comment}{\ \ \ *\ \ \ manager\ ::}}
+\DoxyCodeLine{00523\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ cache\ manager\ handle.}}
+\DoxyCodeLine{00524\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00525\ \textcolor{comment}{\ \ \ *\ \ \ face\_id\ ::}}
+\DoxyCodeLine{00526\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ @FTC\_FaceID\ to\ be\ removed.}}
+\DoxyCodeLine{00527\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00528\ \textcolor{comment}{\ \ \ *\ @note:}}
+\DoxyCodeLine{00529\ \textcolor{comment}{\ \ \ *\ \ \ This\ function\ flushes\ all\ nodes\ from\ the\ cache\ corresponding\ to\ this}}
+\DoxyCodeLine{00530\ \textcolor{comment}{\ \ \ *\ \ \ \`{}face\_id',\ with\ the\ exception\ of\ nodes\ with\ a\ non-\/null\ reference}}
+\DoxyCodeLine{00531\ \textcolor{comment}{\ \ \ *\ \ \ count.}}
+\DoxyCodeLine{00532\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00533\ \textcolor{comment}{\ \ \ *\ \ \ Such\ nodes\ are\ however\ modified\ internally\ so\ as\ to\ never\ appear}}
+\DoxyCodeLine{00534\ \textcolor{comment}{\ \ \ *\ \ \ in\ later\ lookups\ with\ the\ same\ \`{}face\_id'\ value,\ and\ to\ be\ immediately}}
+\DoxyCodeLine{00535\ \textcolor{comment}{\ \ \ *\ \ \ destroyed\ when\ released\ by\ all\ their\ users.}}
+\DoxyCodeLine{00536\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00537\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00538\ \ \ FT\_EXPORT(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{00539\ \ \ FTC\_Manager\_RemoveFaceID(\ FTC\_Manager\ \ manager,}
+\DoxyCodeLine{00540\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTC\_FaceID\ \ \ face\_id\ );}
+\DoxyCodeLine{00541\ }
+\DoxyCodeLine{00542\ }
+\DoxyCodeLine{00543\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00544\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00545\ \ \ \textcolor{comment}{/*\ <Section>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00546\ \ \ \textcolor{comment}{/*\ \ \ \ cache\_subsystem\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00547\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00548\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00549\ }
+\DoxyCodeLine{00550\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00551\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00552\ \textcolor{comment}{\ \ \ *\ @type:}}
+\DoxyCodeLine{00553\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_CMapCache}}
+\DoxyCodeLine{00554\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00555\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00556\ \textcolor{comment}{\ \ \ *\ \ \ An\ opaque\ handle\ used\ to\ model\ a\ charmap\ cache.\ \ This\ cache\ is\ to}}
+\DoxyCodeLine{00557\ \textcolor{comment}{\ \ \ *\ \ \ hold\ character\ codes\ -\/>\ glyph\ indices\ mappings.}}
+\DoxyCodeLine{00558\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00559\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00560\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }FTC\_CMapCacheRec\_*\ \ FTC\_CMapCache;}
+\DoxyCodeLine{00561\ }
+\DoxyCodeLine{00562\ }
+\DoxyCodeLine{00563\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00564\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00565\ \textcolor{comment}{\ \ \ *\ @function:}}
+\DoxyCodeLine{00566\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_CMapCache\_New}}
+\DoxyCodeLine{00567\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00568\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00569\ \textcolor{comment}{\ \ \ *\ \ \ Create\ a\ new\ charmap\ cache.}}
+\DoxyCodeLine{00570\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00571\ \textcolor{comment}{\ \ \ *\ @input:}}
+\DoxyCodeLine{00572\ \textcolor{comment}{\ \ \ *\ \ \ manager\ ::}}
+\DoxyCodeLine{00573\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ handle\ to\ the\ cache\ manager.}}
+\DoxyCodeLine{00574\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00575\ \textcolor{comment}{\ \ \ *\ @output:}}
+\DoxyCodeLine{00576\ \textcolor{comment}{\ \ \ *\ \ \ acache\ ::}}
+\DoxyCodeLine{00577\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ new\ cache\ handle.\ \ NULL\ in\ case\ of\ error.}}
+\DoxyCodeLine{00578\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00579\ \textcolor{comment}{\ \ \ *\ @return:}}
+\DoxyCodeLine{00580\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.}}
+\DoxyCodeLine{00581\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00582\ \textcolor{comment}{\ \ \ *\ @note:}}
+\DoxyCodeLine{00583\ \textcolor{comment}{\ \ \ *\ \ \ Like\ all\ other\ caches,\ this\ one\ will\ be\ destroyed\ with\ the\ cache}}
+\DoxyCodeLine{00584\ \textcolor{comment}{\ \ \ *\ \ \ manager.}}
+\DoxyCodeLine{00585\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00586\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00587\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{00588\ \ \ FTC\_CMapCache\_New(\ FTC\_Manager\ \ \ \ \ manager,}
+\DoxyCodeLine{00589\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTC\_CMapCache\ \ *acache\ );}
+\DoxyCodeLine{00590\ }
+\DoxyCodeLine{00591\ }
+\DoxyCodeLine{00592\ \textcolor{comment}{\ \ /************************************************************************}}
+\DoxyCodeLine{00593\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00594\ \textcolor{comment}{\ \ \ *\ @function:}}
+\DoxyCodeLine{00595\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_CMapCache\_Lookup}}
+\DoxyCodeLine{00596\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00597\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00598\ \textcolor{comment}{\ \ \ *\ \ \ Translate\ a\ character\ code\ into\ a\ glyph\ index,\ using\ the\ charmap}}
+\DoxyCodeLine{00599\ \textcolor{comment}{\ \ \ *\ \ \ cache.}}
+\DoxyCodeLine{00600\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00601\ \textcolor{comment}{\ \ \ *\ @input:}}
+\DoxyCodeLine{00602\ \textcolor{comment}{\ \ \ *\ \ \ cache\ ::}}
+\DoxyCodeLine{00603\ \textcolor{comment}{\ \ \ *\ \ \ \ \ A\ charmap\ cache\ handle.}}
+\DoxyCodeLine{00604\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00605\ \textcolor{comment}{\ \ \ *\ \ \ face\_id\ ::}}
+\DoxyCodeLine{00606\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ source\ face\ ID.}}
+\DoxyCodeLine{00607\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00608\ \textcolor{comment}{\ \ \ *\ \ \ cmap\_index\ ::}}
+\DoxyCodeLine{00609\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ index\ of\ the\ charmap\ in\ the\ source\ face.\ \ Any\ negative\ value}}
+\DoxyCodeLine{00610\ \textcolor{comment}{\ \ \ *\ \ \ \ \ means\ to\ use\ the\ cache\ @FT\_Face's\ default\ charmap.}}
+\DoxyCodeLine{00611\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00612\ \textcolor{comment}{\ \ \ *\ \ \ char\_code\ ::}}
+\DoxyCodeLine{00613\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ character\ code\ (in\ the\ corresponding\ charmap).}}
+\DoxyCodeLine{00614\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00615\ \textcolor{comment}{\ \ \ *\ @return:}}
+\DoxyCodeLine{00616\ \textcolor{comment}{\ \ \ *\ \ \ \ Glyph\ index.\ \ 0\string~means\ \`{}no\ glyph'.}}
+\DoxyCodeLine{00617\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00618\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00619\ \ \ FT\_EXPORT(\ FT\_UInt\ )}
+\DoxyCodeLine{00620\ \ \ FTC\_CMapCache\_Lookup(\ FTC\_CMapCache\ \ cache,}
+\DoxyCodeLine{00621\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTC\_FaceID\ \ \ \ \ face\_id,}
+\DoxyCodeLine{00622\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Int\ \ \ \ \ \ \ \ \ cmap\_index,}
+\DoxyCodeLine{00623\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_UInt32\ \ \ \ \ \ char\_code\ );}
+\DoxyCodeLine{00624\ }
+\DoxyCodeLine{00625\ }
+\DoxyCodeLine{00626\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00627\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00628\ \ \ \textcolor{comment}{/*\ <Section>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00629\ \ \ \textcolor{comment}{/*\ \ \ \ cache\_subsystem\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00630\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00631\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00632\ }
+\DoxyCodeLine{00633\ }
+\DoxyCodeLine{00634\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00635\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00636\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00637\ \textcolor{comment}{\ \ /*****\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *****/}}
+\DoxyCodeLine{00638\ \textcolor{comment}{\ \ /*****\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ IMAGE\ CACHE\ OBJECT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *****/}}
+\DoxyCodeLine{00639\ \textcolor{comment}{\ \ /*****\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *****/}}
+\DoxyCodeLine{00640\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00641\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00642\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00643\ }
+\DoxyCodeLine{00644\ }
+\DoxyCodeLine{00645\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00646\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00647\ \textcolor{comment}{\ \ \ *\ @struct:}}
+\DoxyCodeLine{00648\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_ImageTypeRec}}
+\DoxyCodeLine{00649\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00650\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00651\ \textcolor{comment}{\ \ \ *\ \ \ A\ structure\ used\ to\ model\ the\ type\ of\ images\ in\ a\ glyph\ cache.}}
+\DoxyCodeLine{00652\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00653\ \textcolor{comment}{\ \ \ *\ @fields:}}
+\DoxyCodeLine{00654\ \textcolor{comment}{\ \ \ *\ \ \ face\_id\ ::}}
+\DoxyCodeLine{00655\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ face\ ID.}}
+\DoxyCodeLine{00656\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00657\ \textcolor{comment}{\ \ \ *\ \ \ width\ ::}}
+\DoxyCodeLine{00658\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ width\ in\ pixels.}}
+\DoxyCodeLine{00659\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00660\ \textcolor{comment}{\ \ \ *\ \ \ height\ ::}}
+\DoxyCodeLine{00661\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ height\ in\ pixels.}}
+\DoxyCodeLine{00662\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00663\ \textcolor{comment}{\ \ \ *\ \ \ flags\ ::}}
+\DoxyCodeLine{00664\ \textcolor{comment}{\ \ \ *\ \ \ \ \ The\ load\ flags,\ as\ in\ @FT\_Load\_Glyph.}}
+\DoxyCodeLine{00665\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00666\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00667\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ \ }\mbox{\hyperlink{structFTC__ImageTypeRec__}{FTC\_ImageTypeRec\_}}}
+\DoxyCodeLine{00668\ \ \ \{}
+\DoxyCodeLine{00669\ \ \ \ \ FTC\_FaceID\ \ face\_id;}
+\DoxyCodeLine{00670\ \ \ \ \ FT\_Int\ \ \ \ \ \ width;}
+\DoxyCodeLine{00671\ \ \ \ \ FT\_Int\ \ \ \ \ \ height;}
+\DoxyCodeLine{00672\ \ \ \ \ FT\_Int32\ \ \ \ flags;}
+\DoxyCodeLine{00673\ }
+\DoxyCodeLine{00674\ \ \ \}\ FTC\_ImageTypeRec;}
+\DoxyCodeLine{00675\ }
+\DoxyCodeLine{00676\ }
+\DoxyCodeLine{00677\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00678\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00679\ \textcolor{comment}{\ \ \ *\ @type:}}
+\DoxyCodeLine{00680\ \textcolor{comment}{\ \ \ *\ \ \ FTC\_ImageType}}
+\DoxyCodeLine{00681\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00682\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00683\ \textcolor{comment}{\ \ \ *\ \ \ A\ handle\ to\ an\ @FTC\_ImageTypeRec\ structure.}}
+\DoxyCodeLine{00684\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00685\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00686\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structFTC__ImageTypeRec__}{FTC\_ImageTypeRec\_}}*\ \ FTC\_ImageType;}
+\DoxyCodeLine{00687\ }
+\DoxyCodeLine{00688\ }
+\DoxyCodeLine{00689\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{00690\ }
+\DoxyCodeLine{00691\ }
+\DoxyCodeLine{00692\ \textcolor{preprocessor}{\#define\ FTC\_IMAGE\_TYPE\_COMPARE(\ d1,\ d2\ )\ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00693\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ (\ (d1)-\/>face\_id\ ==\ (d2)-\/>face\_id\ \&\&\ \(\backslash\)}}
+\DoxyCodeLine{00694\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ (d1)-\/>width\ \ \ ==\ (d2)-\/>width\ \ \ \&\&\ \(\backslash\)}}
+\DoxyCodeLine{00695\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ (d1)-\/>flags\ \ \ ==\ (d2)-\/>flags\ \ \ )}}
+\DoxyCodeLine{00696\ }
+\DoxyCodeLine{00697\ }
+\DoxyCodeLine{00698\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00699\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00700\ \ \ \textcolor{comment}{/*\ <Type>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00701\ \ \ \textcolor{comment}{/*\ \ \ \ FTC\_ImageCache\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00702\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00703\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00704\ \ \ \textcolor{comment}{/*\ \ \ \ A\ handle\ to\ a\ glyph\ image\ cache\ object.\ \ They\ are\ designed\ to\ \ \ \ \ \ */}}
+\DoxyCodeLine{00705\ \ \ \textcolor{comment}{/*\ \ \ \ hold\ many\ distinct\ glyph\ images\ while\ not\ exceeding\ a\ certain\ \ \ \ \ \ */}}
+\DoxyCodeLine{00706\ \ \ \textcolor{comment}{/*\ \ \ \ memory\ threshold.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00707\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00708\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }FTC\_ImageCacheRec\_*\ \ FTC\_ImageCache;}
+\DoxyCodeLine{00709\ }
+\DoxyCodeLine{00710\ }
+\DoxyCodeLine{00711\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00712\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00713\ \ \ \textcolor{comment}{/*\ <Function>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00714\ \ \ \textcolor{comment}{/*\ \ \ \ FTC\_ImageCache\_New\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00715\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00716\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00717\ \ \ \textcolor{comment}{/*\ \ \ \ Create\ a\ new\ glyph\ image\ cache.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00718\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00719\ \ \ \textcolor{comment}{/*\ <Input>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00720\ \ \ \textcolor{comment}{/*\ \ \ \ manager\ ::\ The\ parent\ manager\ for\ the\ image\ cache.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00721\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00722\ \ \ \textcolor{comment}{/*\ <Output>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00723\ \ \ \textcolor{comment}{/*\ \ \ \ acache\ \ ::\ A\ handle\ to\ the\ new\ glyph\ image\ cache\ object.\ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00724\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00725\ \ \ \textcolor{comment}{/*\ <Return>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00726\ \ \ \textcolor{comment}{/*\ \ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00727\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00728\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{00729\ \ \ FTC\_ImageCache\_New(\ FTC\_Manager\ \ \ \ \ \ manager,}
+\DoxyCodeLine{00730\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTC\_ImageCache\ \ *acache\ );}
+\DoxyCodeLine{00731\ }
+\DoxyCodeLine{00732\ }
+\DoxyCodeLine{00733\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00734\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00735\ \ \ \textcolor{comment}{/*\ <Function>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00736\ \ \ \textcolor{comment}{/*\ \ \ \ FTC\_ImageCache\_Lookup\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00737\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00738\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00739\ \ \ \textcolor{comment}{/*\ \ \ \ Retrieve\ a\ given\ glyph\ image\ from\ a\ glyph\ image\ cache.\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00740\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00741\ \ \ \textcolor{comment}{/*\ <Input>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00742\ \ \ \textcolor{comment}{/*\ \ \ \ cache\ \ ::\ A\ handle\ to\ the\ source\ glyph\ image\ cache.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00743\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00744\ \ \ \textcolor{comment}{/*\ \ \ \ type\ \ \ ::\ A\ pointer\ to\ a\ glyph\ image\ type\ descriptor.\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00745\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00746\ \ \ \textcolor{comment}{/*\ \ \ \ gindex\ ::\ The\ glyph\ index\ to\ retrieve.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00747\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00748\ \ \ \textcolor{comment}{/*\ <Output>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00749\ \ \ \textcolor{comment}{/*\ \ \ \ aglyph\ ::\ The\ corresponding\ @FT\_Glyph\ object.\ \ 0\string~in\ case\ of\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00750\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ failure.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00751\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00752\ \ \ \textcolor{comment}{/*\ \ \ \ anode\ \ ::\ Used\ to\ return\ the\ address\ of\ of\ the\ corresponding\ cache\ */}}
+\DoxyCodeLine{00753\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ node\ after\ incrementing\ its\ reference\ count\ (see\ note\ \ \ \ */}}
+\DoxyCodeLine{00754\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ below).\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00755\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00756\ \ \ \textcolor{comment}{/*\ <Return>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00757\ \ \ \textcolor{comment}{/*\ \ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00758\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00759\ \ \ \textcolor{comment}{/*\ <Note>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00760\ \ \ \textcolor{comment}{/*\ \ \ \ The\ returned\ glyph\ is\ owned\ and\ managed\ by\ the\ glyph\ image\ cache.\ \ */}}
+\DoxyCodeLine{00761\ \ \ \textcolor{comment}{/*\ \ \ \ Never\ try\ to\ transform\ or\ discard\ it\ manually!\ \ You\ can\ however\ \ \ \ */}}
+\DoxyCodeLine{00762\ \ \ \textcolor{comment}{/*\ \ \ \ create\ a\ copy\ with\ @FT\_Glyph\_Copy\ and\ modify\ the\ new\ one.\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00763\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00764\ \ \ \textcolor{comment}{/*\ \ \ \ If\ \`{}anode'\ is\ \_not\_\ NULL,\ it\ receives\ the\ address\ of\ the\ cache\ \ \ \ \ */}}
+\DoxyCodeLine{00765\ \ \ \textcolor{comment}{/*\ \ \ \ node\ containing\ the\ glyph\ image,\ after\ increasing\ its\ reference\ \ \ \ */}}
+\DoxyCodeLine{00766\ \ \ \textcolor{comment}{/*\ \ \ \ count.\ \ This\ ensures\ that\ the\ node\ (as\ well\ as\ the\ @FT\_Glyph)\ will\ */}}
+\DoxyCodeLine{00767\ \ \ \textcolor{comment}{/*\ \ \ \ always\ be\ kept\ in\ the\ cache\ until\ you\ call\ @FTC\_Node\_Unref\ to\ \ \ \ \ \ */}}
+\DoxyCodeLine{00768\ \ \ \textcolor{comment}{/*\ \ \ \ \`{}release'\ it.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00769\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00770\ \ \ \textcolor{comment}{/*\ \ \ \ If\ \`{}anode'\ is\ NULL,\ the\ cache\ node\ is\ left\ unchanged,\ which\ means\ \ */}}
+\DoxyCodeLine{00771\ \ \ \textcolor{comment}{/*\ \ \ \ that\ the\ @FT\_Glyph\ could\ be\ flushed\ out\ of\ the\ cache\ on\ the\ next\ \ \ */}}
+\DoxyCodeLine{00772\ \ \ \textcolor{comment}{/*\ \ \ \ call\ to\ one\ of\ the\ caching\ sub-\/system\ APIs.\ \ Don't\ assume\ that\ it\ \ */}}
+\DoxyCodeLine{00773\ \ \ \textcolor{comment}{/*\ \ \ \ is\ persistent!\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00774\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00775\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{00776\ \ \ FTC\_ImageCache\_Lookup(\ FTC\_ImageCache\ \ cache,}
+\DoxyCodeLine{00777\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTC\_ImageType\ \ \ type,}
+\DoxyCodeLine{00778\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_UInt\ \ \ \ \ \ \ \ \ gindex,}
+\DoxyCodeLine{00779\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Glyph\ \ \ \ \ \ \ *aglyph,}
+\DoxyCodeLine{00780\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTC\_Node\ \ \ \ \ \ \ *anode\ );}
+\DoxyCodeLine{00781\ }
+\DoxyCodeLine{00782\ }
+\DoxyCodeLine{00783\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00784\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00785\ \ \ \textcolor{comment}{/*\ <Function>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00786\ \ \ \textcolor{comment}{/*\ \ \ \ FTC\_ImageCache\_LookupScaler\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00787\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00788\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00789\ \ \ \textcolor{comment}{/*\ \ \ \ A\ variant\ of\ @FTC\_ImageCache\_Lookup\ that\ uses\ an\ @FTC\_ScalerRec\ \ \ \ */}}
+\DoxyCodeLine{00790\ \ \ \textcolor{comment}{/*\ \ \ \ to\ specify\ the\ face\ ID\ and\ its\ size.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00791\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00792\ \ \ \textcolor{comment}{/*\ <Input>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00793\ \ \ \textcolor{comment}{/*\ \ \ \ cache\ \ \ \ \ \ ::\ A\ handle\ to\ the\ source\ glyph\ image\ cache.\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00794\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00795\ \ \ \textcolor{comment}{/*\ \ \ \ scaler\ \ \ \ \ ::\ A\ pointer\ to\ a\ scaler\ descriptor.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00796\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00797\ \ \ \textcolor{comment}{/*\ \ \ \ load\_flags\ ::\ The\ corresponding\ load\ flags.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00798\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00799\ \ \ \textcolor{comment}{/*\ \ \ \ gindex\ \ \ \ \ ::\ The\ glyph\ index\ to\ retrieve.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00800\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00801\ \ \ \textcolor{comment}{/*\ <Output>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00802\ \ \ \textcolor{comment}{/*\ \ \ \ aglyph\ \ \ \ \ ::\ The\ corresponding\ @FT\_Glyph\ object.\ \ 0\string~in\ case\ of\ \ \ \ */}}
+\DoxyCodeLine{00803\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ failure.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00804\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00805\ \ \ \textcolor{comment}{/*\ \ \ \ anode\ \ \ \ \ \ ::\ Used\ to\ return\ the\ address\ of\ of\ the\ corresponding\ \ \ */}}
+\DoxyCodeLine{00806\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cache\ node\ after\ incrementing\ its\ reference\ count\ \ \ \ */}}
+\DoxyCodeLine{00807\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (see\ note\ below).\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00808\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00809\ \ \ \textcolor{comment}{/*\ <Return>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00810\ \ \ \textcolor{comment}{/*\ \ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00811\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00812\ \ \ \textcolor{comment}{/*\ <Note>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00813\ \ \ \textcolor{comment}{/*\ \ \ \ The\ returned\ glyph\ is\ owned\ and\ managed\ by\ the\ glyph\ image\ cache.\ \ */}}
+\DoxyCodeLine{00814\ \ \ \textcolor{comment}{/*\ \ \ \ Never\ try\ to\ transform\ or\ discard\ it\ manually!\ \ You\ can\ however\ \ \ \ */}}
+\DoxyCodeLine{00815\ \ \ \textcolor{comment}{/*\ \ \ \ create\ a\ copy\ with\ @FT\_Glyph\_Copy\ and\ modify\ the\ new\ one.\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00816\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00817\ \ \ \textcolor{comment}{/*\ \ \ \ If\ \`{}anode'\ is\ \_not\_\ NULL,\ it\ receives\ the\ address\ of\ the\ cache\ \ \ \ \ */}}
+\DoxyCodeLine{00818\ \ \ \textcolor{comment}{/*\ \ \ \ node\ containing\ the\ glyph\ image,\ after\ increasing\ its\ reference\ \ \ \ */}}
+\DoxyCodeLine{00819\ \ \ \textcolor{comment}{/*\ \ \ \ count.\ \ This\ ensures\ that\ the\ node\ (as\ well\ as\ the\ @FT\_Glyph)\ will\ */}}
+\DoxyCodeLine{00820\ \ \ \textcolor{comment}{/*\ \ \ \ always\ be\ kept\ in\ the\ cache\ until\ you\ call\ @FTC\_Node\_Unref\ to\ \ \ \ \ \ */}}
+\DoxyCodeLine{00821\ \ \ \textcolor{comment}{/*\ \ \ \ \`{}release'\ it.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00822\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00823\ \ \ \textcolor{comment}{/*\ \ \ \ If\ \`{}anode'\ is\ NULL,\ the\ cache\ node\ is\ left\ unchanged,\ which\ means\ \ */}}
+\DoxyCodeLine{00824\ \ \ \textcolor{comment}{/*\ \ \ \ that\ the\ @FT\_Glyph\ could\ be\ flushed\ out\ of\ the\ cache\ on\ the\ next\ \ \ */}}
+\DoxyCodeLine{00825\ \ \ \textcolor{comment}{/*\ \ \ \ call\ to\ one\ of\ the\ caching\ sub-\/system\ APIs.\ \ Don't\ assume\ that\ it\ \ */}}
+\DoxyCodeLine{00826\ \ \ \textcolor{comment}{/*\ \ \ \ is\ persistent!\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00827\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00828\ \ \ \textcolor{comment}{/*\ \ \ \ Calls\ to\ @FT\_Set\_Char\_Size\ and\ friends\ have\ no\ effect\ on\ cached\ \ \ \ */}}
+\DoxyCodeLine{00829\ \ \ \textcolor{comment}{/*\ \ \ \ glyphs;\ you\ should\ always\ use\ the\ FreeType\ cache\ API\ instead.\ \ \ \ \ \ */}}
+\DoxyCodeLine{00830\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00831\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{00832\ \ \ FTC\_ImageCache\_LookupScaler(\ FTC\_ImageCache\ \ cache,}
+\DoxyCodeLine{00833\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTC\_Scaler\ \ \ \ \ \ scaler,}
+\DoxyCodeLine{00834\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_ULong\ \ \ \ \ \ \ \ load\_flags,}
+\DoxyCodeLine{00835\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_UInt\ \ \ \ \ \ \ \ \ gindex,}
+\DoxyCodeLine{00836\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Glyph\ \ \ \ \ \ \ *aglyph,}
+\DoxyCodeLine{00837\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTC\_Node\ \ \ \ \ \ \ *anode\ );}
+\DoxyCodeLine{00838\ }
+\DoxyCodeLine{00839\ }
+\DoxyCodeLine{00840\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00841\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00842\ \ \ \textcolor{comment}{/*\ <Type>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00843\ \ \ \textcolor{comment}{/*\ \ \ \ FTC\_SBit\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00844\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00845\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00846\ \ \ \textcolor{comment}{/*\ \ \ \ A\ handle\ to\ a\ small\ bitmap\ descriptor.\ \ See\ the\ @FTC\_SBitRec\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00847\ \ \ \textcolor{comment}{/*\ \ \ \ structure\ for\ details.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00848\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00849\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structFTC__SBitRec__}{FTC\_SBitRec\_}}*\ \ FTC\_SBit;}
+\DoxyCodeLine{00850\ }
+\DoxyCodeLine{00851\ }
+\DoxyCodeLine{00852\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00853\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00854\ \ \ \textcolor{comment}{/*\ <Struct>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00855\ \ \ \textcolor{comment}{/*\ \ \ \ FTC\_SBitRec\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00856\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00857\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00858\ \ \ \textcolor{comment}{/*\ \ \ \ A\ very\ compact\ structure\ used\ to\ describe\ a\ small\ glyph\ bitmap.\ \ \ \ */}}
+\DoxyCodeLine{00859\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00860\ \ \ \textcolor{comment}{/*\ <Fields>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00861\ \ \ \textcolor{comment}{/*\ \ \ \ width\ \ \ \ \ ::\ The\ bitmap\ width\ in\ pixels.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00862\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00863\ \ \ \textcolor{comment}{/*\ \ \ \ height\ \ \ \ ::\ The\ bitmap\ height\ in\ pixels.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00864\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00865\ \ \ \textcolor{comment}{/*\ \ \ \ left\ \ \ \ \ \ ::\ The\ horizontal\ distance\ from\ the\ pen\ position\ to\ the\ \ */}}
+\DoxyCodeLine{00866\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ left\ bitmap\ border\ (a.k.a.\ \`{}left\ side\ bearing',\ or\ \ \ \ */}}
+\DoxyCodeLine{00867\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \`{}lsb').\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00868\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00869\ \ \ \textcolor{comment}{/*\ \ \ \ top\ \ \ \ \ \ \ ::\ The\ vertical\ distance\ from\ the\ pen\ position\ (on\ the\ \ \ */}}
+\DoxyCodeLine{00870\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ baseline)\ to\ the\ upper\ bitmap\ border\ (a.k.a.\ \`{}top\ \ \ \ \ */}}
+\DoxyCodeLine{00871\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ side\ bearing').\ \ The\ distance\ is\ positive\ for\ upwards\ */}}
+\DoxyCodeLine{00872\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ y\string~coordinates.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00873\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00874\ \ \ \textcolor{comment}{/*\ \ \ \ format\ \ \ \ ::\ The\ format\ of\ the\ glyph\ bitmap\ (monochrome\ or\ gray).\ \ */}}
+\DoxyCodeLine{00875\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00876\ \ \ \textcolor{comment}{/*\ \ \ \ max\_grays\ ::\ Maximum\ gray\ level\ value\ (in\ the\ range\ 1\ to\string~255).\ \ \ \ \ */}}
+\DoxyCodeLine{00877\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00878\ \ \ \textcolor{comment}{/*\ \ \ \ pitch\ \ \ \ \ ::\ The\ number\ of\ bytes\ per\ bitmap\ line.\ \ May\ be\ positive\ */}}
+\DoxyCodeLine{00879\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ or\ negative.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00880\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00881\ \ \ \textcolor{comment}{/*\ \ \ \ xadvance\ \ ::\ The\ horizontal\ advance\ width\ in\ pixels.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00882\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00883\ \ \ \textcolor{comment}{/*\ \ \ \ yadvance\ \ ::\ The\ vertical\ advance\ height\ in\ pixels.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00884\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00885\ \ \ \textcolor{comment}{/*\ \ \ \ buffer\ \ \ \ ::\ A\ pointer\ to\ the\ bitmap\ pixels.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00886\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00887\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ \ }\mbox{\hyperlink{structFTC__SBitRec__}{FTC\_SBitRec\_}}}
+\DoxyCodeLine{00888\ \ \ \{}
+\DoxyCodeLine{00889\ \ \ \ \ FT\_Byte\ \ \ width;}
+\DoxyCodeLine{00890\ \ \ \ \ FT\_Byte\ \ \ height;}
+\DoxyCodeLine{00891\ \ \ \ \ FT\_Char\ \ \ left;}
+\DoxyCodeLine{00892\ \ \ \ \ FT\_Char\ \ \ top;}
+\DoxyCodeLine{00893\ }
+\DoxyCodeLine{00894\ \ \ \ \ FT\_Byte\ \ \ format;}
+\DoxyCodeLine{00895\ \ \ \ \ FT\_Byte\ \ \ max\_grays;}
+\DoxyCodeLine{00896\ \ \ \ \ FT\_Short\ \ pitch;}
+\DoxyCodeLine{00897\ \ \ \ \ FT\_Char\ \ \ xadvance;}
+\DoxyCodeLine{00898\ \ \ \ \ FT\_Char\ \ \ yadvance;}
+\DoxyCodeLine{00899\ }
+\DoxyCodeLine{00900\ \ \ \ \ FT\_Byte*\ \ buffer;}
+\DoxyCodeLine{00901\ }
+\DoxyCodeLine{00902\ \ \ \}\ FTC\_SBitRec;}
+\DoxyCodeLine{00903\ }
+\DoxyCodeLine{00904\ }
+\DoxyCodeLine{00905\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00906\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00907\ \ \ \textcolor{comment}{/*\ <Type>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00908\ \ \ \textcolor{comment}{/*\ \ \ \ FTC\_SBitCache\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00909\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00910\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00911\ \ \ \textcolor{comment}{/*\ \ \ \ A\ handle\ to\ a\ small\ bitmap\ cache.\ \ These\ are\ special\ cache\ objects\ */}}
+\DoxyCodeLine{00912\ \ \ \textcolor{comment}{/*\ \ \ \ used\ to\ store\ small\ glyph\ bitmaps\ (and\ anti-\/aliased\ pixmaps)\ in\ a\ \ */}}
+\DoxyCodeLine{00913\ \ \ \textcolor{comment}{/*\ \ \ \ much\ more\ efficient\ way\ than\ the\ traditional\ glyph\ image\ cache\ \ \ \ \ */}}
+\DoxyCodeLine{00914\ \ \ \textcolor{comment}{/*\ \ \ \ implemented\ by\ @FTC\_ImageCache.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00915\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00916\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }FTC\_SBitCacheRec\_*\ \ FTC\_SBitCache;}
+\DoxyCodeLine{00917\ }
+\DoxyCodeLine{00918\ }
+\DoxyCodeLine{00919\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00920\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00921\ \ \ \textcolor{comment}{/*\ <Function>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00922\ \ \ \textcolor{comment}{/*\ \ \ \ FTC\_SBitCache\_New\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00923\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00924\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00925\ \ \ \textcolor{comment}{/*\ \ \ \ Create\ a\ new\ cache\ to\ store\ small\ glyph\ bitmaps.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00926\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00927\ \ \ \textcolor{comment}{/*\ <Input>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00928\ \ \ \textcolor{comment}{/*\ \ \ \ manager\ ::\ A\ handle\ to\ the\ source\ cache\ manager.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00929\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00930\ \ \ \textcolor{comment}{/*\ <Output>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00931\ \ \ \textcolor{comment}{/*\ \ \ \ acache\ \ ::\ A\ handle\ to\ the\ new\ sbit\ cache.\ \ NULL\ in\ case\ of\ error.\ */}}
+\DoxyCodeLine{00932\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00933\ \ \ \textcolor{comment}{/*\ <Return>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00934\ \ \ \textcolor{comment}{/*\ \ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00935\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00936\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{00937\ \ \ FTC\_SBitCache\_New(\ FTC\_Manager\ \ \ \ \ manager,}
+\DoxyCodeLine{00938\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTC\_SBitCache\ \ *acache\ );}
+\DoxyCodeLine{00939\ }
+\DoxyCodeLine{00940\ }
+\DoxyCodeLine{00941\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00942\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00943\ \ \ \textcolor{comment}{/*\ <Function>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00944\ \ \ \textcolor{comment}{/*\ \ \ \ FTC\_SBitCache\_Lookup\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00945\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00946\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00947\ \ \ \textcolor{comment}{/*\ \ \ \ Look\ up\ a\ given\ small\ glyph\ bitmap\ in\ a\ given\ sbit\ cache\ and\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00948\ \ \ \textcolor{comment}{/*\ \ \ \ \`{}lock'\ it\ to\ prevent\ its\ flushing\ from\ the\ cache\ until\ needed.\ \ \ \ \ */}}
+\DoxyCodeLine{00949\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00950\ \ \ \textcolor{comment}{/*\ <Input>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00951\ \ \ \textcolor{comment}{/*\ \ \ \ cache\ \ ::\ A\ handle\ to\ the\ source\ sbit\ cache.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00952\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00953\ \ \ \textcolor{comment}{/*\ \ \ \ type\ \ \ ::\ A\ pointer\ to\ the\ glyph\ image\ type\ descriptor.\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00954\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00955\ \ \ \textcolor{comment}{/*\ \ \ \ gindex\ ::\ The\ glyph\ index.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00956\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00957\ \ \ \textcolor{comment}{/*\ <Output>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00958\ \ \ \textcolor{comment}{/*\ \ \ \ sbit\ \ \ ::\ A\ handle\ to\ a\ small\ bitmap\ descriptor.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00959\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00960\ \ \ \textcolor{comment}{/*\ \ \ \ anode\ \ ::\ Used\ to\ return\ the\ address\ of\ of\ the\ corresponding\ cache\ */}}
+\DoxyCodeLine{00961\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ node\ after\ incrementing\ its\ reference\ count\ (see\ note\ \ \ \ */}}
+\DoxyCodeLine{00962\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ below).\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00963\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00964\ \ \ \textcolor{comment}{/*\ <Return>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00965\ \ \ \textcolor{comment}{/*\ \ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00966\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00967\ \ \ \textcolor{comment}{/*\ <Note>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00968\ \ \ \textcolor{comment}{/*\ \ \ \ The\ small\ bitmap\ descriptor\ and\ its\ bit\ buffer\ are\ owned\ by\ the\ \ \ \ */}}
+\DoxyCodeLine{00969\ \ \ \textcolor{comment}{/*\ \ \ \ cache\ and\ should\ never\ be\ freed\ by\ the\ application.\ \ They\ might\ \ \ \ */}}
+\DoxyCodeLine{00970\ \ \ \textcolor{comment}{/*\ \ \ \ as\ well\ disappear\ from\ memory\ on\ the\ next\ cache\ lookup,\ so\ don't\ \ \ */}}
+\DoxyCodeLine{00971\ \ \ \textcolor{comment}{/*\ \ \ \ treat\ them\ as\ persistent\ data.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00972\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00973\ \ \ \textcolor{comment}{/*\ \ \ \ The\ descriptor's\ \`{}buffer'\ field\ is\ set\ to\string~0\ to\ indicate\ a\ missing\ \ */}}
+\DoxyCodeLine{00974\ \ \ \textcolor{comment}{/*\ \ \ \ glyph\ bitmap.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00975\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00976\ \ \ \textcolor{comment}{/*\ \ \ \ If\ \`{}anode'\ is\ \_not\_\ NULL,\ it\ receives\ the\ address\ of\ the\ cache\ \ \ \ \ */}}
+\DoxyCodeLine{00977\ \ \ \textcolor{comment}{/*\ \ \ \ node\ containing\ the\ bitmap,\ after\ increasing\ its\ reference\ count.\ \ */}}
+\DoxyCodeLine{00978\ \ \ \textcolor{comment}{/*\ \ \ \ This\ ensures\ that\ the\ node\ (as\ well\ as\ the\ image)\ will\ always\ be\ \ \ */}}
+\DoxyCodeLine{00979\ \ \ \textcolor{comment}{/*\ \ \ \ kept\ in\ the\ cache\ until\ you\ call\ @FTC\_Node\_Unref\ to\ \`{}release'\ it.\ \ */}}
+\DoxyCodeLine{00980\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00981\ \ \ \textcolor{comment}{/*\ \ \ \ If\ \`{}anode'\ is\ NULL,\ the\ cache\ node\ is\ left\ unchanged,\ which\ means\ \ */}}
+\DoxyCodeLine{00982\ \ \ \textcolor{comment}{/*\ \ \ \ that\ the\ bitmap\ could\ be\ flushed\ out\ of\ the\ cache\ on\ the\ next\ \ \ \ \ \ */}}
+\DoxyCodeLine{00983\ \ \ \textcolor{comment}{/*\ \ \ \ call\ to\ one\ of\ the\ caching\ sub-\/system\ APIs.\ \ Don't\ assume\ that\ it\ \ */}}
+\DoxyCodeLine{00984\ \ \ \textcolor{comment}{/*\ \ \ \ is\ persistent!\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00985\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00986\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{00987\ \ \ FTC\_SBitCache\_Lookup(\ FTC\_SBitCache\ \ \ \ cache,}
+\DoxyCodeLine{00988\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTC\_ImageType\ \ \ \ type,}
+\DoxyCodeLine{00989\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_UInt\ \ \ \ \ \ \ \ \ \ gindex,}
+\DoxyCodeLine{00990\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTC\_SBit\ \ \ \ \ \ \ \ *sbit,}
+\DoxyCodeLine{00991\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTC\_Node\ \ \ \ \ \ \ \ *anode\ );}
+\DoxyCodeLine{00992\ }
+\DoxyCodeLine{00993\ }
+\DoxyCodeLine{00994\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00995\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00996\ \ \ \textcolor{comment}{/*\ <Function>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00997\ \ \ \textcolor{comment}{/*\ \ \ \ FTC\_SBitCache\_LookupScaler\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00998\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00999\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01000\ \ \ \textcolor{comment}{/*\ \ \ \ A\ variant\ of\ @FTC\_SBitCache\_Lookup\ that\ uses\ an\ @FTC\_ScalerRec\ \ \ \ \ */}}
+\DoxyCodeLine{01001\ \ \ \textcolor{comment}{/*\ \ \ \ to\ specify\ the\ face\ ID\ and\ its\ size.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01002\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01003\ \ \ \textcolor{comment}{/*\ <Input>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01004\ \ \ \textcolor{comment}{/*\ \ \ \ cache\ \ \ \ \ \ ::\ A\ handle\ to\ the\ source\ sbit\ cache.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01005\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01006\ \ \ \textcolor{comment}{/*\ \ \ \ scaler\ \ \ \ \ ::\ A\ pointer\ to\ the\ scaler\ descriptor.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01007\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01008\ \ \ \textcolor{comment}{/*\ \ \ \ load\_flags\ ::\ The\ corresponding\ load\ flags.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01009\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01010\ \ \ \textcolor{comment}{/*\ \ \ \ gindex\ \ \ \ \ ::\ The\ glyph\ index.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01011\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01012\ \ \ \textcolor{comment}{/*\ <Output>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01013\ \ \ \textcolor{comment}{/*\ \ \ \ sbit\ \ \ \ \ \ \ ::\ A\ handle\ to\ a\ small\ bitmap\ descriptor.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01014\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01015\ \ \ \textcolor{comment}{/*\ \ \ \ anode\ \ \ \ \ \ ::\ Used\ to\ return\ the\ address\ of\ of\ the\ corresponding\ \ \ */}}
+\DoxyCodeLine{01016\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cache\ node\ after\ incrementing\ its\ reference\ count\ \ \ \ */}}
+\DoxyCodeLine{01017\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (see\ note\ below).\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01018\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01019\ \ \ \textcolor{comment}{/*\ <Return>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01020\ \ \ \textcolor{comment}{/*\ \ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01021\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01022\ \ \ \textcolor{comment}{/*\ <Note>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01023\ \ \ \textcolor{comment}{/*\ \ \ \ The\ small\ bitmap\ descriptor\ and\ its\ bit\ buffer\ are\ owned\ by\ the\ \ \ \ */}}
+\DoxyCodeLine{01024\ \ \ \textcolor{comment}{/*\ \ \ \ cache\ and\ should\ never\ be\ freed\ by\ the\ application.\ \ They\ might\ \ \ \ */}}
+\DoxyCodeLine{01025\ \ \ \textcolor{comment}{/*\ \ \ \ as\ well\ disappear\ from\ memory\ on\ the\ next\ cache\ lookup,\ so\ don't\ \ \ */}}
+\DoxyCodeLine{01026\ \ \ \textcolor{comment}{/*\ \ \ \ treat\ them\ as\ persistent\ data.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01027\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01028\ \ \ \textcolor{comment}{/*\ \ \ \ The\ descriptor's\ \`{}buffer'\ field\ is\ set\ to\string~0\ to\ indicate\ a\ missing\ \ */}}
+\DoxyCodeLine{01029\ \ \ \textcolor{comment}{/*\ \ \ \ glyph\ bitmap.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01030\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01031\ \ \ \textcolor{comment}{/*\ \ \ \ If\ \`{}anode'\ is\ \_not\_\ NULL,\ it\ receives\ the\ address\ of\ the\ cache\ \ \ \ \ */}}
+\DoxyCodeLine{01032\ \ \ \textcolor{comment}{/*\ \ \ \ node\ containing\ the\ bitmap,\ after\ increasing\ its\ reference\ count.\ \ */}}
+\DoxyCodeLine{01033\ \ \ \textcolor{comment}{/*\ \ \ \ This\ ensures\ that\ the\ node\ (as\ well\ as\ the\ image)\ will\ always\ be\ \ \ */}}
+\DoxyCodeLine{01034\ \ \ \textcolor{comment}{/*\ \ \ \ kept\ in\ the\ cache\ until\ you\ call\ @FTC\_Node\_Unref\ to\ \`{}release'\ it.\ \ */}}
+\DoxyCodeLine{01035\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01036\ \ \ \textcolor{comment}{/*\ \ \ \ If\ \`{}anode'\ is\ NULL,\ the\ cache\ node\ is\ left\ unchanged,\ which\ means\ \ */}}
+\DoxyCodeLine{01037\ \ \ \textcolor{comment}{/*\ \ \ \ that\ the\ bitmap\ could\ be\ flushed\ out\ of\ the\ cache\ on\ the\ next\ \ \ \ \ \ */}}
+\DoxyCodeLine{01038\ \ \ \textcolor{comment}{/*\ \ \ \ call\ to\ one\ of\ the\ caching\ sub-\/system\ APIs.\ \ Don't\ assume\ that\ it\ \ */}}
+\DoxyCodeLine{01039\ \ \ \textcolor{comment}{/*\ \ \ \ is\ persistent!\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01040\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{01041\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{01042\ \ \ FTC\_SBitCache\_LookupScaler(\ FTC\_SBitCache\ \ cache,}
+\DoxyCodeLine{01043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTC\_Scaler\ \ \ \ \ scaler,}
+\DoxyCodeLine{01044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_ULong\ \ \ \ \ \ \ load\_flags,}
+\DoxyCodeLine{01045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_UInt\ \ \ \ \ \ \ \ gindex,}
+\DoxyCodeLine{01046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTC\_SBit\ \ \ \ \ \ *sbit,}
+\DoxyCodeLine{01047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FTC\_Node\ \ \ \ \ \ *anode\ );}
+\DoxyCodeLine{01048\ }
+\DoxyCodeLine{01049\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{01050\ }
+\DoxyCodeLine{01051\ }
+\DoxyCodeLine{01052\ FT\_END\_HEADER}
+\DoxyCodeLine{01053\ }
+\DoxyCodeLine{01054\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_FTCACHE\_H\_\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01055\ }
+\DoxyCodeLine{01056\ }
+\DoxyCodeLine{01057\ \textcolor{comment}{/*\ END\ */}}
+
+\end{DoxyCode}

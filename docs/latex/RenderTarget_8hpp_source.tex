@@ -1,0 +1,146 @@
+\doxysection{Render\+Target.\+hpp}
+\hypertarget{RenderTarget_8hpp_source}{}\label{RenderTarget_8hpp_source}\index{build/\_deps/sfml-\/src/include/SFML/Graphics/RenderTarget.hpp@{build/\_deps/sfml-\/src/include/SFML/Graphics/RenderTarget.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ SFML\_RENDERTARGET\_HPP}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ SFML\_RENDERTARGET\_HPP}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/Export.hpp>}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/Color.hpp>}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/Rect.hpp>}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/View.hpp>}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/Transform.hpp>}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/BlendMode.hpp>}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/RenderStates.hpp>}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/PrimitiveType.hpp>}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/Vertex.hpp>}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#include\ <SFML/System/NonCopyable.hpp>}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{00044\ \{}
+\DoxyCodeLine{00045\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1Drawable}{Drawable}};}
+\DoxyCodeLine{00046\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1VertexBuffer}{VertexBuffer}};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00052\ \textcolor{keyword}{class\ }SFML\_GRAPHICS\_API\ \mbox{\hyperlink{classsf_1_1RenderTarget_a2997c96cbd93cb8ce0aba2ddae35b86f}{RenderTarget}}\ :\ \mbox{\hyperlink{classsf_1_1NonCopyable_a2110add170580fdb946f887719da6860}{NonCopyable}}}
+\DoxyCodeLine{00053\ \{}
+\DoxyCodeLine{00054\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classsf_1_1RenderTarget_a2997c96cbd93cb8ce0aba2ddae35b86f}{\string~RenderTarget}}();}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1RenderTarget_a6bb6f0ba348f2b1e2f46114aeaf60f26}{clear}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1Color}{Color}}\&\ color\ =\ \mbox{\hyperlink{classsf_1_1Color}{Color}}(0,\ 0,\ 0,\ 255));}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1RenderTarget_a063db6dd0a14913504af30e50cb6d946}{setView}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1View}{View}}\&\ view);}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1View}{View}}\&\ \mbox{\hyperlink{classsf_1_1RenderTarget_adbf8dc5a1f4abbe15a3fbb915844c7ea}{getView}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1View}{View}}\&\ \mbox{\hyperlink{classsf_1_1RenderTarget_a7741129e3ef7ab4f0a40024fca13480c}{getDefaultView}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00130\ \ \ \ \ IntRect\ \mbox{\hyperlink{classsf_1_1RenderTarget_a865d462915dc2a1fae2ebfb3300382ac}{getViewport}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1View}{View}}\&\ view)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00150\ \ \ \ \ Vector2f\ \mbox{\hyperlink{classsf_1_1RenderTarget_a0103ebebafa43a97e6e6414f8560d5e3}{mapPixelToCoords}}(\textcolor{keyword}{const}\ Vector2i\&\ point)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00181\ \ \ \ \ Vector2f\ \mbox{\hyperlink{classsf_1_1RenderTarget_a0103ebebafa43a97e6e6414f8560d5e3}{mapPixelToCoords}}(\textcolor{keyword}{const}\ Vector2i\&\ point,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1View}{View}}\&\ view)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00201\ \ \ \ \ Vector2i\ \mbox{\hyperlink{classsf_1_1RenderTarget_ad92a9f0283aa5f3f67e473c1105b68cf}{mapCoordsToPixel}}(\textcolor{keyword}{const}\ Vector2f\&\ point)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00228\ \ \ \ \ Vector2i\ \mbox{\hyperlink{classsf_1_1RenderTarget_ad92a9f0283aa5f3f67e473c1105b68cf}{mapCoordsToPixel}}(\textcolor{keyword}{const}\ Vector2f\&\ point,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1View}{View}}\&\ view)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00237\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1RenderTarget_a12417a3bcc245c41d957b29583556f39}{draw}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1Drawable}{Drawable}}\&\ drawable,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1RenderStates}{RenderStates}}\&\ states\ =\ \mbox{\hyperlink{classsf_1_1RenderStates_ad29672df29f19ce50c3021d95f2bb062}{RenderStates::Default}});}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00248\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1RenderTarget_a12417a3bcc245c41d957b29583556f39}{draw}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1Vertex}{Vertex}}*\ vertices,\ std::size\_t\ vertexCount,}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{group__graphics_ga5ee56ac1339984909610713096283b1b}{PrimitiveType}}\ type,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1RenderStates}{RenderStates}}\&\ states\ =\ \mbox{\hyperlink{classsf_1_1RenderStates_ad29672df29f19ce50c3021d95f2bb062}{RenderStates::Default}});}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00258\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1RenderTarget_a12417a3bcc245c41d957b29583556f39}{draw}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1VertexBuffer}{VertexBuffer}}\&\ vertexBuffer,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1RenderStates}{RenderStates}}\&\ states\ =\ \mbox{\hyperlink{classsf_1_1RenderStates_ad29672df29f19ce50c3021d95f2bb062}{RenderStates::Default}});}
+\DoxyCodeLine{00259\ }
+\DoxyCodeLine{00269\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1RenderTarget_a12417a3bcc245c41d957b29583556f39}{draw}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1VertexBuffer}{VertexBuffer}}\&\ vertexBuffer,\ std::size\_t\ firstVertex,\ std::size\_t\ vertexCount,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1RenderStates}{RenderStates}}\&\ states\ =\ \mbox{\hyperlink{classsf_1_1RenderStates_ad29672df29f19ce50c3021d95f2bb062}{RenderStates::Default}});}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00277\ \ \ \ \ \textcolor{keyword}{virtual}\ Vector2u\ \mbox{\hyperlink{classsf_1_1RenderTarget_a2e5ade2457d9fb4c4907ae5b3d9e94a5}{getSize}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00285\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1RenderTarget_aa20edd15cd67e60b44a773c649105448}{isSrgb}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00307\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1RenderTarget_a86f66ad60dd65ede0d00bb3090c12484}{setActive}}(\textcolor{keywordtype}{bool}\ active\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00308\ }
+\DoxyCodeLine{00341\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1RenderTarget_a8d1998464ccc54e789aaf990242b47f7}{pushGLStates}}();}
+\DoxyCodeLine{00342\ }
+\DoxyCodeLine{00352\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1RenderTarget_ad5a98401113df931ddcd54c080f7aa8e}{popGLStates}}();}
+\DoxyCodeLine{00353\ }
+\DoxyCodeLine{00375\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1RenderTarget_aac7504990d27dada4bfe3c7866920765}{resetGLStates}}();}
+\DoxyCodeLine{00376\ }
+\DoxyCodeLine{00377\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00378\ }
+\DoxyCodeLine{00383\ \ \ \ \ \mbox{\hyperlink{classsf_1_1RenderTarget_a2997c96cbd93cb8ce0aba2ddae35b86f}{RenderTarget}}();}
+\DoxyCodeLine{00384\ }
+\DoxyCodeLine{00392\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1RenderTarget_af530274b34159d644e509b4b4dc43eb7}{initialize}}();}
+\DoxyCodeLine{00393\ }
+\DoxyCodeLine{00394\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00395\ }
+\DoxyCodeLine{00400\ \ \ \ \ \textcolor{keywordtype}{void}\ applyCurrentView();}
+\DoxyCodeLine{00401\ }
+\DoxyCodeLine{00408\ \ \ \ \ \textcolor{keywordtype}{void}\ applyBlendMode(\textcolor{keyword}{const}\ \mbox{\hyperlink{structsf_1_1BlendMode}{BlendMode}}\&\ mode);}
+\DoxyCodeLine{00409\ }
+\DoxyCodeLine{00416\ \ \ \ \ \textcolor{keywordtype}{void}\ applyTransform(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1Transform}{Transform}}\&\ transform);}
+\DoxyCodeLine{00417\ }
+\DoxyCodeLine{00424\ \ \ \ \ \textcolor{keywordtype}{void}\ applyTexture(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1Texture}{Texture}}*\ texture);}
+\DoxyCodeLine{00425\ }
+\DoxyCodeLine{00432\ \ \ \ \ \textcolor{keywordtype}{void}\ applyShader(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1Shader}{Shader}}*\ shader);}
+\DoxyCodeLine{00433\ }
+\DoxyCodeLine{00441\ \ \ \ \ \textcolor{keywordtype}{void}\ setupDraw(\textcolor{keywordtype}{bool}\ useVertexCache,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1RenderStates}{RenderStates}}\&\ states);}
+\DoxyCodeLine{00442\ }
+\DoxyCodeLine{00451\ \ \ \ \ \textcolor{keywordtype}{void}\ drawPrimitives(\mbox{\hyperlink{group__graphics_ga5ee56ac1339984909610713096283b1b}{PrimitiveType}}\ type,\ std::size\_t\ firstVertex,\ std::size\_t\ vertexCount);}
+\DoxyCodeLine{00452\ }
+\DoxyCodeLine{00459\ \ \ \ \ \textcolor{keywordtype}{void}\ cleanupDraw(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1RenderStates}{RenderStates}}\&\ states);}
+\DoxyCodeLine{00460\ }
+\DoxyCodeLine{00465\ \ \ \ \ \textcolor{keyword}{struct\ }StatesCache}
+\DoxyCodeLine{00466\ \ \ \ \ \{}
+\DoxyCodeLine{00467\ \ \ \ \ \ \ \ \ \textcolor{keyword}{enum}\ \{VertexCacheSize\ =\ 4\};}
+\DoxyCodeLine{00468\ }
+\DoxyCodeLine{00469\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ enable;\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00470\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ glStatesSet;\ \ \ \ }
+\DoxyCodeLine{00471\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ viewChanged;\ \ \ \ }
+\DoxyCodeLine{00472\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structsf_1_1BlendMode}{BlendMode}}\ lastBlendMode;\ \ }
+\DoxyCodeLine{00473\ \ \ \ \ \ \ \ \ Uint64\ \ \ \ lastTextureId;\ \ }
+\DoxyCodeLine{00474\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ texCoordsArrayEnabled;\ }
+\DoxyCodeLine{00475\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ useVertexCache;\ }
+\DoxyCodeLine{00476\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classsf_1_1Vertex}{Vertex}}\ \ \ \ vertexCache[VertexCacheSize];\ }
+\DoxyCodeLine{00477\ \ \ \ \ \};}
+\DoxyCodeLine{00478\ }
+\DoxyCodeLine{00480\ \ \ \ \ \textcolor{comment}{//\ Member\ data}}
+\DoxyCodeLine{00482\ \ \ \ \ View\ \ \ \ \ \ \ \ m\_defaultView;\ }
+\DoxyCodeLine{00483\ \ \ \ \ View\ \ \ \ \ \ \ \ m\_view;\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00484\ \ \ \ \ StatesCache\ m\_cache;\ \ \ \ \ \ \ }
+\DoxyCodeLine{00485\ \ \ \ \ Uint64\ \ \ \ \ \ m\_id;\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00486\ \};}
+\DoxyCodeLine{00487\ }
+\DoxyCodeLine{00488\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{00489\ }
+\DoxyCodeLine{00490\ }
+\DoxyCodeLine{00491\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SFML\_RENDERTARGET\_HPP}}
+\DoxyCodeLine{00492\ }
+\DoxyCodeLine{00493\ }
+
+\end{DoxyCode}

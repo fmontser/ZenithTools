@@ -1,0 +1,88 @@
+\doxysection{Wgl\+Context.\+hpp}
+\hypertarget{WglContext_8hpp_source}{}\label{WglContext_8hpp_source}\index{build/\_deps/sfml-\/src/src/SFML/Window/Win32/WglContext.hpp@{build/\_deps/sfml-\/src/src/SFML/Window/Win32/WglContext.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ SFML\_WGLCONTEXT\_HPP}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ SFML\_WGLCONTEXT\_HPP}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <SFML/Window/GlContext.hpp>}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <glad/wgl.h>}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{00036\ \{}
+\DoxyCodeLine{00037\ \textcolor{keyword}{namespace\ }priv}
+\DoxyCodeLine{00038\ \{}
+\DoxyCodeLine{00043\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1priv_1_1WglContext_a4f174414ee53c0834061861e1d66957b}{WglContext}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classsf_1_1priv_1_1GlContext_a286cd2741faff509387c1c40940303d2}{GlContext}}}
+\DoxyCodeLine{00044\ \{}
+\DoxyCodeLine{00045\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1WglContext_a4f174414ee53c0834061861e1d66957b}{WglContext}}(\mbox{\hyperlink{classsf_1_1priv_1_1WglContext_a4f174414ee53c0834061861e1d66957b}{WglContext}}*\ shared);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1WglContext_a4f174414ee53c0834061861e1d66957b}{WglContext}}(\mbox{\hyperlink{classsf_1_1priv_1_1WglContext_a4f174414ee53c0834061861e1d66957b}{WglContext}}*\ shared,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structsf_1_1ContextSettings}{ContextSettings}}\&\ settings,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1priv_1_1WindowImpl}{WindowImpl}}*\ owner,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ bitsPerPixel);}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00075\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1WglContext_a4f174414ee53c0834061861e1d66957b}{WglContext}}(\mbox{\hyperlink{classsf_1_1priv_1_1WglContext_a4f174414ee53c0834061861e1d66957b}{WglContext}}*\ shared,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structsf_1_1ContextSettings}{ContextSettings}}\&\ settings,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ height);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1WglContext_af54b5b64b68b24566df06d9d75628cd9}{\string~WglContext}}();}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keyword}{static}\ GlFunctionPointer\ \mbox{\hyperlink{classsf_1_1priv_1_1WglContext_a53a8e98f7c606f41109f2f4ecb30abbe}{getFunction}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1WglContext_a3235037dbd919b40e090cd29f80df840}{makeCurrent}}(\textcolor{keywordtype}{bool}\ current);}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1WglContext_af1f2560cba7f551f1177c744e5b36b22}{display}}();}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1WglContext_abfe48a14fb1206c0b81b58cd65292a98}{setVerticalSyncEnabled}}(\textcolor{keywordtype}{bool}\ enabled);}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classsf_1_1priv_1_1WglContext_ac5c0c6502a33c7c635ab8cfe200b591a}{selectBestPixelFormat}}(HDC\ deviceContext,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ bitsPerPixel,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structsf_1_1ContextSettings}{ContextSettings}}\&\ settings,\ \textcolor{keywordtype}{bool}\ pbuffer\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{void}\ setDevicePixelFormat(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ bitsPerPixel);}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordtype}{void}\ updateSettingsFromPixelFormat();}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordtype}{void}\ createSurface(\mbox{\hyperlink{classsf_1_1priv_1_1WglContext_a4f174414ee53c0834061861e1d66957b}{WglContext}}*\ shared,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ height,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ bitsPerPixel);}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordtype}{void}\ createSurface(HWND\ window,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ bitsPerPixel);}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keywordtype}{void}\ createContext(\mbox{\hyperlink{classsf_1_1priv_1_1WglContext_a4f174414ee53c0834061861e1d66957b}{WglContext}}*\ shared);}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{comment}{//\ Member\ data}}
+\DoxyCodeLine{00182\ \ \ \ \ HWND\ \ \ \ \ \ \ \ m\_window;\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00183\ \ \ \ \ HPBUFFERARB\ m\_pbuffer;\ \ \ \ \ \ \ }
+\DoxyCodeLine{00184\ \ \ \ \ HDC\ \ \ \ \ \ \ \ \ m\_deviceContext;\ }
+\DoxyCodeLine{00185\ \ \ \ \ HGLRC\ \ \ \ \ \ \ m\_context;\ \ \ \ \ \ \ }
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ m\_ownsWindow;\ \ \ \ }
+\DoxyCodeLine{00187\ \};}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \}\ \textcolor{comment}{//\ namespace\ priv}}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00191\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SFML\_WGLCONTEXT\_HPP}}
+
+\end{DoxyCode}

@@ -1,0 +1,188 @@
+\doxysection{sf\+::File\+Input\+Stream Class Reference}
+\hypertarget{classsf_1_1FileInputStream}{}\label{classsf_1_1FileInputStream}\index{sf::FileInputStream@{sf::FileInputStream}}
+
+
+Implementation of input stream based on a file.  
+
+
+
+
+{\ttfamily \#include $<$File\+Input\+Stream.\+hpp$>$}
+
+
+
+Inheritance diagram for sf\+::File\+Input\+Stream\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=272pt]{classsf_1_1FileInputStream__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for sf\+::File\+Input\+Stream\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=272pt]{classsf_1_1FileInputStream__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classsf_1_1FileInputStream_a9a321e273f41ff7f187899061fcae9be}\label{classsf_1_1FileInputStream_a9a321e273f41ff7f187899061fcae9be} 
+{\bfseries File\+Input\+Stream} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\Hypertarget{classsf_1_1FileInputStream_af5abf2cecb1fd4b20e2bbe883a1e639f}\label{classsf_1_1FileInputStream_af5abf2cecb1fd4b20e2bbe883a1e639f} 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+File\+Input\+Stream} ()
+\begin{DoxyCompactList}\small\item\em Default destructor. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classsf_1_1FileInputStream_a87a95dc3a71746097a99c86ee58bb353}{open}} (const std\+::string \&filename)
+\begin{DoxyCompactList}\small\item\em Open the stream from a file path. \end{DoxyCompactList}\item 
+virtual Int64 \mbox{\hyperlink{classsf_1_1FileInputStream_a18e222f2cd78b4d32e3594bd9df9ea8f}{read}} (void \texorpdfstring{$\ast$}{*}data, Int64 size)
+\begin{DoxyCompactList}\small\item\em Read data from the stream. \end{DoxyCompactList}\item 
+virtual Int64 \mbox{\hyperlink{classsf_1_1FileInputStream_a82fe7e62607405dde173c0ed4bce9bea}{seek}} (Int64 position)
+\begin{DoxyCompactList}\small\item\em Change the current reading position. \end{DoxyCompactList}\item 
+virtual Int64 \mbox{\hyperlink{classsf_1_1FileInputStream_a06478cfcb7238346cf8a65be0c445b13}{tell}} ()
+\begin{DoxyCompactList}\small\item\em Get the current reading position in the stream. \end{DoxyCompactList}\item 
+virtual Int64 \mbox{\hyperlink{classsf_1_1FileInputStream_a9c5afd4d85aa8a6e05230f005f902280}{get\+Size}} ()
+\begin{DoxyCompactList}\small\item\em Return the size of the stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classsf_1_1InputStream}{sf\+::\+Input\+Stream}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Input\+Stream} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of input stream based on a file. 
+
+This class is a specialization of \doxylink{classsf_1_1InputStream}{Input\+Stream} that reads from a file on disk.
+
+It wraps a file in the common \doxylink{classsf_1_1InputStream}{Input\+Stream} interface and therefore allows to use generic classes or functions that accept such a stream, with a file on disk as the data source.
+
+In addition to the virtual functions inherited from \doxylink{classsf_1_1InputStream}{Input\+Stream}, \doxylink{classsf_1_1FileInputStream}{File\+Input\+Stream} adds a function to specify the file to open.
+
+SFML resource classes can usually be loaded directly from a filename, so this class shouldn\textquotesingle{}t be useful to you unless you create your own algorithms that operate on an \doxylink{classsf_1_1InputStream}{Input\+Stream}.
+
+Usage example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ process(InputStream\&\ stream);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{classsf_1_1FileInputStream_a9a321e273f41ff7f187899061fcae9be}{FileInputStream}}\ stream;}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ (stream.open(\textcolor{stringliteral}{"{}some\_file.dat"{}}))}
+\DoxyCodeLine{\ \ \ process(stream);}
+
+\end{DoxyCode}
+
+
+\doxylink{classsf_1_1InputStream}{Input\+Stream}, \doxylink{classsf_1_1MemoryInputStream}{Memory\+Input\+Stream} 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsf_1_1FileInputStream_a9c5afd4d85aa8a6e05230f005f902280}\index{sf::FileInputStream@{sf::FileInputStream}!getSize@{getSize}}
+\index{getSize@{getSize}!sf::FileInputStream@{sf::FileInputStream}}
+\doxysubsubsection{\texorpdfstring{getSize()}{getSize()}}
+{\footnotesize\ttfamily \label{classsf_1_1FileInputStream_a9c5afd4d85aa8a6e05230f005f902280} 
+Int64 sf\+::\+File\+Input\+Stream\+::get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Return the size of the stream. 
+
+\begin{DoxyReturn}{Returns}
+The total number of bytes available in the stream, or -\/1 on error 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classsf_1_1InputStream_a311eaaaa65d636728e5153b574b72d5d}{sf\+::\+Input\+Stream}}.
+
+\Hypertarget{classsf_1_1FileInputStream_a87a95dc3a71746097a99c86ee58bb353}\index{sf::FileInputStream@{sf::FileInputStream}!open@{open}}
+\index{open@{open}!sf::FileInputStream@{sf::FileInputStream}}
+\doxysubsubsection{\texorpdfstring{open()}{open()}}
+{\footnotesize\ttfamily \label{classsf_1_1FileInputStream_a87a95dc3a71746097a99c86ee58bb353} 
+bool sf\+::\+File\+Input\+Stream\+::open (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{}\end{DoxyParamCaption})}
+
+
+
+Open the stream from a file path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Name of the file to open\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True on success, false on error 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1FileInputStream_a18e222f2cd78b4d32e3594bd9df9ea8f}\index{sf::FileInputStream@{sf::FileInputStream}!read@{read}}
+\index{read@{read}!sf::FileInputStream@{sf::FileInputStream}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily \label{classsf_1_1FileInputStream_a18e222f2cd78b4d32e3594bd9df9ea8f} 
+Int64 sf\+::\+File\+Input\+Stream\+::read (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{Int64}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Read data from the stream. 
+
+After reading, the stream\textquotesingle{}s reading position must be advanced by the amount of bytes read.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Buffer where to copy the read data \\
+\hline
+{\em size} & Desired number of bytes to read\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of bytes actually read, or -\/1 on error 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classsf_1_1InputStream_a8dd89c74c1acb693203f50e750c6ae53}{sf\+::\+Input\+Stream}}.
+
+\Hypertarget{classsf_1_1FileInputStream_a82fe7e62607405dde173c0ed4bce9bea}\index{sf::FileInputStream@{sf::FileInputStream}!seek@{seek}}
+\index{seek@{seek}!sf::FileInputStream@{sf::FileInputStream}}
+\doxysubsubsection{\texorpdfstring{seek()}{seek()}}
+{\footnotesize\ttfamily \label{classsf_1_1FileInputStream_a82fe7e62607405dde173c0ed4bce9bea} 
+Int64 sf\+::\+File\+Input\+Stream\+::seek (\begin{DoxyParamCaption}\item[{Int64}]{position}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Change the current reading position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position to seek to, from the beginning\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The position actually sought to, or -\/1 on error 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classsf_1_1InputStream_a76aba8e5d5cf9b1c5902d5e04f7864fc}{sf\+::\+Input\+Stream}}.
+
+\Hypertarget{classsf_1_1FileInputStream_a06478cfcb7238346cf8a65be0c445b13}\index{sf::FileInputStream@{sf::FileInputStream}!tell@{tell}}
+\index{tell@{tell}!sf::FileInputStream@{sf::FileInputStream}}
+\doxysubsubsection{\texorpdfstring{tell()}{tell()}}
+{\footnotesize\ttfamily \label{classsf_1_1FileInputStream_a06478cfcb7238346cf8a65be0c445b13} 
+Int64 sf\+::\+File\+Input\+Stream\+::tell (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the current reading position in the stream. 
+
+\begin{DoxyReturn}{Returns}
+The current position, or -\/1 on error. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classsf_1_1InputStream_a599515b9ccdbddb6fef5a98424fd559c}{sf\+::\+Input\+Stream}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/include/\+SFML/\+System/File\+Input\+Stream.\+hpp\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+System/File\+Input\+Stream.\+cpp\end{DoxyCompactItemize}

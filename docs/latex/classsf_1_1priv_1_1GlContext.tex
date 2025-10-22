@@ -1,0 +1,412 @@
+\doxysection{sf\+::priv\+::Gl\+Context Class Reference}
+\hypertarget{classsf_1_1priv_1_1GlContext}{}\label{classsf_1_1priv_1_1GlContext}\index{sf::priv::GlContext@{sf::priv::GlContext}}
+
+
+Abstract class representing an Open\+GL context.  
+
+
+
+
+{\ttfamily \#include $<$Gl\+Context.\+hpp$>$}
+
+
+
+Inheritance diagram for sf\+::priv\+::Gl\+Context\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsf_1_1priv_1_1GlContext__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for sf\+::priv\+::Gl\+Context\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{classsf_1_1priv_1_1GlContext__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classsf_1_1priv_1_1GlContext_a05eb811836d6a08a8099bb4fc7c31c61}\label{classsf_1_1priv_1_1GlContext_a05eb811836d6a08a8099bb4fc7c31c61} 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Gl\+Context} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{structsf_1_1ContextSettings}{Context\+Settings}} \& \mbox{\hyperlink{classsf_1_1priv_1_1GlContext_abcda11cfbfa53c59db8056f23aacf147}{get\+Settings}} () const
+\begin{DoxyCompactList}\small\item\em Get the settings of the context. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classsf_1_1priv_1_1GlContext_a8d0fa09683a8a1adaabd20e01d03e72c}{set\+Active}} (bool active)
+\begin{DoxyCompactList}\small\item\em Activate or deactivate the context as the current target for rendering. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classsf_1_1priv_1_1GlContext_ad5cdb55f2b1dcc92c1cb6b09e68e007f}{display}} ()=0
+\begin{DoxyCompactList}\small\item\em Display what has been rendered to the context so far. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classsf_1_1priv_1_1GlContext_a72b2c7da26f064f6d5cfbe65e4e9831c}{set\+Vertical\+Sync\+Enabled}} (bool enabled)=0
+\begin{DoxyCompactList}\small\item\em Enable or disable vertical synchronization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classsf_1_1priv_1_1GlContext_a4718cb115022db132fd378825098e194}{init\+Resource}} ()
+\begin{DoxyCompactList}\small\item\em Perform resource initialization. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classsf_1_1priv_1_1GlContext_a606524edac2af085d8b84fbd8d727bad}{cleanup\+Resource}} ()
+\begin{DoxyCompactList}\small\item\em Perform resource cleanup. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classsf_1_1priv_1_1GlContext_a85f9d69bc21f225de81e1770ebca0044}{register\+Context\+Destroy\+Callback}} (Context\+Destroy\+Callback callback, void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em Register a function to be called when a context is destroyed. \end{DoxyCompactList}\item 
+\Hypertarget{classsf_1_1priv_1_1GlContext_a6de095f2abcb01b0beb066116833737e}\label{classsf_1_1priv_1_1GlContext_a6de095f2abcb01b0beb066116833737e} 
+static void {\bfseries acquire\+Transient\+Context} ()
+\begin{DoxyCompactList}\small\item\em Acquires a context for short-\/term use on the current thread. \end{DoxyCompactList}\item 
+\Hypertarget{classsf_1_1priv_1_1GlContext_ac449e9982a1ac69e7c165fdad4940f7b}\label{classsf_1_1priv_1_1GlContext_ac449e9982a1ac69e7c165fdad4940f7b} 
+static void {\bfseries release\+Transient\+Context} ()
+\begin{DoxyCompactList}\small\item\em Releases a context after short-\/term use on the current thread. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classsf_1_1priv_1_1GlContext}{Gl\+Context}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classsf_1_1priv_1_1GlContext_a508de1c154301406e1f8ee3f4ca19bd2}{create}} ()
+\begin{DoxyCompactList}\small\item\em Create a new context, not associated to a window. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classsf_1_1priv_1_1GlContext}{Gl\+Context}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classsf_1_1priv_1_1GlContext_a4da9acecd374cf132161b1d40468660a}{create}} (const \mbox{\hyperlink{structsf_1_1ContextSettings}{Context\+Settings}} \&settings, const \mbox{\hyperlink{classsf_1_1priv_1_1WindowImpl}{Window\+Impl}} \texorpdfstring{$\ast$}{*}owner, unsigned int bits\+Per\+Pixel)
+\begin{DoxyCompactList}\small\item\em Create a new context attached to a window. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classsf_1_1priv_1_1GlContext}{Gl\+Context}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classsf_1_1priv_1_1GlContext_ac1e01ff02e65e2a94665ef77d33ad019}{create}} (const \mbox{\hyperlink{structsf_1_1ContextSettings}{Context\+Settings}} \&settings, unsigned int width, unsigned int height)
+\begin{DoxyCompactList}\small\item\em Create a new context that embeds its own rendering target. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classsf_1_1priv_1_1GlContext_a2fb661dfceef810ce13473962eb22775}{is\+Extension\+Available}} (const char \texorpdfstring{$\ast$}{*}name)
+\begin{DoxyCompactList}\small\item\em Check whether a given Open\+GL extension is available. \end{DoxyCompactList}\item 
+static Gl\+Function\+Pointer \mbox{\hyperlink{classsf_1_1priv_1_1GlContext_af316730aba4cb7da8f8f857c4b953a31}{get\+Function}} (const char \texorpdfstring{$\ast$}{*}name)
+\begin{DoxyCompactList}\small\item\em Get the address of an Open\+GL function. \end{DoxyCompactList}\item 
+static const \mbox{\hyperlink{classsf_1_1priv_1_1GlContext}{Gl\+Context}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classsf_1_1priv_1_1GlContext_a412f919fcd06ef2e145c6d5f7284c9e4}{get\+Active\+Context}} ()
+\begin{DoxyCompactList}\small\item\em Get the currently active context. \end{DoxyCompactList}\item 
+static Uint64 \mbox{\hyperlink{classsf_1_1priv_1_1GlContext_ab52450881372fb98aebec9a8d1d87bea}{get\+Active\+Context\+Id}} ()
+\begin{DoxyCompactList}\small\item\em Get the currently active context\textquotesingle{}s ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsf_1_1priv_1_1GlContext_a286cd2741faff509387c1c40940303d2}{Gl\+Context}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classsf_1_1priv_1_1GlContext_a82174f66a686bef44ea68ee55df92f8b}{make\+Current}} (bool current)=0
+\begin{DoxyCompactList}\small\item\em Activate the context as the current target for rendering. \end{DoxyCompactList}\item 
+\Hypertarget{classsf_1_1priv_1_1GlContext_adbd990d07ffa9a8bdddcfe5b80a2c5e1}\label{classsf_1_1priv_1_1GlContext_adbd990d07ffa9a8bdddcfe5b80a2c5e1} 
+void {\bfseries cleanup\+Unshared\+Resources} ()
+\begin{DoxyCompactList}\small\item\em Notify unshared Gl\+Resources of context destruction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{classsf_1_1priv_1_1GlContext_aa2b17884ad02fef59c5e641838ce7bf8}{evaluate\+Format}} (unsigned int bits\+Per\+Pixel, const \mbox{\hyperlink{structsf_1_1ContextSettings}{Context\+Settings}} \&settings, int color\+Bits, int depth\+Bits, int stencil\+Bits, int antialiasing, bool accelerated, bool s\+Rgb)
+\begin{DoxyCompactList}\small\item\em Evaluate a pixel format configuration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classsf_1_1priv_1_1GlContext_a7d3a359a689b303900f3f054afa35e44}\label{classsf_1_1priv_1_1GlContext_a7d3a359a689b303900f3f054afa35e44} 
+\mbox{\hyperlink{structsf_1_1ContextSettings}{Context\+Settings}} {\bfseries m\+\_\+settings}
+\begin{DoxyCompactList}\small\item\em Creation settings of the context. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Abstract class representing an Open\+GL context. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classsf_1_1priv_1_1GlContext_a286cd2741faff509387c1c40940303d2}\index{sf::priv::GlContext@{sf::priv::GlContext}!GlContext@{GlContext}}
+\index{GlContext@{GlContext}!sf::priv::GlContext@{sf::priv::GlContext}}
+\doxysubsubsection{\texorpdfstring{GlContext()}{GlContext()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1GlContext_a286cd2741faff509387c1c40940303d2} 
+sf\+::priv\+::\+Gl\+Context\+::\+Gl\+Context (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Default constructor. 
+
+This constructor is meant for derived classes only. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsf_1_1priv_1_1GlContext_a606524edac2af085d8b84fbd8d727bad}\index{sf::priv::GlContext@{sf::priv::GlContext}!cleanupResource@{cleanupResource}}
+\index{cleanupResource@{cleanupResource}!sf::priv::GlContext@{sf::priv::GlContext}}
+\doxysubsubsection{\texorpdfstring{cleanupResource()}{cleanupResource()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1GlContext_a606524edac2af085d8b84fbd8d727bad} 
+void sf\+::priv\+::\+Gl\+Context\+::cleanup\+Resource (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Perform resource cleanup. 
+
+This function is called every time an Open\+GL resource is destroyed. When the last resource is destroyed, it makes sure that everything that was created by \doxylink{classsf_1_1priv_1_1GlContext_a4718cb115022db132fd378825098e194}{init\+Resource()} is properly released. \Hypertarget{classsf_1_1priv_1_1GlContext_a508de1c154301406e1f8ee3f4ca19bd2}\index{sf::priv::GlContext@{sf::priv::GlContext}!create@{create}}
+\index{create@{create}!sf::priv::GlContext@{sf::priv::GlContext}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1GlContext_a508de1c154301406e1f8ee3f4ca19bd2} 
+\mbox{\hyperlink{classsf_1_1priv_1_1GlContext}{Gl\+Context}} \texorpdfstring{$\ast$}{*} sf\+::priv\+::\+Gl\+Context\+::create (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create a new context, not associated to a window. 
+
+This function automatically chooses the specialized class to use according to the OS.
+
+\begin{DoxyReturn}{Returns}
+Pointer to the created context (don\textquotesingle{}t forget to delete it) 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1priv_1_1GlContext_a4da9acecd374cf132161b1d40468660a}\index{sf::priv::GlContext@{sf::priv::GlContext}!create@{create}}
+\index{create@{create}!sf::priv::GlContext@{sf::priv::GlContext}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1GlContext_a4da9acecd374cf132161b1d40468660a} 
+\mbox{\hyperlink{classsf_1_1priv_1_1GlContext}{Gl\+Context}} \texorpdfstring{$\ast$}{*} sf\+::priv\+::\+Gl\+Context\+::create (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structsf_1_1ContextSettings}{Context\+Settings}} \&}]{settings}{, }\item[{const \mbox{\hyperlink{classsf_1_1priv_1_1WindowImpl}{Window\+Impl}} \texorpdfstring{$\ast$}{*}}]{owner}{, }\item[{unsigned int}]{bits\+Per\+Pixel}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create a new context attached to a window. 
+
+This function automatically chooses the specialized class to use according to the OS.
+
+
+\begin{DoxyParams}{Parameters}
+{\em settings} & Creation parameters \\
+\hline
+{\em owner} & Pointer to the owner window \\
+\hline
+{\em bits\+Per\+Pixel} & Pixel depth (in bits per pixel)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the created context 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1priv_1_1GlContext_ac1e01ff02e65e2a94665ef77d33ad019}\index{sf::priv::GlContext@{sf::priv::GlContext}!create@{create}}
+\index{create@{create}!sf::priv::GlContext@{sf::priv::GlContext}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1GlContext_ac1e01ff02e65e2a94665ef77d33ad019} 
+\mbox{\hyperlink{classsf_1_1priv_1_1GlContext}{Gl\+Context}} \texorpdfstring{$\ast$}{*} sf\+::priv\+::\+Gl\+Context\+::create (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structsf_1_1ContextSettings}{Context\+Settings}} \&}]{settings}{, }\item[{unsigned int}]{width}{, }\item[{unsigned int}]{height}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create a new context that embeds its own rendering target. 
+
+This function automatically chooses the specialized class to use according to the OS.
+
+
+\begin{DoxyParams}{Parameters}
+{\em settings} & Creation parameters \\
+\hline
+{\em width} & Back buffer width \\
+\hline
+{\em height} & Back buffer height\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the created context 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1priv_1_1GlContext_ad5cdb55f2b1dcc92c1cb6b09e68e007f}\index{sf::priv::GlContext@{sf::priv::GlContext}!display@{display}}
+\index{display@{display}!sf::priv::GlContext@{sf::priv::GlContext}}
+\doxysubsubsection{\texorpdfstring{display()}{display()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1GlContext_ad5cdb55f2b1dcc92c1cb6b09e68e007f} 
+virtual void sf\+::priv\+::\+Gl\+Context\+::display (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Display what has been rendered to the context so far. 
+
+
+
+Implemented in \mbox{\hyperlink{classsf_1_1priv_1_1DRMContext_a1d030128286270bb94faf2894ae1387c}{sf\+::priv\+::\+DRMContext}}, \mbox{\hyperlink{classsf_1_1priv_1_1EaglContext_a9713901286f20091b116b21ead6d7b12}{sf\+::priv\+::\+Eagl\+Context}}, \mbox{\hyperlink{classsf_1_1priv_1_1EglContext_a4c8a2dcb874e64d1be6d268d5f086624}{sf\+::priv\+::\+Egl\+Context}}, \mbox{\hyperlink{classsf_1_1priv_1_1GlxContext_ab91fdd5878747bd3cf61fa244a56c274}{sf\+::priv\+::\+Glx\+Context}}, \mbox{\hyperlink{classsf_1_1priv_1_1SFContext_a8fe3d27f68c299f3eb5afb2f54d20001}{sf\+::priv\+::\+SFContext}}, and \mbox{\hyperlink{classsf_1_1priv_1_1WglContext_af1f2560cba7f551f1177c744e5b36b22}{sf\+::priv\+::\+Wgl\+Context}}.
+
+\Hypertarget{classsf_1_1priv_1_1GlContext_aa2b17884ad02fef59c5e641838ce7bf8}\index{sf::priv::GlContext@{sf::priv::GlContext}!evaluateFormat@{evaluateFormat}}
+\index{evaluateFormat@{evaluateFormat}!sf::priv::GlContext@{sf::priv::GlContext}}
+\doxysubsubsection{\texorpdfstring{evaluateFormat()}{evaluateFormat()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1GlContext_aa2b17884ad02fef59c5e641838ce7bf8} 
+int sf\+::priv\+::\+Gl\+Context\+::evaluate\+Format (\begin{DoxyParamCaption}\item[{unsigned int}]{bits\+Per\+Pixel}{, }\item[{const \mbox{\hyperlink{structsf_1_1ContextSettings}{Context\+Settings}} \&}]{settings}{, }\item[{int}]{color\+Bits}{, }\item[{int}]{depth\+Bits}{, }\item[{int}]{stencil\+Bits}{, }\item[{int}]{antialiasing}{, }\item[{bool}]{accelerated}{, }\item[{bool}]{s\+Rgb}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Evaluate a pixel format configuration. 
+
+This functions can be used by implementations that have several valid formats and want to get the best one. A score is returned for the given configuration\+: the lower the score is, the better the configuration is.
+
+
+\begin{DoxyParams}{Parameters}
+{\em bits\+Per\+Pixel} & Requested pixel depth (bits per pixel) \\
+\hline
+{\em settings} & Requested additional settings \\
+\hline
+{\em color\+Bits} & \doxylink{classsf_1_1Color}{Color} bits of the configuration to evaluate \\
+\hline
+{\em depth\+Bits} & Depth bits of the configuration to evaluate \\
+\hline
+{\em stencil\+Bits} & Stencil bits of the configuration to evaluate \\
+\hline
+{\em antialiasing} & Antialiasing level of the configuration to evaluate \\
+\hline
+{\em accelerated} & Whether the pixel format is hardware accelerated \\
+\hline
+{\em s\+Rgb} & Whether the pixel format is s\+RGB capable\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Score of the configuration 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1priv_1_1GlContext_a412f919fcd06ef2e145c6d5f7284c9e4}\index{sf::priv::GlContext@{sf::priv::GlContext}!getActiveContext@{getActiveContext}}
+\index{getActiveContext@{getActiveContext}!sf::priv::GlContext@{sf::priv::GlContext}}
+\doxysubsubsection{\texorpdfstring{getActiveContext()}{getActiveContext()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1GlContext_a412f919fcd06ef2e145c6d5f7284c9e4} 
+const \mbox{\hyperlink{classsf_1_1priv_1_1GlContext}{Gl\+Context}} \texorpdfstring{$\ast$}{*} sf\+::priv\+::\+Gl\+Context\+::get\+Active\+Context (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the currently active context. 
+
+\begin{DoxyReturn}{Returns}
+The currently active context or NULL if none is active 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1priv_1_1GlContext_ab52450881372fb98aebec9a8d1d87bea}\index{sf::priv::GlContext@{sf::priv::GlContext}!getActiveContextId@{getActiveContextId}}
+\index{getActiveContextId@{getActiveContextId}!sf::priv::GlContext@{sf::priv::GlContext}}
+\doxysubsubsection{\texorpdfstring{getActiveContextId()}{getActiveContextId()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1GlContext_ab52450881372fb98aebec9a8d1d87bea} 
+Uint64 sf\+::priv\+::\+Gl\+Context\+::get\+Active\+Context\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the currently active context\textquotesingle{}s ID. 
+
+The context ID is used to identify contexts when managing unshareable Open\+GL resources.
+
+\begin{DoxyReturn}{Returns}
+The active context\textquotesingle{}s ID or 0 if no context is currently active 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1priv_1_1GlContext_af316730aba4cb7da8f8f857c4b953a31}\index{sf::priv::GlContext@{sf::priv::GlContext}!getFunction@{getFunction}}
+\index{getFunction@{getFunction}!sf::priv::GlContext@{sf::priv::GlContext}}
+\doxysubsubsection{\texorpdfstring{getFunction()}{getFunction()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1GlContext_af316730aba4cb7da8f8f857c4b953a31} 
+Gl\+Function\+Pointer sf\+::priv\+::\+Gl\+Context\+::get\+Function (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the address of an Open\+GL function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the function to get the address of\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Address of the Open\+GL function, 0 on failure 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1priv_1_1GlContext_abcda11cfbfa53c59db8056f23aacf147}\index{sf::priv::GlContext@{sf::priv::GlContext}!getSettings@{getSettings}}
+\index{getSettings@{getSettings}!sf::priv::GlContext@{sf::priv::GlContext}}
+\doxysubsubsection{\texorpdfstring{getSettings()}{getSettings()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1GlContext_abcda11cfbfa53c59db8056f23aacf147} 
+const \mbox{\hyperlink{structsf_1_1ContextSettings}{Context\+Settings}} \& sf\+::priv\+::\+Gl\+Context\+::get\+Settings (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get the settings of the context. 
+
+Note that these settings may be different than the ones passed to the constructor; they are indeed adjusted if the original settings are not directly supported by the system.
+
+\begin{DoxyReturn}{Returns}
+Structure containing the settings 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1priv_1_1GlContext_a4718cb115022db132fd378825098e194}\index{sf::priv::GlContext@{sf::priv::GlContext}!initResource@{initResource}}
+\index{initResource@{initResource}!sf::priv::GlContext@{sf::priv::GlContext}}
+\doxysubsubsection{\texorpdfstring{initResource()}{initResource()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1GlContext_a4718cb115022db132fd378825098e194} 
+void sf\+::priv\+::\+Gl\+Context\+::init\+Resource (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Perform resource initialization. 
+
+This function is called every time an Open\+GL resource is created. When the first resource is initialized, it makes sure that everything is ready for contexts to work properly. \Hypertarget{classsf_1_1priv_1_1GlContext_a2fb661dfceef810ce13473962eb22775}\index{sf::priv::GlContext@{sf::priv::GlContext}!isExtensionAvailable@{isExtensionAvailable}}
+\index{isExtensionAvailable@{isExtensionAvailable}!sf::priv::GlContext@{sf::priv::GlContext}}
+\doxysubsubsection{\texorpdfstring{isExtensionAvailable()}{isExtensionAvailable()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1GlContext_a2fb661dfceef810ce13473962eb22775} 
+bool sf\+::priv\+::\+Gl\+Context\+::is\+Extension\+Available (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check whether a given Open\+GL extension is available. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the extension to check for\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if available, false if unavailable 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1priv_1_1GlContext_a82174f66a686bef44ea68ee55df92f8b}\index{sf::priv::GlContext@{sf::priv::GlContext}!makeCurrent@{makeCurrent}}
+\index{makeCurrent@{makeCurrent}!sf::priv::GlContext@{sf::priv::GlContext}}
+\doxysubsubsection{\texorpdfstring{makeCurrent()}{makeCurrent()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1GlContext_a82174f66a686bef44ea68ee55df92f8b} 
+virtual bool sf\+::priv\+::\+Gl\+Context\+::make\+Current (\begin{DoxyParamCaption}\item[{bool}]{current}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Activate the context as the current target for rendering. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em current} & Whether to make the context current or no longer current\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True on success, false if any error happened 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classsf_1_1priv_1_1DRMContext_a6c275325bc2926f013c18c8e3fa9716c}{sf\+::priv\+::\+DRMContext}}, \mbox{\hyperlink{classsf_1_1priv_1_1EaglContext_aefa9f92621de0cf5e06cf96d54dc4657}{sf\+::priv\+::\+Eagl\+Context}}, \mbox{\hyperlink{classsf_1_1priv_1_1EglContext_ae4d9fe13418d356d4ab1a58d7c753417}{sf\+::priv\+::\+Egl\+Context}}, \mbox{\hyperlink{classsf_1_1priv_1_1GlxContext_a83dae70106273304552bddf06d0ce5a7}{sf\+::priv\+::\+Glx\+Context}}, \mbox{\hyperlink{classsf_1_1priv_1_1SFContext_ae6d8ef2f71e3f3cc3368963a67c9f813}{sf\+::priv\+::\+SFContext}}, and \mbox{\hyperlink{classsf_1_1priv_1_1WglContext_a3235037dbd919b40e090cd29f80df840}{sf\+::priv\+::\+Wgl\+Context}}.
+
+\Hypertarget{classsf_1_1priv_1_1GlContext_a85f9d69bc21f225de81e1770ebca0044}\index{sf::priv::GlContext@{sf::priv::GlContext}!registerContextDestroyCallback@{registerContextDestroyCallback}}
+\index{registerContextDestroyCallback@{registerContextDestroyCallback}!sf::priv::GlContext@{sf::priv::GlContext}}
+\doxysubsubsection{\texorpdfstring{registerContextDestroyCallback()}{registerContextDestroyCallback()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1GlContext_a85f9d69bc21f225de81e1770ebca0044} 
+void sf\+::priv\+::\+Gl\+Context\+::register\+Context\+Destroy\+Callback (\begin{DoxyParamCaption}\item[{Context\+Destroy\+Callback}]{callback}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{arg}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Register a function to be called when a context is destroyed. 
+
+This is used for internal purposes in order to properly clean up Open\+GL resources that cannot be shared bwteen contexts.
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & Function to be called when a context is destroyed \\
+\hline
+{\em arg} & Argument to pass when calling the function \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classsf_1_1priv_1_1GlContext_a8d0fa09683a8a1adaabd20e01d03e72c}\index{sf::priv::GlContext@{sf::priv::GlContext}!setActive@{setActive}}
+\index{setActive@{setActive}!sf::priv::GlContext@{sf::priv::GlContext}}
+\doxysubsubsection{\texorpdfstring{setActive()}{setActive()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1GlContext_a8d0fa09683a8a1adaabd20e01d03e72c} 
+bool sf\+::priv\+::\+Gl\+Context\+::set\+Active (\begin{DoxyParamCaption}\item[{bool}]{active}{}\end{DoxyParamCaption})}
+
+
+
+Activate or deactivate the context as the current target for rendering. 
+
+A context is active only on the current thread, if you want to make it active on another thread you have to deactivate it on the previous thread first if it was active. Only one context can be active on a thread at a time, thus the context previously active (if any) automatically gets deactivated.
+
+
+\begin{DoxyParams}{Parameters}
+{\em active} & True to activate, false to deactivate\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if operation was successful, false otherwise 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1priv_1_1GlContext_a72b2c7da26f064f6d5cfbe65e4e9831c}\index{sf::priv::GlContext@{sf::priv::GlContext}!setVerticalSyncEnabled@{setVerticalSyncEnabled}}
+\index{setVerticalSyncEnabled@{setVerticalSyncEnabled}!sf::priv::GlContext@{sf::priv::GlContext}}
+\doxysubsubsection{\texorpdfstring{setVerticalSyncEnabled()}{setVerticalSyncEnabled()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1GlContext_a72b2c7da26f064f6d5cfbe65e4e9831c} 
+virtual void sf\+::priv\+::\+Gl\+Context\+::set\+Vertical\+Sync\+Enabled (\begin{DoxyParamCaption}\item[{bool}]{enabled}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Enable or disable vertical synchronization. 
+
+Activating vertical synchronization will limit the number of frames displayed to the refresh rate of the monitor. This can avoid some visual artifacts, and limit the framerate to a good value (but not constant across different computers).
+
+
+\begin{DoxyParams}{Parameters}
+{\em enabled} & True to enable v-\/sync, false to deactivate \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classsf_1_1priv_1_1DRMContext_a1440980667ed796f1218daad35188934}{sf\+::priv\+::\+DRMContext}}, \mbox{\hyperlink{classsf_1_1priv_1_1EaglContext_a39a433c80fcdd7c2472b39ae5451fbde}{sf\+::priv\+::\+Eagl\+Context}}, \mbox{\hyperlink{classsf_1_1priv_1_1EglContext_a6424b4a1b7eac11ffba617798a9f6fb7}{sf\+::priv\+::\+Egl\+Context}}, \mbox{\hyperlink{classsf_1_1priv_1_1GlxContext_afdac27a6412956b196f0ded84d0a0759}{sf\+::priv\+::\+Glx\+Context}}, \mbox{\hyperlink{classsf_1_1priv_1_1SFContext_acecca5820231caccdbd79b3b6027f8f2}{sf\+::priv\+::\+SFContext}}, and \mbox{\hyperlink{classsf_1_1priv_1_1WglContext_abfe48a14fb1206c0b81b58cd65292a98}{sf\+::priv\+::\+Wgl\+Context}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+Window/Gl\+Context.\+hpp\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+Window/Gl\+Context.\+cpp\end{DoxyCompactItemize}

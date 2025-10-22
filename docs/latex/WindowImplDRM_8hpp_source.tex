@@ -1,0 +1,94 @@
+\doxysection{Window\+Impl\+DRM.\+hpp}
+\hypertarget{WindowImplDRM_8hpp_source}{}\label{WindowImplDRM_8hpp_source}\index{build/\_deps/sfml-\/src/src/SFML/Window/DRM/WindowImplDRM.hpp@{build/\_deps/sfml-\/src/src/SFML/Window/DRM/WindowImplDRM.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2023\ Andrew\ Mickelson}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ SFML\_WINDOWIMPLDRM\_HPP}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ SFML\_WINDOWIMPLDRM\_HPP}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <SFML/Window/Event.hpp>}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <SFML/Window/WindowImpl.hpp>}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{00035\ \{}
+\DoxyCodeLine{00036\ \textcolor{keyword}{namespace\ }priv}
+\DoxyCodeLine{00037\ \{}
+\DoxyCodeLine{00042\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1priv_1_1WindowImplDRM_a3c6b4373595de6180d0eb277ffe37cd9}{WindowImplDRM}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classsf_1_1priv_1_1WindowImpl_a1328634be04374d905e1f68d0688b30a}{WindowImpl}}}
+\DoxyCodeLine{00043\ \{}
+\DoxyCodeLine{00044\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1WindowImplDRM_a3c6b4373595de6180d0eb277ffe37cd9}{WindowImplDRM}}(WindowHandle\ handle);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1WindowImplDRM_a3c6b4373595de6180d0eb277ffe37cd9}{WindowImplDRM}}(\mbox{\hyperlink{classsf_1_1VideoMode}{VideoMode}}\ mode,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1String}{String}}\&\ title,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ style,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structsf_1_1ContextSettings}{ContextSettings}}\&\ settings);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1WindowImplDRM_ade876e6fa83affdbb6b43265badd360b}{\string~WindowImplDRM}}();}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{virtual}\ WindowHandle\ \mbox{\hyperlink{classsf_1_1priv_1_1WindowImplDRM_a44c8169f42ee61b1d807978d09c7af69}{getSystemHandle}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keyword}{virtual}\ Vector2i\ \mbox{\hyperlink{classsf_1_1priv_1_1WindowImplDRM_a2806181440d30baacfd8b22a03833984}{getPosition}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1WindowImplDRM_ae101eb143052b7a9e55f2689f0828e75}{setPosition}}(\textcolor{keyword}{const}\ Vector2i\&\ position);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keyword}{virtual}\ Vector2u\ \mbox{\hyperlink{classsf_1_1priv_1_1WindowImplDRM_a08fd479f0dd05c9ec56a93bf9d7ab6ef}{getSize}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1WindowImplDRM_ad2bc14c02e3d4013951f9efa13980709}{setSize}}(\textcolor{keyword}{const}\ Vector2u\&\ size);}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1WindowImplDRM_a2185683273ad39589fbded5acb6f04c4}{setTitle}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1String}{String}}\&\ title);}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1WindowImplDRM_a0f49915f96059af4abbf4931d0dd62bb}{setIcon}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ height,\ \textcolor{keyword}{const}\ Uint8*\ pixels);}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1WindowImplDRM_a9d068fd06118a649521d24b7c8d80567}{setVisible}}(\textcolor{keywordtype}{bool}\ visible);}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1WindowImplDRM_a8266ac8720b388ddeee595eca41170bd}{setMouseCursorVisible}}(\textcolor{keywordtype}{bool}\ visible);}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1WindowImplDRM_a32c537bf9984d3a0f2f17bb0556bf972}{setMouseCursorGrabbed}}(\textcolor{keywordtype}{bool}\ grabbed);}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1WindowImplDRM_a3a4d45356ccf26bdac01aef1350fc014}{setMouseCursor}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1priv_1_1CursorImpl}{CursorImpl}}\&\ cursor);}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1WindowImplDRM_a520ed64dda2fcf4b9079f0f9f460cc35}{setKeyRepeatEnabled}}(\textcolor{keywordtype}{bool}\ enabled);}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1WindowImplDRM_a4f40d7cf2a153ad0f2b8342599d83625}{requestFocus}}();}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1WindowImplDRM_acc1a5e3e77819a38b2d16c937bbc8c4d}{hasFocus}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1WindowImplDRM_ac25f3e4515c1ede28583970f6fc00c26}{processEvents}}();}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{comment}{//\ Member\ data}}
+\DoxyCodeLine{00197\ \ \ \ \ Vector2u\ m\_size;\ }
+\DoxyCodeLine{00198\ \};}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ \}\ \textcolor{comment}{//\ namespace\ priv}}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SFML\_WINDOWIMPLDRM\_HPP}}
+
+\end{DoxyCode}

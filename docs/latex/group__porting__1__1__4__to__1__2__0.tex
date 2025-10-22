@@ -1,0 +1,20 @@
+\doxysubsection{Porting from FLAC 1.1.4 to 1.2.0}
+\hypertarget{group__porting__1__1__4__to__1__2__0}{}\label{group__porting__1__1__4__to__1__2__0}\index{Porting from FLAC 1.1.4 to 1.2.0@{Porting from FLAC 1.1.4 to 1.2.0}}
+
+
+This module describes porting from FLAC 1.\+1.\+4 to FLAC 1.\+2.\+0.  
+
+
+Collaboration diagram for Porting from FLAC 1.1.4 to 1.2.0\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__porting__1__1__4__to__1__2__0}
+\end{center}
+\end{figure}
+This module describes porting from FLAC 1.\+1.\+4 to FLAC 1.\+2.\+0. 
+
+There were only very minor changes to the interfaces from 1.\+1.\+4 to 1.\+2.\+0. In lib\+FLAC, {\ttfamily \doxylink{group__flac__format_ga996f8732a2502ad79a68bb4a9f945235}{FLAC\+\_\+\+\_\+format\+\_\+sample\+\_\+rate\+\_\+is\+\_\+subset()}} was added. In lib\+FLAC++, {\ttfamily FLAC\+::\+Decoder\+::\+Stream\+::get\+\_\+decode\+\_\+position()} was added.
+
+Finally, value of the constant {\ttfamily FLAC\+\_\+\+\_\+\+FRAME\+\_\+\+HEADER\+\_\+\+RESERVED\+\_\+\+LEN} has changed to reflect the conversion of one of the reserved bits into active use. It used to be {\ttfamily 2} and now is {\ttfamily 1}. However the FLAC frame header length has not changed, so to skip the proper number of bits, use {\ttfamily FLAC\+\_\+\+\_\+\+FRAME\+\_\+\+HEADER\+\_\+\+RESERVED\+\_\+\+LEN} + {\ttfamily FLAC\+\_\+\+\_\+\+FRAME\+\_\+\+HEADER\+\_\+\+BLOCKING\+\_\+\+STRATEGY\+\_\+\+LEN} 

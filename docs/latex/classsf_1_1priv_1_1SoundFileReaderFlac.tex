@@ -1,0 +1,157 @@
+\doxysection{sf\+::priv\+::Sound\+File\+Reader\+Flac Class Reference}
+\hypertarget{classsf_1_1priv_1_1SoundFileReaderFlac}{}\label{classsf_1_1priv_1_1SoundFileReaderFlac}\index{sf::priv::SoundFileReaderFlac@{sf::priv::SoundFileReaderFlac}}
+
+
+Implementation of sound file reader that handles FLAC files.  
+
+
+
+
+{\ttfamily \#include $<$Sound\+File\+Reader\+Flac.\+hpp$>$}
+
+
+
+Inheritance diagram for sf\+::priv\+::Sound\+File\+Reader\+Flac\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{classsf_1_1priv_1_1SoundFileReaderFlac__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for sf\+::priv\+::Sound\+File\+Reader\+Flac\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{classsf_1_1priv_1_1SoundFileReaderFlac__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structsf_1_1priv_1_1SoundFileReaderFlac_1_1ClientData}{Client\+Data}}
+\begin{DoxyCompactList}\small\item\em Hold the state that is passed to the decoder callbacks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classsf_1_1priv_1_1SoundFileReaderFlac_a01cc3547a3835e99d0a855f0653bb656}\label{classsf_1_1priv_1_1SoundFileReaderFlac_a01cc3547a3835e99d0a855f0653bb656} 
+{\bfseries Sound\+File\+Reader\+Flac} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\Hypertarget{classsf_1_1priv_1_1SoundFileReaderFlac_a73ed51254cb82decb244032dce6fcf8f}\label{classsf_1_1priv_1_1SoundFileReaderFlac_a73ed51254cb82decb244032dce6fcf8f} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Sound\+File\+Reader\+Flac} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classsf_1_1priv_1_1SoundFileReaderFlac_a7fdf7aa03a6ff4c7a19f6c53cb4fc0ba}{open}} (\mbox{\hyperlink{classsf_1_1InputStream}{sf\+::\+Input\+Stream}} \&stream, \mbox{\hyperlink{structsf_1_1SoundFileReader_1_1Info}{Info}} \&info)
+\begin{DoxyCompactList}\small\item\em Open a sound file for reading. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classsf_1_1priv_1_1SoundFileReaderFlac_a204e8c452a68472fd7c821237465085d}{seek}} (Uint64 sample\+Offset)
+\begin{DoxyCompactList}\small\item\em Change the current read position to the given sample offset. \end{DoxyCompactList}\item 
+virtual Uint64 \mbox{\hyperlink{classsf_1_1priv_1_1SoundFileReaderFlac_a8d875824393da5741d3a036594a351c7}{read}} (Int16 \texorpdfstring{$\ast$}{*}samples, Uint64 max\+Count)
+\begin{DoxyCompactList}\small\item\em Read audio samples from the open file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classsf_1_1SoundFileReader}{sf\+::\+Sound\+File\+Reader}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Sound\+File\+Reader} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classsf_1_1priv_1_1SoundFileReaderFlac_acbc84cb9b7644506e09174277b47e54b}{check}} (\mbox{\hyperlink{classsf_1_1InputStream}{Input\+Stream}} \&stream)
+\begin{DoxyCompactList}\small\item\em Check if this reader can handle a file given by an input stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of sound file reader that handles FLAC files. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsf_1_1priv_1_1SoundFileReaderFlac_acbc84cb9b7644506e09174277b47e54b}\index{sf::priv::SoundFileReaderFlac@{sf::priv::SoundFileReaderFlac}!check@{check}}
+\index{check@{check}!sf::priv::SoundFileReaderFlac@{sf::priv::SoundFileReaderFlac}}
+\doxysubsubsection{\texorpdfstring{check()}{check()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1SoundFileReaderFlac_acbc84cb9b7644506e09174277b47e54b} 
+bool sf\+::priv\+::\+Sound\+File\+Reader\+Flac\+::check (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classsf_1_1InputStream}{Input\+Stream}} \&}]{stream}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if this reader can handle a file given by an input stream. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & Source stream to check\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the file is supported by this reader 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1priv_1_1SoundFileReaderFlac_a7fdf7aa03a6ff4c7a19f6c53cb4fc0ba}\index{sf::priv::SoundFileReaderFlac@{sf::priv::SoundFileReaderFlac}!open@{open}}
+\index{open@{open}!sf::priv::SoundFileReaderFlac@{sf::priv::SoundFileReaderFlac}}
+\doxysubsubsection{\texorpdfstring{open()}{open()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1SoundFileReaderFlac_a7fdf7aa03a6ff4c7a19f6c53cb4fc0ba} 
+bool sf\+::priv\+::\+Sound\+File\+Reader\+Flac\+::open (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classsf_1_1InputStream}{sf\+::\+Input\+Stream}} \&}]{stream}{, }\item[{\mbox{\hyperlink{structsf_1_1SoundFileReader_1_1Info}{Info}} \&}]{info}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Open a sound file for reading. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & Stream to open \\
+\hline
+{\em info} & Structure to fill with the attributes of the loaded sound \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classsf_1_1SoundFileReader_aa1d2fee2ba8f359c833ab74590d55935}{sf\+::\+Sound\+File\+Reader}}.
+
+\Hypertarget{classsf_1_1priv_1_1SoundFileReaderFlac_a8d875824393da5741d3a036594a351c7}\index{sf::priv::SoundFileReaderFlac@{sf::priv::SoundFileReaderFlac}!read@{read}}
+\index{read@{read}!sf::priv::SoundFileReaderFlac@{sf::priv::SoundFileReaderFlac}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1SoundFileReaderFlac_a8d875824393da5741d3a036594a351c7} 
+Uint64 sf\+::priv\+::\+Sound\+File\+Reader\+Flac\+::read (\begin{DoxyParamCaption}\item[{Int16 \texorpdfstring{$\ast$}{*}}]{samples}{, }\item[{Uint64}]{max\+Count}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Read audio samples from the open file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em samples} & Pointer to the sample array to fill \\
+\hline
+{\em max\+Count} & Maximum number of samples to read\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of samples actually read (may be less than {\itshape max\+Count}) 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classsf_1_1SoundFileReader_a3b7d86769ea07e24e7b0f0486bed7591}{sf\+::\+Sound\+File\+Reader}}.
+
+\Hypertarget{classsf_1_1priv_1_1SoundFileReaderFlac_a204e8c452a68472fd7c821237465085d}\index{sf::priv::SoundFileReaderFlac@{sf::priv::SoundFileReaderFlac}!seek@{seek}}
+\index{seek@{seek}!sf::priv::SoundFileReaderFlac@{sf::priv::SoundFileReaderFlac}}
+\doxysubsubsection{\texorpdfstring{seek()}{seek()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1SoundFileReaderFlac_a204e8c452a68472fd7c821237465085d} 
+void sf\+::priv\+::\+Sound\+File\+Reader\+Flac\+::seek (\begin{DoxyParamCaption}\item[{Uint64}]{sample\+Offset}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Change the current read position to the given sample offset. 
+
+The sample offset takes the channels into account. If you have a time offset instead, you can easily find the corresponding sample offset with the following formula\+: {\ttfamily time\+In\+Seconds \texorpdfstring{$\ast$}{*} sample\+Rate \texorpdfstring{$\ast$}{*} channel\+Count} If the given offset exceeds to total number of samples, this function must jump to the end of the file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sample\+Offset} & Index of the sample to jump to, relative to the beginning \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classsf_1_1SoundFileReader_a1e18ade5ffe882bdfa20a2ebe7e2b015}{sf\+::\+Sound\+File\+Reader}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+Audio/Sound\+File\+Reader\+Flac.\+hpp\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+Audio/Sound\+File\+Reader\+Flac.\+cpp\end{DoxyCompactItemize}

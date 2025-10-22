@@ -1,0 +1,64 @@
+\doxysection{Render\+Texture\+Impl.\+hpp}
+\hypertarget{RenderTextureImpl_8hpp_source}{}\label{RenderTextureImpl_8hpp_source}\index{build/\_deps/sfml-\/src/src/SFML/Graphics/RenderTextureImpl.hpp@{build/\_deps/sfml-\/src/src/SFML/Graphics/RenderTextureImpl.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ SFML\_RENDERTEXTUREIMPL\_HPP}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ SFML\_RENDERTEXTUREIMPL\_HPP}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <SFML/System/NonCopyable.hpp>}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{00035\ \{}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsf_1_1ContextSettings}{ContextSettings}};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{keyword}{namespace\ }priv}
+\DoxyCodeLine{00040\ \{}
+\DoxyCodeLine{00045\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1priv_1_1RenderTextureImpl}{RenderTextureImpl}}\ :\ \mbox{\hyperlink{classsf_1_1NonCopyable_a2110add170580fdb946f887719da6860}{NonCopyable}}}
+\DoxyCodeLine{00046\ \{}
+\DoxyCodeLine{00047\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classsf_1_1priv_1_1RenderTextureImpl_af505672c86098c99b446a0e5b21b6598}{\string~RenderTextureImpl}}();}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1RenderTextureImpl_a9f47a58dd71506875601e88ed86a2806}{create}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ height,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ textureId,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structsf_1_1ContextSettings}{ContextSettings}}\&\ settings)\ =\ 0;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1RenderTextureImpl_a9bddf81716167dc980b4b36287056a51}{activate}}(\textcolor{keywordtype}{bool}\ active)\ =\ 0;}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1RenderTextureImpl_a0c330de7b05cf055201490fb3b97569f}{isSrgb}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1RenderTextureImpl_aca935a46aa8f04b070b9b0b55491313e}{updateTexture}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ textureId)\ =\ 0;}
+\DoxyCodeLine{00096\ \};}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \}\ \textcolor{comment}{//\ namespace\ priv}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SFML\_RENDERTEXTUREIMPL\_HPP}}
+
+\end{DoxyCode}

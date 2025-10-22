@@ -1,0 +1,97 @@
+\doxysection{Window.\+hpp}
+\hypertarget{Window_2Window_8hpp_source}{}\label{Window_2Window_8hpp_source}\index{build/\_deps/sfml-\/src/include/SFML/Window/Window.hpp@{build/\_deps/sfml-\/src/include/SFML/Window/Window.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ SFML\_WINDOW\_HPP}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ SFML\_WINDOW\_HPP}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <SFML/Window/ContextSettings.hpp>}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <SFML/Window/GlResource.hpp>}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ <SFML/Window/WindowBase.hpp>}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{00037\ \{}
+\DoxyCodeLine{00038\ \textcolor{keyword}{namespace\ }priv}
+\DoxyCodeLine{00039\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1priv_1_1GlContext}{GlContext}};}
+\DoxyCodeLine{00041\ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1Event}{Event}};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00049\ \textcolor{keyword}{class\ }SFML\_WINDOW\_API\ \mbox{\hyperlink{classsf_1_1Window_a5359122166b4dc492c3d25caf08ccfc4}{Window}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classsf_1_1WindowBase_a0cfe9d015cc95b89ef862c8d8050a964}{WindowBase}},\ \mbox{\hyperlink{classsf_1_1GlResource_ad8fb7a0674f0f77e530dacc2a3b0dc6a}{GlResource}}}
+\DoxyCodeLine{00050\ \{}
+\DoxyCodeLine{00051\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{classsf_1_1Window_a5359122166b4dc492c3d25caf08ccfc4}{Window}}();}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{classsf_1_1Window_a5359122166b4dc492c3d25caf08ccfc4}{Window}}(\mbox{\hyperlink{classsf_1_1VideoMode}{VideoMode}}\ mode,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1String}{String}}\&\ title,\ Uint32\ style\ =\ \mbox{\hyperlink{group__window_gga9b1eb7a118a8e91bc6851ec07f136beea5597cd420fc461807e4a201c92adea37}{Style::Default}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structsf_1_1ContextSettings}{ContextSettings}}\&\ settings\ =\ \mbox{\hyperlink{structsf_1_1ContextSettings}{ContextSettings}}());}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classsf_1_1Window_a5359122166b4dc492c3d25caf08ccfc4}{Window}}(WindowHandle\ handle,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structsf_1_1ContextSettings}{ContextSettings}}\&\ settings\ =\ \mbox{\hyperlink{structsf_1_1ContextSettings}{ContextSettings}}());}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classsf_1_1Window_a5359122166b4dc492c3d25caf08ccfc4}{\string~Window}}();}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Window_af97b0a41f374f81b4f6eea6609d7c1eb}{create}}(\mbox{\hyperlink{classsf_1_1VideoMode}{VideoMode}}\ mode,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1String}{String}}\&\ title,\ Uint32\ style\ =\ \mbox{\hyperlink{group__window_gga9b1eb7a118a8e91bc6851ec07f136beea5597cd420fc461807e4a201c92adea37}{Style::Default}});}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Window_af97b0a41f374f81b4f6eea6609d7c1eb}{create}}(\mbox{\hyperlink{classsf_1_1VideoMode}{VideoMode}}\ mode,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1String}{String}}\&\ title,\ Uint32\ style,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structsf_1_1ContextSettings}{ContextSettings}}\&\ settings);}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Window_af97b0a41f374f81b4f6eea6609d7c1eb}{create}}(WindowHandle\ handle);}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Window_af97b0a41f374f81b4f6eea6609d7c1eb}{create}}(WindowHandle\ handle,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structsf_1_1ContextSettings}{ContextSettings}}\&\ settings);}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Window_a99d1e030387b0c26f5995670504fe7b5}{close}}();}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structsf_1_1ContextSettings}{ContextSettings}}\&\ \mbox{\hyperlink{classsf_1_1Window_a0605afbaceb02b098f9d731b7ab4203d}{getSettings}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Window_a59041c4556e0351048f8aff366034f61}{setVerticalSyncEnabled}}(\textcolor{keywordtype}{bool}\ enabled);}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Window_af4322d315baf93405bf0d5087ad5e784}{setFramerateLimit}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ limit);}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00242\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1Window_aaab549da64cedf74fa6f1ae7a3cc79e0}{setActive}}(\textcolor{keywordtype}{bool}\ active\ =\ \textcolor{keyword}{true})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00243\ }
+\DoxyCodeLine{00252\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Window_adabf839cb103ac96cfc82f781638772a}{display}}();}
+\DoxyCodeLine{00253\ }
+\DoxyCodeLine{00254\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00268\ \ \ \ \ \textcolor{keywordtype}{bool}\ filterEvent(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1Event}{Event}}\&\ event);}
+\DoxyCodeLine{00269\ }
+\DoxyCodeLine{00274\ \ \ \ \ \textcolor{keywordtype}{void}\ initialize();}
+\DoxyCodeLine{00275\ }
+\DoxyCodeLine{00277\ \ \ \ \ \textcolor{comment}{//\ Member\ data}}
+\DoxyCodeLine{00279\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1GlContext}{priv::GlContext}}*\ \ m\_context;\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00280\ \ \ \ \ \mbox{\hyperlink{classsf_1_1Clock}{Clock}}\ \ \ \ \ \ \ \ \ \ \ \ \ m\_clock;\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00281\ \ \ \ \ \mbox{\hyperlink{classsf_1_1Time}{Time}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_frameTimeLimit;\ }
+\DoxyCodeLine{00282\ \};}
+\DoxyCodeLine{00283\ }
+\DoxyCodeLine{00284\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{00285\ }
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00287\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SFML\_WINDOW\_HPP}}
+\DoxyCodeLine{00288\ }
+\DoxyCodeLine{00289\ }
+
+\end{DoxyCode}

@@ -1,0 +1,107 @@
+\doxysection{ftbbox.\+h}
+\hypertarget{ftbbox_8h_source}{}\label{ftbbox_8h_source}\index{build/\_deps/sfml-\/src/extlibs/headers/freetype2/ftbbox.h@{build/\_deps/sfml-\/src/extlibs/headers/freetype2/ftbbox.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00003\ \textcolor{comment}{/*\ \ ftbbox.h\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00005\ \textcolor{comment}{/*\ \ \ \ FreeType\ exact\ bbox\ computation\ (specification).\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00007\ \textcolor{comment}{/*\ \ Copyright\ 1996-\/2001,\ 2003,\ 2007,\ 2011,\ 2013\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ \ David\ Turner,\ Robert\ Wilhelm,\ and\ Werner\ Lemberg.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00010\ \textcolor{comment}{/*\ \ This\ file\ is\ part\ of\ the\ FreeType\ project,\ and\ may\ only\ be\ used,\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*\ \ modified,\ and\ distributed\ under\ the\ terms\ of\ the\ FreeType\ project\ \ \ \ \ \ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*\ \ license,\ LICENSE.TXT.\ \ By\ continuing\ to\ use,\ modify,\ or\ distribute\ \ \ \ \ */}}
+\DoxyCodeLine{00013\ \textcolor{comment}{/*\ \ this\ file\ you\ indicate\ that\ you\ have\ read\ the\ license\ and\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00014\ \textcolor{comment}{/*\ \ understand\ and\ accept\ it\ fully.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00015\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00016\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00020\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00021\ \ \ \textcolor{comment}{/*\ This\ component\ has\ a\ \_single\_\ role:\ to\ compute\ exact\ outline\ bounding\ */}}
+\DoxyCodeLine{00022\ \ \ \textcolor{comment}{/*\ boxes.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00023\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00024\ \ \ \textcolor{comment}{/*\ It\ is\ separated\ from\ the\ rest\ of\ the\ engine\ for\ various\ technical\ \ \ \ \ */}}
+\DoxyCodeLine{00025\ \ \ \textcolor{comment}{/*\ reasons.\ \ It\ may\ well\ be\ integrated\ in\ \`{}ftoutln'\ later.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00026\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#ifndef\ \_\_FTBBOX\_H\_\_}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ \_\_FTBBOX\_H\_\_}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ <ft2build.h>}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#include\ FT\_FREETYPE\_H}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#ifdef\ FREETYPE\_H}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#error\ "{}freetype.h\ of\ FreeType\ 1\ has\ been\ loaded!"{}}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#error\ "{}Please\ fix\ the\ directory\ search\ order\ for\ header\ files"{}}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#error\ "{}so\ that\ freetype.h\ of\ FreeType\ 2\ is\ found\ first."{}}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ FT\_BEGIN\_HEADER}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00048\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00049\ \ \ \textcolor{comment}{/*\ <Section>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00050\ \ \ \textcolor{comment}{/*\ \ \ \ outline\_processing\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00051\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00052\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00056\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00057\ \ \ \textcolor{comment}{/*\ <Function>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00058\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_Outline\_Get\_BBox\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00059\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00060\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00061\ \ \ \textcolor{comment}{/*\ \ \ \ Compute\ the\ exact\ bounding\ box\ of\ an\ outline.\ \ This\ is\ slower\ \ \ \ \ \ */}}
+\DoxyCodeLine{00062\ \ \ \textcolor{comment}{/*\ \ \ \ than\ computing\ the\ control\ box.\ \ However,\ it\ uses\ an\ advanced\ \ \ \ \ \ */}}
+\DoxyCodeLine{00063\ \ \ \textcolor{comment}{/*\ \ \ \ algorithm\ that\ returns\ \_very\_\ quickly\ when\ the\ two\ boxes\ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00064\ \ \ \textcolor{comment}{/*\ \ \ \ coincide.\ \ Otherwise,\ the\ outline\ Bézier\ arcs\ are\ traversed\ to\ \ \ \ \ */}}
+\DoxyCodeLine{00065\ \ \ \textcolor{comment}{/*\ \ \ \ extract\ their\ extrema.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00066\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00067\ \ \ \textcolor{comment}{/*\ <Input>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00068\ \ \ \textcolor{comment}{/*\ \ \ \ outline\ ::\ A\ pointer\ to\ the\ source\ outline.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00069\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00070\ \ \ \textcolor{comment}{/*\ <Output>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00071\ \ \ \textcolor{comment}{/*\ \ \ \ abbox\ \ \ ::\ The\ outline's\ exact\ bounding\ box.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00072\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00073\ \ \ \textcolor{comment}{/*\ <Return>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00074\ \ \ \textcolor{comment}{/*\ \ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00075\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00076\ \ \ \textcolor{comment}{/*\ <Note>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00077\ \ \ \textcolor{comment}{/*\ \ \ \ If\ the\ font\ is\ tricky\ and\ the\ glyph\ has\ been\ loaded\ with\ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00078\ \ \ \textcolor{comment}{/*\ \ \ \ @FT\_LOAD\_NO\_SCALE,\ the\ resulting\ BBox\ is\ meaningless.\ \ To\ get\ \ \ \ \ \ */}}
+\DoxyCodeLine{00079\ \ \ \textcolor{comment}{/*\ \ \ \ reasonable\ values\ for\ the\ BBox\ it\ is\ necessary\ to\ load\ the\ glyph\ \ \ */}}
+\DoxyCodeLine{00080\ \ \ \textcolor{comment}{/*\ \ \ \ at\ a\ large\ ppem\ value\ (so\ that\ the\ hinting\ instructions\ can\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00081\ \ \ \textcolor{comment}{/*\ \ \ \ properly\ shift\ and\ scale\ the\ subglyphs),\ then\ extracting\ the\ BBox,\ */}}
+\DoxyCodeLine{00082\ \ \ \textcolor{comment}{/*\ \ \ \ which\ can\ be\ eventually\ converted\ back\ to\ font\ units.\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00083\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00084\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{00085\ \ \ FT\_Outline\_Get\_BBox(\ FT\_Outline*\ \ outline,}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_BBox\ \ \ \ \ *abbox\ );}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ FT\_END\_HEADER}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_FTBBOX\_H\_\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{comment}{/*\ END\ */}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \textcolor{comment}{/*\ Local\ Variables:\ */}}
+\DoxyCodeLine{00100\ \textcolor{comment}{/*\ coding:\ utf-\/8\ \ \ \ */}}
+\DoxyCodeLine{00101\ \textcolor{comment}{/*\ End:\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+
+\end{DoxyCode}

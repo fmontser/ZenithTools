@@ -1,0 +1,545 @@
+\doxysection{sf\+::Ftp Class Reference}
+\hypertarget{classsf_1_1Ftp}{}\label{classsf_1_1Ftp}\index{sf::Ftp@{sf::Ftp}}
+
+
+A FTP client.  
+
+
+
+
+{\ttfamily \#include $<$Ftp.\+hpp$>$}
+
+
+
+Inheritance diagram for sf\+::Ftp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{classsf_1_1Ftp__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for sf\+::Ftp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{classsf_1_1Ftp__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classsf_1_1Ftp_1_1DataChannel}{Data\+Channel}}
+\item 
+class \mbox{\hyperlink{classsf_1_1Ftp_1_1DirectoryResponse}{Directory\+Response}}
+\begin{DoxyCompactList}\small\item\em Specialization of FTP response returning a directory. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classsf_1_1Ftp_1_1ListingResponse}{Listing\+Response}}
+\begin{DoxyCompactList}\small\item\em Specialization of FTP response returning a filename listing. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Response}}
+\begin{DoxyCompactList}\small\item\em Define a FTP response. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classsf_1_1Ftp_a1cd6b89ad23253f6d97e6d4ca4d558cb}{Transfer\+Mode}} \{ \mbox{\hyperlink{classsf_1_1Ftp_a1cd6b89ad23253f6d97e6d4ca4d558cba6f253b362639fb5e059dc292762a21ee}{Binary}}
+, \mbox{\hyperlink{classsf_1_1Ftp_a1cd6b89ad23253f6d97e6d4ca4d558cbac9e544a22dce8ef3177449cb235d15c2}{Ascii}}
+, \mbox{\hyperlink{classsf_1_1Ftp_a1cd6b89ad23253f6d97e6d4ca4d558cbabb1e34435231e73c96534c71090be7f4}{Ebcdic}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeration of transfer modes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsf_1_1Ftp_a2edfa8e9009caf27bce74459ae76dc52}{\texorpdfstring{$\sim$}{\string~}\+Ftp}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Response}} \mbox{\hyperlink{classsf_1_1Ftp_a23cd365658c226b51640ac4870be6583}{connect}} (const \mbox{\hyperlink{classsf_1_1IpAddress}{Ip\+Address}} \&server, unsigned short port=21, \mbox{\hyperlink{classsf_1_1Time}{Time}} timeout=\mbox{\hyperlink{classsf_1_1Time_a8db127b632fa8da21550e7282af11fa0}{Time\+::\+Zero}})
+\begin{DoxyCompactList}\small\item\em Connect to the specified FTP server. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Response}} \mbox{\hyperlink{classsf_1_1Ftp_adfca64f2d6d9c796557b4736d3a56866}{disconnect}} ()
+\begin{DoxyCompactList}\small\item\em Close the connection with the server. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Response}} \mbox{\hyperlink{classsf_1_1Ftp_a8430053eac5a18c732d00fea182b3944}{login}} ()
+\begin{DoxyCompactList}\small\item\em Log in using an anonymous account. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Response}} \mbox{\hyperlink{classsf_1_1Ftp_ac93f19f1d9d2c75a05e0b0b7d7abc7cd}{login}} (const std\+::string \&name, const std\+::string \&password)
+\begin{DoxyCompactList}\small\item\em Log in using a username and a password. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Response}} \mbox{\hyperlink{classsf_1_1Ftp_a54a857b74089a35f3d1c48f6a6ea2a64}{keep\+Alive}} ()
+\begin{DoxyCompactList}\small\item\em Send a null command to keep the connection alive. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1DirectoryResponse}{Directory\+Response}} \mbox{\hyperlink{classsf_1_1Ftp_a8b28cb24eee0cedac6e4791767bf2412}{get\+Working\+Directory}} ()
+\begin{DoxyCompactList}\small\item\em Get the current working directory. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1ListingResponse}{Listing\+Response}} \mbox{\hyperlink{classsf_1_1Ftp_aa43931622ecdcd51d2627b5556ca4b7c}{get\+Directory\+Listing}} (const std\+::string \&directory="{}"{})
+\begin{DoxyCompactList}\small\item\em Get the contents of the given directory. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Response}} \mbox{\hyperlink{classsf_1_1Ftp_a9983979974b6adca3d65d503791a8eb8}{change\+Directory}} (const std\+::string \&directory)
+\begin{DoxyCompactList}\small\item\em Change the current working directory. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Response}} \mbox{\hyperlink{classsf_1_1Ftp_a0995c5d04959adf0b03cfee3ca5b03f1}{parent\+Directory}} ()
+\begin{DoxyCompactList}\small\item\em Go to the parent directory of the current one. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Response}} \mbox{\hyperlink{classsf_1_1Ftp_ab814393400ce0dbd00ee4405766ac1ed}{create\+Directory}} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Create a new directory. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Response}} \mbox{\hyperlink{classsf_1_1Ftp_a92b0940bac4ab0b5d6db3d647ca691e3}{delete\+Directory}} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Remove an existing directory. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Response}} \mbox{\hyperlink{classsf_1_1Ftp_a276b111d7790000175e910645bf8357d}{rename\+File}} (const std\+::string \&file, const std\+::string \&new\+Name)
+\begin{DoxyCompactList}\small\item\em Rename an existing file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Response}} \mbox{\hyperlink{classsf_1_1Ftp_afe1e1249aaff70be5ebdeeadd038348a}{delete\+File}} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Remove an existing file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Response}} \mbox{\hyperlink{classsf_1_1Ftp_a2e7bdf68d8306543f991ad89c2a3c0ae}{download}} (const std\+::string \&remote\+File, const std\+::string \&local\+Path, \mbox{\hyperlink{classsf_1_1Ftp_a1cd6b89ad23253f6d97e6d4ca4d558cb}{Transfer\+Mode}} mode=\mbox{\hyperlink{classsf_1_1Ftp_a1cd6b89ad23253f6d97e6d4ca4d558cba6f253b362639fb5e059dc292762a21ee}{Binary}})
+\begin{DoxyCompactList}\small\item\em Download a file from the server. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Response}} \mbox{\hyperlink{classsf_1_1Ftp_aa4e84f11729dc2219ecdce4feb2f32ab}{upload}} (const std\+::string \&local\+File, const std\+::string \&remote\+Path, \mbox{\hyperlink{classsf_1_1Ftp_a1cd6b89ad23253f6d97e6d4ca4d558cb}{Transfer\+Mode}} mode=\mbox{\hyperlink{classsf_1_1Ftp_a1cd6b89ad23253f6d97e6d4ca4d558cba6f253b362639fb5e059dc292762a21ee}{Binary}}, bool append=false)
+\begin{DoxyCompactList}\small\item\em Upload a file to the server. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Response}} \mbox{\hyperlink{classsf_1_1Ftp_a1e2f75aa4b1fd2b4be139ffc57d6c1c3}{send\+Command}} (const std\+::string \&command, const std\+::string \&parameter="{}"{})
+\begin{DoxyCompactList}\small\item\em Send a command to the FTP server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classsf_1_1Ftp_a8dee57337b6a7e183bfe21d178757b0c}\label{classsf_1_1Ftp_a8dee57337b6a7e183bfe21d178757b0c} 
+class {\bfseries Data\+Channel}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A FTP client. 
+
+\doxylink{classsf_1_1Ftp}{sf\+::\+Ftp} is a very simple FTP client that allows you to communicate with a FTP server. The FTP protocol allows you to manipulate a remote file system (list files, upload, download, create, remove, ...).
+
+Using the FTP client consists of 4 parts\+: \begin{DoxyItemize}
+\item Connecting to the FTP server \item Logging in (either as a registered user or anonymously) \item Sending commands to the server \item Disconnecting (this part can be done implicitly by the destructor)\end{DoxyItemize}
+Every command returns a FTP response, which contains the status code as well as a message from the server. Some commands such as \doxylink{classsf_1_1Ftp_a8b28cb24eee0cedac6e4791767bf2412}{get\+Working\+Directory()} and \doxylink{classsf_1_1Ftp_aa43931622ecdcd51d2627b5556ca4b7c}{get\+Directory\+Listing()} return additional data, and use a class derived from \doxylink{classsf_1_1Ftp_1_1Response}{sf\+::\+Ftp\+::\+Response} to provide this data. The most often used commands are directly provided as member functions, but it is also possible to use specific commands with the \doxylink{classsf_1_1Ftp_a1e2f75aa4b1fd2b4be139ffc57d6c1c3}{send\+Command()} function.
+
+Note that response statuses \texorpdfstring{$>$}{>}= 1000 are not part of the FTP standard, they are generated by SFML when an internal error occurs.
+
+All commands, especially upload and download, may take some time to complete. This is important to know if you don\textquotesingle{}t want to block your application while the server is completing the task.
+
+Usage example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Create\ a\ new\ FTP\ client}}
+\DoxyCodeLine{sf::Ftp\ ftp;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Connect\ to\ the\ server}}
+\DoxyCodeLine{sf::Ftp::Response\ response\ =\ ftp.\mbox{\hyperlink{classsf_1_1Ftp_a23cd365658c226b51640ac4870be6583}{connect}}(\textcolor{stringliteral}{"{}ftp://ftp.myserver.com"{}});}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ (response.\mbox{\hyperlink{classsf_1_1Ftp_1_1Response_a5102552955a2652c1a39e9046e617b36}{isOk}}())}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Connected"{}}\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Log\ in}}
+\DoxyCodeLine{response\ =\ ftp.\mbox{\hyperlink{classsf_1_1Ftp_a8430053eac5a18c732d00fea182b3944}{login}}(\textcolor{stringliteral}{"{}laurent"{}},\ \textcolor{stringliteral}{"{}dF6Zm89D"{}});}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ (response.\mbox{\hyperlink{classsf_1_1Ftp_1_1Response_a5102552955a2652c1a39e9046e617b36}{isOk}}())}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Logged\ in"{}}\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Print\ the\ working\ directory}}
+\DoxyCodeLine{sf::Ftp::DirectoryResponse\ directory\ =\ ftp.\mbox{\hyperlink{classsf_1_1Ftp_a8b28cb24eee0cedac6e4791767bf2412}{getWorkingDirectory}}();}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ (directory.\mbox{\hyperlink{classsf_1_1Ftp_1_1Response_a5102552955a2652c1a39e9046e617b36}{isOk}}())}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Working\ directory:\ "{}}\ <<\ directory.\mbox{\hyperlink{classsf_1_1Ftp_1_1DirectoryResponse_a983b0ce3d99c687e0862212040158d67}{getDirectory}}()\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Create\ a\ new\ directory}}
+\DoxyCodeLine{response\ =\ ftp.\mbox{\hyperlink{classsf_1_1Ftp_ab814393400ce0dbd00ee4405766ac1ed}{createDirectory}}(\textcolor{stringliteral}{"{}files"{}});}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ (response.\mbox{\hyperlink{classsf_1_1Ftp_1_1Response_a5102552955a2652c1a39e9046e617b36}{isOk}}())}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Created\ new\ directory"{}}\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Upload\ a\ file\ to\ this\ new\ directory}}
+\DoxyCodeLine{response\ =\ ftp.\mbox{\hyperlink{classsf_1_1Ftp_aa4e84f11729dc2219ecdce4feb2f32ab}{upload}}(\textcolor{stringliteral}{"{}local-\/path/file.txt"{}},\ \textcolor{stringliteral}{"{}files"{}},\ \mbox{\hyperlink{classsf_1_1Ftp_a1cd6b89ad23253f6d97e6d4ca4d558cbac9e544a22dce8ef3177449cb235d15c2}{sf::Ftp::Ascii}});}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ (response.\mbox{\hyperlink{classsf_1_1Ftp_1_1Response_a5102552955a2652c1a39e9046e617b36}{isOk}}())}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}File\ uploaded"{}}\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Send\ specific\ commands\ (here:\ FEAT\ to\ list\ supported\ FTP\ features)}}
+\DoxyCodeLine{response\ =\ ftp.\mbox{\hyperlink{classsf_1_1Ftp_a1e2f75aa4b1fd2b4be139ffc57d6c1c3}{sendCommand}}(\textcolor{stringliteral}{"{}FEAT"{}});}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ (response.\mbox{\hyperlink{classsf_1_1Ftp_1_1Response_a5102552955a2652c1a39e9046e617b36}{isOk}}())}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Feature\ list:\(\backslash\)n"{}}\ <<\ response.\mbox{\hyperlink{classsf_1_1Ftp_1_1Response_adc2890c93c9f8ee997b828fcbef82c97}{getMessage}}()\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Disconnect\ from\ the\ server\ (optional)}}
+\DoxyCodeLine{ftp.\mbox{\hyperlink{classsf_1_1Ftp_adfca64f2d6d9c796557b4736d3a56866}{disconnect}}();}
+
+\end{DoxyCode}
+ 
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classsf_1_1Ftp_a1cd6b89ad23253f6d97e6d4ca4d558cb}\index{sf::Ftp@{sf::Ftp}!TransferMode@{TransferMode}}
+\index{TransferMode@{TransferMode}!sf::Ftp@{sf::Ftp}}
+\doxysubsubsection{\texorpdfstring{TransferMode}{TransferMode}}
+{\footnotesize\ttfamily \label{classsf_1_1Ftp_a1cd6b89ad23253f6d97e6d4ca4d558cb} 
+enum \mbox{\hyperlink{classsf_1_1Ftp_a1cd6b89ad23253f6d97e6d4ca4d558cb}{sf\+::\+Ftp\+::\+Transfer\+Mode}}}
+
+
+
+Enumeration of transfer modes. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Binary@{Binary}!sf::Ftp@{sf::Ftp}}\index{sf::Ftp@{sf::Ftp}!Binary@{Binary}}}\Hypertarget{classsf_1_1Ftp_a1cd6b89ad23253f6d97e6d4ca4d558cba6f253b362639fb5e059dc292762a21ee}\label{classsf_1_1Ftp_a1cd6b89ad23253f6d97e6d4ca4d558cba6f253b362639fb5e059dc292762a21ee} 
+Binary&Binary mode (file is transfered as a sequence of bytes) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Ascii@{Ascii}!sf::Ftp@{sf::Ftp}}\index{sf::Ftp@{sf::Ftp}!Ascii@{Ascii}}}\Hypertarget{classsf_1_1Ftp_a1cd6b89ad23253f6d97e6d4ca4d558cbac9e544a22dce8ef3177449cb235d15c2}\label{classsf_1_1Ftp_a1cd6b89ad23253f6d97e6d4ca4d558cbac9e544a22dce8ef3177449cb235d15c2} 
+Ascii&\doxylink{classsf_1_1Text}{Text} mode using ASCII encoding. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Ebcdic@{Ebcdic}!sf::Ftp@{sf::Ftp}}\index{sf::Ftp@{sf::Ftp}!Ebcdic@{Ebcdic}}}\Hypertarget{classsf_1_1Ftp_a1cd6b89ad23253f6d97e6d4ca4d558cbabb1e34435231e73c96534c71090be7f4}\label{classsf_1_1Ftp_a1cd6b89ad23253f6d97e6d4ca4d558cbabb1e34435231e73c96534c71090be7f4} 
+Ebcdic&\doxylink{classsf_1_1Text}{Text} mode using EBCDIC encoding. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classsf_1_1Ftp_a2edfa8e9009caf27bce74459ae76dc52}\index{sf::Ftp@{sf::Ftp}!````~Ftp@{\texorpdfstring{$\sim$}{\string~}Ftp}}
+\index{````~Ftp@{\texorpdfstring{$\sim$}{\string~}Ftp}!sf::Ftp@{sf::Ftp}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Ftp()}{\string~Ftp()}}
+{\footnotesize\ttfamily \label{classsf_1_1Ftp_a2edfa8e9009caf27bce74459ae76dc52} 
+sf\+::\+Ftp\+::\texorpdfstring{$\sim$}{\string~}\+Ftp (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor. 
+
+Automatically closes the connection with the server if it is still opened. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsf_1_1Ftp_a9983979974b6adca3d65d503791a8eb8}\index{sf::Ftp@{sf::Ftp}!changeDirectory@{changeDirectory}}
+\index{changeDirectory@{changeDirectory}!sf::Ftp@{sf::Ftp}}
+\doxysubsubsection{\texorpdfstring{changeDirectory()}{changeDirectory()}}
+{\footnotesize\ttfamily \label{classsf_1_1Ftp_a9983979974b6adca3d65d503791a8eb8} 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Ftp\+::\+Response}} sf\+::\+Ftp\+::change\+Directory (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{directory}{}\end{DoxyParamCaption})}
+
+
+
+Change the current working directory. 
+
+The new directory must be relative to the current one.
+
+
+\begin{DoxyParams}{Parameters}
+{\em directory} & New working directory\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Server response to the request
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Ftp_a8b28cb24eee0cedac6e4791767bf2412}{get\+Working\+Directory}, \doxylink{classsf_1_1Ftp_aa43931622ecdcd51d2627b5556ca4b7c}{get\+Directory\+Listing}, \doxylink{classsf_1_1Ftp_a0995c5d04959adf0b03cfee3ca5b03f1}{parent\+Directory} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1Ftp_a23cd365658c226b51640ac4870be6583}\index{sf::Ftp@{sf::Ftp}!connect@{connect}}
+\index{connect@{connect}!sf::Ftp@{sf::Ftp}}
+\doxysubsubsection{\texorpdfstring{connect()}{connect()}}
+{\footnotesize\ttfamily \label{classsf_1_1Ftp_a23cd365658c226b51640ac4870be6583} 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Ftp\+::\+Response}} sf\+::\+Ftp\+::connect (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classsf_1_1IpAddress}{Ip\+Address}} \&}]{server}{, }\item[{unsigned short}]{port}{ = {\ttfamily 21}, }\item[{\mbox{\hyperlink{classsf_1_1Time}{Time}}}]{timeout}{ = {\ttfamily \mbox{\hyperlink{classsf_1_1Time_a8db127b632fa8da21550e7282af11fa0}{Time\+::\+Zero}}}}\end{DoxyParamCaption})}
+
+
+
+Connect to the specified FTP server. 
+
+The port has a default value of 21, which is the standard port used by the FTP protocol. You shouldn\textquotesingle{}t use a different value, unless you really know what you do. This function tries to connect to the server so it may take a while to complete, especially if the server is not reachable. To avoid blocking your application for too long, you can use a timeout. The default value, \doxylink{classsf_1_1Time_a8db127b632fa8da21550e7282af11fa0}{Time\+::\+Zero}, means that the system timeout will be used (which is usually pretty long).
+
+
+\begin{DoxyParams}{Parameters}
+{\em server} & Name or address of the FTP server to connect to \\
+\hline
+{\em port} & Port used for the connection \\
+\hline
+{\em timeout} & Maximum time to wait\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Server response to the request
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Ftp_adfca64f2d6d9c796557b4736d3a56866}{disconnect} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1Ftp_ab814393400ce0dbd00ee4405766ac1ed}\index{sf::Ftp@{sf::Ftp}!createDirectory@{createDirectory}}
+\index{createDirectory@{createDirectory}!sf::Ftp@{sf::Ftp}}
+\doxysubsubsection{\texorpdfstring{createDirectory()}{createDirectory()}}
+{\footnotesize\ttfamily \label{classsf_1_1Ftp_ab814393400ce0dbd00ee4405766ac1ed} 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Ftp\+::\+Response}} sf\+::\+Ftp\+::create\+Directory (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption})}
+
+
+
+Create a new directory. 
+
+The new directory is created as a child of the current working directory.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the directory to create\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Server response to the request
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Ftp_a92b0940bac4ab0b5d6db3d647ca691e3}{delete\+Directory} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1Ftp_a92b0940bac4ab0b5d6db3d647ca691e3}\index{sf::Ftp@{sf::Ftp}!deleteDirectory@{deleteDirectory}}
+\index{deleteDirectory@{deleteDirectory}!sf::Ftp@{sf::Ftp}}
+\doxysubsubsection{\texorpdfstring{deleteDirectory()}{deleteDirectory()}}
+{\footnotesize\ttfamily \label{classsf_1_1Ftp_a92b0940bac4ab0b5d6db3d647ca691e3} 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Ftp\+::\+Response}} sf\+::\+Ftp\+::delete\+Directory (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption})}
+
+
+
+Remove an existing directory. 
+
+The directory to remove must be relative to the current working directory. Use this function with caution, the directory will be removed permanently!
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the directory to remove\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Server response to the request
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Ftp_ab814393400ce0dbd00ee4405766ac1ed}{create\+Directory} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1Ftp_afe1e1249aaff70be5ebdeeadd038348a}\index{sf::Ftp@{sf::Ftp}!deleteFile@{deleteFile}}
+\index{deleteFile@{deleteFile}!sf::Ftp@{sf::Ftp}}
+\doxysubsubsection{\texorpdfstring{deleteFile()}{deleteFile()}}
+{\footnotesize\ttfamily \label{classsf_1_1Ftp_afe1e1249aaff70be5ebdeeadd038348a} 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Ftp\+::\+Response}} sf\+::\+Ftp\+::delete\+File (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption})}
+
+
+
+Remove an existing file. 
+
+The file name must be relative to the current working directory. Use this function with caution, the file will be removed permanently!
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & File to remove\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Server response to the request
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Ftp_a276b111d7790000175e910645bf8357d}{rename\+File} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1Ftp_adfca64f2d6d9c796557b4736d3a56866}\index{sf::Ftp@{sf::Ftp}!disconnect@{disconnect}}
+\index{disconnect@{disconnect}!sf::Ftp@{sf::Ftp}}
+\doxysubsubsection{\texorpdfstring{disconnect()}{disconnect()}}
+{\footnotesize\ttfamily \label{classsf_1_1Ftp_adfca64f2d6d9c796557b4736d3a56866} 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Ftp\+::\+Response}} sf\+::\+Ftp\+::disconnect (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Close the connection with the server. 
+
+\begin{DoxyReturn}{Returns}
+Server response to the request
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Ftp_a23cd365658c226b51640ac4870be6583}{connect} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1Ftp_a2e7bdf68d8306543f991ad89c2a3c0ae}\index{sf::Ftp@{sf::Ftp}!download@{download}}
+\index{download@{download}!sf::Ftp@{sf::Ftp}}
+\doxysubsubsection{\texorpdfstring{download()}{download()}}
+{\footnotesize\ttfamily \label{classsf_1_1Ftp_a2e7bdf68d8306543f991ad89c2a3c0ae} 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Ftp\+::\+Response}} sf\+::\+Ftp\+::download (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{remote\+File}{, }\item[{const std\+::string \&}]{local\+Path}{, }\item[{\mbox{\hyperlink{classsf_1_1Ftp_a1cd6b89ad23253f6d97e6d4ca4d558cb}{Transfer\+Mode}}}]{mode}{ = {\ttfamily \mbox{\hyperlink{classsf_1_1Ftp_a1cd6b89ad23253f6d97e6d4ca4d558cba6f253b362639fb5e059dc292762a21ee}{Binary}}}}\end{DoxyParamCaption})}
+
+
+
+Download a file from the server. 
+
+The filename of the distant file is relative to the current working directory of the server, and the local destination path is relative to the current directory of your application. If a file with the same filename as the distant file already exists in the local destination path, it will be overwritten.
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+File} & Filename of the distant file to download \\
+\hline
+{\em local\+Path} & The directory in which to put the file on the local computer \\
+\hline
+{\em mode} & Transfer mode\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Server response to the request
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Ftp_aa4e84f11729dc2219ecdce4feb2f32ab}{upload} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1Ftp_aa43931622ecdcd51d2627b5556ca4b7c}\index{sf::Ftp@{sf::Ftp}!getDirectoryListing@{getDirectoryListing}}
+\index{getDirectoryListing@{getDirectoryListing}!sf::Ftp@{sf::Ftp}}
+\doxysubsubsection{\texorpdfstring{getDirectoryListing()}{getDirectoryListing()}}
+{\footnotesize\ttfamily \label{classsf_1_1Ftp_aa43931622ecdcd51d2627b5556ca4b7c} 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1ListingResponse}{Ftp\+::\+Listing\+Response}} sf\+::\+Ftp\+::get\+Directory\+Listing (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{directory}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})}
+
+
+
+Get the contents of the given directory. 
+
+This function retrieves the sub-\/directories and files contained in the given directory. It is not recursive. The {\itshape directory} parameter is relative to the current working directory.
+
+
+\begin{DoxyParams}{Parameters}
+{\em directory} & Directory to list\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Server response to the request
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Ftp_a8b28cb24eee0cedac6e4791767bf2412}{get\+Working\+Directory}, \doxylink{classsf_1_1Ftp_a9983979974b6adca3d65d503791a8eb8}{change\+Directory}, \doxylink{classsf_1_1Ftp_a0995c5d04959adf0b03cfee3ca5b03f1}{parent\+Directory} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1Ftp_a8b28cb24eee0cedac6e4791767bf2412}\index{sf::Ftp@{sf::Ftp}!getWorkingDirectory@{getWorkingDirectory}}
+\index{getWorkingDirectory@{getWorkingDirectory}!sf::Ftp@{sf::Ftp}}
+\doxysubsubsection{\texorpdfstring{getWorkingDirectory()}{getWorkingDirectory()}}
+{\footnotesize\ttfamily \label{classsf_1_1Ftp_a8b28cb24eee0cedac6e4791767bf2412} 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1DirectoryResponse}{Ftp\+::\+Directory\+Response}} sf\+::\+Ftp\+::get\+Working\+Directory (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Get the current working directory. 
+
+The working directory is the root path for subsequent operations involving directories and/or filenames.
+
+\begin{DoxyReturn}{Returns}
+Server response to the request
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Ftp_aa43931622ecdcd51d2627b5556ca4b7c}{get\+Directory\+Listing}, \doxylink{classsf_1_1Ftp_a9983979974b6adca3d65d503791a8eb8}{change\+Directory}, \doxylink{classsf_1_1Ftp_a0995c5d04959adf0b03cfee3ca5b03f1}{parent\+Directory} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1Ftp_a54a857b74089a35f3d1c48f6a6ea2a64}\index{sf::Ftp@{sf::Ftp}!keepAlive@{keepAlive}}
+\index{keepAlive@{keepAlive}!sf::Ftp@{sf::Ftp}}
+\doxysubsubsection{\texorpdfstring{keepAlive()}{keepAlive()}}
+{\footnotesize\ttfamily \label{classsf_1_1Ftp_a54a857b74089a35f3d1c48f6a6ea2a64} 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Ftp\+::\+Response}} sf\+::\+Ftp\+::keep\+Alive (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Send a null command to keep the connection alive. 
+
+This command is useful because the server may close the connection automatically if no command is sent.
+
+\begin{DoxyReturn}{Returns}
+Server response to the request 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1Ftp_a8430053eac5a18c732d00fea182b3944}\index{sf::Ftp@{sf::Ftp}!login@{login}}
+\index{login@{login}!sf::Ftp@{sf::Ftp}}
+\doxysubsubsection{\texorpdfstring{login()}{login()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classsf_1_1Ftp_a8430053eac5a18c732d00fea182b3944} 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Ftp\+::\+Response}} sf\+::\+Ftp\+::login (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Log in using an anonymous account. 
+
+Logging in is mandatory after connecting to the server. Users that are not logged in cannot perform any operation.
+
+\begin{DoxyReturn}{Returns}
+Server response to the request 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1Ftp_ac93f19f1d9d2c75a05e0b0b7d7abc7cd}\index{sf::Ftp@{sf::Ftp}!login@{login}}
+\index{login@{login}!sf::Ftp@{sf::Ftp}}
+\doxysubsubsection{\texorpdfstring{login()}{login()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classsf_1_1Ftp_ac93f19f1d9d2c75a05e0b0b7d7abc7cd} 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Ftp\+::\+Response}} sf\+::\+Ftp\+::login (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{const std\+::string \&}]{password}{}\end{DoxyParamCaption})}
+
+
+
+Log in using a username and a password. 
+
+Logging in is mandatory after connecting to the server. Users that are not logged in cannot perform any operation.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & User name \\
+\hline
+{\em password} & Password\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Server response to the request 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1Ftp_a0995c5d04959adf0b03cfee3ca5b03f1}\index{sf::Ftp@{sf::Ftp}!parentDirectory@{parentDirectory}}
+\index{parentDirectory@{parentDirectory}!sf::Ftp@{sf::Ftp}}
+\doxysubsubsection{\texorpdfstring{parentDirectory()}{parentDirectory()}}
+{\footnotesize\ttfamily \label{classsf_1_1Ftp_a0995c5d04959adf0b03cfee3ca5b03f1} 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Ftp\+::\+Response}} sf\+::\+Ftp\+::parent\+Directory (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Go to the parent directory of the current one. 
+
+\begin{DoxyReturn}{Returns}
+Server response to the request
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Ftp_a8b28cb24eee0cedac6e4791767bf2412}{get\+Working\+Directory}, \doxylink{classsf_1_1Ftp_aa43931622ecdcd51d2627b5556ca4b7c}{get\+Directory\+Listing}, \doxylink{classsf_1_1Ftp_a9983979974b6adca3d65d503791a8eb8}{change\+Directory} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1Ftp_a276b111d7790000175e910645bf8357d}\index{sf::Ftp@{sf::Ftp}!renameFile@{renameFile}}
+\index{renameFile@{renameFile}!sf::Ftp@{sf::Ftp}}
+\doxysubsubsection{\texorpdfstring{renameFile()}{renameFile()}}
+{\footnotesize\ttfamily \label{classsf_1_1Ftp_a276b111d7790000175e910645bf8357d} 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Ftp\+::\+Response}} sf\+::\+Ftp\+::rename\+File (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{file}{, }\item[{const std\+::string \&}]{new\+Name}{}\end{DoxyParamCaption})}
+
+
+
+Rename an existing file. 
+
+The filenames must be relative to the current working directory.
+
+
+\begin{DoxyParams}{Parameters}
+{\em file} & File to rename \\
+\hline
+{\em new\+Name} & New name of the file\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Server response to the request
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Ftp_afe1e1249aaff70be5ebdeeadd038348a}{delete\+File} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1Ftp_a1e2f75aa4b1fd2b4be139ffc57d6c1c3}\index{sf::Ftp@{sf::Ftp}!sendCommand@{sendCommand}}
+\index{sendCommand@{sendCommand}!sf::Ftp@{sf::Ftp}}
+\doxysubsubsection{\texorpdfstring{sendCommand()}{sendCommand()}}
+{\footnotesize\ttfamily \label{classsf_1_1Ftp_a1e2f75aa4b1fd2b4be139ffc57d6c1c3} 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Ftp\+::\+Response}} sf\+::\+Ftp\+::send\+Command (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{command}{, }\item[{const std\+::string \&}]{parameter}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})}
+
+
+
+Send a command to the FTP server. 
+
+While the most often used commands are provided as member functions in the \doxylink{classsf_1_1Ftp}{sf\+::\+Ftp} class, this method can be used to send any FTP command to the server. If the command requires one or more parameters, they can be specified in {\itshape parameter}. If the server returns information, you can extract it from the response using \doxylink{classsf_1_1Ftp_1_1Response_adc2890c93c9f8ee997b828fcbef82c97}{Response\+::get\+Message()}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & Command to send \\
+\hline
+{\em parameter} & Command parameter\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Server response to the request 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1Ftp_aa4e84f11729dc2219ecdce4feb2f32ab}\index{sf::Ftp@{sf::Ftp}!upload@{upload}}
+\index{upload@{upload}!sf::Ftp@{sf::Ftp}}
+\doxysubsubsection{\texorpdfstring{upload()}{upload()}}
+{\footnotesize\ttfamily \label{classsf_1_1Ftp_aa4e84f11729dc2219ecdce4feb2f32ab} 
+\mbox{\hyperlink{classsf_1_1Ftp_1_1Response}{Ftp\+::\+Response}} sf\+::\+Ftp\+::upload (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{local\+File}{, }\item[{const std\+::string \&}]{remote\+Path}{, }\item[{\mbox{\hyperlink{classsf_1_1Ftp_a1cd6b89ad23253f6d97e6d4ca4d558cb}{Transfer\+Mode}}}]{mode}{ = {\ttfamily \mbox{\hyperlink{classsf_1_1Ftp_a1cd6b89ad23253f6d97e6d4ca4d558cba6f253b362639fb5e059dc292762a21ee}{Binary}}}, }\item[{bool}]{append}{ = {\ttfamily false}}\end{DoxyParamCaption})}
+
+
+
+Upload a file to the server. 
+
+The name of the local file is relative to the current working directory of your application, and the remote path is relative to the current directory of the FTP server.
+
+The append parameter controls whether the remote file is appended to or overwritten if it already exists.
+
+
+\begin{DoxyParams}{Parameters}
+{\em local\+File} & Path of the local file to upload \\
+\hline
+{\em remote\+Path} & The directory in which to put the file on the server \\
+\hline
+{\em mode} & Transfer mode \\
+\hline
+{\em append} & Pass true to append to or false to overwrite the remote file if it already exists\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Server response to the request
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Ftp_a2e7bdf68d8306543f991ad89c2a3c0ae}{download} 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/include/\+SFML/\+Network/Ftp.\+hpp\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+Network/Ftp.\+cpp\end{DoxyCompactItemize}

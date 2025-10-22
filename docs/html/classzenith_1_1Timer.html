@@ -111,7 +111,7 @@ $(function(){initNavTree('classzenith_1_1Timer.html',''); initResizable(true); }
 </div><!--header-->
 <div class="contents">
 
-<p>Manages a thread based timer with minutes and seconds.  
+<p>Manages a timer with minutes and seconds.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="Timer_8hpp_source.html">Timer.hpp</a>&gt;</code></p>
@@ -124,45 +124,42 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:ac47cbb00d62a075e4c61655b6b3269cf" id="r_ac47cbb00d62a075e4c61655b6b3269cf"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac47cbb00d62a075e4c61655b6b3269cf">State</a> { <a class="el" href="#ac47cbb00d62a075e4c61655b6b3269cfac23e2b09ebe6bf4cb5e2a9abe85c0be2">Stopped</a>
-, <a class="el" href="#ac47cbb00d62a075e4c61655b6b3269cfae99180abf47a8b3a856e0bcb2656990a">Paused</a>
-, <a class="el" href="#ac47cbb00d62a075e4c61655b6b3269cfa5bda814c4aedb126839228f1a3d92f09">Running</a>
-, <a class="el" href="#ac47cbb00d62a075e4c61655b6b3269cfa0157fbb99be9622bdaa6e544270c0622">Ended</a>
+<tr class="memitem:a83ee68149877014f5309a16a2e2e4adf" id="r_a83ee68149877014f5309a16a2e2e4adf"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a83ee68149877014f5309a16a2e2e4adf">Mode</a> { <a class="el" href="#a83ee68149877014f5309a16a2e2e4adfac23e2b09ebe6bf4cb5e2a9abe85c0be2">Stopped</a>
+, <a class="el" href="#a83ee68149877014f5309a16a2e2e4adfae99180abf47a8b3a856e0bcb2656990a">Paused</a>
+, <a class="el" href="#a83ee68149877014f5309a16a2e2e4adfa5bda814c4aedb126839228f1a3d92f09">Running</a>
+, <a class="el" href="#a83ee68149877014f5309a16a2e2e4adfa0157fbb99be9622bdaa6e544270c0622">Ended</a>
  }</td></tr>
-<tr class="memdesc:ac47cbb00d62a075e4c61655b6b3269cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the possible states of the <a class="el" href="classzenith_1_1Timer.html" title="Manages a thread based timer with minutes and seconds.">Timer</a>.  <a href="#ac47cbb00d62a075e4c61655b6b3269cf">More...</a><br /></td></tr>
-<tr class="separator:ac47cbb00d62a075e4c61655b6b3269cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a83ee68149877014f5309a16a2e2e4adf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the possible modes of the <a class="el" href="classzenith_1_1Timer.html" title="Manages a timer with minutes and seconds.">Timer</a>.  <a href="#a83ee68149877014f5309a16a2e2e4adf">More...</a><br /></td></tr>
+<tr class="separator:a83ee68149877014f5309a16a2e2e4adf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7ebf9a77a1e5ac6ebc77e1e1c31a02e7" id="r_a7ebf9a77a1e5ac6ebc77e1e1c31a02e7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7ebf9a77a1e5ac6ebc77e1e1c31a02e7">Timer</a> (<a class="el" href="Timer_8hpp.html#ac7e1d0a6dad8892b9b68cf47f75817fc">Minutes</a> minutes, <a class="el" href="Timer_8hpp.html#a5e6c50203625681fded15903008539fa">Seconds</a> seconds)</td></tr>
-<tr class="memdesc:a7ebf9a77a1e5ac6ebc77e1e1c31a02e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classzenith_1_1Timer.html" title="Manages a thread based timer with minutes and seconds.">Timer</a> with a specific duration.  <br /></td></tr>
-<tr class="separator:a7ebf9a77a1e5ac6ebc77e1e1c31a02e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14fa469c4c295c5fa6e66a4ad1092146" id="r_a14fa469c4c295c5fa6e66a4ad1092146"><td class="memItemLeft" align="right" valign="top"><a id="a14fa469c4c295c5fa6e66a4ad1092146" name="a14fa469c4c295c5fa6e66a4ad1092146"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>~Timer</b> ()</td></tr>
-<tr class="memdesc:a14fa469c4c295c5fa6e66a4ad1092146"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor that ensures the background thread is properly handled. <br /></td></tr>
-<tr class="separator:a14fa469c4c295c5fa6e66a4ad1092146"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e607b129b392c11adddd9641a320436" id="r_a4e607b129b392c11adddd9641a320436"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4e607b129b392c11adddd9641a320436">Start</a> ()</td></tr>
-<tr class="memdesc:a4e607b129b392c11adddd9641a320436"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the timer countdown.  <br /></td></tr>
-<tr class="separator:a4e607b129b392c11adddd9641a320436"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b8c57bf9675da635a82d68d9b4d05e5" id="r_a9b8c57bf9675da635a82d68d9b4d05e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9b8c57bf9675da635a82d68d9b4d05e5">Pause</a> ()</td></tr>
-<tr class="memdesc:a9b8c57bf9675da635a82d68d9b4d05e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pauses the timer's countdown.  <br /></td></tr>
-<tr class="separator:a9b8c57bf9675da635a82d68d9b4d05e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3b4e386f8ebb885fa2ef6fcac8d9ca3" id="r_ad3b4e386f8ebb885fa2ef6fcac8d9ca3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad3b4e386f8ebb885fa2ef6fcac8d9ca3">Resume</a> ()</td></tr>
-<tr class="memdesc:ad3b4e386f8ebb885fa2ef6fcac8d9ca3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resumes the timer's countdown from where it was paused.  <br /></td></tr>
-<tr class="separator:ad3b4e386f8ebb885fa2ef6fcac8d9ca3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7c0c1e7d12de4b8a6e7c64e451cdd2a" id="r_ae7c0c1e7d12de4b8a6e7c64e451cdd2a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7c0c1e7d12de4b8a6e7c64e451cdd2a">Reset</a> ()</td></tr>
-<tr class="memdesc:ae7c0c1e7d12de4b8a6e7c64e451cdd2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the timer to its initial duration and stops it.  <br /></td></tr>
-<tr class="separator:ae7c0c1e7d12de4b8a6e7c64e451cdd2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a872c7f976999336c5ca0fc6af3295d35" id="r_a872c7f976999336c5ca0fc6af3295d35"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structzenith_1_1Timer_1_1Status.html">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a872c7f976999336c5ca0fc6af3295d35">GetStatus</a> ()</td></tr>
-<tr class="memdesc:a872c7f976999336c5ca0fc6af3295d35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a snapshot of the timer's current status.  <br /></td></tr>
-<tr class="separator:a872c7f976999336c5ca0fc6af3295d35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c7cebec6e7388a7175670a577c79312" id="r_a6c7cebec6e7388a7175670a577c79312"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6c7cebec6e7388a7175670a577c79312">Timer</a> (<a class="el" href="Timer_8hpp.html#ac7e1d0a6dad8892b9b68cf47f75817fc">Minutes</a> minutes, <a class="el" href="Timer_8hpp.html#a5e6c50203625681fded15903008539fa">Seconds</a> seconds)</td></tr>
+<tr class="memdesc:a6c7cebec6e7388a7175670a577c79312"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classzenith_1_1Timer.html" title="Manages a timer with minutes and seconds.">Timer</a> with a specific duration.  <br /></td></tr>
+<tr class="separator:a6c7cebec6e7388a7175670a577c79312"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ed0dfc131682b8c5382aeeaeae8563f" id="r_a3ed0dfc131682b8c5382aeeaeae8563f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3ed0dfc131682b8c5382aeeaeae8563f">Start</a> ()</td></tr>
+<tr class="memdesc:a3ed0dfc131682b8c5382aeeaeae8563f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the timer countdown.  <br /></td></tr>
+<tr class="separator:a3ed0dfc131682b8c5382aeeaeae8563f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba5e97e24ec5c879ea25a1387f2dc90b" id="r_aba5e97e24ec5c879ea25a1387f2dc90b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba5e97e24ec5c879ea25a1387f2dc90b">Pause</a> ()</td></tr>
+<tr class="memdesc:aba5e97e24ec5c879ea25a1387f2dc90b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pauses the timer's countdown.  <br /></td></tr>
+<tr class="separator:aba5e97e24ec5c879ea25a1387f2dc90b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25e6750c76e6dd69eeaded9b90b5d179" id="r_a25e6750c76e6dd69eeaded9b90b5d179"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a25e6750c76e6dd69eeaded9b90b5d179">Resume</a> ()</td></tr>
+<tr class="memdesc:a25e6750c76e6dd69eeaded9b90b5d179"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resumes the timer's countdown from where it was paused.  <br /></td></tr>
+<tr class="separator:a25e6750c76e6dd69eeaded9b90b5d179"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e4b864a706b96b25419d18fd22f10e0" id="r_a5e4b864a706b96b25419d18fd22f10e0"><td class="memItemLeft" align="right" valign="top"><a id="a5e4b864a706b96b25419d18fd22f10e0" name="a5e4b864a706b96b25419d18fd22f10e0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Reset</b> ()</td></tr>
+<tr class="memdesc:a5e4b864a706b96b25419d18fd22f10e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the timer to its initial duration and stops it. <br /></td></tr>
+<tr class="separator:a5e4b864a706b96b25419d18fd22f10e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfdcd070be0be20b28bd1c312ceb1f19" id="r_acfdcd070be0be20b28bd1c312ceb1f19"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structzenith_1_1Timer_1_1Status.html">Status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acfdcd070be0be20b28bd1c312ceb1f19">GetStatus</a> ()</td></tr>
+<tr class="memdesc:acfdcd070be0be20b28bd1c312ceb1f19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a snapshot of the timer's current status.  <br /></td></tr>
+<tr class="separator:acfdcd070be0be20b28bd1c312ceb1f19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Manages a thread based timer with minutes and seconds. </p>
-<p>Allows to start, pause, resume and stop a timer. Concurrency safe. </p>
+<div class="textblock"><p>Manages a timer with minutes and seconds. </p>
+<p>Allows to start, pause, resume and stop a timer. </p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
-<a id="ac47cbb00d62a075e4c61655b6b3269cf" name="ac47cbb00d62a075e4c61655b6b3269cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac47cbb00d62a075e4c61655b6b3269cf">&#9670;&#160;</a></span>State</h2>
+<a id="a83ee68149877014f5309a16a2e2e4adf" name="a83ee68149877014f5309a16a2e2e4adf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83ee68149877014f5309a16a2e2e4adf">&#9670;&#160;</a></span>Mode</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -171,7 +168,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">enum class <a class="el" href="#ac47cbb00d62a075e4c61655b6b3269cf">zenith::Timer::State</a></td>
+          <td class="memname">enum class <a class="el" href="#a83ee68149877014f5309a16a2e2e4adf">zenith::Timer::Mode</a></td>
         </tr>
       </table>
   </td>
@@ -181,29 +178,29 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Represents the possible states of the <a class="el" href="classzenith_1_1Timer.html" title="Manages a thread based timer with minutes and seconds.">Timer</a>. </p>
+<p>Represents the possible modes of the <a class="el" href="classzenith_1_1Timer.html" title="Manages a timer with minutes and seconds.">Timer</a>. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ac47cbb00d62a075e4c61655b6b3269cfac23e2b09ebe6bf4cb5e2a9abe85c0be2" name="ac47cbb00d62a075e4c61655b6b3269cfac23e2b09ebe6bf4cb5e2a9abe85c0be2"></a>Stopped&#160;</td><td class="fielddoc"><p>The timer is not running. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a83ee68149877014f5309a16a2e2e4adfac23e2b09ebe6bf4cb5e2a9abe85c0be2" name="a83ee68149877014f5309a16a2e2e4adfac23e2b09ebe6bf4cb5e2a9abe85c0be2"></a>Stopped&#160;</td><td class="fielddoc"><p>The timer is not started. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ac47cbb00d62a075e4c61655b6b3269cfae99180abf47a8b3a856e0bcb2656990a" name="ac47cbb00d62a075e4c61655b6b3269cfae99180abf47a8b3a856e0bcb2656990a"></a>Paused&#160;</td><td class="fielddoc"><p>The timer is paused. </p>
+<tr><td class="fieldname"><a id="a83ee68149877014f5309a16a2e2e4adfae99180abf47a8b3a856e0bcb2656990a" name="a83ee68149877014f5309a16a2e2e4adfae99180abf47a8b3a856e0bcb2656990a"></a>Paused&#160;</td><td class="fielddoc"><p>The timer is paused. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ac47cbb00d62a075e4c61655b6b3269cfa5bda814c4aedb126839228f1a3d92f09" name="ac47cbb00d62a075e4c61655b6b3269cfa5bda814c4aedb126839228f1a3d92f09"></a>Running&#160;</td><td class="fielddoc"><p>The timer is actively counting down. </p>
+<tr><td class="fieldname"><a id="a83ee68149877014f5309a16a2e2e4adfa5bda814c4aedb126839228f1a3d92f09" name="a83ee68149877014f5309a16a2e2e4adfa5bda814c4aedb126839228f1a3d92f09"></a>Running&#160;</td><td class="fielddoc"><p>The timer is actively counting down. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ac47cbb00d62a075e4c61655b6b3269cfa0157fbb99be9622bdaa6e544270c0622" name="ac47cbb00d62a075e4c61655b6b3269cfa0157fbb99be9622bdaa6e544270c0622"></a>Ended&#160;</td><td class="fielddoc"><p>The timer has finished its countdown. </p>
+<tr><td class="fieldname"><a id="a83ee68149877014f5309a16a2e2e4adfa0157fbb99be9622bdaa6e544270c0622" name="a83ee68149877014f5309a16a2e2e4adfa0157fbb99be9622bdaa6e544270c0622"></a>Ended&#160;</td><td class="fielddoc"><p>The timer has finished its countdown. </p>
 </td></tr>
 </table>
 
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a7ebf9a77a1e5ac6ebc77e1e1c31a02e7" name="a7ebf9a77a1e5ac6ebc77e1e1c31a02e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7ebf9a77a1e5ac6ebc77e1e1c31a02e7">&#9670;&#160;</a></span>Timer()</h2>
+<a id="a6c7cebec6e7388a7175670a577c79312" name="a6c7cebec6e7388a7175670a577c79312"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c7cebec6e7388a7175670a577c79312">&#9670;&#160;</a></span>Timer()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Timer::Timer </td>
+          <td class="memname">zenith::Timer::Timer </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="Timer_8hpp.html#ac7e1d0a6dad8892b9b68cf47f75817fc">Minutes</a></td>          <td class="paramname"><span class="paramname"><em>minutes</em></span>, </td>
         </tr>
@@ -215,7 +212,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Constructs a new <a class="el" href="classzenith_1_1Timer.html" title="Manages a thread based timer with minutes and seconds.">Timer</a> with a specific duration. </p>
+<p>Constructs a new <a class="el" href="classzenith_1_1Timer.html" title="Manages a timer with minutes and seconds.">Timer</a> with a specific duration. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">minutes</td><td>The minutes part of the timer's duration. </td></tr>
@@ -227,14 +224,14 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a872c7f976999336c5ca0fc6af3295d35" name="a872c7f976999336c5ca0fc6af3295d35"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a872c7f976999336c5ca0fc6af3295d35">&#9670;&#160;</a></span>GetStatus()</h2>
+<a id="acfdcd070be0be20b28bd1c312ceb1f19" name="acfdcd070be0be20b28bd1c312ceb1f19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfdcd070be0be20b28bd1c312ceb1f19">&#9670;&#160;</a></span>GetStatus()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="structzenith_1_1Timer_1_1Status.html">Timer::Status</a> Timer::GetStatus </td>
+          <td class="memname">const <a class="el" href="structzenith_1_1Timer_1_1Status.html">Status</a> zenith::Timer::GetStatus </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -243,19 +240,19 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retrieves a snapshot of the timer's current status. </p>
-<dl class="section return"><dt>Returns</dt><dd>A const <a class="el" href="structzenith_1_1Timer_1_1Status.html" title="A snapshot of the timer&#39;s current status.">Status</a> struct containing the state, remaining time, and elapsed time. </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>This method is thread-safe. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A const <a class="el" href="structzenith_1_1Timer_1_1Status.html" title="A snapshot of the timer&#39;s current status.">Status</a> struct containing the mode, remaining time, elapsed time and progress. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd><a class="el" href="structzenith_1_1Timer_1_1Status.html" title="A snapshot of the timer&#39;s current status.">Status</a> is only update when calling this function. </dd></dl>
 
 </div>
 </div>
-<a id="a9b8c57bf9675da635a82d68d9b4d05e5" name="a9b8c57bf9675da635a82d68d9b4d05e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9b8c57bf9675da635a82d68d9b4d05e5">&#9670;&#160;</a></span>Pause()</h2>
+<a id="aba5e97e24ec5c879ea25a1387f2dc90b" name="aba5e97e24ec5c879ea25a1387f2dc90b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba5e97e24ec5c879ea25a1387f2dc90b">&#9670;&#160;</a></span>Pause()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Timer::Pause </td>
+          <td class="memname">void zenith::Timer::Pause </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -264,38 +261,18 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Pauses the timer's countdown. </p>
-<dl class="section note"><dt>Note</dt><dd>If the timer is not running, this method has no effect. This method is thread-safe. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>If the timer is not running, this method has no effect. </dd></dl>
 
 </div>
 </div>
-<a id="ae7c0c1e7d12de4b8a6e7c64e451cdd2a" name="ae7c0c1e7d12de4b8a6e7c64e451cdd2a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7c0c1e7d12de4b8a6e7c64e451cdd2a">&#9670;&#160;</a></span>Reset()</h2>
+<a id="a25e6750c76e6dd69eeaded9b90b5d179" name="a25e6750c76e6dd69eeaded9b90b5d179"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25e6750c76e6dd69eeaded9b90b5d179">&#9670;&#160;</a></span>Resume()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Timer::Reset </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Resets the timer to its initial duration and stops it. </p>
-<dl class="section note"><dt>Note</dt><dd>This method is thread-safe. </dd></dl>
-
-</div>
-</div>
-<a id="ad3b4e386f8ebb885fa2ef6fcac8d9ca3" name="ad3b4e386f8ebb885fa2ef6fcac8d9ca3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3b4e386f8ebb885fa2ef6fcac8d9ca3">&#9670;&#160;</a></span>Resume()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Timer::Resume </td>
+          <td class="memname">void zenith::Timer::Resume </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -304,18 +281,18 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Resumes the timer's countdown from where it was paused. </p>
-<dl class="section note"><dt>Note</dt><dd>If the timer was not paused, this method has no effect. This method is thread-safe. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>If the timer was not paused, this method has no effect. </dd></dl>
 
 </div>
 </div>
-<a id="a4e607b129b392c11adddd9641a320436" name="a4e607b129b392c11adddd9641a320436"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e607b129b392c11adddd9641a320436">&#9670;&#160;</a></span>Start()</h2>
+<a id="a3ed0dfc131682b8c5382aeeaeae8563f" name="a3ed0dfc131682b8c5382aeeaeae8563f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ed0dfc131682b8c5382aeeaeae8563f">&#9670;&#160;</a></span>Start()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Timer::Start </td>
+          <td class="memname">void zenith::Timer::Start </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -324,13 +301,12 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Starts the timer countdown. </p>
-<dl class="section note"><dt>Note</dt><dd>If the timer was already running, it will be reset and started again. This method is thread-safe. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>If the timer was already running, it will be reset and started again. </dd></dl>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/<a class="el" href="Timer_8hpp_source.html">Timer.hpp</a></li>
-<li>src/<b>Timer.cpp</b></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

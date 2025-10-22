@@ -1,0 +1,127 @@
+\doxysection{Catch\+::Result\+Builder Class Reference}
+\hypertarget{classCatch_1_1ResultBuilder}{}\label{classCatch_1_1ResultBuilder}\index{Catch::ResultBuilder@{Catch::ResultBuilder}}
+
+
+Inheritance diagram for Catch\+::Result\+Builder\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=235pt]{classCatch_1_1ResultBuilder__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Catch\+::Result\+Builder\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=235pt]{classCatch_1_1ResultBuilder__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classCatch_1_1ResultBuilder_a8579c3056f64f9324cf1181532828376}\label{classCatch_1_1ResultBuilder_a8579c3056f64f9324cf1181532828376} 
+{\bfseries Result\+Builder} (char const \texorpdfstring{$\ast$}{*}macro\+Name, \mbox{\hyperlink{structCatch_1_1SourceLineInfo}{Source\+Line\+Info}} const \&line\+Info, char const \texorpdfstring{$\ast$}{*}captured\+Expression, Result\+Disposition\+::\+Flags result\+Disposition, char const \texorpdfstring{$\ast$}{*}second\+Arg="{}"{})
+\item 
+\Hypertarget{classCatch_1_1ResultBuilder_a1829db87e701758c4c520988883b25b5}\label{classCatch_1_1ResultBuilder_a1829db87e701758c4c520988883b25b5} 
+{\footnotesize template$<$typename T$>$ }\\\mbox{\hyperlink{classCatch_1_1ExpressionLhs}{Expression\+Lhs}}$<$ T const \& $>$ {\bfseries operator$<$=} (T const \&operand)
+\item 
+\Hypertarget{classCatch_1_1ResultBuilder_a3b87b20bcd1ef9e630880e59eeefba2a}\label{classCatch_1_1ResultBuilder_a3b87b20bcd1ef9e630880e59eeefba2a} 
+\mbox{\hyperlink{classCatch_1_1ExpressionLhs}{Expression\+Lhs}}$<$ bool $>$ {\bfseries operator$<$=} (bool value)
+\item 
+\Hypertarget{classCatch_1_1ResultBuilder_aed849cb1c654940bfbf33c501dac7729}\label{classCatch_1_1ResultBuilder_aed849cb1c654940bfbf33c501dac7729} 
+{\footnotesize template$<$typename T$>$ }\\\mbox{\hyperlink{classCatch_1_1ResultBuilder}{Result\+Builder}} \& {\bfseries operator$<$$<$} (T const \&value)
+\item 
+\Hypertarget{classCatch_1_1ResultBuilder_abd0bf0a0d763e14509cde3ac6fab654b}\label{classCatch_1_1ResultBuilder_abd0bf0a0d763e14509cde3ac6fab654b} 
+\mbox{\hyperlink{classCatch_1_1ResultBuilder}{Result\+Builder}} \& {\bfseries set\+Result\+Type} (Result\+Was\+::\+Of\+Type result)
+\item 
+\Hypertarget{classCatch_1_1ResultBuilder_a192f7ab71681a1c7a6aaf9073e85ce1a}\label{classCatch_1_1ResultBuilder_a192f7ab71681a1c7a6aaf9073e85ce1a} 
+\mbox{\hyperlink{classCatch_1_1ResultBuilder}{Result\+Builder}} \& {\bfseries set\+Result\+Type} (bool result)
+\item 
+\Hypertarget{classCatch_1_1ResultBuilder_a864e03b7300271de7cc44b9864463c5a}\label{classCatch_1_1ResultBuilder_a864e03b7300271de7cc44b9864463c5a} 
+void {\bfseries end\+Expression} (\mbox{\hyperlink{structCatch_1_1DecomposedExpression}{Decomposed\+Expression}} const \&expr)
+\item 
+virtual void \mbox{\hyperlink{classCatch_1_1ResultBuilder_a7d94b15cf04301a8617e7b16158b5d82}{reconstruct\+Expression}} (std\+::string \&dest) const CATCH\+\_\+\+OVERRIDE
+\item 
+\Hypertarget{classCatch_1_1ResultBuilder_a4fc96e7bb8b5f7119a8e79692ec97808}\label{classCatch_1_1ResultBuilder_a4fc96e7bb8b5f7119a8e79692ec97808} 
+\mbox{\hyperlink{classCatch_1_1AssertionResult}{Assertion\+Result}} {\bfseries build} () const
+\item 
+\Hypertarget{classCatch_1_1ResultBuilder_a475d19a04c5d10a5a87cbb85447b59da}\label{classCatch_1_1ResultBuilder_a475d19a04c5d10a5a87cbb85447b59da} 
+\mbox{\hyperlink{classCatch_1_1AssertionResult}{Assertion\+Result}} {\bfseries build} (\mbox{\hyperlink{structCatch_1_1DecomposedExpression}{Decomposed\+Expression}} const \&expr) const
+\item 
+\Hypertarget{classCatch_1_1ResultBuilder_a5bbd2f14a678f3e8d0f791ac6d233d65}\label{classCatch_1_1ResultBuilder_a5bbd2f14a678f3e8d0f791ac6d233d65} 
+void {\bfseries use\+Active\+Exception} (Result\+Disposition\+::\+Flags result\+Disposition=Result\+Disposition\+::\+Normal)
+\item 
+\Hypertarget{classCatch_1_1ResultBuilder_a10e467f7b7a4976e5d148b4d5066e8fd}\label{classCatch_1_1ResultBuilder_a10e467f7b7a4976e5d148b4d5066e8fd} 
+void {\bfseries capture\+Result} (Result\+Was\+::\+Of\+Type result\+Type)
+\item 
+\Hypertarget{classCatch_1_1ResultBuilder_af2ae2343965802eeeb0abbd4ea9d2d36}\label{classCatch_1_1ResultBuilder_af2ae2343965802eeeb0abbd4ea9d2d36} 
+void {\bfseries capture\+Expression} ()
+\item 
+\Hypertarget{classCatch_1_1ResultBuilder_a9ac96f6220c8dd8e4feee725c6228d77}\label{classCatch_1_1ResultBuilder_a9ac96f6220c8dd8e4feee725c6228d77} 
+void {\bfseries capture\+Expected\+Exception} (std\+::string const \&expected\+Message)
+\item 
+\Hypertarget{classCatch_1_1ResultBuilder_a2d6a194258f07f212fef098c0201038a}\label{classCatch_1_1ResultBuilder_a2d6a194258f07f212fef098c0201038a} 
+void {\bfseries capture\+Expected\+Exception} (\mbox{\hyperlink{structCatch_1_1Matchers_1_1Impl_1_1MatcherBase}{Matchers\+::\+Impl\+::\+Matcher\+Base}}$<$ std\+::string $>$ const \&matcher)
+\item 
+\Hypertarget{classCatch_1_1ResultBuilder_ad8bb17e4ac590b75bf8630d8f3502f4e}\label{classCatch_1_1ResultBuilder_ad8bb17e4ac590b75bf8630d8f3502f4e} 
+void {\bfseries handle\+Result} (\mbox{\hyperlink{classCatch_1_1AssertionResult}{Assertion\+Result}} const \&result)
+\item 
+\Hypertarget{classCatch_1_1ResultBuilder_a3085cdc46533d45bed6f652a2ac295c0}\label{classCatch_1_1ResultBuilder_a3085cdc46533d45bed6f652a2ac295c0} 
+void {\bfseries react} ()
+\item 
+\Hypertarget{classCatch_1_1ResultBuilder_a6f2b0dbcc6cc5e0a500ac45f2534e3e7}\label{classCatch_1_1ResultBuilder_a6f2b0dbcc6cc5e0a500ac45f2534e3e7} 
+bool {\bfseries should\+Debug\+Break} () const
+\item 
+\Hypertarget{classCatch_1_1ResultBuilder_a0428fd78ab9e8e6f1aca6855f20fc715}\label{classCatch_1_1ResultBuilder_a0428fd78ab9e8e6f1aca6855f20fc715} 
+bool {\bfseries allow\+Throws} () const
+\item 
+\Hypertarget{classCatch_1_1ResultBuilder_a27425538bec8fee7ac69403c5df6078c}\label{classCatch_1_1ResultBuilder_a27425538bec8fee7ac69403c5df6078c} 
+{\footnotesize template$<$typename ArgT, typename MatcherT$>$ }\\void {\bfseries capture\+Match} (ArgT const \&arg, MatcherT const \&matcher, char const \texorpdfstring{$\ast$}{*}matcher\+String)
+\item 
+\Hypertarget{classCatch_1_1ResultBuilder_a87929808b4ec9b6cb5838edc1f27df17}\label{classCatch_1_1ResultBuilder_a87929808b4ec9b6cb5838edc1f27df17} 
+void {\bfseries set\+Exception\+Guard} ()
+\item 
+\Hypertarget{classCatch_1_1ResultBuilder_a0990e93c1e13f96ffe02fa0f45e8f155}\label{classCatch_1_1ResultBuilder_a0990e93c1e13f96ffe02fa0f45e8f155} 
+void {\bfseries unset\+Exception\+Guard} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{structCatch_1_1DecomposedExpression}{Catch\+::\+Decomposed\+Expression}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool {\bfseries is\+Binary\+Expression} () const
+\item 
+{\footnotesize template$<$typename T$>$ }\\STATIC\+\_\+\+ASSERT\+\_\+\+Expression\+\_\+\+Too\+\_\+\+Complex\+\_\+\+Please\+\_\+\+Rewrite\+\_\+\+As\+\_\+\+Binary\+\_\+\+Comparison \& {\bfseries operator+} (T const \&)
+\item 
+{\footnotesize template$<$typename T$>$ }\\STATIC\+\_\+\+ASSERT\+\_\+\+Expression\+\_\+\+Too\+\_\+\+Complex\+\_\+\+Please\+\_\+\+Rewrite\+\_\+\+As\+\_\+\+Binary\+\_\+\+Comparison \& {\bfseries operator-\/} (T const \&)
+\item 
+{\footnotesize template$<$typename T$>$ }\\STATIC\+\_\+\+ASSERT\+\_\+\+Expression\+\_\+\+Too\+\_\+\+Complex\+\_\+\+Please\+\_\+\+Rewrite\+\_\+\+As\+\_\+\+Binary\+\_\+\+Comparison \& {\bfseries operator\texorpdfstring{$\ast$}{*}} (T const \&)
+\item 
+{\footnotesize template$<$typename T$>$ }\\STATIC\+\_\+\+ASSERT\+\_\+\+Expression\+\_\+\+Too\+\_\+\+Complex\+\_\+\+Please\+\_\+\+Rewrite\+\_\+\+As\+\_\+\+Binary\+\_\+\+Comparison \& {\bfseries operator/} (T const \&)
+\item 
+{\footnotesize template$<$typename T$>$ }\\STATIC\+\_\+\+ASSERT\+\_\+\+Expression\+\_\+\+Too\+\_\+\+Complex\+\_\+\+Please\+\_\+\+Rewrite\+\_\+\+As\+\_\+\+Binary\+\_\+\+Comparison \& {\bfseries operator\%} (T const \&)
+\item 
+{\footnotesize template$<$typename T$>$ }\\STATIC\+\_\+\+ASSERT\+\_\+\+Expression\+\_\+\+Too\+\_\+\+Complex\+\_\+\+Please\+\_\+\+Rewrite\+\_\+\+As\+\_\+\+Binary\+\_\+\+Comparison \& {\bfseries operator\&\&} (T const \&)
+\item 
+{\footnotesize template$<$typename T$>$ }\\STATIC\+\_\+\+ASSERT\+\_\+\+Expression\+\_\+\+Too\+\_\+\+Complex\+\_\+\+Please\+\_\+\+Rewrite\+\_\+\+As\+\_\+\+Binary\+\_\+\+Comparison \& {\bfseries operator\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}} (T const \&)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classCatch_1_1ResultBuilder_a7d94b15cf04301a8617e7b16158b5d82}\index{Catch::ResultBuilder@{Catch::ResultBuilder}!reconstructExpression@{reconstructExpression}}
+\index{reconstructExpression@{reconstructExpression}!Catch::ResultBuilder@{Catch::ResultBuilder}}
+\doxysubsubsection{\texorpdfstring{reconstructExpression()}{reconstructExpression()}}
+{\footnotesize\ttfamily \label{classCatch_1_1ResultBuilder_a7d94b15cf04301a8617e7b16158b5d82} 
+virtual void Catch\+::\+Result\+Builder\+::reconstruct\+Expression (\begin{DoxyParamCaption}\item[{std\+::string \&}]{dest}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{structCatch_1_1DecomposedExpression}{Catch\+::\+Decomposed\+Expression}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/extlibs/headers/catch.\+hpp\end{DoxyCompactItemize}

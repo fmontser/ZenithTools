@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['getstatus_0',['GetStatus',['../classzenith_1_1Timer.html#a872c7f976999336c5ca0fc6af3295d35',1,'zenith::Timer']]]
+  ['invalidmodeexception_0',['InvalidModeException',['../structzenith_1_1InvalidModeException.html',1,'zenith']]]
 ];
