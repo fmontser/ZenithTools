@@ -35,6 +35,11 @@ void PomodoroSession::StartActualRound() {
 	}
 }
 
+void PomodoroSession::StartRestingPeriod() {
+	Round& round = _roundQueue.front();
+	if (round.mode == RoundMode::RESTING) 
+		round.restTimer.Start();round.workTimer.Start();
+}
 
 void zenith::PomodoroSession::SetNextRound() {
 	Round& round = _roundQueue.front();
@@ -56,10 +61,8 @@ void PomodoroSession::UpdateRound() {
 			break;
 		case RoundMode::WORKING:
 			round.progress = round.workTimer.GetStatus().progress;
-			if (round.workTimer.GetStatus().mode == Timer::Mode::Ended) {
+			if (round.workTimer.GetStatus().mode == Timer::Mode::Ended)
 				round.mode = RoundMode::RESTING;
-				round.restTimer.Start();
-			}
 			break;
 		case RoundMode::RESTING:
 			round.progress = round.restTimer.GetStatus().progress;

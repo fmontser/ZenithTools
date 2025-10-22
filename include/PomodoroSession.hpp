@@ -34,12 +34,13 @@ namespace zenith {
 
 			const Status& GetStatus();
 			void StartActualRound();
-			void SetNextRound();
+			void StartRestingPeriod();
 			
 			private:
 			Status _status;
 			std::queue<Round> _roundQueue;
 			
+			void SetNextRound();
 			void UpdateRound();
 			bool IsHalfSessionRound(uint rounds, uint index);
 
