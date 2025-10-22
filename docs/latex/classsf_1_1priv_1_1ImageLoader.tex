@@ -1,0 +1,188 @@
+\doxysection{sf\+::priv\+::Image\+Loader Class Reference}
+\hypertarget{classsf_1_1priv_1_1ImageLoader}{}\label{classsf_1_1priv_1_1ImageLoader}\index{sf::priv::ImageLoader@{sf::priv::ImageLoader}}
+
+
+Load/save image files.  
+
+
+
+
+{\ttfamily \#include $<$Image\+Loader.\+hpp$>$}
+
+
+
+Inheritance diagram for sf\+::priv\+::Image\+Loader\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=188pt]{classsf_1_1priv_1_1ImageLoader__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for sf\+::priv\+::Image\+Loader\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=188pt]{classsf_1_1priv_1_1ImageLoader__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classsf_1_1priv_1_1ImageLoader_a89932eef8900909459a5accf5717ee40}{load\+Image\+From\+File}} (const std\+::string \&filename, std\+::vector$<$ Uint8 $>$ \&pixels, \mbox{\hyperlink{classsf_1_1Vector2}{Vector2u}} \&size)
+\begin{DoxyCompactList}\small\item\em Load an image from a file on disk. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classsf_1_1priv_1_1ImageLoader_ac9bead2734cda5aed3c442873dc1d48d}{load\+Image\+From\+Memory}} (const void \texorpdfstring{$\ast$}{*}data, std\+::size\+\_\+t data\+Size, std\+::vector$<$ Uint8 $>$ \&pixels, \mbox{\hyperlink{classsf_1_1Vector2}{Vector2u}} \&size)
+\begin{DoxyCompactList}\small\item\em Load an image from a file in memory. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classsf_1_1priv_1_1ImageLoader_a56edaf446d5e450782f97bcde5e85d53}{load\+Image\+From\+Stream}} (\mbox{\hyperlink{classsf_1_1InputStream}{Input\+Stream}} \&stream, std\+::vector$<$ Uint8 $>$ \&pixels, \mbox{\hyperlink{classsf_1_1Vector2}{Vector2u}} \&size)
+\begin{DoxyCompactList}\small\item\em Load an image from a custom stream. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classsf_1_1priv_1_1ImageLoader_a60d1030e999eec94d5893c684f73a586}{save\+Image\+To\+File}} (const std\+::string \&filename, const std\+::vector$<$ Uint8 $>$ \&pixels, const \mbox{\hyperlink{classsf_1_1Vector2}{Vector2u}} \&size)
+\begin{DoxyCompactList}\small\item\em Save an array of pixels as an image file. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classsf_1_1priv_1_1ImageLoader_a655c46d2c98d6217ca91582b87d4af91}{save\+Image\+To\+Memory}} (const std\+::string \&format, std\+::vector$<$ sf\+::\+Uint8 $>$ \&output, const std\+::vector$<$ Uint8 $>$ \&pixels, const \mbox{\hyperlink{classsf_1_1Vector2}{Vector2u}} \&size)
+\begin{DoxyCompactList}\small\item\em Save an array of pixels as an encoded image buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classsf_1_1priv_1_1ImageLoader}{Image\+Loader}} \& \mbox{\hyperlink{classsf_1_1priv_1_1ImageLoader_ad04ce538a1318b130851f7d30ca01ae4}{get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Get the unique instance of the class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Load/save image files. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsf_1_1priv_1_1ImageLoader_ad04ce538a1318b130851f7d30ca01ae4}\index{sf::priv::ImageLoader@{sf::priv::ImageLoader}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!sf::priv::ImageLoader@{sf::priv::ImageLoader}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1ImageLoader_ad04ce538a1318b130851f7d30ca01ae4} 
+\mbox{\hyperlink{classsf_1_1priv_1_1ImageLoader}{Image\+Loader}} \& sf\+::priv\+::\+Image\+Loader\+::get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the unique instance of the class. 
+
+\begin{DoxyReturn}{Returns}
+Reference to the \doxylink{classsf_1_1priv_1_1ImageLoader}{Image\+Loader} instance 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1priv_1_1ImageLoader_a89932eef8900909459a5accf5717ee40}\index{sf::priv::ImageLoader@{sf::priv::ImageLoader}!loadImageFromFile@{loadImageFromFile}}
+\index{loadImageFromFile@{loadImageFromFile}!sf::priv::ImageLoader@{sf::priv::ImageLoader}}
+\doxysubsubsection{\texorpdfstring{loadImageFromFile()}{loadImageFromFile()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1ImageLoader_a89932eef8900909459a5accf5717ee40} 
+bool sf\+::priv\+::\+Image\+Loader\+::load\+Image\+From\+File (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{, }\item[{std\+::vector$<$ Uint8 $>$ \&}]{pixels}{, }\item[{\mbox{\hyperlink{classsf_1_1Vector2}{Vector2u}} \&}]{size}{}\end{DoxyParamCaption})}
+
+
+
+Load an image from a file on disk. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Path of image file to load \\
+\hline
+{\em pixels} & Array of pixels to fill with loaded image \\
+\hline
+{\em size} & Size of loaded image, in pixels\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if loading was successful 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1priv_1_1ImageLoader_ac9bead2734cda5aed3c442873dc1d48d}\index{sf::priv::ImageLoader@{sf::priv::ImageLoader}!loadImageFromMemory@{loadImageFromMemory}}
+\index{loadImageFromMemory@{loadImageFromMemory}!sf::priv::ImageLoader@{sf::priv::ImageLoader}}
+\doxysubsubsection{\texorpdfstring{loadImageFromMemory()}{loadImageFromMemory()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1ImageLoader_ac9bead2734cda5aed3c442873dc1d48d} 
+bool sf\+::priv\+::\+Image\+Loader\+::load\+Image\+From\+Memory (\begin{DoxyParamCaption}\item[{const void \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{std\+::size\+\_\+t}]{data\+Size}{, }\item[{std\+::vector$<$ Uint8 $>$ \&}]{pixels}{, }\item[{\mbox{\hyperlink{classsf_1_1Vector2}{Vector2u}} \&}]{size}{}\end{DoxyParamCaption})}
+
+
+
+Load an image from a file in memory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Pointer to the file data in memory \\
+\hline
+{\em data\+Size} & Size of the data to load, in bytes \\
+\hline
+{\em pixels} & Array of pixels to fill with loaded image \\
+\hline
+{\em size} & Size of loaded image, in pixels\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if loading was successful 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1priv_1_1ImageLoader_a56edaf446d5e450782f97bcde5e85d53}\index{sf::priv::ImageLoader@{sf::priv::ImageLoader}!loadImageFromStream@{loadImageFromStream}}
+\index{loadImageFromStream@{loadImageFromStream}!sf::priv::ImageLoader@{sf::priv::ImageLoader}}
+\doxysubsubsection{\texorpdfstring{loadImageFromStream()}{loadImageFromStream()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1ImageLoader_a56edaf446d5e450782f97bcde5e85d53} 
+bool sf\+::priv\+::\+Image\+Loader\+::load\+Image\+From\+Stream (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classsf_1_1InputStream}{Input\+Stream}} \&}]{stream}{, }\item[{std\+::vector$<$ Uint8 $>$ \&}]{pixels}{, }\item[{\mbox{\hyperlink{classsf_1_1Vector2}{Vector2u}} \&}]{size}{}\end{DoxyParamCaption})}
+
+
+
+Load an image from a custom stream. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & Source stream to read from \\
+\hline
+{\em pixels} & Array of pixels to fill with loaded image \\
+\hline
+{\em size} & Size of loaded image, in pixels\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if loading was successful 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1priv_1_1ImageLoader_a60d1030e999eec94d5893c684f73a586}\index{sf::priv::ImageLoader@{sf::priv::ImageLoader}!saveImageToFile@{saveImageToFile}}
+\index{saveImageToFile@{saveImageToFile}!sf::priv::ImageLoader@{sf::priv::ImageLoader}}
+\doxysubsubsection{\texorpdfstring{saveImageToFile()}{saveImageToFile()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1ImageLoader_a60d1030e999eec94d5893c684f73a586} 
+bool sf\+::priv\+::\+Image\+Loader\+::save\+Image\+To\+File (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{, }\item[{const std\+::vector$<$ Uint8 $>$ \&}]{pixels}{, }\item[{const \mbox{\hyperlink{classsf_1_1Vector2}{Vector2u}} \&}]{size}{}\end{DoxyParamCaption})}
+
+
+
+Save an array of pixels as an image file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Path of image file to save \\
+\hline
+{\em pixels} & Array of pixels to save to image \\
+\hline
+{\em size} & Size of image to save, in pixels\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if saving was successful 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1priv_1_1ImageLoader_a655c46d2c98d6217ca91582b87d4af91}\index{sf::priv::ImageLoader@{sf::priv::ImageLoader}!saveImageToMemory@{saveImageToMemory}}
+\index{saveImageToMemory@{saveImageToMemory}!sf::priv::ImageLoader@{sf::priv::ImageLoader}}
+\doxysubsubsection{\texorpdfstring{saveImageToMemory()}{saveImageToMemory()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1ImageLoader_a655c46d2c98d6217ca91582b87d4af91} 
+bool sf\+::priv\+::\+Image\+Loader\+::save\+Image\+To\+Memory (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{format}{, }\item[{std\+::vector$<$ sf\+::\+Uint8 $>$ \&}]{output}{, }\item[{const std\+::vector$<$ Uint8 $>$ \&}]{pixels}{, }\item[{const \mbox{\hyperlink{classsf_1_1Vector2}{Vector2u}} \&}]{size}{}\end{DoxyParamCaption})}
+
+
+
+Save an array of pixels as an encoded image buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em format} & Must be "{}bmp"{}, "{}png"{}, "{}tga"{} or "{}jpg"{}/"{}jpeg"{}. \\
+\hline
+{\em output} & Buffer to fill with encoded data \\
+\hline
+{\em pixels} & Array of pixels to save to image \\
+\hline
+{\em size} & Size of image to save, in pixels\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if saving was successful 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+Graphics/Image\+Loader.\+hpp\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+Graphics/Image\+Loader.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,78 @@
+\doxysection{Sound\+File\+Writer\+Ogg.\+hpp}
+\hypertarget{SoundFileWriterOgg_8hpp_source}{}\label{SoundFileWriterOgg_8hpp_source}\index{build/\_deps/sfml-\/src/src/SFML/Audio/SoundFileWriterOgg.hpp@{build/\_deps/sfml-\/src/src/SFML/Audio/SoundFileWriterOgg.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ SFML\_SOUNDFILEWRITEROGG\_HPP}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ SFML\_SOUNDFILEWRITEROGG\_HPP}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <SFML/Audio/SoundFileWriter.hpp>}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{vorbisenc_8h}{vorbis/vorbisenc.h}}>}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{00037\ \{}
+\DoxyCodeLine{00038\ \textcolor{keyword}{namespace\ }priv}
+\DoxyCodeLine{00039\ \{}
+\DoxyCodeLine{00044\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1priv_1_1SoundFileWriterOgg_ab410a4d0a617717571e343ce60e279ce}{SoundFileWriterOgg}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classsf_1_1SoundFileWriter}{SoundFileWriter}}}
+\DoxyCodeLine{00045\ \{}
+\DoxyCodeLine{00046\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1SoundFileWriterOgg_a7d4fee03e56749daf43959f93a18a721}{check}}(\textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1SoundFileWriterOgg_ab410a4d0a617717571e343ce60e279ce}{SoundFileWriterOgg}}();}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1SoundFileWriterOgg_aa48c82f7c8c6dae41c47f90da64e3f03}{\string~SoundFileWriterOgg}}();}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1SoundFileWriterOgg_acc278a42330d792ac8ad078981ac61b6}{open}}(\textcolor{keyword}{const}\ std::string\&\ filename,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ sampleRate,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ channelCount);}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1SoundFileWriterOgg_a307e4e42e46072fb04e18391a82971bb}{write}}(\textcolor{keyword}{const}\ Int16*\ samples,\ Uint64\ count);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{void}\ flushBlocks();}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{void}\ close();}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{comment}{//\ Member\ data}}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \ \ \ \ m\_channelCount;\ \textcolor{comment}{//\ channel\ count\ of\ the\ sound\ being\ written}}
+\DoxyCodeLine{00111\ \ \ \ \ std::ofstream\ \ \ \ m\_file;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ output\ file}}
+\DoxyCodeLine{00112\ \ \ \ \ \mbox{\hyperlink{structogg__stream__state}{ogg\_stream\_state}}\ m\_ogg;\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ ogg\ stream}}
+\DoxyCodeLine{00113\ \ \ \ \ \mbox{\hyperlink{structvorbis__info}{vorbis\_info}}\ \ \ \ \ \ m\_vorbis;\ \ \ \ \ \ \ \textcolor{comment}{//\ vorbis\ handle}}
+\DoxyCodeLine{00114\ \ \ \ \ \mbox{\hyperlink{structvorbis__dsp__state}{vorbis\_dsp\_state}}\ m\_state;\ \ \ \ \ \ \ \ \textcolor{comment}{//\ current\ encoding\ state}}
+\DoxyCodeLine{00115\ \};}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \}\ \textcolor{comment}{//\ namespace\ priv}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SFML\_SOUNDFILEWRITEROGG\_HPP}}
+
+\end{DoxyCode}

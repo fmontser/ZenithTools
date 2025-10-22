@@ -1,0 +1,122 @@
+\doxysection{HIDInput\+Manager.\+hpp}
+\hypertarget{HIDInputManager_8hpp_source}{}\label{HIDInputManager_8hpp_source}\index{build/\_deps/sfml-\/src/src/SFML/Window/OSX/HIDInputManager.hpp@{build/\_deps/sfml-\/src/src/SFML/Window/OSX/HIDInputManager.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Marco\ Antognini\ (antognini.marco@gmail.com),}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{00023\ \textcolor{comment}{//}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#ifndef\ SFML\_HIDINPUTMANAGER\_HPP}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ SFML\_HIDINPUTMANAGER\_HPP}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <SFML/Window/JoystickImpl.hpp>}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ <SFML/Window/Keyboard.hpp>}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ <SFML/System/NonCopyable.hpp>}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#include\ <Carbon/Carbon.h>}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#include\ <IOKit/hid/IOHIDDevice.h>}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#include\ <IOKit/hid/IOHIDManager.h>}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{00041\ \{}
+\DoxyCodeLine{00042\ \textcolor{keyword}{namespace\ }priv}
+\DoxyCodeLine{00043\ \{}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{typedef}\ std::vector<IOHIDElementRef>\ IOHIDElements;}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00054\ \textcolor{keyword}{class\ }HIDInputManager\ :\ \mbox{\hyperlink{classsf_1_1NonCopyable_a2110add170580fdb946f887719da6860}{NonCopyable}}}
+\DoxyCodeLine{00055\ \{}
+\DoxyCodeLine{00056\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{static}\ HIDInputManager\&\ \mbox{\hyperlink{classsf_1_1priv_1_1HIDInputManager_a1fa701041e916a3dae97e45d85ee37b5}{getInstance}}();}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{long}\ \mbox{\hyperlink{classsf_1_1priv_1_1HIDInputManager_a8f2bf16875b43cc8155502fb50c62eb9}{getLocationID}}(IOHIDDeviceRef\ device);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keyword}{static}\ CFDictionaryRef\ \mbox{\hyperlink{classsf_1_1priv_1_1HIDInputManager_ac732d0f7c0d767b23b69bf34942e2993}{copyDevicesMask}}(UInt32\ page,\ UInt32\ usage);}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classsf_1_1Keyboard_acb4cacd7cc5802dec45724cf3314a142}{Keyboard::Key}}\ \mbox{\hyperlink{classsf_1_1priv_1_1HIDInputManager_a7b1243b400de5c7670818755cfd3fdaa}{localizedKey}}(UniChar\ ch);}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keyword}{static}\ UniChar\ \mbox{\hyperlink{classsf_1_1priv_1_1HIDInputManager_a930c847add8cac68eac89b46c146cb5a}{toUnicode}}(\mbox{\hyperlink{classsf_1_1Keyboard_acb4cacd7cc5802dec45724cf3314a142}{Keyboard::Key}}\ key);}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keyword}{static}\ Keyboard::Scancode\ \mbox{\hyperlink{classsf_1_1priv_1_1HIDInputManager_afe4a2bc0118e860f6ef57cd8d7a701f5}{nonLocalizedKey}}(UniChar\ virtualKeycode);}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1HIDInputManager_a17fc2ce10d0a1a24948b941460e5b94e}{isKeyPressed}}(\mbox{\hyperlink{classsf_1_1Keyboard_acb4cacd7cc5802dec45724cf3314a142}{Keyboard::Key}}\ key);}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1HIDInputManager_a17fc2ce10d0a1a24948b941460e5b94e}{isKeyPressed}}(Keyboard::Scancode\ code);}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00141\ \ \ \ \ \mbox{\hyperlink{classsf_1_1Keyboard_acb4cacd7cc5802dec45724cf3314a142}{Keyboard::Key}}\ \mbox{\hyperlink{classsf_1_1priv_1_1HIDInputManager_a560425b2ec37c943cd91e59d8510df59}{localize}}(Keyboard::Scancode\ code);}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00147\ \ \ \ \ Keyboard::Scancode\ \mbox{\hyperlink{classsf_1_1priv_1_1HIDInputManager_ad1ccfcd06cabc35efd4072ebef1cd91f}{delocalize}}(\mbox{\hyperlink{classsf_1_1Keyboard_acb4cacd7cc5802dec45724cf3314a142}{Keyboard::Key}}\ key);}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00153\ \ \ \ \ \mbox{\hyperlink{classsf_1_1String}{String}}\ \mbox{\hyperlink{classsf_1_1priv_1_1HIDInputManager_a4617eb342c62a0ae5be04d0d1d4e15e5}{getDescription}}(Keyboard::Scancode\ code);}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00161\ \ \ \ \ HIDInputManager();}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00167\ \ \ \ \ \string~HIDInputManager();}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keywordtype}{void}\ initializeKeyboard();}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00194\ \ \ \ \ \textcolor{keywordtype}{void}\ loadKeyboard(IOHIDDeviceRef\ keyboard);}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00206\ \ \ \ \ \textcolor{keywordtype}{void}\ loadKey(IOHIDElementRef\ key);}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{keywordtype}{void}\ buildMappings();}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00219\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ keyboardChanged(CFNotificationCenterRef\ \textcolor{comment}{/*\ center\ */},\ \textcolor{keywordtype}{void}*\ observer,\ CFStringRef\ \textcolor{comment}{/*\ name\ */},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ \textcolor{comment}{/*\ object\ */},\ CFDictionaryRef\ \textcolor{comment}{/*\ userInfo\ */});}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{keywordtype}{void}\ freeUp();}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00241\ \ \ \ \ CFSetRef\ copyDevices(UInt32\ page,\ UInt32\ usage);}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00253\ \ \ \ \ \textcolor{keywordtype}{bool}\ isPressed(IOHIDElements\&\ elements);}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00263\ \ \ \ \ \textcolor{keyword}{static}\ Keyboard::Scancode\ usageToScancode(UInt32\ usage);}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00269\ \ \ \ \ \textcolor{keyword}{static}\ UInt8\ scanToVirtualCode(Keyboard::Scancode\ code);}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00276\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classsf_1_1Keyboard_acb4cacd7cc5802dec45724cf3314a142}{Keyboard::Key}}\ localizedKeyFallback(Keyboard::Scancode\ code);}
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00278\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00279\ }
+\DoxyCodeLine{00281\ \ \ \ \ \textcolor{comment}{//\ Member\ data}}
+\DoxyCodeLine{00283\ \ \ \ \ IOHIDManagerRef\ \ \ \ m\_manager;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00284\ \ \ \ \ IOHIDElements\ \ \ \ \ \ m\_keys[\mbox{\hyperlink{structsf_1_1Keyboard_1_1Scan_aa42fbf6954d6f81f7606e566c7abe875a28c5ad8524e1e653b43440e660d441d0}{Keyboard::Scan::ScancodeCount}}];\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00285\ \ \ \ \ Keyboard::Scancode\ m\_keyToScancodeMapping[\mbox{\hyperlink{classsf_1_1Keyboard_acb4cacd7cc5802dec45724cf3314a142a93e6ffa0320fe9b2f29aec14a58be36b}{Keyboard::KeyCount}}];\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00286\ \ \ \ \ \mbox{\hyperlink{classsf_1_1Keyboard_acb4cacd7cc5802dec45724cf3314a142}{Keyboard::Key}}\ \ \ \ \ \ m\_scancodeToKeyMapping[\mbox{\hyperlink{structsf_1_1Keyboard_1_1Scan_aa42fbf6954d6f81f7606e566c7abe875a28c5ad8524e1e653b43440e660d441d0}{Keyboard::Scan::ScancodeCount}}];\ }
+\DoxyCodeLine{00287\ }
+\DoxyCodeLine{00299\ \};}
+\DoxyCodeLine{00300\ }
+\DoxyCodeLine{00301\ \}\ \textcolor{comment}{//\ namespace\ priv}}
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00303\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00305\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

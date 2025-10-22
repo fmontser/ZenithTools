@@ -1,0 +1,51 @@
+\doxysection{sf\+::Shader\+::Uniform\+Binder Struct Reference}
+\hypertarget{structsf_1_1Shader_1_1UniformBinder}{}\label{structsf_1_1Shader_1_1UniformBinder}\index{sf::Shader::UniformBinder@{sf::Shader::UniformBinder}}
+
+
+Inheritance diagram for sf\+::Shader\+::Uniform\+Binder\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=209pt]{structsf_1_1Shader_1_1UniformBinder__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for sf\+::Shader\+::Uniform\+Binder\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=209pt]{structsf_1_1Shader_1_1UniformBinder__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{structsf_1_1Shader_1_1UniformBinder_aea83c2f8cc1cd762ba22335aab55955e}\label{structsf_1_1Shader_1_1UniformBinder_aea83c2f8cc1cd762ba22335aab55955e} 
+{\bfseries Uniform\+Binder} (\mbox{\hyperlink{classsf_1_1Shader}{Shader}} \&shader, const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Constructor\+: set up state before uniform is set. \end{DoxyCompactList}\item 
+\Hypertarget{structsf_1_1Shader_1_1UniformBinder_a9ecf64ed9f8b4da8912252af83edcc90}\label{structsf_1_1Shader_1_1UniformBinder_a9ecf64ed9f8b4da8912252af83edcc90} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Uniform\+Binder} ()
+\begin{DoxyCompactList}\small\item\em Destructor\+: restore state after uniform is set. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{structsf_1_1Shader_1_1UniformBinder_ad79d103ca5d3b4c3e9bcd4822b1809c4}\label{structsf_1_1Shader_1_1UniformBinder_ad79d103ca5d3b4c3e9bcd4822b1809c4} 
+\mbox{\hyperlink{classsf_1_1GlResource_1_1TransientContextLock}{Transient\+Context\+Lock}} {\bfseries lock}
+\begin{DoxyCompactList}\small\item\em \doxylink{classsf_1_1Lock}{Lock} to keep context active while uniform is bound. \end{DoxyCompactList}\item 
+\Hypertarget{structsf_1_1Shader_1_1UniformBinder_a81f2e3635edec67bd8297f283864c4b6}\label{structsf_1_1Shader_1_1UniformBinder_a81f2e3635edec67bd8297f283864c4b6} 
+GLEXT\+\_\+\+GLhandle {\bfseries saved\+Program}
+\begin{DoxyCompactList}\small\item\em Handle to the previously active program object. \end{DoxyCompactList}\item 
+\Hypertarget{structsf_1_1Shader_1_1UniformBinder_a3628ba9f46c95293ff5dadcafc56a2f9}\label{structsf_1_1Shader_1_1UniformBinder_a3628ba9f46c95293ff5dadcafc56a2f9} 
+GLEXT\+\_\+\+GLhandle {\bfseries current\+Program}
+\begin{DoxyCompactList}\small\item\em Handle to the program object of the modified \doxylink{classsf_1_1Shader}{sf\+::\+Shader} instance. \end{DoxyCompactList}\item 
+\Hypertarget{structsf_1_1Shader_1_1UniformBinder_a3d95c500b594ea252276e3ee7b7a0d3e}\label{structsf_1_1Shader_1_1UniformBinder_a3d95c500b594ea252276e3ee7b7a0d3e} 
+GLint {\bfseries location}
+\begin{DoxyCompactList}\small\item\em Uniform location, used by the surrounding \doxylink{classsf_1_1Shader}{sf\+::\+Shader} code. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+Graphics/Shader.\+cpp\end{DoxyCompactItemize}

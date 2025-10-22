@@ -1,0 +1,119 @@
+\doxysection{Joystick\+Impl.\+hpp}
+\hypertarget{Win32_2JoystickImpl_8hpp_source}{}\label{Win32_2JoystickImpl_8hpp_source}\index{build/\_deps/sfml-\/src/src/SFML/Window/Win32/JoystickImpl.hpp@{build/\_deps/sfml-\/src/src/SFML/Window/Win32/JoystickImpl.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ SFML\_JOYSTICKIMPLWIN32\_HPP}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ SFML\_JOYSTICKIMPLWIN32\_HPP}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#ifdef\ \_WIN32\_WINDOWS}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\ \ \ \ \#undef\ \_WIN32\_WINDOWS}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#ifdef\ \_WIN32\_WINNT}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\ \ \ \ \#undef\ \_WIN32\_WINNT}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ \_WIN32\_WINDOWS\ \ \ \ \ \ 0x0501}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ \_WIN32\_WINNT\ \ \ \ \ \ \ \ 0x0501}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ DIRECTINPUT\_VERSION\ 0x0800}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#include\ <SFML/Window/Joystick.hpp>}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#include\ <SFML/Window/JoystickImpl.hpp>}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#include\ <windows.h>}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#include\ <mmsystem.h>}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#include\ <dinput.h>}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{00048\ \{}
+\DoxyCodeLine{00049\ \textcolor{keyword}{namespace\ }priv}
+\DoxyCodeLine{00050\ \{}
+\DoxyCodeLine{00055\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1priv_1_1JoystickImpl}{JoystickImpl}}}
+\DoxyCodeLine{00056\ \{}
+\DoxyCodeLine{00057\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1JoystickImpl_a5c431845acc18564f6ca43abf2892c98}{initialize}}();}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1JoystickImpl_aa494706a20d8dc372f9ace3a9997eb20}{cleanup}}();}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1JoystickImpl_a8dbefc9636277a127923e22a30df9339}{isConnected}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ index);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1JoystickImpl_a250c25c37809b5fe074aaa911a99eac8}{setLazyUpdates}}(\textcolor{keywordtype}{bool}\ status);}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1JoystickImpl_a4a4bd8f9ac71c43faf1af79faba3d2b2}{updateConnections}}();}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1JoystickImpl_a285c91388783ee842cd2b63e97e7b511}{open}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ index);}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1JoystickImpl_a2c3954572cd37b41ad3d2858163473c1}{close}}();}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00117\ \ \ \ \ \mbox{\hyperlink{structsf_1_1priv_1_1JoystickCaps}{JoystickCaps}}\ \mbox{\hyperlink{classsf_1_1priv_1_1JoystickImpl_acc7ccc3fcd5e8722f42bda354f960353}{getCapabilities}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00125\ \ \ \ \ \mbox{\hyperlink{structsf_1_1Joystick_1_1Identification}{Joystick::Identification}}\ \mbox{\hyperlink{classsf_1_1priv_1_1JoystickImpl_a1c169b63a61da578ed28b8314e17357d}{getIdentification}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00133\ \ \ \ \ \mbox{\hyperlink{structsf_1_1priv_1_1JoystickState}{JoystickState}}\ \mbox{\hyperlink{classsf_1_1priv_1_1JoystickImpl_af0b8d7b58072b78ee1f477e4c9b93840}{update}}();}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1JoystickImpl_a38e9fea02e720721e9f8c0b4e1170c2d}{initializeDInput}}();}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1JoystickImpl_a16aa4e374bda269732c62ee15fa42db6}{cleanupDInput}}();}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1JoystickImpl_a0f42492fd7690976bcb3f44fa77b907a}{isConnectedDInput}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ index);}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1JoystickImpl_a55c71c73b1dee212d00d36dc66edf519}{updateConnectionsDInput}}();}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1JoystickImpl_a072d46492e9d438f121d68e83e22d0ad}{openDInput}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ index);}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1JoystickImpl_ae28a837c488a4174d254a68e63428676}{closeDInput}}();}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00185\ \ \ \ \ \mbox{\hyperlink{structsf_1_1priv_1_1JoystickCaps}{JoystickCaps}}\ \mbox{\hyperlink{classsf_1_1priv_1_1JoystickImpl_a1835104731e8bff42bf6383df52bd2ef}{getCapabilitiesDInput}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00193\ \ \ \ \ \mbox{\hyperlink{structsf_1_1priv_1_1JoystickState}{JoystickState}}\ \mbox{\hyperlink{classsf_1_1priv_1_1JoystickImpl_a9ad7079fd5493f50eb01d81f6bfdc858}{updateDInputBuffered}}();}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00201\ \ \ \ \ \mbox{\hyperlink{structsf_1_1priv_1_1JoystickState}{JoystickState}}\ \mbox{\hyperlink{classsf_1_1priv_1_1JoystickImpl_acbd9b9721037f8bc953e4514ca1b041d}{updateDInputPolled}}();}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00214\ \ \ \ \ \textcolor{keyword}{static}\ BOOL\ CALLBACK\ deviceEnumerationCallback(\textcolor{keyword}{const}\ DIDEVICEINSTANCE*\ deviceInstance,\ \textcolor{keywordtype}{void}*\ userData);}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{keyword}{static}\ BOOL\ CALLBACK\ deviceObjectEnumerationCallback(\textcolor{keyword}{const}\ DIDEVICEOBJECTINSTANCE*\ deviceObjectInstance,\ \textcolor{keywordtype}{void}*\ userData);}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00228\ \ \ \ \ \textcolor{comment}{//\ Member\ data}}
+\DoxyCodeLine{00230\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ m\_index;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00231\ \ \ \ \ JOYCAPS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_caps;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00232\ \ \ \ \ IDirectInputDevice8W*\ \ \ \ m\_device;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00233\ \ \ \ \ \mbox{\hyperlink{structDIDEVCAPS}{DIDEVCAPS}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_deviceCaps;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00234\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_axes[\mbox{\hyperlink{classsf_1_1Joystick_abb53a6ffd9b2c99adc69573d0282c44eaccf3e487c9f6ee2f384351323626a42c}{Joystick::AxisCount}}];\ \ \ \ \ \ }
+\DoxyCodeLine{00235\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_buttons[\mbox{\hyperlink{classsf_1_1Joystick_abb53a6ffd9b2c99adc69573d0282c44ea2f1b8a0a59f2c12a4775c0e1e69e1816}{Joystick::ButtonCount}}];\ }
+\DoxyCodeLine{00236\ \ \ \ \ \mbox{\hyperlink{structsf_1_1Joystick_1_1Identification}{Joystick::Identification}}\ m\_identification;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00237\ \ \ \ \ \mbox{\hyperlink{structsf_1_1priv_1_1JoystickState}{JoystickState}}\ \ \ \ \ \ \ \ \ \ \ \ m\_state;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_buffered;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00239\ \};}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \}\ \textcolor{comment}{//\ namespace\ priv}}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00243\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00245\ }
+\DoxyCodeLine{00246\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SFML\_JOYSTICKIMPLWIN32\_HPP}}
+
+\end{DoxyCode}

@@ -1,0 +1,88 @@
+\doxysection{ovectl\+\_\+ratemanage\+\_\+arg Struct Reference}
+\hypertarget{structovectl__ratemanage__arg}{}\label{structovectl__ratemanage__arg}\index{ovectl\_ratemanage\_arg@{ovectl\_ratemanage\_arg}}
+
+
+{\ttfamily \#include $<$vorbisenc.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{structovectl__ratemanage__arg_ad792d1b89a5d07f0f0e90509df4bc606}{management\+\_\+active}}
+\item 
+long \mbox{\hyperlink{structovectl__ratemanage__arg_a449d3ea8d0645742af859dd17b41fbfb}{bitrate\+\_\+hard\+\_\+min}}
+\item 
+long \mbox{\hyperlink{structovectl__ratemanage__arg_a3620024b5a9e4b4df6d20deb6c125c92}{bitrate\+\_\+hard\+\_\+max}}
+\item 
+double \mbox{\hyperlink{structovectl__ratemanage__arg_a68caf36fc02a52199705fa331d118446}{bitrate\+\_\+hard\+\_\+window}}
+\item 
+long \mbox{\hyperlink{structovectl__ratemanage__arg_ac241670a3a608f114acaf8f26fe4e913}{bitrate\+\_\+av\+\_\+lo}}
+\item 
+long \mbox{\hyperlink{structovectl__ratemanage__arg_ac1e81b5a2e705022ca895f494718ded7}{bitrate\+\_\+av\+\_\+hi}}
+\item 
+double \mbox{\hyperlink{structovectl__ratemanage__arg_a1232e7296ae5e52f52039bed2560c505}{bitrate\+\_\+av\+\_\+window}}
+\item 
+double \mbox{\hyperlink{structovectl__ratemanage__arg_aad317d50fb4d072e2c55f0a60d1a83b2}{bitrate\+\_\+av\+\_\+window\+\_\+center}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{deprecated__deprecated000001}{Deprecated}}]This is a deprecated interface. Please use \doxylink{vorbisenc_8h_a5f398a378e20b8ce5e3341a582e773bd}{vorbis\+\_\+encode\+\_\+ctl()} with the \doxylink{structovectl__ratemanage2__arg}{ovectl\+\_\+ratemanage2\+\_\+arg} struct and \doxylink{vorbisenc_8h_af95048070bedb467f80ce85e20057126}{OV\+\_\+\+ECTL\+\_\+\+RATEMANAGE2\+\_\+\+GET} and \doxylink{vorbisenc_8h_a5075e0acb85fd45398a290594f83d6ba}{OV\+\_\+\+ECTL\+\_\+\+RATEMANAGE2\+\_\+\+SET} calls in new code.\end{DoxyRefDesc}
+
+
+The \doxylink{structovectl__ratemanage__arg}{ovectl\+\_\+ratemanage\+\_\+arg} structure is used with \doxylink{vorbisenc_8h_a5f398a378e20b8ce5e3341a582e773bd}{vorbis\+\_\+encode\+\_\+ctl()} and the \doxylink{vorbisenc_8h_a614481c0d84bdfbb80eed9208b68f779}{OV\+\_\+\+ECTL\+\_\+\+RATEMANAGE\+\_\+\+GET}, \doxylink{vorbisenc_8h_a1daa1fd8ce1064cce01dde3ad447d389}{OV\+\_\+\+ECTL\+\_\+\+RATEMANAGE\+\_\+\+SET}, \doxylink{vorbisenc_8h_a34c3170d227b6368041e59c1dc7ed6e4}{OV\+\_\+\+ECTL\+\_\+\+RATEMANAGE\+\_\+\+AVG}, \doxylink{vorbisenc_8h_af8869980a805f431af57a50dffbf5d33}{OV\+\_\+\+ECTL\+\_\+\+RATEMANAGE\+\_\+\+HARD} calls in order to query and modify specifics of the encoder\textquotesingle{}s bitrate management configuration. 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structovectl__ratemanage__arg_ac1e81b5a2e705022ca895f494718ded7}\index{ovectl\_ratemanage\_arg@{ovectl\_ratemanage\_arg}!bitrate\_av\_hi@{bitrate\_av\_hi}}
+\index{bitrate\_av\_hi@{bitrate\_av\_hi}!ovectl\_ratemanage\_arg@{ovectl\_ratemanage\_arg}}
+\doxysubsubsection{\texorpdfstring{bitrate\_av\_hi}{bitrate\_av\_hi}}
+{\footnotesize\ttfamily \label{structovectl__ratemanage__arg_ac1e81b5a2e705022ca895f494718ded7} 
+long ovectl\+\_\+ratemanage\+\_\+arg\+::bitrate\+\_\+av\+\_\+hi}
+
+soft upper limit (in kilobits per second) above which the average bitrate tracker will start nudging the bitrate lower. \Hypertarget{structovectl__ratemanage__arg_ac241670a3a608f114acaf8f26fe4e913}\index{ovectl\_ratemanage\_arg@{ovectl\_ratemanage\_arg}!bitrate\_av\_lo@{bitrate\_av\_lo}}
+\index{bitrate\_av\_lo@{bitrate\_av\_lo}!ovectl\_ratemanage\_arg@{ovectl\_ratemanage\_arg}}
+\doxysubsubsection{\texorpdfstring{bitrate\_av\_lo}{bitrate\_av\_lo}}
+{\footnotesize\ttfamily \label{structovectl__ratemanage__arg_ac241670a3a608f114acaf8f26fe4e913} 
+long ovectl\+\_\+ratemanage\+\_\+arg\+::bitrate\+\_\+av\+\_\+lo}
+
+soft lower limit (in kilobits per second) below which the average bitrate tracker will start nudging the bitrate higher. \Hypertarget{structovectl__ratemanage__arg_a1232e7296ae5e52f52039bed2560c505}\index{ovectl\_ratemanage\_arg@{ovectl\_ratemanage\_arg}!bitrate\_av\_window@{bitrate\_av\_window}}
+\index{bitrate\_av\_window@{bitrate\_av\_window}!ovectl\_ratemanage\_arg@{ovectl\_ratemanage\_arg}}
+\doxysubsubsection{\texorpdfstring{bitrate\_av\_window}{bitrate\_av\_window}}
+{\footnotesize\ttfamily \label{structovectl__ratemanage__arg_a1232e7296ae5e52f52039bed2560c505} 
+double ovectl\+\_\+ratemanage\+\_\+arg\+::bitrate\+\_\+av\+\_\+window}
+
+the window period (in seconds) used to regulate the average bitrate minimum and maximum. \Hypertarget{structovectl__ratemanage__arg_aad317d50fb4d072e2c55f0a60d1a83b2}\index{ovectl\_ratemanage\_arg@{ovectl\_ratemanage\_arg}!bitrate\_av\_window\_center@{bitrate\_av\_window\_center}}
+\index{bitrate\_av\_window\_center@{bitrate\_av\_window\_center}!ovectl\_ratemanage\_arg@{ovectl\_ratemanage\_arg}}
+\doxysubsubsection{\texorpdfstring{bitrate\_av\_window\_center}{bitrate\_av\_window\_center}}
+{\footnotesize\ttfamily \label{structovectl__ratemanage__arg_aad317d50fb4d072e2c55f0a60d1a83b2} 
+double ovectl\+\_\+ratemanage\+\_\+arg\+::bitrate\+\_\+av\+\_\+window\+\_\+center}
+
+Regulates the relative centering of the average and hard windows; in libvorbis 1.\+0 and 1.\+0.\+1, the hard window regulation overlapped but followed the average window regulation. In libvorbis 1.\+1 a bit-\/reservoir interface replaces the old windowing interface; the older windowing interface is simulated and this field has no effect. \Hypertarget{structovectl__ratemanage__arg_a3620024b5a9e4b4df6d20deb6c125c92}\index{ovectl\_ratemanage\_arg@{ovectl\_ratemanage\_arg}!bitrate\_hard\_max@{bitrate\_hard\_max}}
+\index{bitrate\_hard\_max@{bitrate\_hard\_max}!ovectl\_ratemanage\_arg@{ovectl\_ratemanage\_arg}}
+\doxysubsubsection{\texorpdfstring{bitrate\_hard\_max}{bitrate\_hard\_max}}
+{\footnotesize\ttfamily \label{structovectl__ratemanage__arg_a3620024b5a9e4b4df6d20deb6c125c92} 
+long ovectl\+\_\+ratemanage\+\_\+arg\+::bitrate\+\_\+hard\+\_\+max}
+
+hard upper limit (in kilobits per second) above which the stream bitrate will never be allowed for any given bitrate\+\_\+hard\+\_\+window seconds of time. \Hypertarget{structovectl__ratemanage__arg_a449d3ea8d0645742af859dd17b41fbfb}\index{ovectl\_ratemanage\_arg@{ovectl\_ratemanage\_arg}!bitrate\_hard\_min@{bitrate\_hard\_min}}
+\index{bitrate\_hard\_min@{bitrate\_hard\_min}!ovectl\_ratemanage\_arg@{ovectl\_ratemanage\_arg}}
+\doxysubsubsection{\texorpdfstring{bitrate\_hard\_min}{bitrate\_hard\_min}}
+{\footnotesize\ttfamily \label{structovectl__ratemanage__arg_a449d3ea8d0645742af859dd17b41fbfb} 
+long ovectl\+\_\+ratemanage\+\_\+arg\+::bitrate\+\_\+hard\+\_\+min}
+
+hard lower limit (in kilobits per second) below which the stream bitrate will never be allowed for any given bitrate\+\_\+hard\+\_\+window seconds of time. \Hypertarget{structovectl__ratemanage__arg_a68caf36fc02a52199705fa331d118446}\index{ovectl\_ratemanage\_arg@{ovectl\_ratemanage\_arg}!bitrate\_hard\_window@{bitrate\_hard\_window}}
+\index{bitrate\_hard\_window@{bitrate\_hard\_window}!ovectl\_ratemanage\_arg@{ovectl\_ratemanage\_arg}}
+\doxysubsubsection{\texorpdfstring{bitrate\_hard\_window}{bitrate\_hard\_window}}
+{\footnotesize\ttfamily \label{structovectl__ratemanage__arg_a68caf36fc02a52199705fa331d118446} 
+double ovectl\+\_\+ratemanage\+\_\+arg\+::bitrate\+\_\+hard\+\_\+window}
+
+the window period (in seconds) used to regulate the hard bitrate minimum and maximum \Hypertarget{structovectl__ratemanage__arg_ad792d1b89a5d07f0f0e90509df4bc606}\index{ovectl\_ratemanage\_arg@{ovectl\_ratemanage\_arg}!management\_active@{management\_active}}
+\index{management\_active@{management\_active}!ovectl\_ratemanage\_arg@{ovectl\_ratemanage\_arg}}
+\doxysubsubsection{\texorpdfstring{management\_active}{management\_active}}
+{\footnotesize\ttfamily \label{structovectl__ratemanage__arg_ad792d1b89a5d07f0f0e90509df4bc606} 
+int ovectl\+\_\+ratemanage\+\_\+arg\+::management\+\_\+active}
+
+nonzero if bitrate management is active 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/extlibs/headers/vorbis/\mbox{\hyperlink{vorbisenc_8h}{vorbisenc.\+h}}\end{DoxyCompactItemize}

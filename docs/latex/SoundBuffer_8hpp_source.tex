@@ -1,0 +1,107 @@
+\doxysection{Sound\+Buffer.\+hpp}
+\hypertarget{SoundBuffer_8hpp_source}{}\label{SoundBuffer_8hpp_source}\index{build/\_deps/sfml-\/src/include/SFML/Audio/SoundBuffer.hpp@{build/\_deps/sfml-\/src/include/SFML/Audio/SoundBuffer.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ SFML\_SOUNDBUFFER\_HPP}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ SFML\_SOUNDBUFFER\_HPP}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <SFML/Audio/Export.hpp>}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <SFML/Audio/AlResource.hpp>}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ <SFML/System/Time.hpp>}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#include\ <set>}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{00040\ \{}
+\DoxyCodeLine{00041\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1Sound}{Sound}};}
+\DoxyCodeLine{00042\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1InputSoundFile}{InputSoundFile}};}
+\DoxyCodeLine{00043\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1InputStream}{InputStream}};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00049\ \textcolor{keyword}{class\ }SFML\_AUDIO\_API\ \mbox{\hyperlink{classsf_1_1SoundBuffer_a0cabfbfe19b831bf7d5c9592d92ef233}{SoundBuffer}}\ :\ \mbox{\hyperlink{classsf_1_1AlResource_a51b4f3a825c5d68386f8683e3e1053d7}{AlResource}}}
+\DoxyCodeLine{00050\ \{}
+\DoxyCodeLine{00051\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{classsf_1_1SoundBuffer_a0cabfbfe19b831bf7d5c9592d92ef233}{SoundBuffer}}();}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{classsf_1_1SoundBuffer_a0cabfbfe19b831bf7d5c9592d92ef233}{SoundBuffer}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1SoundBuffer_a0cabfbfe19b831bf7d5c9592d92ef233}{SoundBuffer}}\&\ copy);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{classsf_1_1SoundBuffer_a0cabfbfe19b831bf7d5c9592d92ef233}{\string~SoundBuffer}}();}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1SoundBuffer_a2be6a8025c97eb622a7dff6cf2594394}{loadFromFile}}(\textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1SoundBuffer_af8cfa5599739a7edae69c5cba273d33f}{loadFromMemory}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ data,\ std::size\_t\ sizeInBytes);}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1SoundBuffer_ad292156b1e01f6dabd4c0c277d5e079e}{loadFromStream}}(\mbox{\hyperlink{classsf_1_1InputStream}{InputStream}}\&\ stream);}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1SoundBuffer_a42d51ce4bb3b60c7ea06f63c273fd063}{loadFromSamples}}(\textcolor{keyword}{const}\ Int16*\ samples,\ Uint64\ sampleCount,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ channelCount,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ sampleRate);}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1SoundBuffer_aade64260c6375580a085314a30be007e}{saveToFile}}(\textcolor{keyword}{const}\ std::string\&\ filename)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keyword}{const}\ Int16*\ \mbox{\hyperlink{classsf_1_1SoundBuffer_a3d5571a5231d3aea0d2cea933c38cc9e}{getSamples}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00177\ \ \ \ \ Uint64\ \mbox{\hyperlink{classsf_1_1SoundBuffer_aebe2a4bdbfbd9249353748da3f6a4fa1}{getSampleCount}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classsf_1_1SoundBuffer_a2c2cf0078ce0549246ecc4a1646212b4}{getSampleRate}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00204\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classsf_1_1SoundBuffer_a127707b831d875ed790eef1aa2b9fcc3}{getChannelCount}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00214\ \ \ \ \ \mbox{\hyperlink{classsf_1_1Time}{Time}}\ \mbox{\hyperlink{classsf_1_1SoundBuffer_a280a581d9b360fd16121714c51fc8261}{getDuration}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00224\ \ \ \ \ \mbox{\hyperlink{classsf_1_1SoundBuffer_a0cabfbfe19b831bf7d5c9592d92ef233}{SoundBuffer}}\&\ operator\ =(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1SoundBuffer_a0cabfbfe19b831bf7d5c9592d92ef233}{SoundBuffer}}\&\ right);}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00226\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00228\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }Sound;}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{keywordtype}{bool}\ initialize(\mbox{\hyperlink{classsf_1_1InputSoundFile}{InputSoundFile}}\&\ file);}
+\DoxyCodeLine{00239\ }
+\DoxyCodeLine{00249\ \ \ \ \ \textcolor{keywordtype}{bool}\ update(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ channelCount,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ sampleRate);}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00257\ \ \ \ \ \textcolor{keywordtype}{void}\ attachSound(Sound*\ sound)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00265\ \ \ \ \ \textcolor{keywordtype}{void}\ detachSound(Sound*\ sound)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00268\ \ \ \ \ \textcolor{comment}{//\ Types}}
+\DoxyCodeLine{00270\ \ \ \ \ \textcolor{keyword}{typedef}\ std::set<Sound*>\ SoundList;\ }
+\DoxyCodeLine{00271\ }
+\DoxyCodeLine{00273\ \ \ \ \ \textcolor{comment}{//\ Member\ data}}
+\DoxyCodeLine{00275\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ m\_buffer;\ \ \ }
+\DoxyCodeLine{00276\ \ \ \ \ std::vector<Int16>\ m\_samples;\ \ }
+\DoxyCodeLine{00277\ \ \ \ \ \mbox{\hyperlink{classsf_1_1Time}{Time}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_duration;\ }
+\DoxyCodeLine{00278\ \ \ \ \ \textcolor{keyword}{mutable}\ SoundList\ \ m\_sounds;\ \ \ }
+\DoxyCodeLine{00279\ \};}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00283\ }
+\DoxyCodeLine{00284\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SFML\_SOUNDBUFFER\_HPP}}
+\DoxyCodeLine{00285\ }
+\DoxyCodeLine{00286\ }
+
+\end{DoxyCode}

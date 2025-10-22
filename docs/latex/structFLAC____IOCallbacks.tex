@@ -1,0 +1,31 @@
+\doxysection{FLAC\+\_\+\+\_\+\+IOCallbacks Struct Reference}
+\hypertarget{structFLAC____IOCallbacks}{}\label{structFLAC____IOCallbacks}\index{FLAC\_\_IOCallbacks@{FLAC\_\_IOCallbacks}}
+
+
+{\ttfamily \#include $<$callback.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group__flac__callbacks_ga49d95218a6c09b215cd92cc96de71bf9}{FLAC\+\_\+\+\_\+\+IOCallback\+\_\+\+Read}} {\bfseries read}
+\item 
+\mbox{\hyperlink{group__flac__callbacks_gad991792235879aecae289b56a112e1b8}{FLAC\+\_\+\+\_\+\+IOCallback\+\_\+\+Write}} {\bfseries write}
+\item 
+\mbox{\hyperlink{group__flac__callbacks_gab3942bbbd6ae09bcefe7cb3a0060c49c}{FLAC\+\_\+\+\_\+\+IOCallback\+\_\+\+Seek}} {\bfseries seek}
+\item 
+\mbox{\hyperlink{group__flac__callbacks_ga45314930cabc2e9c04867eae6bca309f}{FLAC\+\_\+\+\_\+\+IOCallback\+\_\+\+Tell}} {\bfseries tell}
+\item 
+\mbox{\hyperlink{group__flac__callbacks_ga00ae3b3d373e691908e9539ebf720675}{FLAC\+\_\+\+\_\+\+IOCallback\+\_\+\+Eof}} {\bfseries eof}
+\item 
+\mbox{\hyperlink{group__flac__callbacks_ga0032267fac38220689778833e08f7387}{FLAC\+\_\+\+\_\+\+IOCallback\+\_\+\+Close}} {\bfseries close}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A structure for holding a set of callbacks. Each FLAC interface that requires a \doxylink{structFLAC____IOCallbacks}{FLAC\+\_\+\+\_\+\+IOCallbacks} structure will describe which of the callbacks are required. The ones that are not required may be set to NULL.
+
+If the seek requirement for an interface is optional, you can signify that a data sorce is not seekable by setting the {\itshape seek} field to {\ttfamily NULL}. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/extlibs/headers/\+FLAC/callback.\+h\end{DoxyCompactItemize}

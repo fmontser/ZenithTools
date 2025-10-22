@@ -1,0 +1,95 @@
+\doxysection{Image.\+hpp}
+\hypertarget{Image_8hpp_source}{}\label{Image_8hpp_source}\index{build/\_deps/sfml-\/src/include/SFML/Graphics/Image.hpp@{build/\_deps/sfml-\/src/include/SFML/Graphics/Image.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ SFML\_IMAGE\_HPP}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ SFML\_IMAGE\_HPP}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/Export.hpp>}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/Color.hpp>}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/Rect.hpp>}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{00039\ \{}
+\DoxyCodeLine{00040\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1InputStream}{InputStream}};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{class\ }SFML\_GRAPHICS\_API\ \mbox{\hyperlink{classsf_1_1Image_abb4caf3cb167b613345ebe36fc883f12}{Image}}}
+\DoxyCodeLine{00047\ \{}
+\DoxyCodeLine{00048\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{classsf_1_1Image_abb4caf3cb167b613345ebe36fc883f12}{Image}}();}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{classsf_1_1Image_abb4caf3cb167b613345ebe36fc883f12}{\string~Image}}();}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Image_a2a67930e2fd9ad97cf004e918cf5832b}{create}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ height,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1Color}{Color}}\&\ color\ =\ \mbox{\hyperlink{classsf_1_1Color}{Color}}(0,\ 0,\ 0));}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Image_a2a67930e2fd9ad97cf004e918cf5832b}{create}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ height,\ \textcolor{keyword}{const}\ Uint8*\ pixels);}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1Image_a9e4f2aa8e36d0cabde5ed5a4ef80290b}{loadFromFile}}(\textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1Image_aaa6c7afa5851a51cec6ab438faa7354c}{loadFromMemory}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ data,\ std::size\_t\ size);}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1Image_a21122ded0e8368bb06ed3b9acfbfb501}{loadFromStream}}(\mbox{\hyperlink{classsf_1_1InputStream}{InputStream}}\&\ stream);}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1Image_a51537fb667f47cbe80395cfd7f9e72a4}{saveToFile}}(\textcolor{keyword}{const}\ std::string\&\ filename)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1Image_ae33432a31031ee501674efa9b6dc3f40}{saveToMemory}}(std::vector<sf::Uint8>\&\ output,\ \textcolor{keyword}{const}\ std::string\&\ format)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00182\ \ \ \ \ Vector2u\ \mbox{\hyperlink{classsf_1_1Image_a85409951b05369813069ed64393391ce}{getSize}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Image_a22f13f8c242a6b38eb73cc176b37ae34}{createMaskFromColor}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1Color}{Color}}\&\ color,\ Uint8\ alpha\ =\ 0);}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Image_ab2fa337c956f85f93377dcb52153a45a}{copy}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1Image_abb4caf3cb167b613345ebe36fc883f12}{Image}}\&\ source,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ destX,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ destY,\ \textcolor{keyword}{const}\ IntRect\&\ sourceRect\ =\ IntRect(0,\ 0,\ 0,\ 0),\ \textcolor{keywordtype}{bool}\ applyAlpha\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00237\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Image_a9fd329b8cd7d4439e07fb5d3bb2d9744}{setPixel}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1Color}{Color}}\&\ color);}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00254\ \ \ \ \ \mbox{\hyperlink{classsf_1_1Color}{Color}}\ \mbox{\hyperlink{classsf_1_1Image_acf278760458433b2c3626a6980388a95}{getPixel}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ y)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00269\ \ \ \ \ \textcolor{keyword}{const}\ Uint8*\ \mbox{\hyperlink{classsf_1_1Image_a2f49e69b6c6257b19b4d911993075c40}{getPixelsPtr}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00275\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Image_a57168e7bc29190e08bbd6c9c19f4bb2c}{flipHorizontally}}();}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00281\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Image_a78a702a7e49d1de2dec9894da99d279c}{flipVertically}}();}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00283\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00284\ }
+\DoxyCodeLine{00286\ \ \ \ \ \textcolor{comment}{//\ Member\ data}}
+\DoxyCodeLine{00288\ \ \ \ \ Vector2u\ \ \ \ \ \ \ \ \ \ \ m\_size;\ \ \ }
+\DoxyCodeLine{00289\ \ \ \ \ std::vector<Uint8>\ m\_pixels;\ }
+\DoxyCodeLine{00290\ \};}
+\DoxyCodeLine{00291\ }
+\DoxyCodeLine{00292\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{00293\ }
+\DoxyCodeLine{00294\ }
+\DoxyCodeLine{00295\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SFML\_IMAGE\_HPP}}
+\DoxyCodeLine{00296\ }
+\DoxyCodeLine{00297\ }
+
+\end{DoxyCode}

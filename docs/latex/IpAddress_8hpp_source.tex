@@ -1,0 +1,103 @@
+\doxysection{Ip\+Address.\+hpp}
+\hypertarget{IpAddress_8hpp_source}{}\label{IpAddress_8hpp_source}\index{build/\_deps/sfml-\/src/include/SFML/Network/IpAddress.hpp@{build/\_deps/sfml-\/src/include/SFML/Network/IpAddress.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ SFML\_IPADDRESS\_HPP}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ SFML\_IPADDRESS\_HPP}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <SFML/Network/Export.hpp>}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <SFML/System/Time.hpp>}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ <istream>}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ <ostream>}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{00039\ \{}
+\DoxyCodeLine{00044\ \textcolor{keyword}{class\ }SFML\_NETWORK\_API\ \mbox{\hyperlink{classsf_1_1IpAddress_af32a0574baa0f46e48deb2d83ca7658b}{IpAddress}}}
+\DoxyCodeLine{00045\ \{}
+\DoxyCodeLine{00046\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{classsf_1_1IpAddress_af32a0574baa0f46e48deb2d83ca7658b}{IpAddress}}();}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{classsf_1_1IpAddress_af32a0574baa0f46e48deb2d83ca7658b}{IpAddress}}(\textcolor{keyword}{const}\ std::string\&\ address);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{classsf_1_1IpAddress_af32a0574baa0f46e48deb2d83ca7658b}{IpAddress}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ address);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00094\ \ \ \ \ \mbox{\hyperlink{classsf_1_1IpAddress_af32a0574baa0f46e48deb2d83ca7658b}{IpAddress}}(Uint8\ byte0,\ Uint8\ byte1,\ Uint8\ byte2,\ Uint8\ byte3);}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classsf_1_1IpAddress_af32a0574baa0f46e48deb2d83ca7658b}{IpAddress}}(Uint32\ address);}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00123\ \ \ \ \ std::string\ \mbox{\hyperlink{classsf_1_1IpAddress_a88507954142d7fc2176cce7f36422340}{toString}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00139\ \ \ \ \ Uint32\ \mbox{\hyperlink{classsf_1_1IpAddress_ae7911c5ea9562f9602c3e29cd54b15e9}{toInteger}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classsf_1_1IpAddress_af32a0574baa0f46e48deb2d83ca7658b}{IpAddress}}\ \mbox{\hyperlink{classsf_1_1IpAddress_abd7a79ff433590fcd9a10a8d16f67cc0}{getLocalAddress}}();}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classsf_1_1IpAddress_af32a0574baa0f46e48deb2d83ca7658b}{IpAddress}}\ \mbox{\hyperlink{classsf_1_1IpAddress_a252f61d27099559ac9b4e539f82d30dc}{getPublicAddress}}(\mbox{\hyperlink{classsf_1_1Time}{Time}}\ timeout\ =\ \mbox{\hyperlink{classsf_1_1Time_a8db127b632fa8da21550e7282af11fa0}{Time::Zero}});}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{comment}{//\ Static\ member\ data}}
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1IpAddress_af32a0574baa0f46e48deb2d83ca7658b}{IpAddress}}\ \mbox{\hyperlink{classsf_1_1IpAddress_a4619b4abbe3c8fef056e7299db967404}{None}};\ \ \ \ \ \ }
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1IpAddress_af32a0574baa0f46e48deb2d83ca7658b}{IpAddress}}\ \mbox{\hyperlink{classsf_1_1IpAddress_a3dbc10b0dc6804cc69e29342f7406907}{Any}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1IpAddress_af32a0574baa0f46e48deb2d83ca7658b}{IpAddress}}\ \mbox{\hyperlink{classsf_1_1IpAddress_a594d3a8e2559f8fa8ab0a96fa597333b}{LocalHost}};\ }
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1IpAddress_af32a0574baa0f46e48deb2d83ca7658b}{IpAddress}}\ \mbox{\hyperlink{classsf_1_1IpAddress_aa93d1d57b65d243f2baf804b6035465c}{Broadcast}};\ }
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keyword}{friend}\ SFML\_NETWORK\_API\ \textcolor{keywordtype}{bool}\ operator\ <(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1IpAddress_af32a0574baa0f46e48deb2d83ca7658b}{IpAddress}}\&\ left,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1IpAddress_af32a0574baa0f46e48deb2d83ca7658b}{IpAddress}}\&\ right);}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00199\ \ \ \ \ \textcolor{keywordtype}{void}\ resolve(\textcolor{keyword}{const}\ std::string\&\ address);}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{comment}{//\ Member\ data}}
+\DoxyCodeLine{00204\ \ \ \ \ Uint32\ m\_address;\ }
+\DoxyCodeLine{00205\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ m\_valid;\ \ \ }
+\DoxyCodeLine{00206\ \};}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00217\ SFML\_NETWORK\_API\ \textcolor{keywordtype}{bool}\ operator\ ==(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1IpAddress}{IpAddress}}\&\ left,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1IpAddress}{IpAddress}}\&\ right);}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00228\ SFML\_NETWORK\_API\ \textcolor{keywordtype}{bool}\ operator\ !=(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1IpAddress}{IpAddress}}\&\ left,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1IpAddress}{IpAddress}}\&\ right);}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00239\ SFML\_NETWORK\_API\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespacesf_ae761c09191acb8e31cce343197fec0b9}{operator\ <}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1IpAddress}{IpAddress}}\&\ left,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1IpAddress}{IpAddress}}\&\ right);}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00250\ SFML\_NETWORK\_API\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespacesf_af142e40929bb8cc96d79c48af19bd045}{operator\ >}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1IpAddress}{IpAddress}}\&\ left,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1IpAddress}{IpAddress}}\&\ right);}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00261\ SFML\_NETWORK\_API\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespacesf_a9c0477225ec01865c550da5b3b2b6cc5}{operator\ <=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1IpAddress}{IpAddress}}\&\ left,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1IpAddress}{IpAddress}}\&\ right);}
+\DoxyCodeLine{00262\ }
+\DoxyCodeLine{00272\ SFML\_NETWORK\_API\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespacesf_a68124f60ee7ee08073bd1894d69b0ed2}{operator\ >=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1IpAddress}{IpAddress}}\&\ left,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1IpAddress}{IpAddress}}\&\ right);}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00283\ SFML\_NETWORK\_API\ std::istream\&\ \mbox{\hyperlink{namespacesf_a6a79ef337fc5bca4fb054e15dee675c0}{operator\ >>}}(std::istream\&\ stream,\ \mbox{\hyperlink{classsf_1_1IpAddress}{IpAddress}}\&\ address);}
+\DoxyCodeLine{00284\ }
+\DoxyCodeLine{00294\ SFML\_NETWORK\_API\ std::ostream\&\ \mbox{\hyperlink{namespacesf_ab76f5a287dd4b6885eb083e9c5985753}{operator\ <<}}(std::ostream\&\ stream,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1IpAddress}{IpAddress}}\&\ address);}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{00297\ }
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00299\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SFML\_IPADDRESS\_HPP}}
+\DoxyCodeLine{00300\ }
+\DoxyCodeLine{00301\ }
+
+\end{DoxyCode}

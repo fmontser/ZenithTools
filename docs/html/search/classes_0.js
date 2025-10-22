@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['invalidstateexception_0',['InvalidStateException',['../structzenith_1_1InvalidStateException.html',1,'zenith']]]
+  ['invalidmodeexception_0',['InvalidModeException',['../structzenith_1_1InvalidModeException.html',1,'zenith']]]
 ];

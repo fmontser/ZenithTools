@@ -11,81 +11,51 @@ using std::stringstream;
 Timer::Timer(Minutes minutes,Seconds seconds) {
 	_remainingTime = minutes + seconds;
 	_durationTime = _remainingTime;
-	_status.state = State::Stopped;
+	_status.mode = Mode::Stopped;
 	_status.remaining = FormatTimer(_remainingTime);
 	_status.elapsed = FormatTimer(Seconds::zero());
-}
-
-Timer::Timer(unsigned int minutes,unsigned int seconds) {
-	_remainingTime = Minutes(minutes) + Seconds(seconds);
-	_durationTime = _remainingTime;
-	_status.state = State::Stopped;
-	_status.remaining = FormatTimer(_remainingTime);
-	_status.elapsed = FormatTimer(Seconds::zero());
-}
-
-Timer::~Timer() {
-	{
-		std::lock_guard<std::mutex> lock(_statusMutex);
-		_status.state = State::Ended;
-	}
-	if (_thread.joinable())
-		_thread.join();
 }
 
 void Timer::Start() {
-	std::lock_guard<std::mutex> lock(_statusMutex);
-
-	if (_status.state == State::Ended) {
-		if (_thread.joinable())
-			_thread.detach();
+	if (_status.mode == Mode::Ended) {
 		_remainingTime = _durationTime;
-		_status.state = State::Stopped;
+		_status.mode = Mode::Stopped;
 	}
 
-	if (_status.state == State::Stopped) {
+	if (_status.mode == Mode::Stopped) {
 		_startTime = Clock::now();
 		_targetTime = _startTime + _remainingTime;
-		_status.state = State::Running;
-		if (_thread.joinable())
-			_thread.detach();
-		_thread = std::thread(&Timer::Daemon, this);
+		_status.mode = Mode::Running;
 	}
 }
 
 void Timer::Pause() {
-	std::lock_guard<std::mutex> lock(_statusMutex);
-
-	if (_status.state == State::Running) {
-		_remainingTime = FetchRemainingTime_locked();
-		_status.state = State::Paused;
+	if (_status.mode == Mode::Running) {
+		_remainingTime = FetchRemainingTime();
+		_status.mode = Mode::Paused;
 	}
 }
 
 void Timer::Resume() {
-	std::lock_guard<std::mutex> lock(_statusMutex);
-
-	if (_status.state == State::Paused) {
+	if (_status.mode == Mode::Paused) {
 		_targetTime = Clock::now() + _remainingTime;
-		_status.state = State::Running;
+		_status.mode = Mode::Running;
 	}
 }
 
 void Timer::Reset() {
-	std::lock_guard<std::mutex> lock(_statusMutex);
-
-	if (_status.state != State::Stopped) {
+	if (_status.mode != Mode::Stopped) {
 		_remainingTime = _durationTime;
-		_status.state = State::Stopped;
+		_status.mode = Mode::Stopped;
 	}
 }
 
 const Timer::Status Timer::GetStatus(){
-	std::lock_guard<std::mutex> lock(_statusMutex);
-
-	auto remainingTime = FetchRemainingTime_locked();
-	if (remainingTime <= Seconds::zero())
+	auto remainingTime = FetchRemainingTime();
+	if (remainingTime <= Seconds::zero()) {
 		remainingTime = Seconds::zero();
+		_status.mode = Mode::Ended;
+	}
 
 	auto elapsedTime = _durationTime - remainingTime;
 	if (elapsedTime > _durationTime)
@@ -93,29 +63,29 @@ const Timer::Status Timer::GetStatus(){
 
 	_status.remaining = FormatTimer(remainingTime);
 	_status.elapsed = FormatTimer(elapsedTime);
+	_status.progress = CalculateProgress(elapsedTime);
 	return _status;
 }
 
-const Seconds Timer::FetchRemainingTime_locked() const {
-	switch (_status.state)
+const Seconds Timer::FetchRemainingTime() const {
+	switch (_status.mode)
 	{
-		case State::Stopped:
+		case Mode::Stopped:
 			return _durationTime;
-		case State::Paused:
+		case Mode::Paused:
 			return _remainingTime;
-		case State::Running:
+		case Mode::Running:
 			return std::chrono::round<Seconds>(
 			_targetTime - Clock::now());
-		case State::Ended:
+		case Mode::Ended:
 			return Seconds::zero();
 		default:
-			throw InvalidStateException();
+			throw InvalidModeException();
 	}
 }
 
-const Seconds Timer::FetchRemainingTime() {
-	std::lock_guard<std::mutex> lock(_statusMutex);
-	return FetchRemainingTime_locked();
+float Timer::CalculateProgress(const Seconds& elapsedTime) const {
+	return static_cast<float>(elapsedTime.count()) / _durationTime.count();
 }
 
 const string Timer::FormatTimer(const Seconds& seconds) const {
@@ -128,16 +98,4 @@ const string Timer::FormatTimer(const Seconds& seconds) const {
 			<< (seconds - minutes).count();
 
 	return timeSS.str();
-}
-
-void Timer::Daemon() {
-	while(_status.state != State::Ended && _status.state != State::Stopped) {
-		std::this_thread::sleep_for(Seconds(1));
-
-		std::lock_guard<std::mutex> lock(_statusMutex);
-
-		auto remainingTime = FetchRemainingTime_locked();
-		if (remainingTime <= Seconds::zero())
-			_status.state = State::Ended;
-	}
 }

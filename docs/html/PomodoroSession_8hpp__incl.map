@@ -1,0 +1,11 @@
+<map id="include/PomodoroSession.hpp" name="include/PomodoroSession.hpp">
+<area shape="rect" id="Node000001" title="PomodoroSession class definition." alt="" coords="22,5,220,32"/>
+<area shape="rect" id="Node000002" href="$Timer_8hpp.html" title="Timer class definition." alt="" coords="36,80,115,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,34,94,68,89,65,111,31"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="139,80,196,107"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="131,31,154,66,149,68,127,34"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,155,66,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="71,109,52,142,47,140,66,106"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="90,155,144,181"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="85,106,105,140,100,143,80,109"/>
+</map>

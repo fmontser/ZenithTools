@@ -6,67 +6,61 @@
 \DoxyCodeLine{00006\ }
 \DoxyCodeLine{00007\ \textcolor{preprocessor}{\#pragma\ once}}
 \DoxyCodeLine{00008\ }
-\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <thread>}}
-\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <chrono>}}
-\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <string>}}
-\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{using\ }std::string;}
 \DoxyCodeLine{00013\ }
-\DoxyCodeLine{00014\ \textcolor{keyword}{using\ }std::string;}
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }zenith\ \{}
 \DoxyCodeLine{00015\ }
-\DoxyCodeLine{00016\ \textcolor{keyword}{namespace\ }zenith\ \{}
-\DoxyCodeLine{00017\ }
-\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{Timer_8hpp_acc1726d1f3d16aed9577019dd5d1eba5}{Clock}}\ =\ std::chrono::steady\_clock;}
-\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{Timer_8hpp_ae8fe82a89040d69603f529f170ff20a3}{TimePoint}}\ =\ std::chrono::time\_point<std::chrono::steady\_clock>;}
-\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{Timer_8hpp_a5e6c50203625681fded15903008539fa}{Seconds}}\ =\ std::chrono::seconds;}
-\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{Timer_8hpp_ac7e1d0a6dad8892b9b68cf47f75817fc}{Minutes}}\ =\ std::chrono::minutes;}
-\DoxyCodeLine{00026\ }
-\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classzenith_1_1Timer_a7ebf9a77a1e5ac6ebc77e1e1c31a02e7}{Timer}}\ \{}
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{classzenith_1_1Timer_ac47cbb00d62a075e4c61655b6b3269cf}{State}}\ \{}
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzenith_1_1Timer_ac47cbb00d62a075e4c61655b6b3269cfac23e2b09ebe6bf4cb5e2a9abe85c0be2}{Stopped}},\ }
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzenith_1_1Timer_ac47cbb00d62a075e4c61655b6b3269cfae99180abf47a8b3a856e0bcb2656990a}{Paused}},\ \ }
-\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzenith_1_1Timer_ac47cbb00d62a075e4c61655b6b3269cfa5bda814c4aedb126839228f1a3d92f09}{Running}},\ }
-\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzenith_1_1Timer_ac47cbb00d62a075e4c61655b6b3269cfa0157fbb99be9622bdaa6e544270c0622}{Ended}}\ \ \ \ }
-\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
-\DoxyCodeLine{00043\ }
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structzenith_1_1Timer_1_1Status}{Status}}\ \{}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzenith_1_1Timer_ac47cbb00d62a075e4c61655b6b3269cf}{State}}\ \mbox{\hyperlink{structzenith_1_1Timer_1_1Status_a671e8be31c238aa77ac61baf3e050c6f}{state}};\ \ \ \ \ \ }
-\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{structzenith_1_1Timer_1_1Status_adf726c4837b045207586fe7db376ed91}{remaining}};\ }
-\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{structzenith_1_1Timer_1_1Status_a5911f74e88147cd69108c73418d4daa9}{elapsed}};\ \ \ }
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
-\DoxyCodeLine{00052\ }
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzenith_1_1Timer_a7ebf9a77a1e5ac6ebc77e1e1c31a02e7}{Timer}}(\mbox{\hyperlink{Timer_8hpp_ac7e1d0a6dad8892b9b68cf47f75817fc}{Minutes}}\ minutes,\ \mbox{\hyperlink{Timer_8hpp_a5e6c50203625681fded15903008539fa}{Seconds}}\ seconds);}
-\DoxyCodeLine{00059\ }
-\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzenith_1_1Timer_a14fa469c4c295c5fa6e66a4ad1092146}{\string~Timer}}();}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{Timer_8hpp_acc1726d1f3d16aed9577019dd5d1eba5}{Clock}}\ =\ std::chrono::steady\_clock;}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{Timer_8hpp_ae8fe82a89040d69603f529f170ff20a3}{TimePoint}}\ =\ std::chrono::time\_point<std::chrono::steady\_clock>;}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{Timer_8hpp_a5e6c50203625681fded15903008539fa}{Seconds}}\ =\ std::chrono::seconds;}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{Timer_8hpp_ac7e1d0a6dad8892b9b68cf47f75817fc}{Minutes}}\ =\ std::chrono::minutes;}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classzenith_1_1Timer_a6c7cebec6e7388a7175670a577c79312}{Timer}}\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{classzenith_1_1Timer_a83ee68149877014f5309a16a2e2e4adf}{Mode}}\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzenith_1_1Timer_a83ee68149877014f5309a16a2e2e4adfac23e2b09ebe6bf4cb5e2a9abe85c0be2}{Stopped}},\ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzenith_1_1Timer_a83ee68149877014f5309a16a2e2e4adfae99180abf47a8b3a856e0bcb2656990a}{Paused}},\ \ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzenith_1_1Timer_a83ee68149877014f5309a16a2e2e4adfa5bda814c4aedb126839228f1a3d92f09}{Running}},\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzenith_1_1Timer_a83ee68149877014f5309a16a2e2e4adfa0157fbb99be9622bdaa6e544270c0622}{Ended}}\ \ \ \ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structzenith_1_1Timer_1_1Status}{Status}}\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzenith_1_1Timer_a83ee68149877014f5309a16a2e2e4adf}{Mode}}\ \mbox{\hyperlink{structzenith_1_1Timer_1_1Status_aacf4f59132eb4f3cc785429486668e36}{mode}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{structzenith_1_1Timer_1_1Status_adf726c4837b045207586fe7db376ed91}{remaining}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{structzenith_1_1Timer_1_1Status_a5911f74e88147cd69108c73418d4daa9}{elapsed}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structzenith_1_1Timer_1_1Status_a01b1549352aab71f79d2d6bbd72ba202}{progress}}\ =\ 0.0f;\ \ \ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzenith_1_1Timer_a6c7cebec6e7388a7175670a577c79312}{Timer}}(\mbox{\hyperlink{Timer_8hpp_ac7e1d0a6dad8892b9b68cf47f75817fc}{Minutes}}\ minutes,\ \mbox{\hyperlink{Timer_8hpp_a5e6c50203625681fded15903008539fa}{Seconds}}\ seconds);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classzenith_1_1Timer_a3ed0dfc131682b8c5382aeeaeae8563f}{Start}}();}
 \DoxyCodeLine{00064\ }
-\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classzenith_1_1Timer_a4e607b129b392c11adddd9641a320436}{Start}}();}
-\DoxyCodeLine{00071\ }
-\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classzenith_1_1Timer_a9b8c57bf9675da635a82d68d9b4d05e5}{Pause}}();}
-\DoxyCodeLine{00078\ }
-\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classzenith_1_1Timer_ad3b4e386f8ebb885fa2ef6fcac8d9ca3}{Resume}}();}
-\DoxyCodeLine{00085\ }
-\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classzenith_1_1Timer_ae7c0c1e7d12de4b8a6e7c64e451cdd2a}{Reset}}();}
-\DoxyCodeLine{00091\ }
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structzenith_1_1Timer_1_1Status}{Status}}\ \mbox{\hyperlink{classzenith_1_1Timer_a872c7f976999336c5ca0fc6af3295d35}{GetStatus}}();}
-\DoxyCodeLine{00098\ }
-\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structzenith_1_1Timer_1_1Status}{Status}}\ \_status;\ }
-\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ std::thread\ \_thread;\ }
-\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ std::mutex\ \_statusMutex;\ }
-\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{Timer_8hpp_a5e6c50203625681fded15903008539fa}{Seconds}}\ \_durationTime;\ }
-\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{Timer_8hpp_a5e6c50203625681fded15903008539fa}{Seconds}}\ \_remainingTime;\ }
-\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{Timer_8hpp_ae8fe82a89040d69603f529f170ff20a3}{TimePoint}}\ \_startTime;\ }
-\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{Timer_8hpp_ae8fe82a89040d69603f529f170ff20a3}{TimePoint}}\ \_targetTime;\ }
-\DoxyCodeLine{00107\ }
-\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{Timer_8hpp_a5e6c50203625681fded15903008539fa}{Seconds}}\ FetchRemainingTime\_locked()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classzenith_1_1Timer_aba5e97e24ec5c879ea25a1387f2dc90b}{Pause}}();}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classzenith_1_1Timer_a25e6750c76e6dd69eeaded9b90b5d179}{Resume}}();}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classzenith_1_1Timer_a5e4b864a706b96b25419d18fd22f10e0}{Reset}}();}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structzenith_1_1Timer_1_1Status}{Status}}\ \mbox{\hyperlink{classzenith_1_1Timer_acfdcd070be0be20b28bd1c312ceb1f19}{GetStatus}}();}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structzenith_1_1Timer_1_1Status}{Status}}\ \_status;\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{Timer_8hpp_a5e6c50203625681fded15903008539fa}{Seconds}}\ \_durationTime;\ \ \ \ }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{Timer_8hpp_a5e6c50203625681fded15903008539fa}{Seconds}}\ \_remainingTime;\ \ \ }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{Timer_8hpp_ae8fe82a89040d69603f529f170ff20a3}{TimePoint}}\ \_startTime;\ \ \ \ \ }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{Timer_8hpp_ae8fe82a89040d69603f529f170ff20a3}{TimePoint}}\ \_targetTime;\ \ \ \ }
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{Timer_8hpp_a5e6c50203625681fded15903008539fa}{Seconds}}\ FetchRemainingTime()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ FormatTimer(\textcolor{keyword}{const}\ \mbox{\hyperlink{Timer_8hpp_a5e6c50203625681fded15903008539fa}{Seconds}}\&\ seconds)\ \textcolor{keyword}{const};}
 \DoxyCodeLine{00113\ }
-\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{Timer_8hpp_a5e6c50203625681fded15903008539fa}{Seconds}}\ FetchRemainingTime();}
-\DoxyCodeLine{00119\ }
-\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ FormatTimer(\textcolor{keyword}{const}\ \mbox{\hyperlink{Timer_8hpp_a5e6c50203625681fded15903008539fa}{Seconds}}\&\ seconds)\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00126\ }
-\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Daemon();}
-\DoxyCodeLine{00131\ \ \ \ \ \};}
-\DoxyCodeLine{00132\ }
-\DoxyCodeLine{00133\ \}}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ CalculateProgress(\textcolor{keyword}{const}\ \mbox{\hyperlink{Timer_8hpp_a5e6c50203625681fded15903008539fa}{Seconds}}\&\ elapsedTime)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00119\ \ \ \ \ \};}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \}}
 
 \end{DoxyCode}

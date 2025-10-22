@@ -1,0 +1,18 @@
+\doxysubsection{Porting from FLAC 1.1.3 to 1.1.4}
+\hypertarget{group__porting__1__1__3__to__1__1__4}{}\label{group__porting__1__1__3__to__1__1__4}\index{Porting from FLAC 1.1.3 to 1.1.4@{Porting from FLAC 1.1.3 to 1.1.4}}
+
+
+This module describes porting from FLAC 1.\+1.\+3 to FLAC 1.\+1.\+4.  
+
+
+Collaboration diagram for Porting from FLAC 1.1.3 to 1.1.4\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__porting__1__1__3__to__1__1__4}
+\end{center}
+\end{figure}
+This module describes porting from FLAC 1.\+1.\+3 to FLAC 1.\+1.\+4. 
+
+There were no changes to any of the interfaces from 1.\+1.\+3 to 1.\+1.\+4. There was a slight change in the implementation of \doxylink{group__flac__stream__encoder_ga67b30b1a67a9274f7708a22154b225f6}{FLAC\+\_\+\+\_\+stream\+\_\+encoder\+\_\+set\+\_\+metadata()}; the function now makes a copy of the {\itshape metadata} array of pointers so the client no longer needs to maintain it after the call. The objects themselves that are pointed to by the array are still not copied though and must be maintained until the call to \doxylink{group__flac__stream__encoder_gab2c1e5477c1e3fe9ad0d722ff8eecda2}{FLAC\+\_\+\+\_\+stream\+\_\+encoder\+\_\+finish()}. 

@@ -1,0 +1,77 @@
+\doxysection{Socket\+Selector.\+hpp}
+\hypertarget{SocketSelector_8hpp_source}{}\label{SocketSelector_8hpp_source}\index{build/\_deps/sfml-\/src/include/SFML/Network/SocketSelector.hpp@{build/\_deps/sfml-\/src/include/SFML/Network/SocketSelector.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ SFML\_SOCKETSELECTOR\_HPP}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ SFML\_SOCKETSELECTOR\_HPP}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <SFML/Network/Export.hpp>}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <SFML/System/Time.hpp>}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{00036\ \{}
+\DoxyCodeLine{00037\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1Socket}{Socket}};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{class\ }SFML\_NETWORK\_API\ \mbox{\hyperlink{classsf_1_1SocketSelector_a741959c5158aeb1e4457cad47d90f76b}{SocketSelector}}}
+\DoxyCodeLine{00044\ \{}
+\DoxyCodeLine{00045\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{classsf_1_1SocketSelector_a741959c5158aeb1e4457cad47d90f76b}{SocketSelector}}();}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{classsf_1_1SocketSelector_a741959c5158aeb1e4457cad47d90f76b}{SocketSelector}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1SocketSelector_a741959c5158aeb1e4457cad47d90f76b}{SocketSelector}}\&\ copy);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{classsf_1_1SocketSelector_a741959c5158aeb1e4457cad47d90f76b}{\string~SocketSelector}}();}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1SocketSelector_ade952013232802ff7b9b33668f8d2096}{add}}(\mbox{\hyperlink{classsf_1_1Socket}{Socket}}\&\ socket);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1SocketSelector_a98b6ab693a65b82caa375639232357c1}{remove}}(\mbox{\hyperlink{classsf_1_1Socket}{Socket}}\&\ socket);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1SocketSelector_a76e650acb0199d4be91e90a493fbc91a}{clear}}();}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1SocketSelector_a9cfda5475f17925e65889394d70af702}{wait}}(\mbox{\hyperlink{classsf_1_1Time}{Time}}\ timeout\ =\ \mbox{\hyperlink{classsf_1_1Time_a8db127b632fa8da21550e7282af11fa0}{Time::Zero}});}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1SocketSelector_a917a4bac708290a6782e6686fd3bf889}{isReady}}(\mbox{\hyperlink{classsf_1_1Socket}{Socket}}\&\ socket)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00152\ \ \ \ \ \mbox{\hyperlink{classsf_1_1SocketSelector_a741959c5158aeb1e4457cad47d90f76b}{SocketSelector}}\&\ operator\ =(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1SocketSelector_a741959c5158aeb1e4457cad47d90f76b}{SocketSelector}}\&\ right);}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsf_1_1SocketSelector_1_1SocketSelectorImpl}{SocketSelectorImpl}};}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{comment}{//\ Member\ data}}
+\DoxyCodeLine{00161\ \ \ \ \ \mbox{\hyperlink{structsf_1_1SocketSelector_1_1SocketSelectorImpl}{SocketSelectorImpl}}*\ m\_impl;\ }
+\DoxyCodeLine{00162\ \};}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SFML\_SOCKETSELECTOR\_HPP}}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ }
+
+\end{DoxyCode}

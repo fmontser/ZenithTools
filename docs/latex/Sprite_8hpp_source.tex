@@ -1,0 +1,90 @@
+\doxysection{Sprite.\+hpp}
+\hypertarget{Sprite_8hpp_source}{}\label{Sprite_8hpp_source}\index{build/\_deps/sfml-\/src/include/SFML/Graphics/Sprite.hpp@{build/\_deps/sfml-\/src/include/SFML/Graphics/Sprite.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ SFML\_SPRITE\_HPP}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ SFML\_SPRITE\_HPP}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/Export.hpp>}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/Drawable.hpp>}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/Transformable.hpp>}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/Vertex.hpp>}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/Rect.hpp>}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{00039\ \{}
+\DoxyCodeLine{00040\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1Texture}{Texture}};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00047\ \textcolor{keyword}{class\ }SFML\_GRAPHICS\_API\ \mbox{\hyperlink{classsf_1_1Sprite_a92559fbca895a96758abf5eabab96984}{Sprite}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classsf_1_1Drawable}{Drawable}},\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classsf_1_1Transformable_ae71710de0fef423121bab1c684954a2e}{Transformable}}}
+\DoxyCodeLine{00048\ \{}
+\DoxyCodeLine{00049\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{classsf_1_1Sprite_a92559fbca895a96758abf5eabab96984}{Sprite}}();}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classsf_1_1Sprite_a92559fbca895a96758abf5eabab96984}{Sprite}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1Texture}{Texture}}\&\ texture);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00078\ \ \ \ \ \mbox{\hyperlink{classsf_1_1Sprite_a92559fbca895a96758abf5eabab96984}{Sprite}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1Texture}{Texture}}\&\ texture,\ \textcolor{keyword}{const}\ IntRect\&\ rectangle);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Sprite_a3729c88d88ac38c19317c18e87242560}{setTexture}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1Texture}{Texture}}\&\ texture,\ \textcolor{keywordtype}{bool}\ resetRect\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Sprite_a3fefec419a4e6a90c0fd54c793d82ec2}{setTextureRect}}(\textcolor{keyword}{const}\ IntRect\&\ rectangle);}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Sprite_a14def44da6437bfea20c4df5e71aba4c}{setColor}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1Color}{Color}}\&\ color);}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1Texture}{Texture}}*\ \mbox{\hyperlink{classsf_1_1Sprite_a6d0f107b5dd5976be50bc5b163ba21aa}{getTexture}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keyword}{const}\ IntRect\&\ \mbox{\hyperlink{classsf_1_1Sprite_afb19e5b4f39d17cf4d95752b3a79bcb6}{getTextureRect}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1Color}{Color}}\&\ \mbox{\hyperlink{classsf_1_1Sprite_af4a3ee8177fdd6e472a360a0a837d7cf}{getColor}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00176\ \ \ \ \ FloatRect\ \mbox{\hyperlink{classsf_1_1Sprite_ab2f4c781464da6f8a52b1df6058a48b8}{getLocalBounds}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00190\ \ \ \ \ FloatRect\ \mbox{\hyperlink{classsf_1_1Sprite_aa795483096b90745b2e799532963e271}{getGlobalBounds}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ draw(RenderTarget\&\ target,\ \mbox{\hyperlink{classsf_1_1RenderStates}{RenderStates}}\ states)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keywordtype}{void}\ updatePositions();}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{keywordtype}{void}\ updateTexCoords();}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{comment}{//\ Member\ data}}
+\DoxyCodeLine{00218\ \ \ \ \ \mbox{\hyperlink{classsf_1_1Vertex}{Vertex}}\ \ \ \ \ \ \ \ \ m\_vertices[4];\ }
+\DoxyCodeLine{00219\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1Texture}{Texture}}*\ m\_texture;\ \ \ \ \ }
+\DoxyCodeLine{00220\ \ \ \ \ IntRect\ \ \ \ \ \ \ \ m\_textureRect;\ }
+\DoxyCodeLine{00221\ \};}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00226\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SFML\_SPRITE\_HPP}}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00228\ }
+
+\end{DoxyCode}

@@ -1,0 +1,85 @@
+\doxysection{sf\+::Vulkan Class Reference}
+\hypertarget{classsf_1_1Vulkan}{}\label{classsf_1_1Vulkan}\index{sf::Vulkan@{sf::Vulkan}}
+
+
+\doxylink{classsf_1_1Vulkan}{Vulkan} helper functions.  
+
+
+
+
+{\ttfamily \#include $<$Vulkan.\+hpp$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classsf_1_1Vulkan_a7ef19fe70cf7164f8a3fc47f78fab5a1}{is\+Available}} (bool require\+Graphics=true)
+\begin{DoxyCompactList}\small\item\em Tell whether or not the system supports \doxylink{classsf_1_1Vulkan}{Vulkan}. \end{DoxyCompactList}\item 
+static Vulkan\+Function\+Pointer \mbox{\hyperlink{classsf_1_1Vulkan_a1ef0f8740c571e50ce66e110e9acee26}{get\+Function}} (const char \texorpdfstring{$\ast$}{*}name)
+\begin{DoxyCompactList}\small\item\em Get the address of a \doxylink{classsf_1_1Vulkan}{Vulkan} function. \end{DoxyCompactList}\item 
+static const std\+::vector$<$ const char \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{classsf_1_1Vulkan_a3f0cbedc28688be11208afef83fe1c1f}{get\+Graphics\+Required\+Instance\+Extensions}} ()
+\begin{DoxyCompactList}\small\item\em Get \doxylink{classsf_1_1Vulkan}{Vulkan} instance extensions required for graphics. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classsf_1_1Vulkan}{Vulkan} helper functions. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsf_1_1Vulkan_a1ef0f8740c571e50ce66e110e9acee26}\index{sf::Vulkan@{sf::Vulkan}!getFunction@{getFunction}}
+\index{getFunction@{getFunction}!sf::Vulkan@{sf::Vulkan}}
+\doxysubsubsection{\texorpdfstring{getFunction()}{getFunction()}}
+{\footnotesize\ttfamily \label{classsf_1_1Vulkan_a1ef0f8740c571e50ce66e110e9acee26} 
+Vulkan\+Function\+Pointer sf\+::\+Vulkan\+::get\+Function (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the address of a \doxylink{classsf_1_1Vulkan}{Vulkan} function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the function to get the address of\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Address of the \doxylink{classsf_1_1Vulkan}{Vulkan} function, 0 on failure 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1Vulkan_a3f0cbedc28688be11208afef83fe1c1f}\index{sf::Vulkan@{sf::Vulkan}!getGraphicsRequiredInstanceExtensions@{getGraphicsRequiredInstanceExtensions}}
+\index{getGraphicsRequiredInstanceExtensions@{getGraphicsRequiredInstanceExtensions}!sf::Vulkan@{sf::Vulkan}}
+\doxysubsubsection{\texorpdfstring{getGraphicsRequiredInstanceExtensions()}{getGraphicsRequiredInstanceExtensions()}}
+{\footnotesize\ttfamily \label{classsf_1_1Vulkan_a3f0cbedc28688be11208afef83fe1c1f} 
+const std\+::vector$<$ const char \texorpdfstring{$\ast$}{*} $>$ \& sf\+::\+Vulkan\+::get\+Graphics\+Required\+Instance\+Extensions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get \doxylink{classsf_1_1Vulkan}{Vulkan} instance extensions required for graphics. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{classsf_1_1Vulkan}{Vulkan} instance extensions required for graphics 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1Vulkan_a7ef19fe70cf7164f8a3fc47f78fab5a1}\index{sf::Vulkan@{sf::Vulkan}!isAvailable@{isAvailable}}
+\index{isAvailable@{isAvailable}!sf::Vulkan@{sf::Vulkan}}
+\doxysubsubsection{\texorpdfstring{isAvailable()}{isAvailable()}}
+{\footnotesize\ttfamily \label{classsf_1_1Vulkan_a7ef19fe70cf7164f8a3fc47f78fab5a1} 
+bool sf\+::\+Vulkan\+::is\+Available (\begin{DoxyParamCaption}\item[{bool}]{require\+Graphics}{ = {\ttfamily true}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Tell whether or not the system supports \doxylink{classsf_1_1Vulkan}{Vulkan}. 
+
+This function should always be called before using the \doxylink{classsf_1_1Vulkan}{Vulkan} features. If it returns false, then any attempt to use \doxylink{classsf_1_1Vulkan}{Vulkan} will fail.
+
+If only compute is required, set {\itshape require\+Graphics} to false to skip checking for the extensions necessary for graphics rendering.
+
+
+\begin{DoxyParams}{Parameters}
+{\em require\+Graphics} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if \doxylink{classsf_1_1Vulkan}{Vulkan} is supported, false otherwise 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/include/\+SFML/\+Window/Vulkan.\+hpp\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+Window/Vulkan.\+cpp\end{DoxyCompactItemize}

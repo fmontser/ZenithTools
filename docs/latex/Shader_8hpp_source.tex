@@ -1,0 +1,188 @@
+\doxysection{Shader.\+hpp}
+\hypertarget{Shader_8hpp_source}{}\label{Shader_8hpp_source}\index{build/\_deps/sfml-\/src/include/SFML/Graphics/Shader.hpp@{build/\_deps/sfml-\/src/include/SFML/Graphics/Shader.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ SFML\_SHADER\_HPP}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ SFML\_SHADER\_HPP}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/Export.hpp>}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/Glsl.hpp>}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ <SFML/Window/GlResource.hpp>}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ <SFML/System/NonCopyable.hpp>}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#include\ <SFML/System/Vector2.hpp>}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#include\ <SFML/System/Vector3.hpp>}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{00042\ \{}
+\DoxyCodeLine{00043\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1Color}{Color}};}
+\DoxyCodeLine{00044\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1InputStream}{InputStream}};}
+\DoxyCodeLine{00045\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1Texture}{Texture}};}
+\DoxyCodeLine{00046\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1Transform}{Transform}};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00052\ \textcolor{keyword}{class\ }SFML\_GRAPHICS\_API\ \mbox{\hyperlink{classsf_1_1Shader_a1d7f28f26b4122959fcafec871c2c3c5}{Shader}}\ :\ \mbox{\hyperlink{classsf_1_1GlResource_ad8fb7a0674f0f77e530dacc2a3b0dc6a}{GlResource}},\ \mbox{\hyperlink{classsf_1_1NonCopyable_a2110add170580fdb946f887719da6860}{NonCopyable}}}
+\DoxyCodeLine{00053\ \{}
+\DoxyCodeLine{00054\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{classsf_1_1Shader_afaa1aa65e5de37b74d047da9def9f9b3}{Type}}}
+\DoxyCodeLine{00061\ \ \ \ \ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classsf_1_1Shader_afaa1aa65e5de37b74d047da9def9f9b3a8718008f827eb32e29bbdd1791c62dce}{Vertex}},\ \ \ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classsf_1_1Shader_afaa1aa65e5de37b74d047da9def9f9b3a812421100fd57456727375938fb62788}{Geometry}},\ }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classsf_1_1Shader_afaa1aa65e5de37b74d047da9def9f9b3ace6e88eec3a56b2e55ee3c8e64e9b89a}{Fragment}}\ \ }
+\DoxyCodeLine{00065\ \ \ \ \ \};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsf_1_1Shader_1_1CurrentTextureType}{CurrentTextureType}}\ \{\};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structsf_1_1Shader_1_1CurrentTextureType}{CurrentTextureType}}\ \mbox{\hyperlink{classsf_1_1Shader_a02692fa7a0b6c71df96871906af7811b}{CurrentTexture}};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{classsf_1_1Shader_a1d7f28f26b4122959fcafec871c2c3c5}{Shader}}();}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00098\ \ \ \ \ \mbox{\hyperlink{classsf_1_1Shader_a1d7f28f26b4122959fcafec871c2c3c5}{\string~Shader}}();}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1Shader_a053a5632848ebaca2fcd8ba29abe9e6e}{loadFromFile}}(\textcolor{keyword}{const}\ std::string\&\ filename,\ \mbox{\hyperlink{classsf_1_1Shader_afaa1aa65e5de37b74d047da9def9f9b3}{Type}}\ type);}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1Shader_a053a5632848ebaca2fcd8ba29abe9e6e}{loadFromFile}}(\textcolor{keyword}{const}\ std::string\&\ vertexShaderFilename,\ \textcolor{keyword}{const}\ std::string\&\ fragmentShaderFilename);}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1Shader_a053a5632848ebaca2fcd8ba29abe9e6e}{loadFromFile}}(\textcolor{keyword}{const}\ std::string\&\ vertexShaderFilename,\ \textcolor{keyword}{const}\ std::string\&\ geometryShaderFilename,\ \textcolor{keyword}{const}\ std::string\&\ fragmentShaderFilename);}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1Shader_ac92d46bf71dff2d791117e4e472148aa}{loadFromMemory}}(\textcolor{keyword}{const}\ std::string\&\ shader,\ \mbox{\hyperlink{classsf_1_1Shader_afaa1aa65e5de37b74d047da9def9f9b3}{Type}}\ type);}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1Shader_ac92d46bf71dff2d791117e4e472148aa}{loadFromMemory}}(\textcolor{keyword}{const}\ std::string\&\ vertexShader,\ \textcolor{keyword}{const}\ std::string\&\ fragmentShader);}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1Shader_ac92d46bf71dff2d791117e4e472148aa}{loadFromMemory}}(\textcolor{keyword}{const}\ std::string\&\ vertexShader,\ \textcolor{keyword}{const}\ std::string\&\ geometryShader,\ \textcolor{keyword}{const}\ std::string\&\ fragmentShader);}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00245\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1Shader_a2ee1b130c0606e4f8bcdf65c1efc2a53}{loadFromStream}}(\mbox{\hyperlink{classsf_1_1InputStream}{InputStream}}\&\ stream,\ \mbox{\hyperlink{classsf_1_1Shader_afaa1aa65e5de37b74d047da9def9f9b3}{Type}}\ type);}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00266\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1Shader_a2ee1b130c0606e4f8bcdf65c1efc2a53}{loadFromStream}}(\mbox{\hyperlink{classsf_1_1InputStream}{InputStream}}\&\ vertexShaderStream,\ \mbox{\hyperlink{classsf_1_1InputStream}{InputStream}}\&\ fragmentShaderStream);}
+\DoxyCodeLine{00267\ }
+\DoxyCodeLine{00288\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1Shader_a2ee1b130c0606e4f8bcdf65c1efc2a53}{loadFromStream}}(\mbox{\hyperlink{classsf_1_1InputStream}{InputStream}}\&\ vertexShaderStream,\ \mbox{\hyperlink{classsf_1_1InputStream}{InputStream}}\&\ geometryShaderStream,\ \mbox{\hyperlink{classsf_1_1InputStream}{InputStream}}\&\ fragmentShaderStream);}
+\DoxyCodeLine{00289\ }
+\DoxyCodeLine{00297\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_abf78e3bea1e9b0bab850b6b0a0de29c7}{setUniform}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{float}\ x);}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00306\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_abf78e3bea1e9b0bab850b6b0a0de29c7}{setUniform}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespacesf_1_1Glsl_adeed356d346d87634b4c197a530e4edf}{Glsl::Vec2}}\&\ \mbox{\hyperlink{classvector}{vector}});}
+\DoxyCodeLine{00307\ }
+\DoxyCodeLine{00315\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_abf78e3bea1e9b0bab850b6b0a0de29c7}{setUniform}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespacesf_1_1Glsl_a9bdd0463b7cb5316244a082007bd50f0}{Glsl::Vec3}}\&\ \mbox{\hyperlink{classvector}{vector}});}
+\DoxyCodeLine{00316\ }
+\DoxyCodeLine{00333\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_abf78e3bea1e9b0bab850b6b0a0de29c7}{setUniform}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ Glsl::Vec4\&\ \mbox{\hyperlink{classvector}{vector}});}
+\DoxyCodeLine{00334\ }
+\DoxyCodeLine{00342\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_abf78e3bea1e9b0bab850b6b0a0de29c7}{setUniform}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{int}\ x);}
+\DoxyCodeLine{00343\ }
+\DoxyCodeLine{00351\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_abf78e3bea1e9b0bab850b6b0a0de29c7}{setUniform}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespacesf_1_1Glsl_aab803ee70c4b7bfcd63ec09e10408fd3}{Glsl::Ivec2}}\&\ \mbox{\hyperlink{classvector}{vector}});}
+\DoxyCodeLine{00352\ }
+\DoxyCodeLine{00360\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_abf78e3bea1e9b0bab850b6b0a0de29c7}{setUniform}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespacesf_1_1Glsl_a64f403dd0219e7f128ffddca641394df}{Glsl::Ivec3}}\&\ \mbox{\hyperlink{classvector}{vector}});}
+\DoxyCodeLine{00361\ }
+\DoxyCodeLine{00377\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_abf78e3bea1e9b0bab850b6b0a0de29c7}{setUniform}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ Glsl::Ivec4\&\ \mbox{\hyperlink{classvector}{vector}});}
+\DoxyCodeLine{00378\ }
+\DoxyCodeLine{00386\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_abf78e3bea1e9b0bab850b6b0a0de29c7}{setUniform}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{bool}\ x);}
+\DoxyCodeLine{00387\ }
+\DoxyCodeLine{00395\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_abf78e3bea1e9b0bab850b6b0a0de29c7}{setUniform}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespacesf_1_1Glsl_a59d8cf909c3d71ebf3db057480b464da}{Glsl::Bvec2}}\&\ \mbox{\hyperlink{classvector}{vector}});}
+\DoxyCodeLine{00396\ }
+\DoxyCodeLine{00404\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_abf78e3bea1e9b0bab850b6b0a0de29c7}{setUniform}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespacesf_1_1Glsl_a4166ffc506619b4912d576e6eba2c957}{Glsl::Bvec3}}\&\ \mbox{\hyperlink{classvector}{vector}});}
+\DoxyCodeLine{00405\ }
+\DoxyCodeLine{00413\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_abf78e3bea1e9b0bab850b6b0a0de29c7}{setUniform}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ Glsl::Bvec4\&\ \mbox{\hyperlink{classvector}{vector}});}
+\DoxyCodeLine{00414\ }
+\DoxyCodeLine{00422\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_abf78e3bea1e9b0bab850b6b0a0de29c7}{setUniform}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ Glsl::Mat3\&\ matrix);}
+\DoxyCodeLine{00423\ }
+\DoxyCodeLine{00431\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_abf78e3bea1e9b0bab850b6b0a0de29c7}{setUniform}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ Glsl::Mat4\&\ matrix);}
+\DoxyCodeLine{00432\ }
+\DoxyCodeLine{00463\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_abf78e3bea1e9b0bab850b6b0a0de29c7}{setUniform}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1Texture}{Texture}}\&\ texture);}
+\DoxyCodeLine{00464\ }
+\DoxyCodeLine{00486\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_abf78e3bea1e9b0bab850b6b0a0de29c7}{setUniform}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \mbox{\hyperlink{structsf_1_1Shader_1_1CurrentTextureType}{CurrentTextureType}});}
+\DoxyCodeLine{00487\ }
+\DoxyCodeLine{00496\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_a731d3b9953c50fe7d3fb03340b97deff}{setUniformArray}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}*\ scalarArray,\ std::size\_t\ length);}
+\DoxyCodeLine{00497\ }
+\DoxyCodeLine{00506\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_a731d3b9953c50fe7d3fb03340b97deff}{setUniformArray}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespacesf_1_1Glsl_adeed356d346d87634b4c197a530e4edf}{Glsl::Vec2}}*\ vectorArray,\ std::size\_t\ length);}
+\DoxyCodeLine{00507\ }
+\DoxyCodeLine{00516\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_a731d3b9953c50fe7d3fb03340b97deff}{setUniformArray}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespacesf_1_1Glsl_a9bdd0463b7cb5316244a082007bd50f0}{Glsl::Vec3}}*\ vectorArray,\ std::size\_t\ length);}
+\DoxyCodeLine{00517\ }
+\DoxyCodeLine{00526\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_a731d3b9953c50fe7d3fb03340b97deff}{setUniformArray}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ Glsl::Vec4*\ vectorArray,\ std::size\_t\ length);}
+\DoxyCodeLine{00527\ }
+\DoxyCodeLine{00536\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_a731d3b9953c50fe7d3fb03340b97deff}{setUniformArray}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ Glsl::Mat3*\ matrixArray,\ std::size\_t\ length);}
+\DoxyCodeLine{00537\ }
+\DoxyCodeLine{00546\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_a731d3b9953c50fe7d3fb03340b97deff}{setUniformArray}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ Glsl::Mat4*\ matrixArray,\ std::size\_t\ length);}
+\DoxyCodeLine{00547\ }
+\DoxyCodeLine{00554\ \ \ \ \ SFML\_DEPRECATED\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_a47e4dd78f0752ae08664b4ee616db1cf}{setParameter}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{float}\ x);}
+\DoxyCodeLine{00555\ }
+\DoxyCodeLine{00562\ \ \ \ \ SFML\_DEPRECATED\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_a47e4dd78f0752ae08664b4ee616db1cf}{setParameter}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y);}
+\DoxyCodeLine{00563\ }
+\DoxyCodeLine{00570\ \ \ \ \ SFML\_DEPRECATED\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_a47e4dd78f0752ae08664b4ee616db1cf}{setParameter}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ z);}
+\DoxyCodeLine{00571\ }
+\DoxyCodeLine{00578\ \ \ \ \ SFML\_DEPRECATED\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_a47e4dd78f0752ae08664b4ee616db1cf}{setParameter}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ z,\ \textcolor{keywordtype}{float}\ w);}
+\DoxyCodeLine{00579\ }
+\DoxyCodeLine{00586\ \ \ \ \ SFML\_DEPRECATED\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_a47e4dd78f0752ae08664b4ee616db1cf}{setParameter}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ Vector2f\&\ \mbox{\hyperlink{classvector}{vector}});}
+\DoxyCodeLine{00587\ }
+\DoxyCodeLine{00594\ \ \ \ \ SFML\_DEPRECATED\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_a47e4dd78f0752ae08664b4ee616db1cf}{setParameter}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ Vector3f\&\ \mbox{\hyperlink{classvector}{vector}});}
+\DoxyCodeLine{00595\ }
+\DoxyCodeLine{00602\ \ \ \ \ SFML\_DEPRECATED\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_a47e4dd78f0752ae08664b4ee616db1cf}{setParameter}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1Color}{Color}}\&\ color);}
+\DoxyCodeLine{00603\ }
+\DoxyCodeLine{00610\ \ \ \ \ SFML\_DEPRECATED\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_a47e4dd78f0752ae08664b4ee616db1cf}{setParameter}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1Transform}{Transform}}\&\ transform);}
+\DoxyCodeLine{00611\ }
+\DoxyCodeLine{00618\ \ \ \ \ SFML\_DEPRECATED\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_a47e4dd78f0752ae08664b4ee616db1cf}{setParameter}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1Texture}{Texture}}\&\ texture);}
+\DoxyCodeLine{00619\ }
+\DoxyCodeLine{00626\ \ \ \ \ SFML\_DEPRECATED\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_a47e4dd78f0752ae08664b4ee616db1cf}{setParameter}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \mbox{\hyperlink{structsf_1_1Shader_1_1CurrentTextureType}{CurrentTextureType}});}
+\DoxyCodeLine{00627\ }
+\DoxyCodeLine{00638\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classsf_1_1Shader_ac14d0bf7afe7b6bb415d309f9c707188}{getNativeHandle}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00639\ }
+\DoxyCodeLine{00661\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1Shader_ae09b07e66791b02042b7031a5300199c}{bind}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1Shader_a1d7f28f26b4122959fcafec871c2c3c5}{Shader}}*\ shader);}
+\DoxyCodeLine{00662\ }
+\DoxyCodeLine{00673\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1Shader_adcb29ac376f4525518da89428dd05a22}{isAvailable}}();}
+\DoxyCodeLine{00674\ }
+\DoxyCodeLine{00692\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1Shader_abe3e9d3a77f9c10476a59371164f4b1a}{isGeometryAvailable}}();}
+\DoxyCodeLine{00693\ }
+\DoxyCodeLine{00694\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00695\ }
+\DoxyCodeLine{00709\ \ \ \ \ \textcolor{keywordtype}{bool}\ compile(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ vertexShaderCode,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ geometryShaderCode,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fragmentShaderCode);}
+\DoxyCodeLine{00710\ }
+\DoxyCodeLine{00718\ \ \ \ \ \textcolor{keywordtype}{void}\ bindTextures()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00719\ }
+\DoxyCodeLine{00728\ \ \ \ \ \textcolor{keywordtype}{int}\ getUniformLocation(\textcolor{keyword}{const}\ std::string\&\ name);}
+\DoxyCodeLine{00729\ }
+\DoxyCodeLine{00737\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsf_1_1Shader_1_1UniformBinder}{UniformBinder}};}
+\DoxyCodeLine{00738\ }
+\DoxyCodeLine{00740\ \ \ \ \ \textcolor{comment}{//\ Types}}
+\DoxyCodeLine{00742\ \ \ \ \ \textcolor{keyword}{typedef}\ std::map<int,\ const\ Texture*>\ TextureTable;}
+\DoxyCodeLine{00743\ \ \ \ \ \textcolor{keyword}{typedef}\ std::map<std::string,\ int>\ UniformTable;}
+\DoxyCodeLine{00744\ }
+\DoxyCodeLine{00746\ \ \ \ \ \textcolor{comment}{//\ Member\ data}}
+\DoxyCodeLine{00748\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ m\_shaderProgram;\ \ }
+\DoxyCodeLine{00749\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ m\_currentTexture;\ }
+\DoxyCodeLine{00750\ \ \ \ \ TextureTable\ m\_textures;\ \ \ \ \ \ \ }
+\DoxyCodeLine{00751\ \ \ \ \ UniformTable\ m\_uniforms;\ \ \ \ \ \ \ }
+\DoxyCodeLine{00752\ \};}
+\DoxyCodeLine{00753\ }
+\DoxyCodeLine{00754\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{00755\ }
+\DoxyCodeLine{00756\ }
+\DoxyCodeLine{00757\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SFML\_SHADER\_HPP}}
+\DoxyCodeLine{00758\ }
+\DoxyCodeLine{00759\ }
+
+\end{DoxyCode}

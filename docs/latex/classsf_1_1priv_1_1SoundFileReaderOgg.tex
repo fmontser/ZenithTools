@@ -1,0 +1,155 @@
+\doxysection{sf\+::priv\+::Sound\+File\+Reader\+Ogg Class Reference}
+\hypertarget{classsf_1_1priv_1_1SoundFileReaderOgg}{}\label{classsf_1_1priv_1_1SoundFileReaderOgg}\index{sf::priv::SoundFileReaderOgg@{sf::priv::SoundFileReaderOgg}}
+
+
+Implementation of sound file reader that handles OGG/\+Vorbis files.  
+
+
+
+
+{\ttfamily \#include $<$Sound\+File\+Reader\+Ogg.\+hpp$>$}
+
+
+
+Inheritance diagram for sf\+::priv\+::Sound\+File\+Reader\+Ogg\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=225pt]{classsf_1_1priv_1_1SoundFileReaderOgg__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for sf\+::priv\+::Sound\+File\+Reader\+Ogg\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=225pt]{classsf_1_1priv_1_1SoundFileReaderOgg__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classsf_1_1priv_1_1SoundFileReaderOgg_ab27436db3f09240c89979f54556b028a}\label{classsf_1_1priv_1_1SoundFileReaderOgg_ab27436db3f09240c89979f54556b028a} 
+{\bfseries Sound\+File\+Reader\+Ogg} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\Hypertarget{classsf_1_1priv_1_1SoundFileReaderOgg_a9e27715614d4f5c832b9b91c39f87ae5}\label{classsf_1_1priv_1_1SoundFileReaderOgg_a9e27715614d4f5c832b9b91c39f87ae5} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Sound\+File\+Reader\+Ogg} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classsf_1_1priv_1_1SoundFileReaderOgg_ac0a436385f2a39b38ec32f5631b9f8fa}{open}} (\mbox{\hyperlink{classsf_1_1InputStream}{Input\+Stream}} \&stream, \mbox{\hyperlink{structsf_1_1SoundFileReader_1_1Info}{Info}} \&info)
+\begin{DoxyCompactList}\small\item\em Open a sound file for reading. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classsf_1_1priv_1_1SoundFileReaderOgg_a091fad95720ed9f236bc0ebcc40dee55}{seek}} (Uint64 sample\+Offset)
+\begin{DoxyCompactList}\small\item\em Change the current read position to the given sample offset. \end{DoxyCompactList}\item 
+virtual Uint64 \mbox{\hyperlink{classsf_1_1priv_1_1SoundFileReaderOgg_ade27184e1efc5209180a6cbd5d9e7f00}{read}} (Int16 \texorpdfstring{$\ast$}{*}samples, Uint64 max\+Count)
+\begin{DoxyCompactList}\small\item\em Read audio samples from the open file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classsf_1_1SoundFileReader}{sf\+::\+Sound\+File\+Reader}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Sound\+File\+Reader} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classsf_1_1priv_1_1SoundFileReaderOgg_a055989ce4a7f7bb750fde519a3abc127}{check}} (\mbox{\hyperlink{classsf_1_1InputStream}{Input\+Stream}} \&stream)
+\begin{DoxyCompactList}\small\item\em Check if this reader can handle a file given by an input stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of sound file reader that handles OGG/\+Vorbis files. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsf_1_1priv_1_1SoundFileReaderOgg_a055989ce4a7f7bb750fde519a3abc127}\index{sf::priv::SoundFileReaderOgg@{sf::priv::SoundFileReaderOgg}!check@{check}}
+\index{check@{check}!sf::priv::SoundFileReaderOgg@{sf::priv::SoundFileReaderOgg}}
+\doxysubsubsection{\texorpdfstring{check()}{check()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1SoundFileReaderOgg_a055989ce4a7f7bb750fde519a3abc127} 
+bool sf\+::priv\+::\+Sound\+File\+Reader\+Ogg\+::check (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classsf_1_1InputStream}{Input\+Stream}} \&}]{stream}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if this reader can handle a file given by an input stream. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & Source stream to check\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the file is supported by this reader 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1priv_1_1SoundFileReaderOgg_ac0a436385f2a39b38ec32f5631b9f8fa}\index{sf::priv::SoundFileReaderOgg@{sf::priv::SoundFileReaderOgg}!open@{open}}
+\index{open@{open}!sf::priv::SoundFileReaderOgg@{sf::priv::SoundFileReaderOgg}}
+\doxysubsubsection{\texorpdfstring{open()}{open()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1SoundFileReaderOgg_ac0a436385f2a39b38ec32f5631b9f8fa} 
+bool sf\+::priv\+::\+Sound\+File\+Reader\+Ogg\+::open (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classsf_1_1InputStream}{Input\+Stream}} \&}]{stream}{, }\item[{\mbox{\hyperlink{structsf_1_1SoundFileReader_1_1Info}{Info}} \&}]{info}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Open a sound file for reading. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & Source stream to read from \\
+\hline
+{\em info} & Structure to fill with the properties of the loaded sound\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the file was successfully opened 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classsf_1_1SoundFileReader_aa1d2fee2ba8f359c833ab74590d55935}{sf\+::\+Sound\+File\+Reader}}.
+
+\Hypertarget{classsf_1_1priv_1_1SoundFileReaderOgg_ade27184e1efc5209180a6cbd5d9e7f00}\index{sf::priv::SoundFileReaderOgg@{sf::priv::SoundFileReaderOgg}!read@{read}}
+\index{read@{read}!sf::priv::SoundFileReaderOgg@{sf::priv::SoundFileReaderOgg}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1SoundFileReaderOgg_ade27184e1efc5209180a6cbd5d9e7f00} 
+Uint64 sf\+::priv\+::\+Sound\+File\+Reader\+Ogg\+::read (\begin{DoxyParamCaption}\item[{Int16 \texorpdfstring{$\ast$}{*}}]{samples}{, }\item[{Uint64}]{max\+Count}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Read audio samples from the open file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em samples} & Pointer to the sample array to fill \\
+\hline
+{\em max\+Count} & Maximum number of samples to read\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of samples actually read (may be less than {\itshape max\+Count}) 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classsf_1_1SoundFileReader_a3b7d86769ea07e24e7b0f0486bed7591}{sf\+::\+Sound\+File\+Reader}}.
+
+\Hypertarget{classsf_1_1priv_1_1SoundFileReaderOgg_a091fad95720ed9f236bc0ebcc40dee55}\index{sf::priv::SoundFileReaderOgg@{sf::priv::SoundFileReaderOgg}!seek@{seek}}
+\index{seek@{seek}!sf::priv::SoundFileReaderOgg@{sf::priv::SoundFileReaderOgg}}
+\doxysubsubsection{\texorpdfstring{seek()}{seek()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1SoundFileReaderOgg_a091fad95720ed9f236bc0ebcc40dee55} 
+void sf\+::priv\+::\+Sound\+File\+Reader\+Ogg\+::seek (\begin{DoxyParamCaption}\item[{Uint64}]{sample\+Offset}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Change the current read position to the given sample offset. 
+
+The sample offset takes the channels into account. If you have a time offset instead, you can easily find the corresponding sample offset with the following formula\+: {\ttfamily time\+In\+Seconds \texorpdfstring{$\ast$}{*} sample\+Rate \texorpdfstring{$\ast$}{*} channel\+Count} If the given offset exceeds to total number of samples, this function must jump to the end of the file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sample\+Offset} & Index of the sample to jump to, relative to the beginning \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classsf_1_1SoundFileReader_a1e18ade5ffe882bdfa20a2ebe7e2b015}{sf\+::\+Sound\+File\+Reader}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+Audio/Sound\+File\+Reader\+Ogg.\+hpp\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+Audio/Sound\+File\+Reader\+Ogg.\+cpp\end{DoxyCompactItemize}

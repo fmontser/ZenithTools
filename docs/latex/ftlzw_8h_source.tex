@@ -1,0 +1,105 @@
+\doxysection{ftlzw.\+h}
+\hypertarget{ftlzw_8h_source}{}\label{ftlzw_8h_source}\index{build/\_deps/sfml-\/src/extlibs/headers/freetype2/ftlzw.h@{build/\_deps/sfml-\/src/extlibs/headers/freetype2/ftlzw.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00003\ \textcolor{comment}{/*\ \ ftlzw.h\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00005\ \textcolor{comment}{/*\ \ \ \ LZW-\/compressed\ stream\ support.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00007\ \textcolor{comment}{/*\ \ Copyright\ 2004,\ 2006\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ \ David\ Turner,\ Robert\ Wilhelm,\ and\ Werner\ Lemberg.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00010\ \textcolor{comment}{/*\ \ This\ file\ is\ part\ of\ the\ FreeType\ project,\ and\ may\ only\ be\ used,\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*\ \ modified,\ and\ distributed\ under\ the\ terms\ of\ the\ FreeType\ project\ \ \ \ \ \ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*\ \ license,\ LICENSE.TXT.\ \ By\ continuing\ to\ use,\ modify,\ or\ distribute\ \ \ \ \ */}}
+\DoxyCodeLine{00013\ \textcolor{comment}{/*\ \ this\ file\ you\ indicate\ that\ you\ have\ read\ the\ license\ and\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00014\ \textcolor{comment}{/*\ \ understand\ and\ accept\ it\ fully.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00015\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00016\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ \_\_FTLZW\_H\_\_}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ \_\_FTLZW\_H\_\_}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <ft2build.h>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ FT\_FREETYPE\_H}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifdef\ FREETYPE\_H}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#error\ "{}freetype.h\ of\ FreeType\ 1\ has\ been\ loaded!"{}}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#error\ "{}Please\ fix\ the\ directory\ search\ order\ for\ header\ files"{}}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#error\ "{}so\ that\ freetype.h\ of\ FreeType\ 2\ is\ found\ first."{}}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ FT\_BEGIN\_HEADER}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00035\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00036\ \ \ \textcolor{comment}{/*\ <Section>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00037\ \ \ \textcolor{comment}{/*\ \ \ \ lzw\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00038\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00039\ \ \ \textcolor{comment}{/*\ <Title>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00040\ \ \ \textcolor{comment}{/*\ \ \ \ LZW\ Streams\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00041\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00042\ \ \ \textcolor{comment}{/*\ <Abstract>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00043\ \ \ \textcolor{comment}{/*\ \ \ \ Using\ LZW-\/compressed\ font\ files.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00044\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00045\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00046\ \ \ \textcolor{comment}{/*\ \ \ \ This\ section\ contains\ the\ declaration\ of\ LZW-\/specific\ functions.\ \ \ */}}
+\DoxyCodeLine{00047\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00048\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{comment}{\ /************************************************************************}}
+\DoxyCodeLine{00051\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00052\ \textcolor{comment}{\ \ *\ @function:}}
+\DoxyCodeLine{00053\ \textcolor{comment}{\ \ *\ \ \ FT\_Stream\_OpenLZW}}
+\DoxyCodeLine{00054\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00055\ \textcolor{comment}{\ \ *\ @description:}}
+\DoxyCodeLine{00056\ \textcolor{comment}{\ \ *\ \ \ Open\ a\ new\ stream\ to\ parse\ LZW-\/compressed\ font\ files.\ \ This\ is}}
+\DoxyCodeLine{00057\ \textcolor{comment}{\ \ *\ \ \ mainly\ used\ to\ support\ the\ compressed\ \`{}*.pcf.Z'\ fonts\ that\ come}}
+\DoxyCodeLine{00058\ \textcolor{comment}{\ \ *\ \ \ with\ XFree86.}}
+\DoxyCodeLine{00059\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00060\ \textcolor{comment}{\ \ *\ @input:}}
+\DoxyCodeLine{00061\ \textcolor{comment}{\ \ *\ \ \ stream\ ::\ The\ target\ embedding\ stream.}}
+\DoxyCodeLine{00062\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00063\ \textcolor{comment}{\ \ *\ \ \ source\ ::\ The\ source\ stream.}}
+\DoxyCodeLine{00064\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00065\ \textcolor{comment}{\ \ *\ @return:}}
+\DoxyCodeLine{00066\ \textcolor{comment}{\ \ *\ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.}}
+\DoxyCodeLine{00067\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00068\ \textcolor{comment}{\ \ *\ @note:}}
+\DoxyCodeLine{00069\ \textcolor{comment}{\ \ *\ \ \ The\ source\ stream\ must\ be\ opened\ \_before\_\ calling\ this\ function.}}
+\DoxyCodeLine{00070\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00071\ \textcolor{comment}{\ \ *\ \ \ Calling\ the\ internal\ function\ \`{}FT\_Stream\_Close'\ on\ the\ new\ stream\ will}}
+\DoxyCodeLine{00072\ \textcolor{comment}{\ \ *\ \ \ *not*\ call\ \`{}FT\_Stream\_Close'\ on\ the\ source\ stream.\ \ None\ of\ the\ stream}}
+\DoxyCodeLine{00073\ \textcolor{comment}{\ \ *\ \ \ objects\ will\ be\ released\ to\ the\ heap.}}
+\DoxyCodeLine{00074\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00075\ \textcolor{comment}{\ \ *\ \ \ The\ stream\ implementation\ is\ very\ basic\ and\ resets\ the\ decompression}}
+\DoxyCodeLine{00076\ \textcolor{comment}{\ \ *\ \ \ process\ each\ time\ seeking\ backwards\ is\ needed\ within\ the\ stream}}
+\DoxyCodeLine{00077\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00078\ \textcolor{comment}{\ \ *\ \ \ In\ certain\ builds\ of\ the\ library,\ LZW\ compression\ recognition\ is}}
+\DoxyCodeLine{00079\ \textcolor{comment}{\ \ *\ \ \ automatically\ handled\ when\ calling\ @FT\_New\_Face\ or\ @FT\_Open\_Face.}}
+\DoxyCodeLine{00080\ \textcolor{comment}{\ \ *\ \ \ This\ means\ that\ if\ no\ font\ driver\ is\ capable\ of\ handling\ the\ raw}}
+\DoxyCodeLine{00081\ \textcolor{comment}{\ \ *\ \ \ compressed\ file,\ the\ library\ will\ try\ to\ open\ a\ LZW\ stream\ from\ it}}
+\DoxyCodeLine{00082\ \textcolor{comment}{\ \ *\ \ \ and\ re-\/open\ the\ face\ with\ it.}}
+\DoxyCodeLine{00083\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00084\ \textcolor{comment}{\ \ *\ \ \ This\ function\ may\ return\ \`{}FT\_Err\_Unimplemented\_Feature'\ if\ your\ build}}
+\DoxyCodeLine{00085\ \textcolor{comment}{\ \ *\ \ \ of\ FreeType\ was\ not\ compiled\ with\ LZW\ support.}}
+\DoxyCodeLine{00086\ \textcolor{comment}{\ \ */}}
+\DoxyCodeLine{00087\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{00088\ \ \ FT\_Stream\_OpenLZW(\ FT\_Stream\ \ stream,}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Stream\ \ source\ );}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ FT\_END\_HEADER}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_FTLZW\_H\_\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \textcolor{comment}{/*\ END\ */}}
+
+\end{DoxyCode}

@@ -1,0 +1,5 @@
+<map id="zenith::PomodoroSession::Round" name="zenith::PomodoroSession::Round">
+<area shape="rect" id="Node000001" title="Contains any necesary data of a single round." alt="" coords="5,112,176,155"/>
+<area shape="rect" id="Node000002" href="$classzenith_1_1Timer.html" title="Manages a timer with minutes and seconds." alt="" coords="42,5,139,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,47,93,112,88,112,88,47"/>
+</map>

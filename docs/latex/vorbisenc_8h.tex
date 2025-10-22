@@ -1,0 +1,416 @@
+\doxysection{build/\+\_\+deps/sfml-\/src/extlibs/headers/vorbis/vorbisenc.h File Reference}
+\hypertarget{vorbisenc_8h}{}\label{vorbisenc_8h}\index{build/\_deps/sfml-\/src/extlibs/headers/vorbis/vorbisenc.h@{build/\_deps/sfml-\/src/extlibs/headers/vorbis/vorbisenc.h}}
+{\ttfamily \#include "{}codec.\+h"{}}\newline
+Include dependency graph for vorbisenc.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=300pt]{vorbisenc_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=242pt]{vorbisenc_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structovectl__ratemanage__arg}{ovectl\+\_\+ratemanage\+\_\+arg}}
+\item 
+struct \mbox{\hyperlink{structovectl__ratemanage2__arg}{ovectl\+\_\+ratemanage2\+\_\+arg}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{Indent}\textbf{ vorbis\+\_\+encode\+\_\+ctl() codes}\par
+{\em \label{vorbisenc_8h_encctlcodes}%
+\Hypertarget{vorbisenc_8h_encctlcodes}%
+ These values are passed as the {\ttfamily number} parameter of \doxylink{vorbisenc_8h_a5f398a378e20b8ce5e3341a582e773bd}{vorbis\+\_\+encode\+\_\+ctl()}. The type of the referent of that function\textquotesingle{}s {\ttfamily arg} pointer depends on these codes. }\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{vorbisenc_8h_af95048070bedb467f80ce85e20057126}{OV\+\_\+\+ECTL\+\_\+\+RATEMANAGE2\+\_\+\+GET}}~0x14
+\item 
+\#define \mbox{\hyperlink{vorbisenc_8h_a5075e0acb85fd45398a290594f83d6ba}{OV\+\_\+\+ECTL\+\_\+\+RATEMANAGE2\+\_\+\+SET}}~0x15
+\item 
+\#define \mbox{\hyperlink{vorbisenc_8h_af8614b9ee808ddb88d50d21ea1cdf721}{OV\+\_\+\+ECTL\+\_\+\+LOWPASS\+\_\+\+GET}}~0x20
+\item 
+\#define \mbox{\hyperlink{vorbisenc_8h_a1862ca0d88ed0366990da2a4015547c8}{OV\+\_\+\+ECTL\+\_\+\+LOWPASS\+\_\+\+SET}}~0x21
+\item 
+\#define \mbox{\hyperlink{vorbisenc_8h_a35ba680b627646bff135673d849e40e8}{OV\+\_\+\+ECTL\+\_\+\+IBLOCK\+\_\+\+GET}}~0x30
+\item 
+\#define \mbox{\hyperlink{vorbisenc_8h_a080b74cc4d75070376d7d1008bef4cd5}{OV\+\_\+\+ECTL\+\_\+\+IBLOCK\+\_\+\+SET}}~0x31
+\item 
+\#define \mbox{\hyperlink{vorbisenc_8h_afca9bdb09b83ca6b57018e380583134a}{OV\+\_\+\+ECTL\+\_\+\+COUPLING\+\_\+\+GET}}~0x40
+\item 
+\#define \mbox{\hyperlink{vorbisenc_8h_aa263e0ee8a7343ecb744f4a4b9c96ffd}{OV\+\_\+\+ECTL\+\_\+\+COUPLING\+\_\+\+SET}}~0x41
+\item 
+\#define \mbox{\hyperlink{vorbisenc_8h_a614481c0d84bdfbb80eed9208b68f779}{OV\+\_\+\+ECTL\+\_\+\+RATEMANAGE\+\_\+\+GET}}~0x10
+\item 
+\#define \mbox{\hyperlink{vorbisenc_8h_a1daa1fd8ce1064cce01dde3ad447d389}{OV\+\_\+\+ECTL\+\_\+\+RATEMANAGE\+\_\+\+SET}}~0x11
+\item 
+\#define \mbox{\hyperlink{vorbisenc_8h_a34c3170d227b6368041e59c1dc7ed6e4}{OV\+\_\+\+ECTL\+\_\+\+RATEMANAGE\+\_\+\+AVG}}~0x12
+\item 
+\#define \mbox{\hyperlink{vorbisenc_8h_af8869980a805f431af57a50dffbf5d33}{OV\+\_\+\+ECTL\+\_\+\+RATEMANAGE\+\_\+\+HARD}}~0x13
+\end{DoxyCompactItemize}
+\end{Indent}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{vorbisenc_8h_a6571d9c349c540491256f1083e1ede71}{vorbis\+\_\+encode\+\_\+init}} (\mbox{\hyperlink{structvorbis__info}{vorbis\+\_\+info}} \texorpdfstring{$\ast$}{*}vi, long channels, long rate, long max\+\_\+bitrate, long nominal\+\_\+bitrate, long min\+\_\+bitrate)
+\item 
+int \mbox{\hyperlink{vorbisenc_8h_ac73714f24500e18024e83104e9e09485}{vorbis\+\_\+encode\+\_\+setup\+\_\+managed}} (\mbox{\hyperlink{structvorbis__info}{vorbis\+\_\+info}} \texorpdfstring{$\ast$}{*}vi, long channels, long rate, long max\+\_\+bitrate, long nominal\+\_\+bitrate, long min\+\_\+bitrate)
+\item 
+int \mbox{\hyperlink{vorbisenc_8h_a0f7677f216936a6cd7fa28ddbccada74}{vorbis\+\_\+encode\+\_\+setup\+\_\+vbr}} (\mbox{\hyperlink{structvorbis__info}{vorbis\+\_\+info}} \texorpdfstring{$\ast$}{*}vi, long channels, long rate, float quality)
+\item 
+int \mbox{\hyperlink{vorbisenc_8h_ab4e3d96c3008a29c615271d1f551c2a0}{vorbis\+\_\+encode\+\_\+init\+\_\+vbr}} (\mbox{\hyperlink{structvorbis__info}{vorbis\+\_\+info}} \texorpdfstring{$\ast$}{*}vi, long channels, long rate, float base\+\_\+quality)
+\item 
+int \mbox{\hyperlink{vorbisenc_8h_ac3953ff69d05864e78d1858a544ed619}{vorbis\+\_\+encode\+\_\+setup\+\_\+init}} (\mbox{\hyperlink{structvorbis__info}{vorbis\+\_\+info}} \texorpdfstring{$\ast$}{*}vi)
+\item 
+int \mbox{\hyperlink{vorbisenc_8h_a5f398a378e20b8ce5e3341a582e773bd}{vorbis\+\_\+encode\+\_\+ctl}} (\mbox{\hyperlink{structvorbis__info}{vorbis\+\_\+info}} \texorpdfstring{$\ast$}{*}vi, int number, void \texorpdfstring{$\ast$}{*}arg)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Libvorbisenc is a convenient API for setting up an encoding environment using libvorbis. Libvorbisenc encapsulates the actions needed to set up the encoder properly. 
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{vorbisenc_8h_afca9bdb09b83ca6b57018e380583134a}\index{vorbisenc.h@{vorbisenc.h}!OV\_ECTL\_COUPLING\_GET@{OV\_ECTL\_COUPLING\_GET}}
+\index{OV\_ECTL\_COUPLING\_GET@{OV\_ECTL\_COUPLING\_GET}!vorbisenc.h@{vorbisenc.h}}
+\doxysubsubsection{\texorpdfstring{OV\_ECTL\_COUPLING\_GET}{OV\_ECTL\_COUPLING\_GET}}
+{\footnotesize\ttfamily \label{vorbisenc_8h_afca9bdb09b83ca6b57018e380583134a} 
+\#define OV\+\_\+\+ECTL\+\_\+\+COUPLING\+\_\+\+GET~0x40}
+
+Returns the current encoder coupling setting in the int pointed to by arg.
+
+Argument\+: {\ttfamily int \texorpdfstring{$\ast$}{*}} \Hypertarget{vorbisenc_8h_aa263e0ee8a7343ecb744f4a4b9c96ffd}\index{vorbisenc.h@{vorbisenc.h}!OV\_ECTL\_COUPLING\_SET@{OV\_ECTL\_COUPLING\_SET}}
+\index{OV\_ECTL\_COUPLING\_SET@{OV\_ECTL\_COUPLING\_SET}!vorbisenc.h@{vorbisenc.h}}
+\doxysubsubsection{\texorpdfstring{OV\_ECTL\_COUPLING\_SET}{OV\_ECTL\_COUPLING\_SET}}
+{\footnotesize\ttfamily \label{vorbisenc_8h_aa263e0ee8a7343ecb744f4a4b9c96ffd} 
+\#define OV\+\_\+\+ECTL\+\_\+\+COUPLING\+\_\+\+SET~0x41}
+
+Enables/disables channel coupling in multichannel encoding according to arg.
+
+Argument\+: {\ttfamily int \texorpdfstring{$\ast$}{*}}
+
+Zero disables channel coupling for multichannel inputs, nonzer enables channel coupling. Setting has no effect on monophonic encoding or multichannel counts that do not offer coupling. At present, coupling is available for stereo and 5.\+1 encoding. \Hypertarget{vorbisenc_8h_a35ba680b627646bff135673d849e40e8}\index{vorbisenc.h@{vorbisenc.h}!OV\_ECTL\_IBLOCK\_GET@{OV\_ECTL\_IBLOCK\_GET}}
+\index{OV\_ECTL\_IBLOCK\_GET@{OV\_ECTL\_IBLOCK\_GET}!vorbisenc.h@{vorbisenc.h}}
+\doxysubsubsection{\texorpdfstring{OV\_ECTL\_IBLOCK\_GET}{OV\_ECTL\_IBLOCK\_GET}}
+{\footnotesize\ttfamily \label{vorbisenc_8h_a35ba680b627646bff135673d849e40e8} 
+\#define OV\+\_\+\+ECTL\+\_\+\+IBLOCK\+\_\+\+GET~0x30}
+
+Returns the current encoder impulse block setting in the double pointed to by arg.
+
+Argument\+: {\ttfamily double \texorpdfstring{$\ast$}{*}} \Hypertarget{vorbisenc_8h_a080b74cc4d75070376d7d1008bef4cd5}\index{vorbisenc.h@{vorbisenc.h}!OV\_ECTL\_IBLOCK\_SET@{OV\_ECTL\_IBLOCK\_SET}}
+\index{OV\_ECTL\_IBLOCK\_SET@{OV\_ECTL\_IBLOCK\_SET}!vorbisenc.h@{vorbisenc.h}}
+\doxysubsubsection{\texorpdfstring{OV\_ECTL\_IBLOCK\_SET}{OV\_ECTL\_IBLOCK\_SET}}
+{\footnotesize\ttfamily \label{vorbisenc_8h_a080b74cc4d75070376d7d1008bef4cd5} 
+\#define OV\+\_\+\+ECTL\+\_\+\+IBLOCK\+\_\+\+SET~0x31}
+
+Sets the impulse block bias to the the value pointed to by arg.
+
+Argument\+: {\ttfamily double \texorpdfstring{$\ast$}{*}}
+
+Valid range is -\/15.\+0 to 0.\+0 \mbox{[}default\mbox{]}. A negative impulse block bias will direct to encoder to use more bits when incoding short blocks that contain strong impulses, thus improving the accuracy of impulse encoding. \Hypertarget{vorbisenc_8h_af8614b9ee808ddb88d50d21ea1cdf721}\index{vorbisenc.h@{vorbisenc.h}!OV\_ECTL\_LOWPASS\_GET@{OV\_ECTL\_LOWPASS\_GET}}
+\index{OV\_ECTL\_LOWPASS\_GET@{OV\_ECTL\_LOWPASS\_GET}!vorbisenc.h@{vorbisenc.h}}
+\doxysubsubsection{\texorpdfstring{OV\_ECTL\_LOWPASS\_GET}{OV\_ECTL\_LOWPASS\_GET}}
+{\footnotesize\ttfamily \label{vorbisenc_8h_af8614b9ee808ddb88d50d21ea1cdf721} 
+\#define OV\+\_\+\+ECTL\+\_\+\+LOWPASS\+\_\+\+GET~0x20}
+
+Returns the current encoder hard-\/lowpass setting (k\+Hz) in the double pointed to by arg.
+
+Argument\+: {\ttfamily double \texorpdfstring{$\ast$}{*}} \Hypertarget{vorbisenc_8h_a1862ca0d88ed0366990da2a4015547c8}\index{vorbisenc.h@{vorbisenc.h}!OV\_ECTL\_LOWPASS\_SET@{OV\_ECTL\_LOWPASS\_SET}}
+\index{OV\_ECTL\_LOWPASS\_SET@{OV\_ECTL\_LOWPASS\_SET}!vorbisenc.h@{vorbisenc.h}}
+\doxysubsubsection{\texorpdfstring{OV\_ECTL\_LOWPASS\_SET}{OV\_ECTL\_LOWPASS\_SET}}
+{\footnotesize\ttfamily \label{vorbisenc_8h_a1862ca0d88ed0366990da2a4015547c8} 
+\#define OV\+\_\+\+ECTL\+\_\+\+LOWPASS\+\_\+\+SET~0x21}
+
+Sets the encoder hard-\/lowpass to the value (k\+Hz) pointed to by arg. Valid lowpass settings range from 2 to 99.
+
+Argument\+: {\ttfamily double \texorpdfstring{$\ast$}{*}} \Hypertarget{vorbisenc_8h_af95048070bedb467f80ce85e20057126}\index{vorbisenc.h@{vorbisenc.h}!OV\_ECTL\_RATEMANAGE2\_GET@{OV\_ECTL\_RATEMANAGE2\_GET}}
+\index{OV\_ECTL\_RATEMANAGE2\_GET@{OV\_ECTL\_RATEMANAGE2\_GET}!vorbisenc.h@{vorbisenc.h}}
+\doxysubsubsection{\texorpdfstring{OV\_ECTL\_RATEMANAGE2\_GET}{OV\_ECTL\_RATEMANAGE2\_GET}}
+{\footnotesize\ttfamily \label{vorbisenc_8h_af95048070bedb467f80ce85e20057126} 
+\#define OV\+\_\+\+ECTL\+\_\+\+RATEMANAGE2\+\_\+\+GET~0x14}
+
+Query the current encoder bitrate management setting.
+
+Argument\+: {\ttfamily struct \doxylink{structovectl__ratemanage2__arg}{ovectl\+\_\+ratemanage2\+\_\+arg} \texorpdfstring{$\ast$}{*}}
+
+Used to query the current encoder bitrate management setting. Also used to initialize fields of an \doxylink{structovectl__ratemanage2__arg}{ovectl\+\_\+ratemanage2\+\_\+arg} structure for use with \doxylink{vorbisenc_8h_a5075e0acb85fd45398a290594f83d6ba}{OV\+\_\+\+ECTL\+\_\+\+RATEMANAGE2\+\_\+\+SET}. \Hypertarget{vorbisenc_8h_a5075e0acb85fd45398a290594f83d6ba}\index{vorbisenc.h@{vorbisenc.h}!OV\_ECTL\_RATEMANAGE2\_SET@{OV\_ECTL\_RATEMANAGE2\_SET}}
+\index{OV\_ECTL\_RATEMANAGE2\_SET@{OV\_ECTL\_RATEMANAGE2\_SET}!vorbisenc.h@{vorbisenc.h}}
+\doxysubsubsection{\texorpdfstring{OV\_ECTL\_RATEMANAGE2\_SET}{OV\_ECTL\_RATEMANAGE2\_SET}}
+{\footnotesize\ttfamily \label{vorbisenc_8h_a5075e0acb85fd45398a290594f83d6ba} 
+\#define OV\+\_\+\+ECTL\+\_\+\+RATEMANAGE2\+\_\+\+SET~0x15}
+
+Set the current encoder bitrate management settings.
+
+Argument\+: {\ttfamily struct \doxylink{structovectl__ratemanage2__arg}{ovectl\+\_\+ratemanage2\+\_\+arg} \texorpdfstring{$\ast$}{*}}
+
+Used to set the current encoder bitrate management settings to the values listed in the \doxylink{structovectl__ratemanage2__arg}{ovectl\+\_\+ratemanage2\+\_\+arg}. Passing a NULL pointer will disable bitrate management. \Hypertarget{vorbisenc_8h_a34c3170d227b6368041e59c1dc7ed6e4}\index{vorbisenc.h@{vorbisenc.h}!OV\_ECTL\_RATEMANAGE\_AVG@{OV\_ECTL\_RATEMANAGE\_AVG}}
+\index{OV\_ECTL\_RATEMANAGE\_AVG@{OV\_ECTL\_RATEMANAGE\_AVG}!vorbisenc.h@{vorbisenc.h}}
+\doxysubsubsection{\texorpdfstring{OV\_ECTL\_RATEMANAGE\_AVG}{OV\_ECTL\_RATEMANAGE\_AVG}}
+{\footnotesize\ttfamily \label{vorbisenc_8h_a34c3170d227b6368041e59c1dc7ed6e4} 
+\#define OV\+\_\+\+ECTL\+\_\+\+RATEMANAGE\+\_\+\+AVG~0x12}
+
+Old interface to setting average-\/bitrate encoding mode.
+
+Deprecated after move to bit-\/reservoir style management in 1.\+1 rendered this interface partially obsolete.
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{deprecated__deprecated000004}{Deprecated}}]Please use \doxylink{vorbisenc_8h_a5075e0acb85fd45398a290594f83d6ba}{OV\+\_\+\+ECTL\+\_\+\+RATEMANAGE2\+\_\+\+SET} instead.\end{DoxyRefDesc}
+
+
+Argument\+: {\ttfamily struct \doxylink{structovectl__ratemanage__arg}{ovectl\+\_\+ratemanage\+\_\+arg} \texorpdfstring{$\ast$}{*}} \Hypertarget{vorbisenc_8h_a614481c0d84bdfbb80eed9208b68f779}\index{vorbisenc.h@{vorbisenc.h}!OV\_ECTL\_RATEMANAGE\_GET@{OV\_ECTL\_RATEMANAGE\_GET}}
+\index{OV\_ECTL\_RATEMANAGE\_GET@{OV\_ECTL\_RATEMANAGE\_GET}!vorbisenc.h@{vorbisenc.h}}
+\doxysubsubsection{\texorpdfstring{OV\_ECTL\_RATEMANAGE\_GET}{OV\_ECTL\_RATEMANAGE\_GET}}
+{\footnotesize\ttfamily \label{vorbisenc_8h_a614481c0d84bdfbb80eed9208b68f779} 
+\#define OV\+\_\+\+ECTL\+\_\+\+RATEMANAGE\+\_\+\+GET~0x10}
+
+Old interface to querying bitrate management settings.
+
+Deprecated after move to bit-\/reservoir style management in 1.\+1 rendered this interface partially obsolete.
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{deprecated__deprecated000002}{Deprecated}}]Please use \doxylink{vorbisenc_8h_af95048070bedb467f80ce85e20057126}{OV\+\_\+\+ECTL\+\_\+\+RATEMANAGE2\+\_\+\+GET} instead.\end{DoxyRefDesc}
+
+
+Argument\+: {\ttfamily struct \doxylink{structovectl__ratemanage__arg}{ovectl\+\_\+ratemanage\+\_\+arg} \texorpdfstring{$\ast$}{*}} \Hypertarget{vorbisenc_8h_af8869980a805f431af57a50dffbf5d33}\index{vorbisenc.h@{vorbisenc.h}!OV\_ECTL\_RATEMANAGE\_HARD@{OV\_ECTL\_RATEMANAGE\_HARD}}
+\index{OV\_ECTL\_RATEMANAGE\_HARD@{OV\_ECTL\_RATEMANAGE\_HARD}!vorbisenc.h@{vorbisenc.h}}
+\doxysubsubsection{\texorpdfstring{OV\_ECTL\_RATEMANAGE\_HARD}{OV\_ECTL\_RATEMANAGE\_HARD}}
+{\footnotesize\ttfamily \label{vorbisenc_8h_af8869980a805f431af57a50dffbf5d33} 
+\#define OV\+\_\+\+ECTL\+\_\+\+RATEMANAGE\+\_\+\+HARD~0x13}
+
+Old interface to setting bounded-\/bitrate encoding modes.
+
+deprecated after move to bit-\/reservoir style management in 1.\+1 rendered this interface partially obsolete.
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{deprecated__deprecated000005}{Deprecated}}]Please use \doxylink{vorbisenc_8h_a5075e0acb85fd45398a290594f83d6ba}{OV\+\_\+\+ECTL\+\_\+\+RATEMANAGE2\+\_\+\+SET} instead.\end{DoxyRefDesc}
+
+
+Argument\+: {\ttfamily struct \doxylink{structovectl__ratemanage__arg}{ovectl\+\_\+ratemanage\+\_\+arg} \texorpdfstring{$\ast$}{*}} \Hypertarget{vorbisenc_8h_a1daa1fd8ce1064cce01dde3ad447d389}\index{vorbisenc.h@{vorbisenc.h}!OV\_ECTL\_RATEMANAGE\_SET@{OV\_ECTL\_RATEMANAGE\_SET}}
+\index{OV\_ECTL\_RATEMANAGE\_SET@{OV\_ECTL\_RATEMANAGE\_SET}!vorbisenc.h@{vorbisenc.h}}
+\doxysubsubsection{\texorpdfstring{OV\_ECTL\_RATEMANAGE\_SET}{OV\_ECTL\_RATEMANAGE\_SET}}
+{\footnotesize\ttfamily \label{vorbisenc_8h_a1daa1fd8ce1064cce01dde3ad447d389} 
+\#define OV\+\_\+\+ECTL\+\_\+\+RATEMANAGE\+\_\+\+SET~0x11}
+
+Old interface to modifying bitrate management settings.
+
+deprecated after move to bit-\/reservoir style management in 1.\+1 rendered this interface partially obsolete.
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\mbox{\hyperlink{deprecated__deprecated000003}{Deprecated}}]Please use \doxylink{vorbisenc_8h_a5075e0acb85fd45398a290594f83d6ba}{OV\+\_\+\+ECTL\+\_\+\+RATEMANAGE2\+\_\+\+SET} instead.\end{DoxyRefDesc}
+
+
+Argument\+: {\ttfamily struct \doxylink{structovectl__ratemanage__arg}{ovectl\+\_\+ratemanage\+\_\+arg} \texorpdfstring{$\ast$}{*}} 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{vorbisenc_8h_a5f398a378e20b8ce5e3341a582e773bd}\index{vorbisenc.h@{vorbisenc.h}!vorbis\_encode\_ctl@{vorbis\_encode\_ctl}}
+\index{vorbis\_encode\_ctl@{vorbis\_encode\_ctl}!vorbisenc.h@{vorbisenc.h}}
+\doxysubsubsection{\texorpdfstring{vorbis\_encode\_ctl()}{vorbis\_encode\_ctl()}}
+{\footnotesize\ttfamily \label{vorbisenc_8h_a5f398a378e20b8ce5e3341a582e773bd} 
+int vorbis\+\_\+encode\+\_\+ctl (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structvorbis__info}{vorbis\+\_\+info}} \texorpdfstring{$\ast$}{*}}]{vi}{, }\item[{int}]{number}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{arg}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+This function implements a generic interface to miscellaneous encoder settings similar to the classic UNIX \textquotesingle{}ioctl()\textquotesingle{} system call. Applications may use \doxylink{vorbisenc_8h_a5f398a378e20b8ce5e3341a582e773bd}{vorbis\+\_\+encode\+\_\+ctl()} to query or set bitrate management or quality mode details by using one of several {\itshape request} arguments detailed below. \doxylink{vorbisenc_8h_a5f398a378e20b8ce5e3341a582e773bd}{vorbis\+\_\+encode\+\_\+ctl()} must be called after one of \doxylink{vorbisenc_8h_ac73714f24500e18024e83104e9e09485}{vorbis\+\_\+encode\+\_\+setup\+\_\+managed()} or \doxylink{vorbisenc_8h_a0f7677f216936a6cd7fa28ddbccada74}{vorbis\+\_\+encode\+\_\+setup\+\_\+vbr()}. When used to modify settings, \doxylink{vorbisenc_8h_a5f398a378e20b8ce5e3341a582e773bd}{vorbis\+\_\+encode\+\_\+ctl()} must be called before \doxylink{vorbisenc_8h_ac3953ff69d05864e78d1858a544ed619}{vorbis\+\_\+encode\+\_\+setup\+\_\+init()}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vi} & Pointer to an initialized \doxylink{structvorbis__info}{vorbis\+\_\+info} struct.\\
+\hline
+{\em number} & Specifies the desired action; See \doxylink{vorbisenc_8h_encctlcodes}{the list}of available requests"{}.\\
+\hline
+{\em arg} & void \texorpdfstring{$\ast$}{*} pointing to a data structure matching the request argument.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success. Any further return information (such as the result of a query) is placed into the storage pointed to by \texorpdfstring{$\ast$}{*}arg.\\
+\hline
+{\em OV\+\_\+\+EINVAL} & Invalid argument, or an attempt to modify a setting after calling \doxylink{vorbisenc_8h_ac3953ff69d05864e78d1858a544ed619}{vorbis\+\_\+encode\+\_\+setup\+\_\+init()}.\\
+\hline
+{\em OV\+\_\+\+EIMPL} & Unimplemented or unknown request \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{vorbisenc_8h_a6571d9c349c540491256f1083e1ede71}\index{vorbisenc.h@{vorbisenc.h}!vorbis\_encode\_init@{vorbis\_encode\_init}}
+\index{vorbis\_encode\_init@{vorbis\_encode\_init}!vorbisenc.h@{vorbisenc.h}}
+\doxysubsubsection{\texorpdfstring{vorbis\_encode\_init()}{vorbis\_encode\_init()}}
+{\footnotesize\ttfamily \label{vorbisenc_8h_a6571d9c349c540491256f1083e1ede71} 
+int vorbis\+\_\+encode\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structvorbis__info}{vorbis\+\_\+info}} \texorpdfstring{$\ast$}{*}}]{vi}{, }\item[{long}]{channels}{, }\item[{long}]{rate}{, }\item[{long}]{max\+\_\+bitrate}{, }\item[{long}]{nominal\+\_\+bitrate}{, }\item[{long}]{min\+\_\+bitrate}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+This is the primary function within libvorbisenc for setting up managed bitrate modes.
+
+Before this function is called, the \doxylink{structvorbis__info}{vorbis\+\_\+info} struct should be initialized by using vorbis\+\_\+info\+\_\+init() from the libvorbis API. After encoding, vorbis\+\_\+info\+\_\+clear() should be called.
+
+The max\+\_\+bitrate, nominal\+\_\+bitrate, and min\+\_\+bitrate settings are used to set constraints for the encoded file. This function uses these settings to select the appropriate encoding mode and set it up.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vi} & Pointer to an initialized \doxylink{structvorbis__info}{vorbis\+\_\+info} struct. \\
+\hline
+{\em channels} & The number of channels to be encoded. \\
+\hline
+{\em rate} & The sampling rate of the source audio. \\
+\hline
+{\em max\+\_\+bitrate} & Desired maximum bitrate (limit). -\/1 indicates unset. \\
+\hline
+{\em nominal\+\_\+bitrate} & Desired average, or central, bitrate. -\/1 indicates unset. \\
+\hline
+{\em min\+\_\+bitrate} & Desired minimum bitrate. -\/1 indicates unset.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Zero for success, and negative values for failure.
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success. \\
+\hline
+{\em OV\+\_\+\+EFAULT} & Internal logic fault; indicates a bug or heap/stack corruption. \\
+\hline
+{\em OV\+\_\+\+EINVAL} & Invalid setup request, eg, out of range argument. \\
+\hline
+{\em OV\+\_\+\+EIMPL} & Unimplemented mode; unable to comply with bitrate request. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{vorbisenc_8h_ab4e3d96c3008a29c615271d1f551c2a0}\index{vorbisenc.h@{vorbisenc.h}!vorbis\_encode\_init\_vbr@{vorbis\_encode\_init\_vbr}}
+\index{vorbis\_encode\_init\_vbr@{vorbis\_encode\_init\_vbr}!vorbisenc.h@{vorbisenc.h}}
+\doxysubsubsection{\texorpdfstring{vorbis\_encode\_init\_vbr()}{vorbis\_encode\_init\_vbr()}}
+{\footnotesize\ttfamily \label{vorbisenc_8h_ab4e3d96c3008a29c615271d1f551c2a0} 
+int vorbis\+\_\+encode\+\_\+init\+\_\+vbr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structvorbis__info}{vorbis\+\_\+info}} \texorpdfstring{$\ast$}{*}}]{vi}{, }\item[{long}]{channels}{, }\item[{long}]{rate}{, }\item[{float}]{base\+\_\+quality}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+This is the primary function within libvorbisenc for setting up variable bitrate ("{}quality"{} based) modes.
+
+Before this function is called, the \doxylink{structvorbis__info}{vorbis\+\_\+info} struct should be initialized by using vorbis\+\_\+info\+\_\+init() from the libvorbis API. After encoding, vorbis\+\_\+info\+\_\+clear() should be called.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vi} & Pointer to an initialized \doxylink{structvorbis__info}{vorbis\+\_\+info} struct. \\
+\hline
+{\em channels} & The number of channels to be encoded. \\
+\hline
+{\em rate} & The sampling rate of the source audio. \\
+\hline
+{\em base\+\_\+quality} & Desired quality level, currently from -\/0.\+1 to 1.\+0 (lo to hi).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Zero for success, or a negative number for failure.
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em OV\+\_\+\+EFAULT} & Internal logic fault; indicates a bug or heap/stack corruption. \\
+\hline
+{\em OV\+\_\+\+EINVAL} & Invalid setup request, eg, out of range argument. \\
+\hline
+{\em OV\+\_\+\+EIMPL} & Unimplemented mode; unable to comply with quality level request. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{vorbisenc_8h_ac3953ff69d05864e78d1858a544ed619}\index{vorbisenc.h@{vorbisenc.h}!vorbis\_encode\_setup\_init@{vorbis\_encode\_setup\_init}}
+\index{vorbis\_encode\_setup\_init@{vorbis\_encode\_setup\_init}!vorbisenc.h@{vorbisenc.h}}
+\doxysubsubsection{\texorpdfstring{vorbis\_encode\_setup\_init()}{vorbis\_encode\_setup\_init()}}
+{\footnotesize\ttfamily \label{vorbisenc_8h_ac3953ff69d05864e78d1858a544ed619} 
+int vorbis\+\_\+encode\+\_\+setup\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structvorbis__info}{vorbis\+\_\+info}} \texorpdfstring{$\ast$}{*}}]{vi}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+This function performs the last stage of three-\/step encoding setup, as described in the API overview under managed bitrate modes.
+
+Before this function is called, the \doxylink{structvorbis__info}{vorbis\+\_\+info} struct should be initialized by using vorbis\+\_\+info\+\_\+init() from the libvorbis API, one of \doxylink{vorbisenc_8h_ac73714f24500e18024e83104e9e09485}{vorbis\+\_\+encode\+\_\+setup\+\_\+managed()} or \doxylink{vorbisenc_8h_a0f7677f216936a6cd7fa28ddbccada74}{vorbis\+\_\+encode\+\_\+setup\+\_\+vbr()} called to initialize the high-\/level encoding setup, and \doxylink{vorbisenc_8h_a5f398a378e20b8ce5e3341a582e773bd}{vorbis\+\_\+encode\+\_\+ctl()} called if necessary to make encoding setup changes. \doxylink{vorbisenc_8h_ac3953ff69d05864e78d1858a544ed619}{vorbis\+\_\+encode\+\_\+setup\+\_\+init()} finalizes the highlevel encoding structure into a complete encoding setup after which the application may make no further setup changes.
+
+After encoding, vorbis\+\_\+info\+\_\+clear() should be called.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vi} & Pointer to an initialized \doxylink{structvorbis__info}{vorbis\+\_\+info} struct.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Zero for success, and negative values for failure.
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success. \\
+\hline
+{\em OV\+\_\+\+EFAULT} & Internal logic fault; indicates a bug or heap/stack corruption.\\
+\hline
+{\em OV\+\_\+\+EINVAL} & Attempt to use \doxylink{vorbisenc_8h_ac3953ff69d05864e78d1858a544ed619}{vorbis\+\_\+encode\+\_\+setup\+\_\+init()} without first calling one of \doxylink{vorbisenc_8h_ac73714f24500e18024e83104e9e09485}{vorbis\+\_\+encode\+\_\+setup\+\_\+managed()} or \doxylink{vorbisenc_8h_a0f7677f216936a6cd7fa28ddbccada74}{vorbis\+\_\+encode\+\_\+setup\+\_\+vbr()} to initialize the high-\/level encoding setup \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{vorbisenc_8h_ac73714f24500e18024e83104e9e09485}\index{vorbisenc.h@{vorbisenc.h}!vorbis\_encode\_setup\_managed@{vorbis\_encode\_setup\_managed}}
+\index{vorbis\_encode\_setup\_managed@{vorbis\_encode\_setup\_managed}!vorbisenc.h@{vorbisenc.h}}
+\doxysubsubsection{\texorpdfstring{vorbis\_encode\_setup\_managed()}{vorbis\_encode\_setup\_managed()}}
+{\footnotesize\ttfamily \label{vorbisenc_8h_ac73714f24500e18024e83104e9e09485} 
+int vorbis\+\_\+encode\+\_\+setup\+\_\+managed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structvorbis__info}{vorbis\+\_\+info}} \texorpdfstring{$\ast$}{*}}]{vi}{, }\item[{long}]{channels}{, }\item[{long}]{rate}{, }\item[{long}]{max\+\_\+bitrate}{, }\item[{long}]{nominal\+\_\+bitrate}{, }\item[{long}]{min\+\_\+bitrate}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+This function performs step-\/one of a three-\/step bitrate-\/managed encode setup. It functions similarly to the one-\/step setup performed by \doxylink{vorbisenc_8h_a6571d9c349c540491256f1083e1ede71}{vorbis\+\_\+encode\+\_\+init} but allows an application to make further encode setup tweaks using \doxylink{vorbisenc_8h_a5f398a378e20b8ce5e3341a582e773bd}{vorbis\+\_\+encode\+\_\+ctl} before finally calling \doxylink{vorbisenc_8h_ac3953ff69d05864e78d1858a544ed619}{vorbis\+\_\+encode\+\_\+setup\+\_\+init} to complete the setup process.
+
+Before this function is called, the \doxylink{structvorbis__info}{vorbis\+\_\+info} struct should be initialized by using vorbis\+\_\+info\+\_\+init() from the libvorbis API. After encoding, vorbis\+\_\+info\+\_\+clear() should be called.
+
+The max\+\_\+bitrate, nominal\+\_\+bitrate, and min\+\_\+bitrate settings are used to set constraints for the encoded file. This function uses these settings to select the appropriate encoding mode and set it up.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vi} & Pointer to an initialized \doxylink{structvorbis__info}{vorbis\+\_\+info} struct. \\
+\hline
+{\em channels} & The number of channels to be encoded. \\
+\hline
+{\em rate} & The sampling rate of the source audio. \\
+\hline
+{\em max\+\_\+bitrate} & Desired maximum bitrate (limit). -\/1 indicates unset. \\
+\hline
+{\em nominal\+\_\+bitrate} & Desired average, or central, bitrate. -\/1 indicates unset. \\
+\hline
+{\em min\+\_\+bitrate} & Desired minimum bitrate. -\/1 indicates unset.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Zero for success, and negative for failure.
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em OV\+\_\+\+EFAULT} & Internal logic fault; indicates a bug or heap/stack corruption. \\
+\hline
+{\em OV\+\_\+\+EINVAL} & Invalid setup request, eg, out of range argument. \\
+\hline
+{\em OV\+\_\+\+EIMPL} & Unimplemented mode; unable to comply with bitrate request. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{vorbisenc_8h_a0f7677f216936a6cd7fa28ddbccada74}\index{vorbisenc.h@{vorbisenc.h}!vorbis\_encode\_setup\_vbr@{vorbis\_encode\_setup\_vbr}}
+\index{vorbis\_encode\_setup\_vbr@{vorbis\_encode\_setup\_vbr}!vorbisenc.h@{vorbisenc.h}}
+\doxysubsubsection{\texorpdfstring{vorbis\_encode\_setup\_vbr()}{vorbis\_encode\_setup\_vbr()}}
+{\footnotesize\ttfamily \label{vorbisenc_8h_a0f7677f216936a6cd7fa28ddbccada74} 
+int vorbis\+\_\+encode\+\_\+setup\+\_\+vbr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structvorbis__info}{vorbis\+\_\+info}} \texorpdfstring{$\ast$}{*}}]{vi}{, }\item[{long}]{channels}{, }\item[{long}]{rate}{, }\item[{float}]{quality}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [extern]}}
+
+This function performs step-\/one of a three-\/step variable bitrate (quality-\/based) encode setup. It functions similarly to the one-\/step setup performed by \doxylink{vorbisenc_8h_ab4e3d96c3008a29c615271d1f551c2a0}{vorbis\+\_\+encode\+\_\+init\+\_\+vbr()} but allows an application to make further encode setup tweaks using \doxylink{vorbisenc_8h_a5f398a378e20b8ce5e3341a582e773bd}{vorbis\+\_\+encode\+\_\+ctl()} before finally calling \doxylink{vorbisenc_8h_ac3953ff69d05864e78d1858a544ed619}{vorbis\+\_\+encode\+\_\+setup\+\_\+init} to complete the setup process.
+
+Before this function is called, the \doxylink{structvorbis__info}{vorbis\+\_\+info} struct should be initialized by using vorbis\+\_\+info\+\_\+init() from the libvorbis API. After encoding, vorbis\+\_\+info\+\_\+clear() should be called.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vi} & Pointer to an initialized \doxylink{structvorbis__info}{vorbis\+\_\+info} struct. \\
+\hline
+{\em channels} & The number of channels to be encoded. \\
+\hline
+{\em rate} & The sampling rate of the source audio. \\
+\hline
+{\em quality} & Desired quality level, currently from -\/0.\+1 to 1.\+0 (lo to hi).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Zero for success, and negative values for failure.
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em OV\+\_\+\+EFAULT} & Internal logic fault; indicates a bug or heap/stack corruption. \\
+\hline
+{\em OV\+\_\+\+EINVAL} & Invalid setup request, eg, out of range argument. \\
+\hline
+{\em OV\+\_\+\+EIMPL} & Unimplemented mode; unable to comply with quality level request. \\
+\hline
+\end{DoxyRetVals}

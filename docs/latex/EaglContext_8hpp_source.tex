@@ -1,0 +1,96 @@
+\doxysection{Eagl\+Context.\+hpp}
+\hypertarget{EaglContext_8hpp_source}{}\label{EaglContext_8hpp_source}\index{build/\_deps/sfml-\/src/src/SFML/Window/iOS/EaglContext.hpp@{build/\_deps/sfml-\/src/src/SFML/Window/iOS/EaglContext.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ SFML\_EAGLCONTEXT\_HPP}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ SFML\_EAGLCONTEXT\_HPP}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <SFML/Window/GlContext.hpp>}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <SFML/Window/iOS/ObjCType.hpp>}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ <SFML/System/Vector2.hpp>}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ <SFML/System/Clock.hpp>}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#include\ <glad/gl.h>}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ SFML\_DECLARE\_OBJC\_CLASS(EAGLContext);}
+\DoxyCodeLine{00039\ SFML\_DECLARE\_OBJC\_CLASS(\mbox{\hyperlink{interfaceSFView}{SFView}});}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{00042\ \{}
+\DoxyCodeLine{00043\ \textcolor{keyword}{namespace\ }priv}
+\DoxyCodeLine{00044\ \{}
+\DoxyCodeLine{00045\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1priv_1_1WindowImplUIKit}{WindowImplUIKit}};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00051\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1priv_1_1EaglContext_a912538dbe002cc1619936730b6436d33}{EaglContext}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classsf_1_1priv_1_1GlContext_a286cd2741faff509387c1c40940303d2}{GlContext}}}
+\DoxyCodeLine{00052\ \{}
+\DoxyCodeLine{00053\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1EaglContext_a912538dbe002cc1619936730b6436d33}{EaglContext}}(\mbox{\hyperlink{classsf_1_1priv_1_1EaglContext_a912538dbe002cc1619936730b6436d33}{EaglContext}}*\ shared);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1EaglContext_a912538dbe002cc1619936730b6436d33}{EaglContext}}(\mbox{\hyperlink{classsf_1_1priv_1_1EaglContext_a912538dbe002cc1619936730b6436d33}{EaglContext}}*\ shared,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structsf_1_1ContextSettings}{ContextSettings}}\&\ settings,}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1priv_1_1WindowImpl}{WindowImpl}}*\ owner,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ bitsPerPixel);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00084\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1EaglContext_a912538dbe002cc1619936730b6436d33}{EaglContext}}(\mbox{\hyperlink{classsf_1_1priv_1_1EaglContext_a912538dbe002cc1619936730b6436d33}{EaglContext}}*\ shared,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structsf_1_1ContextSettings}{ContextSettings}}\&\ settings,}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ height);}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00091\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1EaglContext_afd71703efba53593d3363963d2ebf476}{\string~EaglContext}}();}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keyword}{static}\ GlFunctionPointer\ \mbox{\hyperlink{classsf_1_1priv_1_1EaglContext_ac916d494b240d6ea1aec6da81675bb71}{getFunction}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name);}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1EaglContext_a0e201e178e4a3e3850c18bfaa1076caf}{recreateRenderBuffers}}(\mbox{\hyperlink{interfaceSFView}{SFView}}*\ glView);}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1EaglContext_a9713901286f20091b116b21ead6d7b12}{display}}();}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1EaglContext_a39a433c80fcdd7c2472b39ae5451fbde}{setVerticalSyncEnabled}}(\textcolor{keywordtype}{bool}\ enabled);}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1EaglContext_aefa9f92621de0cf5e06cf96d54dc4657}{makeCurrent}}(\textcolor{keywordtype}{bool}\ current);}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordtype}{void}\ createContext(\mbox{\hyperlink{classsf_1_1priv_1_1EaglContext_a912538dbe002cc1619936730b6436d33}{EaglContext}}*\ shared,}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1priv_1_1WindowImplUIKit}{WindowImplUIKit}}*\ window,}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ bitsPerPixel,}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structsf_1_1ContextSettings}{ContextSettings}}\&\ settings);}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{comment}{//\ Member\ data}}
+\DoxyCodeLine{00165\ \ \ \ \ EAGLContext*\ m\_context;\ }
+\DoxyCodeLine{00166\ \ \ \ \ GLuint\ m\_framebuffer;\ \ \ }
+\DoxyCodeLine{00167\ \ \ \ \ GLuint\ m\_colorbuffer;\ \ \ }
+\DoxyCodeLine{00168\ \ \ \ \ GLuint\ m\_depthbuffer;\ \ \ }
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_vsyncEnabled;\ \ \ \ }
+\DoxyCodeLine{00170\ \ \ \ \ \mbox{\hyperlink{classsf_1_1Clock}{Clock}}\ m\_clock;\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00171\ \};}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \}\ \textcolor{comment}{//\ namespace\ priv}}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SFML\_EAGLCONTEXT\_HPP}}
+
+\end{DoxyCode}

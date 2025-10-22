@@ -1,0 +1,97 @@
+\doxysection{sf\+::Clock Class Reference}
+\hypertarget{classsf_1_1Clock}{}\label{classsf_1_1Clock}\index{sf::Clock@{sf::Clock}}
+
+
+Utility class that measures the elapsed time.  
+
+
+
+
+{\ttfamily \#include $<$Clock.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsf_1_1Clock_abbc959c7830ca7c3a4da133cb506d3fd}{Clock}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Time}{Time}} \mbox{\hyperlink{classsf_1_1Clock_abe889b42a65bcd8eefc16419645d08a7}{get\+Elapsed\+Time}} () const
+\begin{DoxyCompactList}\small\item\em Get the elapsed time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Time}{Time}} \mbox{\hyperlink{classsf_1_1Clock_a123e2627f2943e5ecaa1db0c7df3231b}{restart}} ()
+\begin{DoxyCompactList}\small\item\em Restart the clock. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Utility class that measures the elapsed time. 
+
+\doxylink{classsf_1_1Clock}{sf\+::\+Clock} is a lightweight class for measuring time.
+
+Its provides the most precise time that the underlying OS can achieve (generally microseconds or nanoseconds). It also ensures monotonicity, which means that the returned time can never go backward, even if the system time is changed.
+
+Usage example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sf::Clock\ clock;}
+\DoxyCodeLine{...}
+\DoxyCodeLine{Time\ time1\ =\ clock.\mbox{\hyperlink{classsf_1_1Clock_abe889b42a65bcd8eefc16419645d08a7}{getElapsedTime}}();}
+\DoxyCodeLine{...}
+\DoxyCodeLine{\mbox{\hyperlink{classsf_1_1Time_acba0cfbc49e3a09a22a8e079eb67a05c}{Time}}\ time2\ =\ clock.\mbox{\hyperlink{classsf_1_1Clock_a123e2627f2943e5ecaa1db0c7df3231b}{restart}}();}
+
+\end{DoxyCode}
+
+
+The \doxylink{classsf_1_1Time}{sf\+::\+Time} value returned by the clock can then be converted to a number of seconds, milliseconds or even microseconds.
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1Time}{sf\+::\+Time} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classsf_1_1Clock_abbc959c7830ca7c3a4da133cb506d3fd}\index{sf::Clock@{sf::Clock}!Clock@{Clock}}
+\index{Clock@{Clock}!sf::Clock@{sf::Clock}}
+\doxysubsubsection{\texorpdfstring{Clock()}{Clock()}}
+{\footnotesize\ttfamily \label{classsf_1_1Clock_abbc959c7830ca7c3a4da133cb506d3fd} 
+sf\+::\+Clock\+::\+Clock (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+The clock starts automatically after being constructed. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsf_1_1Clock_abe889b42a65bcd8eefc16419645d08a7}\index{sf::Clock@{sf::Clock}!getElapsedTime@{getElapsedTime}}
+\index{getElapsedTime@{getElapsedTime}!sf::Clock@{sf::Clock}}
+\doxysubsubsection{\texorpdfstring{getElapsedTime()}{getElapsedTime()}}
+{\footnotesize\ttfamily \label{classsf_1_1Clock_abe889b42a65bcd8eefc16419645d08a7} 
+\mbox{\hyperlink{classsf_1_1Time}{Time}} sf\+::\+Clock\+::get\+Elapsed\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get the elapsed time. 
+
+This function returns the time elapsed since the last call to \doxylink{classsf_1_1Clock_a123e2627f2943e5ecaa1db0c7df3231b}{restart()} (or the construction of the instance if \doxylink{classsf_1_1Clock_a123e2627f2943e5ecaa1db0c7df3231b}{restart()} has not been called).
+
+\begin{DoxyReturn}{Returns}
+\doxylink{classsf_1_1Time}{Time} elapsed 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1Clock_a123e2627f2943e5ecaa1db0c7df3231b}\index{sf::Clock@{sf::Clock}!restart@{restart}}
+\index{restart@{restart}!sf::Clock@{sf::Clock}}
+\doxysubsubsection{\texorpdfstring{restart()}{restart()}}
+{\footnotesize\ttfamily \label{classsf_1_1Clock_a123e2627f2943e5ecaa1db0c7df3231b} 
+\mbox{\hyperlink{classsf_1_1Time}{Time}} sf\+::\+Clock\+::restart (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Restart the clock. 
+
+This function puts the time counter back to zero. It also returns the time elapsed since the clock was started.
+
+\begin{DoxyReturn}{Returns}
+\doxylink{classsf_1_1Time}{Time} elapsed 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/include/\+SFML/\+System/Clock.\+hpp\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+System/Clock.\+cpp\end{DoxyCompactItemize}

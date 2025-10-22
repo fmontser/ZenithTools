@@ -1,0 +1,43 @@
+\doxysection{NSImage(raw) Category Reference}
+\hypertarget{categoryNSImage_07raw_08}{}\label{categoryNSImage_07raw_08}\index{NSImage(raw)@{NSImage(raw)}}
+
+
+{\ttfamily \#include $<$NSImage+raw.\+h$>$}
+
+\doxysubsubsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(NSImage \texorpdfstring{$\ast$}{*}) + \mbox{\hyperlink{categoryNSImage_07raw_08_ab09accf97b2bcd26fadc7aadb1952e68}{image\+With\+Raw\+Data\+:and\+Size\+:}}
+\begin{DoxyCompactList}\small\item\em Load an image from raw RGBA pixels. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Extends NSImage with a convenience method to load images from raw data. 
+
+\doxysubsection{Method Documentation}
+\Hypertarget{categoryNSImage_07raw_08_ab09accf97b2bcd26fadc7aadb1952e68}\index{NSImage(raw)@{NSImage(raw)}!imageWithRawData:andSize:@{imageWithRawData:andSize:}}
+\index{imageWithRawData:andSize:@{imageWithRawData:andSize:}!NSImage(raw)@{NSImage(raw)}}
+\doxysubsubsection{\texorpdfstring{imageWithRawData:andSize:}{imageWithRawData:andSize:}}
+{\footnotesize\ttfamily \label{categoryNSImage_07raw_08_ab09accf97b2bcd26fadc7aadb1952e68} 
++ (NSImage \texorpdfstring{$\ast$}{*}) image\+With\+Raw\+Data\+: \begin{DoxyParamCaption}\item[{(const sf\+::\+Uint8\texorpdfstring{$\ast$}{*})}]{pixels}{}\item[{and\+Size\+:(NSSize)}]{size}{}\end{DoxyParamCaption}}
+
+
+
+Load an image from raw RGBA pixels. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pixels} & array of 4 \texorpdfstring{$\ast$}{*} {\ttfamily size} bytes representing the image \\
+\hline
+{\em size} & size of the image\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an instance of NSImage that needs to be released by the caller 
+\end{DoxyReturn}
+
+
+The documentation for this category was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+Window/\+OSX/NSImage+raw.\+h\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+Window/\+OSX/NSImage+raw.\+mm\end{DoxyCompactItemize}

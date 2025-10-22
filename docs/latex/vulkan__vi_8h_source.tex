@@ -1,0 +1,64 @@
+\doxysection{vulkan\+\_\+vi.\+h}
+\hypertarget{vulkan__vi_8h_source}{}\label{vulkan__vi_8h_source}\index{build/\_deps/sfml-\/src/extlibs/headers/vulkan/vulkan\_vi.h@{build/\_deps/sfml-\/src/extlibs/headers/vulkan/vulkan\_vi.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ VULKAN\_VI\_H\_}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ VULKAN\_VI\_H\_\ 1}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00005\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00009\ \textcolor{comment}{**\ Copyright\ (c)\ 2015-\/2018\ The\ Khronos\ Group\ Inc.}}
+\DoxyCodeLine{00010\ \textcolor{comment}{**}}
+\DoxyCodeLine{00011\ \textcolor{comment}{**\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ "{}License"{});}}
+\DoxyCodeLine{00012\ \textcolor{comment}{**\ you\ may\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{**\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00014\ \textcolor{comment}{**}}
+\DoxyCodeLine{00015\ \textcolor{comment}{**\ \ \ \ \ http://www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00016\ \textcolor{comment}{**}}
+\DoxyCodeLine{00017\ \textcolor{comment}{**\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00018\ \textcolor{comment}{**\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ "{}AS\ IS"{}\ BASIS,}}
+\DoxyCodeLine{00019\ \textcolor{comment}{**\ WITHOUT\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{**\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00021\ \textcolor{comment}{**\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00025\ \textcolor{comment}{**\ This\ header\ is\ generated\ from\ the\ Khronos\ Vulkan\ XML\ API\ Registry.}}
+\DoxyCodeLine{00026\ \textcolor{comment}{**}}
+\DoxyCodeLine{00027\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#define\ VK\_NN\_vi\_surface\ 1}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ VK\_NN\_VI\_SURFACE\_SPEC\_VERSION\ \ \ \ \ 1}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ VK\_NN\_VI\_SURFACE\_EXTENSION\_NAME\ \ \ "{}VK\_NN\_vi\_surface"{}}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{typedef}\ VkFlags\ VkViSurfaceCreateFlagsNN;}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structVkViSurfaceCreateInfoNN}{VkViSurfaceCreateInfoNN}}\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ VkStructureType\ \ \ \ \ \ \ \ \ \ \ \ \ sType;}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pNext;}
+\DoxyCodeLine{00039\ \ \ \ \ VkViSurfaceCreateFlagsNN\ \ \ \ flags;}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ window;}
+\DoxyCodeLine{00041\ \}\ \mbox{\hyperlink{structVkViSurfaceCreateInfoNN}{VkViSurfaceCreateInfoNN}};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{typedef}\ VkResult\ (VKAPI\_PTR\ *PFN\_vkCreateViSurfaceNN)(VkInstance\ instance,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structVkViSurfaceCreateInfoNN}{VkViSurfaceCreateInfoNN}}*\ pCreateInfo,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structVkAllocationCallbacks}{VkAllocationCallbacks}}*\ pAllocator,\ VkSurfaceKHR*\ pSurface);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#ifndef\ VK\_NO\_PROTOTYPES}}
+\DoxyCodeLine{00047\ VKAPI\_ATTR\ VkResult\ VKAPI\_CALL\ vkCreateViSurfaceNN(}
+\DoxyCodeLine{00048\ \ \ \ \ VkInstance\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ instance,}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structVkViSurfaceCreateInfoNN}{VkViSurfaceCreateInfoNN}}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ pCreateInfo,}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structVkAllocationCallbacks}{VkAllocationCallbacks}}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pAllocator,}
+\DoxyCodeLine{00051\ \ \ \ \ VkSurfaceKHR*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pSurface);}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00055\ \}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

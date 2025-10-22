@@ -1,0 +1,1837 @@
+\doxysubsubsubsubsubsection{FLAC/metadata.h\+: metadata object methods}
+\hypertarget{group__flac__metadata__object}{}\label{group__flac__metadata__object}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+
+
+This module contains methods for manipulating FLAC metadata objects.  
+
+
+Collaboration diagram for FLAC/metadata.h\+: metadata object methods\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__flac__metadata__object}
+\end{center}
+\end{figure}
+\doxysubsubsubsubsubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+FLAC\+\_\+\+API \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{group__flac__metadata__object_gab3d728ca4455bda71cc231fdb91307fb}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+new}} (\mbox{\hyperlink{group__flac__format_gac71714ba8ddbbd66d26bb78a427fac01}{FLAC\+\_\+\+\_\+\+Metadata\+Type}} type)
+\item 
+FLAC\+\_\+\+API \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{group__flac__metadata__object_gaa12d8f3c14500a977b7ddf14c6bf81fe}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+clone}} (const \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object)
+\item 
+FLAC\+\_\+\+API void \mbox{\hyperlink{group__flac__metadata__object_ga66bbe27dba68ba77be5af83986a280ea}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+delete}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_gac834137d4837c304ca5db4c8407900bb}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+is\+\_\+equal}} (const \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}block1, const \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}block2)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_ga8f7fbaa68d5637e2409a053ec2ff744d}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+application\+\_\+set\+\_\+data}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, FLAC\+\_\+\+\_\+byte \texorpdfstring{$\ast$}{*}data, unsigned length, FLAC\+\_\+\+\_\+bool copy)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_ga836f94fa622ece4f50dadf27c7ec107a}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+resize\+\_\+points}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, unsigned new\+\_\+num\+\_\+points)
+\item 
+FLAC\+\_\+\+API void \mbox{\hyperlink{group__flac__metadata__object_gae2c58ebdfb9f2b238d45971b14600944}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+set\+\_\+point}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, unsigned point\+\_\+num, \mbox{\hyperlink{structFLAC____StreamMetadata__SeekPoint}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Seek\+Point}} point)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_ga0c658260aaffb126486f5d1e211b53e5}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+insert\+\_\+point}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, unsigned point\+\_\+num, \mbox{\hyperlink{structFLAC____StreamMetadata__SeekPoint}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Seek\+Point}} point)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_ga5a865f792845cbf22b5935c3d96568d1}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+delete\+\_\+point}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, unsigned point\+\_\+num)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_ga08f33e2ef85d72363dda82de3208ed1e}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+is\+\_\+legal}} (const \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_gae9d8c43dc78bde9778c4e57c5f74b025}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+template\+\_\+append\+\_\+placeholders}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, unsigned num)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_ga9ce1940ca29d71739316cf104256c078}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+template\+\_\+append\+\_\+point}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, FLAC\+\_\+\+\_\+uint64 sample\+\_\+number)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_gac27a59879fa8cdf47b75f8d73de82f0e}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+template\+\_\+append\+\_\+points}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, FLAC\+\_\+\+\_\+uint64 sample\+\_\+numbers\mbox{[}$\,$\mbox{]}, unsigned num)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_gab96c6585578c87f6853731860e2872e0}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+template\+\_\+append\+\_\+spaced\+\_\+points}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, unsigned num, FLAC\+\_\+\+\_\+uint64 total\+\_\+samples)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_gabf797b64b96808cabf1d995573680fe9}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+template\+\_\+append\+\_\+spaced\+\_\+points\+\_\+by\+\_\+samples}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, unsigned samples, FLAC\+\_\+\+\_\+uint64 total\+\_\+samples)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_gaee6a1f08321b56a3fa65af94dd7830cd}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+template\+\_\+sort}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, FLAC\+\_\+\+\_\+bool compact)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_gabfc6277c08a86329efd19572695b57e6}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+set\+\_\+vendor\+\_\+string}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, \mbox{\hyperlink{structFLAC____StreamMetadata__VorbisComment__Entry}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Vorbis\+Comment\+\_\+\+Entry}} entry, FLAC\+\_\+\+\_\+bool copy)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_ga264611f0af9b5e09d083c1ca5495f1c4}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+resize\+\_\+comments}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, unsigned new\+\_\+num\+\_\+comments)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_gadf034b2c385e7932c6be2d724a0deae3}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+set\+\_\+comment}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, unsigned comment\+\_\+num, \mbox{\hyperlink{structFLAC____StreamMetadata__VorbisComment__Entry}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Vorbis\+Comment\+\_\+\+Entry}} entry, FLAC\+\_\+\+\_\+bool copy)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_ga0c23f59f465f302b35a2d3ab1eae07e7}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+insert\+\_\+comment}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, unsigned comment\+\_\+num, \mbox{\hyperlink{structFLAC____StreamMetadata__VorbisComment__Entry}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Vorbis\+Comment\+\_\+\+Entry}} entry, FLAC\+\_\+\+\_\+bool copy)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_gad04ef80ae5f852db8f3729a6ef8c1631}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+append\+\_\+comment}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, \mbox{\hyperlink{structFLAC____StreamMetadata__VorbisComment__Entry}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Vorbis\+Comment\+\_\+\+Entry}} entry, FLAC\+\_\+\+\_\+bool copy)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_gabef3625575b7e4c7257617a27220959a}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+replace\+\_\+comment}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, \mbox{\hyperlink{structFLAC____StreamMetadata__VorbisComment__Entry}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Vorbis\+Comment\+\_\+\+Entry}} entry, FLAC\+\_\+\+\_\+bool all, FLAC\+\_\+\+\_\+bool copy)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_ga2d1b309d4ca207039ad6d19bd779800f}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+delete\+\_\+comment}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, unsigned comment\+\_\+num)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_ga0ec0c7ddd3a8832ee7a75bf47956b1c7}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+entry\+\_\+from\+\_\+name\+\_\+value\+\_\+pair}} (\mbox{\hyperlink{structFLAC____StreamMetadata__VorbisComment__Entry}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Vorbis\+Comment\+\_\+\+Entry}} \texorpdfstring{$\ast$}{*}entry, const char \texorpdfstring{$\ast$}{*}field\+\_\+name, const char \texorpdfstring{$\ast$}{*}field\+\_\+value)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_gaca557b35c7c1ac19e30794bcf529746b}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+entry\+\_\+to\+\_\+name\+\_\+value\+\_\+pair}} (const \mbox{\hyperlink{structFLAC____StreamMetadata__VorbisComment__Entry}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Vorbis\+Comment\+\_\+\+Entry}} entry, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}field\+\_\+name, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}field\+\_\+value)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_gac31ee3de9f9931628f120cb611bb0f20}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+entry\+\_\+matches}} (const \mbox{\hyperlink{structFLAC____StreamMetadata__VorbisComment__Entry}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Vorbis\+Comment\+\_\+\+Entry}} entry, const char \texorpdfstring{$\ast$}{*}field\+\_\+name, unsigned field\+\_\+name\+\_\+length)
+\item 
+FLAC\+\_\+\+API int \mbox{\hyperlink{group__flac__metadata__object_gae094c1ce4f248d49e8c099661bd5288e}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+find\+\_\+entry\+\_\+from}} (const \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, unsigned offset, const char \texorpdfstring{$\ast$}{*}field\+\_\+name)
+\item 
+FLAC\+\_\+\+API int \mbox{\hyperlink{group__flac__metadata__object_ga6812052a110800bef2f4139017501507}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+remove\+\_\+entry\+\_\+matching}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, const char \texorpdfstring{$\ast$}{*}field\+\_\+name)
+\item 
+FLAC\+\_\+\+API int \mbox{\hyperlink{group__flac__metadata__object_ga525525f5f21b1caee776cba3cfb6d72f}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+remove\+\_\+entries\+\_\+matching}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, const char \texorpdfstring{$\ast$}{*}field\+\_\+name)
+\item 
+FLAC\+\_\+\+API \mbox{\hyperlink{structFLAC____StreamMetadata__CueSheet__Track}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Cue\+Sheet\+\_\+\+Track}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{group__flac__metadata__object_gafac37284d73c301a48ff8aa8069253a4}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+track\+\_\+new}} (void)
+\item 
+FLAC\+\_\+\+API \mbox{\hyperlink{structFLAC____StreamMetadata__CueSheet__Track}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Cue\+Sheet\+\_\+\+Track}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{group__flac__metadata__object_ga0be772e782ad4a298c6f494e292dea0c}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+track\+\_\+clone}} (const \mbox{\hyperlink{structFLAC____StreamMetadata__CueSheet__Track}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Cue\+Sheet\+\_\+\+Track}} \texorpdfstring{$\ast$}{*}object)
+\item 
+FLAC\+\_\+\+API void \mbox{\hyperlink{group__flac__metadata__object_ga8fbf8912add405a4b1acd510b6e27c89}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+track\+\_\+delete}} (\mbox{\hyperlink{structFLAC____StreamMetadata__CueSheet__Track}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Cue\+Sheet\+\_\+\+Track}} \texorpdfstring{$\ast$}{*}object)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_ga57dfba89ba704574bde4e3fcd925d473}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+track\+\_\+resize\+\_\+indices}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, unsigned track\+\_\+num, unsigned new\+\_\+num\+\_\+indices)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_ga2f8c5d80c409eff5ebd53ccd0c6f0984}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+track\+\_\+insert\+\_\+index}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, unsigned track\+\_\+num, unsigned index\+\_\+num, \mbox{\hyperlink{structFLAC____StreamMetadata__CueSheet__Index}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Cue\+Sheet\+\_\+\+Index}} index)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_gaa1401ea99e4dc61d3eb034aed7d99602}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+track\+\_\+insert\+\_\+blank\+\_\+index}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, unsigned track\+\_\+num, unsigned index\+\_\+num)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_ga9cba3429dcc863714ceb1de6952c4737}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+track\+\_\+delete\+\_\+index}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, unsigned track\+\_\+num, unsigned index\+\_\+num)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_gafb0e09fdcfb08c466ceb1f6bca961177}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+resize\+\_\+tracks}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, unsigned new\+\_\+num\+\_\+tracks)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_ga682176f845b99956b3974bcc1bb63a20}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+set\+\_\+track}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, unsigned track\+\_\+num, \mbox{\hyperlink{structFLAC____StreamMetadata__CueSheet__Track}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Cue\+Sheet\+\_\+\+Track}} \texorpdfstring{$\ast$}{*}track, FLAC\+\_\+\+\_\+bool copy)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_ga5dbdffac2cd7e327f711103c15e015ac}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+insert\+\_\+track}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, unsigned track\+\_\+num, \mbox{\hyperlink{structFLAC____StreamMetadata__CueSheet__Track}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Cue\+Sheet\+\_\+\+Track}} \texorpdfstring{$\ast$}{*}track, FLAC\+\_\+\+\_\+bool copy)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_ga87855591d933cd6371010a675f0bc629}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+insert\+\_\+blank\+\_\+track}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, unsigned track\+\_\+num)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_ga3232bae96f19722bee19afd37fdc214d}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+delete\+\_\+track}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, unsigned track\+\_\+num)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_ga1160f85e437c1a763ec0a8f372cb1390}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+is\+\_\+legal}} (const \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, FLAC\+\_\+\+\_\+bool check\+\_\+cd\+\_\+da\+\_\+subset, const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}violation)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+uint32 \mbox{\hyperlink{group__flac__metadata__object_ga897138ca0a985d8741f73d6657f38845}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+calculate\+\_\+cddb\+\_\+id}} (const \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_ga5db3363648b6e7693e032f200f241e85}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+picture\+\_\+set\+\_\+mime\+\_\+type}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, char \texorpdfstring{$\ast$}{*}mime\+\_\+type, FLAC\+\_\+\+\_\+bool copy)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_ga5582649e395e70a4b3df510a39d70cc5}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+picture\+\_\+set\+\_\+description}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, FLAC\+\_\+\+\_\+byte \texorpdfstring{$\ast$}{*}description, FLAC\+\_\+\+\_\+bool copy)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_ga07e5950094528e2954c06d7991d543a8}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+picture\+\_\+set\+\_\+data}} (\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, FLAC\+\_\+\+\_\+byte \texorpdfstring{$\ast$}{*}data, FLAC\+\_\+\+\_\+uint32 length, FLAC\+\_\+\+\_\+bool copy)
+\item 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool \mbox{\hyperlink{group__flac__metadata__object_ga2e389272f4df904e1652e79c89ca55c8}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+picture\+\_\+is\+\_\+legal}} (const \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}object, const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}violation)
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsubsubsubsubsection{Detailed Description}
+This module contains methods for manipulating FLAC metadata objects. 
+
+Since many are variable length we have to be careful about the memory management. We decree that all pointers to data in the object are owned by the object and memory-\/managed by the object.
+
+Use the \doxylink{group__flac__metadata__object_gab3d728ca4455bda71cc231fdb91307fb}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+new()} and \doxylink{group__flac__metadata__object_ga66bbe27dba68ba77be5af83986a280ea}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+delete()} functions to create all instances. When using the FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+set\+\_\+\texorpdfstring{$\ast$}{*}() functions to set pointers to data, set {\itshape copy} to {\ttfamily true} to have the function make it\textquotesingle{}s own copy of the data, or to {\ttfamily false} to give the object ownership of your data. In the latter case your pointer must be freeable by free() and will be free()d when the object is \doxylink{group__flac__metadata__object_ga66bbe27dba68ba77be5af83986a280ea}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+delete()}d. It is legal to pass a null pointer as the data pointer to a FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+set\+\_\+\texorpdfstring{$\ast$}{*}() function as long as the length argument is 0 and the {\itshape copy} argument is {\ttfamily false}.
+
+The \doxylink{group__flac__metadata__object_gab3d728ca4455bda71cc231fdb91307fb}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+new()} and \doxylink{group__flac__metadata__object_gaa12d8f3c14500a977b7ddf14c6bf81fe}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+clone()} function will return {\ttfamily NULL} in the case of a memory allocation error, otherwise a new object. The FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+set\+\_\+\texorpdfstring{$\ast$}{*}() functions return {\ttfamily false} in the case of a memory allocation error.
+
+We don\textquotesingle{}t have the convenience of C++ here, so note that the library relies on you to keep the types straight. In other words, if you pass, for example, a FLAC\+\_\+\+\_\+\+Stream\+Metadata\texorpdfstring{$\ast$}{*} that represents a STREAMINFO block to \doxylink{group__flac__metadata__object_ga8f7fbaa68d5637e2409a053ec2ff744d}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+application\+\_\+set\+\_\+data()}, you will get an assertion failure.
+
+For convenience the FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+\texorpdfstring{$\ast$}{*}() functions maintain a trailing NUL on each Vorbis comment entry. This is not counted toward the length or stored in the stream, but it can make working with plain comments (those that don\textquotesingle{}t contain embedded-\/\+NULs in the value) easier. Entries passed into these functions have trailing NULs added if missing, and returned entries are guaranteed to have a trailing NUL.
+
+The FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+\texorpdfstring{$\ast$}{*}() functions that take a Vorbis comment entry/name/value will first validate that it complies with the Vorbis comment specification and return false if it does not.
+
+There is no need to recalculate the length field on metadata blocks you have modified. They will be calculated automatically before they are written back to a file. 
+
+\doxysubsubsubsubsubsubsection{Function Documentation}
+\Hypertarget{group__flac__metadata__object_ga8f7fbaa68d5637e2409a053ec2ff744d}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_application\_set\_data@{FLAC\_\_metadata\_object\_application\_set\_data}}
+\index{FLAC\_\_metadata\_object\_application\_set\_data@{FLAC\_\_metadata\_object\_application\_set\_data}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_application\_set\_data()}{FLAC\_\_metadata\_object\_application\_set\_data()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga8f7fbaa68d5637e2409a053ec2ff744d} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+application\+\_\+set\+\_\+data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{FLAC\+\_\+\+\_\+byte \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{unsigned}]{length}{, }\item[{FLAC\+\_\+\+\_\+bool}]{copy}{}\end{DoxyParamCaption})}
+
+Sets the application data of an APPLICATION block.
+
+If {\itshape copy} is {\ttfamily true}, a copy of the data is stored; otherwise, the object takes ownership of the pointer. The existing data will be freed if this function is successful, otherwise the original data will remain if {\itshape copy} is {\ttfamily true} and malloc() fails.
+
+\begin{DoxyNote}{Note}
+It is safe to pass a const pointer to {\itshape data} if {\itshape copy} is {\ttfamily true}.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing APPLICATION object. \\
+\hline
+{\em data} & A pointer to the data to set. \\
+\hline
+{\em length} & The length of {\itshape data} in bytes. \\
+\hline
+{\em copy} & See above. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a2b287a22a1ac9440b309127884c8d41b}{FLAC\_\_METADATA\_TYPE\_APPLICATION}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\ (data\ !=\ NULL\ \&\&\ length\ >\ 0)\ ||}
+\DoxyCodeLine{(data\ ==\ NULL\ \&\&\ length\ ==\ 0\ \&\&\ copy\ ==\ \textcolor{keyword}{false})\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if {\itshape copy} is {\ttfamily true} and malloc() fails, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_gaa12d8f3c14500a977b7ddf14c6bf81fe}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_clone@{FLAC\_\_metadata\_object\_clone}}
+\index{FLAC\_\_metadata\_object\_clone@{FLAC\_\_metadata\_object\_clone}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_clone()}{FLAC\_\_metadata\_object\_clone()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_gaa12d8f3c14500a977b7ddf14c6bf81fe} 
+FLAC\+\_\+\+API \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*} FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+clone (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{}\end{DoxyParamCaption})}
+
+Create a copy of an existing metadata object.
+
+The copy is a "{}deep"{} copy, i.\+e. dynamically allocated data within the object is also copied. The caller takes ownership of the new block and is responsible for freeing it with \doxylink{group__flac__metadata__object_ga66bbe27dba68ba77be5af83986a280ea}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+delete()}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & Pointer to object to copy. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+\+Stream\+Metadata\texorpdfstring{$\ast$}{*}} & {\ttfamily NULL} if there was an error allocating memory, else the new instance. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga897138ca0a985d8741f73d6657f38845}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_cuesheet\_calculate\_cddb\_id@{FLAC\_\_metadata\_object\_cuesheet\_calculate\_cddb\_id}}
+\index{FLAC\_\_metadata\_object\_cuesheet\_calculate\_cddb\_id@{FLAC\_\_metadata\_object\_cuesheet\_calculate\_cddb\_id}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_cuesheet\_calculate\_cddb\_id()}{FLAC\_\_metadata\_object\_cuesheet\_calculate\_cddb\_id()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga897138ca0a985d8741f73d6657f38845} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+uint32 FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+calculate\+\_\+cddb\+\_\+id (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{}\end{DoxyParamCaption})}
+
+Calculate and return the CDDB/freedb ID for a cue sheet. The function assumes the cue sheet corresponds to a CD; the result is undefined if the cuesheet\textquotesingle{}s is\+\_\+cd bit is not set.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing CUESHEET object. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a0b3f07ae60609126562cd0233ce00a65}{FLAC\_\_METADATA\_TYPE\_CUESHEET}}\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+uint32} & The unsigned integer representation of the CDDB/freedb ID \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga3232bae96f19722bee19afd37fdc214d}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_cuesheet\_delete\_track@{FLAC\_\_metadata\_object\_cuesheet\_delete\_track}}
+\index{FLAC\_\_metadata\_object\_cuesheet\_delete\_track@{FLAC\_\_metadata\_object\_cuesheet\_delete\_track}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_cuesheet\_delete\_track()}{FLAC\_\_metadata\_object\_cuesheet\_delete\_track()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga3232bae96f19722bee19afd37fdc214d} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+delete\+\_\+track (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{unsigned}]{track\+\_\+num}{}\end{DoxyParamCaption})}
+
+Delete a track in a CUESHEET block at the given index.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing CUESHEET object. \\
+\hline
+{\em track\+\_\+num} & The index into the track array of the track to delete. NOTE\+: this is not necessarily the same as the track\textquotesingle{}s {\itshape number} field. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a0b3f07ae60609126562cd0233ce00a65}{FLAC\_\_METADATA\_TYPE\_CUESHEET}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>data.cue\_sheet.num\_tracks\ >\ track\_num\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if realloc() fails, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga87855591d933cd6371010a675f0bc629}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_cuesheet\_insert\_blank\_track@{FLAC\_\_metadata\_object\_cuesheet\_insert\_blank\_track}}
+\index{FLAC\_\_metadata\_object\_cuesheet\_insert\_blank\_track@{FLAC\_\_metadata\_object\_cuesheet\_insert\_blank\_track}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_cuesheet\_insert\_blank\_track()}{FLAC\_\_metadata\_object\_cuesheet\_insert\_blank\_track()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga87855591d933cd6371010a675f0bc629} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+insert\+\_\+blank\+\_\+track (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{unsigned}]{track\+\_\+num}{}\end{DoxyParamCaption})}
+
+Insert a blank track in a CUESHEET block at the given index.
+
+A blank track is one in which all field values are zero.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing CUESHEET object. \\
+\hline
+{\em track\+\_\+num} & The index at which to insert the track. NOTE\+: this is not necessarily the same as the track\textquotesingle{}s {\itshape number} field. The tracks at and after {\itshape track\+\_\+num} move right one position. To append a track to the end, set {\itshape track\+\_\+num} to {\ttfamily object-\/\texorpdfstring{$>$}{>}data.\+cue\+\_\+sheet.\+num\+\_\+tracks} . \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a0b3f07ae60609126562cd0233ce00a65}{FLAC\_\_METADATA\_TYPE\_CUESHEET}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>data.cue\_sheet.num\_tracks\ >=\ track\_num\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if {\itshape copy} is {\ttfamily true} and malloc() fails, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga5dbdffac2cd7e327f711103c15e015ac}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_cuesheet\_insert\_track@{FLAC\_\_metadata\_object\_cuesheet\_insert\_track}}
+\index{FLAC\_\_metadata\_object\_cuesheet\_insert\_track@{FLAC\_\_metadata\_object\_cuesheet\_insert\_track}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_cuesheet\_insert\_track()}{FLAC\_\_metadata\_object\_cuesheet\_insert\_track()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga5dbdffac2cd7e327f711103c15e015ac} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+insert\+\_\+track (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{unsigned}]{track\+\_\+num}{, }\item[{\mbox{\hyperlink{structFLAC____StreamMetadata__CueSheet__Track}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Cue\+Sheet\+\_\+\+Track}} \texorpdfstring{$\ast$}{*}}]{track}{, }\item[{FLAC\+\_\+\+\_\+bool}]{copy}{}\end{DoxyParamCaption})}
+
+Insert a track in a CUESHEET block at the given index.
+
+If {\itshape copy} is {\ttfamily true}, a copy of the track is stored; otherwise, the object takes ownership of the {\itshape track} pointer.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing CUESHEET object. \\
+\hline
+{\em track\+\_\+num} & The index at which to insert the track. NOTE\+: this is not necessarily the same as the track\textquotesingle{}s {\itshape number} field. The tracks at and after {\itshape track\+\_\+num} move right one position. To append a track to the end, set {\itshape track\+\_\+num} to {\ttfamily object-\/\texorpdfstring{$>$}{>}data.\+cue\+\_\+sheet.\+num\+\_\+tracks} . \\
+\hline
+{\em track} & The track to insert. You may safely pass in a const pointer if {\itshape copy} is {\ttfamily true}. \\
+\hline
+{\em copy} & See above. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a0b3f07ae60609126562cd0233ce00a65}{FLAC\_\_METADATA\_TYPE\_CUESHEET}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>data.cue\_sheet.num\_tracks\ >=\ track\_num\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if {\itshape copy} is {\ttfamily true} and malloc() fails, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga1160f85e437c1a763ec0a8f372cb1390}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_cuesheet\_is\_legal@{FLAC\_\_metadata\_object\_cuesheet\_is\_legal}}
+\index{FLAC\_\_metadata\_object\_cuesheet\_is\_legal@{FLAC\_\_metadata\_object\_cuesheet\_is\_legal}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_cuesheet\_is\_legal()}{FLAC\_\_metadata\_object\_cuesheet\_is\_legal()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga1160f85e437c1a763ec0a8f372cb1390} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+is\+\_\+legal (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{FLAC\+\_\+\+\_\+bool}]{check\+\_\+cd\+\_\+da\+\_\+subset}{, }\item[{const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{violation}{}\end{DoxyParamCaption})}
+
+Check a cue sheet to see if it conforms to the FLAC specification. See the format specification for limits on the contents of the cue sheet.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing CUESHEET object. \\
+\hline
+{\em check\+\_\+cd\+\_\+da\+\_\+subset} & If {\ttfamily true}, check CUESHEET against more stringent requirements for a CD-\/\+DA (audio) disc. \\
+\hline
+{\em violation} & Address of a pointer to a string. If there is a violation, a pointer to a string explanation of the violation will be returned here. {\itshape violation} may be {\ttfamily NULL} if you don\textquotesingle{}t need the returned string. Do not free the returned string; it will always point to static data. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a0b3f07ae60609126562cd0233ce00a65}{FLAC\_\_METADATA\_TYPE\_CUESHEET}}\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if cue sheet is illegal, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_gafb0e09fdcfb08c466ceb1f6bca961177}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_cuesheet\_resize\_tracks@{FLAC\_\_metadata\_object\_cuesheet\_resize\_tracks}}
+\index{FLAC\_\_metadata\_object\_cuesheet\_resize\_tracks@{FLAC\_\_metadata\_object\_cuesheet\_resize\_tracks}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_cuesheet\_resize\_tracks()}{FLAC\_\_metadata\_object\_cuesheet\_resize\_tracks()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_gafb0e09fdcfb08c466ceb1f6bca961177} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+resize\+\_\+tracks (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{unsigned}]{new\+\_\+num\+\_\+tracks}{}\end{DoxyParamCaption})}
+
+Resize the track array.
+
+If the size shrinks, elements will truncated; if it grows, new blank tracks will be added to the end.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing CUESHEET object. \\
+\hline
+{\em new\+\_\+num\+\_\+tracks} & The desired length of the array; may be {\ttfamily 0}. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a0b3f07ae60609126562cd0233ce00a65}{FLAC\_\_METADATA\_TYPE\_CUESHEET}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\ (\textcolor{keywordtype}{object}-\/>data.cue\_sheet.tracks\ ==\ NULL\ \&\&\ \textcolor{keywordtype}{object}-\/>data.cue\_sheet.num\_tracks\ ==\ 0)\ ||}
+\DoxyCodeLine{(object-\/>data.cue\_sheet.tracks\ !=\ NULL\ \&\&\ object-\/>data.cue\_sheet.num\_tracks\ >\ 0)\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if memory allocation error, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga682176f845b99956b3974bcc1bb63a20}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_cuesheet\_set\_track@{FLAC\_\_metadata\_object\_cuesheet\_set\_track}}
+\index{FLAC\_\_metadata\_object\_cuesheet\_set\_track@{FLAC\_\_metadata\_object\_cuesheet\_set\_track}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_cuesheet\_set\_track()}{FLAC\_\_metadata\_object\_cuesheet\_set\_track()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga682176f845b99956b3974bcc1bb63a20} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+set\+\_\+track (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{unsigned}]{track\+\_\+num}{, }\item[{\mbox{\hyperlink{structFLAC____StreamMetadata__CueSheet__Track}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Cue\+Sheet\+\_\+\+Track}} \texorpdfstring{$\ast$}{*}}]{track}{, }\item[{FLAC\+\_\+\+\_\+bool}]{copy}{}\end{DoxyParamCaption})}
+
+Sets a track in a CUESHEET block.
+
+If {\itshape copy} is {\ttfamily true}, a copy of the track is stored; otherwise, the object takes ownership of the {\itshape track} pointer.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing CUESHEET object. \\
+\hline
+{\em track\+\_\+num} & Index into track array to set. NOTE\+: this is not necessarily the same as the track\textquotesingle{}s {\itshape number} field. \\
+\hline
+{\em track} & The track to set the track to. You may safely pass in a const pointer if {\itshape copy} is {\ttfamily true}. \\
+\hline
+{\em copy} & See above. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a0b3f07ae60609126562cd0233ce00a65}{FLAC\_\_METADATA\_TYPE\_CUESHEET}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{track\_num\ <\ \textcolor{keywordtype}{object}-\/>data.cue\_sheet.num\_tracks\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\ (track-\/>indices\ !=\ NULL\ \&\&\ track-\/>num\_indices\ >\ 0)\ ||}
+\DoxyCodeLine{(track-\/>indices\ ==\ NULL\ \&\&\ track-\/>num\_indices\ ==\ 0)\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if {\itshape copy} is {\ttfamily true} and malloc() fails, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga0be772e782ad4a298c6f494e292dea0c}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_cuesheet\_track\_clone@{FLAC\_\_metadata\_object\_cuesheet\_track\_clone}}
+\index{FLAC\_\_metadata\_object\_cuesheet\_track\_clone@{FLAC\_\_metadata\_object\_cuesheet\_track\_clone}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_cuesheet\_track\_clone()}{FLAC\_\_metadata\_object\_cuesheet\_track\_clone()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga0be772e782ad4a298c6f494e292dea0c} 
+FLAC\+\_\+\+API \mbox{\hyperlink{structFLAC____StreamMetadata__CueSheet__Track}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Cue\+Sheet\+\_\+\+Track}} \texorpdfstring{$\ast$}{*} FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+track\+\_\+clone (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structFLAC____StreamMetadata__CueSheet__Track}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Cue\+Sheet\+\_\+\+Track}} \texorpdfstring{$\ast$}{*}}]{object}{}\end{DoxyParamCaption})}
+
+Create a copy of an existing CUESHEET track object.
+
+The copy is a "{}deep"{} copy, i.\+e. dynamically allocated data within the object is also copied. The caller takes ownership of the new object and is responsible for freeing it with \doxylink{group__flac__metadata__object_ga8fbf8912add405a4b1acd510b6e27c89}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+track\+\_\+delete()}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & Pointer to object to copy. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Cue\+Sheet\+\_\+\+Track\texorpdfstring{$\ast$}{*}} & {\ttfamily NULL} if there was an error allocating memory, else the new instance. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga8fbf8912add405a4b1acd510b6e27c89}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_cuesheet\_track\_delete@{FLAC\_\_metadata\_object\_cuesheet\_track\_delete}}
+\index{FLAC\_\_metadata\_object\_cuesheet\_track\_delete@{FLAC\_\_metadata\_object\_cuesheet\_track\_delete}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_cuesheet\_track\_delete()}{FLAC\_\_metadata\_object\_cuesheet\_track\_delete()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga8fbf8912add405a4b1acd510b6e27c89} 
+FLAC\+\_\+\+API void FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+track\+\_\+delete (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata__CueSheet__Track}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Cue\+Sheet\+\_\+\+Track}} \texorpdfstring{$\ast$}{*}}]{object}{}\end{DoxyParamCaption})}
+
+Delete a CUESHEET track object
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing CUESHEET track object. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__flac__metadata__object_ga9cba3429dcc863714ceb1de6952c4737}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_cuesheet\_track\_delete\_index@{FLAC\_\_metadata\_object\_cuesheet\_track\_delete\_index}}
+\index{FLAC\_\_metadata\_object\_cuesheet\_track\_delete\_index@{FLAC\_\_metadata\_object\_cuesheet\_track\_delete\_index}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_cuesheet\_track\_delete\_index()}{FLAC\_\_metadata\_object\_cuesheet\_track\_delete\_index()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga9cba3429dcc863714ceb1de6952c4737} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+track\+\_\+delete\+\_\+index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{unsigned}]{track\+\_\+num}{, }\item[{unsigned}]{index\+\_\+num}{}\end{DoxyParamCaption})}
+
+Delete an index point in a CUESHEET track at the given index.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing CUESHEET object. \\
+\hline
+{\em track\+\_\+num} & The index into the track array of the track to modify. NOTE\+: this is not necessarily the same as the track\textquotesingle{}s {\itshape number} field. \\
+\hline
+{\em index\+\_\+num} & The index into the track\textquotesingle{}s index array of the index to delete. NOTE\+: this is not necessarily the same as the index\textquotesingle{}s {\itshape number} field. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a0b3f07ae60609126562cd0233ce00a65}{FLAC\_\_METADATA\_TYPE\_CUESHEET}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>data.cue\_sheet.num\_tracks\ >\ track\_num\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>data.cue\_sheet.tracks[track\_num].num\_indices\ >\ index\_num\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if realloc() fails, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_gaa1401ea99e4dc61d3eb034aed7d99602}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_cuesheet\_track\_insert\_blank\_index@{FLAC\_\_metadata\_object\_cuesheet\_track\_insert\_blank\_index}}
+\index{FLAC\_\_metadata\_object\_cuesheet\_track\_insert\_blank\_index@{FLAC\_\_metadata\_object\_cuesheet\_track\_insert\_blank\_index}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_cuesheet\_track\_insert\_blank\_index()}{FLAC\_\_metadata\_object\_cuesheet\_track\_insert\_blank\_index()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_gaa1401ea99e4dc61d3eb034aed7d99602} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+track\+\_\+insert\+\_\+blank\+\_\+index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{unsigned}]{track\+\_\+num}{, }\item[{unsigned}]{index\+\_\+num}{}\end{DoxyParamCaption})}
+
+Insert a blank index point in a CUESHEET track at the given index.
+
+A blank index point is one in which all field values are zero.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing CUESHEET object. \\
+\hline
+{\em track\+\_\+num} & The index of the track to modify. NOTE\+: this is not necessarily the same as the track\textquotesingle{}s {\itshape number} field. \\
+\hline
+{\em index\+\_\+num} & The index into the track\textquotesingle{}s index array at which to insert the index point. NOTE\+: this is not necessarily the same as the index point\textquotesingle{}s {\itshape number} field. The indices at and after {\itshape index\+\_\+num} move right one position. To append an index point to the end, set {\itshape index\+\_\+num} to {\ttfamily object-\/\texorpdfstring{$>$}{>}data.\+cue\+\_\+sheet.\+tracks}\mbox{[}track\+\_\+num\mbox{]}.num\+\_\+indices . \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a0b3f07ae60609126562cd0233ce00a65}{FLAC\_\_METADATA\_TYPE\_CUESHEET}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>data.cue\_sheet.num\_tracks\ >\ track\_num\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>data.cue\_sheet.tracks[track\_num].num\_indices\ >=\ index\_num\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if realloc() fails, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga2f8c5d80c409eff5ebd53ccd0c6f0984}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_cuesheet\_track\_insert\_index@{FLAC\_\_metadata\_object\_cuesheet\_track\_insert\_index}}
+\index{FLAC\_\_metadata\_object\_cuesheet\_track\_insert\_index@{FLAC\_\_metadata\_object\_cuesheet\_track\_insert\_index}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_cuesheet\_track\_insert\_index()}{FLAC\_\_metadata\_object\_cuesheet\_track\_insert\_index()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga2f8c5d80c409eff5ebd53ccd0c6f0984} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+track\+\_\+insert\+\_\+index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{unsigned}]{track\+\_\+num}{, }\item[{unsigned}]{index\+\_\+num}{, }\item[{\mbox{\hyperlink{structFLAC____StreamMetadata__CueSheet__Index}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Cue\+Sheet\+\_\+\+Index}}}]{index}{}\end{DoxyParamCaption})}
+
+Insert an index point in a CUESHEET track at the given index.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing CUESHEET object. \\
+\hline
+{\em track\+\_\+num} & The index of the track to modify. NOTE\+: this is not necessarily the same as the track\textquotesingle{}s {\itshape number} field. \\
+\hline
+{\em index\+\_\+num} & The index into the track\textquotesingle{}s index array at which to insert the index point. NOTE\+: this is not necessarily the same as the index point\textquotesingle{}s {\itshape number} field. The indices at and after {\itshape index\+\_\+num} move right one position. To append an index point to the end, set {\itshape index\+\_\+num} to {\ttfamily object-\/\texorpdfstring{$>$}{>}data.\+cue\+\_\+sheet.\+tracks}\mbox{[}track\+\_\+num\mbox{]}.num\+\_\+indices . \\
+\hline
+{\em index} & The index point to insert. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a0b3f07ae60609126562cd0233ce00a65}{FLAC\_\_METADATA\_TYPE\_CUESHEET}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>data.cue\_sheet.num\_tracks\ >\ track\_num\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>data.cue\_sheet.tracks[track\_num].num\_indices\ >=\ index\_num\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if realloc() fails, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_gafac37284d73c301a48ff8aa8069253a4}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_cuesheet\_track\_new@{FLAC\_\_metadata\_object\_cuesheet\_track\_new}}
+\index{FLAC\_\_metadata\_object\_cuesheet\_track\_new@{FLAC\_\_metadata\_object\_cuesheet\_track\_new}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_cuesheet\_track\_new()}{FLAC\_\_metadata\_object\_cuesheet\_track\_new()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_gafac37284d73c301a48ff8aa8069253a4} 
+FLAC\+\_\+\+API \mbox{\hyperlink{structFLAC____StreamMetadata__CueSheet__Track}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Cue\+Sheet\+\_\+\+Track}} \texorpdfstring{$\ast$}{*} FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+track\+\_\+new (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+Create a new CUESHEET track instance.
+
+The object will be "{}empty"{}; i.\+e. values and data pointers will be {\ttfamily 0}.
+
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Cue\+Sheet\+\_\+\+Track\texorpdfstring{$\ast$}{*}} & {\ttfamily NULL} if there was an error allocating memory, else the new instance. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga57dfba89ba704574bde4e3fcd925d473}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_cuesheet\_track\_resize\_indices@{FLAC\_\_metadata\_object\_cuesheet\_track\_resize\_indices}}
+\index{FLAC\_\_metadata\_object\_cuesheet\_track\_resize\_indices@{FLAC\_\_metadata\_object\_cuesheet\_track\_resize\_indices}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_cuesheet\_track\_resize\_indices()}{FLAC\_\_metadata\_object\_cuesheet\_track\_resize\_indices()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga57dfba89ba704574bde4e3fcd925d473} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+cuesheet\+\_\+track\+\_\+resize\+\_\+indices (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{unsigned}]{track\+\_\+num}{, }\item[{unsigned}]{new\+\_\+num\+\_\+indices}{}\end{DoxyParamCaption})}
+
+Resize a track\textquotesingle{}s index point array.
+
+If the size shrinks, elements will truncated; if it grows, new blank indices will be added to the end.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing CUESHEET object. \\
+\hline
+{\em track\+\_\+num} & The index of the track to modify. NOTE\+: this is not necessarily the same as the track\textquotesingle{}s {\itshape number} field. \\
+\hline
+{\em new\+\_\+num\+\_\+indices} & The desired length of the array; may be {\ttfamily 0}. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a0b3f07ae60609126562cd0233ce00a65}{FLAC\_\_METADATA\_TYPE\_CUESHEET}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>data.cue\_sheet.num\_tracks\ >\ track\_num\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\ (\textcolor{keywordtype}{object}-\/>data.cue\_sheet.tracks[track\_num].indices\ ==\ NULL\ \&\&\ \textcolor{keywordtype}{object}-\/>data.cue\_sheet.tracks[track\_num].num\_indices\ ==\ 0)\ ||}
+\DoxyCodeLine{(object-\/>data.cue\_sheet.tracks[track\_num].indices\ !=\ NULL\ \&\&\ object-\/>data.cue\_sheet.tracks[track\_num].num\_indices\ >\ 0)\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if memory allocation error, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga66bbe27dba68ba77be5af83986a280ea}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_delete@{FLAC\_\_metadata\_object\_delete}}
+\index{FLAC\_\_metadata\_object\_delete@{FLAC\_\_metadata\_object\_delete}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_delete()}{FLAC\_\_metadata\_object\_delete()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga66bbe27dba68ba77be5af83986a280ea} 
+FLAC\+\_\+\+API void FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+delete (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{}\end{DoxyParamCaption})}
+
+Free a metadata object. Deletes the object pointed to by {\itshape object}.
+
+The delete is a "{}deep"{} delete, i.\+e. dynamically allocated data within the object is also deleted.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing object. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__flac__metadata__object_gac834137d4837c304ca5db4c8407900bb}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_is\_equal@{FLAC\_\_metadata\_object\_is\_equal}}
+\index{FLAC\_\_metadata\_object\_is\_equal@{FLAC\_\_metadata\_object\_is\_equal}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_is\_equal()}{FLAC\_\_metadata\_object\_is\_equal()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_gac834137d4837c304ca5db4c8407900bb} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+is\+\_\+equal (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{block1}{, }\item[{const \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{block2}{}\end{DoxyParamCaption})}
+
+Compares two metadata objects.
+
+The compare is "{}deep"{}, i.\+e. dynamically allocated data within the object is also compared.
+
+
+\begin{DoxyParams}{Parameters}
+{\em block1} & A pointer to an existing object. \\
+\hline
+{\em block2} & A pointer to an existing object. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{block1\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{block2\ !=\ NULL\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily true} if objects are identical, else {\ttfamily false}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_gab3d728ca4455bda71cc231fdb91307fb}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_new@{FLAC\_\_metadata\_object\_new}}
+\index{FLAC\_\_metadata\_object\_new@{FLAC\_\_metadata\_object\_new}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_new()}{FLAC\_\_metadata\_object\_new()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_gab3d728ca4455bda71cc231fdb91307fb} 
+FLAC\+\_\+\+API \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*} FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+new (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__flac__format_gac71714ba8ddbbd66d26bb78a427fac01}{FLAC\+\_\+\+\_\+\+Metadata\+Type}}}]{type}{}\end{DoxyParamCaption})}
+
+Create a new metadata object instance of the given type.
+
+The object will be "{}empty"{}; i.\+e. values and data pointers will be {\ttfamily 0}, with the exception of FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+TYPE\+\_\+\+VORBIS\+\_\+\+COMMENT, which will have the vendor string set (but zero comments).
+
+Do not pass in a value greater than or equal to {\itshape FLAC\+\_\+\+\_\+\+METADATA\+\_\+\+TYPE\+\_\+\+UNDEFINED} unless you really know what you\textquotesingle{}re doing.
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & Type of object to create \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+\+Stream\+Metadata\texorpdfstring{$\ast$}{*}} & {\ttfamily NULL} if there was an error allocating memory or the type code is greater than FLAC\+\_\+\+\_\+\+MAX\+\_\+\+METADATA\+\_\+\+TYPE\+\_\+\+CODE, else the new instance. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga2e389272f4df904e1652e79c89ca55c8}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_picture\_is\_legal@{FLAC\_\_metadata\_object\_picture\_is\_legal}}
+\index{FLAC\_\_metadata\_object\_picture\_is\_legal@{FLAC\_\_metadata\_object\_picture\_is\_legal}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_picture\_is\_legal()}{FLAC\_\_metadata\_object\_picture\_is\_legal()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga2e389272f4df904e1652e79c89ca55c8} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+picture\+\_\+is\+\_\+legal (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{violation}{}\end{DoxyParamCaption})}
+
+Check a PICTURE block to see if it conforms to the FLAC specification. See the format specification for limits on the contents of the PICTURE block.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to existing PICTURE block to be checked. \\
+\hline
+{\em violation} & Address of a pointer to a string. If there is a violation, a pointer to a string explanation of the violation will be returned here. {\itshape violation} may be {\ttfamily NULL} if you don\textquotesingle{}t need the returned string. Do not free the returned string; it will always point to static data. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01acf28ae2788366617c1aeab81d5961c6e}{FLAC\_\_METADATA\_TYPE\_PICTURE}}\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if PICTURE block is illegal, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga07e5950094528e2954c06d7991d543a8}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_picture\_set\_data@{FLAC\_\_metadata\_object\_picture\_set\_data}}
+\index{FLAC\_\_metadata\_object\_picture\_set\_data@{FLAC\_\_metadata\_object\_picture\_set\_data}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_picture\_set\_data()}{FLAC\_\_metadata\_object\_picture\_set\_data()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga07e5950094528e2954c06d7991d543a8} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+picture\+\_\+set\+\_\+data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{FLAC\+\_\+\+\_\+byte \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{FLAC\+\_\+\+\_\+uint32}]{length}{, }\item[{FLAC\+\_\+\+\_\+bool}]{copy}{}\end{DoxyParamCaption})}
+
+Sets the picture data of a PICTURE block.
+
+If {\itshape copy} is {\ttfamily true}, a copy of the data is stored; otherwise, the object takes ownership of the pointer. Also sets the {\itshape data\+\_\+length} field of the metadata object to what is passed in as the {\itshape length} parameter. The existing data will be freed if this function is successful, otherwise the original data and data\+\_\+length will remain if {\itshape copy} is {\ttfamily true} and malloc() fails.
+
+\begin{DoxyNote}{Note}
+It is safe to pass a const pointer to {\itshape data} if {\itshape copy} is {\ttfamily true}.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing PICTURE object. \\
+\hline
+{\em data} & A pointer to the data to set. \\
+\hline
+{\em length} & The length of {\itshape data} in bytes. \\
+\hline
+{\em copy} & See above. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01acf28ae2788366617c1aeab81d5961c6e}{FLAC\_\_METADATA\_TYPE\_PICTURE}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\ (data\ !=\ NULL\ \&\&\ length\ >\ 0)\ ||}
+\DoxyCodeLine{(data\ ==\ NULL\ \&\&\ length\ ==\ 0\ \&\&\ copy\ ==\ \textcolor{keyword}{false})\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if {\itshape copy} is {\ttfamily true} and malloc() fails, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga5582649e395e70a4b3df510a39d70cc5}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_picture\_set\_description@{FLAC\_\_metadata\_object\_picture\_set\_description}}
+\index{FLAC\_\_metadata\_object\_picture\_set\_description@{FLAC\_\_metadata\_object\_picture\_set\_description}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_picture\_set\_description()}{FLAC\_\_metadata\_object\_picture\_set\_description()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga5582649e395e70a4b3df510a39d70cc5} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+picture\+\_\+set\+\_\+description (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{FLAC\+\_\+\+\_\+byte \texorpdfstring{$\ast$}{*}}]{description}{, }\item[{FLAC\+\_\+\+\_\+bool}]{copy}{}\end{DoxyParamCaption})}
+
+Sets the description of a PICTURE block.
+
+If {\itshape copy} is {\ttfamily true}, a copy of the string is stored; otherwise, the object takes ownership of the pointer. The existing string will be freed if this function is successful, otherwise the original string will remain if {\itshape copy} is {\ttfamily true} and malloc() fails.
+
+\begin{DoxyNote}{Note}
+It is safe to pass a const pointer to {\itshape description} if {\itshape copy} is {\ttfamily true}.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing PICTURE object. \\
+\hline
+{\em description} & A pointer to the description string. The string must be valid UTF-\/8, NUL-\/terminated. No validation is done. \\
+\hline
+{\em copy} & See above. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01acf28ae2788366617c1aeab81d5961c6e}{FLAC\_\_METADATA\_TYPE\_PICTURE}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{(description\ !=\ NULL)\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if {\itshape copy} is {\ttfamily true} and malloc() fails, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga5db3363648b6e7693e032f200f241e85}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_picture\_set\_mime\_type@{FLAC\_\_metadata\_object\_picture\_set\_mime\_type}}
+\index{FLAC\_\_metadata\_object\_picture\_set\_mime\_type@{FLAC\_\_metadata\_object\_picture\_set\_mime\_type}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_picture\_set\_mime\_type()}{FLAC\_\_metadata\_object\_picture\_set\_mime\_type()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga5db3363648b6e7693e032f200f241e85} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+picture\+\_\+set\+\_\+mime\+\_\+type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{mime\+\_\+type}{, }\item[{FLAC\+\_\+\+\_\+bool}]{copy}{}\end{DoxyParamCaption})}
+
+Sets the MIME type of a PICTURE block.
+
+If {\itshape copy} is {\ttfamily true}, a copy of the string is stored; otherwise, the object takes ownership of the pointer. The existing string will be freed if this function is successful, otherwise the original string will remain if {\itshape copy} is {\ttfamily true} and malloc() fails.
+
+\begin{DoxyNote}{Note}
+It is safe to pass a const pointer to {\itshape mime\+\_\+type} if {\itshape copy} is {\ttfamily true}.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing PICTURE object. \\
+\hline
+{\em mime\+\_\+type} & A pointer to the MIME type string. The string must be ASCII characters 0x20-\/0x7e, NUL-\/terminated. No validation is done. \\
+\hline
+{\em copy} & See above. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01acf28ae2788366617c1aeab81d5961c6e}{FLAC\_\_METADATA\_TYPE\_PICTURE}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{(mime\_type\ !=\ NULL)\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if {\itshape copy} is {\ttfamily true} and malloc() fails, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga5a865f792845cbf22b5935c3d96568d1}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_seektable\_delete\_point@{FLAC\_\_metadata\_object\_seektable\_delete\_point}}
+\index{FLAC\_\_metadata\_object\_seektable\_delete\_point@{FLAC\_\_metadata\_object\_seektable\_delete\_point}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_seektable\_delete\_point()}{FLAC\_\_metadata\_object\_seektable\_delete\_point()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga5a865f792845cbf22b5935c3d96568d1} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+delete\+\_\+point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{unsigned}]{point\+\_\+num}{}\end{DoxyParamCaption})}
+
+Delete a seekpoint from a seektable.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing SEEKTABLE object. \\
+\hline
+{\em point\+\_\+num} & Index into seekpoint array to set. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a5f6323e489be1318f0e3747960ebdd91}{FLAC\_\_METADATA\_TYPE\_SEEKTABLE}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>data.seek\_table.num\_points\ >\ point\_num\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if memory allocation error, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga0c658260aaffb126486f5d1e211b53e5}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_seektable\_insert\_point@{FLAC\_\_metadata\_object\_seektable\_insert\_point}}
+\index{FLAC\_\_metadata\_object\_seektable\_insert\_point@{FLAC\_\_metadata\_object\_seektable\_insert\_point}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_seektable\_insert\_point()}{FLAC\_\_metadata\_object\_seektable\_insert\_point()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga0c658260aaffb126486f5d1e211b53e5} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+insert\+\_\+point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{unsigned}]{point\+\_\+num}{, }\item[{\mbox{\hyperlink{structFLAC____StreamMetadata__SeekPoint}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Seek\+Point}}}]{point}{}\end{DoxyParamCaption})}
+
+Insert a seekpoint into a seektable.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing SEEKTABLE object. \\
+\hline
+{\em point\+\_\+num} & Index into seekpoint array to set. \\
+\hline
+{\em point} & The point to set. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a5f6323e489be1318f0e3747960ebdd91}{FLAC\_\_METADATA\_TYPE\_SEEKTABLE}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>data.seek\_table.num\_points\ >=\ point\_num\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if memory allocation error, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga08f33e2ef85d72363dda82de3208ed1e}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_seektable\_is\_legal@{FLAC\_\_metadata\_object\_seektable\_is\_legal}}
+\index{FLAC\_\_metadata\_object\_seektable\_is\_legal@{FLAC\_\_metadata\_object\_seektable\_is\_legal}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_seektable\_is\_legal()}{FLAC\_\_metadata\_object\_seektable\_is\_legal()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga08f33e2ef85d72363dda82de3208ed1e} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+is\+\_\+legal (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{}\end{DoxyParamCaption})}
+
+Check a seektable to see if it conforms to the FLAC specification. See the format specification for limits on the contents of the seektable.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing SEEKTABLE object. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a5f6323e489be1318f0e3747960ebdd91}{FLAC\_\_METADATA\_TYPE\_SEEKTABLE}}\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if seek table is illegal, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga836f94fa622ece4f50dadf27c7ec107a}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_seektable\_resize\_points@{FLAC\_\_metadata\_object\_seektable\_resize\_points}}
+\index{FLAC\_\_metadata\_object\_seektable\_resize\_points@{FLAC\_\_metadata\_object\_seektable\_resize\_points}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_seektable\_resize\_points()}{FLAC\_\_metadata\_object\_seektable\_resize\_points()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga836f94fa622ece4f50dadf27c7ec107a} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+resize\+\_\+points (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{unsigned}]{new\+\_\+num\+\_\+points}{}\end{DoxyParamCaption})}
+
+Resize the seekpoint array.
+
+If the size shrinks, elements will truncated; if it grows, new placeholder points will be added to the end.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing SEEKTABLE object. \\
+\hline
+{\em new\+\_\+num\+\_\+points} & The desired length of the array; may be {\ttfamily 0}. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a5f6323e489be1318f0e3747960ebdd91}{FLAC\_\_METADATA\_TYPE\_SEEKTABLE}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\ (\textcolor{keywordtype}{object}-\/>data.seek\_table.points\ ==\ NULL\ \&\&\ \textcolor{keywordtype}{object}-\/>data.seek\_table.num\_points\ ==\ 0)\ ||}
+\DoxyCodeLine{(object-\/>data.seek\_table.points\ !=\ NULL\ \&\&\ object-\/>data.seek\_table.num\_points\ >\ 0)\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if memory allocation error, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_gae2c58ebdfb9f2b238d45971b14600944}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_seektable\_set\_point@{FLAC\_\_metadata\_object\_seektable\_set\_point}}
+\index{FLAC\_\_metadata\_object\_seektable\_set\_point@{FLAC\_\_metadata\_object\_seektable\_set\_point}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_seektable\_set\_point()}{FLAC\_\_metadata\_object\_seektable\_set\_point()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_gae2c58ebdfb9f2b238d45971b14600944} 
+FLAC\+\_\+\+API void FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+set\+\_\+point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{unsigned}]{point\+\_\+num}{, }\item[{\mbox{\hyperlink{structFLAC____StreamMetadata__SeekPoint}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Seek\+Point}}}]{point}{}\end{DoxyParamCaption})}
+
+Set a seekpoint in a seektable.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing SEEKTABLE object. \\
+\hline
+{\em point\+\_\+num} & Index into seekpoint array to set. \\
+\hline
+{\em point} & The point to set. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a5f6323e489be1318f0e3747960ebdd91}{FLAC\_\_METADATA\_TYPE\_SEEKTABLE}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>data.seek\_table.num\_points\ >\ point\_num\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__flac__metadata__object_gae9d8c43dc78bde9778c4e57c5f74b025}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_seektable\_template\_append\_placeholders@{FLAC\_\_metadata\_object\_seektable\_template\_append\_placeholders}}
+\index{FLAC\_\_metadata\_object\_seektable\_template\_append\_placeholders@{FLAC\_\_metadata\_object\_seektable\_template\_append\_placeholders}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_seektable\_template\_append\_placeholders()}{FLAC\_\_metadata\_object\_seektable\_template\_append\_placeholders()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_gae9d8c43dc78bde9778c4e57c5f74b025} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+template\+\_\+append\+\_\+placeholders (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{unsigned}]{num}{}\end{DoxyParamCaption})}
+
+Append a number of placeholder points to the end of a seek table.
+
+\begin{DoxyNote}{Note}
+As with the other ...\+\_\+seektable\+\_\+template\+\_\+... functions, you should call \doxylink{group__flac__metadata__object_gaee6a1f08321b56a3fa65af94dd7830cd}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+template\+\_\+sort()} when finished to make the seek table legal.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing SEEKTABLE object. \\
+\hline
+{\em num} & The number of placeholder points to append. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a5f6323e489be1318f0e3747960ebdd91}{FLAC\_\_METADATA\_TYPE\_SEEKTABLE}}\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if memory allocation fails, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga9ce1940ca29d71739316cf104256c078}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_seektable\_template\_append\_point@{FLAC\_\_metadata\_object\_seektable\_template\_append\_point}}
+\index{FLAC\_\_metadata\_object\_seektable\_template\_append\_point@{FLAC\_\_metadata\_object\_seektable\_template\_append\_point}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_seektable\_template\_append\_point()}{FLAC\_\_metadata\_object\_seektable\_template\_append\_point()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga9ce1940ca29d71739316cf104256c078} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+template\+\_\+append\+\_\+point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{FLAC\+\_\+\+\_\+uint64}]{sample\+\_\+number}{}\end{DoxyParamCaption})}
+
+Append a specific seek point template to the end of a seek table.
+
+\begin{DoxyNote}{Note}
+As with the other ...\+\_\+seektable\+\_\+template\+\_\+... functions, you should call \doxylink{group__flac__metadata__object_gaee6a1f08321b56a3fa65af94dd7830cd}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+template\+\_\+sort()} when finished to make the seek table legal.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing SEEKTABLE object. \\
+\hline
+{\em sample\+\_\+number} & The sample number of the seek point template. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a5f6323e489be1318f0e3747960ebdd91}{FLAC\_\_METADATA\_TYPE\_SEEKTABLE}}\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if memory allocation fails, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_gac27a59879fa8cdf47b75f8d73de82f0e}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_seektable\_template\_append\_points@{FLAC\_\_metadata\_object\_seektable\_template\_append\_points}}
+\index{FLAC\_\_metadata\_object\_seektable\_template\_append\_points@{FLAC\_\_metadata\_object\_seektable\_template\_append\_points}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_seektable\_template\_append\_points()}{FLAC\_\_metadata\_object\_seektable\_template\_append\_points()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_gac27a59879fa8cdf47b75f8d73de82f0e} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+template\+\_\+append\+\_\+points (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{FLAC\+\_\+\+\_\+uint64}]{sample\+\_\+numbers}{\mbox{[}$\,$\mbox{]}, }\item[{unsigned}]{num}{}\end{DoxyParamCaption})}
+
+Append specific seek point templates to the end of a seek table.
+
+\begin{DoxyNote}{Note}
+As with the other ...\+\_\+seektable\+\_\+template\+\_\+... functions, you should call \doxylink{group__flac__metadata__object_gaee6a1f08321b56a3fa65af94dd7830cd}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+template\+\_\+sort()} when finished to make the seek table legal.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing SEEKTABLE object. \\
+\hline
+{\em sample\+\_\+numbers} & An array of sample numbers for the seek points. \\
+\hline
+{\em num} & The number of seek point templates to append. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a5f6323e489be1318f0e3747960ebdd91}{FLAC\_\_METADATA\_TYPE\_SEEKTABLE}}\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if memory allocation fails, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_gab96c6585578c87f6853731860e2872e0}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_seektable\_template\_append\_spaced\_points@{FLAC\_\_metadata\_object\_seektable\_template\_append\_spaced\_points}}
+\index{FLAC\_\_metadata\_object\_seektable\_template\_append\_spaced\_points@{FLAC\_\_metadata\_object\_seektable\_template\_append\_spaced\_points}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_seektable\_template\_append\_spaced\_points()}{FLAC\_\_metadata\_object\_seektable\_template\_append\_spaced\_points()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_gab96c6585578c87f6853731860e2872e0} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+template\+\_\+append\+\_\+spaced\+\_\+points (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{unsigned}]{num}{, }\item[{FLAC\+\_\+\+\_\+uint64}]{total\+\_\+samples}{}\end{DoxyParamCaption})}
+
+Append a set of evenly-\/spaced seek point templates to the end of a seek table.
+
+\begin{DoxyNote}{Note}
+As with the other ...\+\_\+seektable\+\_\+template\+\_\+... functions, you should call \doxylink{group__flac__metadata__object_gaee6a1f08321b56a3fa65af94dd7830cd}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+template\+\_\+sort()} when finished to make the seek table legal.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing SEEKTABLE object. \\
+\hline
+{\em num} & The number of placeholder points to append. \\
+\hline
+{\em total\+\_\+samples} & The total number of samples to be encoded; the seekpoints will be spaced approximately {\itshape total\+\_\+samples} / {\itshape num} samples apart. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a5f6323e489be1318f0e3747960ebdd91}{FLAC\_\_METADATA\_TYPE\_SEEKTABLE}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{total\_samples\ >\ 0\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if memory allocation fails, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_gabf797b64b96808cabf1d995573680fe9}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_seektable\_template\_append\_spaced\_points\_by\_samples@{FLAC\_\_metadata\_object\_seektable\_template\_append\_spaced\_points\_by\_samples}}
+\index{FLAC\_\_metadata\_object\_seektable\_template\_append\_spaced\_points\_by\_samples@{FLAC\_\_metadata\_object\_seektable\_template\_append\_spaced\_points\_by\_samples}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_seektable\_template\_append\_spaced\_points\_by\_samples()}{FLAC\_\_metadata\_object\_seektable\_template\_append\_spaced\_points\_by\_samples()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_gabf797b64b96808cabf1d995573680fe9} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+template\+\_\+append\+\_\+spaced\+\_\+points\+\_\+by\+\_\+samples (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{unsigned}]{samples}{, }\item[{FLAC\+\_\+\+\_\+uint64}]{total\+\_\+samples}{}\end{DoxyParamCaption})}
+
+Append a set of evenly-\/spaced seek point templates to the end of a seek table.
+
+\begin{DoxyNote}{Note}
+As with the other ...\+\_\+seektable\+\_\+template\+\_\+... functions, you should call \doxylink{group__flac__metadata__object_gaee6a1f08321b56a3fa65af94dd7830cd}{FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+template\+\_\+sort()} when finished to make the seek table legal.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing SEEKTABLE object. \\
+\hline
+{\em samples} & The number of samples apart to space the placeholder points. The first point will be at sample {\ttfamily 0}, the second at sample {\itshape samples}, then 2\texorpdfstring{$\ast$}{*}{\itshape samples}, and so on. As long as {\itshape samples} and {\itshape total\+\_\+samples} are greater than {\ttfamily 0}, there will always be at least one seekpoint at sample {\ttfamily 0}. \\
+\hline
+{\em total\+\_\+samples} & The total number of samples to be encoded; the seekpoints will be spaced {\itshape samples} samples apart. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a5f6323e489be1318f0e3747960ebdd91}{FLAC\_\_METADATA\_TYPE\_SEEKTABLE}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{samples\ >\ 0\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{total\_samples\ >\ 0\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if memory allocation fails, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_gaee6a1f08321b56a3fa65af94dd7830cd}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_seektable\_template\_sort@{FLAC\_\_metadata\_object\_seektable\_template\_sort}}
+\index{FLAC\_\_metadata\_object\_seektable\_template\_sort@{FLAC\_\_metadata\_object\_seektable\_template\_sort}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_seektable\_template\_sort()}{FLAC\_\_metadata\_object\_seektable\_template\_sort()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_gaee6a1f08321b56a3fa65af94dd7830cd} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+seektable\+\_\+template\+\_\+sort (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{FLAC\+\_\+\+\_\+bool}]{compact}{}\end{DoxyParamCaption})}
+
+Sort a seek table\textquotesingle{}s seek points according to the format specification, removing duplicates.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to a seek table to be sorted. \\
+\hline
+{\em compact} & If {\ttfamily false}, behaves like \doxylink{group__flac__format_gad1b0090d45a6d65a696a81261bd7fbf6}{FLAC\+\_\+\+\_\+format\+\_\+seektable\+\_\+sort()}. If {\ttfamily true}, duplicates are deleted and the seek table is shrunk appropriately; the number of placeholder points present in the seek table will be the same after the call as before. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01a5f6323e489be1318f0e3747960ebdd91}{FLAC\_\_METADATA\_TYPE\_SEEKTABLE}}\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if realloc() fails, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_gad04ef80ae5f852db8f3729a6ef8c1631}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_vorbiscomment\_append\_comment@{FLAC\_\_metadata\_object\_vorbiscomment\_append\_comment}}
+\index{FLAC\_\_metadata\_object\_vorbiscomment\_append\_comment@{FLAC\_\_metadata\_object\_vorbiscomment\_append\_comment}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_vorbiscomment\_append\_comment()}{FLAC\_\_metadata\_object\_vorbiscomment\_append\_comment()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_gad04ef80ae5f852db8f3729a6ef8c1631} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+append\+\_\+comment (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{\mbox{\hyperlink{structFLAC____StreamMetadata__VorbisComment__Entry}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Vorbis\+Comment\+\_\+\+Entry}}}]{entry}{, }\item[{FLAC\+\_\+\+\_\+bool}]{copy}{}\end{DoxyParamCaption})}
+
+Appends a comment to a VORBIS\+\_\+\+COMMENT block.
+
+For convenience, a trailing NUL is added to the entry if it doesn\textquotesingle{}t have one already.
+
+If {\itshape copy} is {\ttfamily true}, a copy of the entry is stored; otherwise, the object takes ownership of the {\ttfamily entry.\+entry} pointer.
+
+\begin{DoxyNote}{Note}
+If this function returns {\ttfamily false}, the caller still owns the pointer.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing VORBIS\+\_\+\+COMMENT object. \\
+\hline
+{\em entry} & The comment to insert. \\
+\hline
+{\em copy} & See above. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01ad013576bc5196b907547739518605520}{FLAC\_\_METADATA\_TYPE\_VORBIS\_COMMENT}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\ (entry.entry\ !=\ NULL\ \&\&\ entry.length\ >\ 0)\ ||}
+\DoxyCodeLine{(entry.entry\ ==\ NULL\ \&\&\ entry.length\ ==\ 0\ \&\&\ copy\ ==\ \textcolor{keyword}{false})\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if memory allocation fails or {\itshape entry} does not comply with the Vorbis comment specification, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga2d1b309d4ca207039ad6d19bd779800f}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_vorbiscomment\_delete\_comment@{FLAC\_\_metadata\_object\_vorbiscomment\_delete\_comment}}
+\index{FLAC\_\_metadata\_object\_vorbiscomment\_delete\_comment@{FLAC\_\_metadata\_object\_vorbiscomment\_delete\_comment}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_vorbiscomment\_delete\_comment()}{FLAC\_\_metadata\_object\_vorbiscomment\_delete\_comment()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga2d1b309d4ca207039ad6d19bd779800f} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+delete\+\_\+comment (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{unsigned}]{comment\+\_\+num}{}\end{DoxyParamCaption})}
+
+Delete a comment in a VORBIS\+\_\+\+COMMENT block at the given index.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing VORBIS\+\_\+\+COMMENT object. \\
+\hline
+{\em comment\+\_\+num} & The index of the comment to delete. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01ad013576bc5196b907547739518605520}{FLAC\_\_METADATA\_TYPE\_VORBIS\_COMMENT}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>data.vorbis\_comment.num\_comments\ >\ comment\_num\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if realloc() fails, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga0ec0c7ddd3a8832ee7a75bf47956b1c7}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_vorbiscomment\_entry\_from\_name\_value\_pair@{FLAC\_\_metadata\_object\_vorbiscomment\_entry\_from\_name\_value\_pair}}
+\index{FLAC\_\_metadata\_object\_vorbiscomment\_entry\_from\_name\_value\_pair@{FLAC\_\_metadata\_object\_vorbiscomment\_entry\_from\_name\_value\_pair}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_vorbiscomment\_entry\_from\_name\_value\_pair()}{FLAC\_\_metadata\_object\_vorbiscomment\_entry\_from\_name\_value\_pair()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga0ec0c7ddd3a8832ee7a75bf47956b1c7} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+entry\+\_\+from\+\_\+name\+\_\+value\+\_\+pair (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata__VorbisComment__Entry}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Vorbis\+Comment\+\_\+\+Entry}} \texorpdfstring{$\ast$}{*}}]{entry}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{field\+\_\+name}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{field\+\_\+value}{}\end{DoxyParamCaption})}
+
+Creates a Vorbis comment entry from NUL-\/terminated name and value strings.
+
+On return, the filled-\/in {\itshape entry-\/\texorpdfstring{$>$}{>}entry} pointer will point to malloc()ed memory and shall be owned by the caller. For convenience the entry will have a terminating NUL.
+
+
+\begin{DoxyParams}{Parameters}
+{\em entry} & A pointer to a Vorbis comment entry. The entry\textquotesingle{}s {\ttfamily entry} pointer should not point to allocated memory as it will be overwritten. \\
+\hline
+{\em field\+\_\+name} & The field name in ASCII, {\ttfamily NUL} terminated. \\
+\hline
+{\em field\+\_\+value} & The field value in UTF-\/8, {\ttfamily NUL} terminated. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{entry\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{field\_name\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{field\_value\ !=\ NULL\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if malloc() fails, or if {\itshape field\+\_\+name} or {\itshape field\+\_\+value} does not comply with the Vorbis comment specification, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_gac31ee3de9f9931628f120cb611bb0f20}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_vorbiscomment\_entry\_matches@{FLAC\_\_metadata\_object\_vorbiscomment\_entry\_matches}}
+\index{FLAC\_\_metadata\_object\_vorbiscomment\_entry\_matches@{FLAC\_\_metadata\_object\_vorbiscomment\_entry\_matches}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_vorbiscomment\_entry\_matches()}{FLAC\_\_metadata\_object\_vorbiscomment\_entry\_matches()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_gac31ee3de9f9931628f120cb611bb0f20} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+entry\+\_\+matches (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structFLAC____StreamMetadata__VorbisComment__Entry}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Vorbis\+Comment\+\_\+\+Entry}}}]{entry}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{field\+\_\+name}{, }\item[{unsigned}]{field\+\_\+name\+\_\+length}{}\end{DoxyParamCaption})}
+
+Check if the given Vorbis comment entry\textquotesingle{}s field name matches the given field name.
+
+
+\begin{DoxyParams}{Parameters}
+{\em entry} & An existing Vorbis comment entry. \\
+\hline
+{\em field\+\_\+name} & The field name to check. \\
+\hline
+{\em field\+\_\+name\+\_\+length} & The length of {\itshape field\+\_\+name}, not including the terminating {\ttfamily NUL}. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{(entry.entry\ !=\ NULL\ \&\&\ entry.length\ >\ 0)\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily true} if the field names match, else {\ttfamily false} \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_gaca557b35c7c1ac19e30794bcf529746b}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_vorbiscomment\_entry\_to\_name\_value\_pair@{FLAC\_\_metadata\_object\_vorbiscomment\_entry\_to\_name\_value\_pair}}
+\index{FLAC\_\_metadata\_object\_vorbiscomment\_entry\_to\_name\_value\_pair@{FLAC\_\_metadata\_object\_vorbiscomment\_entry\_to\_name\_value\_pair}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_vorbiscomment\_entry\_to\_name\_value\_pair()}{FLAC\_\_metadata\_object\_vorbiscomment\_entry\_to\_name\_value\_pair()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_gaca557b35c7c1ac19e30794bcf529746b} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+entry\+\_\+to\+\_\+name\+\_\+value\+\_\+pair (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structFLAC____StreamMetadata__VorbisComment__Entry}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Vorbis\+Comment\+\_\+\+Entry}}}]{entry}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{field\+\_\+name}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{field\+\_\+value}{}\end{DoxyParamCaption})}
+
+Splits a Vorbis comment entry into NUL-\/terminated name and value strings.
+
+The returned pointers to name and value will be allocated by malloc() and shall be owned by the caller.
+
+
+\begin{DoxyParams}{Parameters}
+{\em entry} & An existing Vorbis comment entry. \\
+\hline
+{\em field\+\_\+name} & The address of where the returned pointer to the field name will be stored. \\
+\hline
+{\em field\+\_\+value} & The address of where the returned pointer to the field value will be stored. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{(entry.entry\ !=\ NULL\ \&\&\ entry.length\ >\ 0)\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{memchr(entry.entry,\ \textcolor{charliteral}{'='},\ entry.length)\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{field\_name\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{field\_value\ !=\ NULL\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if memory allocation fails or {\itshape entry} does not comply with the Vorbis comment specification, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_gae094c1ce4f248d49e8c099661bd5288e}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_vorbiscomment\_find\_entry\_from@{FLAC\_\_metadata\_object\_vorbiscomment\_find\_entry\_from}}
+\index{FLAC\_\_metadata\_object\_vorbiscomment\_find\_entry\_from@{FLAC\_\_metadata\_object\_vorbiscomment\_find\_entry\_from}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_vorbiscomment\_find\_entry\_from()}{FLAC\_\_metadata\_object\_vorbiscomment\_find\_entry\_from()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_gae094c1ce4f248d49e8c099661bd5288e} 
+FLAC\+\_\+\+API int FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+find\+\_\+entry\+\_\+from (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{unsigned}]{offset}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{field\+\_\+name}{}\end{DoxyParamCaption})}
+
+Find a Vorbis comment with the given field name.
+
+The search begins at entry number {\itshape offset}; use an offset of 0 to search from the beginning of the comment array.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing VORBIS\+\_\+\+COMMENT object. \\
+\hline
+{\em offset} & The offset into the comment array from where to start the search. \\
+\hline
+{\em field\+\_\+name} & The field name of the comment to find. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01ad013576bc5196b907547739518605520}{FLAC\_\_METADATA\_TYPE\_VORBIS\_COMMENT}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{field\_name\ !=\ NULL\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em int} & The offset in the comment array of the first comment whose field name matches {\itshape field\+\_\+name}, or {\ttfamily -\/1} if no match was found. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga0c23f59f465f302b35a2d3ab1eae07e7}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_vorbiscomment\_insert\_comment@{FLAC\_\_metadata\_object\_vorbiscomment\_insert\_comment}}
+\index{FLAC\_\_metadata\_object\_vorbiscomment\_insert\_comment@{FLAC\_\_metadata\_object\_vorbiscomment\_insert\_comment}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_vorbiscomment\_insert\_comment()}{FLAC\_\_metadata\_object\_vorbiscomment\_insert\_comment()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga0c23f59f465f302b35a2d3ab1eae07e7} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+insert\+\_\+comment (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{unsigned}]{comment\+\_\+num}{, }\item[{\mbox{\hyperlink{structFLAC____StreamMetadata__VorbisComment__Entry}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Vorbis\+Comment\+\_\+\+Entry}}}]{entry}{, }\item[{FLAC\+\_\+\+\_\+bool}]{copy}{}\end{DoxyParamCaption})}
+
+Insert a comment in a VORBIS\+\_\+\+COMMENT block at the given index.
+
+For convenience, a trailing NUL is added to the entry if it doesn\textquotesingle{}t have one already.
+
+If {\itshape copy} is {\ttfamily true}, a copy of the entry is stored; otherwise, the object takes ownership of the {\ttfamily entry.\+entry} pointer.
+
+\begin{DoxyNote}{Note}
+If this function returns {\ttfamily false}, the caller still owns the pointer.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing VORBIS\+\_\+\+COMMENT object. \\
+\hline
+{\em comment\+\_\+num} & The index at which to insert the comment. The comments at and after {\itshape comment\+\_\+num} move right one position. To append a comment to the end, set {\itshape comment\+\_\+num} to {\ttfamily object-\/\texorpdfstring{$>$}{>}data.\+vorbis\+\_\+comment.\+num\+\_\+comments} . \\
+\hline
+{\em entry} & The comment to insert. \\
+\hline
+{\em copy} & See above. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01ad013576bc5196b907547739518605520}{FLAC\_\_METADATA\_TYPE\_VORBIS\_COMMENT}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>data.vorbis\_comment.num\_comments\ >=\ comment\_num\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\ (entry.entry\ !=\ NULL\ \&\&\ entry.length\ >\ 0)\ ||}
+\DoxyCodeLine{(entry.entry\ ==\ NULL\ \&\&\ entry.length\ ==\ 0\ \&\&\ copy\ ==\ \textcolor{keyword}{false})\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if memory allocation fails or {\itshape entry} does not comply with the Vorbis comment specification, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga525525f5f21b1caee776cba3cfb6d72f}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_vorbiscomment\_remove\_entries\_matching@{FLAC\_\_metadata\_object\_vorbiscomment\_remove\_entries\_matching}}
+\index{FLAC\_\_metadata\_object\_vorbiscomment\_remove\_entries\_matching@{FLAC\_\_metadata\_object\_vorbiscomment\_remove\_entries\_matching}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_vorbiscomment\_remove\_entries\_matching()}{FLAC\_\_metadata\_object\_vorbiscomment\_remove\_entries\_matching()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga525525f5f21b1caee776cba3cfb6d72f} 
+FLAC\+\_\+\+API int FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+remove\+\_\+entries\+\_\+matching (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{field\+\_\+name}{}\end{DoxyParamCaption})}
+
+Remove all Vorbis comments matching the given field name.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing VORBIS\+\_\+\+COMMENT object. \\
+\hline
+{\em field\+\_\+name} & The field name of comments to delete. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01ad013576bc5196b907547739518605520}{FLAC\_\_METADATA\_TYPE\_VORBIS\_COMMENT}}\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em int} & {\ttfamily -\/1} for memory allocation error, {\ttfamily 0} for no matching entries, else the number of matching entries deleted. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga6812052a110800bef2f4139017501507}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_vorbiscomment\_remove\_entry\_matching@{FLAC\_\_metadata\_object\_vorbiscomment\_remove\_entry\_matching}}
+\index{FLAC\_\_metadata\_object\_vorbiscomment\_remove\_entry\_matching@{FLAC\_\_metadata\_object\_vorbiscomment\_remove\_entry\_matching}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_vorbiscomment\_remove\_entry\_matching()}{FLAC\_\_metadata\_object\_vorbiscomment\_remove\_entry\_matching()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga6812052a110800bef2f4139017501507} 
+FLAC\+\_\+\+API int FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+remove\+\_\+entry\+\_\+matching (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{field\+\_\+name}{}\end{DoxyParamCaption})}
+
+Remove first Vorbis comment matching the given field name.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing VORBIS\+\_\+\+COMMENT object. \\
+\hline
+{\em field\+\_\+name} & The field name of comment to delete. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01ad013576bc5196b907547739518605520}{FLAC\_\_METADATA\_TYPE\_VORBIS\_COMMENT}}\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em int} & {\ttfamily -\/1} for memory allocation error, {\ttfamily 0} for no matching entries, {\ttfamily 1} for one matching entry deleted. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_gabef3625575b7e4c7257617a27220959a}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_vorbiscomment\_replace\_comment@{FLAC\_\_metadata\_object\_vorbiscomment\_replace\_comment}}
+\index{FLAC\_\_metadata\_object\_vorbiscomment\_replace\_comment@{FLAC\_\_metadata\_object\_vorbiscomment\_replace\_comment}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_vorbiscomment\_replace\_comment()}{FLAC\_\_metadata\_object\_vorbiscomment\_replace\_comment()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_gabef3625575b7e4c7257617a27220959a} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+replace\+\_\+comment (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{\mbox{\hyperlink{structFLAC____StreamMetadata__VorbisComment__Entry}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Vorbis\+Comment\+\_\+\+Entry}}}]{entry}{, }\item[{FLAC\+\_\+\+\_\+bool}]{all}{, }\item[{FLAC\+\_\+\+\_\+bool}]{copy}{}\end{DoxyParamCaption})}
+
+Replaces comments in a VORBIS\+\_\+\+COMMENT block with a new one.
+
+For convenience, a trailing NUL is added to the entry if it doesn\textquotesingle{}t have one already.
+
+Depending on the the value of {\itshape all}, either all or just the first comment whose field name(s) match the given entry\textquotesingle{}s name will be replaced by the given entry. If no comments match, {\itshape entry} will simply be appended.
+
+If {\itshape copy} is {\ttfamily true}, a copy of the entry is stored; otherwise, the object takes ownership of the {\ttfamily entry.\+entry} pointer.
+
+\begin{DoxyNote}{Note}
+If this function returns {\ttfamily false}, the caller still owns the pointer.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing VORBIS\+\_\+\+COMMENT object. \\
+\hline
+{\em entry} & The comment to insert. \\
+\hline
+{\em all} & If {\ttfamily true}, all comments whose field name matches {\itshape entry\textquotesingle{}s} field name will be removed, and {\itshape entry} will be inserted at the position of the first matching comment. If {\ttfamily false}, only the first comment whose field name matches {\itshape entry\textquotesingle{}s} field name will be replaced with {\itshape entry}. \\
+\hline
+{\em copy} & See above. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01ad013576bc5196b907547739518605520}{FLAC\_\_METADATA\_TYPE\_VORBIS\_COMMENT}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\ (entry.entry\ !=\ NULL\ \&\&\ entry.length\ >\ 0)\ ||}
+\DoxyCodeLine{(entry.entry\ ==\ NULL\ \&\&\ entry.length\ ==\ 0\ \&\&\ copy\ ==\ \textcolor{keyword}{false})\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if memory allocation fails or {\itshape entry} does not comply with the Vorbis comment specification, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_ga264611f0af9b5e09d083c1ca5495f1c4}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_vorbiscomment\_resize\_comments@{FLAC\_\_metadata\_object\_vorbiscomment\_resize\_comments}}
+\index{FLAC\_\_metadata\_object\_vorbiscomment\_resize\_comments@{FLAC\_\_metadata\_object\_vorbiscomment\_resize\_comments}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_vorbiscomment\_resize\_comments()}{FLAC\_\_metadata\_object\_vorbiscomment\_resize\_comments()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_ga264611f0af9b5e09d083c1ca5495f1c4} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+resize\+\_\+comments (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{unsigned}]{new\+\_\+num\+\_\+comments}{}\end{DoxyParamCaption})}
+
+Resize the comment array.
+
+If the size shrinks, elements will truncated; if it grows, new empty fields will be added to the end.
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing VORBIS\+\_\+\+COMMENT object. \\
+\hline
+{\em new\+\_\+num\+\_\+comments} & The desired length of the array; may be {\ttfamily 0}. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01ad013576bc5196b907547739518605520}{FLAC\_\_METADATA\_TYPE\_VORBIS\_COMMENT}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\ (\textcolor{keywordtype}{object}-\/>data.vorbis\_comment.comments\ ==\ NULL\ \&\&\ \textcolor{keywordtype}{object}-\/>data.vorbis\_comment.num\_comments\ ==\ 0)\ ||}
+\DoxyCodeLine{(object-\/>data.vorbis\_comment.comments\ !=\ NULL\ \&\&\ object-\/>data.vorbis\_comment.num\_comments\ >\ 0)\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if memory allocation fails, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_gadf034b2c385e7932c6be2d724a0deae3}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_vorbiscomment\_set\_comment@{FLAC\_\_metadata\_object\_vorbiscomment\_set\_comment}}
+\index{FLAC\_\_metadata\_object\_vorbiscomment\_set\_comment@{FLAC\_\_metadata\_object\_vorbiscomment\_set\_comment}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_vorbiscomment\_set\_comment()}{FLAC\_\_metadata\_object\_vorbiscomment\_set\_comment()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_gadf034b2c385e7932c6be2d724a0deae3} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+set\+\_\+comment (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{unsigned}]{comment\+\_\+num}{, }\item[{\mbox{\hyperlink{structFLAC____StreamMetadata__VorbisComment__Entry}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Vorbis\+Comment\+\_\+\+Entry}}}]{entry}{, }\item[{FLAC\+\_\+\+\_\+bool}]{copy}{}\end{DoxyParamCaption})}
+
+Sets a comment in a VORBIS\+\_\+\+COMMENT block.
+
+For convenience, a trailing NUL is added to the entry if it doesn\textquotesingle{}t have one already.
+
+If {\itshape copy} is {\ttfamily true}, a copy of the entry is stored; otherwise, the object takes ownership of the {\ttfamily entry.\+entry} pointer.
+
+\begin{DoxyNote}{Note}
+If this function returns {\ttfamily false}, the caller still owns the pointer.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing VORBIS\+\_\+\+COMMENT object. \\
+\hline
+{\em comment\+\_\+num} & Index into comment array to set. \\
+\hline
+{\em entry} & The entry to set the comment to. \\
+\hline
+{\em copy} & See above. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01ad013576bc5196b907547739518605520}{FLAC\_\_METADATA\_TYPE\_VORBIS\_COMMENT}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{comment\_num\ <\ \textcolor{keywordtype}{object}-\/>data.vorbis\_comment.num\_comments\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\ (entry.entry\ !=\ NULL\ \&\&\ entry.length\ >\ 0)\ ||}
+\DoxyCodeLine{(entry.entry\ ==\ NULL\ \&\&\ entry.length\ ==\ 0)\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if memory allocation fails or {\itshape entry} does not comply with the Vorbis comment specification, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{group__flac__metadata__object_gabfc6277c08a86329efd19572695b57e6}\index{FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}!FLAC\_\_metadata\_object\_vorbiscomment\_set\_vendor\_string@{FLAC\_\_metadata\_object\_vorbiscomment\_set\_vendor\_string}}
+\index{FLAC\_\_metadata\_object\_vorbiscomment\_set\_vendor\_string@{FLAC\_\_metadata\_object\_vorbiscomment\_set\_vendor\_string}!FLAC/metadata.h: metadata object methods@{FLAC/metadata.h: metadata object methods}}
+\doxysubsubsubsubsubsubsubsection{\texorpdfstring{FLAC\_\_metadata\_object\_vorbiscomment\_set\_vendor\_string()}{FLAC\_\_metadata\_object\_vorbiscomment\_set\_vendor\_string()}}
+{\footnotesize\ttfamily \label{group__flac__metadata__object_gabfc6277c08a86329efd19572695b57e6} 
+FLAC\+\_\+\+API FLAC\+\_\+\+\_\+bool FLAC\+\_\+\+\_\+metadata\+\_\+object\+\_\+vorbiscomment\+\_\+set\+\_\+vendor\+\_\+string (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFLAC____StreamMetadata}{FLAC\+\_\+\+\_\+\+Stream\+Metadata}} \texorpdfstring{$\ast$}{*}}]{object}{, }\item[{\mbox{\hyperlink{structFLAC____StreamMetadata__VorbisComment__Entry}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Vorbis\+Comment\+\_\+\+Entry}}}]{entry}{, }\item[{FLAC\+\_\+\+\_\+bool}]{copy}{}\end{DoxyParamCaption})}
+
+Sets the vendor string in a VORBIS\+\_\+\+COMMENT block.
+
+For convenience, a trailing NUL is added to the entry if it doesn\textquotesingle{}t have one already.
+
+If {\itshape copy} is {\ttfamily true}, a copy of the entry is stored; otherwise, the object takes ownership of the {\ttfamily entry.\+entry} pointer.
+
+\begin{DoxyNote}{Note}
+If this function returns {\ttfamily false}, the caller still owns the pointer.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em object} & A pointer to an existing VORBIS\+\_\+\+COMMENT object. \\
+\hline
+{\em entry} & The entry to set the vendor string to. \\
+\hline
+{\em copy} & See above. \textbackslash{}assert 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}\ !=\ NULL\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keywordtype}{object}-\/>type\ ==\ \mbox{\hyperlink{group__flac__format_ggac71714ba8ddbbd66d26bb78a427fac01ad013576bc5196b907547739518605520}{FLAC\_\_METADATA\_TYPE\_VORBIS\_COMMENT}}\ }
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\ (entry.entry\ !=\ NULL\ \&\&\ entry.length\ >\ 0)\ ||}
+\DoxyCodeLine{(entry.entry\ ==\ NULL\ \&\&\ entry.length\ ==\ 0)\ }
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em FLAC\+\_\+\+\_\+bool} & {\ttfamily false} if memory allocation fails or {\itshape entry} does not comply with the Vorbis comment specification, else {\ttfamily true}. \\
+\hline
+\end{DoxyRetVals}

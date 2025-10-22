@@ -1,0 +1,123 @@
+\doxysection{DRMContext.\+hpp}
+\hypertarget{DRMContext_8hpp_source}{}\label{DRMContext_8hpp_source}\index{build/\_deps/sfml-\/src/src/SFML/Window/DRM/DRMContext.hpp@{build/\_deps/sfml-\/src/src/SFML/Window/DRM/DRMContext.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2023\ Andrew\ Mickelson}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2013\ Jonathan\ De\ Wachter\ (dewachter.jonathan@gmail.com)}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{00023\ \textcolor{comment}{//}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#ifndef\ SFML\_DRMCONTEXT\_HPP}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ SFML\_DRMCONTEXT\_HPP}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <SFML/Window/ContextSettings.hpp>}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ <SFML/Window/EGLCheck.hpp>}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ <SFML/Window/GlContext.hpp>}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#include\ <SFML/Window/VideoMode.hpp>}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#include\ <glad/egl.h>}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#include\ <gbm.h>}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#include\ <xf86drmMode.h>}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{00042\ \{}
+\DoxyCodeLine{00043\ \textcolor{keyword}{namespace\ }priv}
+\DoxyCodeLine{00044\ \{}
+\DoxyCodeLine{00045\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsf_1_1priv_1_1Drm}{Drm}}}
+\DoxyCodeLine{00046\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{int}\ fileDescriptor;}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ drmModeModeInfoPtr\ mode;}
+\DoxyCodeLine{00050\ \ \ \ \ Uint32\ crtcId;}
+\DoxyCodeLine{00051\ \ \ \ \ Uint32\ connectorId;}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ drmModeCrtcPtr\ originalCrtc;}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ drmModeConnectorPtr\ savedConnector;}
+\DoxyCodeLine{00056\ \ \ \ \ drmModeEncoderPtr\ savedEncoder;}
+\DoxyCodeLine{00057\ \};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1priv_1_1WindowImplDRM}{WindowImplDRM}};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1priv_1_1DRMContext_a1c123bbed20df3936e35acb757f82c39}{DRMContext}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classsf_1_1priv_1_1GlContext_a286cd2741faff509387c1c40940303d2}{GlContext}}}
+\DoxyCodeLine{00062\ \{}
+\DoxyCodeLine{00063\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1DRMContext_a1c123bbed20df3936e35acb757f82c39}{DRMContext}}(\mbox{\hyperlink{classsf_1_1priv_1_1DRMContext_a1c123bbed20df3936e35acb757f82c39}{DRMContext}}*\ shared);}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00082\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1DRMContext_a1c123bbed20df3936e35acb757f82c39}{DRMContext}}(\mbox{\hyperlink{classsf_1_1priv_1_1DRMContext_a1c123bbed20df3936e35acb757f82c39}{DRMContext}}*\ shared,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structsf_1_1ContextSettings}{ContextSettings}}\&\ settings,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1priv_1_1WindowImpl}{WindowImpl}}*\ owner,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ bitsPerPixel);}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00093\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1DRMContext_a1c123bbed20df3936e35acb757f82c39}{DRMContext}}(\mbox{\hyperlink{classsf_1_1priv_1_1DRMContext_a1c123bbed20df3936e35acb757f82c39}{DRMContext}}*\ shared,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structsf_1_1ContextSettings}{ContextSettings}}\&\ settings,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ height);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00099\ \ \ \ \ \mbox{\hyperlink{classsf_1_1priv_1_1DRMContext_a7be45ca2f85ba6923ff074d3ccf69059}{\string~DRMContext}}();}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1DRMContext_a6c275325bc2926f013c18c8e3fa9716c}{makeCurrent}}(\textcolor{keywordtype}{bool}\ current);}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1DRMContext_a1d030128286270bb94faf2894ae1387c}{display}}();}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1DRMContext_a1440980667ed796f1218daad35188934}{setVerticalSyncEnabled}}(\textcolor{keywordtype}{bool}\ enabled);}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1DRMContext_a4e46ad9cf32752bc61d4ba2b7a72542e}{createContext}}(\mbox{\hyperlink{classsf_1_1priv_1_1DRMContext_a1c123bbed20df3936e35acb757f82c39}{DRMContext}}*\ shared);}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1DRMContext_a9f6cff4cc19cf613a79396a84d8d21d4}{createSurface}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ height,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ bpp,\ \textcolor{keywordtype}{bool}\ scanout);}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1DRMContext_a7a02341bb5042d1bbd99e64111c56ce6}{destroySurface}}();}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keyword}{static}\ EGLConfig\ \mbox{\hyperlink{classsf_1_1priv_1_1DRMContext_a2683e50c5c6589692132fac8dc42f355}{getBestConfig}}(EGLDisplay\ \mbox{\hyperlink{classsf_1_1priv_1_1DRMContext_a1d030128286270bb94faf2894ae1387c}{display}},\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ bitsPerPixel,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structsf_1_1ContextSettings}{ContextSettings}}\&\ settings);}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keyword}{static}\ GlFunctionPointer\ \mbox{\hyperlink{classsf_1_1priv_1_1DRMContext_a138dce57cdaf32a08c2c18f1a3072b05}{getFunction}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name);}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }VideoModeImpl;}
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }WindowImplDRM;}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structsf_1_1priv_1_1Drm}{Drm}}\&\ \mbox{\hyperlink{classsf_1_1priv_1_1DRMContext_aa49a27047aa6287e393319bd4773cb59}{getDRM}}();}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00200\ \ \ \ \ \textcolor{keywordtype}{void}\ updateSettings();}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{comment}{//\ Member\ data}}
+\DoxyCodeLine{00205\ \ \ \ \ EGLDisplay\ \ m\_display;\ }
+\DoxyCodeLine{00206\ \ \ \ \ EGLContext\ \ m\_context;\ }
+\DoxyCodeLine{00207\ \ \ \ \ EGLSurface\ \ m\_surface;\ }
+\DoxyCodeLine{00208\ \ \ \ \ EGLConfig\ \ \ m\_config;\ \ }
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \ \ \ \ gbm\_bo*\ m\_currentBO;}
+\DoxyCodeLine{00211\ \ \ \ \ gbm\_bo*\ m\_nextBO;}
+\DoxyCodeLine{00212\ \ \ \ \ gbm\_surface*\ m\_gbmSurface;}
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ m\_width;}
+\DoxyCodeLine{00214\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ m\_height;}
+\DoxyCodeLine{00215\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_shown;}
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_scanOut;}
+\DoxyCodeLine{00217\ \};}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00219\ \}\ \textcolor{comment}{//\ namespace\ priv}}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00221\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00224\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SFML\_DRMCONTEXT\_HPP}}
+
+\end{DoxyCode}

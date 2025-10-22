@@ -1,0 +1,176 @@
+\doxysection{vk\+\_\+icd.\+h}
+\hypertarget{vk__icd_8h_source}{}\label{vk__icd_8h_source}\index{build/\_deps/sfml-\/src/extlibs/headers/vulkan/vk\_icd.h@{build/\_deps/sfml-\/src/extlibs/headers/vulkan/vk\_icd.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ File:\ vk\_icd.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2015-\/2016\ The\ Khronos\ Group\ Inc.}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2015-\/2016\ Valve\ Corporation}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2015-\/2016\ LunarG,\ Inc.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ "{}License"{});}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ you\ may\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *\ \ \ \ \ http://www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ "{}AS\ IS"{}\ BASIS,}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ WITHOUT\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#ifndef\ VKICD\_H}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ VKICD\_H}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ "{}vulkan.h"{}}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Loader-\/ICD\ version\ negotiation\ API.\ \ Versions\ add\ the\ following\ features:}}
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ \ \ Version\ 0\ -\/\ Initial.\ \ Doesn't\ support\ vk\_icdGetInstanceProcAddr}}
+\DoxyCodeLine{00031\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ or\ vk\_icdNegotiateLoaderICDInterfaceVersion.}}
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ \ \ Version\ 1\ -\/\ Add\ support\ for\ vk\_icdGetInstanceProcAddr.}}
+\DoxyCodeLine{00033\ \textcolor{comment}{//\ \ \ Version\ 2\ -\/\ Add\ Loader/ICD\ Interface\ version\ negotiation}}
+\DoxyCodeLine{00034\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ via\ vk\_icdNegotiateLoaderICDInterfaceVersion.}}
+\DoxyCodeLine{00035\ \textcolor{comment}{//\ \ \ Version\ 3\ -\/\ Add\ ICD\ creation/destruction\ of\ KHR\_surface\ objects.}}
+\DoxyCodeLine{00036\ \textcolor{comment}{//\ \ \ Version\ 4\ -\/\ Add\ unknown\ physical\ device\ extension\ qyering\ via}}
+\DoxyCodeLine{00037\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vk\_icdGetPhysicalDeviceProcAddr.}}
+\DoxyCodeLine{00038\ \textcolor{comment}{//\ \ \ Version\ 5\ -\/\ Tells\ ICDs\ that\ the\ loader\ is\ now\ paying\ attention\ to\ the}}
+\DoxyCodeLine{00039\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ application\ version\ of\ Vulkan\ passed\ into\ the\ ApplicationInfo}}
+\DoxyCodeLine{00040\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ structure\ during\ vkCreateInstance.\ \ This\ will\ tell\ the\ ICD}}
+\DoxyCodeLine{00041\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ that\ if\ the\ loader\ is\ older,\ it\ should\ automatically\ fail\ a}}
+\DoxyCodeLine{00042\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ call\ for\ any\ API\ version\ >\ 1.0.\ \ Otherwise,\ the\ loader\ will}}
+\DoxyCodeLine{00043\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ manually\ determine\ if\ it\ can\ support\ the\ expected\ version.}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#define\ CURRENT\_LOADER\_ICD\_INTERFACE\_VERSION\ 5}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#define\ MIN\_SUPPORTED\_LOADER\_ICD\_INTERFACE\_VERSION\ 0}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ MIN\_PHYS\_DEV\_EXTENSION\_ICD\_INTERFACE\_VERSION\ 4}}
+\DoxyCodeLine{00047\ \textcolor{keyword}{typedef}\ VkResult(VKAPI\_PTR\ *PFN\_vkNegotiateLoaderICDInterfaceVersion)(uint32\_t\ *pVersion);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{comment}{//\ This\ is\ defined\ in\ vk\_layer.h\ which\ will\ be\ found\ by\ the\ loader,\ but\ if\ an\ ICD\ is\ building\ against\ this}}
+\DoxyCodeLine{00050\ \textcolor{comment}{//\ file\ directly,\ it\ won't\ be\ found.}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#ifndef\ PFN\_GetPhysicalDeviceProcAddr}}
+\DoxyCodeLine{00052\ \textcolor{keyword}{typedef}\ PFN\_vkVoidFunction(VKAPI\_PTR\ *PFN\_GetPhysicalDeviceProcAddr)(VkInstance\ instance,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *pName);}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00056\ \textcolor{comment}{\ *\ The\ ICD\ must\ reserve\ space\ for\ a\ pointer\ for\ the\ loader's\ dispatch}}
+\DoxyCodeLine{00057\ \textcolor{comment}{\ *\ table,\ at\ the\ start\ of\ <each\ object>.}}
+\DoxyCodeLine{00058\ \textcolor{comment}{\ *\ The\ ICD\ must\ initialize\ this\ variable\ using\ the\ SET\_LOADER\_MAGIC\_VALUE\ macro.}}
+\DoxyCodeLine{00059\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#define\ ICD\_LOADER\_MAGIC\ 0x01CDC0DE}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union\ }\{}
+\DoxyCodeLine{00064\ \ \ \ \ uintptr\_t\ loaderMagic;}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ *loaderData;}
+\DoxyCodeLine{00066\ \}\ \mbox{\hyperlink{unionVK__LOADER__DATA}{VK\_LOADER\_DATA}};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ set\_loader\_magic\_value(\textcolor{keywordtype}{void}\ *pNewObject)\ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{unionVK__LOADER__DATA}{VK\_LOADER\_DATA}}\ *loader\_info\ =\ (\mbox{\hyperlink{unionVK__LOADER__DATA}{VK\_LOADER\_DATA}}\ *)pNewObject;}
+\DoxyCodeLine{00070\ \ \ \ \ loader\_info-\/>loaderMagic\ =\ ICD\_LOADER\_MAGIC;}
+\DoxyCodeLine{00071\ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ valid\_loader\_magic\_value(\textcolor{keywordtype}{void}\ *pNewObject)\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{unionVK__LOADER__DATA}{VK\_LOADER\_DATA}}\ *loader\_info\ =\ (\mbox{\hyperlink{unionVK__LOADER__DATA}{VK\_LOADER\_DATA}}\ *)pNewObject;}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordflow}{return}\ (loader\_info-\/>loaderMagic\ \&\ 0xffffffff)\ ==\ ICD\_LOADER\_MAGIC;}
+\DoxyCodeLine{00076\ \}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00079\ \textcolor{comment}{\ *\ Windows\ and\ Linux\ ICDs\ will\ treat\ VkSurfaceKHR\ as\ a\ pointer\ to\ a\ struct\ that}}
+\DoxyCodeLine{00080\ \textcolor{comment}{\ *\ contains\ the\ platform-\/specific\ connection\ and\ surface\ information.}}
+\DoxyCodeLine{00081\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00082\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00083\ \ \ \ \ VK\_ICD\_WSI\_PLATFORM\_MIR,}
+\DoxyCodeLine{00084\ \ \ \ \ VK\_ICD\_WSI\_PLATFORM\_WAYLAND,}
+\DoxyCodeLine{00085\ \ \ \ \ VK\_ICD\_WSI\_PLATFORM\_WIN32,}
+\DoxyCodeLine{00086\ \ \ \ \ VK\_ICD\_WSI\_PLATFORM\_XCB,}
+\DoxyCodeLine{00087\ \ \ \ \ VK\_ICD\_WSI\_PLATFORM\_XLIB,}
+\DoxyCodeLine{00088\ \ \ \ \ VK\_ICD\_WSI\_PLATFORM\_ANDROID,}
+\DoxyCodeLine{00089\ \ \ \ \ VK\_ICD\_WSI\_PLATFORM\_MACOS,}
+\DoxyCodeLine{00090\ \ \ \ \ VK\_ICD\_WSI\_PLATFORM\_IOS,}
+\DoxyCodeLine{00091\ \ \ \ \ VK\_ICD\_WSI\_PLATFORM\_DISPLAY}
+\DoxyCodeLine{00092\ \}\ VkIcdWsiPlatform;}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00095\ \ \ \ \ VkIcdWsiPlatform\ platform;}
+\DoxyCodeLine{00096\ \}\ \mbox{\hyperlink{structVkIcdSurfaceBase}{VkIcdSurfaceBase}};}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#ifdef\ VK\_USE\_PLATFORM\_MIR\_KHR}}
+\DoxyCodeLine{00099\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00100\ \ \ \ \ \mbox{\hyperlink{structVkIcdSurfaceBase}{VkIcdSurfaceBase}}\ base;}
+\DoxyCodeLine{00101\ \ \ \ \ MirConnection\ *connection;}
+\DoxyCodeLine{00102\ \ \ \ \ MirSurface\ *mirSurface;}
+\DoxyCodeLine{00103\ \}\ VkIcdSurfaceMir;}
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ VK\_USE\_PLATFORM\_MIR\_KHR}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#ifdef\ VK\_USE\_PLATFORM\_WAYLAND\_KHR}}
+\DoxyCodeLine{00107\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00108\ \ \ \ \ \mbox{\hyperlink{structVkIcdSurfaceBase}{VkIcdSurfaceBase}}\ base;}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keyword}{struct\ }wl\_display\ *display;}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keyword}{struct\ }wl\_surface\ *surface;}
+\DoxyCodeLine{00111\ \}\ VkIcdSurfaceWayland;}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ VK\_USE\_PLATFORM\_WAYLAND\_KHR}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#ifdef\ VK\_USE\_PLATFORM\_WIN32\_KHR}}
+\DoxyCodeLine{00115\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00116\ \ \ \ \ VkIcdSurfaceBase\ base;}
+\DoxyCodeLine{00117\ \ \ \ \ HINSTANCE\ hinstance;}
+\DoxyCodeLine{00118\ \ \ \ \ HWND\ hwnd;}
+\DoxyCodeLine{00119\ \}\ VkIcdSurfaceWin32;}
+\DoxyCodeLine{00120\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ VK\_USE\_PLATFORM\_WIN32\_KHR}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \textcolor{preprocessor}{\#ifdef\ VK\_USE\_PLATFORM\_XCB\_KHR}}
+\DoxyCodeLine{00123\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00124\ \ \ \ \ \mbox{\hyperlink{structVkIcdSurfaceBase}{VkIcdSurfaceBase}}\ base;}
+\DoxyCodeLine{00125\ \ \ \ \ xcb\_connection\_t\ *connection;}
+\DoxyCodeLine{00126\ \ \ \ \ xcb\_window\_t\ window;}
+\DoxyCodeLine{00127\ \}\ VkIcdSurfaceXcb;}
+\DoxyCodeLine{00128\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ VK\_USE\_PLATFORM\_XCB\_KHR}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \textcolor{preprocessor}{\#ifdef\ VK\_USE\_PLATFORM\_XLIB\_KHR}}
+\DoxyCodeLine{00131\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00132\ \ \ \ \ \mbox{\hyperlink{structVkIcdSurfaceBase}{VkIcdSurfaceBase}}\ base;}
+\DoxyCodeLine{00133\ \ \ \ \ Display\ *dpy;}
+\DoxyCodeLine{00134\ \ \ \ \ Window\ window;}
+\DoxyCodeLine{00135\ \}\ VkIcdSurfaceXlib;}
+\DoxyCodeLine{00136\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ VK\_USE\_PLATFORM\_XLIB\_KHR}}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#ifdef\ VK\_USE\_PLATFORM\_ANDROID\_KHR}}
+\DoxyCodeLine{00139\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00140\ \ \ \ \ \mbox{\hyperlink{structVkIcdSurfaceBase}{VkIcdSurfaceBase}}\ base;}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keyword}{struct\ }ANativeWindow\ *window;}
+\DoxyCodeLine{00142\ \}\ VkIcdSurfaceAndroid;}
+\DoxyCodeLine{00143\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ VK\_USE\_PLATFORM\_ANDROID\_KHR}}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \textcolor{preprocessor}{\#ifdef\ VK\_USE\_PLATFORM\_MACOS\_MVK}}
+\DoxyCodeLine{00146\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00147\ \ \ \ \ VkIcdSurfaceBase\ base;}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *pView;}
+\DoxyCodeLine{00149\ \}\ VkIcdSurfaceMacOS;}
+\DoxyCodeLine{00150\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ VK\_USE\_PLATFORM\_MACOS\_MVK}}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \textcolor{preprocessor}{\#ifdef\ VK\_USE\_PLATFORM\_IOS\_MVK}}
+\DoxyCodeLine{00153\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00154\ \ \ \ \ \mbox{\hyperlink{structVkIcdSurfaceBase}{VkIcdSurfaceBase}}\ base;}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *pView;}
+\DoxyCodeLine{00156\ \}\ VkIcdSurfaceIOS;}
+\DoxyCodeLine{00157\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ VK\_USE\_PLATFORM\_IOS\_MVK}}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00160\ \ \ \ \ \mbox{\hyperlink{structVkIcdSurfaceBase}{VkIcdSurfaceBase}}\ base;}
+\DoxyCodeLine{00161\ \ \ \ \ VkDisplayModeKHR\ displayMode;}
+\DoxyCodeLine{00162\ \ \ \ \ uint32\_t\ planeIndex;}
+\DoxyCodeLine{00163\ \ \ \ \ uint32\_t\ planeStackIndex;}
+\DoxyCodeLine{00164\ \ \ \ \ VkSurfaceTransformFlagBitsKHR\ transform;}
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keywordtype}{float}\ globalAlpha;}
+\DoxyCodeLine{00166\ \ \ \ \ VkDisplayPlaneAlphaFlagBitsKHR\ alphaMode;}
+\DoxyCodeLine{00167\ \ \ \ \ \mbox{\hyperlink{structVkExtent2D}{VkExtent2D}}\ imageExtent;}
+\DoxyCodeLine{00168\ \}\ \mbox{\hyperlink{structVkIcdSurfaceDisplay}{VkIcdSurfaceDisplay}};}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ VKICD\_H}}
+
+\end{DoxyCode}

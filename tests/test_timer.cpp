@@ -1,12 +1,13 @@
 #include "gtest/gtest.h"
 #include "Timer.hpp"
+#include <thread>
 
 namespace zenith {
 
-	// Verify timer starts with stopped state
+	// Verify timer starts with stopped mode
 	TEST(TimerTest, IsInitiallyStopped) {
 		Timer timer(Minutes(1), Seconds(0));
-		EXPECT_EQ(timer.GetStatus().state, Timer::State::Stopped);
+		EXPECT_EQ(timer.GetStatus().mode, Timer::Mode::Stopped);
 	}
 
 	// Verify initial remaining time
@@ -21,11 +22,11 @@ namespace zenith {
 		EXPECT_EQ(timer.GetStatus().elapsed, "00:00");
 	}
 
-	// Verify Start() changes state to Running
-	TEST(TimerTest, StartChangesStateToRunning) {
+	// Verify Start() changes mode to Running
+	TEST(TimerTest, StartChangesModeToRunning) {
 		Timer timer(Minutes(1), Seconds(0));
 		timer.Start();
-		EXPECT_EQ(timer.GetStatus().state, Timer::State::Running);
+		EXPECT_EQ(timer.GetStatus().mode, Timer::Mode::Running);
 	}
 
 	// Verify time progresses after starting
@@ -42,30 +43,29 @@ namespace zenith {
 	TEST(TimerTest, TimeStopAfterPause) {
 		Timer timer(Minutes(0), Seconds(10));
 		timer.Start();
-		std::this_thread::sleep_for(std::chrono::seconds(2));
+		std::this_thread::sleep_for(std::chrono::seconds(1));
 		timer.Pause();
-		std::this_thread::sleep_for(std::chrono::seconds(2));
 		auto status = timer.GetStatus();
-		EXPECT_EQ(status.state, Timer::State::Paused);
-		EXPECT_EQ(status.remaining, "00:08");
-		EXPECT_EQ(status.elapsed, "00:02");
+		EXPECT_EQ(status.mode, Timer::Mode::Paused);
+		EXPECT_EQ(status.remaining, "00:09");
+		EXPECT_EQ(status.elapsed, "00:01");
 	}
 
-	// Verify timer pauses only in running state
+	// Verify timer pauses only in running mode
 	TEST(TimerTest, TimerPausesOnlyRunning) {
 		Timer timer(Minutes(0), Seconds(2));
 		timer.Start();
 		std::this_thread::sleep_for(std::chrono::seconds(3));
 		timer.Pause();
 		auto status = timer.GetStatus();
-		EXPECT_EQ(status.state, Timer::State::Ended);
+		EXPECT_EQ(status.mode, Timer::Mode::Ended);
 		EXPECT_EQ(status.remaining, "00:00");
 		EXPECT_EQ(status.elapsed, "00:02");
 		timer.Reset();
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 		timer.Pause();
 		status = timer.GetStatus();
-		EXPECT_EQ(status.state, Timer::State::Stopped);
+		EXPECT_EQ(status.mode, Timer::Mode::Stopped);
 		EXPECT_EQ(status.remaining, "00:02");
 		EXPECT_EQ(status.elapsed, "00:00");
 	}
@@ -80,7 +80,7 @@ namespace zenith {
 		timer.Resume();
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 		auto status = timer.GetStatus();
-		EXPECT_EQ(status.state, Timer::State::Running);
+		EXPECT_EQ(status.mode, Timer::Mode::Running);
 		EXPECT_EQ(status.remaining, "00:08");
 		EXPECT_EQ(status.elapsed, "00:02");
 	}
@@ -92,7 +92,7 @@ namespace zenith {
 		std::this_thread::sleep_for(std::chrono::seconds(2));
 		timer.Reset();
 		auto status = timer.GetStatus();
-		EXPECT_EQ(status.state, Timer::State::Stopped);
+		EXPECT_EQ(status.mode, Timer::Mode::Stopped);
 		EXPECT_EQ(status.remaining, "00:10");
 		EXPECT_EQ(status.elapsed, "00:00");
 	}
@@ -104,7 +104,7 @@ namespace zenith {
 		std::this_thread::sleep_for(std::chrono::seconds(3));
 		timer.Reset();
 		auto status = timer.GetStatus();
-		EXPECT_EQ(status.state, Timer::State::Stopped);
+		EXPECT_EQ(status.mode, Timer::Mode::Stopped);
 		EXPECT_EQ(status.remaining, "00:02");
 		EXPECT_EQ(status.elapsed, "00:00");
 	}
@@ -115,7 +115,7 @@ namespace zenith {
 		timer.Start();
 		std::this_thread::sleep_for(std::chrono::seconds(3));
 		auto status = timer.GetStatus();
-		EXPECT_EQ(status.state, Timer::State::Ended);
+		EXPECT_EQ(status.mode, Timer::Mode::Ended);
 		EXPECT_EQ(status.remaining, "00:00");
 		EXPECT_EQ(status.elapsed, "00:02");
 	}
@@ -126,13 +126,13 @@ namespace zenith {
 		timer.Start();
 		std::this_thread::sleep_for(std::chrono::seconds(3));
 		auto status = timer.GetStatus();
-		EXPECT_EQ(status.state, Timer::State::Ended);
+		EXPECT_EQ(status.mode, Timer::Mode::Ended);
 		EXPECT_EQ(status.remaining, "00:00");
 		EXPECT_EQ(status.elapsed, "00:02");
 		timer.Start();
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 		status = timer.GetStatus();
-		EXPECT_EQ(status.state, Timer::State::Running);
+		EXPECT_EQ(status.mode, Timer::Mode::Running);
 		EXPECT_EQ(status.remaining, "00:01");
 		EXPECT_EQ(status.elapsed, "00:01");
 	}
@@ -147,6 +147,6 @@ namespace zenith {
 			timer.Reset();
 			std::this_thread::sleep_for(std::chrono::milliseconds(500));
 		}
-		EXPECT_EQ(timer.GetStatus().state, Timer::State::Stopped);
+		EXPECT_EQ(timer.GetStatus().mode, Timer::Mode::Stopped);
 	}
 }

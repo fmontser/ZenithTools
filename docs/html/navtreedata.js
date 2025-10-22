@@ -25,12 +25,6 @@
 var NAVTREE =
 [
   [ "ZenithTools", "index.html", [
-    [ "README", "md_README.html", [
-      [ "ZenithTools", "md_README.html#autotoc_md0", [
-        [ "Requirements", "md_README.html#autotoc_md1", null ],
-        [ "Building", "md_README.html#autotoc_md2", null ]
-      ] ]
-    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],

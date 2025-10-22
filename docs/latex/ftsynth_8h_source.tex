@@ -1,0 +1,88 @@
+\doxysection{ftsynth.\+h}
+\hypertarget{ftsynth_8h_source}{}\label{ftsynth_8h_source}\index{build/\_deps/sfml-\/src/extlibs/headers/freetype2/ftsynth.h@{build/\_deps/sfml-\/src/extlibs/headers/freetype2/ftsynth.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00003\ \textcolor{comment}{/*\ \ ftsynth.h\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00005\ \textcolor{comment}{/*\ \ \ \ FreeType\ synthesizing\ code\ for\ emboldening\ and\ slanting\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ \ \ \ (specification).\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00007\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ \ Copyright\ 2000-\/2001,\ 2003,\ 2006,\ 2008,\ 2012,\ 2013\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ \ David\ Turner,\ Robert\ Wilhelm,\ and\ Werner\ Lemberg.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00010\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*\ \ This\ file\ is\ part\ of\ the\ FreeType\ project,\ and\ may\ only\ be\ used,\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*\ \ modified,\ and\ distributed\ under\ the\ terms\ of\ the\ FreeType\ project\ \ \ \ \ \ */}}
+\DoxyCodeLine{00013\ \textcolor{comment}{/*\ \ license,\ LICENSE.TXT.\ \ By\ continuing\ to\ use,\ modify,\ or\ distribute\ \ \ \ \ */}}
+\DoxyCodeLine{00014\ \textcolor{comment}{/*\ \ this\ file\ you\ indicate\ that\ you\ have\ read\ the\ license\ and\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00015\ \textcolor{comment}{/*\ \ understand\ and\ accept\ it\ fully.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00016\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00017\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ \ /*********\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *********/}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ \ /*********\ \ \ \ \ \ \ \ WARNING,\ THIS\ IS\ ALPHA\ CODE!\ \ THIS\ API\ \ \ \ \ \ \ \ \ *********/}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ \ /*********\ \ \ \ IS\ DUE\ TO\ CHANGE\ UNTIL\ STRICTLY\ NOTIFIED\ BY\ THE\ \ \ \ *********/}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ \ /*********\ \ \ \ \ \ \ \ \ \ \ \ FREETYPE\ DEVELOPMENT\ TEAM\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *********/}}
+\DoxyCodeLine{00029\ \textcolor{comment}{\ \ /*********\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *********/}}
+\DoxyCodeLine{00030\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00031\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00032\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00033\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00034\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \textcolor{comment}{/*\ Main\ reason\ for\ not\ lifting\ the\ functions\ in\ this\ module\ to\ a\ \ */}}
+\DoxyCodeLine{00038\ \ \ \textcolor{comment}{/*\ \`{}standard'\ API\ is\ that\ the\ used\ parameters\ for\ emboldening\ and\ */}}
+\DoxyCodeLine{00039\ \ \ \textcolor{comment}{/*\ slanting\ are\ not\ configurable.\ \ Consider\ the\ functions\ as\ a\ \ \ \ */}}
+\DoxyCodeLine{00040\ \ \ \textcolor{comment}{/*\ code\ resource\ that\ should\ be\ copied\ into\ the\ application\ and\ \ \ */}}
+\DoxyCodeLine{00041\ \ \ \textcolor{comment}{/*\ adapted\ to\ the\ particular\ needs.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#ifndef\ \_\_FTSYNTH\_H\_\_}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#define\ \_\_FTSYNTH\_H\_\_}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#include\ <ft2build.h>}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#include\ FT\_FREETYPE\_H}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#ifdef\ FREETYPE\_H}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#error\ "{}freetype.h\ of\ FreeType\ 1\ has\ been\ loaded!"{}}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#error\ "{}Please\ fix\ the\ directory\ search\ order\ for\ header\ files"{}}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#error\ "{}so\ that\ freetype.h\ of\ FreeType\ 2\ is\ found\ first."{}}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ FT\_BEGIN\_HEADER}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \textcolor{comment}{/*\ Embolden\ a\ glyph\ by\ a\ \`{}reasonable'\ value\ (which\ is\ highly\ a\ matter\ of\ */}}
+\DoxyCodeLine{00061\ \ \ \textcolor{comment}{/*\ taste).\ \ This\ function\ is\ actually\ a\ convenience\ function,\ providing\ \ */}}
+\DoxyCodeLine{00062\ \ \ \textcolor{comment}{/*\ a\ wrapper\ for\ @FT\_Outline\_Embolden\ and\ @FT\_Bitmap\_Embolden.\ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00063\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00064\ \ \ \textcolor{comment}{/*\ For\ emboldened\ outlines\ the\ height,\ width,\ and\ advance\ metrics\ are\ \ \ \ */}}
+\DoxyCodeLine{00065\ \ \ \textcolor{comment}{/*\ increased\ by\ the\ strength\ of\ the\ emboldening.\ \ You\ can\ also\ call\ \ \ \ \ \ */}}
+\DoxyCodeLine{00066\ \ \ \textcolor{comment}{/*\ @FT\_Outline\_Get\_CBox\ to\ get\ precise\ values.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00067\ \ \ FT\_EXPORT(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{00068\ \ \ FT\_GlyphSlot\_Embolden(\ FT\_GlyphSlot\ \ slot\ );}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \textcolor{comment}{/*\ Slant\ an\ outline\ glyph\ to\ the\ right\ by\ about\ 12\ degrees.\ */}}
+\DoxyCodeLine{00071\ \ \ FT\_EXPORT(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{00072\ \ \ FT\_GlyphSlot\_Oblique(\ FT\_GlyphSlot\ \ slot\ );}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ FT\_END\_HEADER}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_FTSYNTH\_H\_\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \textcolor{comment}{/*\ END\ */}}
+
+\end{DoxyCode}

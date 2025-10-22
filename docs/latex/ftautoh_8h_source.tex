@@ -1,0 +1,408 @@
+\doxysection{ftautoh.\+h}
+\hypertarget{ftautoh_8h_source}{}\label{ftautoh_8h_source}\index{build/\_deps/sfml-\/src/extlibs/headers/freetype2/ftautoh.h@{build/\_deps/sfml-\/src/extlibs/headers/freetype2/ftautoh.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00003\ \textcolor{comment}{/*\ \ ftautoh.h\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00005\ \textcolor{comment}{/*\ \ \ \ FreeType\ API\ for\ controlling\ the\ auto-\/hinter\ (specification\ only).\ \ \ */}}
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00007\ \textcolor{comment}{/*\ \ Copyright\ 2012,\ 2013\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ \ David\ Turner,\ Robert\ Wilhelm,\ and\ Werner\ Lemberg.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00010\ \textcolor{comment}{/*\ \ This\ file\ is\ part\ of\ the\ FreeType\ project,\ and\ may\ only\ be\ used,\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*\ \ modified,\ and\ distributed\ under\ the\ terms\ of\ the\ FreeType\ project\ \ \ \ \ \ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*\ \ license,\ LICENSE.TXT.\ \ By\ continuing\ to\ use,\ modify,\ or\ distribute\ \ \ \ \ */}}
+\DoxyCodeLine{00013\ \textcolor{comment}{/*\ \ this\ file\ you\ indicate\ that\ you\ have\ read\ the\ license\ and\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00014\ \textcolor{comment}{/*\ \ understand\ and\ accept\ it\ fully.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00015\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00016\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ \_\_FTAUTOH\_H\_\_}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ \_\_FTAUTOH\_H\_\_}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <ft2build.h>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ FT\_FREETYPE\_H}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifdef\ FREETYPE\_H}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#error\ "{}freetype.h\ of\ FreeType\ 1\ has\ been\ loaded!"{}}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#error\ "{}Please\ fix\ the\ directory\ search\ order\ for\ header\ files"{}}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#error\ "{}so\ that\ freetype.h\ of\ FreeType\ 2\ is\ found\ first."{}}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ FT\_BEGIN\_HEADER}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{comment}{\ \ /**************************************************************************}}
+\DoxyCodeLine{00036\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00037\ \textcolor{comment}{\ \ \ *\ @section:}}
+\DoxyCodeLine{00038\ \textcolor{comment}{\ \ \ *\ \ \ auto\_hinter}}
+\DoxyCodeLine{00039\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00040\ \textcolor{comment}{\ \ \ *\ @title:}}
+\DoxyCodeLine{00041\ \textcolor{comment}{\ \ \ *\ \ \ The\ auto-\/hinter}}
+\DoxyCodeLine{00042\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00043\ \textcolor{comment}{\ \ \ *\ @abstract:}}
+\DoxyCodeLine{00044\ \textcolor{comment}{\ \ \ *\ \ \ Controlling\ the\ auto-\/hinting\ module.}}
+\DoxyCodeLine{00045\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00046\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00047\ \textcolor{comment}{\ \ \ *\ \ \ While\ FreeType's\ auto-\/hinter\ doesn't\ expose\ API\ functions\ by\ itself,}}
+\DoxyCodeLine{00048\ \textcolor{comment}{\ \ \ *\ \ \ it\ is\ possible\ to\ control\ its\ behaviour\ with\ @FT\_Property\_Set\ and}}
+\DoxyCodeLine{00049\ \textcolor{comment}{\ \ \ *\ \ \ @FT\_Property\_Get.\ \ The\ following\ lists\ the\ available\ properties}}
+\DoxyCodeLine{00050\ \textcolor{comment}{\ \ \ *\ \ \ together\ with\ the\ necessary\ macros\ and\ structures.}}
+\DoxyCodeLine{00051\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00052\ \textcolor{comment}{\ \ \ *\ \ \ Note\ that\ the\ auto-\/hinter's\ module\ name\ is\ \`{}autofitter'\ for}}
+\DoxyCodeLine{00053\ \textcolor{comment}{\ \ \ *\ \ \ historical\ reasons.}}
+\DoxyCodeLine{00054\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00055\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{comment}{\ \ /**************************************************************************}}
+\DoxyCodeLine{00059\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00060\ \textcolor{comment}{\ \ \ *\ @property:}}
+\DoxyCodeLine{00061\ \textcolor{comment}{\ \ \ *\ \ \ glyph-\/to-\/script-\/map}}
+\DoxyCodeLine{00062\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00063\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00064\ \textcolor{comment}{\ \ \ *\ \ \ *Experimental*\ *only*}}
+\DoxyCodeLine{00065\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00066\ \textcolor{comment}{\ \ \ *\ \ \ The\ auto-\/hinter\ provides\ various\ script\ modules\ to\ hint\ glyphs.}}
+\DoxyCodeLine{00067\ \textcolor{comment}{\ \ \ *\ \ \ Examples\ of\ supported\ scripts\ are\ Latin\ or\ CJK.\ \ Before\ a\ glyph\ is}}
+\DoxyCodeLine{00068\ \textcolor{comment}{\ \ \ *\ \ \ auto-\/hinted,\ the\ Unicode\ character\ map\ of\ the\ font\ gets\ examined,\ and}}
+\DoxyCodeLine{00069\ \textcolor{comment}{\ \ \ *\ \ \ the\ script\ is\ then\ determined\ based\ on\ Unicode\ character\ ranges,\ see}}
+\DoxyCodeLine{00070\ \textcolor{comment}{\ \ \ *\ \ \ below.}}
+\DoxyCodeLine{00071\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00072\ \textcolor{comment}{\ \ \ *\ \ \ OpenType\ fonts,\ however,\ often\ provide\ much\ more\ glyphs\ than}}
+\DoxyCodeLine{00073\ \textcolor{comment}{\ \ \ *\ \ \ character\ codes\ (small\ caps,\ superscripts,\ ligatures,\ swashes,\ etc.),}}
+\DoxyCodeLine{00074\ \textcolor{comment}{\ \ \ *\ \ \ to\ be\ controlled\ by\ so-\/called\ \`{}features'.\ \ Handling\ OpenType\ features}}
+\DoxyCodeLine{00075\ \textcolor{comment}{\ \ \ *\ \ \ can\ be\ quite\ complicated\ and\ thus\ needs\ a\ separate\ library\ on\ top\ of}}
+\DoxyCodeLine{00076\ \textcolor{comment}{\ \ \ *\ \ \ FreeType.}}
+\DoxyCodeLine{00077\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00078\ \textcolor{comment}{\ \ \ *\ \ \ The\ mapping\ between\ glyph\ indices\ and\ scripts\ (in\ the\ auto-\/hinter}}
+\DoxyCodeLine{00079\ \textcolor{comment}{\ \ \ *\ \ \ sense,\ see\ the\ @FT\_AUTOHINTER\_SCRIPT\_XXX\ values)\ is\ stored\ as\ an}}
+\DoxyCodeLine{00080\ \textcolor{comment}{\ \ \ *\ \ \ array\ with\ \`{}num\_glyphs'\ elements,\ as\ found\ in\ the\ font's\ @FT\_Face}}
+\DoxyCodeLine{00081\ \textcolor{comment}{\ \ \ *\ \ \ structure.\ \ The\ \`{}glyph-\/to-\/script-\/map'\ property\ returns\ a\ pointer\ to}}
+\DoxyCodeLine{00082\ \textcolor{comment}{\ \ \ *\ \ \ this\ array,\ which\ can\ be\ modified\ as\ needed.\ \ Note\ that\ the}}
+\DoxyCodeLine{00083\ \textcolor{comment}{\ \ \ *\ \ \ modification\ should\ happen\ before\ the\ first\ glyph\ gets\ processed\ by}}
+\DoxyCodeLine{00084\ \textcolor{comment}{\ \ \ *\ \ \ the\ auto-\/hinter\ so\ that\ the\ global\ analysis\ of\ the\ font\ shapes}}
+\DoxyCodeLine{00085\ \textcolor{comment}{\ \ \ *\ \ \ actually\ uses\ the\ modified\ mapping.}}
+\DoxyCodeLine{00086\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00087\ \textcolor{comment}{\ \ \ *\ \ \ The\ following\ example\ code\ demonstrates\ how\ to\ access\ it\ (omitting}}
+\DoxyCodeLine{00088\ \textcolor{comment}{\ \ \ *\ \ \ the\ error\ handling).}}
+\DoxyCodeLine{00089\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00090\ \textcolor{comment}{\ \ \ *\ \ \ \{}}
+\DoxyCodeLine{00091\ \textcolor{comment}{\ \ \ *\ \ \ \ \ FT\_Library\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ library;}}
+\DoxyCodeLine{00092\ \textcolor{comment}{\ \ \ *\ \ \ \ \ FT\_Face\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ face;}}
+\DoxyCodeLine{00093\ \textcolor{comment}{\ \ \ *\ \ \ \ \ FT\_Prop\_GlyphToScriptMap\ \ prop;}}
+\DoxyCodeLine{00094\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00095\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00096\ \textcolor{comment}{\ \ \ *\ \ \ \ \ FT\_Init\_FreeType(\ \&library\ );}}
+\DoxyCodeLine{00097\ \textcolor{comment}{\ \ \ *\ \ \ \ \ FT\_New\_Face(\ library,\ "{}foo.ttf"{},\ 0,\ \&face\ );}}
+\DoxyCodeLine{00098\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00099\ \textcolor{comment}{\ \ \ *\ \ \ \ \ prop.face\ =\ face;}}
+\DoxyCodeLine{00100\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00101\ \textcolor{comment}{\ \ \ *\ \ \ \ \ FT\_Property\_Get(\ library,\ "{}autofitter"{},}}
+\DoxyCodeLine{00102\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}glyph-\/to-\/script-\/map"{},\ \&prop\ );}}
+\DoxyCodeLine{00103\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00104\ \textcolor{comment}{\ \ \ *\ \ \ \ \ //\ adjust\ \`{}prop.map'\ as\ needed\ right\ here}}
+\DoxyCodeLine{00105\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00106\ \textcolor{comment}{\ \ \ *\ \ \ \ \ FT\_Load\_Glyph(\ face,\ ...,\ FT\_LOAD\_FORCE\_AUTOHINT\ );}}
+\DoxyCodeLine{00107\ \textcolor{comment}{\ \ \ *\ \ \ \}}}
+\DoxyCodeLine{00108\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00109\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \textcolor{comment}{\ \ /**************************************************************************}}
+\DoxyCodeLine{00113\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00114\ \textcolor{comment}{\ \ \ *\ @enum:}}
+\DoxyCodeLine{00115\ \textcolor{comment}{\ \ \ *\ \ \ FT\_AUTOHINTER\_SCRIPT\_XXX}}
+\DoxyCodeLine{00116\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00117\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00118\ \textcolor{comment}{\ \ \ *\ \ \ *Experimental*\ *only*}}
+\DoxyCodeLine{00119\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00120\ \textcolor{comment}{\ \ \ *\ \ \ A\ list\ of\ constants\ used\ for\ the\ @glyph-\/to-\/script-\/map\ property\ to}}
+\DoxyCodeLine{00121\ \textcolor{comment}{\ \ \ *\ \ \ specify\ the\ script\ submodule\ the\ auto-\/hinter\ should\ use\ for\ hinting\ a}}
+\DoxyCodeLine{00122\ \textcolor{comment}{\ \ \ *\ \ \ particular\ glyph.}}
+\DoxyCodeLine{00123\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00124\ \textcolor{comment}{\ \ \ *\ @values:}}
+\DoxyCodeLine{00125\ \textcolor{comment}{\ \ \ *\ \ \ FT\_AUTOHINTER\_SCRIPT\_NONE\ ::}}
+\DoxyCodeLine{00126\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Don't\ auto-\/hint\ this\ glyph.}}
+\DoxyCodeLine{00127\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00128\ \textcolor{comment}{\ \ \ *\ \ \ FT\_AUTOHINTER\_SCRIPT\_LATIN\ ::}}
+\DoxyCodeLine{00129\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Apply\ the\ latin\ auto-\/hinter.\ \ For\ the\ auto-\/hinter,\ \`{}latin'\ is\ a}}
+\DoxyCodeLine{00130\ \textcolor{comment}{\ \ \ *\ \ \ \ \ very\ broad\ term,\ including\ Cyrillic\ and\ Greek\ also\ since\ characters}}
+\DoxyCodeLine{00131\ \textcolor{comment}{\ \ \ *\ \ \ \ \ from\ those\ scripts\ share\ the\ same\ design\ constraints.}}
+\DoxyCodeLine{00132\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00133\ \textcolor{comment}{\ \ \ *\ \ \ \ \ By\ default,\ characters\ from\ the\ following\ Unicode\ ranges\ are}}
+\DoxyCodeLine{00134\ \textcolor{comment}{\ \ \ *\ \ \ \ \ assigned\ to\ this\ submodule.}}
+\DoxyCodeLine{00135\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00136\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \{}}
+\DoxyCodeLine{00137\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+0020\ -\/\ U+007F\ \ //\ Basic\ Latin\ (no\ control\ characters)}}
+\DoxyCodeLine{00138\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+00A0\ -\/\ U+00FF\ \ //\ Latin-\/1\ Supplement\ (no\ control\ characters)}}
+\DoxyCodeLine{00139\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+0100\ -\/\ U+017F\ \ //\ Latin\ Extended-\/A}}
+\DoxyCodeLine{00140\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+0180\ -\/\ U+024F\ \ //\ Latin\ Extended-\/B}}
+\DoxyCodeLine{00141\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+0250\ -\/\ U+02AF\ \ //\ IPA\ Extensions}}
+\DoxyCodeLine{00142\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+02B0\ -\/\ U+02FF\ \ //\ Spacing\ Modifier\ Letters}}
+\DoxyCodeLine{00143\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+0300\ -\/\ U+036F\ \ //\ Combining\ Diacritical\ Marks}}
+\DoxyCodeLine{00144\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+0370\ -\/\ U+03FF\ \ //\ Greek\ and\ Coptic}}
+\DoxyCodeLine{00145\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+0400\ -\/\ U+04FF\ \ //\ Cyrillic}}
+\DoxyCodeLine{00146\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+0500\ -\/\ U+052F\ \ //\ Cyrillic\ Supplement}}
+\DoxyCodeLine{00147\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+1D00\ -\/\ U+1D7F\ \ //\ Phonetic\ Extensions}}
+\DoxyCodeLine{00148\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+1D80\ -\/\ U+1DBF\ \ //\ Phonetic\ Extensions\ Supplement}}
+\DoxyCodeLine{00149\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+1DC0\ -\/\ U+1DFF\ \ //\ Combining\ Diacritical\ Marks\ Supplement}}
+\DoxyCodeLine{00150\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+1E00\ -\/\ U+1EFF\ \ //\ Latin\ Extended\ Additional}}
+\DoxyCodeLine{00151\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+1F00\ -\/\ U+1FFF\ \ //\ Greek\ Extended}}
+\DoxyCodeLine{00152\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+2000\ -\/\ U+206F\ \ //\ General\ Punctuation}}
+\DoxyCodeLine{00153\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+2070\ -\/\ U+209F\ \ //\ Superscripts\ and\ Subscripts}}
+\DoxyCodeLine{00154\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+20A0\ -\/\ U+20CF\ \ //\ Currency\ Symbols}}
+\DoxyCodeLine{00155\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+2150\ -\/\ U+218F\ \ //\ Number\ Forms}}
+\DoxyCodeLine{00156\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+2460\ -\/\ U+24FF\ \ //\ Enclosed\ Alphanumerics}}
+\DoxyCodeLine{00157\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+2C60\ -\/\ U+2C7F\ \ //\ Latin\ Extended-\/C}}
+\DoxyCodeLine{00158\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+2DE0\ -\/\ U+2DFF\ \ //\ Cyrillic\ Extended-\/A}}
+\DoxyCodeLine{00159\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+2E00\ -\/\ U+2E7F\ \ //\ Supplemental\ Punctuation}}
+\DoxyCodeLine{00160\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+A640\ -\/\ U+A69F\ \ //\ Cyrillic\ Extended-\/B}}
+\DoxyCodeLine{00161\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+A720\ -\/\ U+A7FF\ \ //\ Latin\ Extended-\/D}}
+\DoxyCodeLine{00162\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+FB00\ -\/\ U+FB06\ \ //\ Alphab.\ Present.\ Forms\ (Latin\ Ligatures)}}
+\DoxyCodeLine{00163\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ U+1D400\ -\/\ U+1D7FF\ //\ Mathematical\ Alphanumeric\ Symbols}}
+\DoxyCodeLine{00164\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ U+1F100\ -\/\ U+1F1FF\ //\ Enclosed\ Alphanumeric\ Supplement}}
+\DoxyCodeLine{00165\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \}}}
+\DoxyCodeLine{00166\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00167\ \textcolor{comment}{\ \ \ *\ \ \ FT\_AUTOHINTER\_SCRIPT\_CJK\ ::}}
+\DoxyCodeLine{00168\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Apply\ the\ CJK\ auto-\/hinter,\ covering\ Chinese,\ Japanese,\ Korean,\ old}}
+\DoxyCodeLine{00169\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Vietnamese,\ and\ some\ other\ scripts.}}
+\DoxyCodeLine{00170\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00171\ \textcolor{comment}{\ \ \ *\ \ \ \ \ By\ default,\ characters\ from\ the\ following\ Unicode\ ranges\ are}}
+\DoxyCodeLine{00172\ \textcolor{comment}{\ \ \ *\ \ \ \ \ assigned\ to\ this\ submodule.}}
+\DoxyCodeLine{00173\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00174\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \{}}
+\DoxyCodeLine{00175\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+1100\ -\/\ U+11FF\ \ //\ Hangul\ Jamo}}
+\DoxyCodeLine{00176\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+2E80\ -\/\ U+2EFF\ \ //\ CJK\ Radicals\ Supplement}}
+\DoxyCodeLine{00177\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+2F00\ -\/\ U+2FDF\ \ //\ Kangxi\ Radicals}}
+\DoxyCodeLine{00178\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+2FF0\ -\/\ U+2FFF\ \ //\ Ideographic\ Description\ Characters}}
+\DoxyCodeLine{00179\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+3000\ -\/\ U+303F\ \ //\ CJK\ Symbols\ and\ Punctuation}}
+\DoxyCodeLine{00180\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+3040\ -\/\ U+309F\ \ //\ Hiragana}}
+\DoxyCodeLine{00181\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+30A0\ -\/\ U+30FF\ \ //\ Katakana}}
+\DoxyCodeLine{00182\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+3100\ -\/\ U+312F\ \ //\ Bopomofo}}
+\DoxyCodeLine{00183\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+3130\ -\/\ U+318F\ \ //\ Hangul\ Compatibility\ Jamo}}
+\DoxyCodeLine{00184\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+3190\ -\/\ U+319F\ \ //\ Kanbun}}
+\DoxyCodeLine{00185\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+31A0\ -\/\ U+31BF\ \ //\ Bopomofo\ Extended}}
+\DoxyCodeLine{00186\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+31C0\ -\/\ U+31EF\ \ //\ CJK\ Strokes}}
+\DoxyCodeLine{00187\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+31F0\ -\/\ U+31FF\ \ //\ Katakana\ Phonetic\ Extensions}}
+\DoxyCodeLine{00188\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+3200\ -\/\ U+32FF\ \ //\ Enclosed\ CJK\ Letters\ and\ Months}}
+\DoxyCodeLine{00189\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+3300\ -\/\ U+33FF\ \ //\ CJK\ Compatibility}}
+\DoxyCodeLine{00190\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+3400\ -\/\ U+4DBF\ \ //\ CJK\ Unified\ Ideographs\ Extension\ A}}
+\DoxyCodeLine{00191\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+4DC0\ -\/\ U+4DFF\ \ //\ Yijing\ Hexagram\ Symbols}}
+\DoxyCodeLine{00192\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+4E00\ -\/\ U+9FFF\ \ //\ CJK\ Unified\ Ideographs}}
+\DoxyCodeLine{00193\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+A960\ -\/\ U+A97F\ \ //\ Hangul\ Jamo\ Extended-\/A}}
+\DoxyCodeLine{00194\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+AC00\ -\/\ U+D7AF\ \ //\ Hangul\ Syllables}}
+\DoxyCodeLine{00195\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+D7B0\ -\/\ U+D7FF\ \ //\ Hangul\ Jamo\ Extended-\/B}}
+\DoxyCodeLine{00196\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+F900\ -\/\ U+FAFF\ \ //\ CJK\ Compatibility\ Ideographs}}
+\DoxyCodeLine{00197\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+FE10\ -\/\ U+FE1F\ \ //\ Vertical\ forms}}
+\DoxyCodeLine{00198\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+FE30\ -\/\ U+FE4F\ \ //\ CJK\ Compatibility\ Forms}}
+\DoxyCodeLine{00199\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+FF00\ -\/\ U+FFEF\ \ //\ Halfwidth\ and\ Fullwidth\ Forms}}
+\DoxyCodeLine{00200\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ U+1B000\ -\/\ U+1B0FF\ //\ Kana\ Supplement}}
+\DoxyCodeLine{00201\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ U+1D300\ -\/\ U+1D35F\ //\ Tai\ Xuan\ Hing\ Symbols}}
+\DoxyCodeLine{00202\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ U+1F200\ -\/\ U+1F2FF\ //\ Enclosed\ Ideographic\ Supplement}}
+\DoxyCodeLine{00203\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ U+20000\ -\/\ U+2A6DF\ //\ CJK\ Unified\ Ideographs\ Extension\ B}}
+\DoxyCodeLine{00204\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ U+2A700\ -\/\ U+2B73F\ //\ CJK\ Unified\ Ideographs\ Extension\ C}}
+\DoxyCodeLine{00205\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ U+2B740\ -\/\ U+2B81F\ //\ CJK\ Unified\ Ideographs\ Extension\ D}}
+\DoxyCodeLine{00206\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ U+2F800\ -\/\ U+2FA1F\ //\ CJK\ Compatibility\ Ideographs\ Supplement}}
+\DoxyCodeLine{00207\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \}}}
+\DoxyCodeLine{00208\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00209\ \textcolor{comment}{\ \ \ *\ \ \ FT\_AUTOHINTER\_SCRIPT\_INDIC\ ::}}
+\DoxyCodeLine{00210\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Apply\ the\ indic\ auto-\/hinter,\ covering\ all\ major\ scripts\ from\ the}}
+\DoxyCodeLine{00211\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Indian\ sub-\/continent\ and\ some\ other\ related\ scripts\ like\ Thai,\ Lao,}}
+\DoxyCodeLine{00212\ \textcolor{comment}{\ \ \ *\ \ \ \ \ or\ Tibetan.}}
+\DoxyCodeLine{00213\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00214\ \textcolor{comment}{\ \ \ *\ \ \ \ \ By\ default,\ characters\ from\ the\ following\ Unicode\ ranges\ are}}
+\DoxyCodeLine{00215\ \textcolor{comment}{\ \ \ *\ \ \ \ \ assigned\ to\ this\ submodule.}}
+\DoxyCodeLine{00216\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00217\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \{}}
+\DoxyCodeLine{00218\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+0900\ -\/\ U+0DFF\ \ //\ Indic\ Range}}
+\DoxyCodeLine{00219\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+0F00\ -\/\ U+0FFF\ \ //\ Tibetan}}
+\DoxyCodeLine{00220\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+1900\ -\/\ U+194F\ \ //\ Limbu}}
+\DoxyCodeLine{00221\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+1B80\ -\/\ U+1BBF\ \ //\ Sundanese}}
+\DoxyCodeLine{00222\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+1C80\ -\/\ U+1CDF\ \ //\ Meetei\ Mayak}}
+\DoxyCodeLine{00223\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ U+A800\ -\/\ U+A82F\ \ //\ Syloti\ Nagri}}
+\DoxyCodeLine{00224\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ U+11800\ -\/\ U+118DF\ //\ Sharada}}
+\DoxyCodeLine{00225\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \}}}
+\DoxyCodeLine{00226\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00227\ \textcolor{comment}{\ \ \ *\ \ \ \ \ Note\ that\ currently\ Indic\ support\ is\ rudimentary\ only,\ missing\ blue}}
+\DoxyCodeLine{00228\ \textcolor{comment}{\ \ \ *\ \ \ \ \ zone\ support.}}
+\DoxyCodeLine{00229\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00230\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00231\ \textcolor{preprocessor}{\#define\ FT\_AUTOHINTER\_SCRIPT\_NONE\ \ \ 0}}
+\DoxyCodeLine{00232\ \textcolor{preprocessor}{\#define\ FT\_AUTOHINTER\_SCRIPT\_LATIN\ \ 1}}
+\DoxyCodeLine{00233\ \textcolor{preprocessor}{\#define\ FT\_AUTOHINTER\_SCRIPT\_CJK\ \ \ \ 2}}
+\DoxyCodeLine{00234\ \textcolor{preprocessor}{\#define\ FT\_AUTOHINTER\_SCRIPT\_INDIC\ \ 3}}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \textcolor{comment}{\ \ /**************************************************************************}}
+\DoxyCodeLine{00238\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00239\ \textcolor{comment}{\ \ \ *\ @struct:}}
+\DoxyCodeLine{00240\ \textcolor{comment}{\ \ \ *\ \ \ FT\_Prop\_GlyphToScriptMap}}
+\DoxyCodeLine{00241\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00242\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00243\ \textcolor{comment}{\ \ \ *\ \ \ *Experimental*\ *only*}}
+\DoxyCodeLine{00244\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00245\ \textcolor{comment}{\ \ \ *\ \ \ The\ data\ exchange\ structure\ for\ the\ @glyph-\/to-\/script-\/map\ property.}}
+\DoxyCodeLine{00246\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00247\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00248\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ \ }\mbox{\hyperlink{structFT__Prop__GlyphToScriptMap__}{FT\_Prop\_GlyphToScriptMap\_}}}
+\DoxyCodeLine{00249\ \ \ \{}
+\DoxyCodeLine{00250\ \ \ \ \ FT\_Face\ \ \ face;}
+\DoxyCodeLine{00251\ \ \ \ \ FT\_Byte*\ \ map;}
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00253\ \ \ \}\ FT\_Prop\_GlyphToScriptMap;}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00256\ \textcolor{comment}{\ \ /**************************************************************************}}
+\DoxyCodeLine{00257\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00258\ \textcolor{comment}{\ \ \ *\ @property:}}
+\DoxyCodeLine{00259\ \textcolor{comment}{\ \ \ *\ \ \ fallback-\/script}}
+\DoxyCodeLine{00260\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00261\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00262\ \textcolor{comment}{\ \ \ *\ \ \ *Experimental*\ *only*}}
+\DoxyCodeLine{00263\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00264\ \textcolor{comment}{\ \ \ *\ \ \ If\ no\ auto-\/hinter\ script\ module\ can\ be\ assigned\ to\ a\ glyph,\ a}}
+\DoxyCodeLine{00265\ \textcolor{comment}{\ \ \ *\ \ \ fallback\ script\ gets\ assigned\ to\ it\ (see\ also\ the}}
+\DoxyCodeLine{00266\ \textcolor{comment}{\ \ \ *\ \ \ @glyph-\/to-\/script-\/map\ property).\ \ By\ default,\ this\ is}}
+\DoxyCodeLine{00267\ \textcolor{comment}{\ \ \ *\ \ \ @FT\_AUTOHINTER\_SCRIPT\_CJK.\ \ Using\ the\ \`{}fallback-\/script'\ property,}}
+\DoxyCodeLine{00268\ \textcolor{comment}{\ \ \ *\ \ \ this\ fallback\ value\ can\ be\ changed.}}
+\DoxyCodeLine{00269\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00270\ \textcolor{comment}{\ \ \ *\ \ \ \{}}
+\DoxyCodeLine{00271\ \textcolor{comment}{\ \ \ *\ \ \ \ \ FT\_Library\ \ library;}}
+\DoxyCodeLine{00272\ \textcolor{comment}{\ \ \ *\ \ \ \ \ FT\_UInt\ \ \ \ \ fallback\_script\ =\ FT\_AUTOHINTER\_SCRIPT\_NONE;}}
+\DoxyCodeLine{00273\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00274\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00275\ \textcolor{comment}{\ \ \ *\ \ \ \ \ FT\_Init\_FreeType(\ \&library\ );}}
+\DoxyCodeLine{00276\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00277\ \textcolor{comment}{\ \ \ *\ \ \ \ \ FT\_Property\_Set(\ library,\ "{}autofitter"{},}}
+\DoxyCodeLine{00278\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}fallback-\/script"{},\ \&fallback\_script\ );}}
+\DoxyCodeLine{00279\ \textcolor{comment}{\ \ \ *\ \ \ \}}}
+\DoxyCodeLine{00280\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00281\ \textcolor{comment}{\ \ \ *\ @note:}}
+\DoxyCodeLine{00282\ \textcolor{comment}{\ \ \ *\ \ \ This\ property\ can\ be\ used\ with\ @FT\_Property\_Get\ also.}}
+\DoxyCodeLine{00283\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00284\ \textcolor{comment}{\ \ \ *\ \ \ It's\ important\ to\ use\ the\ right\ timing\ for\ changing\ this\ value:\ The}}
+\DoxyCodeLine{00285\ \textcolor{comment}{\ \ \ *\ \ \ creation\ of\ the\ glyph-\/to-\/script\ map\ that\ eventually\ uses\ the}}
+\DoxyCodeLine{00286\ \textcolor{comment}{\ \ \ *\ \ \ fallback\ script\ value\ gets\ triggered\ either\ by\ setting\ or\ reading\ a}}
+\DoxyCodeLine{00287\ \textcolor{comment}{\ \ \ *\ \ \ face-\/specific\ property\ like\ @glyph-\/to-\/script-\/map,\ or\ by\ auto-\/hinting}}
+\DoxyCodeLine{00288\ \textcolor{comment}{\ \ \ *\ \ \ any\ glyph\ from\ that\ face.\ \ In\ particular,\ if\ you\ have\ already\ created}}
+\DoxyCodeLine{00289\ \textcolor{comment}{\ \ \ *\ \ \ an\ @FT\_Face\ structure\ but\ not\ loaded\ any\ glyph\ (using\ the}}
+\DoxyCodeLine{00290\ \textcolor{comment}{\ \ \ *\ \ \ auto-\/hinter),\ a\ change\ of\ the\ fallback\ script\ will\ affect\ this\ face.}}
+\DoxyCodeLine{00291\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00292\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00293\ }
+\DoxyCodeLine{00294\ }
+\DoxyCodeLine{00295\ \textcolor{comment}{\ \ /**************************************************************************}}
+\DoxyCodeLine{00296\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00297\ \textcolor{comment}{\ \ \ *\ @property:}}
+\DoxyCodeLine{00298\ \textcolor{comment}{\ \ \ *\ \ \ default-\/script}}
+\DoxyCodeLine{00299\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00300\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00301\ \textcolor{comment}{\ \ \ *\ \ \ *Experimental*\ *only*}}
+\DoxyCodeLine{00302\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00303\ \textcolor{comment}{\ \ \ *\ \ \ If\ Freetype\ gets\ compiled\ with\ FT\_CONFIG\_OPTION\_USE\_HARFBUZZ\ to\ make}}
+\DoxyCodeLine{00304\ \textcolor{comment}{\ \ \ *\ \ \ the\ HarfBuzz\ library\ access\ OpenType\ features\ for\ getting\ better}}
+\DoxyCodeLine{00305\ \textcolor{comment}{\ \ \ *\ \ \ glyph\ coverages,\ this\ property\ sets\ the\ (auto-\/fitter)\ script\ to\ be}}
+\DoxyCodeLine{00306\ \textcolor{comment}{\ \ \ *\ \ \ used\ for\ the\ default\ (OpenType)\ script\ data\ of\ a\ font's\ GSUB\ table.}}
+\DoxyCodeLine{00307\ \textcolor{comment}{\ \ \ *\ \ \ Features\ for\ the\ default\ script\ are\ intended\ for\ all\ scripts\ not}}
+\DoxyCodeLine{00308\ \textcolor{comment}{\ \ \ *\ \ \ explicitly\ handled\ in\ GSUB;\ an\ example\ is\ a\ \`{}dlig'\ feature,}}
+\DoxyCodeLine{00309\ \textcolor{comment}{\ \ \ *\ \ \ containing\ the\ combination\ of\ the\ characters\ \`{}T',\ \`{}E',\ and\ \`{}L'\ to}}
+\DoxyCodeLine{00310\ \textcolor{comment}{\ \ \ *\ \ \ form\ a\ \`{}TEL'\ ligature.}}
+\DoxyCodeLine{00311\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00312\ \textcolor{comment}{\ \ \ *\ \ \ By\ default,\ this\ is\ @FT\_AUTOHINTER\_SCRIPT\_LATIN.\ \ Using\ the}}
+\DoxyCodeLine{00313\ \textcolor{comment}{\ \ \ *\ \ \ \`{}default-\/script'\ property,\ this\ default\ value\ can\ be\ changed.}}
+\DoxyCodeLine{00314\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00315\ \textcolor{comment}{\ \ \ *\ \ \ \{}}
+\DoxyCodeLine{00316\ \textcolor{comment}{\ \ \ *\ \ \ \ \ FT\_Library\ \ library;}}
+\DoxyCodeLine{00317\ \textcolor{comment}{\ \ \ *\ \ \ \ \ FT\_UInt\ \ \ \ \ default\_script\ =\ FT\_AUTOHINTER\_SCRIPT\_NONE;}}
+\DoxyCodeLine{00318\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00319\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00320\ \textcolor{comment}{\ \ \ *\ \ \ \ \ FT\_Init\_FreeType(\ \&library\ );}}
+\DoxyCodeLine{00321\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00322\ \textcolor{comment}{\ \ \ *\ \ \ \ \ FT\_Property\_Set(\ library,\ "{}autofitter"{},}}
+\DoxyCodeLine{00323\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}default-\/script"{},\ \&default\_script\ );}}
+\DoxyCodeLine{00324\ \textcolor{comment}{\ \ \ *\ \ \ \}}}
+\DoxyCodeLine{00325\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00326\ \textcolor{comment}{\ \ \ *\ @note:}}
+\DoxyCodeLine{00327\ \textcolor{comment}{\ \ \ *\ \ \ This\ property\ can\ be\ used\ with\ @FT\_Property\_Get\ also.}}
+\DoxyCodeLine{00328\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00329\ \textcolor{comment}{\ \ \ *\ \ \ It's\ important\ to\ use\ the\ right\ timing\ for\ changing\ this\ value:\ The}}
+\DoxyCodeLine{00330\ \textcolor{comment}{\ \ \ *\ \ \ creation\ of\ the\ glyph-\/to-\/script\ map\ that\ eventually\ uses\ the}}
+\DoxyCodeLine{00331\ \textcolor{comment}{\ \ \ *\ \ \ default\ script\ value\ gets\ triggered\ either\ by\ setting\ or\ reading\ a}}
+\DoxyCodeLine{00332\ \textcolor{comment}{\ \ \ *\ \ \ face-\/specific\ property\ like\ @glyph-\/to-\/script-\/map,\ or\ by\ auto-\/hinting}}
+\DoxyCodeLine{00333\ \textcolor{comment}{\ \ \ *\ \ \ any\ glyph\ from\ that\ face.\ \ In\ particular,\ if\ you\ have\ already\ created}}
+\DoxyCodeLine{00334\ \textcolor{comment}{\ \ \ *\ \ \ an\ @FT\_Face\ structure\ but\ not\ loaded\ any\ glyph\ (using\ the}}
+\DoxyCodeLine{00335\ \textcolor{comment}{\ \ \ *\ \ \ auto-\/hinter),\ a\ change\ of\ the\ default\ script\ will\ affect\ this\ face.}}
+\DoxyCodeLine{00336\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00337\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00338\ }
+\DoxyCodeLine{00339\ }
+\DoxyCodeLine{00340\ \textcolor{comment}{\ \ /**************************************************************************}}
+\DoxyCodeLine{00341\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00342\ \textcolor{comment}{\ \ \ *\ @property:}}
+\DoxyCodeLine{00343\ \textcolor{comment}{\ \ \ *\ \ \ increase-\/x-\/height}}
+\DoxyCodeLine{00344\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00345\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00346\ \textcolor{comment}{\ \ \ *\ \ \ For\ ppem\ values\ in\ the\ range\ 6\string~<=\ ppem\ <=\ \`{}increase-\/x-\/height',\ round}}
+\DoxyCodeLine{00347\ \textcolor{comment}{\ \ \ *\ \ \ up\ the\ font's\ x\string~height\ much\ more\ often\ than\ normally.\ \ If\ the\ value}}
+\DoxyCodeLine{00348\ \textcolor{comment}{\ \ \ *\ \ \ is\ set\ to\string~0,\ which\ is\ the\ default,\ this\ feature\ is\ switched\ off.\ \ Use}}
+\DoxyCodeLine{00349\ \textcolor{comment}{\ \ \ *\ \ \ this\ property\ to\ improve\ the\ legibility\ of\ small\ font\ sizes\ if}}
+\DoxyCodeLine{00350\ \textcolor{comment}{\ \ \ *\ \ \ necessary.}}
+\DoxyCodeLine{00351\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00352\ \textcolor{comment}{\ \ \ *\ \ \ \{}}
+\DoxyCodeLine{00353\ \textcolor{comment}{\ \ \ *\ \ \ \ \ FT\_Library\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ library;}}
+\DoxyCodeLine{00354\ \textcolor{comment}{\ \ \ *\ \ \ \ \ FT\_Face\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ face;}}
+\DoxyCodeLine{00355\ \textcolor{comment}{\ \ \ *\ \ \ \ \ FT\_Prop\_IncreaseXHeight\ \ prop;}}
+\DoxyCodeLine{00356\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00357\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00358\ \textcolor{comment}{\ \ \ *\ \ \ \ \ FT\_Init\_FreeType(\ \&library\ );}}
+\DoxyCodeLine{00359\ \textcolor{comment}{\ \ \ *\ \ \ \ \ FT\_New\_Face(\ library,\ "{}foo.ttf"{},\ 0,\ \&face\ );}}
+\DoxyCodeLine{00360\ \textcolor{comment}{\ \ \ *\ \ \ \ \ FT\_Set\_Char\_Size(\ face,\ 10\ *\ 64,\ 0,\ 72,\ 0\ );}}
+\DoxyCodeLine{00361\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00362\ \textcolor{comment}{\ \ \ *\ \ \ \ \ prop.face\ \ =\ face;}}
+\DoxyCodeLine{00363\ \textcolor{comment}{\ \ \ *\ \ \ \ \ prop.limit\ =\ 14;}}
+\DoxyCodeLine{00364\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00365\ \textcolor{comment}{\ \ \ *\ \ \ \ \ FT\_Property\_Set(\ library,\ "{}autofitter"{},}}
+\DoxyCodeLine{00366\ \textcolor{comment}{\ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}increase-\/x-\/height"{},\ \&prop\ );}}
+\DoxyCodeLine{00367\ \textcolor{comment}{\ \ \ *\ \ \ \}}}
+\DoxyCodeLine{00368\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00369\ \textcolor{comment}{\ \ \ *\ @note:}}
+\DoxyCodeLine{00370\ \textcolor{comment}{\ \ \ *\ \ \ This\ property\ can\ be\ used\ with\ @FT\_Property\_Get\ also.}}
+\DoxyCodeLine{00371\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00372\ \textcolor{comment}{\ \ \ *\ \ \ Set\ this\ value\ right\ after\ calling\ @FT\_Set\_Char\_Size,\ but\ before}}
+\DoxyCodeLine{00373\ \textcolor{comment}{\ \ \ *\ \ \ loading\ any\ glyph\ (using\ the\ auto-\/hinter).}}
+\DoxyCodeLine{00374\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00375\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00376\ }
+\DoxyCodeLine{00377\ }
+\DoxyCodeLine{00378\ \textcolor{comment}{\ \ /**************************************************************************}}
+\DoxyCodeLine{00379\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00380\ \textcolor{comment}{\ \ \ *\ @struct:}}
+\DoxyCodeLine{00381\ \textcolor{comment}{\ \ \ *\ \ \ FT\_Prop\_IncreaseXHeight}}
+\DoxyCodeLine{00382\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00383\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00384\ \textcolor{comment}{\ \ \ *\ \ \ The\ data\ exchange\ structure\ for\ the\ @increase-\/x-\/height\ property.}}
+\DoxyCodeLine{00385\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00386\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00387\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ \ }\mbox{\hyperlink{structFT__Prop__IncreaseXHeight__}{FT\_Prop\_IncreaseXHeight\_}}}
+\DoxyCodeLine{00388\ \ \ \{}
+\DoxyCodeLine{00389\ \ \ \ \ FT\_Face\ \ face;}
+\DoxyCodeLine{00390\ \ \ \ \ FT\_UInt\ \ limit;}
+\DoxyCodeLine{00391\ }
+\DoxyCodeLine{00392\ \ \ \}\ FT\_Prop\_IncreaseXHeight;}
+\DoxyCodeLine{00393\ }
+\DoxyCodeLine{00394\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{00395\ }
+\DoxyCodeLine{00396\ }
+\DoxyCodeLine{00397\ FT\_END\_HEADER}
+\DoxyCodeLine{00398\ }
+\DoxyCodeLine{00399\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_FTAUTOH\_H\_\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00400\ }
+\DoxyCodeLine{00401\ }
+\DoxyCodeLine{00402\ \textcolor{comment}{/*\ END\ */}}
+
+\end{DoxyCode}

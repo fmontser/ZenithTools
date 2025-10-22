@@ -1,0 +1,86 @@
+\doxysection{Input\+Impl.\+hpp}
+\hypertarget{Win32_2InputImpl_8hpp_source}{}\label{Win32_2InputImpl_8hpp_source}\index{build/\_deps/sfml-\/src/src/SFML/Window/Win32/InputImpl.hpp@{build/\_deps/sfml-\/src/src/SFML/Window/Win32/InputImpl.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ SFML\ -\/\ Simple\ and\ Fast\ Multimedia\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Copyright\ (C)\ 2007-\/2023\ Laurent\ Gomila\ (laurent@sfml-\/dev.org)}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ software\ is\ provided\ 'as-\/is',\ without\ any\ express\ or\ implied\ warranty.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ In\ no\ event\ will\ the\ authors\ be\ held\ liable\ for\ any\ damages\ arising\ from\ the\ use\ of\ this\ software.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Permission\ is\ granted\ to\ anyone\ to\ use\ this\ software\ for\ any\ purpose,}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ including\ commercial\ applications,\ and\ to\ alter\ it\ and\ redistribute\ it\ freely,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ subject\ to\ the\ following\ restrictions:}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ 1.\ The\ origin\ of\ this\ software\ must\ not\ be\ misrepresented;}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ you\ must\ not\ claim\ that\ you\ wrote\ the\ original\ software.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ If\ you\ use\ this\ software\ in\ a\ product,\ an\ acknowledgment}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ in\ the\ product\ documentation\ would\ be\ appreciated\ but\ is\ not\ required.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ 2.\ Altered\ source\ versions\ must\ be\ plainly\ marked\ as\ such,}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ and\ must\ not\ be\ misrepresented\ as\ being\ the\ original\ software.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ 3.\ This\ notice\ may\ not\ be\ removed\ or\ altered\ from\ any\ source\ distribution.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ SFML\_INPUTIMPLWIN32\_HPP}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ SFML\_INPUTIMPLWIN32\_HPP}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Headers}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <SFML/Window/Keyboard.hpp>}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <SFML/Window/Mouse.hpp>}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacesf}{sf}}}
+\DoxyCodeLine{00035\ \{}
+\DoxyCodeLine{00036\ \textcolor{keyword}{namespace\ }priv}
+\DoxyCodeLine{00037\ \{}
+\DoxyCodeLine{00042\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classsf_1_1priv_1_1InputImpl}{InputImpl}}}
+\DoxyCodeLine{00043\ \{}
+\DoxyCodeLine{00044\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1InputImpl_ae5c86fa42857d35943c83a6381b5889a}{isKeyPressed}}(\mbox{\hyperlink{classsf_1_1Keyboard_acb4cacd7cc5802dec45724cf3314a142}{Keyboard::Key}}\ key);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1InputImpl_ac55be0ad763994c71fdd6bf779abf306}{isKeyPressed}}(Keyboard::Scancode\ code);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classsf_1_1Keyboard_acb4cacd7cc5802dec45724cf3314a142}{Keyboard::Key}}\ \mbox{\hyperlink{classsf_1_1priv_1_1InputImpl_a2aa43c124fa95de999fbcc7c0a8bd951}{localize}}(Keyboard::Scancode\ code);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{static}\ Keyboard::Scancode\ \mbox{\hyperlink{classsf_1_1priv_1_1InputImpl_ad631f3baa9c59bf6e388145ad0a44b80}{delocalize}}(\mbox{\hyperlink{classsf_1_1Keyboard_acb4cacd7cc5802dec45724cf3314a142}{Keyboard::Key}}\ key);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classsf_1_1String}{String}}\ \mbox{\hyperlink{classsf_1_1priv_1_1InputImpl_abcbbbfbd8570a57d5ddd1666a48a7085}{getDescription}}(Keyboard::Scancode\ code);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1InputImpl_abfa3c573f19de6769602269a62692b95}{setVirtualKeyboardVisible}}(\textcolor{keywordtype}{bool}\ visible);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1InputImpl_a077e925a19e4f03d34485df55cc4fe01}{isMouseButtonPressed}}(\mbox{\hyperlink{classsf_1_1Mouse_a4fb128be433f9aafe66bc0c605daaa90}{Mouse::Button}}\ button);}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keyword}{static}\ Vector2i\ \mbox{\hyperlink{classsf_1_1priv_1_1InputImpl_a8976c93cd6ae547583e977572e22a2a8}{getMousePosition}}();}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keyword}{static}\ Vector2i\ \mbox{\hyperlink{classsf_1_1priv_1_1InputImpl_a783243fbd5022234be34cdc0812cd184}{getMousePosition}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1WindowBase}{WindowBase}}\&\ relativeTo);}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1InputImpl_a3026080ff6f4c1be4a4dc3459cae2ebb}{setMousePosition}}(\textcolor{keyword}{const}\ Vector2i\&\ position);}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classsf_1_1priv_1_1InputImpl_adc737f03cc2cbeedf8fedcebdd2db1f7}{setMousePosition}}(\textcolor{keyword}{const}\ Vector2i\&\ position,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1WindowBase}{WindowBase}}\&\ relativeTo);}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classsf_1_1priv_1_1InputImpl_a532ce9bf8fb379633d1765662e8ec3ed}{isTouchDown}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ finger);}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keyword}{static}\ Vector2i\ \mbox{\hyperlink{classsf_1_1priv_1_1InputImpl_ae830a1752861900124a9eb30e353a2b2}{getTouchPosition}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ finger);}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keyword}{static}\ Vector2i\ \mbox{\hyperlink{classsf_1_1priv_1_1InputImpl_a58944c6217419de2a016dc6d954a2165}{getTouchPosition}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ finger,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classsf_1_1WindowBase}{WindowBase}}\&\ relativeTo);}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ensureMappings();}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{comment}{//\ Member\ data}}
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keyword}{static}\ Keyboard::Scancode\ m\_keyToScancodeMapping[\mbox{\hyperlink{classsf_1_1Keyboard_acb4cacd7cc5802dec45724cf3314a142a93e6ffa0320fe9b2f29aec14a58be36b}{Keyboard::KeyCount}}];\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classsf_1_1Keyboard_acb4cacd7cc5802dec45724cf3314a142}{Keyboard::Key}}\ \ \ \ \ \ m\_scancodeToKeyMapping[\mbox{\hyperlink{structsf_1_1Keyboard_1_1Scan_aa42fbf6954d6f81f7606e566c7abe875a28c5ad8524e1e653b43440e660d441d0}{Keyboard::Scan::ScancodeCount}}];\ }
+\DoxyCodeLine{00191\ \};}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \}\ \textcolor{comment}{//\ namespace\ priv}}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \}\ \textcolor{comment}{//\ namespace\ sf}}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SFML\_INPUTIMPLWIN32\_HPP}}
+
+\end{DoxyCode}

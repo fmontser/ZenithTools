@@ -1,7 +1,10 @@
 set(TEST_SOURCES
 	test_timer.cpp
-	${CMAKE_SOURCE_DIR}/src/Timer.cpp
+	test_pomodoro_session.cpp
 	${CMAKE_SOURCE_DIR}/src/Exceptions.cpp
+	${CMAKE_SOURCE_DIR}/src/Timer.cpp
+	${CMAKE_SOURCE_DIR}/src/PomodoroSession.cpp
+
 )
 
 add_executable(zenith_tests ${TEST_SOURCES})

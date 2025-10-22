@@ -1,0 +1,77 @@
+\doxysection{sf\+::Non\+Copyable Class Reference}
+\hypertarget{classsf_1_1NonCopyable}{}\label{classsf_1_1NonCopyable}\index{sf::NonCopyable@{sf::NonCopyable}}
+
+
+Utility class that makes any derived class non-\/copyable.  
+
+
+
+
+{\ttfamily \#include $<$Non\+Copyable.\+hpp$>$}
+
+
+
+Inheritance diagram for sf\+::Non\+Copyable\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classsf_1_1NonCopyable__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsf_1_1NonCopyable_a2110add170580fdb946f887719da6860}{Non\+Copyable}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1NonCopyable_a8274ffbf46014f5f7f364befb52c7728}{\texorpdfstring{$\sim$}{\string~}\+Non\+Copyable}} ()
+\begin{DoxyCompactList}\small\item\em Default destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Utility class that makes any derived class non-\/copyable. 
+
+This class makes its instances non-\/copyable, by explicitly disabling its copy constructor and its assignment operator.
+
+To create a non-\/copyable class, simply inherit from \doxylink{classsf_1_1NonCopyable}{sf\+::\+Non\+Copyable}.
+
+The type of inheritance (public or private) doesn\textquotesingle{}t matter, the copy constructor and assignment operator are declared private in \doxylink{classsf_1_1NonCopyable}{sf\+::\+Non\+Copyable} so they will end up being inaccessible in both cases. Thus you can use a shorter syntax for inheriting from it (see below).
+
+Usage example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class\ }MyNonCopyableClass\ :\ sf::NonCopyable}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ ...}
+\DoxyCodeLine{\};}
+
+\end{DoxyCode}
+
+
+Deciding whether the instances of a class can be copied or not is a very important design choice. You are strongly encouraged to think about it before writing a class, and to use \doxylink{classsf_1_1NonCopyable}{sf\+::\+Non\+Copyable} when necessary to prevent many potential future errors when using it. This is also a very important indication to users of your class. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classsf_1_1NonCopyable_a2110add170580fdb946f887719da6860}\index{sf::NonCopyable@{sf::NonCopyable}!NonCopyable@{NonCopyable}}
+\index{NonCopyable@{NonCopyable}!sf::NonCopyable@{sf::NonCopyable}}
+\doxysubsubsection{\texorpdfstring{NonCopyable()}{NonCopyable()}}
+{\footnotesize\ttfamily \label{classsf_1_1NonCopyable_a2110add170580fdb946f887719da6860} 
+sf\+::\+Non\+Copyable\+::\+Non\+Copyable (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Default constructor. 
+
+Because this class has a copy constructor, the compiler will not automatically generate the default constructor. That\textquotesingle{}s why we must define it explicitly. \Hypertarget{classsf_1_1NonCopyable_a8274ffbf46014f5f7f364befb52c7728}\index{sf::NonCopyable@{sf::NonCopyable}!````~NonCopyable@{\texorpdfstring{$\sim$}{\string~}NonCopyable}}
+\index{````~NonCopyable@{\texorpdfstring{$\sim$}{\string~}NonCopyable}!sf::NonCopyable@{sf::NonCopyable}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}NonCopyable()}{\string~NonCopyable()}}
+{\footnotesize\ttfamily \label{classsf_1_1NonCopyable_a8274ffbf46014f5f7f364befb52c7728} 
+sf\+::\+Non\+Copyable\+::\texorpdfstring{$\sim$}{\string~}\+Non\+Copyable (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Default destructor. 
+
+By declaring a protected destructor it\textquotesingle{}s impossible to call delete on a pointer of \doxylink{classsf_1_1NonCopyable}{sf\+::\+Non\+Copyable}, thus preventing possible resource leaks. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/include/\+SFML/\+System/Non\+Copyable.\+hpp\end{DoxyCompactItemize}

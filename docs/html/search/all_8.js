@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['readme_0',['README',['../md_README.html',1,'']]],
-  ['remaining_1',['remaining',['../structzenith_1_1Timer_1_1Status.html#adf726c4837b045207586fe7db376ed91',1,'zenith::Timer::Status']]],
-  ['requirements_2',['Requirements',['../md_README.html#autotoc_md1',1,'']]],
-  ['reset_3',['Reset',['../classzenith_1_1Timer.html#ae7c0c1e7d12de4b8a6e7c64e451cdd2a',1,'zenith::Timer']]],
-  ['resume_4',['Resume',['../classzenith_1_1Timer.html#ad3b4e386f8ebb885fa2ef6fcac8d9ca3',1,'zenith::Timer']]],
-  ['running_5',['Running',['../classzenith_1_1Timer.html#ac47cbb00d62a075e4c61655b6b3269cfa5bda814c4aedb126839228f1a3d92f09',1,'zenith::Timer']]]
+  ['seconds_0',['Seconds',['../Timer_8hpp.html#a5e6c50203625681fded15903008539fa',1,'zenith']]],
+  ['start_1',['Start',['../classzenith_1_1Timer.html#a3ed0dfc131682b8c5382aeeaeae8563f',1,'zenith::Timer']]],
+  ['startactualround_2',['StartActualRound',['../classzenith_1_1PomodoroSession.html#a9d135fbb2acdbaa923e0f7ab395d309c',1,'zenith::PomodoroSession']]],
+  ['startrestingperiod_3',['StartRestingPeriod',['../classzenith_1_1PomodoroSession.html#a3084f65cacc7b1e48be112b13e3e0d2e',1,'zenith::PomodoroSession']]],
+  ['status_4',['Status',['../structzenith_1_1PomodoroSession_1_1Status.html',1,'zenith::PomodoroSession::Status'],['../structzenith_1_1Timer_1_1Status.html',1,'zenith::Timer::Status']]],
+  ['stopped_5',['Stopped',['../classzenith_1_1Timer.html#a83ee68149877014f5309a16a2e2e4adfac23e2b09ebe6bf4cb5e2a9abe85c0be2',1,'zenith::Timer']]]
 ];

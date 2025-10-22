@@ -1,0 +1,524 @@
+\doxysection{sf\+::Render\+Target Class Reference}
+\hypertarget{classsf_1_1RenderTarget}{}\label{classsf_1_1RenderTarget}\index{sf::RenderTarget@{sf::RenderTarget}}
+
+
+\doxylink{classBase}{Base} class for all render targets (window, texture, ...)  
+
+
+
+
+{\ttfamily \#include $<$Render\+Target.\+hpp$>$}
+
+
+
+Inheritance diagram for sf\+::Render\+Target\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=290pt]{classsf_1_1RenderTarget__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for sf\+::Render\+Target\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{classsf_1_1RenderTarget__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classsf_1_1RenderTarget_a45414a2f09b257db7e7b37861d70c5a0}\label{classsf_1_1RenderTarget_a45414a2f09b257db7e7b37861d70c5a0} 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Render\+Target} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1RenderTarget_a6bb6f0ba348f2b1e2f46114aeaf60f26}{clear}} (const \mbox{\hyperlink{classsf_1_1Color}{Color}} \&color=\mbox{\hyperlink{classsf_1_1Color}{Color}}(0, 0, 0, 255))
+\begin{DoxyCompactList}\small\item\em Clear the entire target with a single color. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1RenderTarget_a063db6dd0a14913504af30e50cb6d946}{set\+View}} (const \mbox{\hyperlink{classsf_1_1View}{View}} \&view)
+\begin{DoxyCompactList}\small\item\em Change the current active view. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classsf_1_1View}{View}} \& \mbox{\hyperlink{classsf_1_1RenderTarget_adbf8dc5a1f4abbe15a3fbb915844c7ea}{get\+View}} () const
+\begin{DoxyCompactList}\small\item\em Get the view currently in use in the render target. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classsf_1_1View}{View}} \& \mbox{\hyperlink{classsf_1_1RenderTarget_a7741129e3ef7ab4f0a40024fca13480c}{get\+Default\+View}} () const
+\begin{DoxyCompactList}\small\item\em Get the default view of the render target. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Rect}{Int\+Rect}} \mbox{\hyperlink{classsf_1_1RenderTarget_a865d462915dc2a1fae2ebfb3300382ac}{get\+Viewport}} (const \mbox{\hyperlink{classsf_1_1View}{View}} \&view) const
+\begin{DoxyCompactList}\small\item\em Get the viewport of a view, applied to this render target. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Vector2}{Vector2f}} \mbox{\hyperlink{classsf_1_1RenderTarget_a0103ebebafa43a97e6e6414f8560d5e3}{map\+Pixel\+To\+Coords}} (const \mbox{\hyperlink{classsf_1_1Vector2}{Vector2i}} \&point) const
+\begin{DoxyCompactList}\small\item\em Convert a point from target coordinates to world coordinates, using the current view. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Vector2}{Vector2f}} \mbox{\hyperlink{classsf_1_1RenderTarget_a2d3e9d7c4a1f5ea7e52b06f53e3011f9}{map\+Pixel\+To\+Coords}} (const \mbox{\hyperlink{classsf_1_1Vector2}{Vector2i}} \&point, const \mbox{\hyperlink{classsf_1_1View}{View}} \&view) const
+\begin{DoxyCompactList}\small\item\em Convert a point from target coordinates to world coordinates. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Vector2}{Vector2i}} \mbox{\hyperlink{classsf_1_1RenderTarget_ad92a9f0283aa5f3f67e473c1105b68cf}{map\+Coords\+To\+Pixel}} (const \mbox{\hyperlink{classsf_1_1Vector2}{Vector2f}} \&point) const
+\begin{DoxyCompactList}\small\item\em Convert a point from world coordinates to target coordinates, using the current view. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsf_1_1Vector2}{Vector2i}} \mbox{\hyperlink{classsf_1_1RenderTarget_a848eee44b72ac3f16fa9182df26e83bc}{map\+Coords\+To\+Pixel}} (const \mbox{\hyperlink{classsf_1_1Vector2}{Vector2f}} \&point, const \mbox{\hyperlink{classsf_1_1View}{View}} \&view) const
+\begin{DoxyCompactList}\small\item\em Convert a point from world coordinates to target coordinates. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1RenderTarget_a12417a3bcc245c41d957b29583556f39}{draw}} (const \mbox{\hyperlink{classsf_1_1Drawable}{Drawable}} \&drawable, const \mbox{\hyperlink{classsf_1_1RenderStates}{Render\+States}} \&states=\mbox{\hyperlink{classsf_1_1RenderStates_ad29672df29f19ce50c3021d95f2bb062}{Render\+States\+::\+Default}})
+\begin{DoxyCompactList}\small\item\em Draw a drawable object to the render target. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1RenderTarget_a976bc94057799eb9f8a18ac5fdfd9b73}{draw}} (const \mbox{\hyperlink{classsf_1_1Vertex}{Vertex}} \texorpdfstring{$\ast$}{*}vertices, std\+::size\+\_\+t vertex\+Count, \mbox{\hyperlink{group__graphics_ga5ee56ac1339984909610713096283b1b}{Primitive\+Type}} type, const \mbox{\hyperlink{classsf_1_1RenderStates}{Render\+States}} \&states=\mbox{\hyperlink{classsf_1_1RenderStates_ad29672df29f19ce50c3021d95f2bb062}{Render\+States\+::\+Default}})
+\begin{DoxyCompactList}\small\item\em Draw primitives defined by an array of vertices. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1RenderTarget_a3dc4d06f081d36ca1e8f1a1298d49abc}{draw}} (const \mbox{\hyperlink{classsf_1_1VertexBuffer}{Vertex\+Buffer}} \&vertex\+Buffer, const \mbox{\hyperlink{classsf_1_1RenderStates}{Render\+States}} \&states=\mbox{\hyperlink{classsf_1_1RenderStates_ad29672df29f19ce50c3021d95f2bb062}{Render\+States\+::\+Default}})
+\begin{DoxyCompactList}\small\item\em Draw primitives defined by a vertex buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1RenderTarget_a07cb25d4557a30146b24b25b242310ea}{draw}} (const \mbox{\hyperlink{classsf_1_1VertexBuffer}{Vertex\+Buffer}} \&vertex\+Buffer, std\+::size\+\_\+t first\+Vertex, std\+::size\+\_\+t vertex\+Count, const \mbox{\hyperlink{classsf_1_1RenderStates}{Render\+States}} \&states=\mbox{\hyperlink{classsf_1_1RenderStates_ad29672df29f19ce50c3021d95f2bb062}{Render\+States\+::\+Default}})
+\begin{DoxyCompactList}\small\item\em Draw primitives defined by a vertex buffer. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classsf_1_1Vector2}{Vector2u}} \mbox{\hyperlink{classsf_1_1RenderTarget_a2e5ade2457d9fb4c4907ae5b3d9e94a5}{get\+Size}} () const =0
+\begin{DoxyCompactList}\small\item\em Return the size of the rendering region of the target. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classsf_1_1RenderTarget_aa20edd15cd67e60b44a773c649105448}{is\+Srgb}} () const
+\begin{DoxyCompactList}\small\item\em Tell if the render target will use s\+RGB encoding when drawing on it. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classsf_1_1RenderTarget_a86f66ad60dd65ede0d00bb3090c12484}{set\+Active}} (bool active=true)
+\begin{DoxyCompactList}\small\item\em Activate or deactivate the render target for rendering. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1RenderTarget_a8d1998464ccc54e789aaf990242b47f7}{push\+GLStates}} ()
+\begin{DoxyCompactList}\small\item\em Save the current Open\+GL render states and matrices. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1RenderTarget_ad5a98401113df931ddcd54c080f7aa8e}{pop\+GLStates}} ()
+\begin{DoxyCompactList}\small\item\em Restore the previously saved Open\+GL render states and matrices. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1RenderTarget_aac7504990d27dada4bfe3c7866920765}{reset\+GLStates}} ()
+\begin{DoxyCompactList}\small\item\em Reset the internal Open\+GL states so that the target is ready for drawing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classsf_1_1RenderTarget_a2997c96cbd93cb8ce0aba2ddae35b86f}\label{classsf_1_1RenderTarget_a2997c96cbd93cb8ce0aba2ddae35b86f} 
+{\bfseries Render\+Target} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classsf_1_1RenderTarget_af530274b34159d644e509b4b4dc43eb7}{initialize}} ()
+\begin{DoxyCompactList}\small\item\em Performs the common initialization step after creation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classBase}{Base} class for all render targets (window, texture, ...) 
+
+\doxylink{classsf_1_1RenderTarget}{sf\+::\+Render\+Target} defines the common behavior of all the 2D render targets usable in the graphics module. It makes it possible to draw 2D entities like sprites, shapes, text without using any Open\+GL command directly.
+
+A \doxylink{classsf_1_1RenderTarget}{sf\+::\+Render\+Target} is also able to use views (\doxylink{classsf_1_1View}{sf\+::\+View}), which are a kind of 2D cameras. With views you can globally scroll, rotate or zoom everything that is drawn, without having to transform every single entity. See the documentation of \doxylink{classsf_1_1View}{sf\+::\+View} for more details and sample pieces of code about this class.
+
+On top of that, render targets are still able to render direct Open\+GL stuff. It is even possible to mix together Open\+GL calls and regular SFML drawing commands. When doing so, make sure that Open\+GL states are not messed up by calling the push\+GLStates/pop\+GLStates functions.
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1RenderWindow}{sf\+::\+Render\+Window}, \doxylink{classsf_1_1RenderTexture}{sf\+::\+Render\+Texture}, \doxylink{classsf_1_1View}{sf\+::\+View} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsf_1_1RenderTarget_a6bb6f0ba348f2b1e2f46114aeaf60f26}\index{sf::RenderTarget@{sf::RenderTarget}!clear@{clear}}
+\index{clear@{clear}!sf::RenderTarget@{sf::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily \label{classsf_1_1RenderTarget_a6bb6f0ba348f2b1e2f46114aeaf60f26} 
+void sf\+::\+Render\+Target\+::clear (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classsf_1_1Color}{Color}} \&}]{color}{ = {\ttfamily \mbox{\hyperlink{classsf_1_1Color}{Color}}(0,~0,~0,~255)}}\end{DoxyParamCaption})}
+
+
+
+Clear the entire target with a single color. 
+
+This function is usually called once every frame, to clear the previous contents of the target.
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & Fill color to use to clear the render target \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classsf_1_1RenderTarget_a12417a3bcc245c41d957b29583556f39}\index{sf::RenderTarget@{sf::RenderTarget}!draw@{draw}}
+\index{draw@{draw}!sf::RenderTarget@{sf::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classsf_1_1RenderTarget_a12417a3bcc245c41d957b29583556f39} 
+void sf\+::\+Render\+Target\+::draw (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classsf_1_1Drawable}{Drawable}} \&}]{drawable}{, }\item[{const \mbox{\hyperlink{classsf_1_1RenderStates}{Render\+States}} \&}]{states}{ = {\ttfamily \mbox{\hyperlink{classsf_1_1RenderStates_ad29672df29f19ce50c3021d95f2bb062}{Render\+States\+::\+Default}}}}\end{DoxyParamCaption})}
+
+
+
+Draw a drawable object to the render target. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em drawable} & Object to draw \\
+\hline
+{\em states} & Render states to use for drawing \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classsf_1_1RenderTarget_a976bc94057799eb9f8a18ac5fdfd9b73}\index{sf::RenderTarget@{sf::RenderTarget}!draw@{draw}}
+\index{draw@{draw}!sf::RenderTarget@{sf::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classsf_1_1RenderTarget_a976bc94057799eb9f8a18ac5fdfd9b73} 
+void sf\+::\+Render\+Target\+::draw (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classsf_1_1Vertex}{Vertex}} \texorpdfstring{$\ast$}{*}}]{vertices}{, }\item[{std\+::size\+\_\+t}]{vertex\+Count}{, }\item[{\mbox{\hyperlink{group__graphics_ga5ee56ac1339984909610713096283b1b}{Primitive\+Type}}}]{type}{, }\item[{const \mbox{\hyperlink{classsf_1_1RenderStates}{Render\+States}} \&}]{states}{ = {\ttfamily \mbox{\hyperlink{classsf_1_1RenderStates_ad29672df29f19ce50c3021d95f2bb062}{Render\+States\+::\+Default}}}}\end{DoxyParamCaption})}
+
+
+
+Draw primitives defined by an array of vertices. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices} & Pointer to the vertices \\
+\hline
+{\em vertex\+Count} & Number of vertices in the array \\
+\hline
+{\em type} & Type of primitives to draw \\
+\hline
+{\em states} & Render states to use for drawing \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classsf_1_1RenderTarget_a3dc4d06f081d36ca1e8f1a1298d49abc}\index{sf::RenderTarget@{sf::RenderTarget}!draw@{draw}}
+\index{draw@{draw}!sf::RenderTarget@{sf::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classsf_1_1RenderTarget_a3dc4d06f081d36ca1e8f1a1298d49abc} 
+void sf\+::\+Render\+Target\+::draw (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classsf_1_1VertexBuffer}{Vertex\+Buffer}} \&}]{vertex\+Buffer}{, }\item[{const \mbox{\hyperlink{classsf_1_1RenderStates}{Render\+States}} \&}]{states}{ = {\ttfamily \mbox{\hyperlink{classsf_1_1RenderStates_ad29672df29f19ce50c3021d95f2bb062}{Render\+States\+::\+Default}}}}\end{DoxyParamCaption})}
+
+
+
+Draw primitives defined by a vertex buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertex\+Buffer} & \doxylink{classsf_1_1Vertex}{Vertex} buffer \\
+\hline
+{\em states} & Render states to use for drawing \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classsf_1_1RenderTarget_a07cb25d4557a30146b24b25b242310ea}\index{sf::RenderTarget@{sf::RenderTarget}!draw@{draw}}
+\index{draw@{draw}!sf::RenderTarget@{sf::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classsf_1_1RenderTarget_a07cb25d4557a30146b24b25b242310ea} 
+void sf\+::\+Render\+Target\+::draw (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classsf_1_1VertexBuffer}{Vertex\+Buffer}} \&}]{vertex\+Buffer}{, }\item[{std\+::size\+\_\+t}]{first\+Vertex}{, }\item[{std\+::size\+\_\+t}]{vertex\+Count}{, }\item[{const \mbox{\hyperlink{classsf_1_1RenderStates}{Render\+States}} \&}]{states}{ = {\ttfamily \mbox{\hyperlink{classsf_1_1RenderStates_ad29672df29f19ce50c3021d95f2bb062}{Render\+States\+::\+Default}}}}\end{DoxyParamCaption})}
+
+
+
+Draw primitives defined by a vertex buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertex\+Buffer} & \doxylink{classsf_1_1Vertex}{Vertex} buffer \\
+\hline
+{\em first\+Vertex} & Index of the first vertex to render \\
+\hline
+{\em vertex\+Count} & Number of vertices to render \\
+\hline
+{\em states} & Render states to use for drawing \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classsf_1_1RenderTarget_a7741129e3ef7ab4f0a40024fca13480c}\index{sf::RenderTarget@{sf::RenderTarget}!getDefaultView@{getDefaultView}}
+\index{getDefaultView@{getDefaultView}!sf::RenderTarget@{sf::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{getDefaultView()}{getDefaultView()}}
+{\footnotesize\ttfamily \label{classsf_1_1RenderTarget_a7741129e3ef7ab4f0a40024fca13480c} 
+const \mbox{\hyperlink{classsf_1_1View}{View}} \& sf\+::\+Render\+Target\+::get\+Default\+View (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get the default view of the render target. 
+
+The default view has the initial size of the render target, and never changes after the target has been created.
+
+\begin{DoxyReturn}{Returns}
+The default view of the render target
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1RenderTarget_a063db6dd0a14913504af30e50cb6d946}{set\+View}, \doxylink{classsf_1_1RenderTarget_adbf8dc5a1f4abbe15a3fbb915844c7ea}{get\+View} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1RenderTarget_a2e5ade2457d9fb4c4907ae5b3d9e94a5}\index{sf::RenderTarget@{sf::RenderTarget}!getSize@{getSize}}
+\index{getSize@{getSize}!sf::RenderTarget@{sf::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{getSize()}{getSize()}}
+{\footnotesize\ttfamily \label{classsf_1_1RenderTarget_a2e5ade2457d9fb4c4907ae5b3d9e94a5} 
+virtual \mbox{\hyperlink{classsf_1_1Vector2}{Vector2u}} sf\+::\+Render\+Target\+::get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Return the size of the rendering region of the target. 
+
+\begin{DoxyReturn}{Returns}
+Size in pixels 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classsf_1_1RenderTexture_a09a4e928dafb7fcf397b8fd3d0f98ee8}{sf\+::\+Render\+Texture}}, and \mbox{\hyperlink{classsf_1_1RenderWindow_a1c69f843fba7bb1999ea05cf61ffabbc}{sf\+::\+Render\+Window}}.
+
+\Hypertarget{classsf_1_1RenderTarget_adbf8dc5a1f4abbe15a3fbb915844c7ea}\index{sf::RenderTarget@{sf::RenderTarget}!getView@{getView}}
+\index{getView@{getView}!sf::RenderTarget@{sf::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{getView()}{getView()}}
+{\footnotesize\ttfamily \label{classsf_1_1RenderTarget_adbf8dc5a1f4abbe15a3fbb915844c7ea} 
+const \mbox{\hyperlink{classsf_1_1View}{View}} \& sf\+::\+Render\+Target\+::get\+View (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get the view currently in use in the render target. 
+
+\begin{DoxyReturn}{Returns}
+The view object that is currently used
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1RenderTarget_a063db6dd0a14913504af30e50cb6d946}{set\+View}, \doxylink{classsf_1_1RenderTarget_a7741129e3ef7ab4f0a40024fca13480c}{get\+Default\+View} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1RenderTarget_a865d462915dc2a1fae2ebfb3300382ac}\index{sf::RenderTarget@{sf::RenderTarget}!getViewport@{getViewport}}
+\index{getViewport@{getViewport}!sf::RenderTarget@{sf::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{getViewport()}{getViewport()}}
+{\footnotesize\ttfamily \label{classsf_1_1RenderTarget_a865d462915dc2a1fae2ebfb3300382ac} 
+\mbox{\hyperlink{classsf_1_1Rect}{Int\+Rect}} sf\+::\+Render\+Target\+::get\+Viewport (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classsf_1_1View}{View}} \&}]{view}{}\end{DoxyParamCaption}) const}
+
+
+
+Get the viewport of a view, applied to this render target. 
+
+The viewport is defined in the view as a ratio, this function simply applies this ratio to the current dimensions of the render target to calculate the pixels rectangle that the viewport actually covers in the target.
+
+
+\begin{DoxyParams}{Parameters}
+{\em view} & The view for which we want to compute the viewport\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Viewport rectangle, expressed in pixels 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1RenderTarget_af530274b34159d644e509b4b4dc43eb7}\index{sf::RenderTarget@{sf::RenderTarget}!initialize@{initialize}}
+\index{initialize@{initialize}!sf::RenderTarget@{sf::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{initialize()}{initialize()}}
+{\footnotesize\ttfamily \label{classsf_1_1RenderTarget_af530274b34159d644e509b4b4dc43eb7} 
+void sf\+::\+Render\+Target\+::initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Performs the common initialization step after creation. 
+
+The derived classes must call this function after the target is created and ready for drawing. \Hypertarget{classsf_1_1RenderTarget_aa20edd15cd67e60b44a773c649105448}\index{sf::RenderTarget@{sf::RenderTarget}!isSrgb@{isSrgb}}
+\index{isSrgb@{isSrgb}!sf::RenderTarget@{sf::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{isSrgb()}{isSrgb()}}
+{\footnotesize\ttfamily \label{classsf_1_1RenderTarget_aa20edd15cd67e60b44a773c649105448} 
+bool sf\+::\+Render\+Target\+::is\+Srgb (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Tell if the render target will use s\+RGB encoding when drawing on it. 
+
+\begin{DoxyReturn}{Returns}
+True if the render target use s\+RGB encoding, false otherwise 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classsf_1_1RenderTexture_a2b0c1876cfb411d7db737d85b38c062c}{sf\+::\+Render\+Texture}}, and \mbox{\hyperlink{classsf_1_1RenderWindow_a91917aa37dc198313cd87c4840acdb91}{sf\+::\+Render\+Window}}.
+
+\Hypertarget{classsf_1_1RenderTarget_ad92a9f0283aa5f3f67e473c1105b68cf}\index{sf::RenderTarget@{sf::RenderTarget}!mapCoordsToPixel@{mapCoordsToPixel}}
+\index{mapCoordsToPixel@{mapCoordsToPixel}!sf::RenderTarget@{sf::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{mapCoordsToPixel()}{mapCoordsToPixel()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classsf_1_1RenderTarget_ad92a9f0283aa5f3f67e473c1105b68cf} 
+\mbox{\hyperlink{classsf_1_1Vector2}{Vector2i}} sf\+::\+Render\+Target\+::map\+Coords\+To\+Pixel (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classsf_1_1Vector2}{Vector2f}} \&}]{point}{}\end{DoxyParamCaption}) const}
+
+
+
+Convert a point from world coordinates to target coordinates, using the current view. 
+
+This function is an overload of the map\+Coords\+To\+Pixel function that implicitly uses the current view. It is equivalent to\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{target.mapCoordsToPixel(point,\ target.getView());}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & Point to convert\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The converted point, in target coordinates (pixels)
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1RenderTarget_a0103ebebafa43a97e6e6414f8560d5e3}{map\+Pixel\+To\+Coords} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1RenderTarget_a848eee44b72ac3f16fa9182df26e83bc}\index{sf::RenderTarget@{sf::RenderTarget}!mapCoordsToPixel@{mapCoordsToPixel}}
+\index{mapCoordsToPixel@{mapCoordsToPixel}!sf::RenderTarget@{sf::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{mapCoordsToPixel()}{mapCoordsToPixel()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classsf_1_1RenderTarget_a848eee44b72ac3f16fa9182df26e83bc} 
+\mbox{\hyperlink{classsf_1_1Vector2}{Vector2i}} sf\+::\+Render\+Target\+::map\+Coords\+To\+Pixel (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classsf_1_1Vector2}{Vector2f}} \&}]{point}{, }\item[{const \mbox{\hyperlink{classsf_1_1View}{View}} \&}]{view}{}\end{DoxyParamCaption}) const}
+
+
+
+Convert a point from world coordinates to target coordinates. 
+
+This function finds the pixel of the render target that matches the given 2D point. In other words, it goes through the same process as the graphics card, to compute the final position of a rendered point.
+
+Initially, both coordinate systems (world units and target pixels) match perfectly. But if you define a custom view or resize your render target, this assertion is not true anymore, i.\+e. a point located at (150, 75) in your 2D world may map to the pixel (10, 50) of your render target -- if the view is translated by (140, 25).
+
+This version uses a custom view for calculations, see the other overload of the function if you want to use the current view of the render target.
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & Point to convert \\
+\hline
+{\em view} & The view to use for converting the point\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The converted point, in target coordinates (pixels)
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1RenderTarget_a0103ebebafa43a97e6e6414f8560d5e3}{map\+Pixel\+To\+Coords} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1RenderTarget_a0103ebebafa43a97e6e6414f8560d5e3}\index{sf::RenderTarget@{sf::RenderTarget}!mapPixelToCoords@{mapPixelToCoords}}
+\index{mapPixelToCoords@{mapPixelToCoords}!sf::RenderTarget@{sf::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{mapPixelToCoords()}{mapPixelToCoords()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classsf_1_1RenderTarget_a0103ebebafa43a97e6e6414f8560d5e3} 
+\mbox{\hyperlink{classsf_1_1Vector2}{Vector2f}} sf\+::\+Render\+Target\+::map\+Pixel\+To\+Coords (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classsf_1_1Vector2}{Vector2i}} \&}]{point}{}\end{DoxyParamCaption}) const}
+
+
+
+Convert a point from target coordinates to world coordinates, using the current view. 
+
+This function is an overload of the map\+Pixel\+To\+Coords function that implicitly uses the current view. It is equivalent to\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{target.mapPixelToCoords(point,\ target.getView());}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & Pixel to convert\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The converted point, in "{}world"{} coordinates
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1RenderTarget_ad92a9f0283aa5f3f67e473c1105b68cf}{map\+Coords\+To\+Pixel} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1RenderTarget_a2d3e9d7c4a1f5ea7e52b06f53e3011f9}\index{sf::RenderTarget@{sf::RenderTarget}!mapPixelToCoords@{mapPixelToCoords}}
+\index{mapPixelToCoords@{mapPixelToCoords}!sf::RenderTarget@{sf::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{mapPixelToCoords()}{mapPixelToCoords()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classsf_1_1RenderTarget_a2d3e9d7c4a1f5ea7e52b06f53e3011f9} 
+\mbox{\hyperlink{classsf_1_1Vector2}{Vector2f}} sf\+::\+Render\+Target\+::map\+Pixel\+To\+Coords (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classsf_1_1Vector2}{Vector2i}} \&}]{point}{, }\item[{const \mbox{\hyperlink{classsf_1_1View}{View}} \&}]{view}{}\end{DoxyParamCaption}) const}
+
+
+
+Convert a point from target coordinates to world coordinates. 
+
+This function finds the 2D position that matches the given pixel of the render target. In other words, it does the inverse of what the graphics card does, to find the initial position of a rendered pixel.
+
+Initially, both coordinate systems (world units and target pixels) match perfectly. But if you define a custom view or resize your render target, this assertion is not true anymore, i.\+e. a point located at (10, 50) in your render target may map to the point (150, 75) in your 2D world -- if the view is translated by (140, 25).
+
+For render-\/windows, this function is typically used to find which point (or object) is located below the mouse cursor.
+
+This version uses a custom view for calculations, see the other overload of the function if you want to use the current view of the render target.
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & Pixel to convert \\
+\hline
+{\em view} & The view to use for converting the point\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The converted point, in "{}world"{} units
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1RenderTarget_ad92a9f0283aa5f3f67e473c1105b68cf}{map\+Coords\+To\+Pixel} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1RenderTarget_ad5a98401113df931ddcd54c080f7aa8e}\index{sf::RenderTarget@{sf::RenderTarget}!popGLStates@{popGLStates}}
+\index{popGLStates@{popGLStates}!sf::RenderTarget@{sf::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{popGLStates()}{popGLStates()}}
+{\footnotesize\ttfamily \label{classsf_1_1RenderTarget_ad5a98401113df931ddcd54c080f7aa8e} 
+void sf\+::\+Render\+Target\+::pop\+GLStates (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Restore the previously saved Open\+GL render states and matrices. 
+
+See the description of push\+GLStates to get a detailed description of these functions.
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1RenderTarget_a8d1998464ccc54e789aaf990242b47f7}{push\+GLStates} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1RenderTarget_a8d1998464ccc54e789aaf990242b47f7}\index{sf::RenderTarget@{sf::RenderTarget}!pushGLStates@{pushGLStates}}
+\index{pushGLStates@{pushGLStates}!sf::RenderTarget@{sf::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{pushGLStates()}{pushGLStates()}}
+{\footnotesize\ttfamily \label{classsf_1_1RenderTarget_a8d1998464ccc54e789aaf990242b47f7} 
+void sf\+::\+Render\+Target\+::push\+GLStates (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Save the current Open\+GL render states and matrices. 
+
+This function can be used when you mix SFML drawing and direct Open\+GL rendering. Combined with pop\+GLStates, it ensures that\+: \begin{DoxyItemize}
+\item SFML\textquotesingle{}s internal states are not messed up by your Open\+GL code \item your Open\+GL states are not modified by a call to a SFML function\end{DoxyItemize}
+More specifically, it must be used around code that calls Draw functions. Example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ OpenGL\ code\ here...}}
+\DoxyCodeLine{window.pushGLStates();}
+\DoxyCodeLine{window.draw(...);}
+\DoxyCodeLine{window.draw(...);}
+\DoxyCodeLine{window.popGLStates();}
+\DoxyCodeLine{\textcolor{comment}{//\ OpenGL\ code\ here...}}
+
+\end{DoxyCode}
+
+
+Note that this function is quite expensive\+: it saves all the possible Open\+GL states and matrices, even the ones you don\textquotesingle{}t care about. Therefore it should be used wisely. It is provided for convenience, but the best results will be achieved if you handle Open\+GL states yourself (because you know which states have really changed, and need to be saved and restored). Take a look at the reset\+GLStates function if you do so.
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1RenderTarget_ad5a98401113df931ddcd54c080f7aa8e}{pop\+GLStates} 
+\end{DoxySeeAlso}
+\Hypertarget{classsf_1_1RenderTarget_aac7504990d27dada4bfe3c7866920765}\index{sf::RenderTarget@{sf::RenderTarget}!resetGLStates@{resetGLStates}}
+\index{resetGLStates@{resetGLStates}!sf::RenderTarget@{sf::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{resetGLStates()}{resetGLStates()}}
+{\footnotesize\ttfamily \label{classsf_1_1RenderTarget_aac7504990d27dada4bfe3c7866920765} 
+void sf\+::\+Render\+Target\+::reset\+GLStates (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Reset the internal Open\+GL states so that the target is ready for drawing. 
+
+This function can be used when you mix SFML drawing and direct Open\+GL rendering, if you choose not to use push\+GLStates/pop\+GLStates. It makes sure that all Open\+GL states needed by SFML are set, so that subsequent \doxylink{classsf_1_1RenderTarget_a12417a3bcc245c41d957b29583556f39}{draw()} calls will work as expected.
+
+Example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ OpenGL\ code\ here...}}
+\DoxyCodeLine{glPushAttrib(...);}
+\DoxyCodeLine{window.resetGLStates();}
+\DoxyCodeLine{window.draw(...);}
+\DoxyCodeLine{window.draw(...);}
+\DoxyCodeLine{glPopAttrib(...);}
+\DoxyCodeLine{\textcolor{comment}{//\ OpenGL\ code\ here...}}
+
+\end{DoxyCode}
+ \Hypertarget{classsf_1_1RenderTarget_a86f66ad60dd65ede0d00bb3090c12484}\index{sf::RenderTarget@{sf::RenderTarget}!setActive@{setActive}}
+\index{setActive@{setActive}!sf::RenderTarget@{sf::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{setActive()}{setActive()}}
+{\footnotesize\ttfamily \label{classsf_1_1RenderTarget_a86f66ad60dd65ede0d00bb3090c12484} 
+bool sf\+::\+Render\+Target\+::set\+Active (\begin{DoxyParamCaption}\item[{bool}]{active}{ = {\ttfamily true}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Activate or deactivate the render target for rendering. 
+
+This function makes the render target\textquotesingle{}s context current for future Open\+GL rendering operations (so you shouldn\textquotesingle{}t care about it if you\textquotesingle{}re not doing direct Open\+GL stuff). A render target\textquotesingle{}s context is active only on the current thread, if you want to make it active on another thread you have to deactivate it on the previous thread first if it was active. Only one context can be current in a thread, so if you want to draw Open\+GL geometry to another render target don\textquotesingle{}t forget to activate it again. Activating a render target will automatically deactivate the previously active context (if any).
+
+
+\begin{DoxyParams}{Parameters}
+{\em active} & True to activate, false to deactivate\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if operation was successful, false otherwise 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classsf_1_1RenderTexture_a5da95ecdbce615a80bb78399012508cf}{sf\+::\+Render\+Texture}}, and \mbox{\hyperlink{classsf_1_1RenderWindow_aee6c53eced675e885931eb3e91f11155}{sf\+::\+Render\+Window}}.
+
+\Hypertarget{classsf_1_1RenderTarget_a063db6dd0a14913504af30e50cb6d946}\index{sf::RenderTarget@{sf::RenderTarget}!setView@{setView}}
+\index{setView@{setView}!sf::RenderTarget@{sf::RenderTarget}}
+\doxysubsubsection{\texorpdfstring{setView()}{setView()}}
+{\footnotesize\ttfamily \label{classsf_1_1RenderTarget_a063db6dd0a14913504af30e50cb6d946} 
+void sf\+::\+Render\+Target\+::set\+View (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classsf_1_1View}{View}} \&}]{view}{}\end{DoxyParamCaption})}
+
+
+
+Change the current active view. 
+
+The view is like a 2D camera, it controls which part of the 2D scene is visible, and how it is viewed in the render target. The new view will affect everything that is drawn, until another view is set. The render target keeps its own copy of the view object, so it is not necessary to keep the original one alive after calling this function. To restore the original view of the target, you can pass the result of \doxylink{classsf_1_1RenderTarget_a7741129e3ef7ab4f0a40024fca13480c}{get\+Default\+View()} to this function.
+
+
+\begin{DoxyParams}{Parameters}
+{\em view} & New view to use\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1RenderTarget_adbf8dc5a1f4abbe15a3fbb915844c7ea}{get\+View}, \doxylink{classsf_1_1RenderTarget_a7741129e3ef7ab4f0a40024fca13480c}{get\+Default\+View} 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/include/\+SFML/\+Graphics/Render\+Target.\+hpp\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+Graphics/Render\+Target.\+cpp\end{DoxyCompactItemize}

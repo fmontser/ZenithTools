@@ -1,0 +1,116 @@
+\doxysection{sf\+::Drawable Class Reference}
+\hypertarget{classsf_1_1Drawable}{}\label{classsf_1_1Drawable}\index{sf::Drawable@{sf::Drawable}}
+
+
+Abstract base class for objects that can be drawn to a render target.  
+
+
+
+
+{\ttfamily \#include $<$Drawable.\+hpp$>$}
+
+
+
+Inheritance diagram for sf\+::Drawable\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsf_1_1Drawable__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classsf_1_1Drawable_a906002f2df7beb5edbddf5bbef96f120}\label{classsf_1_1Drawable_a906002f2df7beb5edbddf5bbef96f120} 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Drawable} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classsf_1_1Drawable_a90d2c88bba9b035a0844eccb380ef631}{draw}} (\mbox{\hyperlink{classsf_1_1RenderTarget}{Render\+Target}} \&target, \mbox{\hyperlink{classsf_1_1RenderStates}{Render\+States}} states) const =0
+\begin{DoxyCompactList}\small\item\em Draw the object to a render target. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classsf_1_1Drawable_aa5afc6f82b7b587ed5ada4d227ce32aa}\label{classsf_1_1Drawable_aa5afc6f82b7b587ed5ada4d227ce32aa} 
+class {\bfseries Render\+Target}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Abstract base class for objects that can be drawn to a render target. 
+
+\doxylink{classsf_1_1Drawable}{sf\+::\+Drawable} is a very simple base class that allows objects of derived classes to be drawn to a \doxylink{classsf_1_1RenderTarget}{sf\+::\+Render\+Target}.
+
+All you have to do in your derived class is to override the draw virtual function.
+
+Note that inheriting from \doxylink{classsf_1_1Drawable}{sf\+::\+Drawable} is not mandatory, but it allows this nice syntax "{}window.\+draw(object)"{} rather than "{}object.\+draw(window)"{}, which is more consistent with other SFML classes.
+
+Example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class\ }MyDrawable\ :\ \textcolor{keyword}{public}\ sf::Drawable}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ ...}
+\DoxyCodeLine{}
+\DoxyCodeLine{private:}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ draw(sf::RenderTarget\&\ target,\ sf::RenderStates\ states)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ You\ can\ draw\ other\ high-\/level\ objects}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ target.\mbox{\hyperlink{classsf_1_1RenderTarget_a12417a3bcc245c41d957b29583556f39}{draw}}(m\_sprite,\ states);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ ...\ or\ use\ the\ low-\/level\ API}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ states.\mbox{\hyperlink{classsf_1_1RenderStates_a457fc5a41731889de9cf39cf9b3436c3}{texture}}\ =\ \&m\_texture;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ target.\mbox{\hyperlink{classsf_1_1RenderTarget_a12417a3bcc245c41d957b29583556f39}{draw}}(m\_vertices,\ states);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ ...\ or\ draw\ with\ OpenGL\ directly}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ glBegin(GL\_QUADS);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ...}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ glEnd();}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ sf::Sprite\ m\_sprite;}
+\DoxyCodeLine{\ \ \ \ sf::Texture\ m\_texture;}
+\DoxyCodeLine{\ \ \ \ sf::VertexArray\ m\_vertices;}
+\DoxyCodeLine{\};}
+
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classsf_1_1RenderTarget}{sf\+::\+Render\+Target} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsf_1_1Drawable_a90d2c88bba9b035a0844eccb380ef631}\index{sf::Drawable@{sf::Drawable}!draw@{draw}}
+\index{draw@{draw}!sf::Drawable@{sf::Drawable}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily \label{classsf_1_1Drawable_a90d2c88bba9b035a0844eccb380ef631} 
+virtual void sf\+::\+Drawable\+::draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classsf_1_1RenderTarget}{Render\+Target}} \&}]{target}{, }\item[{\mbox{\hyperlink{classsf_1_1RenderStates}{Render\+States}}}]{states}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Draw the object to a render target. 
+
+This is a pure virtual function that has to be implemented by the derived class to define how the drawable should be drawn.
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & Render target to draw to \\
+\hline
+{\em states} & Current render states \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classEffect_a6a3a393e127581c7f84e1278b5be0438}{Effect}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/include/\+SFML/\+Graphics/Drawable.\+hpp\end{DoxyCompactItemize}

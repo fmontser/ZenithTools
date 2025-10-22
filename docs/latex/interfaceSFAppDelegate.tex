@@ -1,0 +1,214 @@
+\doxysection{SFApp\+Delegate Class Reference}
+\hypertarget{interfaceSFAppDelegate}{}\label{interfaceSFAppDelegate}\index{SFAppDelegate@{SFAppDelegate}}
+
+
+Our custom application delegate.  
+
+
+
+
+{\ttfamily \#include $<$SFApp\+Delegate.\+hpp$>$}
+
+
+
+Inheritance diagram for SFApp\+Delegate\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=282pt]{interfaceSFAppDelegate__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for SFApp\+Delegate\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{interfaceSFAppDelegate__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \mbox{\hyperlink{interfaceSFAppDelegate_a58316632b8d285c95f15a2c417a0bb1b}{set\+Virtual\+Keyboard\+Visible\+:}}
+\begin{DoxyCompactList}\small\item\em Show or hide the virtual keyboard. \end{DoxyCompactList}\item 
+(\mbox{\hyperlink{classsf_1_1Vector2}{sf\+::\+Vector2i}}) -\/ \mbox{\hyperlink{interfaceSFAppDelegate_aaaed0d1b13a2954b69edfb748f901393}{get\+Touch\+Position\+:}}
+\begin{DoxyCompactList}\small\item\em Get the current touch position for a given finger. \end{DoxyCompactList}\item 
+(void) -\/ \mbox{\hyperlink{interfaceSFAppDelegate_afdaac71e2253e5a487a5421103fff075}{notify\+Touch\+Begin\+:at\+Position\+:}}
+\begin{DoxyCompactList}\small\item\em Receive an external touch begin notification. \end{DoxyCompactList}\item 
+(void) -\/ \mbox{\hyperlink{interfaceSFAppDelegate_aea15ee3c44770335765abb36adc28926}{notify\+Touch\+Move\+:at\+Position\+:}}
+\begin{DoxyCompactList}\small\item\em Receive an external touch move notification. \end{DoxyCompactList}\item 
+(void) -\/ \mbox{\hyperlink{interfaceSFAppDelegate_adb08d0c18a7c9899b7c63c50a16902be}{notify\+Touch\+End\+:at\+Position\+:}}
+\begin{DoxyCompactList}\small\item\em Receive an external touch end notification. \end{DoxyCompactList}\item 
+(void) -\/ \mbox{\hyperlink{interfaceSFAppDelegate_abe947106290fd4ecf627ac11e2b0c094}{notify\+Character\+:}}
+\begin{DoxyCompactList}\small\item\em Receive an external character notification. \end{DoxyCompactList}\item 
+(bool) -\/ \mbox{\hyperlink{interfaceSFAppDelegate_a49028aafea4d53f4314a936e80efe0b7}{needs\+To\+Flip\+Frame\+For\+Orientation\+:}}
+\begin{DoxyCompactList}\small\item\em Tells if the dimensions of the current window must be flipped when switching to a given orientation. \end{DoxyCompactList}\item 
+(bool) -\/ \mbox{\hyperlink{interfaceSFAppDelegate_a28ad842cabfa79ab824f8bbdb24f7069}{supports\+Orientation\+:}}
+\begin{DoxyCompactList}\small\item\em Tells if app and view support a requested device orientation or not. \end{DoxyCompactList}\item 
+\Hypertarget{interfaceSFAppDelegate_aa1906a9b4fa8e0cc7b216b286b91f5b9}\label{interfaceSFAppDelegate_aa1906a9b4fa8e0cc7b216b286b91f5b9} 
+(void) -\/ {\bfseries init\+Backing\+Scale}
+\begin{DoxyCompactList}\small\item\em Initializes the factor which is required to convert from points to pixels and back. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{interfaceSFAppDelegate_a867bb51c775b400f3b6f7b7e4dec3ad7}\label{interfaceSFAppDelegate_a867bb51c775b400f3b6f7b7e4dec3ad7} 
+(\mbox{\hyperlink{interfaceSFAppDelegate}{SFApp\+Delegate}} \texorpdfstring{$\ast$}{*}) + {\bfseries get\+Instance}
+\begin{DoxyCompactList}\small\item\em Return the instance of the application delegate. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{interfaceSFAppDelegate_a81b0088db8f240f8f00c67cbe72e11ec}\label{interfaceSFAppDelegate_a81b0088db8f240f8f00c67cbe72e11ec} 
+\mbox{\hyperlink{classsf_1_1priv_1_1WindowImplUIKit}{sf\+::priv\+::\+Window\+Impl\+UIKit}} \texorpdfstring{$\ast$}{*} {\bfseries sf\+Window}
+\begin{DoxyCompactList}\small\item\em Main window of the application. \end{DoxyCompactList}\item 
+\Hypertarget{interfaceSFAppDelegate_a6052afdf876b8caa6eacd1211c61e851}\label{interfaceSFAppDelegate_a6052afdf876b8caa6eacd1211c61e851} 
+CMMotion\+Manager \texorpdfstring{$\ast$}{*} {\bfseries motion\+Manager}
+\begin{DoxyCompactList}\small\item\em Instance of the motion manager. \end{DoxyCompactList}\item 
+\Hypertarget{interfaceSFAppDelegate_a12678724701055536e81bc06d7b10f1f}\label{interfaceSFAppDelegate_a12678724701055536e81bc06d7b10f1f} 
+CGFloat {\bfseries backing\+Scale\+Factor}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Our custom application delegate. 
+
+This class handles global application events. 
+
+\doxysubsection{Method Documentation}
+\Hypertarget{interfaceSFAppDelegate_aaaed0d1b13a2954b69edfb748f901393}\index{SFAppDelegate@{SFAppDelegate}!getTouchPosition:@{getTouchPosition:}}
+\index{getTouchPosition:@{getTouchPosition:}!SFAppDelegate@{SFAppDelegate}}
+\doxysubsubsection{\texorpdfstring{getTouchPosition:}{getTouchPosition:}}
+{\footnotesize\ttfamily \label{interfaceSFAppDelegate_aaaed0d1b13a2954b69edfb748f901393} 
+-\/ (Vector2i) SFApp\+Delegate\+: \begin{DoxyParamCaption}\item[{(unsigned int)}]{index}{}\end{DoxyParamCaption}}
+
+
+
+Get the current touch position for a given finger. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Finger index\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Current touch position, or (-\/1, -\/1) if no touch 
+\end{DoxyReturn}
+\Hypertarget{interfaceSFAppDelegate_a49028aafea4d53f4314a936e80efe0b7}\index{SFAppDelegate@{SFAppDelegate}!needsToFlipFrameForOrientation:@{needsToFlipFrameForOrientation:}}
+\index{needsToFlipFrameForOrientation:@{needsToFlipFrameForOrientation:}!SFAppDelegate@{SFAppDelegate}}
+\doxysubsubsection{\texorpdfstring{needsToFlipFrameForOrientation:}{needsToFlipFrameForOrientation:}}
+{\footnotesize\ttfamily \label{interfaceSFAppDelegate_a49028aafea4d53f4314a936e80efe0b7} 
+-\/ (bool) needs\+To\+Flip\+Frame\+For\+Orientation\+: \begin{DoxyParamCaption}\item[{(UIDevice\+Orientation)}]{orientation}{}\end{DoxyParamCaption}}
+
+
+
+Tells if the dimensions of the current window must be flipped when switching to a given orientation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em orientation} & the device has changed to \\
+\hline
+\end{DoxyParams}
+\Hypertarget{interfaceSFAppDelegate_abe947106290fd4ecf627ac11e2b0c094}\index{SFAppDelegate@{SFAppDelegate}!notifyCharacter:@{notifyCharacter:}}
+\index{notifyCharacter:@{notifyCharacter:}!SFAppDelegate@{SFAppDelegate}}
+\doxysubsubsection{\texorpdfstring{notifyCharacter:}{notifyCharacter:}}
+{\footnotesize\ttfamily \label{interfaceSFAppDelegate_abe947106290fd4ecf627ac11e2b0c094} 
+-\/ (void) notify\+Character\+: \begin{DoxyParamCaption}\item[{(sf\+::\+Uint32)}]{character}{}\end{DoxyParamCaption}}
+
+
+
+Receive an external character notification. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em character} & The typed character \\
+\hline
+\end{DoxyParams}
+\Hypertarget{interfaceSFAppDelegate_afdaac71e2253e5a487a5421103fff075}\index{SFAppDelegate@{SFAppDelegate}!notifyTouchBegin:atPosition:@{notifyTouchBegin:atPosition:}}
+\index{notifyTouchBegin:atPosition:@{notifyTouchBegin:atPosition:}!SFAppDelegate@{SFAppDelegate}}
+\doxysubsubsection{\texorpdfstring{notifyTouchBegin:atPosition:}{notifyTouchBegin:atPosition:}}
+{\footnotesize\ttfamily \label{interfaceSFAppDelegate_afdaac71e2253e5a487a5421103fff075} 
+-\/ (void) notify\+Touch\+Begin\+: \begin{DoxyParamCaption}\item[{(unsigned int)}]{index}{}\item[{at\+Position\+:(\mbox{\hyperlink{classsf_1_1Vector2}{sf\+::\+Vector2i}})}]{position}{}\end{DoxyParamCaption}}
+
+
+
+Receive an external touch begin notification. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Finger index \\
+\hline
+{\em position} & Position of the touch \\
+\hline
+\end{DoxyParams}
+\Hypertarget{interfaceSFAppDelegate_adb08d0c18a7c9899b7c63c50a16902be}\index{SFAppDelegate@{SFAppDelegate}!notifyTouchEnd:atPosition:@{notifyTouchEnd:atPosition:}}
+\index{notifyTouchEnd:atPosition:@{notifyTouchEnd:atPosition:}!SFAppDelegate@{SFAppDelegate}}
+\doxysubsubsection{\texorpdfstring{notifyTouchEnd:atPosition:}{notifyTouchEnd:atPosition:}}
+{\footnotesize\ttfamily \label{interfaceSFAppDelegate_adb08d0c18a7c9899b7c63c50a16902be} 
+-\/ (void) notify\+Touch\+End\+: \begin{DoxyParamCaption}\item[{(unsigned int)}]{index}{}\item[{at\+Position\+:(\mbox{\hyperlink{classsf_1_1Vector2}{sf\+::\+Vector2i}})}]{position}{}\end{DoxyParamCaption}}
+
+
+
+Receive an external touch end notification. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Finger index \\
+\hline
+{\em position} & Position of the touch \\
+\hline
+\end{DoxyParams}
+\Hypertarget{interfaceSFAppDelegate_aea15ee3c44770335765abb36adc28926}\index{SFAppDelegate@{SFAppDelegate}!notifyTouchMove:atPosition:@{notifyTouchMove:atPosition:}}
+\index{notifyTouchMove:atPosition:@{notifyTouchMove:atPosition:}!SFAppDelegate@{SFAppDelegate}}
+\doxysubsubsection{\texorpdfstring{notifyTouchMove:atPosition:}{notifyTouchMove:atPosition:}}
+{\footnotesize\ttfamily \label{interfaceSFAppDelegate_aea15ee3c44770335765abb36adc28926} 
+-\/ (void) notify\+Touch\+Move\+: \begin{DoxyParamCaption}\item[{(unsigned int)}]{index}{}\item[{at\+Position\+:(\mbox{\hyperlink{classsf_1_1Vector2}{sf\+::\+Vector2i}})}]{position}{}\end{DoxyParamCaption}}
+
+
+
+Receive an external touch move notification. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Finger index \\
+\hline
+{\em position} & Position of the touch \\
+\hline
+\end{DoxyParams}
+\Hypertarget{interfaceSFAppDelegate_a58316632b8d285c95f15a2c417a0bb1b}\index{SFAppDelegate@{SFAppDelegate}!setVirtualKeyboardVisible:@{setVirtualKeyboardVisible:}}
+\index{setVirtualKeyboardVisible:@{setVirtualKeyboardVisible:}!SFAppDelegate@{SFAppDelegate}}
+\doxysubsubsection{\texorpdfstring{setVirtualKeyboardVisible:}{setVirtualKeyboardVisible:}}
+{\footnotesize\ttfamily \label{interfaceSFAppDelegate_a58316632b8d285c95f15a2c417a0bb1b} 
+-\/ (void) set\+Virtual\+Keyboard\+Visible\+: \begin{DoxyParamCaption}\item[{(bool)}]{visible}{}\end{DoxyParamCaption}}
+
+
+
+Show or hide the virtual keyboard. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em visible} & True to show, false to hide \\
+\hline
+\end{DoxyParams}
+\Hypertarget{interfaceSFAppDelegate_a28ad842cabfa79ab824f8bbdb24f7069}\index{SFAppDelegate@{SFAppDelegate}!supportsOrientation:@{supportsOrientation:}}
+\index{supportsOrientation:@{supportsOrientation:}!SFAppDelegate@{SFAppDelegate}}
+\doxysubsubsection{\texorpdfstring{supportsOrientation:}{supportsOrientation:}}
+{\footnotesize\ttfamily \label{interfaceSFAppDelegate_a28ad842cabfa79ab824f8bbdb24f7069} 
+-\/ (bool) supports\+Orientation\+: \begin{DoxyParamCaption}\item[{(UIDevice\+Orientation)}]{orientation}{}\end{DoxyParamCaption}}
+
+
+
+Tells if app and view support a requested device orientation or not. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em orientation} & the device has changed to \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+Window/i\+OS/SFApp\+Delegate.\+hpp\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+Window/i\+OS/SFApp\+Delegate.\+mm\end{DoxyCompactItemize}

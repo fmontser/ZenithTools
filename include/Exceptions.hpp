@@ -7,8 +7,8 @@ namespace zenith {
 		NotImplementedException();
 	};
 
-	struct InvalidStateException : public std::logic_error {
-		InvalidStateException();
+	struct InvalidModeException : public std::logic_error {
+		InvalidModeException();
 	};
 
 }

@@ -1,0 +1,61 @@
+\doxysection{Pomodoro\+Session.\+hpp}
+\hypertarget{PomodoroSession_8hpp_source}{}\label{PomodoroSession_8hpp_source}\index{include/PomodoroSession.hpp@{include/PomodoroSession.hpp}}
+\mbox{\hyperlink{PomodoroSession_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Timer_8hpp}{Timer.hpp}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }zenith\ \{}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classzenith_1_1PomodoroSession_aadd31a773844890abbe54152847889eb}{PomodoroSession}}\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{classzenith_1_1PomodoroSession_ab11f87b6463d1b396489e79f4e7746ac}{RoundMode}}\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ IDLE,\ WORKING,\ RESTING,\ COMPLETED}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }Round\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzenith_1_1Timer}{Timer}}\ workTimer;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzenith_1_1Timer}{Timer}}\ restTimer;}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ progress\ =\ 0.0f;}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzenith_1_1PomodoroSession_ab11f87b6463d1b396489e79f4e7746ac}{RoundMode}}\ mode\ =\ RoundMode::IDLE;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Round(\mbox{\hyperlink{classzenith_1_1Timer}{Timer}}\ workTimer,\ \mbox{\hyperlink{classzenith_1_1Timer}{Timer}}\ restTimer)}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ workTimer(workTimer),\ restTimer(restTimer)\ \{\}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{classzenith_1_1PomodoroSession_a56764997fa4ae0e26f486c51327fad06}{Mode}}\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ IDLE,\ ONGOING,\ COMPLETED}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structzenith_1_1PomodoroSession_1_1Status}{Status}}\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzenith_1_1PomodoroSession_a56764997fa4ae0e26f486c51327fad06}{Mode}}\ mode\ =\ Mode::IDLE;}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzenith_1_1PomodoroSession_aadd31a773844890abbe54152847889eb}{PomodoroSession}}(uint\ rounds,\ \mbox{\hyperlink{Timer_8hpp_a5e6c50203625681fded15903008539fa}{Seconds}}\ workTime,}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{Timer_8hpp_a5e6c50203625681fded15903008539fa}{Seconds}}\ restTime,\ \mbox{\hyperlink{Timer_8hpp_a5e6c50203625681fded15903008539fa}{Seconds}}\ largeRestTime);}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structzenith_1_1PomodoroSession_1_1Status}{Status}}\&\ \mbox{\hyperlink{classzenith_1_1PomodoroSession_ad367586835a2661e740a2a2dcbaa585c}{GetStatus}}();}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classzenith_1_1PomodoroSession_a9d135fbb2acdbaa923e0f7ab395d309c}{StartActualRound}}();}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classzenith_1_1PomodoroSession_a3084f65cacc7b1e48be112b13e3e0d2e}{StartRestingPeriod}}();}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structzenith_1_1PomodoroSession_1_1Status}{Status}}\ \_status;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ std::queue<Round>\ \_roundQueue;\ \ }
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetNextRound();}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ UpdateRound();}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ IsHalfSessionRound(uint\ rounds,\ uint\ index);}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ \};}
+\DoxyCodeLine{00105\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,838 @@
+\doxysection{ftheader.\+h}
+\hypertarget{ftheader_8h_source}{}\label{ftheader_8h_source}\index{build/\_deps/sfml-\/src/extlibs/headers/freetype2/config/ftheader.h@{build/\_deps/sfml-\/src/extlibs/headers/freetype2/config/ftheader.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00003\ \textcolor{comment}{/*\ \ ftheader.h\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00005\ \textcolor{comment}{/*\ \ \ \ Build\ macros\ of\ the\ FreeType\ 2\ library.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00007\ \textcolor{comment}{/*\ \ Copyright\ 1996-\/2008,\ 2010,\ 2012,\ 2013\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ \ David\ Turner,\ Robert\ Wilhelm,\ and\ Werner\ Lemberg.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00010\ \textcolor{comment}{/*\ \ This\ file\ is\ part\ of\ the\ FreeType\ project,\ and\ may\ only\ be\ used,\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*\ \ modified,\ and\ distributed\ under\ the\ terms\ of\ the\ FreeType\ project\ \ \ \ \ \ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*\ \ license,\ LICENSE.TXT.\ \ By\ continuing\ to\ use,\ modify,\ or\ distribute\ \ \ \ \ */}}
+\DoxyCodeLine{00013\ \textcolor{comment}{/*\ \ this\ file\ you\ indicate\ that\ you\ have\ read\ the\ license\ and\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00014\ \textcolor{comment}{/*\ \ understand\ and\ accept\ it\ fully.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00015\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00016\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#ifndef\ \_\_FT\_HEADER\_H\_\_}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ \_\_FT\_HEADER\_H\_\_}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \textcolor{comment}{/*@***********************************************************************/}}
+\DoxyCodeLine{00023\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00024\ \ \ \textcolor{comment}{/*\ <Macro>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00025\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_BEGIN\_HEADER\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00026\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00027\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00028\ \ \ \textcolor{comment}{/*\ \ \ \ This\ macro\ is\ used\ in\ association\ with\ @FT\_END\_HEADER\ in\ header\ \ \ \ */}}
+\DoxyCodeLine{00029\ \ \ \textcolor{comment}{/*\ \ \ \ files\ to\ ensure\ that\ the\ declarations\ within\ are\ properly\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00030\ \ \ \textcolor{comment}{/*\ \ \ \ encapsulated\ in\ an\ \`{}extern\ "{}C"{}\ \{\ ..\ \}'\ block\ when\ included\ from\ a\ \ */}}
+\DoxyCodeLine{00031\ \ \ \textcolor{comment}{/*\ \ \ \ C++\ compiler.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00032\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ FT\_BEGIN\_HEADER\ \ extern\ "{}C"{}\ \{}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ FT\_BEGIN\_HEADER\ \ }\textcolor{comment}{/*\ nothing\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \textcolor{comment}{/*@***********************************************************************/}}
+\DoxyCodeLine{00041\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00042\ \ \ \textcolor{comment}{/*\ <Macro>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00043\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_END\_HEADER\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00044\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00045\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00046\ \ \ \textcolor{comment}{/*\ \ \ \ This\ macro\ is\ used\ in\ association\ with\ @FT\_BEGIN\_HEADER\ in\ header\ \ */}}
+\DoxyCodeLine{00047\ \ \ \textcolor{comment}{/*\ \ \ \ files\ to\ ensure\ that\ the\ declarations\ within\ are\ properly\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00048\ \ \ \textcolor{comment}{/*\ \ \ \ encapsulated\ in\ an\ \`{}extern\ "{}C"{}\ \{\ ..\ \}'\ block\ when\ included\ from\ a\ \ */}}
+\DoxyCodeLine{00049\ \ \ \textcolor{comment}{/*\ \ \ \ C++\ compiler.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00050\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ FT\_END\_HEADER\ \ \}}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ FT\_END\_HEADER\ \ }\textcolor{comment}{/*\ nothing\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00059\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00060\ \ \ \textcolor{comment}{/*\ Aliases\ for\ the\ FreeType\ 2\ public\ and\ configuration\ files.\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00061\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00062\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00065\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00066\ \ \ \textcolor{comment}{/*\ <Section>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00067\ \ \ \textcolor{comment}{/*\ \ \ \ header\_file\_macros\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00068\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00069\ \ \ \textcolor{comment}{/*\ <Title>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00070\ \ \ \textcolor{comment}{/*\ \ \ \ Header\ File\ Macros\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00071\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00072\ \ \ \textcolor{comment}{/*\ <Abstract>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00073\ \ \ \textcolor{comment}{/*\ \ \ \ Macro\ definitions\ used\ to\ \#include\ specific\ header\ files.\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00074\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00075\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00076\ \ \ \textcolor{comment}{/*\ \ \ \ The\ following\ macros\ are\ defined\ to\ the\ name\ of\ specific\ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00077\ \ \ \textcolor{comment}{/*\ \ \ \ FreeType\string~2\ header\ files.\ \ They\ can\ be\ used\ directly\ in\ \#include\ \ \ \ */}}
+\DoxyCodeLine{00078\ \ \ \textcolor{comment}{/*\ \ \ \ statements\ as\ in:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00079\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00080\ \ \ \textcolor{comment}{/*\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00081\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \#include\ FT\_FREETYPE\_H\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00082\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \#include\ FT\_MULTIPLE\_MASTERS\_H\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00083\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \#include\ FT\_GLYPH\_H\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00084\ \ \ \textcolor{comment}{/*\ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00085\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00086\ \ \ \textcolor{comment}{/*\ \ \ \ There\ are\ several\ reasons\ why\ we\ are\ now\ using\ macros\ to\ name\ \ \ \ \ \ */}}
+\DoxyCodeLine{00087\ \ \ \textcolor{comment}{/*\ \ \ \ public\ header\ files.\ \ The\ first\ one\ is\ that\ such\ macros\ are\ not\ \ \ \ */}}
+\DoxyCodeLine{00088\ \ \ \textcolor{comment}{/*\ \ \ \ limited\ to\ the\ infamous\ 8.3\string~naming\ rule\ required\ by\ DOS\ (and\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00089\ \ \ \textcolor{comment}{/*\ \ \ \ \`{}FT\_MULTIPLE\_MASTERS\_H'\ is\ a\ lot\ more\ meaningful\ than\ \`{}ftmm.h').\ \ \ */}}
+\DoxyCodeLine{00090\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00091\ \ \ \textcolor{comment}{/*\ \ \ \ The\ second\ reason\ is\ that\ it\ allows\ for\ more\ flexibility\ in\ the\ \ \ \ */}}
+\DoxyCodeLine{00092\ \ \ \textcolor{comment}{/*\ \ \ \ way\ FreeType\string~2\ is\ installed\ on\ a\ given\ system.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00093\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00094\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \textcolor{comment}{/*\ configuration\ files\ */}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00100\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00101\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00102\ \textcolor{comment}{\ \ \ *\ \ \ FT\_CONFIG\_CONFIG\_H}}
+\DoxyCodeLine{00103\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00104\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00105\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing}}
+\DoxyCodeLine{00106\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ configuration\ data.}}
+\DoxyCodeLine{00107\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00108\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\#ifndef\ FT\_CONFIG\_CONFIG\_H}}
+\DoxyCodeLine{00110\ \textcolor{preprocessor}{\#define\ FT\_CONFIG\_CONFIG\_H\ \ <config/ftconfig.h>}}
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00115\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00116\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00117\ \textcolor{comment}{\ \ \ *\ \ \ FT\_CONFIG\_STANDARD\_LIBRARY\_H}}
+\DoxyCodeLine{00118\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00119\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00120\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing}}
+\DoxyCodeLine{00121\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ interface\ to\ the\ standard\ C\ library\ functions.}}
+\DoxyCodeLine{00122\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00123\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00124\ \textcolor{preprocessor}{\#ifndef\ FT\_CONFIG\_STANDARD\_LIBRARY\_H}}
+\DoxyCodeLine{00125\ \textcolor{preprocessor}{\#define\ FT\_CONFIG\_STANDARD\_LIBRARY\_H\ \ <config/ftstdlib.h>}}
+\DoxyCodeLine{00126\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00130\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00131\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00132\ \textcolor{comment}{\ \ \ *\ \ \ FT\_CONFIG\_OPTIONS\_H}}
+\DoxyCodeLine{00133\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00134\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00135\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing}}
+\DoxyCodeLine{00136\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ project-\/specific\ configuration\ options.}}
+\DoxyCodeLine{00137\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00138\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00139\ \textcolor{preprocessor}{\#ifndef\ FT\_CONFIG\_OPTIONS\_H}}
+\DoxyCodeLine{00140\ \textcolor{preprocessor}{\#define\ FT\_CONFIG\_OPTIONS\_H\ \ <config/ftoption.h>}}
+\DoxyCodeLine{00141\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00145\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00146\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00147\ \textcolor{comment}{\ \ \ *\ \ \ FT\_CONFIG\_MODULES\_H}}
+\DoxyCodeLine{00148\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00149\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00150\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00151\ \textcolor{comment}{\ \ \ *\ \ \ list\ of\ FreeType\string~2\ modules\ that\ are\ statically\ linked\ to\ new\ library}}
+\DoxyCodeLine{00152\ \textcolor{comment}{\ \ \ *\ \ \ instances\ in\ @FT\_Init\_FreeType.}}
+\DoxyCodeLine{00153\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00154\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00155\ \textcolor{preprocessor}{\#ifndef\ FT\_CONFIG\_MODULES\_H}}
+\DoxyCodeLine{00156\ \textcolor{preprocessor}{\#define\ FT\_CONFIG\_MODULES\_H\ \ <config/ftmodule.h>}}
+\DoxyCodeLine{00157\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \textcolor{comment}{/*\ public\ headers\ */}}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00164\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00165\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00166\ \textcolor{comment}{\ \ \ *\ \ \ FT\_FREETYPE\_H}}
+\DoxyCodeLine{00167\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00168\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00169\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00170\ \textcolor{comment}{\ \ \ *\ \ \ base\ FreeType\string~2\ API.}}
+\DoxyCodeLine{00171\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00172\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00173\ \textcolor{preprocessor}{\#define\ FT\_FREETYPE\_H\ \ <freetype.h>}}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00177\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00178\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00179\ \textcolor{comment}{\ \ \ *\ \ \ FT\_ERRORS\_H}}
+\DoxyCodeLine{00180\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00181\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00182\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00183\ \textcolor{comment}{\ \ \ *\ \ \ list\ of\ FreeType\string~2\ error\ codes\ (and\ messages).}}
+\DoxyCodeLine{00184\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00185\ \textcolor{comment}{\ \ \ *\ \ \ It\ is\ included\ by\ @FT\_FREETYPE\_H.}}
+\DoxyCodeLine{00186\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00187\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00188\ \textcolor{preprocessor}{\#define\ FT\_ERRORS\_H\ \ <fterrors.h>}}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00191\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00192\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00193\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00194\ \textcolor{comment}{\ \ \ *\ \ \ FT\_MODULE\_ERRORS\_H}}
+\DoxyCodeLine{00195\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00196\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00197\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00198\ \textcolor{comment}{\ \ \ *\ \ \ list\ of\ FreeType\string~2\ module\ error\ offsets\ (and\ messages).}}
+\DoxyCodeLine{00199\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00200\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00201\ \textcolor{preprocessor}{\#define\ FT\_MODULE\_ERRORS\_H\ \ <ftmoderr.h>}}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00205\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00206\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00207\ \textcolor{comment}{\ \ \ *\ \ \ FT\_SYSTEM\_H}}
+\DoxyCodeLine{00208\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00209\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00210\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00211\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ interface\ to\ low-\/level\ operations\ (i.e.,\ memory\ management}}
+\DoxyCodeLine{00212\ \textcolor{comment}{\ \ \ *\ \ \ and\ stream\ i/o).}}
+\DoxyCodeLine{00213\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00214\ \textcolor{comment}{\ \ \ *\ \ \ It\ is\ included\ by\ @FT\_FREETYPE\_H.}}
+\DoxyCodeLine{00215\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00216\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00217\ \textcolor{preprocessor}{\#define\ FT\_SYSTEM\_H\ \ <ftsystem.h>}}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00221\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00222\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00223\ \textcolor{comment}{\ \ \ *\ \ \ FT\_IMAGE\_H}}
+\DoxyCodeLine{00224\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00225\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00226\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ type}}
+\DoxyCodeLine{00227\ \textcolor{comment}{\ \ \ *\ \ \ definitions\ related\ to\ glyph\ images\ (i.e.,\ bitmaps,\ outlines,}}
+\DoxyCodeLine{00228\ \textcolor{comment}{\ \ \ *\ \ \ scan-\/converter\ parameters).}}
+\DoxyCodeLine{00229\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00230\ \textcolor{comment}{\ \ \ *\ \ \ It\ is\ included\ by\ @FT\_FREETYPE\_H.}}
+\DoxyCodeLine{00231\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00232\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00233\ \textcolor{preprocessor}{\#define\ FT\_IMAGE\_H\ \ <ftimage.h>}}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00236\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00237\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00238\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00239\ \textcolor{comment}{\ \ \ *\ \ \ FT\_TYPES\_H}}
+\DoxyCodeLine{00240\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00241\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00242\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00243\ \textcolor{comment}{\ \ \ *\ \ \ basic\ data\ types\ defined\ by\ FreeType\string~2.}}
+\DoxyCodeLine{00244\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00245\ \textcolor{comment}{\ \ \ *\ \ \ It\ is\ included\ by\ @FT\_FREETYPE\_H.}}
+\DoxyCodeLine{00246\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00247\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00248\ \textcolor{preprocessor}{\#define\ FT\_TYPES\_H\ \ <fttypes.h>}}
+\DoxyCodeLine{00249\ }
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00251\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00252\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00253\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00254\ \textcolor{comment}{\ \ \ *\ \ \ FT\_LIST\_H}}
+\DoxyCodeLine{00255\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00256\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00257\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00258\ \textcolor{comment}{\ \ \ *\ \ \ list\ management\ API\ of\ FreeType\string~2.}}
+\DoxyCodeLine{00259\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00260\ \textcolor{comment}{\ \ \ *\ \ \ (Most\ applications\ will\ never\ need\ to\ include\ this\ file.)}}
+\DoxyCodeLine{00261\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00262\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00263\ \textcolor{preprocessor}{\#define\ FT\_LIST\_H\ \ <ftlist.h>}}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00266\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00267\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00268\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00269\ \textcolor{comment}{\ \ \ *\ \ \ FT\_OUTLINE\_H}}
+\DoxyCodeLine{00270\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00271\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00272\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00273\ \textcolor{comment}{\ \ \ *\ \ \ scalable\ outline\ management\ API\ of\ FreeType\string~2.}}
+\DoxyCodeLine{00274\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00275\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00276\ \textcolor{preprocessor}{\#define\ FT\_OUTLINE\_H\ \ <ftoutln.h>}}
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00279\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00280\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00281\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00282\ \textcolor{comment}{\ \ \ *\ \ \ FT\_SIZES\_H}}
+\DoxyCodeLine{00283\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00284\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00285\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00286\ \textcolor{comment}{\ \ \ *\ \ \ API\ which\ manages\ multiple\ @FT\_Size\ objects\ per\ face.}}
+\DoxyCodeLine{00287\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00288\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00289\ \textcolor{preprocessor}{\#define\ FT\_SIZES\_H\ \ <ftsizes.h>}}
+\DoxyCodeLine{00290\ }
+\DoxyCodeLine{00291\ }
+\DoxyCodeLine{00292\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00293\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00294\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00295\ \textcolor{comment}{\ \ \ *\ \ \ FT\_MODULE\_H}}
+\DoxyCodeLine{00296\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00297\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00298\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00299\ \textcolor{comment}{\ \ \ *\ \ \ module\ management\ API\ of\ FreeType\string~2.}}
+\DoxyCodeLine{00300\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00301\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00302\ \textcolor{preprocessor}{\#define\ FT\_MODULE\_H\ \ <ftmodapi.h>}}
+\DoxyCodeLine{00303\ }
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00305\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00306\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00307\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00308\ \textcolor{comment}{\ \ \ *\ \ \ FT\_RENDER\_H}}
+\DoxyCodeLine{00309\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00310\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00311\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00312\ \textcolor{comment}{\ \ \ *\ \ \ renderer\ module\ management\ API\ of\ FreeType\string~2.}}
+\DoxyCodeLine{00313\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00314\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00315\ \textcolor{preprocessor}{\#define\ FT\_RENDER\_H\ \ <ftrender.h>}}
+\DoxyCodeLine{00316\ }
+\DoxyCodeLine{00317\ }
+\DoxyCodeLine{00318\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00319\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00320\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00321\ \textcolor{comment}{\ \ \ *\ \ \ FT\_AUTOHINTER\_H}}
+\DoxyCodeLine{00322\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00323\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00324\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing}}
+\DoxyCodeLine{00325\ \textcolor{comment}{\ \ \ *\ \ \ structures\ and\ macros\ related\ to\ the\ auto-\/hinting\ module.}}
+\DoxyCodeLine{00326\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00327\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00328\ \textcolor{preprocessor}{\#define\ FT\_AUTOHINTER\_H\ \ <ftautoh.h>}}
+\DoxyCodeLine{00329\ }
+\DoxyCodeLine{00330\ }
+\DoxyCodeLine{00331\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00332\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00333\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00334\ \textcolor{comment}{\ \ \ *\ \ \ FT\_CFF\_DRIVER\_H}}
+\DoxyCodeLine{00335\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00336\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00337\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing}}
+\DoxyCodeLine{00338\ \textcolor{comment}{\ \ \ *\ \ \ structures\ and\ macros\ related\ to\ the\ CFF\ driver\ module.}}
+\DoxyCodeLine{00339\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00340\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00341\ \textcolor{preprocessor}{\#define\ FT\_CFF\_DRIVER\_H\ \ <ftcffdrv.h>}}
+\DoxyCodeLine{00342\ }
+\DoxyCodeLine{00343\ }
+\DoxyCodeLine{00344\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00345\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00346\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00347\ \textcolor{comment}{\ \ \ *\ \ \ FT\_TRUETYPE\_DRIVER\_H}}
+\DoxyCodeLine{00348\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00349\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00350\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing}}
+\DoxyCodeLine{00351\ \textcolor{comment}{\ \ \ *\ \ \ structures\ and\ macros\ related\ to\ the\ TrueType\ driver\ module.}}
+\DoxyCodeLine{00352\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00353\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00354\ \textcolor{preprocessor}{\#define\ FT\_TRUETYPE\_DRIVER\_H\ \ <ftttdrv.h>}}
+\DoxyCodeLine{00355\ }
+\DoxyCodeLine{00356\ }
+\DoxyCodeLine{00357\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00358\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00359\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00360\ \textcolor{comment}{\ \ \ *\ \ \ FT\_TYPE1\_TABLES\_H}}
+\DoxyCodeLine{00361\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00362\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00363\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00364\ \textcolor{comment}{\ \ \ *\ \ \ types\ and\ API\ specific\ to\ the\ Type\string~1\ format.}}
+\DoxyCodeLine{00365\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00366\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00367\ \textcolor{preprocessor}{\#define\ FT\_TYPE1\_TABLES\_H\ \ <t1tables.h>}}
+\DoxyCodeLine{00368\ }
+\DoxyCodeLine{00369\ }
+\DoxyCodeLine{00370\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00371\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00372\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00373\ \textcolor{comment}{\ \ \ *\ \ \ FT\_TRUETYPE\_IDS\_H}}
+\DoxyCodeLine{00374\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00375\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00376\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00377\ \textcolor{comment}{\ \ \ *\ \ \ enumeration\ values\ which\ identify\ name\ strings,\ languages,\ encodings,}}
+\DoxyCodeLine{00378\ \textcolor{comment}{\ \ \ *\ \ \ etc.\ \ This\ file\ really\ contains\ a\ \_large\_\ set\ of\ constant\ macro}}
+\DoxyCodeLine{00379\ \textcolor{comment}{\ \ \ *\ \ \ definitions,\ taken\ from\ the\ TrueType\ and\ OpenType\ specifications.}}
+\DoxyCodeLine{00380\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00381\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00382\ \textcolor{preprocessor}{\#define\ FT\_TRUETYPE\_IDS\_H\ \ <ttnameid.h>}}
+\DoxyCodeLine{00383\ }
+\DoxyCodeLine{00384\ }
+\DoxyCodeLine{00385\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00386\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00387\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00388\ \textcolor{comment}{\ \ \ *\ \ \ FT\_TRUETYPE\_TABLES\_H}}
+\DoxyCodeLine{00389\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00390\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00391\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00392\ \textcolor{comment}{\ \ \ *\ \ \ types\ and\ API\ specific\ to\ the\ TrueType\ (as\ well\ as\ OpenType)\ format.}}
+\DoxyCodeLine{00393\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00394\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00395\ \textcolor{preprocessor}{\#define\ FT\_TRUETYPE\_TABLES\_H\ \ <tttables.h>}}
+\DoxyCodeLine{00396\ }
+\DoxyCodeLine{00397\ }
+\DoxyCodeLine{00398\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00399\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00400\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00401\ \textcolor{comment}{\ \ \ *\ \ \ FT\_TRUETYPE\_TAGS\_H}}
+\DoxyCodeLine{00402\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00403\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00404\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00405\ \textcolor{comment}{\ \ \ *\ \ \ definitions\ of\ TrueType\ four-\/byte\ \`{}tags'\ which\ identify\ blocks\ in}}
+\DoxyCodeLine{00406\ \textcolor{comment}{\ \ \ *\ \ \ SFNT-\/based\ font\ formats\ (i.e.,\ TrueType\ and\ OpenType).}}
+\DoxyCodeLine{00407\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00408\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00409\ \textcolor{preprocessor}{\#define\ FT\_TRUETYPE\_TAGS\_H\ \ <tttags.h>}}
+\DoxyCodeLine{00410\ }
+\DoxyCodeLine{00411\ }
+\DoxyCodeLine{00412\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00413\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00414\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00415\ \textcolor{comment}{\ \ \ *\ \ \ FT\_BDF\_H}}
+\DoxyCodeLine{00416\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00417\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00418\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00419\ \textcolor{comment}{\ \ \ *\ \ \ definitions\ of\ an\ API\ which\ accesses\ BDF-\/specific\ strings\ from\ a}}
+\DoxyCodeLine{00420\ \textcolor{comment}{\ \ \ *\ \ \ face.}}
+\DoxyCodeLine{00421\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00422\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00423\ \textcolor{preprocessor}{\#define\ FT\_BDF\_H\ \ <ftbdf.h>}}
+\DoxyCodeLine{00424\ }
+\DoxyCodeLine{00425\ }
+\DoxyCodeLine{00426\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00427\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00428\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00429\ \textcolor{comment}{\ \ \ *\ \ \ FT\_CID\_H}}
+\DoxyCodeLine{00430\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00431\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00432\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00433\ \textcolor{comment}{\ \ \ *\ \ \ definitions\ of\ an\ API\ which\ access\ CID\ font\ information\ from\ a}}
+\DoxyCodeLine{00434\ \textcolor{comment}{\ \ \ *\ \ \ face.}}
+\DoxyCodeLine{00435\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00436\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00437\ \textcolor{preprocessor}{\#define\ FT\_CID\_H\ \ <ftcid.h>}}
+\DoxyCodeLine{00438\ }
+\DoxyCodeLine{00439\ }
+\DoxyCodeLine{00440\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00441\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00442\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00443\ \textcolor{comment}{\ \ \ *\ \ \ FT\_GZIP\_H}}
+\DoxyCodeLine{00444\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00445\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00446\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00447\ \textcolor{comment}{\ \ \ *\ \ \ definitions\ of\ an\ API\ which\ supports\ gzip-\/compressed\ files.}}
+\DoxyCodeLine{00448\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00449\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00450\ \textcolor{preprocessor}{\#define\ FT\_GZIP\_H\ \ <ftgzip.h>}}
+\DoxyCodeLine{00451\ }
+\DoxyCodeLine{00452\ }
+\DoxyCodeLine{00453\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00454\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00455\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00456\ \textcolor{comment}{\ \ \ *\ \ \ FT\_LZW\_H}}
+\DoxyCodeLine{00457\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00458\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00459\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00460\ \textcolor{comment}{\ \ \ *\ \ \ definitions\ of\ an\ API\ which\ supports\ LZW-\/compressed\ files.}}
+\DoxyCodeLine{00461\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00462\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00463\ \textcolor{preprocessor}{\#define\ FT\_LZW\_H\ \ <ftlzw.h>}}
+\DoxyCodeLine{00464\ }
+\DoxyCodeLine{00465\ }
+\DoxyCodeLine{00466\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00467\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00468\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00469\ \textcolor{comment}{\ \ \ *\ \ \ FT\_BZIP2\_H}}
+\DoxyCodeLine{00470\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00471\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00472\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00473\ \textcolor{comment}{\ \ \ *\ \ \ definitions\ of\ an\ API\ which\ supports\ bzip2-\/compressed\ files.}}
+\DoxyCodeLine{00474\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00475\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00476\ \textcolor{preprocessor}{\#define\ FT\_BZIP2\_H\ \ <ftbzip2.h>}}
+\DoxyCodeLine{00477\ }
+\DoxyCodeLine{00478\ }
+\DoxyCodeLine{00479\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00480\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00481\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00482\ \textcolor{comment}{\ \ \ *\ \ \ FT\_WINFONTS\_H}}
+\DoxyCodeLine{00483\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00484\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00485\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00486\ \textcolor{comment}{\ \ \ *\ \ \ definitions\ of\ an\ API\ which\ supports\ Windows\ FNT\ files.}}
+\DoxyCodeLine{00487\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00488\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00489\ \textcolor{preprocessor}{\#define\ FT\_WINFONTS\_H\ \ \ <ftwinfnt.h>}}
+\DoxyCodeLine{00490\ }
+\DoxyCodeLine{00491\ }
+\DoxyCodeLine{00492\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00493\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00494\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00495\ \textcolor{comment}{\ \ \ *\ \ \ FT\_GLYPH\_H}}
+\DoxyCodeLine{00496\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00497\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00498\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00499\ \textcolor{comment}{\ \ \ *\ \ \ API\ of\ the\ optional\ glyph\ management\ component.}}
+\DoxyCodeLine{00500\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00501\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00502\ \textcolor{preprocessor}{\#define\ FT\_GLYPH\_H\ \ <ftglyph.h>}}
+\DoxyCodeLine{00503\ }
+\DoxyCodeLine{00504\ }
+\DoxyCodeLine{00505\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00506\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00507\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00508\ \textcolor{comment}{\ \ \ *\ \ \ FT\_BITMAP\_H}}
+\DoxyCodeLine{00509\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00510\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00511\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00512\ \textcolor{comment}{\ \ \ *\ \ \ API\ of\ the\ optional\ bitmap\ conversion\ component.}}
+\DoxyCodeLine{00513\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00514\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00515\ \textcolor{preprocessor}{\#define\ FT\_BITMAP\_H\ \ <ftbitmap.h>}}
+\DoxyCodeLine{00516\ }
+\DoxyCodeLine{00517\ }
+\DoxyCodeLine{00518\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00519\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00520\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00521\ \textcolor{comment}{\ \ \ *\ \ \ FT\_BBOX\_H}}
+\DoxyCodeLine{00522\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00523\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00524\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00525\ \textcolor{comment}{\ \ \ *\ \ \ API\ of\ the\ optional\ exact\ bounding\ box\ computation\ routines.}}
+\DoxyCodeLine{00526\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00527\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00528\ \textcolor{preprocessor}{\#define\ FT\_BBOX\_H\ \ <ftbbox.h>}}
+\DoxyCodeLine{00529\ }
+\DoxyCodeLine{00530\ }
+\DoxyCodeLine{00531\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00532\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00533\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00534\ \textcolor{comment}{\ \ \ *\ \ \ FT\_CACHE\_H}}
+\DoxyCodeLine{00535\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00536\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00537\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00538\ \textcolor{comment}{\ \ \ *\ \ \ API\ of\ the\ optional\ FreeType\string~2\ cache\ sub-\/system.}}
+\DoxyCodeLine{00539\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00540\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00541\ \textcolor{preprocessor}{\#define\ FT\_CACHE\_H\ \ <ftcache.h>}}
+\DoxyCodeLine{00542\ }
+\DoxyCodeLine{00543\ }
+\DoxyCodeLine{00544\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00545\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00546\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00547\ \textcolor{comment}{\ \ \ *\ \ \ FT\_CACHE\_IMAGE\_H}}
+\DoxyCodeLine{00548\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00549\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00550\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00551\ \textcolor{comment}{\ \ \ *\ \ \ \`{}glyph\ image'\ API\ of\ the\ FreeType\string~2\ cache\ sub-\/system.}}
+\DoxyCodeLine{00552\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00553\ \textcolor{comment}{\ \ \ *\ \ \ It\ is\ used\ to\ define\ a\ cache\ for\ @FT\_Glyph\ elements.\ \ You\ can\ also}}
+\DoxyCodeLine{00554\ \textcolor{comment}{\ \ \ *\ \ \ use\ the\ API\ defined\ in\ @FT\_CACHE\_SMALL\_BITMAPS\_H\ if\ you\ only\ need\ to}}
+\DoxyCodeLine{00555\ \textcolor{comment}{\ \ \ *\ \ \ store\ small\ glyph\ bitmaps,\ as\ it\ will\ use\ less\ memory.}}
+\DoxyCodeLine{00556\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00557\ \textcolor{comment}{\ \ \ *\ \ \ This\ macro\ is\ deprecated.\ \ Simply\ include\ @FT\_CACHE\_H\ to\ have\ all}}
+\DoxyCodeLine{00558\ \textcolor{comment}{\ \ \ *\ \ \ glyph\ image-\/related\ cache\ declarations.}}
+\DoxyCodeLine{00559\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00560\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00561\ \textcolor{preprocessor}{\#define\ FT\_CACHE\_IMAGE\_H\ \ FT\_CACHE\_H}}
+\DoxyCodeLine{00562\ }
+\DoxyCodeLine{00563\ }
+\DoxyCodeLine{00564\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00565\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00566\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00567\ \textcolor{comment}{\ \ \ *\ \ \ FT\_CACHE\_SMALL\_BITMAPS\_H}}
+\DoxyCodeLine{00568\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00569\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00570\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00571\ \textcolor{comment}{\ \ \ *\ \ \ \`{}small\ bitmaps'\ API\ of\ the\ FreeType\string~2\ cache\ sub-\/system.}}
+\DoxyCodeLine{00572\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00573\ \textcolor{comment}{\ \ \ *\ \ \ It\ is\ used\ to\ define\ a\ cache\ for\ small\ glyph\ bitmaps\ in\ a\ relatively}}
+\DoxyCodeLine{00574\ \textcolor{comment}{\ \ \ *\ \ \ memory-\/efficient\ way.\ \ You\ can\ also\ use\ the\ API\ defined\ in}}
+\DoxyCodeLine{00575\ \textcolor{comment}{\ \ \ *\ \ \ @FT\_CACHE\_IMAGE\_H\ if\ you\ want\ to\ cache\ arbitrary\ glyph\ images,}}
+\DoxyCodeLine{00576\ \textcolor{comment}{\ \ \ *\ \ \ including\ scalable\ outlines.}}
+\DoxyCodeLine{00577\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00578\ \textcolor{comment}{\ \ \ *\ \ \ This\ macro\ is\ deprecated.\ \ Simply\ include\ @FT\_CACHE\_H\ to\ have\ all}}
+\DoxyCodeLine{00579\ \textcolor{comment}{\ \ \ *\ \ \ small\ bitmaps-\/related\ cache\ declarations.}}
+\DoxyCodeLine{00580\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00581\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00582\ \textcolor{preprocessor}{\#define\ FT\_CACHE\_SMALL\_BITMAPS\_H\ \ FT\_CACHE\_H}}
+\DoxyCodeLine{00583\ }
+\DoxyCodeLine{00584\ }
+\DoxyCodeLine{00585\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00586\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00587\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00588\ \textcolor{comment}{\ \ \ *\ \ \ FT\_CACHE\_CHARMAP\_H}}
+\DoxyCodeLine{00589\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00590\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00591\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00592\ \textcolor{comment}{\ \ \ *\ \ \ \`{}charmap'\ API\ of\ the\ FreeType\string~2\ cache\ sub-\/system.}}
+\DoxyCodeLine{00593\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00594\ \textcolor{comment}{\ \ \ *\ \ \ This\ macro\ is\ deprecated.\ \ Simply\ include\ @FT\_CACHE\_H\ to\ have\ all}}
+\DoxyCodeLine{00595\ \textcolor{comment}{\ \ \ *\ \ \ charmap-\/based\ cache\ declarations.}}
+\DoxyCodeLine{00596\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00597\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00598\ \textcolor{preprocessor}{\#define\ FT\_CACHE\_CHARMAP\_H\ \ FT\_CACHE\_H}}
+\DoxyCodeLine{00599\ }
+\DoxyCodeLine{00600\ }
+\DoxyCodeLine{00601\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00602\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00603\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00604\ \textcolor{comment}{\ \ \ *\ \ \ FT\_MAC\_H}}
+\DoxyCodeLine{00605\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00606\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00607\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00608\ \textcolor{comment}{\ \ \ *\ \ \ Macintosh-\/specific\ FreeType\string~2\ API.\ \ The\ latter\ is\ used\ to\ access}}
+\DoxyCodeLine{00609\ \textcolor{comment}{\ \ \ *\ \ \ fonts\ embedded\ in\ resource\ forks.}}
+\DoxyCodeLine{00610\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00611\ \textcolor{comment}{\ \ \ *\ \ \ This\ header\ file\ must\ be\ explicitly\ included\ by\ client\ applications}}
+\DoxyCodeLine{00612\ \textcolor{comment}{\ \ \ *\ \ \ compiled\ on\ the\ Mac\ (note\ that\ the\ base\ API\ still\ works\ though).}}
+\DoxyCodeLine{00613\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00614\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00615\ \textcolor{preprocessor}{\#define\ FT\_MAC\_H\ \ <ftmac.h>}}
+\DoxyCodeLine{00616\ }
+\DoxyCodeLine{00617\ }
+\DoxyCodeLine{00618\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00619\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00620\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00621\ \textcolor{comment}{\ \ \ *\ \ \ FT\_MULTIPLE\_MASTERS\_H}}
+\DoxyCodeLine{00622\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00623\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00624\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00625\ \textcolor{comment}{\ \ \ *\ \ \ optional\ multiple-\/masters\ management\ API\ of\ FreeType\string~2.}}
+\DoxyCodeLine{00626\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00627\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00628\ \textcolor{preprocessor}{\#define\ FT\_MULTIPLE\_MASTERS\_H\ \ <ftmm.h>}}
+\DoxyCodeLine{00629\ }
+\DoxyCodeLine{00630\ }
+\DoxyCodeLine{00631\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00632\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00633\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00634\ \textcolor{comment}{\ \ \ *\ \ \ FT\_SFNT\_NAMES\_H}}
+\DoxyCodeLine{00635\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00636\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00637\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00638\ \textcolor{comment}{\ \ \ *\ \ \ optional\ FreeType\string~2\ API\ which\ accesses\ embedded\ \`{}name'\ strings\ in}}
+\DoxyCodeLine{00639\ \textcolor{comment}{\ \ \ *\ \ \ SFNT-\/based\ font\ formats\ (i.e.,\ TrueType\ and\ OpenType).}}
+\DoxyCodeLine{00640\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00641\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00642\ \textcolor{preprocessor}{\#define\ FT\_SFNT\_NAMES\_H\ \ <ftsnames.h>}}
+\DoxyCodeLine{00643\ }
+\DoxyCodeLine{00644\ }
+\DoxyCodeLine{00645\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00646\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00647\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00648\ \textcolor{comment}{\ \ \ *\ \ \ FT\_OPENTYPE\_VALIDATE\_H}}
+\DoxyCodeLine{00649\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00650\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00651\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00652\ \textcolor{comment}{\ \ \ *\ \ \ optional\ FreeType\string~2\ API\ which\ validates\ OpenType\ tables\ (BASE,\ GDEF,}}
+\DoxyCodeLine{00653\ \textcolor{comment}{\ \ \ *\ \ \ GPOS,\ GSUB,\ JSTF).}}
+\DoxyCodeLine{00654\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00655\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00656\ \textcolor{preprocessor}{\#define\ FT\_OPENTYPE\_VALIDATE\_H\ \ <ftotval.h>}}
+\DoxyCodeLine{00657\ }
+\DoxyCodeLine{00658\ }
+\DoxyCodeLine{00659\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00660\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00661\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00662\ \textcolor{comment}{\ \ \ *\ \ \ FT\_GX\_VALIDATE\_H}}
+\DoxyCodeLine{00663\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00664\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00665\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00666\ \textcolor{comment}{\ \ \ *\ \ \ optional\ FreeType\string~2\ API\ which\ validates\ TrueTypeGX/AAT\ tables\ (feat,}}
+\DoxyCodeLine{00667\ \textcolor{comment}{\ \ \ *\ \ \ mort,\ morx,\ bsln,\ just,\ kern,\ opbd,\ trak,\ prop).}}
+\DoxyCodeLine{00668\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00669\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00670\ \textcolor{preprocessor}{\#define\ FT\_GX\_VALIDATE\_H\ \ <ftgxval.h>}}
+\DoxyCodeLine{00671\ }
+\DoxyCodeLine{00672\ }
+\DoxyCodeLine{00673\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00674\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00675\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00676\ \textcolor{comment}{\ \ \ *\ \ \ FT\_PFR\_H}}
+\DoxyCodeLine{00677\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00678\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00679\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00680\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ API\ which\ accesses\ PFR-\/specific\ data.}}
+\DoxyCodeLine{00681\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00682\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00683\ \textcolor{preprocessor}{\#define\ FT\_PFR\_H\ \ <ftpfr.h>}}
+\DoxyCodeLine{00684\ }
+\DoxyCodeLine{00685\ }
+\DoxyCodeLine{00686\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00687\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00688\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00689\ \textcolor{comment}{\ \ \ *\ \ \ FT\_STROKER\_H}}
+\DoxyCodeLine{00690\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00691\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00692\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00693\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ API\ which\ provides\ functions\ to\ stroke\ outline\ paths.}}
+\DoxyCodeLine{00694\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00695\ \textcolor{preprocessor}{\#define\ FT\_STROKER\_H\ \ <ftstroke.h>}}
+\DoxyCodeLine{00696\ }
+\DoxyCodeLine{00697\ }
+\DoxyCodeLine{00698\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00699\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00700\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00701\ \textcolor{comment}{\ \ \ *\ \ \ FT\_SYNTHESIS\_H}}
+\DoxyCodeLine{00702\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00703\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00704\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00705\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ API\ which\ performs\ artificial\ obliquing\ and\ emboldening.}}
+\DoxyCodeLine{00706\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00707\ \textcolor{preprocessor}{\#define\ FT\_SYNTHESIS\_H\ \ <ftsynth.h>}}
+\DoxyCodeLine{00708\ }
+\DoxyCodeLine{00709\ }
+\DoxyCodeLine{00710\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00711\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00712\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00713\ \textcolor{comment}{\ \ \ *\ \ \ FT\_XFREE86\_H}}
+\DoxyCodeLine{00714\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00715\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00716\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00717\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ API\ which\ provides\ functions\ specific\ to\ the\ XFree86\ and}}
+\DoxyCodeLine{00718\ \textcolor{comment}{\ \ \ *\ \ \ X.Org\ X11\ servers.}}
+\DoxyCodeLine{00719\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00720\ \textcolor{preprocessor}{\#define\ FT\_XFREE86\_H\ \ <ftxf86.h>}}
+\DoxyCodeLine{00721\ }
+\DoxyCodeLine{00722\ }
+\DoxyCodeLine{00723\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00724\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00725\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00726\ \textcolor{comment}{\ \ \ *\ \ \ FT\_TRIGONOMETRY\_H}}
+\DoxyCodeLine{00727\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00728\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00729\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00730\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ API\ which\ performs\ trigonometric\ computations\ (e.g.,}}
+\DoxyCodeLine{00731\ \textcolor{comment}{\ \ \ *\ \ \ cosines\ and\ arc\ tangents).}}
+\DoxyCodeLine{00732\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00733\ \textcolor{preprocessor}{\#define\ FT\_TRIGONOMETRY\_H\ \ <fttrigon.h>}}
+\DoxyCodeLine{00734\ }
+\DoxyCodeLine{00735\ }
+\DoxyCodeLine{00736\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00737\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00738\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00739\ \textcolor{comment}{\ \ \ *\ \ \ FT\_LCD\_FILTER\_H}}
+\DoxyCodeLine{00740\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00741\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00742\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00743\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ API\ which\ performs\ color\ filtering\ for\ subpixel\ rendering.}}
+\DoxyCodeLine{00744\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00745\ \textcolor{preprocessor}{\#define\ FT\_LCD\_FILTER\_H\ \ <ftlcdfil.h>}}
+\DoxyCodeLine{00746\ }
+\DoxyCodeLine{00747\ }
+\DoxyCodeLine{00748\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00749\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00750\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00751\ \textcolor{comment}{\ \ \ *\ \ \ FT\_UNPATENTED\_HINTING\_H}}
+\DoxyCodeLine{00752\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00753\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00754\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00755\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ API\ which\ performs\ color\ filtering\ for\ subpixel\ rendering.}}
+\DoxyCodeLine{00756\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00757\ \textcolor{preprocessor}{\#define\ FT\_UNPATENTED\_HINTING\_H\ \ <ttunpat.h>}}
+\DoxyCodeLine{00758\ }
+\DoxyCodeLine{00759\ }
+\DoxyCodeLine{00760\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00761\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00762\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00763\ \textcolor{comment}{\ \ \ *\ \ \ FT\_INCREMENTAL\_H}}
+\DoxyCodeLine{00764\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00765\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00766\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00767\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ API\ which\ performs\ color\ filtering\ for\ subpixel\ rendering.}}
+\DoxyCodeLine{00768\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00769\ \textcolor{preprocessor}{\#define\ FT\_INCREMENTAL\_H\ \ <ftincrem.h>}}
+\DoxyCodeLine{00770\ }
+\DoxyCodeLine{00771\ }
+\DoxyCodeLine{00772\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00773\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00774\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00775\ \textcolor{comment}{\ \ \ *\ \ \ FT\_GASP\_H}}
+\DoxyCodeLine{00776\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00777\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00778\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00779\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ API\ which\ returns\ entries\ from\ the\ TrueType\ GASP\ table.}}
+\DoxyCodeLine{00780\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00781\ \textcolor{preprocessor}{\#define\ FT\_GASP\_H\ \ <ftgasp.h>}}
+\DoxyCodeLine{00782\ }
+\DoxyCodeLine{00783\ }
+\DoxyCodeLine{00784\ \textcolor{comment}{\ \ /*************************************************************************}}
+\DoxyCodeLine{00785\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00786\ \textcolor{comment}{\ \ \ *\ @macro:}}
+\DoxyCodeLine{00787\ \textcolor{comment}{\ \ \ *\ \ \ FT\_ADVANCES\_H}}
+\DoxyCodeLine{00788\ \textcolor{comment}{\ \ \ *}}
+\DoxyCodeLine{00789\ \textcolor{comment}{\ \ \ *\ @description:}}
+\DoxyCodeLine{00790\ \textcolor{comment}{\ \ \ *\ \ \ A\ macro\ used\ in\ \#include\ statements\ to\ name\ the\ file\ containing\ the}}
+\DoxyCodeLine{00791\ \textcolor{comment}{\ \ \ *\ \ \ FreeType\string~2\ API\ which\ returns\ individual\ and\ ranged\ glyph\ advances.}}
+\DoxyCodeLine{00792\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00793\ \textcolor{preprocessor}{\#define\ FT\_ADVANCES\_H\ \ <ftadvanc.h>}}
+\DoxyCodeLine{00794\ }
+\DoxyCodeLine{00795\ }
+\DoxyCodeLine{00796\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{00797\ }
+\DoxyCodeLine{00798\ \textcolor{preprocessor}{\#define\ FT\_ERROR\_DEFINITIONS\_H\ \ <fterrdef.h>}}
+\DoxyCodeLine{00799\ }
+\DoxyCodeLine{00800\ }
+\DoxyCodeLine{00801\ \ \ \textcolor{comment}{/*\ The\ internals\ of\ the\ cache\ sub-\/system\ are\ no\ longer\ exposed.\ \ We\ */}}
+\DoxyCodeLine{00802\ \ \ \textcolor{comment}{/*\ default\ to\ FT\_CACHE\_H\ at\ the\ moment\ just\ in\ case,\ but\ we\ know\ of\ */}}
+\DoxyCodeLine{00803\ \ \ \textcolor{comment}{/*\ no\ rogue\ client\ that\ uses\ them.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00804\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00805\ \textcolor{preprocessor}{\#define\ FT\_CACHE\_MANAGER\_H\ \ \ \ \ \ \ \ \ \ \ <ftcache.h>}}
+\DoxyCodeLine{00806\ \textcolor{preprocessor}{\#define\ FT\_CACHE\_INTERNAL\_MRU\_H\ \ \ \ \ \ <ftcache.h>}}
+\DoxyCodeLine{00807\ \textcolor{preprocessor}{\#define\ FT\_CACHE\_INTERNAL\_MANAGER\_H\ \ <ftcache.h>}}
+\DoxyCodeLine{00808\ \textcolor{preprocessor}{\#define\ FT\_CACHE\_INTERNAL\_CACHE\_H\ \ \ \ <ftcache.h>}}
+\DoxyCodeLine{00809\ \textcolor{preprocessor}{\#define\ FT\_CACHE\_INTERNAL\_GLYPH\_H\ \ \ \ <ftcache.h>}}
+\DoxyCodeLine{00810\ \textcolor{preprocessor}{\#define\ FT\_CACHE\_INTERNAL\_IMAGE\_H\ \ \ \ <ftcache.h>}}
+\DoxyCodeLine{00811\ \textcolor{preprocessor}{\#define\ FT\_CACHE\_INTERNAL\_SBITS\_H\ \ \ \ <ftcache.h>}}
+\DoxyCodeLine{00812\ }
+\DoxyCodeLine{00813\ }
+\DoxyCodeLine{00814\ \textcolor{preprocessor}{\#define\ FT\_INCREMENTAL\_H\ \ \ \ \ \ \ \ \ \ <ftincrem.h>}}
+\DoxyCodeLine{00815\ }
+\DoxyCodeLine{00816\ \textcolor{preprocessor}{\#define\ FT\_TRUETYPE\_UNPATENTED\_H\ \ <ttunpat.h>}}
+\DoxyCodeLine{00817\ }
+\DoxyCodeLine{00818\ }
+\DoxyCodeLine{00819\ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00820\ \textcolor{comment}{\ \ \ *\ Include\ internal\ headers\ definitions\ from\ <internal/...>}}
+\DoxyCodeLine{00821\ \textcolor{comment}{\ \ \ *\ only\ when\ building\ the\ library.}}
+\DoxyCodeLine{00822\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00823\ \textcolor{preprocessor}{\#ifdef\ FT2\_BUILD\_LIBRARY}}
+\DoxyCodeLine{00824\ \textcolor{preprocessor}{\#define\ \ FT\_INTERNAL\_INTERNAL\_H\ \ <internal/internal.h>}}
+\DoxyCodeLine{00825\ \textcolor{preprocessor}{\#include\ FT\_INTERNAL\_INTERNAL\_H}}
+\DoxyCodeLine{00826\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FT2\_BUILD\_LIBRARY\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00827\ }
+\DoxyCodeLine{00828\ }
+\DoxyCodeLine{00829\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_FT2\_BUILD\_H\_\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00830\ }
+\DoxyCodeLine{00831\ }
+\DoxyCodeLine{00832\ \textcolor{comment}{/*\ END\ */}}
+
+\end{DoxyCode}

@@ -4,8 +4,6 @@
 #include "imgui.h"
 #include "imgui-SFML.h"
 #include <memory>
-#include <vector>
-#include <functional>
 #include "Timer.hpp"
 
 namespace zenith {
@@ -20,7 +18,6 @@ namespace zenith {
 
 		private:
 			std::unique_ptr<sf::RenderWindow> _viewport;
-			Timer _currentTimer;
 
 			void InitViewport();
 			void SetWindows();

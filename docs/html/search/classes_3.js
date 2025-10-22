@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['timer_0',['Timer',['../classzenith_1_1Timer.html',1,'zenith']]]
+  ['round_0',['Round',['../structzenith_1_1PomodoroSession_1_1Round.html',1,'zenith::PomodoroSession']]]
 ];

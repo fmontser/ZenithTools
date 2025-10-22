@@ -1,0 +1,98 @@
+\doxysection{build/\+\_\+deps/googletest-\/src Directory Reference}
+\hypertarget{dir_b8d6b26144d6312ab7a4ea26f9e69ccf}{}\label{dir_b8d6b26144d6312ab7a4ea26f9e69ccf}\index{build/\_deps/googletest-\/src Directory Reference@{build/\_deps/googletest-\/src Directory Reference}}
+Directory dependency graph for googletest-\/src\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dir_b8d6b26144d6312ab7a4ea26f9e69ccf_dep}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Directories}
+\begin{DoxyCompactItemize}
+\item 
+directory \mbox{\hyperlink{dir_c5f655d618205cb28123d4e6a51ea001}{googlemock}}
+\item 
+directory \mbox{\hyperlink{dir_001a0f336d1d0a6c17b1be78e41a6b36}{googletest}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{README.md_autotoc_md405}{}\doxysubsubsection{\texorpdfstring{Announcements}{Announcements}}\label{README.md_autotoc_md405}
+\hypertarget{README.md_autotoc_md406}{}\doxysubsubsubsection{\texorpdfstring{Live at Head}{Live at Head}}\label{README.md_autotoc_md406}
+Google\+Test now follows the \href{https://abseil.io/about/philosophy\#upgrade-support}{\texttt{ Abseil Live at Head philosophy}}. We recommend \href{https://github.com/abseil/abseil-cpp/blob/master/FAQ.md\#what-is-live-at-head-and-how-do-i-do-it}{\texttt{ updating to the latest commit in the {\ttfamily main} branch as often as possible}}.\hypertarget{README.md_autotoc_md407}{}\doxysubsubsubsection{\texorpdfstring{Documentation Updates}{Documentation Updates}}\label{README.md_autotoc_md407}
+Our documentation is now live on Git\+Hub Pages at \href{https://google.github.io/googletest/}{\texttt{ https\+://google.\+github.\+io/googletest/}}. We recommend browsing the documentation on Git\+Hub Pages rather than directly in the repository.\hypertarget{README.md_autotoc_md408}{}\doxysubsubsubsection{\texorpdfstring{Release 1.\+11.\+0}{Release 1.\+11.\+0}}\label{README.md_autotoc_md408}
+\href{https://github.com/google/googletest/releases/tag/release-1.11.0}{\texttt{ Release 1.\+11.\+0}} is now available.\hypertarget{README.md_autotoc_md409}{}\doxysubsubsubsection{\texorpdfstring{Coming Soon}{Coming Soon}}\label{README.md_autotoc_md409}
+
+\begin{DoxyItemize}
+\item We are planning to take a dependency on \href{https://github.com/abseil/abseil-cpp}{\texttt{ Abseil}}.
+\item More documentation improvements are planned.
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md410}{}\doxysubsection{\texorpdfstring{Welcome to {\bfseries{Google\+Test}}, Google\textquotesingle{}s C++ test framework!}{Welcome to {\bfseries{Google\+Test}}, Google\textquotesingle{}s C++ test framework!}}\label{README.md_autotoc_md410}
+This repository is a merger of the formerly separate Google\+Test and Google\+Mock projects. These were so closely related that it makes sense to maintain and release them together.\hypertarget{README.md_autotoc_md411}{}\doxysubsubsection{\texorpdfstring{Getting Started}{Getting Started}}\label{README.md_autotoc_md411}
+See the \href{https://google.github.io/googletest/}{\texttt{ Google\+Test User\textquotesingle{}s Guide}} for documentation. We recommend starting with the \href{https://google.github.io/googletest/primer.html}{\texttt{ Google\+Test Primer}}.
+
+More information about building Google\+Test can be found at googletest/\+README.md.\hypertarget{README.md_autotoc_md412}{}\doxysubsection{\texorpdfstring{Features}{Features}}\label{README.md_autotoc_md412}
+
+\begin{DoxyItemize}
+\item An \href{https://en.wikipedia.org/wiki/XUnit}{\texttt{ x\+Unit}} test framework.
+\item Test discovery.
+\item A rich set of assertions.
+\item User-\/defined assertions.
+\item Death tests.
+\item Fatal and non-\/fatal failures.
+\item Value-\/parameterized tests.
+\item Type-\/parameterized tests.
+\item Various options for running the tests.
+\item XML test report generation.
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md413}{}\doxysubsection{\texorpdfstring{Supported Platforms}{Supported Platforms}}\label{README.md_autotoc_md413}
+Google\+Test requires a codebase and compiler compliant with the C++11 standard or newer.
+
+The Google\+Test code is officially supported on the following platforms. Operating systems or tools not listed below are community-\/supported. For community-\/supported platforms, patches that do not complicate the code may be considered.
+
+If you notice any problems on your platform, please file an issue on the \href{https://github.com/google/googletest/issues}{\texttt{ Google\+Test Git\+Hub Issue Tracker}}. Pull requests containing fixes are welcome!\hypertarget{README.md_autotoc_md414}{}\doxysubsubsection{\texorpdfstring{Operating Systems}{Operating Systems}}\label{README.md_autotoc_md414}
+
+\begin{DoxyItemize}
+\item Linux
+\item mac\+OS
+\item Windows
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md415}{}\doxysubsubsection{\texorpdfstring{Compilers}{Compilers}}\label{README.md_autotoc_md415}
+
+\begin{DoxyItemize}
+\item gcc 5.\+0+
+\item clang 5.\+0+
+\item MSVC 2015+
+\end{DoxyItemize}
+
+{\bfseries{mac\+OS users\+:}} Xcode 9.\+3+ provides clang 5.\+0+.\hypertarget{README.md_autotoc_md416}{}\doxysubsubsection{\texorpdfstring{Build Systems}{Build Systems}}\label{README.md_autotoc_md416}
+
+\begin{DoxyItemize}
+\item \href{https://bazel.build/}{\texttt{ Bazel}}
+\item \href{https://cmake.org/}{\texttt{ CMake}}
+\end{DoxyItemize}
+
+{\bfseries{Note\+:}} Bazel is the build system used by the team internally and in tests. CMake is supported on a best-\/effort basis and by the community.\hypertarget{README.md_autotoc_md417}{}\doxysubsection{\texorpdfstring{Who Is Using Google\+Test?}{Who Is Using Google\+Test?}}\label{README.md_autotoc_md417}
+In addition to many internal projects at Google, Google\+Test is also used by the following notable projects\+:
+
+
+\begin{DoxyItemize}
+\item The \href{http://www.chromium.org/}{\texttt{ Chromium projects}} (behind the Chrome browser and Chrome OS).
+\item The \href{http://llvm.org/}{\texttt{ LLVM}} compiler.
+\item \href{https://github.com/google/protobuf}{\texttt{ Protocol Buffers}}, Google\textquotesingle{}s data interchange format.
+\item The \href{http://opencv.org/}{\texttt{ Open\+CV}} computer vision library.
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md418}{}\doxysubsection{\texorpdfstring{Related Open Source Projects}{Related Open Source Projects}}\label{README.md_autotoc_md418}
+\href{https://github.com/nholthaus/gtest-runner}{\texttt{ GTest Runner}} is a Qt5 based automated test-\/runner and Graphical User \doxylink{classInterface}{Interface} with powerful features for Windows and Linux platforms.
+
+\href{https://github.com/ospector/gtest-gbar}{\texttt{ Google\+Test UI}} is a test runner that runs your test binary, allows you to track its progress via a progress bar, and displays a list of test failures. Clicking on one shows failure text. Google\+Test UI is written in C\#.
+
+\href{https://github.com/kinow/gtest-tap-listener}{\texttt{ GTest TAP Listener}} is an event listener for Google\+Test that implements the \href{https://en.wikipedia.org/wiki/Test_Anything_Protocol}{\texttt{ TAP protocol}} for test result output. If your test runner understands TAP, you may find it useful.
+
+\href{https://github.com/google/gtest-parallel}{\texttt{ gtest-\/parallel}} is a test runner that runs tests from your binary in parallel to provide significant speed-\/up.
+
+\href{https://marketplace.visualstudio.com/items?itemName=DavidSchuldenfrei.gtest-adapter}{\texttt{ Google\+Test Adapter}} is a VS Code extension allowing to view Google\+Test in a tree view and run/debug your tests.
+
+\href{https://github.com/matepek/vscode-catch2-test-adapter}{\texttt{ C++ Test\+Mate}} is a VS Code extension allowing to view Google\+Test in a tree view and run/debug your tests.
+
+\href{https://pypi.org/project/cornichon/}{\texttt{ Cornichon}} is a small Gherkin DSL parser that generates stub code for Google\+Test.\hypertarget{README.md_autotoc_md419}{}\doxysubsection{\texorpdfstring{Contributing Changes}{Contributing Changes}}\label{README.md_autotoc_md419}
+Please read \href{https://github.com/google/googletest/blob/master/CONTRIBUTING.md}{\texttt{ {\ttfamily CONTRIBUTING.\+md}}} for details on how to contribute to this project.
+
+Happy testing! 

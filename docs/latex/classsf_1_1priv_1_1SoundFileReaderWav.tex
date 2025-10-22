@@ -1,0 +1,149 @@
+\doxysection{sf\+::priv\+::Sound\+File\+Reader\+Wav Class Reference}
+\hypertarget{classsf_1_1priv_1_1SoundFileReaderWav}{}\label{classsf_1_1priv_1_1SoundFileReaderWav}\index{sf::priv::SoundFileReaderWav@{sf::priv::SoundFileReaderWav}}
+
+
+Implementation of sound file reader that handles wav files.  
+
+
+
+
+{\ttfamily \#include $<$Sound\+File\+Reader\+Wav.\+hpp$>$}
+
+
+
+Inheritance diagram for sf\+::priv\+::Sound\+File\+Reader\+Wav\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=227pt]{classsf_1_1priv_1_1SoundFileReaderWav__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for sf\+::priv\+::Sound\+File\+Reader\+Wav\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=227pt]{classsf_1_1priv_1_1SoundFileReaderWav__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classsf_1_1priv_1_1SoundFileReaderWav_a42e8d443c2241f9858f60c5e93b034af}\label{classsf_1_1priv_1_1SoundFileReaderWav_a42e8d443c2241f9858f60c5e93b034af} 
+{\bfseries Sound\+File\+Reader\+Wav} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classsf_1_1priv_1_1SoundFileReaderWav_a5641ddf7af92f2e3d60a0a3ba13cdf3a}{open}} (\mbox{\hyperlink{classsf_1_1InputStream}{sf\+::\+Input\+Stream}} \&stream, \mbox{\hyperlink{structsf_1_1SoundFileReader_1_1Info}{Info}} \&info)
+\begin{DoxyCompactList}\small\item\em Open a sound file for reading. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classsf_1_1priv_1_1SoundFileReaderWav_a680ce70e04ec14974f8ee2e871d8a8fa}{seek}} (Uint64 sample\+Offset)
+\begin{DoxyCompactList}\small\item\em Change the current read position to the given sample offset. \end{DoxyCompactList}\item 
+virtual Uint64 \mbox{\hyperlink{classsf_1_1priv_1_1SoundFileReaderWav_aabf2690b226985023e76f5f21a69c19c}{read}} (Int16 \texorpdfstring{$\ast$}{*}samples, Uint64 max\+Count)
+\begin{DoxyCompactList}\small\item\em Read audio samples from the open file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classsf_1_1SoundFileReader}{sf\+::\+Sound\+File\+Reader}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Sound\+File\+Reader} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classsf_1_1priv_1_1SoundFileReaderWav_ab43ffe974f12659d77443e5ad61ae4a8}{check}} (\mbox{\hyperlink{classsf_1_1InputStream}{Input\+Stream}} \&stream)
+\begin{DoxyCompactList}\small\item\em Check if this reader can handle a file given by an input stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of sound file reader that handles wav files. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsf_1_1priv_1_1SoundFileReaderWav_ab43ffe974f12659d77443e5ad61ae4a8}\index{sf::priv::SoundFileReaderWav@{sf::priv::SoundFileReaderWav}!check@{check}}
+\index{check@{check}!sf::priv::SoundFileReaderWav@{sf::priv::SoundFileReaderWav}}
+\doxysubsubsection{\texorpdfstring{check()}{check()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1SoundFileReaderWav_ab43ffe974f12659d77443e5ad61ae4a8} 
+bool sf\+::priv\+::\+Sound\+File\+Reader\+Wav\+::check (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classsf_1_1InputStream}{Input\+Stream}} \&}]{stream}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if this reader can handle a file given by an input stream. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & Source stream to check\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the file is supported by this reader 
+\end{DoxyReturn}
+\Hypertarget{classsf_1_1priv_1_1SoundFileReaderWav_a5641ddf7af92f2e3d60a0a3ba13cdf3a}\index{sf::priv::SoundFileReaderWav@{sf::priv::SoundFileReaderWav}!open@{open}}
+\index{open@{open}!sf::priv::SoundFileReaderWav@{sf::priv::SoundFileReaderWav}}
+\doxysubsubsection{\texorpdfstring{open()}{open()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1SoundFileReaderWav_a5641ddf7af92f2e3d60a0a3ba13cdf3a} 
+bool sf\+::priv\+::\+Sound\+File\+Reader\+Wav\+::open (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classsf_1_1InputStream}{sf\+::\+Input\+Stream}} \&}]{stream}{, }\item[{\mbox{\hyperlink{structsf_1_1SoundFileReader_1_1Info}{Info}} \&}]{info}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Open a sound file for reading. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & Stream to open \\
+\hline
+{\em info} & Structure to fill with the attributes of the loaded sound \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classsf_1_1SoundFileReader_aa1d2fee2ba8f359c833ab74590d55935}{sf\+::\+Sound\+File\+Reader}}.
+
+\Hypertarget{classsf_1_1priv_1_1SoundFileReaderWav_aabf2690b226985023e76f5f21a69c19c}\index{sf::priv::SoundFileReaderWav@{sf::priv::SoundFileReaderWav}!read@{read}}
+\index{read@{read}!sf::priv::SoundFileReaderWav@{sf::priv::SoundFileReaderWav}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1SoundFileReaderWav_aabf2690b226985023e76f5f21a69c19c} 
+Uint64 sf\+::priv\+::\+Sound\+File\+Reader\+Wav\+::read (\begin{DoxyParamCaption}\item[{Int16 \texorpdfstring{$\ast$}{*}}]{samples}{, }\item[{Uint64}]{max\+Count}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Read audio samples from the open file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em samples} & Pointer to the sample array to fill \\
+\hline
+{\em max\+Count} & Maximum number of samples to read\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of samples actually read (may be less than {\itshape max\+Count}) 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classsf_1_1SoundFileReader_a3b7d86769ea07e24e7b0f0486bed7591}{sf\+::\+Sound\+File\+Reader}}.
+
+\Hypertarget{classsf_1_1priv_1_1SoundFileReaderWav_a680ce70e04ec14974f8ee2e871d8a8fa}\index{sf::priv::SoundFileReaderWav@{sf::priv::SoundFileReaderWav}!seek@{seek}}
+\index{seek@{seek}!sf::priv::SoundFileReaderWav@{sf::priv::SoundFileReaderWav}}
+\doxysubsubsection{\texorpdfstring{seek()}{seek()}}
+{\footnotesize\ttfamily \label{classsf_1_1priv_1_1SoundFileReaderWav_a680ce70e04ec14974f8ee2e871d8a8fa} 
+void sf\+::priv\+::\+Sound\+File\+Reader\+Wav\+::seek (\begin{DoxyParamCaption}\item[{Uint64}]{sample\+Offset}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Change the current read position to the given sample offset. 
+
+The sample offset takes the channels into account. If you have a time offset instead, you can easily find the corresponding sample offset with the following formula\+: {\ttfamily time\+In\+Seconds \texorpdfstring{$\ast$}{*} sample\+Rate \texorpdfstring{$\ast$}{*} channel\+Count} If the given offset exceeds to total number of samples, this function must jump to the end of the file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sample\+Offset} & Index of the sample to jump to, relative to the beginning \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classsf_1_1SoundFileReader_a1e18ade5ffe882bdfa20a2ebe7e2b015}{sf\+::\+Sound\+File\+Reader}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+Audio/Sound\+File\+Reader\+Wav.\+hpp\item 
+build/\+\_\+deps/sfml-\/src/src/\+SFML/\+Audio/Sound\+File\+Reader\+Wav.\+cpp\end{DoxyCompactItemize}

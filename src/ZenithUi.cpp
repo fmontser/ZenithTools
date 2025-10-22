@@ -1,7 +1,4 @@
 #include "ZenithUi.hpp"
-#include "ZenithBar.hpp"
-#include "imgui.h"
-#include "imgui-SFML.h"
 
 using namespace zenith;
 
@@ -26,7 +23,6 @@ void ZenithUi::RenderLoop() {
 	ImGui::SFML::Shutdown();
 }
 
-#include <iostream>
 void ZenithUi::SetupEvents() {
 
 	// Alt+F4 close //TODO not working due to sf::Style::None

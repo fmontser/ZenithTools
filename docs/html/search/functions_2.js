@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['reset_0',['Reset',['../classzenith_1_1Timer.html#ae7c0c1e7d12de4b8a6e7c64e451cdd2a',1,'zenith::Timer']]],
-  ['resume_1',['Resume',['../classzenith_1_1Timer.html#ad3b4e386f8ebb885fa2ef6fcac8d9ca3',1,'zenith::Timer']]]
+  ['reset_0',['Reset',['../classzenith_1_1Timer.html#a5e4b864a706b96b25419d18fd22f10e0',1,'zenith::Timer']]],
+  ['resume_1',['Resume',['../classzenith_1_1Timer.html#a25e6750c76e6dd69eeaded9b90b5d179',1,'zenith::Timer']]]
 ];

@@ -1,0 +1,210 @@
+\doxysection{ftotval.\+h}
+\hypertarget{ftotval_8h_source}{}\label{ftotval_8h_source}\index{build/\_deps/sfml-\/src/extlibs/headers/freetype2/ftotval.h@{build/\_deps/sfml-\/src/extlibs/headers/freetype2/ftotval.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00003\ \textcolor{comment}{/*\ \ ftotval.h\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00004\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00005\ \textcolor{comment}{/*\ \ \ \ FreeType\ API\ for\ validating\ OpenType\ tables\ (specification).\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00007\ \textcolor{comment}{/*\ \ Copyright\ 2004-\/2007,\ 2013,\ 2014\ by\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ \ David\ Turner,\ Robert\ Wilhelm,\ and\ Werner\ Lemberg.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00010\ \textcolor{comment}{/*\ \ This\ file\ is\ part\ of\ the\ FreeType\ project,\ and\ may\ only\ be\ used,\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*\ \ modified,\ and\ distributed\ under\ the\ terms\ of\ the\ FreeType\ project\ \ \ \ \ \ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*\ \ license,\ LICENSE.TXT.\ \ By\ continuing\ to\ use,\ modify,\ or\ distribute\ \ \ \ \ */}}
+\DoxyCodeLine{00013\ \textcolor{comment}{/*\ \ this\ file\ you\ indicate\ that\ you\ have\ read\ the\ license\ and\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00014\ \textcolor{comment}{/*\ \ understand\ and\ accept\ it\ fully.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00015\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00016\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00020\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00021\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00022\ \textcolor{comment}{/*\ Warning:\ This\ module\ might\ be\ moved\ to\ a\ different\ library\ in\ the\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00023\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ future\ to\ avoid\ a\ tight\ dependency\ between\ FreeType\ and\ the\ \ \ \ */}}
+\DoxyCodeLine{00024\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ OpenType\ specification.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00025\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00026\ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00027\ \textcolor{comment}{/***************************************************************************/}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#ifndef\ \_\_FTOTVAL\_H\_\_}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ \_\_FTOTVAL\_H\_\_}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ <ft2build.h>}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ FT\_FREETYPE\_H}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#ifdef\ FREETYPE\_H}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#error\ "{}freetype.h\ of\ FreeType\ 1\ has\ been\ loaded!"{}}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#error\ "{}Please\ fix\ the\ directory\ search\ order\ for\ header\ files"{}}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#error\ "{}so\ that\ freetype.h\ of\ FreeType\ 2\ is\ found\ first."{}}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ FT\_BEGIN\_HEADER}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00047\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00048\ \ \ \textcolor{comment}{/*\ <Section>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00049\ \ \ \textcolor{comment}{/*\ \ \ \ ot\_validation\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00050\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00051\ \ \ \textcolor{comment}{/*\ <Title>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00052\ \ \ \textcolor{comment}{/*\ \ \ \ OpenType\ Validation\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00053\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00054\ \ \ \textcolor{comment}{/*\ <Abstract>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00055\ \ \ \textcolor{comment}{/*\ \ \ \ An\ API\ to\ validate\ OpenType\ tables.\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00056\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00057\ \ \ \textcolor{comment}{/*\ <Description>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00058\ \ \ \textcolor{comment}{/*\ \ \ \ This\ section\ contains\ the\ declaration\ of\ functions\ to\ validate\ \ \ \ \ */}}
+\DoxyCodeLine{00059\ \ \ \textcolor{comment}{/*\ \ \ \ some\ OpenType\ tables\ (BASE,\ GDEF,\ GPOS,\ GSUB,\ JSTF,\ MATH).\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00060\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00061\ \ \ \textcolor{comment}{/*\ <Order>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00062\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_OpenType\_Validate\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00063\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_OpenType\_Free\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00064\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00065\ \ \ \textcolor{comment}{/*\ \ \ \ FT\_VALIDATE\_OTXXX\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00066\ \ \ \textcolor{comment}{/*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00067\ \textcolor{comment}{\ \ /*************************************************************************/}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \textcolor{comment}{\ /**********************************************************************}}
+\DoxyCodeLine{00071\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00072\ \textcolor{comment}{\ \ *\ @enum:}}
+\DoxyCodeLine{00073\ \textcolor{comment}{\ \ *\ \ \ \ FT\_VALIDATE\_OTXXX}}
+\DoxyCodeLine{00074\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00075\ \textcolor{comment}{\ \ *\ @description:}}
+\DoxyCodeLine{00076\ \textcolor{comment}{\ \ *\ \ \ \ A\ list\ of\ bit-\/field\ constants\ used\ with\ @FT\_OpenType\_Validate\ to}}
+\DoxyCodeLine{00077\ \textcolor{comment}{\ \ *\ \ \ \ indicate\ which\ OpenType\ tables\ should\ be\ validated.}}
+\DoxyCodeLine{00078\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00079\ \textcolor{comment}{\ \ *\ @values:}}
+\DoxyCodeLine{00080\ \textcolor{comment}{\ \ *\ \ \ \ FT\_VALIDATE\_BASE\ ::}}
+\DoxyCodeLine{00081\ \textcolor{comment}{\ \ *\ \ \ \ \ \ Validate\ BASE\ table.}}
+\DoxyCodeLine{00082\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00083\ \textcolor{comment}{\ \ *\ \ \ \ FT\_VALIDATE\_GDEF\ ::}}
+\DoxyCodeLine{00084\ \textcolor{comment}{\ \ *\ \ \ \ \ \ Validate\ GDEF\ table.}}
+\DoxyCodeLine{00085\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00086\ \textcolor{comment}{\ \ *\ \ \ \ FT\_VALIDATE\_GPOS\ ::}}
+\DoxyCodeLine{00087\ \textcolor{comment}{\ \ *\ \ \ \ \ \ Validate\ GPOS\ table.}}
+\DoxyCodeLine{00088\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00089\ \textcolor{comment}{\ \ *\ \ \ \ FT\_VALIDATE\_GSUB\ ::}}
+\DoxyCodeLine{00090\ \textcolor{comment}{\ \ *\ \ \ \ \ \ Validate\ GSUB\ table.}}
+\DoxyCodeLine{00091\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00092\ \textcolor{comment}{\ \ *\ \ \ \ FT\_VALIDATE\_JSTF\ ::}}
+\DoxyCodeLine{00093\ \textcolor{comment}{\ \ *\ \ \ \ \ \ Validate\ JSTF\ table.}}
+\DoxyCodeLine{00094\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00095\ \textcolor{comment}{\ \ *\ \ \ \ FT\_VALIDATE\_MATH\ ::}}
+\DoxyCodeLine{00096\ \textcolor{comment}{\ \ *\ \ \ \ \ \ Validate\ MATH\ table.}}
+\DoxyCodeLine{00097\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00098\ \textcolor{comment}{\ \ *\ \ \ \ FT\_VALIDATE\_OT\ ::}}
+\DoxyCodeLine{00099\ \textcolor{comment}{\ \ *\ \ \ \ \ \ Validate\ all\ OpenType\ tables\ (BASE,\ GDEF,\ GPOS,\ GSUB,\ JSTF,\ MATH).}}
+\DoxyCodeLine{00100\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00101\ \textcolor{comment}{\ \ */}}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#define\ FT\_VALIDATE\_BASE\ \ 0x0100}}
+\DoxyCodeLine{00103\ \textcolor{preprocessor}{\#define\ FT\_VALIDATE\_GDEF\ \ 0x0200}}
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#define\ FT\_VALIDATE\_GPOS\ \ 0x0400}}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\#define\ FT\_VALIDATE\_GSUB\ \ 0x0800}}
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#define\ FT\_VALIDATE\_JSTF\ \ 0x1000}}
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\#define\ FT\_VALIDATE\_MATH\ \ 0x2000}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\#define\ FT\_VALIDATE\_OT\ \ FT\_VALIDATE\_BASE\ |\ \(\backslash\)}}
+\DoxyCodeLine{00110\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_VALIDATE\_GDEF\ |\ \(\backslash\)}}
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_VALIDATE\_GPOS\ |\ \(\backslash\)}}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_VALIDATE\_GSUB\ |\ \(\backslash\)}}
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_VALIDATE\_JSTF\ |\ \(\backslash\)}}
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_VALIDATE\_MATH}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \textcolor{comment}{\ /**********************************************************************}}
+\DoxyCodeLine{00117\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00118\ \textcolor{comment}{\ \ *\ @function:}}
+\DoxyCodeLine{00119\ \textcolor{comment}{\ \ *\ \ \ \ FT\_OpenType\_Validate}}
+\DoxyCodeLine{00120\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00121\ \textcolor{comment}{\ \ *\ @description:}}
+\DoxyCodeLine{00122\ \textcolor{comment}{\ \ *\ \ \ \ Validate\ various\ OpenType\ tables\ to\ assure\ that\ all\ offsets\ and}}
+\DoxyCodeLine{00123\ \textcolor{comment}{\ \ *\ \ \ \ indices\ are\ valid.\ \ The\ idea\ is\ that\ a\ higher-\/level\ library\ that}}
+\DoxyCodeLine{00124\ \textcolor{comment}{\ \ *\ \ \ \ actually\ does\ the\ text\ layout\ can\ access\ those\ tables\ without}}
+\DoxyCodeLine{00125\ \textcolor{comment}{\ \ *\ \ \ \ error\ checking\ (which\ can\ be\ quite\ time\ consuming).}}
+\DoxyCodeLine{00126\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00127\ \textcolor{comment}{\ \ *\ @input:}}
+\DoxyCodeLine{00128\ \textcolor{comment}{\ \ *\ \ \ \ face\ ::}}
+\DoxyCodeLine{00129\ \textcolor{comment}{\ \ *\ \ \ \ \ \ \ A\ handle\ to\ the\ input\ face.}}
+\DoxyCodeLine{00130\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00131\ \textcolor{comment}{\ \ *\ \ \ \ validation\_flags\ ::}}
+\DoxyCodeLine{00132\ \textcolor{comment}{\ \ *\ \ \ \ \ \ \ A\ bit\ field\ that\ specifies\ the\ tables\ to\ be\ validated.\ \ See}}
+\DoxyCodeLine{00133\ \textcolor{comment}{\ \ *\ \ \ \ \ \ \ @FT\_VALIDATE\_OTXXX\ for\ possible\ values.}}
+\DoxyCodeLine{00134\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00135\ \textcolor{comment}{\ \ *\ @output:}}
+\DoxyCodeLine{00136\ \textcolor{comment}{\ \ *\ \ \ \ BASE\_table\ ::}}
+\DoxyCodeLine{00137\ \textcolor{comment}{\ \ *\ \ \ \ \ \ \ A\ pointer\ to\ the\ BASE\ table.}}
+\DoxyCodeLine{00138\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00139\ \textcolor{comment}{\ \ *\ \ \ \ GDEF\_table\ ::}}
+\DoxyCodeLine{00140\ \textcolor{comment}{\ \ *\ \ \ \ \ \ \ A\ pointer\ to\ the\ GDEF\ table.}}
+\DoxyCodeLine{00141\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00142\ \textcolor{comment}{\ \ *\ \ \ \ GPOS\_table\ ::}}
+\DoxyCodeLine{00143\ \textcolor{comment}{\ \ *\ \ \ \ \ \ \ A\ pointer\ to\ the\ GPOS\ table.}}
+\DoxyCodeLine{00144\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00145\ \textcolor{comment}{\ \ *\ \ \ \ GSUB\_table\ ::}}
+\DoxyCodeLine{00146\ \textcolor{comment}{\ \ *\ \ \ \ \ \ \ A\ pointer\ to\ the\ GSUB\ table.}}
+\DoxyCodeLine{00147\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00148\ \textcolor{comment}{\ \ *\ \ \ \ JSTF\_table\ ::}}
+\DoxyCodeLine{00149\ \textcolor{comment}{\ \ *\ \ \ \ \ \ \ A\ pointer\ to\ the\ JSTF\ table.}}
+\DoxyCodeLine{00150\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00151\ \textcolor{comment}{\ \ *\ @return:}}
+\DoxyCodeLine{00152\ \textcolor{comment}{\ \ *\ \ \ FreeType\ error\ code.\ \ 0\string~means\ success.}}
+\DoxyCodeLine{00153\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00154\ \textcolor{comment}{\ \ *\ @note:}}
+\DoxyCodeLine{00155\ \textcolor{comment}{\ \ *\ \ \ This\ function\ only\ works\ with\ OpenType\ fonts,\ returning\ an\ error}}
+\DoxyCodeLine{00156\ \textcolor{comment}{\ \ *\ \ \ otherwise.}}
+\DoxyCodeLine{00157\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00158\ \textcolor{comment}{\ \ *\ \ \ After\ use,\ the\ application\ should\ deallocate\ the\ five\ tables\ with}}
+\DoxyCodeLine{00159\ \textcolor{comment}{\ \ *\ \ \ @FT\_OpenType\_Free.\ \ A\ NULL\ value\ indicates\ that\ the\ table\ either}}
+\DoxyCodeLine{00160\ \textcolor{comment}{\ \ *\ \ \ doesn't\ exist\ in\ the\ font,\ or\ the\ application\ hasn't\ asked\ for}}
+\DoxyCodeLine{00161\ \textcolor{comment}{\ \ *\ \ \ validation.}}
+\DoxyCodeLine{00162\ \textcolor{comment}{\ \ */}}
+\DoxyCodeLine{00163\ \ \ FT\_EXPORT(\ FT\_Error\ )}
+\DoxyCodeLine{00164\ \ \ FT\_OpenType\_Validate(\ FT\_Face\ \ \ \ face,}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_UInt\ \ \ \ validation\_flags,}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Bytes\ \ *BASE\_table,}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Bytes\ \ *GDEF\_table,}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Bytes\ \ *GPOS\_table,}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Bytes\ \ *GSUB\_table,}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Bytes\ \ *JSTF\_table\ );}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \textcolor{comment}{\ /**********************************************************************}}
+\DoxyCodeLine{00173\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00174\ \textcolor{comment}{\ \ *\ @function:}}
+\DoxyCodeLine{00175\ \textcolor{comment}{\ \ *\ \ \ \ FT\_OpenType\_Free}}
+\DoxyCodeLine{00176\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00177\ \textcolor{comment}{\ \ *\ @description:}}
+\DoxyCodeLine{00178\ \textcolor{comment}{\ \ *\ \ \ \ Free\ the\ buffer\ allocated\ by\ OpenType\ validator.}}
+\DoxyCodeLine{00179\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00180\ \textcolor{comment}{\ \ *\ @input:}}
+\DoxyCodeLine{00181\ \textcolor{comment}{\ \ *\ \ \ \ face\ ::}}
+\DoxyCodeLine{00182\ \textcolor{comment}{\ \ *\ \ \ \ \ \ \ A\ handle\ to\ the\ input\ face.}}
+\DoxyCodeLine{00183\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00184\ \textcolor{comment}{\ \ *\ \ \ \ table\ ::}}
+\DoxyCodeLine{00185\ \textcolor{comment}{\ \ *\ \ \ \ \ \ \ The\ pointer\ to\ the\ buffer\ that\ is\ allocated\ by}}
+\DoxyCodeLine{00186\ \textcolor{comment}{\ \ *\ \ \ \ \ \ \ @FT\_OpenType\_Validate.}}
+\DoxyCodeLine{00187\ \textcolor{comment}{\ \ *}}
+\DoxyCodeLine{00188\ \textcolor{comment}{\ \ *\ @note:}}
+\DoxyCodeLine{00189\ \textcolor{comment}{\ \ *\ \ \ This\ function\ must\ be\ used\ to\ free\ the\ buffer\ allocated\ by}}
+\DoxyCodeLine{00190\ \textcolor{comment}{\ \ *\ \ \ @FT\_OpenType\_Validate\ only.}}
+\DoxyCodeLine{00191\ \textcolor{comment}{\ \ */}}
+\DoxyCodeLine{00192\ \ \ FT\_EXPORT(\ \textcolor{keywordtype}{void}\ )}
+\DoxyCodeLine{00193\ \ \ FT\_OpenType\_Free(\ FT\_Face\ \ \ face,}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FT\_Bytes\ \ table\ );}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ \ \ \textcolor{comment}{/*\ */}}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ FT\_END\_HEADER}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_FTOTVAL\_H\_\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \textcolor{comment}{/*\ END\ */}}
+
+\end{DoxyCode}

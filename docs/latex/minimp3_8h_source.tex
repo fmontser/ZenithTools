@@ -1,0 +1,1861 @@
+\doxysection{minimp3.\+h}
+\hypertarget{minimp3_8h_source}{}\label{minimp3_8h_source}\index{build/\_deps/sfml-\/src/extlibs/headers/minimp3/minimp3.h@{build/\_deps/sfml-\/src/extlibs/headers/minimp3/minimp3.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MINIMP3\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MINIMP3\_H}}
+\DoxyCodeLine{00003\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ \ \ \ https://github.com/lieff/minimp3}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ \ \ \ To\ the\ extent\ possible\ under\ law,\ the\ author(s)\ have\ dedicated\ all\ copyright\ and\ related\ and\ neighboring\ rights\ to\ this\ software\ to\ the\ public\ domain\ worldwide.}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ \ \ \ This\ software\ is\ distributed\ without\ any\ warranty.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ \ \ \ See\ <http://creativecommons.org/publicdomain/zero/1.0/>.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ MINIMP3\_MAX\_SAMPLES\_PER\_FRAME\ (1152*2)}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{int}\ frame\_bytes,\ frame\_offset,\ channels,\ hz,\ layer,\ bitrate\_kbps;}
+\DoxyCodeLine{00016\ \}\ \mbox{\hyperlink{structmp3dec__frame__info__t}{mp3dec\_frame\_info\_t}};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{float}\ mdct\_overlap[2][9*32],\ qmf\_state[15*2*32];}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{int}\ reserv,\ free\_format\_bytes;}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ header[4],\ reserv\_buf[511];}
+\DoxyCodeLine{00023\ \}\ \mbox{\hyperlink{structmp3dec__t}{mp3dec\_t}};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00026\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_cplusplus\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keywordtype}{void}\ mp3dec\_init(\mbox{\hyperlink{structmp3dec__t}{mp3dec\_t}}\ *dec);}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#ifndef\ MINIMP3\_FLOAT\_OUTPUT}}
+\DoxyCodeLine{00031\ \textcolor{keyword}{typedef}\ int16\_t\ mp3d\_sample\_t;}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ MINIMP3\_FLOAT\_OUTPUT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00033\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{float}\ mp3d\_sample\_t;}
+\DoxyCodeLine{00034\ \textcolor{keywordtype}{void}\ mp3dec\_f32\_to\_s16(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ *in,\ int16\_t\ *out,\ \textcolor{keywordtype}{int}\ num\_samples);}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MINIMP3\_FLOAT\_OUTPUT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00036\ \textcolor{keywordtype}{int}\ mp3dec\_decode\_frame(\mbox{\hyperlink{structmp3dec__t}{mp3dec\_t}}\ *dec,\ \textcolor{keyword}{const}\ uint8\_t\ *mp3,\ \textcolor{keywordtype}{int}\ mp3\_bytes,\ mp3d\_sample\_t\ *pcm,\ \mbox{\hyperlink{structmp3dec__frame__info__t}{mp3dec\_frame\_info\_t}}\ *info);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00039\ \}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_cplusplus\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MINIMP3\_H\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#if\ defined(MINIMP3\_IMPLEMENTATION)\ \&\&\ !defined(\_MINIMP3\_IMPLEMENTATION\_GUARD)}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#define\ \_MINIMP3\_IMPLEMENTATION\_GUARD}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#define\ MAX\_FREE\_FORMAT\_FRAME\_SIZE\ \ 2304\ \ \ \ }\textcolor{comment}{/*\ more\ than\ ISO\ spec's\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#ifndef\ MAX\_FRAME\_SYNC\_MATCHES}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#define\ MAX\_FRAME\_SYNC\_MATCHES\ \ \ \ \ \ 10}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MAX\_FRAME\_SYNC\_MATCHES\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ MAX\_L3\_FRAME\_PAYLOAD\_BYTES\ \ MAX\_FREE\_FORMAT\_FRAME\_SIZE\ }\textcolor{comment}{/*\ MUST\ be\ >=\ 320000/8/32000*1152\ =\ 1440\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#define\ MAX\_BITRESERVOIR\_BYTES\ \ \ \ \ \ 511}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#define\ SHORT\_BLOCK\_TYPE\ \ \ \ \ \ \ \ \ \ \ \ 2}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#define\ STOP\_BLOCK\_TYPE\ \ \ \ \ \ \ \ \ \ \ \ \ 3}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#define\ MODE\_MONO\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 3}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#define\ MODE\_JOINT\_STEREO\ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#define\ HDR\_SIZE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 4}}
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#define\ HDR\_IS\_MONO(h)\ \ \ \ \ \ \ \ \ \ \ \ \ \ (((h[3])\ \&\ 0xC0)\ ==\ 0xC0)}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#define\ HDR\_IS\_MS\_STEREO(h)\ \ \ \ \ \ \ \ \ (((h[3])\ \&\ 0xE0)\ ==\ 0x60)}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#define\ HDR\_IS\_FREE\_FORMAT(h)\ \ \ \ \ \ \ (((h[2])\ \&\ 0xF0)\ ==\ 0)}}
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#define\ HDR\_IS\_CRC(h)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (!((h[1])\ \&\ 1))}}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#define\ HDR\_TEST\_PADDING(h)\ \ \ \ \ \ \ \ \ ((h[2])\ \&\ 0x2)}}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#define\ HDR\_TEST\_MPEG1(h)\ \ \ \ \ \ \ \ \ \ \ ((h[1])\ \&\ 0x8)}}
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#define\ HDR\_TEST\_NOT\_MPEG25(h)\ \ \ \ \ \ ((h[1])\ \&\ 0x10)}}
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#define\ HDR\_TEST\_I\_STEREO(h)\ \ \ \ \ \ \ \ ((h[3])\ \&\ 0x10)}}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#define\ HDR\_TEST\_MS\_STEREO(h)\ \ \ \ \ \ \ ((h[3])\ \&\ 0x20)}}
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#define\ HDR\_GET\_STEREO\_MODE(h)\ \ \ \ \ \ (((h[3])\ >>\ 6)\ \&\ 3)}}
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#define\ HDR\_GET\_STEREO\_MODE\_EXT(h)\ \ (((h[3])\ >>\ 4)\ \&\ 3)}}
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\#define\ HDR\_GET\_LAYER(h)\ \ \ \ \ \ \ \ \ \ \ \ (((h[1])\ >>\ 1)\ \&\ 3)}}
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#define\ HDR\_GET\_BITRATE(h)\ \ \ \ \ \ \ \ \ \ ((h[2])\ >>\ 4)}}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#define\ HDR\_GET\_SAMPLE\_RATE(h)\ \ \ \ \ \ (((h[2])\ >>\ 2)\ \&\ 3)}}
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#define\ HDR\_GET\_MY\_SAMPLE\_RATE(h)\ \ \ (HDR\_GET\_SAMPLE\_RATE(h)\ +\ (((h[1]\ >>\ 3)\ \&\ 1)\ +\ ((h[1]\ >>\ 4)\ \&\ 1))*3)}}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#define\ HDR\_IS\_FRAME\_576(h)\ \ \ \ \ \ \ \ \ ((h[1]\ \&\ 14)\ ==\ 2)}}
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#define\ HDR\_IS\_LAYER\_1(h)\ \ \ \ \ \ \ \ \ \ \ ((h[1]\ \&\ 6)\ ==\ 6)}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#define\ BITS\_DEQUANTIZER\_OUT\ \ \ \ \ \ \ \ -\/1}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#define\ MAX\_SCF\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (255\ +\ BITS\_DEQUANTIZER\_OUT*4\ -\/\ 210)}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#define\ MAX\_SCFI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((MAX\_SCF\ +\ 3)\ \&\ \string~3)}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#define\ MINIMP3\_MIN(a,\ b)\ \ \ \ \ \ \ \ \ \ \ ((a)\ >\ (b)\ ?\ (b)\ :\ (a))}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#define\ MINIMP3\_MAX(a,\ b)\ \ \ \ \ \ \ \ \ \ \ ((a)\ <\ (b)\ ?\ (b)\ :\ (a))}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#if\ !defined(MINIMP3\_NO\_SIMD)}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#if\ !defined(MINIMP3\_ONLY\_SIMD)\ \&\&\ (defined(\_M\_X64)\ ||\ defined(\_\_x86\_64\_\_)\ ||\ defined(\_\_aarch64\_\_)\ ||\ defined(\_M\_ARM64))}}
+\DoxyCodeLine{00090\ \textcolor{comment}{/*\ x64\ always\ have\ SSE2,\ arm64\ always\ have\ neon,\ no\ need\ for\ generic\ code\ */}}
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#define\ MINIMP3\_ONLY\_SIMD}}
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ SIMD\ checks...\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#if\ (defined(\_MSC\_VER)\ \&\&\ (defined(\_M\_IX86)\ ||\ defined(\_M\_X64)))\ ||\ ((defined(\_\_i386\_\_)\ ||\ defined(\_\_x86\_64\_\_))\ \&\&\ defined(\_\_SSE2\_\_))}}
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#if\ defined(\_MSC\_VER)}}
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\#include\ <intrin.h>}}
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ defined(\_MSC\_VER)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#include\ <immintrin.h>}}
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#define\ HAVE\_SSE\ 1}}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#define\ HAVE\_SIMD\ 1}}
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#define\ VSTORE\ \_mm\_storeu\_ps}}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#define\ VLD\ \_mm\_loadu\_ps}}
+\DoxyCodeLine{00103\ \textcolor{preprocessor}{\#define\ VSET\ \_mm\_set1\_ps}}
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#define\ VADD\ \_mm\_add\_ps}}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\#define\ VSUB\ \_mm\_sub\_ps}}
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#define\ VMUL\ \_mm\_mul\_ps}}
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\#define\ VMAC(a,\ x,\ y)\ \_mm\_add\_ps(a,\ \_mm\_mul\_ps(x,\ y))}}
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\#define\ VMSB(a,\ x,\ y)\ \_mm\_sub\_ps(a,\ \_mm\_mul\_ps(x,\ y))}}
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\#define\ VMUL\_S(x,\ s)\ \ \_mm\_mul\_ps(x,\ \_mm\_set1\_ps(s))}}
+\DoxyCodeLine{00110\ \textcolor{preprocessor}{\#define\ VREV(x)\ \_mm\_shuffle\_ps(x,\ x,\ \_MM\_SHUFFLE(0,\ 1,\ 2,\ 3))}}
+\DoxyCodeLine{00111\ \textcolor{keyword}{typedef}\ \_\_m128\ f4;}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#if\ defined(\_MSC\_VER)\ ||\ defined(MINIMP3\_ONLY\_SIMD)}}
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\#define\ minimp3\_cpuid\ \_\_cpuid}}
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ defined(\_MSC\_VER)\ ||\ defined(MINIMP3\_ONLY\_SIMD)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00115\ \textcolor{keyword}{static}\ \_\_inline\_\_\ \_\_attribute\_\_((always\_inline))\ \textcolor{keywordtype}{void}\ minimp3\_cpuid(\textcolor{keywordtype}{int}\ CPUInfo[],\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ InfoType)}
+\DoxyCodeLine{00116\ \{}
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#if\ defined(\_\_PIC\_\_)}}
+\DoxyCodeLine{00118\ \ \ \ \ \_\_asm\_\_\ \_\_volatile\_\_(}
+\DoxyCodeLine{00119\ \#\textcolor{keywordflow}{if}\ defined(\_\_x86\_64\_\_)}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}push\ \%\%rbx\(\backslash\)n"{}}}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}cpuid\(\backslash\)n"{}}}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}xchgl\ \%\%ebx,\ \%1\(\backslash\)n"{}}}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}pop\ \ \%\%rbx\(\backslash\)n"{}}}
+\DoxyCodeLine{00124\ \#\textcolor{keywordflow}{else}\ \textcolor{comment}{/*\ defined(\_\_x86\_64\_\_)\ */}}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}xchgl\ \%\%ebx,\ \%1\(\backslash\)n"{}}}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}cpuid\(\backslash\)n"{}}}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}xchgl\ \%\%ebx,\ \%1\(\backslash\)n"{}}}
+\DoxyCodeLine{00128\ \#endif\ \textcolor{comment}{/*\ defined(\_\_x86\_64\_\_)\ */}}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ :\ \textcolor{stringliteral}{"{}=a"{}}\ (CPUInfo[0]),\ \textcolor{stringliteral}{"{}=r"{}}\ (CPUInfo[1]),\ \textcolor{stringliteral}{"{}=c"{}}\ (CPUInfo[2]),\ \textcolor{stringliteral}{"{}=d"{}}\ (CPUInfo[3])}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ :\ \textcolor{stringliteral}{"{}a"{}}\ (InfoType));}
+\DoxyCodeLine{00131\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ defined(\_\_PIC\_\_)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00132\ \ \ \ \ \_\_asm\_\_\ \_\_volatile\_\_(}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}cpuid"{}}}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ :\ \textcolor{stringliteral}{"{}=a"{}}\ (CPUInfo[0]),\ \textcolor{stringliteral}{"{}=b"{}}\ (CPUInfo[1]),\ \textcolor{stringliteral}{"{}=c"{}}\ (CPUInfo[2]),\ \textcolor{stringliteral}{"{}=d"{}}\ (CPUInfo[3])}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ :\ \textcolor{stringliteral}{"{}a"{}}\ (InfoType));}
+\DoxyCodeLine{00136\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ defined(\_\_PIC\_\_)*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00137\ \}}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ defined(\_MSC\_VER)\ ||\ defined(MINIMP3\_ONLY\_SIMD)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00139\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ have\_simd(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00140\ \{}
+\DoxyCodeLine{00141\ \textcolor{preprocessor}{\#ifdef\ MINIMP3\_ONLY\_SIMD}}
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00143\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ MINIMP3\_ONLY\_SIMD\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ g\_have\_simd;}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordtype}{int}\ CPUInfo[4];}
+\DoxyCodeLine{00146\ \textcolor{preprocessor}{\#ifdef\ MINIMP3\_TEST}}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ g\_counter;}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordflow}{if}\ (g\_counter++\ >\ 100)}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00150\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MINIMP3\_TEST\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordflow}{if}\ (g\_have\_simd)}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ end;}
+\DoxyCodeLine{00153\ \ \ \ \ minimp3\_cpuid(CPUInfo,\ 0);}
+\DoxyCodeLine{00154\ \ \ \ \ g\_have\_simd\ =\ 1;}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordflow}{if}\ (CPUInfo[0]\ >\ 0)}
+\DoxyCodeLine{00156\ \ \ \ \ \{}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ minimp3\_cpuid(CPUInfo,\ 1);}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ g\_have\_simd\ =\ (CPUInfo[3]\ \&\ (1\ <<\ 26))\ +\ 1;\ \textcolor{comment}{/*\ SSE2\ */}}
+\DoxyCodeLine{00159\ \ \ \ \ \}}
+\DoxyCodeLine{00160\ end:}
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordflow}{return}\ g\_have\_simd\ -\/\ 1;}
+\DoxyCodeLine{00162\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MINIMP3\_ONLY\_SIMD\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00163\ \}}
+\DoxyCodeLine{00164\ \textcolor{preprocessor}{\#elif\ defined(\_\_ARM\_NEON)\ ||\ defined(\_\_aarch64\_\_)\ ||\ defined(\_M\_ARM64)}}
+\DoxyCodeLine{00165\ \textcolor{preprocessor}{\#include\ <arm\_neon.h>}}
+\DoxyCodeLine{00166\ \textcolor{preprocessor}{\#define\ HAVE\_SSE\ 0}}
+\DoxyCodeLine{00167\ \textcolor{preprocessor}{\#define\ HAVE\_SIMD\ 1}}
+\DoxyCodeLine{00168\ \textcolor{preprocessor}{\#define\ VSTORE\ vst1q\_f32}}
+\DoxyCodeLine{00169\ \textcolor{preprocessor}{\#define\ VLD\ vld1q\_f32}}
+\DoxyCodeLine{00170\ \textcolor{preprocessor}{\#define\ VSET\ vmovq\_n\_f32}}
+\DoxyCodeLine{00171\ \textcolor{preprocessor}{\#define\ VADD\ vaddq\_f32}}
+\DoxyCodeLine{00172\ \textcolor{preprocessor}{\#define\ VSUB\ vsubq\_f32}}
+\DoxyCodeLine{00173\ \textcolor{preprocessor}{\#define\ VMUL\ vmulq\_f32}}
+\DoxyCodeLine{00174\ \textcolor{preprocessor}{\#define\ VMAC(a,\ x,\ y)\ vmlaq\_f32(a,\ x,\ y)}}
+\DoxyCodeLine{00175\ \textcolor{preprocessor}{\#define\ VMSB(a,\ x,\ y)\ vmlsq\_f32(a,\ x,\ y)}}
+\DoxyCodeLine{00176\ \textcolor{preprocessor}{\#define\ VMUL\_S(x,\ s)\ \ vmulq\_f32(x,\ vmovq\_n\_f32(s))}}
+\DoxyCodeLine{00177\ \textcolor{preprocessor}{\#define\ VREV(x)\ vcombine\_f32(vget\_high\_f32(vrev64q\_f32(x)),\ vget\_low\_f32(vrev64q\_f32(x)))}}
+\DoxyCodeLine{00178\ \textcolor{keyword}{typedef}\ float32x4\_t\ f4;}
+\DoxyCodeLine{00179\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ have\_simd()}
+\DoxyCodeLine{00180\ \{\ \ \ \textcolor{comment}{/*\ TODO:\ detect\ neon\ for\ !MINIMP3\_ONLY\_SIMD\ */}}
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00182\ \}}
+\DoxyCodeLine{00183\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ SIMD\ checks...\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00184\ \textcolor{preprocessor}{\#define\ HAVE\_SSE\ 0}}
+\DoxyCodeLine{00185\ \textcolor{preprocessor}{\#define\ HAVE\_SIMD\ 0}}
+\DoxyCodeLine{00186\ \textcolor{preprocessor}{\#ifdef\ MINIMP3\_ONLY\_SIMD}}
+\DoxyCodeLine{00187\ \textcolor{preprocessor}{\#error\ MINIMP3\_ONLY\_SIMD\ used,\ but\ SSE/NEON\ not\ enabled}}
+\DoxyCodeLine{00188\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MINIMP3\_ONLY\_SIMD\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00189\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ SIMD\ checks...\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00190\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ !defined(MINIMP3\_NO\_SIMD)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00191\ \textcolor{preprocessor}{\#define\ HAVE\_SIMD\ 0}}
+\DoxyCodeLine{00192\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !defined(MINIMP3\_NO\_SIMD)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \textcolor{preprocessor}{\#if\ defined(\_\_ARM\_ARCH)\ \&\&\ (\_\_ARM\_ARCH\ >=\ 6)\ \&\&\ !defined(\_\_aarch64\_\_)\ \&\&\ !defined(\_M\_ARM64)}}
+\DoxyCodeLine{00195\ \textcolor{preprocessor}{\#define\ HAVE\_ARMV6\ 1}}
+\DoxyCodeLine{00196\ \textcolor{keyword}{static}\ \_\_inline\_\_\ \_\_attribute\_\_((always\_inline))\ int32\_t\ minimp3\_clip\_int16\_arm(int32\_t\ a)}
+\DoxyCodeLine{00197\ \{}
+\DoxyCodeLine{00198\ \ \ \ \ int32\_t\ x\ =\ 0;}
+\DoxyCodeLine{00199\ \ \ \ \ \_\_asm\_\_\ (\textcolor{stringliteral}{"{}ssat\ \%0,\ \#16,\ \%1"{}}\ :\ \textcolor{stringliteral}{"{}=r"{}}(x)\ :\ \textcolor{stringliteral}{"{}r"{}}(a));}
+\DoxyCodeLine{00200\ \ \ \ \ \textcolor{keywordflow}{return}\ x;}
+\DoxyCodeLine{00201\ \}}
+\DoxyCodeLine{00202\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00203\ \textcolor{preprocessor}{\#define\ HAVE\_ARMV6\ 0}}
+\DoxyCodeLine{00204\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00207\ \{}
+\DoxyCodeLine{00208\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *buf;}
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keywordtype}{int}\ pos,\ limit;}
+\DoxyCodeLine{00210\ \}\ bs\_t;}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00213\ \{}
+\DoxyCodeLine{00214\ \ \ \ \ \textcolor{keywordtype}{float}\ scf[3*64];}
+\DoxyCodeLine{00215\ \ \ \ \ uint8\_t\ total\_bands,\ stereo\_bands,\ bitalloc[64],\ scfcod[64];}
+\DoxyCodeLine{00216\ \}\ L12\_scale\_info;}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00218\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00219\ \{}
+\DoxyCodeLine{00220\ \ \ \ \ uint8\_t\ tab\_offset,\ code\_tab\_width,\ band\_count;}
+\DoxyCodeLine{00221\ \}\ L12\_subband\_alloc\_t;}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00224\ \{}
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *sfbtab;}
+\DoxyCodeLine{00226\ \ \ \ \ uint16\_t\ part\_23\_length,\ big\_values,\ scalefac\_compress;}
+\DoxyCodeLine{00227\ \ \ \ \ uint8\_t\ global\_gain,\ block\_type,\ mixed\_block\_flag,\ n\_long\_sfb,\ n\_short\_sfb;}
+\DoxyCodeLine{00228\ \ \ \ \ uint8\_t\ table\_select[3],\ region\_count[3],\ subblock\_gain[3];}
+\DoxyCodeLine{00229\ \ \ \ \ uint8\_t\ preflag,\ scalefac\_scale,\ count1\_table,\ scfsi;}
+\DoxyCodeLine{00230\ \}\ L3\_gr\_info\_t;}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00232\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00233\ \{}
+\DoxyCodeLine{00234\ \ \ \ \ bs\_t\ bs;}
+\DoxyCodeLine{00235\ \ \ \ \ uint8\_t\ maindata[MAX\_BITRESERVOIR\_BYTES\ +\ MAX\_L3\_FRAME\_PAYLOAD\_BYTES];}
+\DoxyCodeLine{00236\ \ \ \ \ L3\_gr\_info\_t\ gr\_info[4];}
+\DoxyCodeLine{00237\ \ \ \ \ \textcolor{keywordtype}{float}\ grbuf[2][576],\ scf[40],\ syn[18\ +\ 15][2*32];}
+\DoxyCodeLine{00238\ \ \ \ \ uint8\_t\ ist\_pos[2][39];}
+\DoxyCodeLine{00239\ \}\ mp3dec\_scratch\_t;}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ bs\_init(bs\_t\ *bs,\ \textcolor{keyword}{const}\ uint8\_t\ *data,\ \textcolor{keywordtype}{int}\ bytes)}
+\DoxyCodeLine{00242\ \{}
+\DoxyCodeLine{00243\ \ \ \ \ bs-\/>buf\ \ \ =\ data;}
+\DoxyCodeLine{00244\ \ \ \ \ bs-\/>pos\ \ \ =\ 0;}
+\DoxyCodeLine{00245\ \ \ \ \ bs-\/>limit\ =\ bytes*8;}
+\DoxyCodeLine{00246\ \}}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \textcolor{keyword}{static}\ uint32\_t\ get\_bits(bs\_t\ *bs,\ \textcolor{keywordtype}{int}\ n)}
+\DoxyCodeLine{00249\ \{}
+\DoxyCodeLine{00250\ \ \ \ \ uint32\_t\ next,\ cache\ =\ 0,\ s\ =\ bs-\/>pos\ \&\ 7;}
+\DoxyCodeLine{00251\ \ \ \ \ \textcolor{keywordtype}{int}\ shl\ =\ n\ +\ s;}
+\DoxyCodeLine{00252\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *p\ =\ bs-\/>buf\ +\ (bs-\/>pos\ >>\ 3);}
+\DoxyCodeLine{00253\ \ \ \ \ \textcolor{keywordflow}{if}\ ((bs-\/>pos\ +=\ n)\ >\ bs-\/>limit)}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00255\ \ \ \ \ next\ =\ *p++\ \&\ (255\ >>\ s);}
+\DoxyCodeLine{00256\ \ \ \ \ \textcolor{keywordflow}{while}\ ((shl\ -\/=\ 8)\ >\ 0)}
+\DoxyCodeLine{00257\ \ \ \ \ \{}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ cache\ |=\ next\ <<\ shl;}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ next\ =\ *p++;}
+\DoxyCodeLine{00260\ \ \ \ \ \}}
+\DoxyCodeLine{00261\ \ \ \ \ \textcolor{keywordflow}{return}\ cache\ |\ (next\ >>\ -\/shl);}
+\DoxyCodeLine{00262\ \}}
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00264\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ hdr\_valid(\textcolor{keyword}{const}\ uint8\_t\ *h)}
+\DoxyCodeLine{00265\ \{}
+\DoxyCodeLine{00266\ \ \ \ \ \textcolor{keywordflow}{return}\ h[0]\ ==\ 0xff\ \&\&}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ ((h[1]\ \&\ 0xF0)\ ==\ 0xf0\ ||\ (h[1]\ \&\ 0xFE)\ ==\ 0xe2)\ \&\&}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ (HDR\_GET\_LAYER(h)\ !=\ 0)\ \&\&}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ (HDR\_GET\_BITRATE(h)\ !=\ 15)\ \&\&}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ (HDR\_GET\_SAMPLE\_RATE(h)\ !=\ 3);}
+\DoxyCodeLine{00271\ \}}
+\DoxyCodeLine{00272\ }
+\DoxyCodeLine{00273\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ hdr\_compare(\textcolor{keyword}{const}\ uint8\_t\ *h1,\ \textcolor{keyword}{const}\ uint8\_t\ *h2)}
+\DoxyCodeLine{00274\ \{}
+\DoxyCodeLine{00275\ \ \ \ \ \textcolor{keywordflow}{return}\ hdr\_valid(h2)\ \&\&}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ ((h1[1]\ \string^\ h2[1])\ \&\ 0xFE)\ ==\ 0\ \&\&}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ ((h1[2]\ \string^\ h2[2])\ \&\ 0x0C)\ ==\ 0\ \&\&}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ !(HDR\_IS\_FREE\_FORMAT(h1)\ \string^\ HDR\_IS\_FREE\_FORMAT(h2));}
+\DoxyCodeLine{00279\ \}}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{unsigned}\ hdr\_bitrate\_kbps(\textcolor{keyword}{const}\ uint8\_t\ *h)}
+\DoxyCodeLine{00282\ \{}
+\DoxyCodeLine{00283\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint8\_t\ halfrate[2][3][15]\ =\ \{}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \{\ \{\ 0,4,8,12,16,20,24,28,32,40,48,56,64,72,80\ \},\ \{\ 0,4,8,12,16,20,24,28,32,40,48,56,64,72,80\ \},\ \{\ 0,16,24,28,32,40,48,56,64,72,80,88,96,112,128\ \}\ \},}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \{\ \{\ 0,16,20,24,28,32,40,48,56,64,80,96,112,128,160\ \},\ \{\ 0,16,24,28,32,40,48,56,64,80,96,112,128,160,192\ \},\ \{\ 0,16,32,48,64,80,96,112,128,144,160,176,192,208,224\ \}\ \},}
+\DoxyCodeLine{00286\ \ \ \ \ \};}
+\DoxyCodeLine{00287\ \ \ \ \ \textcolor{keywordflow}{return}\ 2*halfrate[!!HDR\_TEST\_MPEG1(h)][HDR\_GET\_LAYER(h)\ -\/\ 1][HDR\_GET\_BITRATE(h)];}
+\DoxyCodeLine{00288\ \}}
+\DoxyCodeLine{00289\ }
+\DoxyCodeLine{00290\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{unsigned}\ hdr\_sample\_rate\_hz(\textcolor{keyword}{const}\ uint8\_t\ *h)}
+\DoxyCodeLine{00291\ \{}
+\DoxyCodeLine{00292\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ g\_hz[3]\ =\ \{\ 44100,\ 48000,\ 32000\ \};}
+\DoxyCodeLine{00293\ \ \ \ \ \textcolor{keywordflow}{return}\ g\_hz[HDR\_GET\_SAMPLE\_RATE(h)]\ >>\ (int)!HDR\_TEST\_MPEG1(h)\ >>\ (int)!HDR\_TEST\_NOT\_MPEG25(h);}
+\DoxyCodeLine{00294\ \}}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{unsigned}\ hdr\_frame\_samples(\textcolor{keyword}{const}\ uint8\_t\ *h)}
+\DoxyCodeLine{00297\ \{}
+\DoxyCodeLine{00298\ \ \ \ \ \textcolor{keywordflow}{return}\ HDR\_IS\_LAYER\_1(h)\ ?\ 384\ :\ (1152\ >>\ (int)HDR\_IS\_FRAME\_576(h));}
+\DoxyCodeLine{00299\ \}}
+\DoxyCodeLine{00300\ }
+\DoxyCodeLine{00301\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ hdr\_frame\_bytes(\textcolor{keyword}{const}\ uint8\_t\ *h,\ \textcolor{keywordtype}{int}\ free\_format\_size)}
+\DoxyCodeLine{00302\ \{}
+\DoxyCodeLine{00303\ \ \ \ \ \textcolor{keywordtype}{int}\ frame\_bytes\ =\ hdr\_frame\_samples(h)*hdr\_bitrate\_kbps(h)*125/hdr\_sample\_rate\_hz(h);}
+\DoxyCodeLine{00304\ \ \ \ \ \textcolor{keywordflow}{if}\ (HDR\_IS\_LAYER\_1(h))}
+\DoxyCodeLine{00305\ \ \ \ \ \{}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ frame\_bytes\ \&=\ \string~3;\ \textcolor{comment}{/*\ slot\ align\ */}}
+\DoxyCodeLine{00307\ \ \ \ \ \}}
+\DoxyCodeLine{00308\ \ \ \ \ \textcolor{keywordflow}{return}\ frame\_bytes\ ?\ frame\_bytes\ :\ free\_format\_size;}
+\DoxyCodeLine{00309\ \}}
+\DoxyCodeLine{00310\ }
+\DoxyCodeLine{00311\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ hdr\_padding(\textcolor{keyword}{const}\ uint8\_t\ *h)}
+\DoxyCodeLine{00312\ \{}
+\DoxyCodeLine{00313\ \ \ \ \ \textcolor{keywordflow}{return}\ HDR\_TEST\_PADDING(h)\ ?\ (HDR\_IS\_LAYER\_1(h)\ ?\ 4\ :\ 1)\ :\ 0;}
+\DoxyCodeLine{00314\ \}}
+\DoxyCodeLine{00315\ }
+\DoxyCodeLine{00316\ \textcolor{preprocessor}{\#ifndef\ MINIMP3\_ONLY\_MP3}}
+\DoxyCodeLine{00317\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ L12\_subband\_alloc\_t\ *L12\_subband\_alloc\_table(\textcolor{keyword}{const}\ uint8\_t\ *hdr,\ L12\_scale\_info\ *sci)}
+\DoxyCodeLine{00318\ \{}
+\DoxyCodeLine{00319\ \ \ \ \ \textcolor{keyword}{const}\ L12\_subband\_alloc\_t\ *alloc;}
+\DoxyCodeLine{00320\ \ \ \ \ \textcolor{keywordtype}{int}\ mode\ =\ HDR\_GET\_STEREO\_MODE(hdr);}
+\DoxyCodeLine{00321\ \ \ \ \ \textcolor{keywordtype}{int}\ nbands,\ stereo\_bands\ =\ (mode\ ==\ MODE\_MONO)\ ?\ 0\ :\ (mode\ ==\ MODE\_JOINT\_STEREO)\ ?\ (HDR\_GET\_STEREO\_MODE\_EXT(hdr)\ <<\ 2)\ +\ 4\ :\ 32;}
+\DoxyCodeLine{00322\ }
+\DoxyCodeLine{00323\ \ \ \ \ \textcolor{keywordflow}{if}\ (HDR\_IS\_LAYER\_1(hdr))}
+\DoxyCodeLine{00324\ \ \ \ \ \{}
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ L12\_subband\_alloc\_t\ g\_alloc\_L1[]\ =\ \{\ \{\ 76,\ 4,\ 32\ \}\ \};}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ alloc\ =\ g\_alloc\_L1;}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ nbands\ =\ 32;}
+\DoxyCodeLine{00328\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (!HDR\_TEST\_MPEG1(hdr))}
+\DoxyCodeLine{00329\ \ \ \ \ \{}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ L12\_subband\_alloc\_t\ g\_alloc\_L2M2[]\ =\ \{\ \{\ 60,\ 4,\ 4\ \},\ \{\ 44,\ 3,\ 7\ \},\ \{\ 44,\ 2,\ 19\ \}\ \};}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ alloc\ =\ g\_alloc\_L2M2;}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ nbands\ =\ 30;}
+\DoxyCodeLine{00333\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00334\ \ \ \ \ \{}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ L12\_subband\_alloc\_t\ g\_alloc\_L2M1[]\ =\ \{\ \{\ 0,\ 4,\ 3\ \},\ \{\ 16,\ 4,\ 8\ \},\ \{\ 32,\ 3,\ 12\ \},\ \{\ 40,\ 2,\ 7\ \}\ \};}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ sample\_rate\_idx\ =\ HDR\_GET\_SAMPLE\_RATE(hdr);}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ kbps\ =\ hdr\_bitrate\_kbps(hdr)\ >>\ (int)(mode\ !=\ MODE\_MONO);}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!kbps)\ \textcolor{comment}{/*\ free-\/format\ */}}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \ \ \ \ kbps\ =\ 192;}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00342\ }
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ alloc\ =\ g\_alloc\_L2M1;}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ nbands\ =\ 27;}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (kbps\ <\ 56)}
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ L12\_subband\_alloc\_t\ g\_alloc\_L2M1\_lowrate[]\ =\ \{\ \{\ 44,\ 4,\ 2\ \},\ \{\ 44,\ 3,\ 10\ \}\ \};}
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \ \ \ \ alloc\ =\ g\_alloc\_L2M1\_lowrate;}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \ \ \ \ nbands\ =\ sample\_rate\_idx\ ==\ 2\ ?\ 12\ :\ 8;}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (kbps\ >=\ 96\ \&\&\ sample\_rate\_idx\ !=\ 1)}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \ \ \ \ nbands\ =\ 30;}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00354\ \ \ \ \ \}}
+\DoxyCodeLine{00355\ }
+\DoxyCodeLine{00356\ \ \ \ \ sci-\/>total\_bands\ =\ (uint8\_t)nbands;}
+\DoxyCodeLine{00357\ \ \ \ \ sci-\/>stereo\_bands\ =\ (uint8\_t)MINIMP3\_MIN(stereo\_bands,\ nbands);}
+\DoxyCodeLine{00358\ }
+\DoxyCodeLine{00359\ \ \ \ \ \textcolor{keywordflow}{return}\ alloc;}
+\DoxyCodeLine{00360\ \}}
+\DoxyCodeLine{00361\ }
+\DoxyCodeLine{00362\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ L12\_read\_scalefactors(bs\_t\ *bs,\ uint8\_t\ *pba,\ uint8\_t\ *scfcod,\ \textcolor{keywordtype}{int}\ bands,\ \textcolor{keywordtype}{float}\ *scf)}
+\DoxyCodeLine{00363\ \{}
+\DoxyCodeLine{00364\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ g\_deq\_L12[18*3]\ =\ \{}
+\DoxyCodeLine{00365\ \textcolor{preprocessor}{\#define\ DQ(x)\ 9.53674316e-\/07f/x,\ 7.56931807e-\/07f/x,\ 6.00777173e-\/07f/x}}
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ DQ(3),DQ(7),DQ(15),DQ(31),DQ(63),DQ(127),DQ(255),DQ(511),DQ(1023),DQ(2047),DQ(4095),DQ(8191),DQ(16383),DQ(32767),DQ(65535),DQ(3),DQ(5),DQ(9)}
+\DoxyCodeLine{00367\ \ \ \ \ \};}
+\DoxyCodeLine{00368\ \ \ \ \ \textcolor{keywordtype}{int}\ i,\ m;}
+\DoxyCodeLine{00369\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ bands;\ i++)}
+\DoxyCodeLine{00370\ \ \ \ \ \{}
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ s\ =\ 0;}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ ba\ =\ *pba++;}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ mask\ =\ ba\ ?\ 4\ +\ ((19\ >>\ scfcod[i])\ \&\ 3)\ :\ 0;}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (m\ =\ 4;\ m;\ m\ >>=\ 1)}
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mask\ \&\ m)}
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ b\ =\ get\_bits(bs,\ 6);}
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ s\ =\ g\_deq\_L12[ba*3\ -\/\ 6\ +\ b\ \%\ 3]*(1\ <<\ 21\ >>\ b/3);}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \ \ \ \ *scf++\ =\ s;}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00383\ \ \ \ \ \}}
+\DoxyCodeLine{00384\ \}}
+\DoxyCodeLine{00385\ }
+\DoxyCodeLine{00386\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ L12\_read\_scale\_info(\textcolor{keyword}{const}\ uint8\_t\ *hdr,\ bs\_t\ *bs,\ L12\_scale\_info\ *sci)}
+\DoxyCodeLine{00387\ \{}
+\DoxyCodeLine{00388\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint8\_t\ g\_bitalloc\_code\_tab[]\ =\ \{}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ 0,17,\ 3,\ 4,\ 5,6,7,\ 8,9,10,11,12,13,14,15,16,}
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ 0,17,18,\ 3,19,4,5,\ 6,7,\ 8,\ 9,10,11,12,13,16,}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ 0,17,18,\ 3,19,4,5,16,}
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ 0,17,18,16,}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ 0,17,18,19,\ 4,5,6,\ 7,8,\ 9,10,11,12,13,14,15,}
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ 0,17,18,\ 3,19,4,5,\ 6,7,\ 8,\ 9,10,11,12,13,14,}
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ 0,\ 2,\ 3,\ 4,\ 5,6,7,\ 8,9,10,11,12,13,14,15,16}
+\DoxyCodeLine{00396\ \ \ \ \ \};}
+\DoxyCodeLine{00397\ \ \ \ \ \textcolor{keyword}{const}\ L12\_subband\_alloc\_t\ *subband\_alloc\ =\ L12\_subband\_alloc\_table(hdr,\ sci);}
+\DoxyCodeLine{00398\ }
+\DoxyCodeLine{00399\ \ \ \ \ \textcolor{keywordtype}{int}\ i,\ k\ =\ 0,\ ba\_bits\ =\ 0;}
+\DoxyCodeLine{00400\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *ba\_code\_tab\ =\ g\_bitalloc\_code\_tab;}
+\DoxyCodeLine{00401\ }
+\DoxyCodeLine{00402\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ sci-\/>total\_bands;\ i++)}
+\DoxyCodeLine{00403\ \ \ \ \ \{}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ uint8\_t\ ba;}
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ k)}
+\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \ \ \ \ k\ +=\ subband\_alloc-\/>band\_count;}
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \ \ \ \ ba\_bits\ =\ subband\_alloc-\/>code\_tab\_width;}
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \ \ \ \ ba\_code\_tab\ =\ g\_bitalloc\_code\_tab\ +\ subband\_alloc-\/>tab\_offset;}
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \ \ \ \ subband\_alloc++;}
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ ba\ =\ ba\_code\_tab[get\_bits(bs,\ ba\_bits)];}
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ sci-\/>bitalloc[2*i]\ =\ ba;}
+\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ <\ sci-\/>stereo\_bands)}
+\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ \ \ \ \ ba\ =\ ba\_code\_tab[get\_bits(bs,\ ba\_bits)];}
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ sci-\/>bitalloc[2*i\ +\ 1]\ =\ sci-\/>stereo\_bands\ ?\ ba\ :\ 0;}
+\DoxyCodeLine{00419\ \ \ \ \ \}}
+\DoxyCodeLine{00420\ }
+\DoxyCodeLine{00421\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ 2*sci-\/>total\_bands;\ i++)}
+\DoxyCodeLine{00422\ \ \ \ \ \{}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ sci-\/>scfcod[i]\ =\ sci-\/>bitalloc[i]\ ?\ HDR\_IS\_LAYER\_1(hdr)\ ?\ 2\ :\ get\_bits(bs,\ 2)\ :\ 6;}
+\DoxyCodeLine{00424\ \ \ \ \ \}}
+\DoxyCodeLine{00425\ }
+\DoxyCodeLine{00426\ \ \ \ \ L12\_read\_scalefactors(bs,\ sci-\/>bitalloc,\ sci-\/>scfcod,\ sci-\/>total\_bands*2,\ sci-\/>scf);}
+\DoxyCodeLine{00427\ }
+\DoxyCodeLine{00428\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ sci-\/>stereo\_bands;\ i\ <\ sci-\/>total\_bands;\ i++)}
+\DoxyCodeLine{00429\ \ \ \ \ \{}
+\DoxyCodeLine{00430\ \ \ \ \ \ \ \ \ sci-\/>bitalloc[2*i\ +\ 1]\ =\ 0;}
+\DoxyCodeLine{00431\ \ \ \ \ \}}
+\DoxyCodeLine{00432\ \}}
+\DoxyCodeLine{00433\ }
+\DoxyCodeLine{00434\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ L12\_dequantize\_granule(\textcolor{keywordtype}{float}\ *grbuf,\ bs\_t\ *bs,\ L12\_scale\_info\ *sci,\ \textcolor{keywordtype}{int}\ group\_size)}
+\DoxyCodeLine{00435\ \{}
+\DoxyCodeLine{00436\ \ \ \ \ \textcolor{keywordtype}{int}\ i,\ j,\ k,\ choff\ =\ 576;}
+\DoxyCodeLine{00437\ \ \ \ \ \textcolor{keywordflow}{for}\ (j\ =\ 0;\ j\ <\ 4;\ j++)}
+\DoxyCodeLine{00438\ \ \ \ \ \{}
+\DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ *dst\ =\ grbuf\ +\ group\_size*j;}
+\DoxyCodeLine{00440\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ 2*sci-\/>total\_bands;\ i++)}
+\DoxyCodeLine{00441\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ ba\ =\ sci-\/>bitalloc[i];}
+\DoxyCodeLine{00443\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ba\ !=\ 0)}
+\DoxyCodeLine{00444\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ba\ <\ 17)}
+\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ half\ =\ (1\ <<\ (ba\ -\/\ 1))\ -\/\ 1;}
+\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (k\ =\ 0;\ k\ <\ group\_size;\ k++)}
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00450\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dst[k]\ =\ (float)((\textcolor{keywordtype}{int})get\_bits(bs,\ ba)\ -\/\ half);}
+\DoxyCodeLine{00451\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00452\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00453\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00454\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ mod\ =\ (2\ <<\ (ba\ -\/\ 17))\ +\ 1;\ \ \ \ \textcolor{comment}{/*\ 3,\ 5,\ 9\ */}}
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ code\ =\ get\_bits(bs,\ mod\ +\ 2\ -\/\ (mod\ >>\ 3));\ \ \textcolor{comment}{/*\ 5,\ 7,\ 10\ */}}
+\DoxyCodeLine{00456\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (k\ =\ 0;\ k\ <\ group\_size;\ k++,\ code\ /=\ mod)}
+\DoxyCodeLine{00457\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00458\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dst[k]\ =\ (float)((\textcolor{keywordtype}{int})(code\ \%\ mod\ -\/\ mod/2));}
+\DoxyCodeLine{00459\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00460\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00461\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00462\ \ \ \ \ \ \ \ \ \ \ \ \ dst\ +=\ choff;}
+\DoxyCodeLine{00463\ \ \ \ \ \ \ \ \ \ \ \ \ choff\ =\ 18\ -\/\ choff;}
+\DoxyCodeLine{00464\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00465\ \ \ \ \ \}}
+\DoxyCodeLine{00466\ \ \ \ \ \textcolor{keywordflow}{return}\ group\_size*4;}
+\DoxyCodeLine{00467\ \}}
+\DoxyCodeLine{00468\ }
+\DoxyCodeLine{00469\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ L12\_apply\_scf\_384(L12\_scale\_info\ *sci,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ *scf,\ \textcolor{keywordtype}{float}\ *dst)}
+\DoxyCodeLine{00470\ \{}
+\DoxyCodeLine{00471\ \ \ \ \ \textcolor{keywordtype}{int}\ i,\ k;}
+\DoxyCodeLine{00472\ \ \ \ \ memcpy(dst\ +\ 576\ +\ sci-\/>stereo\_bands*18,\ dst\ +\ sci-\/>stereo\_bands*18,\ (sci-\/>total\_bands\ -\/\ sci-\/>stereo\_bands)*18*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{float}));}
+\DoxyCodeLine{00473\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ sci-\/>total\_bands;\ i++,\ dst\ +=\ 18,\ scf\ +=\ 6)}
+\DoxyCodeLine{00474\ \ \ \ \ \{}
+\DoxyCodeLine{00475\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (k\ =\ 0;\ k\ <\ 12;\ k++)}
+\DoxyCodeLine{00476\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00477\ \ \ \ \ \ \ \ \ \ \ \ \ dst[k\ +\ 0]\ \ \ *=\ scf[0];}
+\DoxyCodeLine{00478\ \ \ \ \ \ \ \ \ \ \ \ \ dst[k\ +\ 576]\ *=\ scf[3];}
+\DoxyCodeLine{00479\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00480\ \ \ \ \ \}}
+\DoxyCodeLine{00481\ \}}
+\DoxyCodeLine{00482\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MINIMP3\_ONLY\_MP3\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00483\ }
+\DoxyCodeLine{00484\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ L3\_read\_side\_info(bs\_t\ *bs,\ L3\_gr\_info\_t\ *gr,\ \textcolor{keyword}{const}\ uint8\_t\ *hdr)}
+\DoxyCodeLine{00485\ \{}
+\DoxyCodeLine{00486\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint8\_t\ g\_scf\_long[8][23]\ =\ \{}
+\DoxyCodeLine{00487\ \ \ \ \ \ \ \ \ \{\ 6,6,6,6,6,6,8,10,12,14,16,20,24,28,32,38,46,52,60,68,58,54,0\ \},}
+\DoxyCodeLine{00488\ \ \ \ \ \ \ \ \ \{\ 12,12,12,12,12,12,16,20,24,28,32,40,48,56,64,76,90,2,2,2,2,2,0\ \},}
+\DoxyCodeLine{00489\ \ \ \ \ \ \ \ \ \{\ 6,6,6,6,6,6,8,10,12,14,16,20,24,28,32,38,46,52,60,68,58,54,0\ \},}
+\DoxyCodeLine{00490\ \ \ \ \ \ \ \ \ \{\ 6,6,6,6,6,6,8,10,12,14,16,18,22,26,32,38,46,54,62,70,76,36,0\ \},}
+\DoxyCodeLine{00491\ \ \ \ \ \ \ \ \ \{\ 6,6,6,6,6,6,8,10,12,14,16,20,24,28,32,38,46,52,60,68,58,54,0\ \},}
+\DoxyCodeLine{00492\ \ \ \ \ \ \ \ \ \{\ 4,4,4,4,4,4,6,6,8,8,10,12,16,20,24,28,34,42,50,54,76,158,0\ \},}
+\DoxyCodeLine{00493\ \ \ \ \ \ \ \ \ \{\ 4,4,4,4,4,4,6,6,6,8,10,12,16,18,22,28,34,40,46,54,54,192,0\ \},}
+\DoxyCodeLine{00494\ \ \ \ \ \ \ \ \ \{\ 4,4,4,4,4,4,6,6,8,10,12,16,20,24,30,38,46,56,68,84,102,26,0\ \}}
+\DoxyCodeLine{00495\ \ \ \ \ \};}
+\DoxyCodeLine{00496\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint8\_t\ g\_scf\_short[8][40]\ =\ \{}
+\DoxyCodeLine{00497\ \ \ \ \ \ \ \ \ \{\ 4,4,4,4,4,4,4,4,4,6,6,6,8,8,8,10,10,10,12,12,12,14,14,14,18,18,18,24,24,24,30,30,30,40,40,40,18,18,18,0\ \},}
+\DoxyCodeLine{00498\ \ \ \ \ \ \ \ \ \{\ 8,8,8,8,8,8,8,8,8,12,12,12,16,16,16,20,20,20,24,24,24,28,28,28,36,36,36,2,2,2,2,2,2,2,2,2,26,26,26,0\ \},}
+\DoxyCodeLine{00499\ \ \ \ \ \ \ \ \ \{\ 4,4,4,4,4,4,4,4,4,6,6,6,6,6,6,8,8,8,10,10,10,14,14,14,18,18,18,26,26,26,32,32,32,42,42,42,18,18,18,0\ \},}
+\DoxyCodeLine{00500\ \ \ \ \ \ \ \ \ \{\ 4,4,4,4,4,4,4,4,4,6,6,6,8,8,8,10,10,10,12,12,12,14,14,14,18,18,18,24,24,24,32,32,32,44,44,44,12,12,12,0\ \},}
+\DoxyCodeLine{00501\ \ \ \ \ \ \ \ \ \{\ 4,4,4,4,4,4,4,4,4,6,6,6,8,8,8,10,10,10,12,12,12,14,14,14,18,18,18,24,24,24,30,30,30,40,40,40,18,18,18,0\ \},}
+\DoxyCodeLine{00502\ \ \ \ \ \ \ \ \ \{\ 4,4,4,4,4,4,4,4,4,4,4,4,6,6,6,8,8,8,10,10,10,12,12,12,14,14,14,18,18,18,22,22,22,30,30,30,56,56,56,0\ \},}
+\DoxyCodeLine{00503\ \ \ \ \ \ \ \ \ \{\ 4,4,4,4,4,4,4,4,4,4,4,4,6,6,6,6,6,6,10,10,10,12,12,12,14,14,14,16,16,16,20,20,20,26,26,26,66,66,66,0\ \},}
+\DoxyCodeLine{00504\ \ \ \ \ \ \ \ \ \{\ 4,4,4,4,4,4,4,4,4,4,4,4,6,6,6,8,8,8,12,12,12,16,16,16,20,20,20,26,26,26,34,34,34,42,42,42,12,12,12,0\ \}}
+\DoxyCodeLine{00505\ \ \ \ \ \};}
+\DoxyCodeLine{00506\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint8\_t\ g\_scf\_mixed[8][40]\ =\ \{}
+\DoxyCodeLine{00507\ \ \ \ \ \ \ \ \ \{\ 6,6,6,6,6,6,6,6,6,8,8,8,10,10,10,12,12,12,14,14,14,18,18,18,24,24,24,30,30,30,40,40,40,18,18,18,0\ \},}
+\DoxyCodeLine{00508\ \ \ \ \ \ \ \ \ \{\ 12,12,12,4,4,4,8,8,8,12,12,12,16,16,16,20,20,20,24,24,24,28,28,28,36,36,36,2,2,2,2,2,2,2,2,2,26,26,26,0\ \},}
+\DoxyCodeLine{00509\ \ \ \ \ \ \ \ \ \{\ 6,6,6,6,6,6,6,6,6,6,6,6,8,8,8,10,10,10,14,14,14,18,18,18,26,26,26,32,32,32,42,42,42,18,18,18,0\ \},}
+\DoxyCodeLine{00510\ \ \ \ \ \ \ \ \ \{\ 6,6,6,6,6,6,6,6,6,8,8,8,10,10,10,12,12,12,14,14,14,18,18,18,24,24,24,32,32,32,44,44,44,12,12,12,0\ \},}
+\DoxyCodeLine{00511\ \ \ \ \ \ \ \ \ \{\ 6,6,6,6,6,6,6,6,6,8,8,8,10,10,10,12,12,12,14,14,14,18,18,18,24,24,24,30,30,30,40,40,40,18,18,18,0\ \},}
+\DoxyCodeLine{00512\ \ \ \ \ \ \ \ \ \{\ 4,4,4,4,4,4,6,6,4,4,4,6,6,6,8,8,8,10,10,10,12,12,12,14,14,14,18,18,18,22,22,22,30,30,30,56,56,56,0\ \},}
+\DoxyCodeLine{00513\ \ \ \ \ \ \ \ \ \{\ 4,4,4,4,4,4,6,6,4,4,4,6,6,6,6,6,6,10,10,10,12,12,12,14,14,14,16,16,16,20,20,20,26,26,26,66,66,66,0\ \},}
+\DoxyCodeLine{00514\ \ \ \ \ \ \ \ \ \{\ 4,4,4,4,4,4,6,6,4,4,4,6,6,6,8,8,8,12,12,12,16,16,16,20,20,20,26,26,26,34,34,34,42,42,42,12,12,12,0\ \}}
+\DoxyCodeLine{00515\ \ \ \ \ \};}
+\DoxyCodeLine{00516\ }
+\DoxyCodeLine{00517\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ tables,\ scfsi\ =\ 0;}
+\DoxyCodeLine{00518\ \ \ \ \ \textcolor{keywordtype}{int}\ main\_data\_begin,\ part\_23\_sum\ =\ 0;}
+\DoxyCodeLine{00519\ \ \ \ \ \textcolor{keywordtype}{int}\ sr\_idx\ =\ HDR\_GET\_MY\_SAMPLE\_RATE(hdr);\ sr\_idx\ -\/=\ (sr\_idx\ !=\ 0);}
+\DoxyCodeLine{00520\ \ \ \ \ \textcolor{keywordtype}{int}\ gr\_count\ =\ HDR\_IS\_MONO(hdr)\ ?\ 1\ :\ 2;}
+\DoxyCodeLine{00521\ }
+\DoxyCodeLine{00522\ \ \ \ \ \textcolor{keywordflow}{if}\ (HDR\_TEST\_MPEG1(hdr))}
+\DoxyCodeLine{00523\ \ \ \ \ \{}
+\DoxyCodeLine{00524\ \ \ \ \ \ \ \ \ gr\_count\ *=\ 2;}
+\DoxyCodeLine{00525\ \ \ \ \ \ \ \ \ main\_data\_begin\ =\ get\_bits(bs,\ 9);}
+\DoxyCodeLine{00526\ \ \ \ \ \ \ \ \ scfsi\ =\ get\_bits(bs,\ 7\ +\ gr\_count);}
+\DoxyCodeLine{00527\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00528\ \ \ \ \ \{}
+\DoxyCodeLine{00529\ \ \ \ \ \ \ \ \ main\_data\_begin\ =\ get\_bits(bs,\ 8\ +\ gr\_count)\ >>\ gr\_count;}
+\DoxyCodeLine{00530\ \ \ \ \ \}}
+\DoxyCodeLine{00531\ }
+\DoxyCodeLine{00532\ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{00533\ \ \ \ \ \{}
+\DoxyCodeLine{00534\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (HDR\_IS\_MONO(hdr))}
+\DoxyCodeLine{00535\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ \ \ \ \ scfsi\ <<=\ 4;}
+\DoxyCodeLine{00537\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00538\ \ \ \ \ \ \ \ \ gr-\/>part\_23\_length\ =\ (uint16\_t)get\_bits(bs,\ 12);}
+\DoxyCodeLine{00539\ \ \ \ \ \ \ \ \ part\_23\_sum\ +=\ gr-\/>part\_23\_length;}
+\DoxyCodeLine{00540\ \ \ \ \ \ \ \ \ gr-\/>big\_values\ =\ (uint16\_t)get\_bits(bs,\ \ 9);}
+\DoxyCodeLine{00541\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (gr-\/>big\_values\ >\ 288)}
+\DoxyCodeLine{00542\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00543\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00544\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00545\ \ \ \ \ \ \ \ \ gr-\/>global\_gain\ =\ (uint8\_t)get\_bits(bs,\ 8);}
+\DoxyCodeLine{00546\ \ \ \ \ \ \ \ \ gr-\/>scalefac\_compress\ =\ (uint16\_t)get\_bits(bs,\ HDR\_TEST\_MPEG1(hdr)\ ?\ 4\ :\ 9);}
+\DoxyCodeLine{00547\ \ \ \ \ \ \ \ \ gr-\/>sfbtab\ =\ g\_scf\_long[sr\_idx];}
+\DoxyCodeLine{00548\ \ \ \ \ \ \ \ \ gr-\/>n\_long\_sfb\ \ =\ 22;}
+\DoxyCodeLine{00549\ \ \ \ \ \ \ \ \ gr-\/>n\_short\_sfb\ =\ 0;}
+\DoxyCodeLine{00550\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (get\_bits(bs,\ 1))}
+\DoxyCodeLine{00551\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00552\ \ \ \ \ \ \ \ \ \ \ \ \ gr-\/>block\_type\ =\ (uint8\_t)get\_bits(bs,\ 2);}
+\DoxyCodeLine{00553\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!gr-\/>block\_type)}
+\DoxyCodeLine{00554\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00555\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00556\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00557\ \ \ \ \ \ \ \ \ \ \ \ \ gr-\/>mixed\_block\_flag\ =\ (uint8\_t)get\_bits(bs,\ 1);}
+\DoxyCodeLine{00558\ \ \ \ \ \ \ \ \ \ \ \ \ gr-\/>region\_count[0]\ =\ 7;}
+\DoxyCodeLine{00559\ \ \ \ \ \ \ \ \ \ \ \ \ gr-\/>region\_count[1]\ =\ 255;}
+\DoxyCodeLine{00560\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (gr-\/>block\_type\ ==\ SHORT\_BLOCK\_TYPE)}
+\DoxyCodeLine{00561\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00562\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scfsi\ \&=\ 0x0F0F;}
+\DoxyCodeLine{00563\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!gr-\/>mixed\_block\_flag)}
+\DoxyCodeLine{00564\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00565\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ gr-\/>region\_count[0]\ =\ 8;}
+\DoxyCodeLine{00566\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ gr-\/>sfbtab\ =\ g\_scf\_short[sr\_idx];}
+\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ gr-\/>n\_long\_sfb\ =\ 0;}
+\DoxyCodeLine{00568\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ gr-\/>n\_short\_sfb\ =\ 39;}
+\DoxyCodeLine{00569\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ gr-\/>sfbtab\ =\ g\_scf\_mixed[sr\_idx];}
+\DoxyCodeLine{00572\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ gr-\/>n\_long\_sfb\ =\ HDR\_TEST\_MPEG1(hdr)\ ?\ 8\ :\ 6;}
+\DoxyCodeLine{00573\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ gr-\/>n\_short\_sfb\ =\ 30;}
+\DoxyCodeLine{00574\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00575\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00576\ \ \ \ \ \ \ \ \ \ \ \ \ tables\ =\ get\_bits(bs,\ 10);}
+\DoxyCodeLine{00577\ \ \ \ \ \ \ \ \ \ \ \ \ tables\ <<=\ 5;}
+\DoxyCodeLine{00578\ \ \ \ \ \ \ \ \ \ \ \ \ gr-\/>subblock\_gain[0]\ =\ (uint8\_t)get\_bits(bs,\ 3);}
+\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ \ \ \ \ gr-\/>subblock\_gain[1]\ =\ (uint8\_t)get\_bits(bs,\ 3);}
+\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ \ \ \ \ gr-\/>subblock\_gain[2]\ =\ (uint8\_t)get\_bits(bs,\ 3);}
+\DoxyCodeLine{00581\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00582\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00583\ \ \ \ \ \ \ \ \ \ \ \ \ gr-\/>block\_type\ =\ 0;}
+\DoxyCodeLine{00584\ \ \ \ \ \ \ \ \ \ \ \ \ gr-\/>mixed\_block\_flag\ =\ 0;}
+\DoxyCodeLine{00585\ \ \ \ \ \ \ \ \ \ \ \ \ tables\ =\ get\_bits(bs,\ 15);}
+\DoxyCodeLine{00586\ \ \ \ \ \ \ \ \ \ \ \ \ gr-\/>region\_count[0]\ =\ (uint8\_t)get\_bits(bs,\ 4);}
+\DoxyCodeLine{00587\ \ \ \ \ \ \ \ \ \ \ \ \ gr-\/>region\_count[1]\ =\ (uint8\_t)get\_bits(bs,\ 3);}
+\DoxyCodeLine{00588\ \ \ \ \ \ \ \ \ \ \ \ \ gr-\/>region\_count[2]\ =\ 255;}
+\DoxyCodeLine{00589\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00590\ \ \ \ \ \ \ \ \ gr-\/>table\_select[0]\ =\ (uint8\_t)(tables\ >>\ 10);}
+\DoxyCodeLine{00591\ \ \ \ \ \ \ \ \ gr-\/>table\_select[1]\ =\ (uint8\_t)((tables\ >>\ 5)\ \&\ 31);}
+\DoxyCodeLine{00592\ \ \ \ \ \ \ \ \ gr-\/>table\_select[2]\ =\ (uint8\_t)((tables)\ \&\ 31);}
+\DoxyCodeLine{00593\ \ \ \ \ \ \ \ \ gr-\/>preflag\ =\ HDR\_TEST\_MPEG1(hdr)\ ?\ get\_bits(bs,\ 1)\ :\ (gr-\/>scalefac\_compress\ >=\ 500);}
+\DoxyCodeLine{00594\ \ \ \ \ \ \ \ \ gr-\/>scalefac\_scale\ =\ (uint8\_t)get\_bits(bs,\ 1);}
+\DoxyCodeLine{00595\ \ \ \ \ \ \ \ \ gr-\/>count1\_table\ =\ (uint8\_t)get\_bits(bs,\ 1);}
+\DoxyCodeLine{00596\ \ \ \ \ \ \ \ \ gr-\/>scfsi\ =\ (uint8\_t)((scfsi\ >>\ 12)\ \&\ 15);}
+\DoxyCodeLine{00597\ \ \ \ \ \ \ \ \ scfsi\ <<=\ 4;}
+\DoxyCodeLine{00598\ \ \ \ \ \ \ \ \ gr++;}
+\DoxyCodeLine{00599\ \ \ \ \ \}\ \textcolor{keywordflow}{while}(-\/-\/gr\_count);}
+\DoxyCodeLine{00600\ }
+\DoxyCodeLine{00601\ \ \ \ \ \textcolor{keywordflow}{if}\ (part\_23\_sum\ +\ bs-\/>pos\ >\ bs-\/>limit\ +\ main\_data\_begin*8)}
+\DoxyCodeLine{00602\ \ \ \ \ \{}
+\DoxyCodeLine{00603\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00604\ \ \ \ \ \}}
+\DoxyCodeLine{00605\ }
+\DoxyCodeLine{00606\ \ \ \ \ \textcolor{keywordflow}{return}\ main\_data\_begin;}
+\DoxyCodeLine{00607\ \}}
+\DoxyCodeLine{00608\ }
+\DoxyCodeLine{00609\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ L3\_read\_scalefactors(uint8\_t\ *scf,\ uint8\_t\ *ist\_pos,\ \textcolor{keyword}{const}\ uint8\_t\ *scf\_size,\ \textcolor{keyword}{const}\ uint8\_t\ *scf\_count,\ bs\_t\ *bitbuf,\ \textcolor{keywordtype}{int}\ scfsi)}
+\DoxyCodeLine{00610\ \{}
+\DoxyCodeLine{00611\ \ \ \ \ \textcolor{keywordtype}{int}\ i,\ k;}
+\DoxyCodeLine{00612\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ 4\ \&\&\ scf\_count[i];\ i++,\ scfsi\ *=\ 2)}
+\DoxyCodeLine{00613\ \ \ \ \ \{}
+\DoxyCodeLine{00614\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ cnt\ =\ scf\_count[i];}
+\DoxyCodeLine{00615\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (scfsi\ \&\ 8)}
+\DoxyCodeLine{00616\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00617\ \ \ \ \ \ \ \ \ \ \ \ \ memcpy(scf,\ ist\_pos,\ cnt);}
+\DoxyCodeLine{00618\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00619\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00620\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ bits\ =\ scf\_size[i];}
+\DoxyCodeLine{00621\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!bits)}
+\DoxyCodeLine{00622\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00623\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ memset(scf,\ 0,\ cnt);}
+\DoxyCodeLine{00624\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ memset(ist\_pos,\ 0,\ cnt);}
+\DoxyCodeLine{00625\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00626\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00627\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ max\_scf\ =\ (scfsi\ <\ 0)\ ?\ (1\ <<\ bits)\ -\/\ 1\ :\ -\/1;}
+\DoxyCodeLine{00628\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (k\ =\ 0;\ k\ <\ cnt;\ k++)}
+\DoxyCodeLine{00629\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00630\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ s\ =\ get\_bits(bitbuf,\ bits);}
+\DoxyCodeLine{00631\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ist\_pos[k]\ =\ (s\ ==\ max\_scf\ ?\ -\/1\ :\ s);}
+\DoxyCodeLine{00632\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scf[k]\ =\ s;}
+\DoxyCodeLine{00633\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00634\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00635\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00636\ \ \ \ \ \ \ \ \ ist\_pos\ +=\ cnt;}
+\DoxyCodeLine{00637\ \ \ \ \ \ \ \ \ scf\ +=\ cnt;}
+\DoxyCodeLine{00638\ \ \ \ \ \}}
+\DoxyCodeLine{00639\ \ \ \ \ scf[0]\ =\ scf[1]\ =\ scf[2]\ =\ 0;}
+\DoxyCodeLine{00640\ \}}
+\DoxyCodeLine{00641\ }
+\DoxyCodeLine{00642\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{float}\ L3\_ldexp\_q2(\textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{int}\ exp\_q2)}
+\DoxyCodeLine{00643\ \{}
+\DoxyCodeLine{00644\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ g\_expfrac[4]\ =\ \{\ 9.31322575e-\/10f,7.83145814e-\/10f,6.58544508e-\/10f,5.53767716e-\/10f\ \};}
+\DoxyCodeLine{00645\ \ \ \ \ \textcolor{keywordtype}{int}\ e;}
+\DoxyCodeLine{00646\ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{00647\ \ \ \ \ \{}
+\DoxyCodeLine{00648\ \ \ \ \ \ \ \ \ e\ =\ MINIMP3\_MIN(30*4,\ exp\_q2);}
+\DoxyCodeLine{00649\ \ \ \ \ \ \ \ \ y\ *=\ g\_expfrac[e\ \&\ 3]*(1\ <<\ 30\ >>\ (e\ >>\ 2));}
+\DoxyCodeLine{00650\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ ((exp\_q2\ -\/=\ e)\ >\ 0);}
+\DoxyCodeLine{00651\ \ \ \ \ \textcolor{keywordflow}{return}\ y;}
+\DoxyCodeLine{00652\ \}}
+\DoxyCodeLine{00653\ }
+\DoxyCodeLine{00654\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ L3\_decode\_scalefactors(\textcolor{keyword}{const}\ uint8\_t\ *hdr,\ uint8\_t\ *ist\_pos,\ bs\_t\ *bs,\ \textcolor{keyword}{const}\ L3\_gr\_info\_t\ *gr,\ \textcolor{keywordtype}{float}\ *scf,\ \textcolor{keywordtype}{int}\ ch)}
+\DoxyCodeLine{00655\ \{}
+\DoxyCodeLine{00656\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint8\_t\ g\_scf\_partitions[3][28]\ =\ \{}
+\DoxyCodeLine{00657\ \ \ \ \ \ \ \ \ \{\ 6,5,5,\ 5,6,5,5,5,6,5,\ 7,3,11,10,0,0,\ 7,\ 7,\ 7,0,\ 6,\ 6,6,3,\ 8,\ 8,5,0\ \},}
+\DoxyCodeLine{00658\ \ \ \ \ \ \ \ \ \{\ 8,9,6,12,6,9,9,9,6,9,12,6,15,18,0,0,\ 6,15,12,0,\ 6,12,9,6,\ 6,18,9,0\ \},}
+\DoxyCodeLine{00659\ \ \ \ \ \ \ \ \ \{\ 9,9,6,12,9,9,9,9,9,9,12,6,18,18,0,0,12,12,12,0,12,\ 9,9,6,15,12,9,0\ \}}
+\DoxyCodeLine{00660\ \ \ \ \ \};}
+\DoxyCodeLine{00661\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *scf\_partition\ =\ g\_scf\_partitions[!!gr-\/>n\_short\_sfb\ +\ !gr-\/>n\_long\_sfb];}
+\DoxyCodeLine{00662\ \ \ \ \ uint8\_t\ scf\_size[4],\ iscf[40];}
+\DoxyCodeLine{00663\ \ \ \ \ \textcolor{keywordtype}{int}\ i,\ scf\_shift\ =\ gr-\/>scalefac\_scale\ +\ 1,\ gain\_exp,\ scfsi\ =\ gr-\/>scfsi;}
+\DoxyCodeLine{00664\ \ \ \ \ \textcolor{keywordtype}{float}\ gain;}
+\DoxyCodeLine{00665\ }
+\DoxyCodeLine{00666\ \ \ \ \ \textcolor{keywordflow}{if}\ (HDR\_TEST\_MPEG1(hdr))}
+\DoxyCodeLine{00667\ \ \ \ \ \{}
+\DoxyCodeLine{00668\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint8\_t\ g\_scfc\_decode[16]\ =\ \{\ 0,1,2,3,\ 12,5,6,7,\ 9,10,11,13,\ 14,15,18,19\ \};}
+\DoxyCodeLine{00669\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ part\ =\ g\_scfc\_decode[gr-\/>scalefac\_compress];}
+\DoxyCodeLine{00670\ \ \ \ \ \ \ \ \ scf\_size[1]\ =\ scf\_size[0]\ =\ (uint8\_t)(part\ >>\ 2);}
+\DoxyCodeLine{00671\ \ \ \ \ \ \ \ \ scf\_size[3]\ =\ scf\_size[2]\ =\ (uint8\_t)(part\ \&\ 3);}
+\DoxyCodeLine{00672\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00673\ \ \ \ \ \{}
+\DoxyCodeLine{00674\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint8\_t\ g\_mod[6*4]\ =\ \{\ 5,5,4,4,5,5,4,1,4,3,1,1,5,6,6,1,4,4,4,1,4,3,1,1\ \};}
+\DoxyCodeLine{00675\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ k,\ modprod,\ sfc,\ ist\ =\ HDR\_TEST\_I\_STEREO(hdr)\ \&\&\ ch;}
+\DoxyCodeLine{00676\ \ \ \ \ \ \ \ \ sfc\ =\ gr-\/>scalefac\_compress\ >>\ ist;}
+\DoxyCodeLine{00677\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (k\ =\ ist*3*4;\ sfc\ >=\ 0;\ sfc\ -\/=\ modprod,\ k\ +=\ 4)}
+\DoxyCodeLine{00678\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00679\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (modprod\ =\ 1,\ i\ =\ 3;\ i\ >=\ 0;\ i-\/-\/)}
+\DoxyCodeLine{00680\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00681\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scf\_size[i]\ =\ (uint8\_t)(sfc\ /\ modprod\ \%\ g\_mod[k\ +\ i]);}
+\DoxyCodeLine{00682\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ modprod\ *=\ g\_mod[k\ +\ i];}
+\DoxyCodeLine{00683\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00684\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00685\ \ \ \ \ \ \ \ \ scf\_partition\ +=\ k;}
+\DoxyCodeLine{00686\ \ \ \ \ \ \ \ \ scfsi\ =\ -\/16;}
+\DoxyCodeLine{00687\ \ \ \ \ \}}
+\DoxyCodeLine{00688\ \ \ \ \ L3\_read\_scalefactors(iscf,\ ist\_pos,\ scf\_size,\ scf\_partition,\ bs,\ scfsi);}
+\DoxyCodeLine{00689\ }
+\DoxyCodeLine{00690\ \ \ \ \ \textcolor{keywordflow}{if}\ (gr-\/>n\_short\_sfb)}
+\DoxyCodeLine{00691\ \ \ \ \ \{}
+\DoxyCodeLine{00692\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ sh\ =\ 3\ -\/\ scf\_shift;}
+\DoxyCodeLine{00693\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ gr-\/>n\_short\_sfb;\ i\ +=\ 3)}
+\DoxyCodeLine{00694\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00695\ \ \ \ \ \ \ \ \ \ \ \ \ iscf[gr-\/>n\_long\_sfb\ +\ i\ +\ 0]\ +=\ gr-\/>subblock\_gain[0]\ <<\ sh;}
+\DoxyCodeLine{00696\ \ \ \ \ \ \ \ \ \ \ \ \ iscf[gr-\/>n\_long\_sfb\ +\ i\ +\ 1]\ +=\ gr-\/>subblock\_gain[1]\ <<\ sh;}
+\DoxyCodeLine{00697\ \ \ \ \ \ \ \ \ \ \ \ \ iscf[gr-\/>n\_long\_sfb\ +\ i\ +\ 2]\ +=\ gr-\/>subblock\_gain[2]\ <<\ sh;}
+\DoxyCodeLine{00698\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00699\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (gr-\/>preflag)}
+\DoxyCodeLine{00700\ \ \ \ \ \{}
+\DoxyCodeLine{00701\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint8\_t\ g\_preamp[10]\ =\ \{\ 1,1,1,1,2,2,3,3,3,2\ \};}
+\DoxyCodeLine{00702\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ 10;\ i++)}
+\DoxyCodeLine{00703\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00704\ \ \ \ \ \ \ \ \ \ \ \ \ iscf[11\ +\ i]\ +=\ g\_preamp[i];}
+\DoxyCodeLine{00705\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00706\ \ \ \ \ \}}
+\DoxyCodeLine{00707\ }
+\DoxyCodeLine{00708\ \ \ \ \ gain\_exp\ =\ gr-\/>global\_gain\ +\ BITS\_DEQUANTIZER\_OUT*4\ -\/\ 210\ -\/\ (HDR\_IS\_MS\_STEREO(hdr)\ ?\ 2\ :\ 0);}
+\DoxyCodeLine{00709\ \ \ \ \ gain\ =\ L3\_ldexp\_q2(1\ <<\ (MAX\_SCFI/4),\ \ MAX\_SCFI\ -\/\ gain\_exp);}
+\DoxyCodeLine{00710\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ (int)(gr-\/>n\_long\_sfb\ +\ gr-\/>n\_short\_sfb);\ i++)}
+\DoxyCodeLine{00711\ \ \ \ \ \{}
+\DoxyCodeLine{00712\ \ \ \ \ \ \ \ \ scf[i]\ =\ L3\_ldexp\_q2(gain,\ iscf[i]\ <<\ scf\_shift);}
+\DoxyCodeLine{00713\ \ \ \ \ \}}
+\DoxyCodeLine{00714\ \}}
+\DoxyCodeLine{00715\ }
+\DoxyCodeLine{00716\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ g\_pow43[129\ +\ 16]\ =\ \{}
+\DoxyCodeLine{00717\ \ \ \ \ 0,-\/1,-\/2.519842f,-\/4.326749f,-\/6.349604f,-\/8.549880f,-\/10.902724f,-\/13.390518f,-\/16.000000f,-\/18.720754f,-\/21.544347f,-\/24.463781f,-\/27.473142f,-\/30.567351f,-\/33.741992f,-\/36.993181f,}
+\DoxyCodeLine{00718\ \ \ \ \ 0,1,2.519842f,4.326749f,6.349604f,8.549880f,10.902724f,13.390518f,16.000000f,18.720754f,21.544347f,24.463781f,27.473142f,30.567351f,33.741992f,36.993181f,40.317474f,43.711787f,47.173345f,50.699631f,54.288352f,57.937408f,61.644865f,65.408941f,69.227979f,73.100443f,77.024898f,81.000000f,85.024491f,89.097188f,93.216975f,97.382800f,101.593667f,105.848633f,110.146801f,114.487321f,118.869381f,123.292209f,127.755065f,132.257246f,136.798076f,141.376907f,145.993119f,150.646117f,155.335327f,160.060199f,164.820202f,169.614826f,174.443577f,179.305980f,184.201575f,189.129918f,194.090580f,199.083145f,204.107210f,209.162385f,214.248292f,219.364564f,224.510845f,229.686789f,234.892058f,240.126328f,245.389280f,250.680604f,256.000000f,261.347174f,266.721841f,272.123723f,277.552547f,283.008049f,288.489971f,293.998060f,299.532071f,305.091761f,310.676898f,316.287249f,321.922592f,327.582707f,333.267377f,338.976394f,344.709550f,350.466646f,356.247482f,362.051866f,367.879608f,373.730522f,379.604427f,385.501143f,391.420496f,397.362314f,403.326427f,409.312672f,415.320884f,421.350905f,427.402579f,433.475750f,439.570269f,445.685987f,451.822757f,457.980436f,464.158883f,470.357960f,476.577530f,482.817459f,489.077615f,495.357868f,501.658090f,507.978156f,514.317941f,520.677324f,527.056184f,533.454404f,539.871867f,546.308458f,552.764065f,559.238575f,565.731879f,572.243870f,578.774440f,585.323483f,591.890898f,598.476581f,605.080431f,611.702349f,618.342238f,625.000000f,631.675540f,638.368763f,645.079578f}
+\DoxyCodeLine{00719\ \};}
+\DoxyCodeLine{00720\ }
+\DoxyCodeLine{00721\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{float}\ L3\_pow\_43(\textcolor{keywordtype}{int}\ x)}
+\DoxyCodeLine{00722\ \{}
+\DoxyCodeLine{00723\ \ \ \ \ \textcolor{keywordtype}{float}\ frac;}
+\DoxyCodeLine{00724\ \ \ \ \ \textcolor{keywordtype}{int}\ sign,\ mult\ =\ 256;}
+\DoxyCodeLine{00725\ }
+\DoxyCodeLine{00726\ \ \ \ \ \textcolor{keywordflow}{if}\ (x\ <\ 129)}
+\DoxyCodeLine{00727\ \ \ \ \ \{}
+\DoxyCodeLine{00728\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ g\_pow43[16\ +\ x];}
+\DoxyCodeLine{00729\ \ \ \ \ \}}
+\DoxyCodeLine{00730\ }
+\DoxyCodeLine{00731\ \ \ \ \ \textcolor{keywordflow}{if}\ (x\ <\ 1024)}
+\DoxyCodeLine{00732\ \ \ \ \ \{}
+\DoxyCodeLine{00733\ \ \ \ \ \ \ \ \ mult\ =\ 16;}
+\DoxyCodeLine{00734\ \ \ \ \ \ \ \ \ x\ <<=\ 3;}
+\DoxyCodeLine{00735\ \ \ \ \ \}}
+\DoxyCodeLine{00736\ }
+\DoxyCodeLine{00737\ \ \ \ \ sign\ =\ 2*x\ \&\ 64;}
+\DoxyCodeLine{00738\ \ \ \ \ frac\ =\ (float)((x\ \&\ 63)\ -\/\ sign)\ /\ ((x\ \&\ \string~63)\ +\ sign);}
+\DoxyCodeLine{00739\ \ \ \ \ \textcolor{keywordflow}{return}\ g\_pow43[16\ +\ ((x\ +\ sign)\ >>\ 6)]*(1.f\ +\ frac*((4.f/3)\ +\ frac*(2.f/9)))*mult;}
+\DoxyCodeLine{00740\ \}}
+\DoxyCodeLine{00741\ }
+\DoxyCodeLine{00742\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ L3\_huffman(\textcolor{keywordtype}{float}\ *dst,\ bs\_t\ *bs,\ \textcolor{keyword}{const}\ L3\_gr\_info\_t\ *gr\_info,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ *scf,\ \textcolor{keywordtype}{int}\ layer3gr\_limit)}
+\DoxyCodeLine{00743\ \{}
+\DoxyCodeLine{00744\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ int16\_t\ tabs[]\ =\ \{\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,}
+\DoxyCodeLine{00745\ \ \ \ \ \ \ \ \ 785,785,785,785,784,784,784,784,513,513,513,513,513,513,513,513,256,256,256,256,256,256,256,256,256,256,256,256,256,256,256,256,}
+\DoxyCodeLine{00746\ \ \ \ \ \ \ \ \ -\/255,1313,1298,1282,785,785,785,785,784,784,784,784,769,769,769,769,256,256,256,256,256,256,256,256,256,256,256,256,256,256,256,256,290,288,}
+\DoxyCodeLine{00747\ \ \ \ \ \ \ \ \ -\/255,1313,1298,1282,769,769,769,769,529,529,529,529,529,529,529,529,528,528,528,528,528,528,528,528,512,512,512,512,512,512,512,512,290,288,}
+\DoxyCodeLine{00748\ \ \ \ \ \ \ \ \ -\/253,-\/318,-\/351,-\/367,785,785,785,785,784,784,784,784,769,769,769,769,256,256,256,256,256,256,256,256,256,256,256,256,256,256,256,256,819,818,547,547,275,275,275,275,561,560,515,546,289,274,288,258,}
+\DoxyCodeLine{00749\ \ \ \ \ \ \ \ \ -\/254,-\/287,1329,1299,1314,1312,1057,1057,1042,1042,1026,1026,784,784,784,784,529,529,529,529,529,529,529,529,769,769,769,769,768,768,768,768,563,560,306,306,291,259,}
+\DoxyCodeLine{00750\ \ \ \ \ \ \ \ \ -\/252,-\/413,-\/477,-\/542,1298,-\/575,1041,1041,784,784,784,784,769,769,769,769,256,256,256,256,256,256,256,256,256,256,256,256,256,256,256,256,-\/383,-\/399,1107,1092,1106,1061,849,849,789,789,1104,1091,773,773,1076,1075,341,340,325,309,834,804,577,577,532,532,516,516,832,818,803,816,561,561,531,531,515,546,289,289,288,258,}
+\DoxyCodeLine{00751\ \ \ \ \ \ \ \ \ -\/252,-\/429,-\/493,-\/559,1057,1057,1042,1042,529,529,529,529,529,529,529,529,784,784,784,784,769,769,769,769,512,512,512,512,512,512,512,512,-\/382,1077,-\/415,1106,1061,1104,849,849,789,789,1091,1076,1029,1075,834,834,597,581,340,340,339,324,804,833,532,532,832,772,818,803,817,787,816,771,290,290,290,290,288,258,}
+\DoxyCodeLine{00752\ \ \ \ \ \ \ \ \ -\/253,-\/349,-\/414,-\/447,-\/463,1329,1299,-\/479,1314,1312,1057,1057,1042,1042,1026,1026,785,785,785,785,784,784,784,784,769,769,769,769,768,768,768,768,-\/319,851,821,-\/335,836,850,805,849,341,340,325,336,533,533,579,579,564,564,773,832,578,548,563,516,321,276,306,291,304,259,}
+\DoxyCodeLine{00753\ \ \ \ \ \ \ \ \ -\/251,-\/572,-\/733,-\/830,-\/863,-\/879,1041,1041,784,784,784,784,769,769,769,769,256,256,256,256,256,256,256,256,256,256,256,256,256,256,256,256,-\/511,-\/527,-\/543,1396,1351,1381,1366,1395,1335,1380,-\/559,1334,1138,1138,1063,1063,1350,1392,1031,1031,1062,1062,1364,1363,1120,1120,1333,1348,881,881,881,881,375,374,359,373,343,358,341,325,791,791,1123,1122,-\/703,1105,1045,-\/719,865,865,790,790,774,774,1104,1029,338,293,323,308,-\/799,-\/815,833,788,772,818,803,816,322,292,307,320,561,531,515,546,289,274,288,258,}
+\DoxyCodeLine{00754\ \ \ \ \ \ \ \ \ -\/251,-\/525,-\/605,-\/685,-\/765,-\/831,-\/846,1298,1057,1057,1312,1282,785,785,785,785,784,784,784,784,769,769,769,769,512,512,512,512,512,512,512,512,1399,1398,1383,1367,1382,1396,1351,-\/511,1381,1366,1139,1139,1079,1079,1124,1124,1364,1349,1363,1333,882,882,882,882,807,807,807,807,1094,1094,1136,1136,373,341,535,535,881,775,867,822,774,-\/591,324,338,-\/671,849,550,550,866,864,609,609,293,336,534,534,789,835,773,-\/751,834,804,308,307,833,788,832,772,562,562,547,547,305,275,560,515,290,290,}
+\DoxyCodeLine{00755\ \ \ \ \ \ \ \ \ -\/252,-\/397,-\/477,-\/557,-\/622,-\/653,-\/719,-\/735,-\/750,1329,1299,1314,1057,1057,1042,1042,1312,1282,1024,1024,785,785,785,785,784,784,784,784,769,769,769,769,-\/383,1127,1141,1111,1126,1140,1095,1110,869,869,883,883,1079,1109,882,882,375,374,807,868,838,881,791,-\/463,867,822,368,263,852,837,836,-\/543,610,610,550,550,352,336,534,534,865,774,851,821,850,805,593,533,579,564,773,832,578,578,548,548,577,577,307,276,306,291,516,560,259,259,}
+\DoxyCodeLine{00756\ \ \ \ \ \ \ \ \ -\/250,-\/2107,-\/2507,-\/2764,-\/2909,-\/2974,-\/3007,-\/3023,1041,1041,1040,1040,769,769,769,769,256,256,256,256,256,256,256,256,256,256,256,256,256,256,256,256,-\/767,-\/1052,-\/1213,-\/1277,-\/1358,-\/1405,-\/1469,-\/1535,-\/1550,-\/1582,-\/1614,-\/1647,-\/1662,-\/1694,-\/1726,-\/1759,-\/1774,-\/1807,-\/1822,-\/1854,-\/1886,1565,-\/1919,-\/1935,-\/1951,-\/1967,1731,1730,1580,1717,-\/1983,1729,1564,-\/1999,1548,-\/2015,-\/2031,1715,1595,-\/2047,1714,-\/2063,1610,-\/2079,1609,-\/2095,1323,1323,1457,1457,1307,1307,1712,1547,1641,1700,1699,1594,1685,1625,1442,1442,1322,1322,-\/780,-\/973,-\/910,1279,1278,1277,1262,1276,1261,1275,1215,1260,1229,-\/959,974,974,989,989,-\/943,735,478,478,495,463,506,414,-\/1039,1003,958,1017,927,942,987,957,431,476,1272,1167,1228,-\/1183,1256,-\/1199,895,895,941,941,1242,1227,1212,1135,1014,1014,490,489,503,487,910,1013,985,925,863,894,970,955,1012,847,-\/1343,831,755,755,984,909,428,366,754,559,-\/1391,752,486,457,924,997,698,698,983,893,740,740,908,877,739,739,667,667,953,938,497,287,271,271,683,606,590,712,726,574,302,302,738,736,481,286,526,725,605,711,636,724,696,651,589,681,666,710,364,467,573,695,466,466,301,465,379,379,709,604,665,679,316,316,634,633,436,436,464,269,424,394,452,332,438,363,347,408,393,448,331,422,362,407,392,421,346,406,391,376,375,359,1441,1306,-\/2367,1290,-\/2383,1337,-\/2399,-\/2415,1426,1321,-\/2431,1411,1336,-\/2447,-\/2463,-\/2479,1169,1169,1049,1049,1424,1289,1412,1352,1319,-\/2495,1154,1154,1064,1064,1153,1153,416,390,360,404,403,389,344,374,373,343,358,372,327,357,342,311,356,326,1395,1394,1137,1137,1047,1047,1365,1392,1287,1379,1334,1364,1349,1378,1318,1363,792,792,792,792,1152,1152,1032,1032,1121,1121,1046,1046,1120,1120,1030,1030,-\/2895,1106,1061,1104,849,849,789,789,1091,1076,1029,1090,1060,1075,833,833,309,324,532,532,832,772,818,803,561,561,531,560,515,546,289,274,288,258,}
+\DoxyCodeLine{00757\ \ \ \ \ \ \ \ \ -\/250,-\/1179,-\/1579,-\/1836,-\/1996,-\/2124,-\/2253,-\/2333,-\/2413,-\/2477,-\/2542,-\/2574,-\/2607,-\/2622,-\/2655,1314,1313,1298,1312,1282,785,785,785,785,1040,1040,1025,1025,768,768,768,768,-\/766,-\/798,-\/830,-\/862,-\/895,-\/911,-\/927,-\/943,-\/959,-\/975,-\/991,-\/1007,-\/1023,-\/1039,-\/1055,-\/1070,1724,1647,-\/1103,-\/1119,1631,1767,1662,1738,1708,1723,-\/1135,1780,1615,1779,1599,1677,1646,1778,1583,-\/1151,1777,1567,1737,1692,1765,1722,1707,1630,1751,1661,1764,1614,1736,1676,1763,1750,1645,1598,1721,1691,1762,1706,1582,1761,1566,-\/1167,1749,1629,767,766,751,765,494,494,735,764,719,749,734,763,447,447,748,718,477,506,431,491,446,476,461,505,415,430,475,445,504,399,460,489,414,503,383,474,429,459,502,502,746,752,488,398,501,473,413,472,486,271,480,270,-\/1439,-\/1455,1357,-\/1471,-\/1487,-\/1503,1341,1325,-\/1519,1489,1463,1403,1309,-\/1535,1372,1448,1418,1476,1356,1462,1387,-\/1551,1475,1340,1447,1402,1386,-\/1567,1068,1068,1474,1461,455,380,468,440,395,425,410,454,364,467,466,464,453,269,409,448,268,432,1371,1473,1432,1417,1308,1460,1355,1446,1459,1431,1083,1083,1401,1416,1458,1445,1067,1067,1370,1457,1051,1051,1291,1430,1385,1444,1354,1415,1400,1443,1082,1082,1173,1113,1186,1066,1185,1050,-\/1967,1158,1128,1172,1097,1171,1081,-\/1983,1157,1112,416,266,375,400,1170,1142,1127,1065,793,793,1169,1033,1156,1096,1141,1111,1155,1080,1126,1140,898,898,808,808,897,897,792,792,1095,1152,1032,1125,1110,1139,1079,1124,882,807,838,881,853,791,-\/2319,867,368,263,822,852,837,866,806,865,-\/2399,851,352,262,534,534,821,836,594,594,549,549,593,593,533,533,848,773,579,579,564,578,548,563,276,276,577,576,306,291,516,560,305,305,275,259,}
+\DoxyCodeLine{00758\ \ \ \ \ \ \ \ \ -\/251,-\/892,-\/2058,-\/2620,-\/2828,-\/2957,-\/3023,-\/3039,1041,1041,1040,1040,769,769,769,769,256,256,256,256,256,256,256,256,256,256,256,256,256,256,256,256,-\/511,-\/527,-\/543,-\/559,1530,-\/575,-\/591,1528,1527,1407,1526,1391,1023,1023,1023,1023,1525,1375,1268,1268,1103,1103,1087,1087,1039,1039,1523,-\/604,815,815,815,815,510,495,509,479,508,463,507,447,431,505,415,399,-\/734,-\/782,1262,-\/815,1259,1244,-\/831,1258,1228,-\/847,-\/863,1196,-\/879,1253,987,987,748,-\/767,493,493,462,477,414,414,686,669,478,446,461,445,474,429,487,458,412,471,1266,1264,1009,1009,799,799,-\/1019,-\/1276,-\/1452,-\/1581,-\/1677,-\/1757,-\/1821,-\/1886,-\/1933,-\/1997,1257,1257,1483,1468,1512,1422,1497,1406,1467,1496,1421,1510,1134,1134,1225,1225,1466,1451,1374,1405,1252,1252,1358,1480,1164,1164,1251,1251,1238,1238,1389,1465,-\/1407,1054,1101,-\/1423,1207,-\/1439,830,830,1248,1038,1237,1117,1223,1148,1236,1208,411,426,395,410,379,269,1193,1222,1132,1235,1221,1116,976,976,1192,1162,1177,1220,1131,1191,963,963,-\/1647,961,780,-\/1663,558,558,994,993,437,408,393,407,829,978,813,797,947,-\/1743,721,721,377,392,844,950,828,890,706,706,812,859,796,960,948,843,934,874,571,571,-\/1919,690,555,689,421,346,539,539,944,779,918,873,932,842,903,888,570,570,931,917,674,674,-\/2575,1562,-\/2591,1609,-\/2607,1654,1322,1322,1441,1441,1696,1546,1683,1593,1669,1624,1426,1426,1321,1321,1639,1680,1425,1425,1305,1305,1545,1668,1608,1623,1667,1592,1638,1666,1320,1320,1652,1607,1409,1409,1304,1304,1288,1288,1664,1637,1395,1395,1335,1335,1622,1636,1394,1394,1319,1319,1606,1621,1392,1392,1137,1137,1137,1137,345,390,360,375,404,373,1047,-\/2751,-\/2767,-\/2783,1062,1121,1046,-\/2799,1077,-\/2815,1106,1061,789,789,1105,1104,263,355,310,340,325,354,352,262,339,324,1091,1076,1029,1090,1060,1075,833,833,788,788,1088,1028,818,818,803,803,561,561,531,531,816,771,546,546,289,274,288,258,}
+\DoxyCodeLine{00759\ \ \ \ \ \ \ \ \ -\/253,-\/317,-\/381,-\/446,-\/478,-\/509,1279,1279,-\/811,-\/1179,-\/1451,-\/1756,-\/1900,-\/2028,-\/2189,-\/2253,-\/2333,-\/2414,-\/2445,-\/2511,-\/2526,1313,1298,-\/2559,1041,1041,1040,1040,1025,1025,1024,1024,1022,1007,1021,991,1020,975,1019,959,687,687,1018,1017,671,671,655,655,1016,1015,639,639,758,758,623,623,757,607,756,591,755,575,754,559,543,543,1009,783,-\/575,-\/621,-\/685,-\/749,496,-\/590,750,749,734,748,974,989,1003,958,988,973,1002,942,987,957,972,1001,926,986,941,971,956,1000,910,985,925,999,894,970,-\/1071,-\/1087,-\/1102,1390,-\/1135,1436,1509,1451,1374,-\/1151,1405,1358,1480,1420,-\/1167,1507,1494,1389,1342,1465,1435,1450,1326,1505,1310,1493,1373,1479,1404,1492,1464,1419,428,443,472,397,736,526,464,464,486,457,442,471,484,482,1357,1449,1434,1478,1388,1491,1341,1490,1325,1489,1463,1403,1309,1477,1372,1448,1418,1433,1476,1356,1462,1387,-\/1439,1475,1340,1447,1402,1474,1324,1461,1371,1473,269,448,1432,1417,1308,1460,-\/1711,1459,-\/1727,1441,1099,1099,1446,1386,1431,1401,-\/1743,1289,1083,1083,1160,1160,1458,1445,1067,1067,1370,1457,1307,1430,1129,1129,1098,1098,268,432,267,416,266,400,-\/1887,1144,1187,1082,1173,1113,1186,1066,1050,1158,1128,1143,1172,1097,1171,1081,420,391,1157,1112,1170,1142,1127,1065,1169,1049,1156,1096,1141,1111,1155,1080,1126,1154,1064,1153,1140,1095,1048,-\/2159,1125,1110,1137,-\/2175,823,823,1139,1138,807,807,384,264,368,263,868,838,853,791,867,822,852,837,866,806,865,790,-\/2319,851,821,836,352,262,850,805,849,-\/2399,533,533,835,820,336,261,578,548,563,577,532,532,832,772,562,562,547,547,305,275,560,515,290,290,288,258\ \};}
+\DoxyCodeLine{00760\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint8\_t\ tab32[]\ =\ \{\ 130,162,193,209,44,28,76,140,9,9,9,9,9,9,9,9,190,254,222,238,126,94,157,157,109,61,173,205\ \};}
+\DoxyCodeLine{00761\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint8\_t\ tab33[]\ =\ \{\ 252,236,220,204,188,172,156,140,124,108,92,76,60,44,28,12\ \};}
+\DoxyCodeLine{00762\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ int16\_t\ tabindex[2*16]\ =\ \{\ 0,32,64,98,0,132,180,218,292,364,426,538,648,746,0,1126,1460,1460,1460,1460,1460,1460,1460,1460,1842,1842,1842,1842,1842,1842,1842,1842\ \};}
+\DoxyCodeLine{00763\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint8\_t\ g\_linbits[]\ =\ \ \{\ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,3,4,6,8,10,13,4,5,6,7,8,9,11,13\ \};}
+\DoxyCodeLine{00764\ }
+\DoxyCodeLine{00765\ \textcolor{preprocessor}{\#define\ PEEK\_BITS(n)\ \ (bs\_cache\ >>\ (32\ -\/\ n))}}
+\DoxyCodeLine{00766\ \textcolor{preprocessor}{\#define\ FLUSH\_BITS(n)\ \{\ bs\_cache\ <<=\ (n);\ bs\_sh\ +=\ (n);\ \}}}
+\DoxyCodeLine{00767\ \textcolor{preprocessor}{\#define\ CHECK\_BITS\ \ \ \ while\ (bs\_sh\ >=\ 0)\ \{\ bs\_cache\ |=\ (uint32\_t)*bs\_next\_ptr++\ <<\ bs\_sh;\ bs\_sh\ -\/=\ 8;\ \}}}
+\DoxyCodeLine{00768\ \textcolor{preprocessor}{\#define\ BSPOS\ \ \ \ \ \ \ \ \ ((bs\_next\_ptr\ -\/\ bs-\/>buf)*8\ -\/\ 24\ +\ bs\_sh)}}
+\DoxyCodeLine{00769\ }
+\DoxyCodeLine{00770\ \ \ \ \ \textcolor{keywordtype}{float}\ one\ =\ 0.0f;}
+\DoxyCodeLine{00771\ \ \ \ \ \textcolor{keywordtype}{int}\ ireg\ =\ 0,\ big\_val\_cnt\ =\ gr\_info-\/>big\_values;}
+\DoxyCodeLine{00772\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *sfb\ =\ gr\_info-\/>sfbtab;}
+\DoxyCodeLine{00773\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *bs\_next\_ptr\ =\ bs-\/>buf\ +\ bs-\/>pos/8;}
+\DoxyCodeLine{00774\ \ \ \ \ uint32\_t\ bs\_cache\ =\ (((bs\_next\_ptr[0]*256u\ +\ bs\_next\_ptr[1])*256u\ +\ bs\_next\_ptr[2])*256u\ +\ bs\_next\_ptr[3])\ <<\ (bs-\/>pos\ \&\ 7);}
+\DoxyCodeLine{00775\ \ \ \ \ \textcolor{keywordtype}{int}\ pairs\_to\_decode,\ np,\ bs\_sh\ =\ (bs-\/>pos\ \&\ 7)\ -\/\ 8;}
+\DoxyCodeLine{00776\ \ \ \ \ bs\_next\_ptr\ +=\ 4;}
+\DoxyCodeLine{00777\ }
+\DoxyCodeLine{00778\ \ \ \ \ \textcolor{keywordflow}{while}\ (big\_val\_cnt\ >\ 0)}
+\DoxyCodeLine{00779\ \ \ \ \ \{}
+\DoxyCodeLine{00780\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tab\_num\ =\ gr\_info-\/>table\_select[ireg];}
+\DoxyCodeLine{00781\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ sfb\_cnt\ =\ gr\_info-\/>region\_count[ireg++];}
+\DoxyCodeLine{00782\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ int16\_t\ *codebook\ =\ tabs\ +\ tabindex[tab\_num];}
+\DoxyCodeLine{00783\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ linbits\ =\ g\_linbits[tab\_num];}
+\DoxyCodeLine{00784\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (linbits)}
+\DoxyCodeLine{00785\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00786\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{00787\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00788\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ np\ =\ *sfb++\ /\ 2;}
+\DoxyCodeLine{00789\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pairs\_to\_decode\ =\ MINIMP3\_MIN(big\_val\_cnt,\ np);}
+\DoxyCodeLine{00790\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ one\ =\ *scf++;}
+\DoxyCodeLine{00791\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{00792\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00793\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ j,\ w\ =\ 5;}
+\DoxyCodeLine{00794\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ leaf\ =\ codebook[PEEK\_BITS(w)];}
+\DoxyCodeLine{00795\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (leaf\ <\ 0)}
+\DoxyCodeLine{00796\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00797\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FLUSH\_BITS(w);}
+\DoxyCodeLine{00798\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ w\ =\ leaf\ \&\ 7;}
+\DoxyCodeLine{00799\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ leaf\ =\ codebook[PEEK\_BITS(w)\ -\/\ (leaf\ >>\ 3)];}
+\DoxyCodeLine{00800\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00801\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FLUSH\_BITS(leaf\ >>\ 8);}
+\DoxyCodeLine{00802\ }
+\DoxyCodeLine{00803\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (j\ =\ 0;\ j\ <\ 2;\ j++,\ dst++,\ leaf\ >>=\ 4)}
+\DoxyCodeLine{00804\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00805\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ lsb\ =\ leaf\ \&\ 0x0F;}
+\DoxyCodeLine{00806\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (lsb\ ==\ 15)}
+\DoxyCodeLine{00807\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00808\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lsb\ +=\ PEEK\_BITS(linbits);}
+\DoxyCodeLine{00809\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FLUSH\_BITS(linbits);}
+\DoxyCodeLine{00810\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CHECK\_BITS;}
+\DoxyCodeLine{00811\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *dst\ =\ one*L3\_pow\_43(lsb)*((int32\_t)bs\_cache\ <\ 0\ ?\ -\/1:\ 1);}
+\DoxyCodeLine{00812\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00813\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00814\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *dst\ =\ g\_pow43[16\ +\ lsb\ -\/\ 16*(bs\_cache\ >>\ 31)]*one;}
+\DoxyCodeLine{00815\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00816\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FLUSH\_BITS(lsb\ ?\ 1\ :\ 0);}
+\DoxyCodeLine{00817\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00818\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CHECK\_BITS;}
+\DoxyCodeLine{00819\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (-\/-\/pairs\_to\_decode);}
+\DoxyCodeLine{00820\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ ((big\_val\_cnt\ -\/=\ np)\ >\ 0\ \&\&\ -\/-\/sfb\_cnt\ >=\ 0);}
+\DoxyCodeLine{00821\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00822\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00823\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{00824\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00825\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ np\ =\ *sfb++\ /\ 2;}
+\DoxyCodeLine{00826\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pairs\_to\_decode\ =\ MINIMP3\_MIN(big\_val\_cnt,\ np);}
+\DoxyCodeLine{00827\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ one\ =\ *scf++;}
+\DoxyCodeLine{00828\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{00829\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00830\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ j,\ w\ =\ 5;}
+\DoxyCodeLine{00831\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ leaf\ =\ codebook[PEEK\_BITS(w)];}
+\DoxyCodeLine{00832\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (leaf\ <\ 0)}
+\DoxyCodeLine{00833\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00834\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FLUSH\_BITS(w);}
+\DoxyCodeLine{00835\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ w\ =\ leaf\ \&\ 7;}
+\DoxyCodeLine{00836\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ leaf\ =\ codebook[PEEK\_BITS(w)\ -\/\ (leaf\ >>\ 3)];}
+\DoxyCodeLine{00837\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00838\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FLUSH\_BITS(leaf\ >>\ 8);}
+\DoxyCodeLine{00839\ }
+\DoxyCodeLine{00840\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (j\ =\ 0;\ j\ <\ 2;\ j++,\ dst++,\ leaf\ >>=\ 4)}
+\DoxyCodeLine{00841\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00842\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ lsb\ =\ leaf\ \&\ 0x0F;}
+\DoxyCodeLine{00843\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *dst\ =\ g\_pow43[16\ +\ lsb\ -\/\ 16*(bs\_cache\ >>\ 31)]*one;}
+\DoxyCodeLine{00844\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FLUSH\_BITS(lsb\ ?\ 1\ :\ 0);}
+\DoxyCodeLine{00845\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00846\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ CHECK\_BITS;}
+\DoxyCodeLine{00847\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (-\/-\/pairs\_to\_decode);}
+\DoxyCodeLine{00848\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ ((big\_val\_cnt\ -\/=\ np)\ >\ 0\ \&\&\ -\/-\/sfb\_cnt\ >=\ 0);}
+\DoxyCodeLine{00849\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00850\ \ \ \ \ \}}
+\DoxyCodeLine{00851\ }
+\DoxyCodeLine{00852\ \ \ \ \ \textcolor{keywordflow}{for}\ (np\ =\ 1\ -\/\ big\_val\_cnt;;\ dst\ +=\ 4)}
+\DoxyCodeLine{00853\ \ \ \ \ \{}
+\DoxyCodeLine{00854\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *codebook\_count1\ =\ (gr\_info-\/>count1\_table)\ ?\ tab33\ :\ tab32;}
+\DoxyCodeLine{00855\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ leaf\ =\ codebook\_count1[PEEK\_BITS(4)];}
+\DoxyCodeLine{00856\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!(leaf\ \&\ 8))}
+\DoxyCodeLine{00857\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00858\ \ \ \ \ \ \ \ \ \ \ \ \ leaf\ =\ codebook\_count1[(leaf\ >>\ 3)\ +\ (bs\_cache\ <<\ 4\ >>\ (32\ -\/\ (leaf\ \&\ 3)))];}
+\DoxyCodeLine{00859\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00860\ \ \ \ \ \ \ \ \ FLUSH\_BITS(leaf\ \&\ 7);}
+\DoxyCodeLine{00861\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (BSPOS\ >\ layer3gr\_limit)}
+\DoxyCodeLine{00862\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00863\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00864\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00865\ \textcolor{preprocessor}{\#define\ RELOAD\_SCALEFACTOR\ \ if\ (!-\/-\/np)\ \{\ np\ =\ *sfb++/2;\ if\ (!np)\ break;\ one\ =\ *scf++;\ \}}}
+\DoxyCodeLine{00866\ \textcolor{preprocessor}{\#define\ DEQ\_COUNT1(s)\ if\ (leaf\ \&\ (128\ >>\ s))\ \{\ dst[s]\ =\ ((int32\_t)bs\_cache\ <\ 0)\ ?\ -\/one\ :\ one;\ FLUSH\_BITS(1)\ \}}}
+\DoxyCodeLine{00867\ \ \ \ \ \ \ \ \ RELOAD\_SCALEFACTOR;}
+\DoxyCodeLine{00868\ \ \ \ \ \ \ \ \ DEQ\_COUNT1(0);}
+\DoxyCodeLine{00869\ \ \ \ \ \ \ \ \ DEQ\_COUNT1(1);}
+\DoxyCodeLine{00870\ \ \ \ \ \ \ \ \ RELOAD\_SCALEFACTOR;}
+\DoxyCodeLine{00871\ \ \ \ \ \ \ \ \ DEQ\_COUNT1(2);}
+\DoxyCodeLine{00872\ \ \ \ \ \ \ \ \ DEQ\_COUNT1(3);}
+\DoxyCodeLine{00873\ \ \ \ \ \ \ \ \ CHECK\_BITS;}
+\DoxyCodeLine{00874\ \ \ \ \ \}}
+\DoxyCodeLine{00875\ }
+\DoxyCodeLine{00876\ \ \ \ \ bs-\/>pos\ =\ layer3gr\_limit;}
+\DoxyCodeLine{00877\ \}}
+\DoxyCodeLine{00878\ }
+\DoxyCodeLine{00879\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ L3\_midside\_stereo(\textcolor{keywordtype}{float}\ *left,\ \textcolor{keywordtype}{int}\ n)}
+\DoxyCodeLine{00880\ \{}
+\DoxyCodeLine{00881\ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ 0;}
+\DoxyCodeLine{00882\ \ \ \ \ \textcolor{keywordtype}{float}\ *right\ =\ left\ +\ 576;}
+\DoxyCodeLine{00883\ \textcolor{preprocessor}{\#if\ HAVE\_SIMD}}
+\DoxyCodeLine{00884\ \ \ \ \ \textcolor{keywordflow}{if}\ (have\_simd())\ \textcolor{keywordflow}{for}\ (;\ i\ <\ n\ -\/\ 3;\ i\ +=\ 4)}
+\DoxyCodeLine{00885\ \ \ \ \ \{}
+\DoxyCodeLine{00886\ \ \ \ \ \ \ \ \ f4\ vl\ =\ VLD(left\ +\ i);}
+\DoxyCodeLine{00887\ \ \ \ \ \ \ \ \ f4\ vr\ =\ VLD(right\ +\ i);}
+\DoxyCodeLine{00888\ \ \ \ \ \ \ \ \ VSTORE(left\ +\ i,\ VADD(vl,\ vr));}
+\DoxyCodeLine{00889\ \ \ \ \ \ \ \ \ VSTORE(right\ +\ i,\ VSUB(vl,\ vr));}
+\DoxyCodeLine{00890\ \ \ \ \ \}}
+\DoxyCodeLine{00891\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ HAVE\_SIMD\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00892\ \ \ \ \ \textcolor{keywordflow}{for}\ (;\ i\ <\ n;\ i++)}
+\DoxyCodeLine{00893\ \ \ \ \ \{}
+\DoxyCodeLine{00894\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ a\ =\ left[i];}
+\DoxyCodeLine{00895\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ b\ =\ right[i];}
+\DoxyCodeLine{00896\ \ \ \ \ \ \ \ \ left[i]\ =\ a\ +\ b;}
+\DoxyCodeLine{00897\ \ \ \ \ \ \ \ \ right[i]\ =\ a\ -\/\ b;}
+\DoxyCodeLine{00898\ \ \ \ \ \}}
+\DoxyCodeLine{00899\ \}}
+\DoxyCodeLine{00900\ }
+\DoxyCodeLine{00901\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ L3\_intensity\_stereo\_band(\textcolor{keywordtype}{float}\ *left,\ \textcolor{keywordtype}{int}\ n,\ \textcolor{keywordtype}{float}\ kl,\ \textcolor{keywordtype}{float}\ kr)}
+\DoxyCodeLine{00902\ \{}
+\DoxyCodeLine{00903\ \ \ \ \ \textcolor{keywordtype}{int}\ i;}
+\DoxyCodeLine{00904\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ n;\ i++)}
+\DoxyCodeLine{00905\ \ \ \ \ \{}
+\DoxyCodeLine{00906\ \ \ \ \ \ \ \ \ left[i\ +\ 576]\ =\ left[i]*kr;}
+\DoxyCodeLine{00907\ \ \ \ \ \ \ \ \ left[i]\ =\ left[i]*kl;}
+\DoxyCodeLine{00908\ \ \ \ \ \}}
+\DoxyCodeLine{00909\ \}}
+\DoxyCodeLine{00910\ }
+\DoxyCodeLine{00911\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ L3\_stereo\_top\_band(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ *right,\ \textcolor{keyword}{const}\ uint8\_t\ *sfb,\ \textcolor{keywordtype}{int}\ nbands,\ \textcolor{keywordtype}{int}\ max\_band[3])}
+\DoxyCodeLine{00912\ \{}
+\DoxyCodeLine{00913\ \ \ \ \ \textcolor{keywordtype}{int}\ i,\ k;}
+\DoxyCodeLine{00914\ }
+\DoxyCodeLine{00915\ \ \ \ \ max\_band[0]\ =\ max\_band[1]\ =\ max\_band[2]\ =\ -\/1;}
+\DoxyCodeLine{00916\ }
+\DoxyCodeLine{00917\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ nbands;\ i++)}
+\DoxyCodeLine{00918\ \ \ \ \ \{}
+\DoxyCodeLine{00919\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (k\ =\ 0;\ k\ <\ sfb[i];\ k\ +=\ 2)}
+\DoxyCodeLine{00920\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00921\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (right[k]\ !=\ 0\ ||\ right[k\ +\ 1]\ !=\ 0)}
+\DoxyCodeLine{00922\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00923\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ max\_band[i\ \%\ 3]\ =\ i;}
+\DoxyCodeLine{00924\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00925\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00926\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00927\ \ \ \ \ \ \ \ \ right\ +=\ sfb[i];}
+\DoxyCodeLine{00928\ \ \ \ \ \}}
+\DoxyCodeLine{00929\ \}}
+\DoxyCodeLine{00930\ }
+\DoxyCodeLine{00931\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ L3\_stereo\_process(\textcolor{keywordtype}{float}\ *left,\ \textcolor{keyword}{const}\ uint8\_t\ *ist\_pos,\ \textcolor{keyword}{const}\ uint8\_t\ *sfb,\ \textcolor{keyword}{const}\ uint8\_t\ *hdr,\ \textcolor{keywordtype}{int}\ max\_band[3],\ \textcolor{keywordtype}{int}\ mpeg2\_sh)}
+\DoxyCodeLine{00932\ \{}
+\DoxyCodeLine{00933\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ g\_pan[7*2]\ =\ \{\ 0,1,0.21132487f,0.78867513f,0.36602540f,0.63397460f,0.5f,0.5f,0.63397460f,0.36602540f,0.78867513f,0.21132487f,1,0\ \};}
+\DoxyCodeLine{00934\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ i,\ max\_pos\ =\ HDR\_TEST\_MPEG1(hdr)\ ?\ 7\ :\ 64;}
+\DoxyCodeLine{00935\ }
+\DoxyCodeLine{00936\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ sfb[i];\ i++)}
+\DoxyCodeLine{00937\ \ \ \ \ \{}
+\DoxyCodeLine{00938\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ ipos\ =\ ist\_pos[i];}
+\DoxyCodeLine{00939\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\textcolor{keywordtype}{int})i\ >\ max\_band[i\ \%\ 3]\ \&\&\ ipos\ <\ max\_pos)}
+\DoxyCodeLine{00940\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00941\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ kl,\ kr,\ s\ =\ HDR\_TEST\_MS\_STEREO(hdr)\ ?\ 1.41421356f\ :\ 1;}
+\DoxyCodeLine{00942\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (HDR\_TEST\_MPEG1(hdr))}
+\DoxyCodeLine{00943\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00944\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ kl\ =\ g\_pan[2*ipos];}
+\DoxyCodeLine{00945\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ kr\ =\ g\_pan[2*ipos\ +\ 1];}
+\DoxyCodeLine{00946\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00947\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00948\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ kl\ =\ 1;}
+\DoxyCodeLine{00949\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ kr\ =\ L3\_ldexp\_q2(1,\ (ipos\ +\ 1)\ >>\ 1\ <<\ mpeg2\_sh);}
+\DoxyCodeLine{00950\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ipos\ \&\ 1)}
+\DoxyCodeLine{00951\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00952\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ kl\ =\ kr;}
+\DoxyCodeLine{00953\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ kr\ =\ 1;}
+\DoxyCodeLine{00954\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00955\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00956\ \ \ \ \ \ \ \ \ \ \ \ \ L3\_intensity\_stereo\_band(left,\ sfb[i],\ kl*s,\ kr*s);}
+\DoxyCodeLine{00957\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (HDR\_TEST\_MS\_STEREO(hdr))}
+\DoxyCodeLine{00958\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00959\ \ \ \ \ \ \ \ \ \ \ \ \ L3\_midside\_stereo(left,\ sfb[i]);}
+\DoxyCodeLine{00960\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00961\ \ \ \ \ \ \ \ \ left\ +=\ sfb[i];}
+\DoxyCodeLine{00962\ \ \ \ \ \}}
+\DoxyCodeLine{00963\ \}}
+\DoxyCodeLine{00964\ }
+\DoxyCodeLine{00965\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ L3\_intensity\_stereo(\textcolor{keywordtype}{float}\ *left,\ uint8\_t\ *ist\_pos,\ \textcolor{keyword}{const}\ L3\_gr\_info\_t\ *gr,\ \textcolor{keyword}{const}\ uint8\_t\ *hdr)}
+\DoxyCodeLine{00966\ \{}
+\DoxyCodeLine{00967\ \ \ \ \ \textcolor{keywordtype}{int}\ max\_band[3],\ n\_sfb\ =\ gr-\/>n\_long\_sfb\ +\ gr-\/>n\_short\_sfb;}
+\DoxyCodeLine{00968\ \ \ \ \ \textcolor{keywordtype}{int}\ i,\ max\_blocks\ =\ gr-\/>n\_short\_sfb\ ?\ 3\ :\ 1;}
+\DoxyCodeLine{00969\ }
+\DoxyCodeLine{00970\ \ \ \ \ L3\_stereo\_top\_band(left\ +\ 576,\ gr-\/>sfbtab,\ n\_sfb,\ max\_band);}
+\DoxyCodeLine{00971\ \ \ \ \ \textcolor{keywordflow}{if}\ (gr-\/>n\_long\_sfb)}
+\DoxyCodeLine{00972\ \ \ \ \ \{}
+\DoxyCodeLine{00973\ \ \ \ \ \ \ \ \ max\_band[0]\ =\ max\_band[1]\ =\ max\_band[2]\ =\ MINIMP3\_MAX(MINIMP3\_MAX(max\_band[0],\ max\_band[1]),\ max\_band[2]);}
+\DoxyCodeLine{00974\ \ \ \ \ \}}
+\DoxyCodeLine{00975\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ max\_blocks;\ i++)}
+\DoxyCodeLine{00976\ \ \ \ \ \{}
+\DoxyCodeLine{00977\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ default\_pos\ =\ HDR\_TEST\_MPEG1(hdr)\ ?\ 3\ :\ 0;}
+\DoxyCodeLine{00978\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ itop\ =\ n\_sfb\ -\/\ max\_blocks\ +\ i;}
+\DoxyCodeLine{00979\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ prev\ =\ itop\ -\/\ max\_blocks;}
+\DoxyCodeLine{00980\ \ \ \ \ \ \ \ \ ist\_pos[itop]\ =\ max\_band[i]\ >=\ prev\ ?\ default\_pos\ :\ ist\_pos[prev];}
+\DoxyCodeLine{00981\ \ \ \ \ \}}
+\DoxyCodeLine{00982\ \ \ \ \ L3\_stereo\_process(left,\ ist\_pos,\ gr-\/>sfbtab,\ hdr,\ max\_band,\ gr[1].scalefac\_compress\ \&\ 1);}
+\DoxyCodeLine{00983\ \}}
+\DoxyCodeLine{00984\ }
+\DoxyCodeLine{00985\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ L3\_reorder(\textcolor{keywordtype}{float}\ *grbuf,\ \textcolor{keywordtype}{float}\ *scratch,\ \textcolor{keyword}{const}\ uint8\_t\ *sfb)}
+\DoxyCodeLine{00986\ \{}
+\DoxyCodeLine{00987\ \ \ \ \ \textcolor{keywordtype}{int}\ i,\ len;}
+\DoxyCodeLine{00988\ \ \ \ \ \textcolor{keywordtype}{float}\ *src\ =\ grbuf,\ *dst\ =\ scratch;}
+\DoxyCodeLine{00989\ }
+\DoxyCodeLine{00990\ \ \ \ \ \textcolor{keywordflow}{for}\ (;0\ !=\ (len\ =\ *sfb);\ sfb\ +=\ 3,\ src\ +=\ 2*len)}
+\DoxyCodeLine{00991\ \ \ \ \ \{}
+\DoxyCodeLine{00992\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ len;\ i++,\ src++)}
+\DoxyCodeLine{00993\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00994\ \ \ \ \ \ \ \ \ \ \ \ \ *dst++\ =\ src[0*len];}
+\DoxyCodeLine{00995\ \ \ \ \ \ \ \ \ \ \ \ \ *dst++\ =\ src[1*len];}
+\DoxyCodeLine{00996\ \ \ \ \ \ \ \ \ \ \ \ \ *dst++\ =\ src[2*len];}
+\DoxyCodeLine{00997\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00998\ \ \ \ \ \}}
+\DoxyCodeLine{00999\ \ \ \ \ memcpy(grbuf,\ scratch,\ (dst\ -\/\ scratch)*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{float}));}
+\DoxyCodeLine{01000\ \}}
+\DoxyCodeLine{01001\ }
+\DoxyCodeLine{01002\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ L3\_antialias(\textcolor{keywordtype}{float}\ *grbuf,\ \textcolor{keywordtype}{int}\ nbands)}
+\DoxyCodeLine{01003\ \{}
+\DoxyCodeLine{01004\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ g\_aa[2][8]\ =\ \{}
+\DoxyCodeLine{01005\ \ \ \ \ \ \ \ \ \{0.85749293f,0.88174200f,0.94962865f,0.98331459f,0.99551782f,0.99916056f,0.99989920f,0.99999316f\},}
+\DoxyCodeLine{01006\ \ \ \ \ \ \ \ \ \{0.51449576f,0.47173197f,0.31337745f,0.18191320f,0.09457419f,0.04096558f,0.01419856f,0.00369997f\}}
+\DoxyCodeLine{01007\ \ \ \ \ \};}
+\DoxyCodeLine{01008\ }
+\DoxyCodeLine{01009\ \ \ \ \ \textcolor{keywordflow}{for}\ (;\ nbands\ >\ 0;\ nbands-\/-\/,\ grbuf\ +=\ 18)}
+\DoxyCodeLine{01010\ \ \ \ \ \{}
+\DoxyCodeLine{01011\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ 0;}
+\DoxyCodeLine{01012\ \textcolor{preprocessor}{\#if\ HAVE\_SIMD}}
+\DoxyCodeLine{01013\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (have\_simd())\ \textcolor{keywordflow}{for}\ (;\ i\ <\ 8;\ i\ +=\ 4)}
+\DoxyCodeLine{01014\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01015\ \ \ \ \ \ \ \ \ \ \ \ \ f4\ vu\ =\ VLD(grbuf\ +\ 18\ +\ i);}
+\DoxyCodeLine{01016\ \ \ \ \ \ \ \ \ \ \ \ \ f4\ vd\ =\ VLD(grbuf\ +\ 14\ -\/\ i);}
+\DoxyCodeLine{01017\ \ \ \ \ \ \ \ \ \ \ \ \ f4\ vc0\ =\ VLD(g\_aa[0]\ +\ i);}
+\DoxyCodeLine{01018\ \ \ \ \ \ \ \ \ \ \ \ \ f4\ vc1\ =\ VLD(g\_aa[1]\ +\ i);}
+\DoxyCodeLine{01019\ \ \ \ \ \ \ \ \ \ \ \ \ vd\ =\ VREV(vd);}
+\DoxyCodeLine{01020\ \ \ \ \ \ \ \ \ \ \ \ \ VSTORE(grbuf\ +\ 18\ +\ i,\ VSUB(VMUL(vu,\ vc0),\ VMUL(vd,\ vc1)));}
+\DoxyCodeLine{01021\ \ \ \ \ \ \ \ \ \ \ \ \ vd\ =\ VADD(VMUL(vu,\ vc1),\ VMUL(vd,\ vc0));}
+\DoxyCodeLine{01022\ \ \ \ \ \ \ \ \ \ \ \ \ VSTORE(grbuf\ +\ 14\ -\/\ i,\ VREV(vd));}
+\DoxyCodeLine{01023\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01024\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ HAVE\_SIMD\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01025\ \textcolor{preprocessor}{\#ifndef\ MINIMP3\_ONLY\_SIMD}}
+\DoxyCodeLine{01026\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(;\ i\ <\ 8;\ i++)}
+\DoxyCodeLine{01027\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ u\ =\ grbuf[18\ +\ i];}
+\DoxyCodeLine{01029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ d\ =\ grbuf[17\ -\/\ i];}
+\DoxyCodeLine{01030\ \ \ \ \ \ \ \ \ \ \ \ \ grbuf[18\ +\ i]\ =\ u*g\_aa[0][i]\ -\/\ d*g\_aa[1][i];}
+\DoxyCodeLine{01031\ \ \ \ \ \ \ \ \ \ \ \ \ grbuf[17\ -\/\ i]\ =\ u*g\_aa[1][i]\ +\ d*g\_aa[0][i];}
+\DoxyCodeLine{01032\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01033\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MINIMP3\_ONLY\_SIMD\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01034\ \ \ \ \ \}}
+\DoxyCodeLine{01035\ \}}
+\DoxyCodeLine{01036\ }
+\DoxyCodeLine{01037\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ L3\_dct3\_9(\textcolor{keywordtype}{float}\ *y)}
+\DoxyCodeLine{01038\ \{}
+\DoxyCodeLine{01039\ \ \ \ \ \textcolor{keywordtype}{float}\ s0,\ s1,\ s2,\ s3,\ s4,\ s5,\ s6,\ s7,\ s8,\ t0,\ t2,\ t4;}
+\DoxyCodeLine{01040\ }
+\DoxyCodeLine{01041\ \ \ \ \ s0\ =\ y[0];\ s2\ =\ y[2];\ s4\ =\ y[4];\ s6\ =\ y[6];\ s8\ =\ y[8];}
+\DoxyCodeLine{01042\ \ \ \ \ t0\ =\ s0\ +\ s6*0.5f;}
+\DoxyCodeLine{01043\ \ \ \ \ s0\ -\/=\ s6;}
+\DoxyCodeLine{01044\ \ \ \ \ t4\ =\ (s4\ +\ s2)*0.93969262f;}
+\DoxyCodeLine{01045\ \ \ \ \ t2\ =\ (s8\ +\ s2)*0.76604444f;}
+\DoxyCodeLine{01046\ \ \ \ \ s6\ =\ (s4\ -\/\ s8)*0.17364818f;}
+\DoxyCodeLine{01047\ \ \ \ \ s4\ +=\ s8\ -\/\ s2;}
+\DoxyCodeLine{01048\ }
+\DoxyCodeLine{01049\ \ \ \ \ s2\ =\ s0\ -\/\ s4*0.5f;}
+\DoxyCodeLine{01050\ \ \ \ \ y[4]\ =\ s4\ +\ s0;}
+\DoxyCodeLine{01051\ \ \ \ \ s8\ =\ t0\ -\/\ t2\ +\ s6;}
+\DoxyCodeLine{01052\ \ \ \ \ s0\ =\ t0\ -\/\ t4\ +\ t2;}
+\DoxyCodeLine{01053\ \ \ \ \ s4\ =\ t0\ +\ t4\ -\/\ s6;}
+\DoxyCodeLine{01054\ }
+\DoxyCodeLine{01055\ \ \ \ \ s1\ =\ y[1];\ s3\ =\ y[3];\ s5\ =\ y[5];\ s7\ =\ y[7];}
+\DoxyCodeLine{01056\ }
+\DoxyCodeLine{01057\ \ \ \ \ s3\ *=\ 0.86602540f;}
+\DoxyCodeLine{01058\ \ \ \ \ t0\ =\ (s5\ +\ s1)*0.98480775f;}
+\DoxyCodeLine{01059\ \ \ \ \ t4\ =\ (s5\ -\/\ s7)*0.34202014f;}
+\DoxyCodeLine{01060\ \ \ \ \ t2\ =\ (s1\ +\ s7)*0.64278761f;}
+\DoxyCodeLine{01061\ \ \ \ \ s1\ =\ (s1\ -\/\ s5\ -\/\ s7)*0.86602540f;}
+\DoxyCodeLine{01062\ }
+\DoxyCodeLine{01063\ \ \ \ \ s5\ =\ t0\ -\/\ s3\ -\/\ t2;}
+\DoxyCodeLine{01064\ \ \ \ \ s7\ =\ t4\ -\/\ s3\ -\/\ t0;}
+\DoxyCodeLine{01065\ \ \ \ \ s3\ =\ t4\ +\ s3\ -\/\ t2;}
+\DoxyCodeLine{01066\ }
+\DoxyCodeLine{01067\ \ \ \ \ y[0]\ =\ s4\ -\/\ s7;}
+\DoxyCodeLine{01068\ \ \ \ \ y[1]\ =\ s2\ +\ s1;}
+\DoxyCodeLine{01069\ \ \ \ \ y[2]\ =\ s0\ -\/\ s3;}
+\DoxyCodeLine{01070\ \ \ \ \ y[3]\ =\ s8\ +\ s5;}
+\DoxyCodeLine{01071\ \ \ \ \ y[5]\ =\ s8\ -\/\ s5;}
+\DoxyCodeLine{01072\ \ \ \ \ y[6]\ =\ s0\ +\ s3;}
+\DoxyCodeLine{01073\ \ \ \ \ y[7]\ =\ s2\ -\/\ s1;}
+\DoxyCodeLine{01074\ \ \ \ \ y[8]\ =\ s4\ +\ s7;}
+\DoxyCodeLine{01075\ \}}
+\DoxyCodeLine{01076\ }
+\DoxyCodeLine{01077\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ L3\_imdct36(\textcolor{keywordtype}{float}\ *grbuf,\ \textcolor{keywordtype}{float}\ *overlap,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ *window,\ \textcolor{keywordtype}{int}\ nbands)}
+\DoxyCodeLine{01078\ \{}
+\DoxyCodeLine{01079\ \ \ \ \ \textcolor{keywordtype}{int}\ i,\ j;}
+\DoxyCodeLine{01080\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ g\_twid9[18]\ =\ \{}
+\DoxyCodeLine{01081\ \ \ \ \ \ \ \ \ 0.73727734f,0.79335334f,0.84339145f,0.88701083f,0.92387953f,0.95371695f,0.97629601f,0.99144486f,0.99904822f,0.67559021f,0.60876143f,0.53729961f,0.46174861f,0.38268343f,0.30070580f,0.21643961f,0.13052619f,0.04361938f}
+\DoxyCodeLine{01082\ \ \ \ \ \};}
+\DoxyCodeLine{01083\ }
+\DoxyCodeLine{01084\ \ \ \ \ \textcolor{keywordflow}{for}\ (j\ =\ 0;\ j\ <\ nbands;\ j++,\ grbuf\ +=\ 18,\ overlap\ +=\ 9)}
+\DoxyCodeLine{01085\ \ \ \ \ \{}
+\DoxyCodeLine{01086\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ co[9],\ si[9];}
+\DoxyCodeLine{01087\ \ \ \ \ \ \ \ \ co[0]\ =\ -\/grbuf[0];}
+\DoxyCodeLine{01088\ \ \ \ \ \ \ \ \ si[0]\ =\ grbuf[17];}
+\DoxyCodeLine{01089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ 4;\ i++)}
+\DoxyCodeLine{01090\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01091\ \ \ \ \ \ \ \ \ \ \ \ \ si[8\ -\/\ 2*i]\ =\ \ \ grbuf[4*i\ +\ 1]\ -\/\ grbuf[4*i\ +\ 2];}
+\DoxyCodeLine{01092\ \ \ \ \ \ \ \ \ \ \ \ \ co[1\ +\ 2*i]\ =\ \ \ grbuf[4*i\ +\ 1]\ +\ grbuf[4*i\ +\ 2];}
+\DoxyCodeLine{01093\ \ \ \ \ \ \ \ \ \ \ \ \ si[7\ -\/\ 2*i]\ =\ \ \ grbuf[4*i\ +\ 4]\ -\/\ grbuf[4*i\ +\ 3];}
+\DoxyCodeLine{01094\ \ \ \ \ \ \ \ \ \ \ \ \ co[2\ +\ 2*i]\ =\ -\/(grbuf[4*i\ +\ 3]\ +\ grbuf[4*i\ +\ 4]);}
+\DoxyCodeLine{01095\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01096\ \ \ \ \ \ \ \ \ L3\_dct3\_9(co);}
+\DoxyCodeLine{01097\ \ \ \ \ \ \ \ \ L3\_dct3\_9(si);}
+\DoxyCodeLine{01098\ }
+\DoxyCodeLine{01099\ \ \ \ \ \ \ \ \ si[1]\ =\ -\/si[1];}
+\DoxyCodeLine{01100\ \ \ \ \ \ \ \ \ si[3]\ =\ -\/si[3];}
+\DoxyCodeLine{01101\ \ \ \ \ \ \ \ \ si[5]\ =\ -\/si[5];}
+\DoxyCodeLine{01102\ \ \ \ \ \ \ \ \ si[7]\ =\ -\/si[7];}
+\DoxyCodeLine{01103\ }
+\DoxyCodeLine{01104\ \ \ \ \ \ \ \ \ i\ =\ 0;}
+\DoxyCodeLine{01105\ }
+\DoxyCodeLine{01106\ \textcolor{preprocessor}{\#if\ HAVE\_SIMD}}
+\DoxyCodeLine{01107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (have\_simd())\ \textcolor{keywordflow}{for}\ (;\ i\ <\ 8;\ i\ +=\ 4)}
+\DoxyCodeLine{01108\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01109\ \ \ \ \ \ \ \ \ \ \ \ \ f4\ vovl\ =\ VLD(overlap\ +\ i);}
+\DoxyCodeLine{01110\ \ \ \ \ \ \ \ \ \ \ \ \ f4\ vc\ =\ VLD(co\ +\ i);}
+\DoxyCodeLine{01111\ \ \ \ \ \ \ \ \ \ \ \ \ f4\ vs\ =\ VLD(si\ +\ i);}
+\DoxyCodeLine{01112\ \ \ \ \ \ \ \ \ \ \ \ \ f4\ vr0\ =\ VLD(g\_twid9\ +\ i);}
+\DoxyCodeLine{01113\ \ \ \ \ \ \ \ \ \ \ \ \ f4\ vr1\ =\ VLD(g\_twid9\ +\ 9\ +\ i);}
+\DoxyCodeLine{01114\ \ \ \ \ \ \ \ \ \ \ \ \ f4\ vw0\ =\ VLD(window\ +\ i);}
+\DoxyCodeLine{01115\ \ \ \ \ \ \ \ \ \ \ \ \ f4\ vw1\ =\ VLD(window\ +\ 9\ +\ i);}
+\DoxyCodeLine{01116\ \ \ \ \ \ \ \ \ \ \ \ \ f4\ vsum\ =\ VADD(VMUL(vc,\ vr1),\ VMUL(vs,\ vr0));}
+\DoxyCodeLine{01117\ \ \ \ \ \ \ \ \ \ \ \ \ VSTORE(overlap\ +\ i,\ VSUB(VMUL(vc,\ vr0),\ VMUL(vs,\ vr1)));}
+\DoxyCodeLine{01118\ \ \ \ \ \ \ \ \ \ \ \ \ VSTORE(grbuf\ +\ i,\ VSUB(VMUL(vovl,\ vw0),\ VMUL(vsum,\ vw1)));}
+\DoxyCodeLine{01119\ \ \ \ \ \ \ \ \ \ \ \ \ vsum\ =\ VADD(VMUL(vovl,\ vw1),\ VMUL(vsum,\ vw0));}
+\DoxyCodeLine{01120\ \ \ \ \ \ \ \ \ \ \ \ \ VSTORE(grbuf\ +\ 14\ -\/\ i,\ VREV(vsum));}
+\DoxyCodeLine{01121\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01122\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ HAVE\_SIMD\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (;\ i\ <\ 9;\ i++)}
+\DoxyCodeLine{01124\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01125\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ ovl\ \ =\ overlap[i];}
+\DoxyCodeLine{01126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ sum\ \ =\ co[i]*g\_twid9[9\ +\ i]\ +\ si[i]*g\_twid9[0\ +\ i];}
+\DoxyCodeLine{01127\ \ \ \ \ \ \ \ \ \ \ \ \ overlap[i]\ =\ co[i]*g\_twid9[0\ +\ i]\ -\/\ si[i]*g\_twid9[9\ +\ i];}
+\DoxyCodeLine{01128\ \ \ \ \ \ \ \ \ \ \ \ \ grbuf[i]\ \ \ \ \ \ =\ ovl*window[0\ +\ i]\ -\/\ sum*window[9\ +\ i];}
+\DoxyCodeLine{01129\ \ \ \ \ \ \ \ \ \ \ \ \ grbuf[17\ -\/\ i]\ =\ ovl*window[9\ +\ i]\ +\ sum*window[0\ +\ i];}
+\DoxyCodeLine{01130\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01131\ \ \ \ \ \}}
+\DoxyCodeLine{01132\ \}}
+\DoxyCodeLine{01133\ }
+\DoxyCodeLine{01134\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ L3\_idct3(\textcolor{keywordtype}{float}\ x0,\ \textcolor{keywordtype}{float}\ x1,\ \textcolor{keywordtype}{float}\ x2,\ \textcolor{keywordtype}{float}\ *dst)}
+\DoxyCodeLine{01135\ \{}
+\DoxyCodeLine{01136\ \ \ \ \ \textcolor{keywordtype}{float}\ m1\ =\ x1*0.86602540f;}
+\DoxyCodeLine{01137\ \ \ \ \ \textcolor{keywordtype}{float}\ a1\ =\ x0\ -\/\ x2*0.5f;}
+\DoxyCodeLine{01138\ \ \ \ \ dst[1]\ =\ x0\ +\ x2;}
+\DoxyCodeLine{01139\ \ \ \ \ dst[0]\ =\ a1\ +\ m1;}
+\DoxyCodeLine{01140\ \ \ \ \ dst[2]\ =\ a1\ -\/\ m1;}
+\DoxyCodeLine{01141\ \}}
+\DoxyCodeLine{01142\ }
+\DoxyCodeLine{01143\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ L3\_imdct12(\textcolor{keywordtype}{float}\ *x,\ \textcolor{keywordtype}{float}\ *dst,\ \textcolor{keywordtype}{float}\ *overlap)}
+\DoxyCodeLine{01144\ \{}
+\DoxyCodeLine{01145\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ g\_twid3[6]\ =\ \{\ 0.79335334f,0.92387953f,0.99144486f,\ 0.60876143f,0.38268343f,0.13052619f\ \};}
+\DoxyCodeLine{01146\ \ \ \ \ \textcolor{keywordtype}{float}\ co[3],\ si[3];}
+\DoxyCodeLine{01147\ \ \ \ \ \textcolor{keywordtype}{int}\ i;}
+\DoxyCodeLine{01148\ }
+\DoxyCodeLine{01149\ \ \ \ \ L3\_idct3(-\/x[0],\ x[6]\ +\ x[3],\ x[12]\ +\ x[9],\ co);}
+\DoxyCodeLine{01150\ \ \ \ \ L3\_idct3(x[15],\ x[12]\ -\/\ x[9],\ x[6]\ -\/\ x[3],\ si);}
+\DoxyCodeLine{01151\ \ \ \ \ si[1]\ =\ -\/si[1];}
+\DoxyCodeLine{01152\ }
+\DoxyCodeLine{01153\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ 3;\ i++)}
+\DoxyCodeLine{01154\ \ \ \ \ \{}
+\DoxyCodeLine{01155\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ ovl\ \ =\ overlap[i];}
+\DoxyCodeLine{01156\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ sum\ \ =\ co[i]*g\_twid3[3\ +\ i]\ +\ si[i]*g\_twid3[0\ +\ i];}
+\DoxyCodeLine{01157\ \ \ \ \ \ \ \ \ overlap[i]\ =\ co[i]*g\_twid3[0\ +\ i]\ -\/\ si[i]*g\_twid3[3\ +\ i];}
+\DoxyCodeLine{01158\ \ \ \ \ \ \ \ \ dst[i]\ \ \ \ \ =\ ovl*g\_twid3[2\ -\/\ i]\ -\/\ sum*g\_twid3[5\ -\/\ i];}
+\DoxyCodeLine{01159\ \ \ \ \ \ \ \ \ dst[5\ -\/\ i]\ =\ ovl*g\_twid3[5\ -\/\ i]\ +\ sum*g\_twid3[2\ -\/\ i];}
+\DoxyCodeLine{01160\ \ \ \ \ \}}
+\DoxyCodeLine{01161\ \}}
+\DoxyCodeLine{01162\ }
+\DoxyCodeLine{01163\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ L3\_imdct\_short(\textcolor{keywordtype}{float}\ *grbuf,\ \textcolor{keywordtype}{float}\ *overlap,\ \textcolor{keywordtype}{int}\ nbands)}
+\DoxyCodeLine{01164\ \{}
+\DoxyCodeLine{01165\ \ \ \ \ \textcolor{keywordflow}{for}\ (;nbands\ >\ 0;\ nbands-\/-\/,\ overlap\ +=\ 9,\ grbuf\ +=\ 18)}
+\DoxyCodeLine{01166\ \ \ \ \ \{}
+\DoxyCodeLine{01167\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ tmp[18];}
+\DoxyCodeLine{01168\ \ \ \ \ \ \ \ \ memcpy(tmp,\ grbuf,\ \textcolor{keyword}{sizeof}(tmp));}
+\DoxyCodeLine{01169\ \ \ \ \ \ \ \ \ memcpy(grbuf,\ overlap,\ 6*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{float}));}
+\DoxyCodeLine{01170\ \ \ \ \ \ \ \ \ L3\_imdct12(tmp,\ grbuf\ +\ 6,\ overlap\ +\ 6);}
+\DoxyCodeLine{01171\ \ \ \ \ \ \ \ \ L3\_imdct12(tmp\ +\ 1,\ grbuf\ +\ 12,\ overlap\ +\ 6);}
+\DoxyCodeLine{01172\ \ \ \ \ \ \ \ \ L3\_imdct12(tmp\ +\ 2,\ overlap,\ overlap\ +\ 6);}
+\DoxyCodeLine{01173\ \ \ \ \ \}}
+\DoxyCodeLine{01174\ \}}
+\DoxyCodeLine{01175\ }
+\DoxyCodeLine{01176\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ L3\_change\_sign(\textcolor{keywordtype}{float}\ *grbuf)}
+\DoxyCodeLine{01177\ \{}
+\DoxyCodeLine{01178\ \ \ \ \ \textcolor{keywordtype}{int}\ b,\ i;}
+\DoxyCodeLine{01179\ \ \ \ \ \textcolor{keywordflow}{for}\ (b\ =\ 0,\ grbuf\ +=\ 18;\ b\ <\ 32;\ b\ +=\ 2,\ grbuf\ +=\ 36)}
+\DoxyCodeLine{01180\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 1;\ i\ <\ 18;\ i\ +=\ 2)}
+\DoxyCodeLine{01181\ \ \ \ \ \ \ \ \ \ \ \ \ grbuf[i]\ =\ -\/grbuf[i];}
+\DoxyCodeLine{01182\ \}}
+\DoxyCodeLine{01183\ }
+\DoxyCodeLine{01184\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ L3\_imdct\_gr(\textcolor{keywordtype}{float}\ *grbuf,\ \textcolor{keywordtype}{float}\ *overlap,\ \textcolor{keywordtype}{unsigned}\ block\_type,\ \textcolor{keywordtype}{unsigned}\ n\_long\_bands)}
+\DoxyCodeLine{01185\ \{}
+\DoxyCodeLine{01186\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ g\_mdct\_window[2][18]\ =\ \{}
+\DoxyCodeLine{01187\ \ \ \ \ \ \ \ \ \{\ 0.99904822f,0.99144486f,0.97629601f,0.95371695f,0.92387953f,0.88701083f,0.84339145f,0.79335334f,0.73727734f,0.04361938f,0.13052619f,0.21643961f,0.30070580f,0.38268343f,0.46174861f,0.53729961f,0.60876143f,0.67559021f\ \},}
+\DoxyCodeLine{01188\ \ \ \ \ \ \ \ \ \{\ 1,1,1,1,1,1,0.99144486f,0.92387953f,0.79335334f,0,0,0,0,0,0,0.13052619f,0.38268343f,0.60876143f\ \}}
+\DoxyCodeLine{01189\ \ \ \ \ \};}
+\DoxyCodeLine{01190\ \ \ \ \ \textcolor{keywordflow}{if}\ (n\_long\_bands)}
+\DoxyCodeLine{01191\ \ \ \ \ \{}
+\DoxyCodeLine{01192\ \ \ \ \ \ \ \ \ L3\_imdct36(grbuf,\ overlap,\ g\_mdct\_window[0],\ n\_long\_bands);}
+\DoxyCodeLine{01193\ \ \ \ \ \ \ \ \ grbuf\ +=\ 18*n\_long\_bands;}
+\DoxyCodeLine{01194\ \ \ \ \ \ \ \ \ overlap\ +=\ 9*n\_long\_bands;}
+\DoxyCodeLine{01195\ \ \ \ \ \}}
+\DoxyCodeLine{01196\ \ \ \ \ \textcolor{keywordflow}{if}\ (block\_type\ ==\ SHORT\_BLOCK\_TYPE)}
+\DoxyCodeLine{01197\ \ \ \ \ \ \ \ \ L3\_imdct\_short(grbuf,\ overlap,\ 32\ -\/\ n\_long\_bands);}
+\DoxyCodeLine{01198\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01199\ \ \ \ \ \ \ \ \ L3\_imdct36(grbuf,\ overlap,\ g\_mdct\_window[block\_type\ ==\ STOP\_BLOCK\_TYPE],\ 32\ -\/\ n\_long\_bands);}
+\DoxyCodeLine{01200\ \}}
+\DoxyCodeLine{01201\ }
+\DoxyCodeLine{01202\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ L3\_save\_reservoir(\mbox{\hyperlink{structmp3dec__t}{mp3dec\_t}}\ *h,\ mp3dec\_scratch\_t\ *s)}
+\DoxyCodeLine{01203\ \{}
+\DoxyCodeLine{01204\ \ \ \ \ \textcolor{keywordtype}{int}\ pos\ =\ (s-\/>bs.pos\ +\ 7)/8u;}
+\DoxyCodeLine{01205\ \ \ \ \ \textcolor{keywordtype}{int}\ remains\ =\ s-\/>bs.limit/8u\ -\/\ pos;}
+\DoxyCodeLine{01206\ \ \ \ \ \textcolor{keywordflow}{if}\ (remains\ >\ MAX\_BITRESERVOIR\_BYTES)}
+\DoxyCodeLine{01207\ \ \ \ \ \{}
+\DoxyCodeLine{01208\ \ \ \ \ \ \ \ \ pos\ +=\ remains\ -\/\ MAX\_BITRESERVOIR\_BYTES;}
+\DoxyCodeLine{01209\ \ \ \ \ \ \ \ \ remains\ =\ MAX\_BITRESERVOIR\_BYTES;}
+\DoxyCodeLine{01210\ \ \ \ \ \}}
+\DoxyCodeLine{01211\ \ \ \ \ \textcolor{keywordflow}{if}\ (remains\ >\ 0)}
+\DoxyCodeLine{01212\ \ \ \ \ \{}
+\DoxyCodeLine{01213\ \ \ \ \ \ \ \ \ memmove(h-\/>reserv\_buf,\ s-\/>maindata\ +\ pos,\ remains);}
+\DoxyCodeLine{01214\ \ \ \ \ \}}
+\DoxyCodeLine{01215\ \ \ \ \ h-\/>reserv\ =\ remains;}
+\DoxyCodeLine{01216\ \}}
+\DoxyCodeLine{01217\ }
+\DoxyCodeLine{01218\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ L3\_restore\_reservoir(\mbox{\hyperlink{structmp3dec__t}{mp3dec\_t}}\ *h,\ bs\_t\ *bs,\ mp3dec\_scratch\_t\ *s,\ \textcolor{keywordtype}{int}\ main\_data\_begin)}
+\DoxyCodeLine{01219\ \{}
+\DoxyCodeLine{01220\ \ \ \ \ \textcolor{keywordtype}{int}\ frame\_bytes\ =\ (bs-\/>limit\ -\/\ bs-\/>pos)/8;}
+\DoxyCodeLine{01221\ \ \ \ \ \textcolor{keywordtype}{int}\ bytes\_have\ =\ MINIMP3\_MIN(h-\/>reserv,\ main\_data\_begin);}
+\DoxyCodeLine{01222\ \ \ \ \ memcpy(s-\/>maindata,\ h-\/>reserv\_buf\ +\ MINIMP3\_MAX(0,\ h-\/>reserv\ -\/\ main\_data\_begin),\ MINIMP3\_MIN(h-\/>reserv,\ main\_data\_begin));}
+\DoxyCodeLine{01223\ \ \ \ \ memcpy(s-\/>maindata\ +\ bytes\_have,\ bs-\/>buf\ +\ bs-\/>pos/8,\ frame\_bytes);}
+\DoxyCodeLine{01224\ \ \ \ \ bs\_init(\&s-\/>bs,\ s-\/>maindata,\ bytes\_have\ +\ frame\_bytes);}
+\DoxyCodeLine{01225\ \ \ \ \ \textcolor{keywordflow}{return}\ h-\/>reserv\ >=\ main\_data\_begin;}
+\DoxyCodeLine{01226\ \}}
+\DoxyCodeLine{01227\ }
+\DoxyCodeLine{01228\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ L3\_decode(\mbox{\hyperlink{structmp3dec__t}{mp3dec\_t}}\ *h,\ mp3dec\_scratch\_t\ *s,\ L3\_gr\_info\_t\ *gr\_info,\ \textcolor{keywordtype}{int}\ nch)}
+\DoxyCodeLine{01229\ \{}
+\DoxyCodeLine{01230\ \ \ \ \ \textcolor{keywordtype}{int}\ ch;}
+\DoxyCodeLine{01231\ }
+\DoxyCodeLine{01232\ \ \ \ \ \textcolor{keywordflow}{for}\ (ch\ =\ 0;\ ch\ <\ nch;\ ch++)}
+\DoxyCodeLine{01233\ \ \ \ \ \{}
+\DoxyCodeLine{01234\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ layer3gr\_limit\ =\ s-\/>bs.pos\ +\ gr\_info[ch].part\_23\_length;}
+\DoxyCodeLine{01235\ \ \ \ \ \ \ \ \ L3\_decode\_scalefactors(h-\/>header,\ s-\/>ist\_pos[ch],\ \&s-\/>bs,\ gr\_info\ +\ ch,\ s-\/>scf,\ ch);}
+\DoxyCodeLine{01236\ \ \ \ \ \ \ \ \ L3\_huffman(s-\/>grbuf[ch],\ \&s-\/>bs,\ gr\_info\ +\ ch,\ s-\/>scf,\ layer3gr\_limit);}
+\DoxyCodeLine{01237\ \ \ \ \ \}}
+\DoxyCodeLine{01238\ }
+\DoxyCodeLine{01239\ \ \ \ \ \textcolor{keywordflow}{if}\ (HDR\_TEST\_I\_STEREO(h-\/>header))}
+\DoxyCodeLine{01240\ \ \ \ \ \{}
+\DoxyCodeLine{01241\ \ \ \ \ \ \ \ \ L3\_intensity\_stereo(s-\/>grbuf[0],\ s-\/>ist\_pos[1],\ gr\_info,\ h-\/>header);}
+\DoxyCodeLine{01242\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (HDR\_IS\_MS\_STEREO(h-\/>header))}
+\DoxyCodeLine{01243\ \ \ \ \ \{}
+\DoxyCodeLine{01244\ \ \ \ \ \ \ \ \ L3\_midside\_stereo(s-\/>grbuf[0],\ 576);}
+\DoxyCodeLine{01245\ \ \ \ \ \}}
+\DoxyCodeLine{01246\ }
+\DoxyCodeLine{01247\ \ \ \ \ \textcolor{keywordflow}{for}\ (ch\ =\ 0;\ ch\ <\ nch;\ ch++,\ gr\_info++)}
+\DoxyCodeLine{01248\ \ \ \ \ \{}
+\DoxyCodeLine{01249\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ aa\_bands\ =\ 31;}
+\DoxyCodeLine{01250\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ n\_long\_bands\ =\ (gr\_info-\/>mixed\_block\_flag\ ?\ 2\ :\ 0)\ <<\ (\textcolor{keywordtype}{int})(HDR\_GET\_MY\_SAMPLE\_RATE(h-\/>header)\ ==\ 2);}
+\DoxyCodeLine{01251\ }
+\DoxyCodeLine{01252\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (gr\_info-\/>n\_short\_sfb)}
+\DoxyCodeLine{01253\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01254\ \ \ \ \ \ \ \ \ \ \ \ \ aa\_bands\ =\ n\_long\_bands\ -\/\ 1;}
+\DoxyCodeLine{01255\ \ \ \ \ \ \ \ \ \ \ \ \ L3\_reorder(s-\/>grbuf[ch]\ +\ n\_long\_bands*18,\ s-\/>syn[0],\ gr\_info-\/>sfbtab\ +\ gr\_info-\/>n\_long\_sfb);}
+\DoxyCodeLine{01256\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01257\ }
+\DoxyCodeLine{01258\ \ \ \ \ \ \ \ \ L3\_antialias(s-\/>grbuf[ch],\ aa\_bands);}
+\DoxyCodeLine{01259\ \ \ \ \ \ \ \ \ L3\_imdct\_gr(s-\/>grbuf[ch],\ h-\/>mdct\_overlap[ch],\ gr\_info-\/>block\_type,\ n\_long\_bands);}
+\DoxyCodeLine{01260\ \ \ \ \ \ \ \ \ L3\_change\_sign(s-\/>grbuf[ch]);}
+\DoxyCodeLine{01261\ \ \ \ \ \}}
+\DoxyCodeLine{01262\ \}}
+\DoxyCodeLine{01263\ }
+\DoxyCodeLine{01264\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ mp3d\_DCT\_II(\textcolor{keywordtype}{float}\ *grbuf,\ \textcolor{keywordtype}{int}\ n)}
+\DoxyCodeLine{01265\ \{}
+\DoxyCodeLine{01266\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ g\_sec[24]\ =\ \{}
+\DoxyCodeLine{01267\ \ \ \ \ \ \ \ \ 10.19000816f,0.50060302f,0.50241929f,3.40760851f,0.50547093f,0.52249861f,2.05778098f,0.51544732f,0.56694406f,1.48416460f,0.53104258f,0.64682180f,1.16943991f,0.55310392f,0.78815460f,0.97256821f,0.58293498f,1.06067765f,0.83934963f,0.62250412f,1.72244716f,0.74453628f,0.67480832f,5.10114861f}
+\DoxyCodeLine{01268\ \ \ \ \ \};}
+\DoxyCodeLine{01269\ \ \ \ \ \textcolor{keywordtype}{int}\ i,\ k\ =\ 0;}
+\DoxyCodeLine{01270\ \textcolor{preprocessor}{\#if\ HAVE\_SIMD}}
+\DoxyCodeLine{01271\ \ \ \ \ \textcolor{keywordflow}{if}\ (have\_simd())\ \textcolor{keywordflow}{for}\ (;\ k\ <\ n;\ k\ +=\ 4)}
+\DoxyCodeLine{01272\ \ \ \ \ \{}
+\DoxyCodeLine{01273\ \ \ \ \ \ \ \ \ f4\ t[4][8],\ *x;}
+\DoxyCodeLine{01274\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ *y\ =\ grbuf\ +\ k;}
+\DoxyCodeLine{01275\ }
+\DoxyCodeLine{01276\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (x\ =\ t[0],\ i\ =\ 0;\ i\ <\ 8;\ i++,\ x++)}
+\DoxyCodeLine{01277\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01278\ \ \ \ \ \ \ \ \ \ \ \ \ f4\ x0\ =\ VLD(\&y[i*18]);}
+\DoxyCodeLine{01279\ \ \ \ \ \ \ \ \ \ \ \ \ f4\ x1\ =\ VLD(\&y[(15\ -\/\ i)*18]);}
+\DoxyCodeLine{01280\ \ \ \ \ \ \ \ \ \ \ \ \ f4\ x2\ =\ VLD(\&y[(16\ +\ i)*18]);}
+\DoxyCodeLine{01281\ \ \ \ \ \ \ \ \ \ \ \ \ f4\ x3\ =\ VLD(\&y[(31\ -\/\ i)*18]);}
+\DoxyCodeLine{01282\ \ \ \ \ \ \ \ \ \ \ \ \ f4\ t0\ =\ VADD(x0,\ x3);}
+\DoxyCodeLine{01283\ \ \ \ \ \ \ \ \ \ \ \ \ f4\ t1\ =\ VADD(x1,\ x2);}
+\DoxyCodeLine{01284\ \ \ \ \ \ \ \ \ \ \ \ \ f4\ t2\ =\ VMUL\_S(VSUB(x1,\ x2),\ g\_sec[3*i\ +\ 0]);}
+\DoxyCodeLine{01285\ \ \ \ \ \ \ \ \ \ \ \ \ f4\ t3\ =\ VMUL\_S(VSUB(x0,\ x3),\ g\_sec[3*i\ +\ 1]);}
+\DoxyCodeLine{01286\ \ \ \ \ \ \ \ \ \ \ \ \ x[0]\ =\ VADD(t0,\ t1);}
+\DoxyCodeLine{01287\ \ \ \ \ \ \ \ \ \ \ \ \ x[8]\ =\ VMUL\_S(VSUB(t0,\ t1),\ g\_sec[3*i\ +\ 2]);}
+\DoxyCodeLine{01288\ \ \ \ \ \ \ \ \ \ \ \ \ x[16]\ =\ VADD(t3,\ t2);}
+\DoxyCodeLine{01289\ \ \ \ \ \ \ \ \ \ \ \ \ x[24]\ =\ VMUL\_S(VSUB(t3,\ t2),\ g\_sec[3*i\ +\ 2]);}
+\DoxyCodeLine{01290\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01291\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (x\ =\ t[0],\ i\ =\ 0;\ i\ <\ 4;\ i++,\ x\ +=\ 8)}
+\DoxyCodeLine{01292\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01293\ \ \ \ \ \ \ \ \ \ \ \ \ f4\ x0\ =\ x[0],\ x1\ =\ x[1],\ x2\ =\ x[2],\ x3\ =\ x[3],\ x4\ =\ x[4],\ x5\ =\ x[5],\ x6\ =\ x[6],\ x7\ =\ x[7],\ xt;}
+\DoxyCodeLine{01294\ \ \ \ \ \ \ \ \ \ \ \ \ xt\ =\ VSUB(x0,\ x7);\ x0\ =\ VADD(x0,\ x7);}
+\DoxyCodeLine{01295\ \ \ \ \ \ \ \ \ \ \ \ \ x7\ =\ VSUB(x1,\ x6);\ x1\ =\ VADD(x1,\ x6);}
+\DoxyCodeLine{01296\ \ \ \ \ \ \ \ \ \ \ \ \ x6\ =\ VSUB(x2,\ x5);\ x2\ =\ VADD(x2,\ x5);}
+\DoxyCodeLine{01297\ \ \ \ \ \ \ \ \ \ \ \ \ x5\ =\ VSUB(x3,\ x4);\ x3\ =\ VADD(x3,\ x4);}
+\DoxyCodeLine{01298\ \ \ \ \ \ \ \ \ \ \ \ \ x4\ =\ VSUB(x0,\ x3);\ x0\ =\ VADD(x0,\ x3);}
+\DoxyCodeLine{01299\ \ \ \ \ \ \ \ \ \ \ \ \ x3\ =\ VSUB(x1,\ x2);\ x1\ =\ VADD(x1,\ x2);}
+\DoxyCodeLine{01300\ \ \ \ \ \ \ \ \ \ \ \ \ x[0]\ =\ VADD(x0,\ x1);}
+\DoxyCodeLine{01301\ \ \ \ \ \ \ \ \ \ \ \ \ x[4]\ =\ VMUL\_S(VSUB(x0,\ x1),\ 0.70710677f);}
+\DoxyCodeLine{01302\ \ \ \ \ \ \ \ \ \ \ \ \ x5\ =\ VADD(x5,\ x6);}
+\DoxyCodeLine{01303\ \ \ \ \ \ \ \ \ \ \ \ \ x6\ =\ VMUL\_S(VADD(x6,\ x7),\ 0.70710677f);}
+\DoxyCodeLine{01304\ \ \ \ \ \ \ \ \ \ \ \ \ x7\ =\ VADD(x7,\ xt);}
+\DoxyCodeLine{01305\ \ \ \ \ \ \ \ \ \ \ \ \ x3\ =\ VMUL\_S(VADD(x3,\ x4),\ 0.70710677f);}
+\DoxyCodeLine{01306\ \ \ \ \ \ \ \ \ \ \ \ \ x5\ =\ VSUB(x5,\ VMUL\_S(x7,\ 0.198912367f));\ \textcolor{comment}{/*\ rotate\ by\ PI/8\ */}}
+\DoxyCodeLine{01307\ \ \ \ \ \ \ \ \ \ \ \ \ x7\ =\ VADD(x7,\ VMUL\_S(x5,\ 0.382683432f));}
+\DoxyCodeLine{01308\ \ \ \ \ \ \ \ \ \ \ \ \ x5\ =\ VSUB(x5,\ VMUL\_S(x7,\ 0.198912367f));}
+\DoxyCodeLine{01309\ \ \ \ \ \ \ \ \ \ \ \ \ x0\ =\ VSUB(xt,\ x6);\ xt\ =\ VADD(xt,\ x6);}
+\DoxyCodeLine{01310\ \ \ \ \ \ \ \ \ \ \ \ \ x[1]\ =\ VMUL\_S(VADD(xt,\ x7),\ 0.50979561f);}
+\DoxyCodeLine{01311\ \ \ \ \ \ \ \ \ \ \ \ \ x[2]\ =\ VMUL\_S(VADD(x4,\ x3),\ 0.54119611f);}
+\DoxyCodeLine{01312\ \ \ \ \ \ \ \ \ \ \ \ \ x[3]\ =\ VMUL\_S(VSUB(x0,\ x5),\ 0.60134488f);}
+\DoxyCodeLine{01313\ \ \ \ \ \ \ \ \ \ \ \ \ x[5]\ =\ VMUL\_S(VADD(x0,\ x5),\ 0.89997619f);}
+\DoxyCodeLine{01314\ \ \ \ \ \ \ \ \ \ \ \ \ x[6]\ =\ VMUL\_S(VSUB(x4,\ x3),\ 1.30656302f);}
+\DoxyCodeLine{01315\ \ \ \ \ \ \ \ \ \ \ \ \ x[7]\ =\ VMUL\_S(VSUB(xt,\ x7),\ 2.56291556f);}
+\DoxyCodeLine{01316\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01317\ }
+\DoxyCodeLine{01318\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (k\ >\ n\ -\/\ 3)}
+\DoxyCodeLine{01319\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01320\ \textcolor{preprocessor}{\#if\ HAVE\_SSE}}
+\DoxyCodeLine{01321\ \textcolor{preprocessor}{\#define\ VSAVE2(i,\ v)\ \_mm\_storel\_pi((\_\_m64\ *)(void*)\&y[i*18],\ v)}}
+\DoxyCodeLine{01322\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ HAVE\_SSE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01323\ \textcolor{preprocessor}{\#define\ VSAVE2(i,\ v)\ vst1\_f32((float32\_t\ *)\&y[i*18],\ \ vget\_low\_f32(v))}}
+\DoxyCodeLine{01324\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ HAVE\_SSE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01325\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ 7;\ i++,\ y\ +=\ 4*18)}
+\DoxyCodeLine{01326\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ f4\ s\ =\ VADD(t[3][i],\ t[3][i\ +\ 1]);}
+\DoxyCodeLine{01328\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ VSAVE2(0,\ t[0][i]);}
+\DoxyCodeLine{01329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ VSAVE2(1,\ VADD(t[2][i],\ s));}
+\DoxyCodeLine{01330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ VSAVE2(2,\ VADD(t[1][i],\ t[1][i\ +\ 1]));}
+\DoxyCodeLine{01331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ VSAVE2(3,\ VADD(t[2][1\ +\ i],\ s));}
+\DoxyCodeLine{01332\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01333\ \ \ \ \ \ \ \ \ \ \ \ \ VSAVE2(0,\ t[0][7]);}
+\DoxyCodeLine{01334\ \ \ \ \ \ \ \ \ \ \ \ \ VSAVE2(1,\ VADD(t[2][7],\ t[3][7]));}
+\DoxyCodeLine{01335\ \ \ \ \ \ \ \ \ \ \ \ \ VSAVE2(2,\ t[1][7]);}
+\DoxyCodeLine{01336\ \ \ \ \ \ \ \ \ \ \ \ \ VSAVE2(3,\ t[3][7]);}
+\DoxyCodeLine{01337\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01338\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01339\ \textcolor{preprocessor}{\#define\ VSAVE4(i,\ v)\ VSTORE(\&y[i*18],\ v)}}
+\DoxyCodeLine{01340\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ 7;\ i++,\ y\ +=\ 4*18)}
+\DoxyCodeLine{01341\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01342\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ f4\ s\ =\ VADD(t[3][i],\ t[3][i\ +\ 1]);}
+\DoxyCodeLine{01343\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ VSAVE4(0,\ t[0][i]);}
+\DoxyCodeLine{01344\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ VSAVE4(1,\ VADD(t[2][i],\ s));}
+\DoxyCodeLine{01345\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ VSAVE4(2,\ VADD(t[1][i],\ t[1][i\ +\ 1]));}
+\DoxyCodeLine{01346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ VSAVE4(3,\ VADD(t[2][1\ +\ i],\ s));}
+\DoxyCodeLine{01347\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01348\ \ \ \ \ \ \ \ \ \ \ \ \ VSAVE4(0,\ t[0][7]);}
+\DoxyCodeLine{01349\ \ \ \ \ \ \ \ \ \ \ \ \ VSAVE4(1,\ VADD(t[2][7],\ t[3][7]));}
+\DoxyCodeLine{01350\ \ \ \ \ \ \ \ \ \ \ \ \ VSAVE4(2,\ t[1][7]);}
+\DoxyCodeLine{01351\ \ \ \ \ \ \ \ \ \ \ \ \ VSAVE4(3,\ t[3][7]);}
+\DoxyCodeLine{01352\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01353\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01354\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ HAVE\_SIMD\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01355\ \textcolor{preprocessor}{\#ifdef\ MINIMP3\_ONLY\_SIMD}}
+\DoxyCodeLine{01356\ \ \ \ \ \{\}\ \textcolor{comment}{/*\ for\ HAVE\_SIMD=1,\ MINIMP3\_ONLY\_SIMD=1\ case\ we\ do\ not\ need\ non-\/intrinsic\ "{}else"{}\ branch\ */}}
+\DoxyCodeLine{01357\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ MINIMP3\_ONLY\_SIMD\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01358\ \ \ \ \ \textcolor{keywordflow}{for}\ (;\ k\ <\ n;\ k++)}
+\DoxyCodeLine{01359\ \ \ \ \ \{}
+\DoxyCodeLine{01360\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ t[4][8],\ *x,\ *y\ =\ grbuf\ +\ k;}
+\DoxyCodeLine{01361\ }
+\DoxyCodeLine{01362\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (x\ =\ t[0],\ i\ =\ 0;\ i\ <\ 8;\ i++,\ x++)}
+\DoxyCodeLine{01363\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01364\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ x0\ =\ y[i*18];}
+\DoxyCodeLine{01365\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ x1\ =\ y[(15\ -\/\ i)*18];}
+\DoxyCodeLine{01366\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ x2\ =\ y[(16\ +\ i)*18];}
+\DoxyCodeLine{01367\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ x3\ =\ y[(31\ -\/\ i)*18];}
+\DoxyCodeLine{01368\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ t0\ =\ x0\ +\ x3;}
+\DoxyCodeLine{01369\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ t1\ =\ x1\ +\ x2;}
+\DoxyCodeLine{01370\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ t2\ =\ (x1\ -\/\ x2)*g\_sec[3*i\ +\ 0];}
+\DoxyCodeLine{01371\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ t3\ =\ (x0\ -\/\ x3)*g\_sec[3*i\ +\ 1];}
+\DoxyCodeLine{01372\ \ \ \ \ \ \ \ \ \ \ \ \ x[0]\ =\ t0\ +\ t1;}
+\DoxyCodeLine{01373\ \ \ \ \ \ \ \ \ \ \ \ \ x[8]\ =\ (t0\ -\/\ t1)*g\_sec[3*i\ +\ 2];}
+\DoxyCodeLine{01374\ \ \ \ \ \ \ \ \ \ \ \ \ x[16]\ =\ t3\ +\ t2;}
+\DoxyCodeLine{01375\ \ \ \ \ \ \ \ \ \ \ \ \ x[24]\ =\ (t3\ -\/\ t2)*g\_sec[3*i\ +\ 2];}
+\DoxyCodeLine{01376\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01377\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (x\ =\ t[0],\ i\ =\ 0;\ i\ <\ 4;\ i++,\ x\ +=\ 8)}
+\DoxyCodeLine{01378\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01379\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ x0\ =\ x[0],\ x1\ =\ x[1],\ x2\ =\ x[2],\ x3\ =\ x[3],\ x4\ =\ x[4],\ x5\ =\ x[5],\ x6\ =\ x[6],\ x7\ =\ x[7],\ xt;}
+\DoxyCodeLine{01380\ \ \ \ \ \ \ \ \ \ \ \ \ xt\ =\ x0\ -\/\ x7;\ x0\ +=\ x7;}
+\DoxyCodeLine{01381\ \ \ \ \ \ \ \ \ \ \ \ \ x7\ =\ x1\ -\/\ x6;\ x1\ +=\ x6;}
+\DoxyCodeLine{01382\ \ \ \ \ \ \ \ \ \ \ \ \ x6\ =\ x2\ -\/\ x5;\ x2\ +=\ x5;}
+\DoxyCodeLine{01383\ \ \ \ \ \ \ \ \ \ \ \ \ x5\ =\ x3\ -\/\ x4;\ x3\ +=\ x4;}
+\DoxyCodeLine{01384\ \ \ \ \ \ \ \ \ \ \ \ \ x4\ =\ x0\ -\/\ x3;\ x0\ +=\ x3;}
+\DoxyCodeLine{01385\ \ \ \ \ \ \ \ \ \ \ \ \ x3\ =\ x1\ -\/\ x2;\ x1\ +=\ x2;}
+\DoxyCodeLine{01386\ \ \ \ \ \ \ \ \ \ \ \ \ x[0]\ =\ x0\ +\ x1;}
+\DoxyCodeLine{01387\ \ \ \ \ \ \ \ \ \ \ \ \ x[4]\ =\ (x0\ -\/\ x1)*0.70710677f;}
+\DoxyCodeLine{01388\ \ \ \ \ \ \ \ \ \ \ \ \ x5\ =\ \ x5\ +\ x6;}
+\DoxyCodeLine{01389\ \ \ \ \ \ \ \ \ \ \ \ \ x6\ =\ (x6\ +\ x7)*0.70710677f;}
+\DoxyCodeLine{01390\ \ \ \ \ \ \ \ \ \ \ \ \ x7\ =\ \ x7\ +\ xt;}
+\DoxyCodeLine{01391\ \ \ \ \ \ \ \ \ \ \ \ \ x3\ =\ (x3\ +\ x4)*0.70710677f;}
+\DoxyCodeLine{01392\ \ \ \ \ \ \ \ \ \ \ \ \ x5\ -\/=\ x7*0.198912367f;\ \ \textcolor{comment}{/*\ rotate\ by\ PI/8\ */}}
+\DoxyCodeLine{01393\ \ \ \ \ \ \ \ \ \ \ \ \ x7\ +=\ x5*0.382683432f;}
+\DoxyCodeLine{01394\ \ \ \ \ \ \ \ \ \ \ \ \ x5\ -\/=\ x7*0.198912367f;}
+\DoxyCodeLine{01395\ \ \ \ \ \ \ \ \ \ \ \ \ x0\ =\ xt\ -\/\ x6;\ xt\ +=\ x6;}
+\DoxyCodeLine{01396\ \ \ \ \ \ \ \ \ \ \ \ \ x[1]\ =\ (xt\ +\ x7)*0.50979561f;}
+\DoxyCodeLine{01397\ \ \ \ \ \ \ \ \ \ \ \ \ x[2]\ =\ (x4\ +\ x3)*0.54119611f;}
+\DoxyCodeLine{01398\ \ \ \ \ \ \ \ \ \ \ \ \ x[3]\ =\ (x0\ -\/\ x5)*0.60134488f;}
+\DoxyCodeLine{01399\ \ \ \ \ \ \ \ \ \ \ \ \ x[5]\ =\ (x0\ +\ x5)*0.89997619f;}
+\DoxyCodeLine{01400\ \ \ \ \ \ \ \ \ \ \ \ \ x[6]\ =\ (x4\ -\/\ x3)*1.30656302f;}
+\DoxyCodeLine{01401\ \ \ \ \ \ \ \ \ \ \ \ \ x[7]\ =\ (xt\ -\/\ x7)*2.56291556f;}
+\DoxyCodeLine{01402\ }
+\DoxyCodeLine{01403\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01404\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ 7;\ i++,\ y\ +=\ 4*18)}
+\DoxyCodeLine{01405\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01406\ \ \ \ \ \ \ \ \ \ \ \ \ y[0*18]\ =\ t[0][i];}
+\DoxyCodeLine{01407\ \ \ \ \ \ \ \ \ \ \ \ \ y[1*18]\ =\ t[2][i]\ +\ t[3][i]\ +\ t[3][i\ +\ 1];}
+\DoxyCodeLine{01408\ \ \ \ \ \ \ \ \ \ \ \ \ y[2*18]\ =\ t[1][i]\ +\ t[1][i\ +\ 1];}
+\DoxyCodeLine{01409\ \ \ \ \ \ \ \ \ \ \ \ \ y[3*18]\ =\ t[2][i\ +\ 1]\ +\ t[3][i]\ +\ t[3][i\ +\ 1];}
+\DoxyCodeLine{01410\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01411\ \ \ \ \ \ \ \ \ y[0*18]\ =\ t[0][7];}
+\DoxyCodeLine{01412\ \ \ \ \ \ \ \ \ y[1*18]\ =\ t[2][7]\ +\ t[3][7];}
+\DoxyCodeLine{01413\ \ \ \ \ \ \ \ \ y[2*18]\ =\ t[1][7];}
+\DoxyCodeLine{01414\ \ \ \ \ \ \ \ \ y[3*18]\ =\ t[3][7];}
+\DoxyCodeLine{01415\ \ \ \ \ \}}
+\DoxyCodeLine{01416\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MINIMP3\_ONLY\_SIMD\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01417\ \}}
+\DoxyCodeLine{01418\ }
+\DoxyCodeLine{01419\ \textcolor{preprocessor}{\#ifndef\ MINIMP3\_FLOAT\_OUTPUT}}
+\DoxyCodeLine{01420\ \textcolor{keyword}{static}\ int16\_t\ mp3d\_scale\_pcm(\textcolor{keywordtype}{float}\ sample)}
+\DoxyCodeLine{01421\ \{}
+\DoxyCodeLine{01422\ \textcolor{preprocessor}{\#if\ HAVE\_ARMV6}}
+\DoxyCodeLine{01423\ \ \ \ \ int32\_t\ s32\ =\ (int32\_t)(sample\ +\ .5f);}
+\DoxyCodeLine{01424\ \ \ \ \ s32\ -\/=\ (s32\ <\ 0);}
+\DoxyCodeLine{01425\ \ \ \ \ int16\_t\ s\ =\ (int16\_t)minimp3\_clip\_int16\_arm(s32);}
+\DoxyCodeLine{01426\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{01427\ \ \ \ \ \textcolor{keywordflow}{if}\ (sample\ >=\ \ 32766.5)\ \textcolor{keywordflow}{return}\ (int16\_t)\ 32767;}
+\DoxyCodeLine{01428\ \ \ \ \ \textcolor{keywordflow}{if}\ (sample\ <=\ -\/32767.5)\ \textcolor{keywordflow}{return}\ (int16\_t)-\/32768;}
+\DoxyCodeLine{01429\ \ \ \ \ int16\_t\ s\ =\ (int16\_t)(sample\ +\ .5f);}
+\DoxyCodeLine{01430\ \ \ \ \ s\ -\/=\ (s\ <\ 0);\ \ \ \textcolor{comment}{/*\ away\ from\ zero,\ to\ be\ compliant\ */}}
+\DoxyCodeLine{01431\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01432\ \ \ \ \ \textcolor{keywordflow}{return}\ s;}
+\DoxyCodeLine{01433\ \}}
+\DoxyCodeLine{01434\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ MINIMP3\_FLOAT\_OUTPUT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01435\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{float}\ mp3d\_scale\_pcm(\textcolor{keywordtype}{float}\ sample)}
+\DoxyCodeLine{01436\ \{}
+\DoxyCodeLine{01437\ \ \ \ \ \textcolor{keywordflow}{return}\ sample*(1.f/32768.f);}
+\DoxyCodeLine{01438\ \}}
+\DoxyCodeLine{01439\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MINIMP3\_FLOAT\_OUTPUT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01440\ }
+\DoxyCodeLine{01441\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ mp3d\_synth\_pair(mp3d\_sample\_t\ *pcm,\ \textcolor{keywordtype}{int}\ nch,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ *z)}
+\DoxyCodeLine{01442\ \{}
+\DoxyCodeLine{01443\ \ \ \ \ \textcolor{keywordtype}{float}\ a;}
+\DoxyCodeLine{01444\ \ \ \ \ a\ \ =\ (z[14*64]\ -\/\ z[\ \ \ \ 0])\ *\ 29;}
+\DoxyCodeLine{01445\ \ \ \ \ a\ +=\ (z[\ 1*64]\ +\ z[13*64])\ *\ 213;}
+\DoxyCodeLine{01446\ \ \ \ \ a\ +=\ (z[12*64]\ -\/\ z[\ 2*64])\ *\ 459;}
+\DoxyCodeLine{01447\ \ \ \ \ a\ +=\ (z[\ 3*64]\ +\ z[11*64])\ *\ 2037;}
+\DoxyCodeLine{01448\ \ \ \ \ a\ +=\ (z[10*64]\ -\/\ z[\ 4*64])\ *\ 5153;}
+\DoxyCodeLine{01449\ \ \ \ \ a\ +=\ (z[\ 5*64]\ +\ z[\ 9*64])\ *\ 6574;}
+\DoxyCodeLine{01450\ \ \ \ \ a\ +=\ (z[\ 8*64]\ -\/\ z[\ 6*64])\ *\ 37489;}
+\DoxyCodeLine{01451\ \ \ \ \ a\ +=\ \ z[\ 7*64]\ \ \ \ \ \ \ \ \ \ \ \ \ *\ 75038;}
+\DoxyCodeLine{01452\ \ \ \ \ pcm[0]\ =\ mp3d\_scale\_pcm(a);}
+\DoxyCodeLine{01453\ }
+\DoxyCodeLine{01454\ \ \ \ \ z\ +=\ 2;}
+\DoxyCodeLine{01455\ \ \ \ \ a\ \ =\ z[14*64]\ *\ 104;}
+\DoxyCodeLine{01456\ \ \ \ \ a\ +=\ z[12*64]\ *\ 1567;}
+\DoxyCodeLine{01457\ \ \ \ \ a\ +=\ z[10*64]\ *\ 9727;}
+\DoxyCodeLine{01458\ \ \ \ \ a\ +=\ z[\ 8*64]\ *\ 64019;}
+\DoxyCodeLine{01459\ \ \ \ \ a\ +=\ z[\ 6*64]\ *\ -\/9975;}
+\DoxyCodeLine{01460\ \ \ \ \ a\ +=\ z[\ 4*64]\ *\ -\/45;}
+\DoxyCodeLine{01461\ \ \ \ \ a\ +=\ z[\ 2*64]\ *\ 146;}
+\DoxyCodeLine{01462\ \ \ \ \ a\ +=\ z[\ 0*64]\ *\ -\/5;}
+\DoxyCodeLine{01463\ \ \ \ \ pcm[16*nch]\ =\ mp3d\_scale\_pcm(a);}
+\DoxyCodeLine{01464\ \}}
+\DoxyCodeLine{01465\ }
+\DoxyCodeLine{01466\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ mp3d\_synth(\textcolor{keywordtype}{float}\ *xl,\ mp3d\_sample\_t\ *dstl,\ \textcolor{keywordtype}{int}\ nch,\ \textcolor{keywordtype}{float}\ *lins)}
+\DoxyCodeLine{01467\ \{}
+\DoxyCodeLine{01468\ \ \ \ \ \textcolor{keywordtype}{int}\ i;}
+\DoxyCodeLine{01469\ \ \ \ \ \textcolor{keywordtype}{float}\ *xr\ =\ xl\ +\ 576*(nch\ -\/\ 1);}
+\DoxyCodeLine{01470\ \ \ \ \ mp3d\_sample\_t\ *dstr\ =\ dstl\ +\ (nch\ -\/\ 1);}
+\DoxyCodeLine{01471\ }
+\DoxyCodeLine{01472\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ g\_win[]\ =\ \{}
+\DoxyCodeLine{01473\ \ \ \ \ \ \ \ \ -\/1,26,-\/31,208,218,401,-\/519,2063,2000,4788,-\/5517,7134,5959,35640,-\/39336,74992,}
+\DoxyCodeLine{01474\ \ \ \ \ \ \ \ \ -\/1,24,-\/35,202,222,347,-\/581,2080,1952,4425,-\/5879,7640,5288,33791,-\/41176,74856,}
+\DoxyCodeLine{01475\ \ \ \ \ \ \ \ \ -\/1,21,-\/38,196,225,294,-\/645,2087,1893,4063,-\/6237,8092,4561,31947,-\/43006,74630,}
+\DoxyCodeLine{01476\ \ \ \ \ \ \ \ \ -\/1,19,-\/41,190,227,244,-\/711,2085,1822,3705,-\/6589,8492,3776,30112,-\/44821,74313,}
+\DoxyCodeLine{01477\ \ \ \ \ \ \ \ \ -\/1,17,-\/45,183,228,197,-\/779,2075,1739,3351,-\/6935,8840,2935,28289,-\/46617,73908,}
+\DoxyCodeLine{01478\ \ \ \ \ \ \ \ \ -\/1,16,-\/49,176,228,153,-\/848,2057,1644,3004,-\/7271,9139,2037,26482,-\/48390,73415,}
+\DoxyCodeLine{01479\ \ \ \ \ \ \ \ \ -\/2,14,-\/53,169,227,111,-\/919,2032,1535,2663,-\/7597,9389,1082,24694,-\/50137,72835,}
+\DoxyCodeLine{01480\ \ \ \ \ \ \ \ \ -\/2,13,-\/58,161,224,72,-\/991,2001,1414,2330,-\/7910,9592,70,22929,-\/51853,72169,}
+\DoxyCodeLine{01481\ \ \ \ \ \ \ \ \ -\/2,11,-\/63,154,221,36,-\/1064,1962,1280,2006,-\/8209,9750,-\/998,21189,-\/53534,71420,}
+\DoxyCodeLine{01482\ \ \ \ \ \ \ \ \ -\/2,10,-\/68,147,215,2,-\/1137,1919,1131,1692,-\/8491,9863,-\/2122,19478,-\/55178,70590,}
+\DoxyCodeLine{01483\ \ \ \ \ \ \ \ \ -\/3,9,-\/73,139,208,-\/29,-\/1210,1870,970,1388,-\/8755,9935,-\/3300,17799,-\/56778,69679,}
+\DoxyCodeLine{01484\ \ \ \ \ \ \ \ \ -\/3,8,-\/79,132,200,-\/57,-\/1283,1817,794,1095,-\/8998,9966,-\/4533,16155,-\/58333,68692,}
+\DoxyCodeLine{01485\ \ \ \ \ \ \ \ \ -\/4,7,-\/85,125,189,-\/83,-\/1356,1759,605,814,-\/9219,9959,-\/5818,14548,-\/59838,67629,}
+\DoxyCodeLine{01486\ \ \ \ \ \ \ \ \ -\/4,7,-\/91,117,177,-\/106,-\/1428,1698,402,545,-\/9416,9916,-\/7154,12980,-\/61289,66494,}
+\DoxyCodeLine{01487\ \ \ \ \ \ \ \ \ -\/5,6,-\/97,111,163,-\/127,-\/1498,1634,185,288,-\/9585,9838,-\/8540,11455,-\/62684,65290}
+\DoxyCodeLine{01488\ \ \ \ \ \};}
+\DoxyCodeLine{01489\ \ \ \ \ \textcolor{keywordtype}{float}\ *zlin\ =\ lins\ +\ 15*64;}
+\DoxyCodeLine{01490\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ *w\ =\ g\_win;}
+\DoxyCodeLine{01491\ }
+\DoxyCodeLine{01492\ \ \ \ \ zlin[4*15]\ \ \ \ \ =\ xl[18*16];}
+\DoxyCodeLine{01493\ \ \ \ \ zlin[4*15\ +\ 1]\ =\ xr[18*16];}
+\DoxyCodeLine{01494\ \ \ \ \ zlin[4*15\ +\ 2]\ =\ xl[0];}
+\DoxyCodeLine{01495\ \ \ \ \ zlin[4*15\ +\ 3]\ =\ xr[0];}
+\DoxyCodeLine{01496\ }
+\DoxyCodeLine{01497\ \ \ \ \ zlin[4*31]\ \ \ \ \ =\ xl[1\ +\ 18*16];}
+\DoxyCodeLine{01498\ \ \ \ \ zlin[4*31\ +\ 1]\ =\ xr[1\ +\ 18*16];}
+\DoxyCodeLine{01499\ \ \ \ \ zlin[4*31\ +\ 2]\ =\ xl[1];}
+\DoxyCodeLine{01500\ \ \ \ \ zlin[4*31\ +\ 3]\ =\ xr[1];}
+\DoxyCodeLine{01501\ }
+\DoxyCodeLine{01502\ \ \ \ \ mp3d\_synth\_pair(dstr,\ nch,\ lins\ +\ 4*15\ +\ 1);}
+\DoxyCodeLine{01503\ \ \ \ \ mp3d\_synth\_pair(dstr\ +\ 32*nch,\ nch,\ lins\ +\ 4*15\ +\ 64\ +\ 1);}
+\DoxyCodeLine{01504\ \ \ \ \ mp3d\_synth\_pair(dstl,\ nch,\ lins\ +\ 4*15);}
+\DoxyCodeLine{01505\ \ \ \ \ mp3d\_synth\_pair(dstl\ +\ 32*nch,\ nch,\ lins\ +\ 4*15\ +\ 64);}
+\DoxyCodeLine{01506\ }
+\DoxyCodeLine{01507\ \textcolor{preprocessor}{\#if\ HAVE\_SIMD}}
+\DoxyCodeLine{01508\ \ \ \ \ \textcolor{keywordflow}{if}\ (have\_simd())\ \textcolor{keywordflow}{for}\ (i\ =\ 14;\ i\ >=\ 0;\ i-\/-\/)}
+\DoxyCodeLine{01509\ \ \ \ \ \{}
+\DoxyCodeLine{01510\ \textcolor{preprocessor}{\#define\ VLOAD(k)\ f4\ w0\ =\ VSET(*w++);\ f4\ w1\ =\ VSET(*w++);\ f4\ vz\ =\ VLD(\&zlin[4*i\ -\/\ 64*k]);\ f4\ vy\ =\ VLD(\&zlin[4*i\ -\/\ 64*(15\ -\/\ k)]);}}
+\DoxyCodeLine{01511\ \textcolor{preprocessor}{\#define\ V0(k)\ \{\ VLOAD(k)\ b\ =\ \ \ \ \ \ \ \ \ VADD(VMUL(vz,\ w1),\ VMUL(vy,\ w0))\ ;\ a\ =\ \ \ \ \ \ \ \ \ VSUB(VMUL(vz,\ w0),\ VMUL(vy,\ w1));\ \ \}}}
+\DoxyCodeLine{01512\ \textcolor{preprocessor}{\#define\ V1(k)\ \{\ VLOAD(k)\ b\ =\ VADD(b,\ VADD(VMUL(vz,\ w1),\ VMUL(vy,\ w0)));\ a\ =\ VADD(a,\ VSUB(VMUL(vz,\ w0),\ VMUL(vy,\ w1)));\ \}}}
+\DoxyCodeLine{01513\ \textcolor{preprocessor}{\#define\ V2(k)\ \{\ VLOAD(k)\ b\ =\ VADD(b,\ VADD(VMUL(vz,\ w1),\ VMUL(vy,\ w0)));\ a\ =\ VADD(a,\ VSUB(VMUL(vy,\ w1),\ VMUL(vz,\ w0)));\ \}}}
+\DoxyCodeLine{01514\ \ \ \ \ \ \ \ \ f4\ a,\ b;}
+\DoxyCodeLine{01515\ \ \ \ \ \ \ \ \ zlin[4*i]\ \ \ \ \ =\ xl[18*(31\ -\/\ i)];}
+\DoxyCodeLine{01516\ \ \ \ \ \ \ \ \ zlin[4*i\ +\ 1]\ =\ xr[18*(31\ -\/\ i)];}
+\DoxyCodeLine{01517\ \ \ \ \ \ \ \ \ zlin[4*i\ +\ 2]\ =\ xl[1\ +\ 18*(31\ -\/\ i)];}
+\DoxyCodeLine{01518\ \ \ \ \ \ \ \ \ zlin[4*i\ +\ 3]\ =\ xr[1\ +\ 18*(31\ -\/\ i)];}
+\DoxyCodeLine{01519\ \ \ \ \ \ \ \ \ zlin[4*i\ +\ 64]\ =\ xl[1\ +\ 18*(1\ +\ i)];}
+\DoxyCodeLine{01520\ \ \ \ \ \ \ \ \ zlin[4*i\ +\ 64\ +\ 1]\ =\ xr[1\ +\ 18*(1\ +\ i)];}
+\DoxyCodeLine{01521\ \ \ \ \ \ \ \ \ zlin[4*i\ -\/\ 64\ +\ 2]\ =\ xl[18*(1\ +\ i)];}
+\DoxyCodeLine{01522\ \ \ \ \ \ \ \ \ zlin[4*i\ -\/\ 64\ +\ 3]\ =\ xr[18*(1\ +\ i)];}
+\DoxyCodeLine{01523\ }
+\DoxyCodeLine{01524\ \ \ \ \ \ \ \ \ V0(0)\ V2(1)\ V1(2)\ V2(3)\ V1(4)\ V2(5)\ V1(6)\ V2(7)}
+\DoxyCodeLine{01525\ }
+\DoxyCodeLine{01526\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01527\ \textcolor{preprocessor}{\#ifndef\ MINIMP3\_FLOAT\_OUTPUT}}
+\DoxyCodeLine{01528\ \textcolor{preprocessor}{\#if\ HAVE\_SSE}}
+\DoxyCodeLine{01529\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ f4\ g\_max\ =\ \{\ 32767.0f,\ 32767.0f,\ 32767.0f,\ 32767.0f\ \};}
+\DoxyCodeLine{01530\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ f4\ g\_min\ =\ \{\ -\/32768.0f,\ -\/32768.0f,\ -\/32768.0f,\ -\/32768.0f\ \};}
+\DoxyCodeLine{01531\ \ \ \ \ \ \ \ \ \ \ \ \ \_\_m128i\ pcm8\ =\ \_mm\_packs\_epi32(\_mm\_cvtps\_epi32(\_mm\_max\_ps(\_mm\_min\_ps(a,\ g\_max),\ g\_min)),}
+\DoxyCodeLine{01532\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_mm\_cvtps\_epi32(\_mm\_max\_ps(\_mm\_min\_ps(b,\ g\_max),\ g\_min)));}
+\DoxyCodeLine{01533\ \ \ \ \ \ \ \ \ \ \ \ \ dstr[(15\ -\/\ i)*nch]\ =\ \_mm\_extract\_epi16(pcm8,\ 1);}
+\DoxyCodeLine{01534\ \ \ \ \ \ \ \ \ \ \ \ \ dstr[(17\ +\ i)*nch]\ =\ \_mm\_extract\_epi16(pcm8,\ 5);}
+\DoxyCodeLine{01535\ \ \ \ \ \ \ \ \ \ \ \ \ dstl[(15\ -\/\ i)*nch]\ =\ \_mm\_extract\_epi16(pcm8,\ 0);}
+\DoxyCodeLine{01536\ \ \ \ \ \ \ \ \ \ \ \ \ dstl[(17\ +\ i)*nch]\ =\ \_mm\_extract\_epi16(pcm8,\ 4);}
+\DoxyCodeLine{01537\ \ \ \ \ \ \ \ \ \ \ \ \ dstr[(47\ -\/\ i)*nch]\ =\ \_mm\_extract\_epi16(pcm8,\ 3);}
+\DoxyCodeLine{01538\ \ \ \ \ \ \ \ \ \ \ \ \ dstr[(49\ +\ i)*nch]\ =\ \_mm\_extract\_epi16(pcm8,\ 7);}
+\DoxyCodeLine{01539\ \ \ \ \ \ \ \ \ \ \ \ \ dstl[(47\ -\/\ i)*nch]\ =\ \_mm\_extract\_epi16(pcm8,\ 2);}
+\DoxyCodeLine{01540\ \ \ \ \ \ \ \ \ \ \ \ \ dstl[(49\ +\ i)*nch]\ =\ \_mm\_extract\_epi16(pcm8,\ 6);}
+\DoxyCodeLine{01541\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ HAVE\_SSE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01542\ \ \ \ \ \ \ \ \ \ \ \ \ int16x4\_t\ pcma,\ pcmb;}
+\DoxyCodeLine{01543\ \ \ \ \ \ \ \ \ \ \ \ \ a\ =\ VADD(a,\ VSET(0.5f));}
+\DoxyCodeLine{01544\ \ \ \ \ \ \ \ \ \ \ \ \ b\ =\ VADD(b,\ VSET(0.5f));}
+\DoxyCodeLine{01545\ \ \ \ \ \ \ \ \ \ \ \ \ pcma\ =\ vqmovn\_s32(vqaddq\_s32(vcvtq\_s32\_f32(a),\ vreinterpretq\_s32\_u32(vcltq\_f32(a,\ VSET(0)))));}
+\DoxyCodeLine{01546\ \ \ \ \ \ \ \ \ \ \ \ \ pcmb\ =\ vqmovn\_s32(vqaddq\_s32(vcvtq\_s32\_f32(b),\ vreinterpretq\_s32\_u32(vcltq\_f32(b,\ VSET(0)))));}
+\DoxyCodeLine{01547\ \ \ \ \ \ \ \ \ \ \ \ \ vst1\_lane\_s16(dstr\ +\ (15\ -\/\ i)*nch,\ pcma,\ 1);}
+\DoxyCodeLine{01548\ \ \ \ \ \ \ \ \ \ \ \ \ vst1\_lane\_s16(dstr\ +\ (17\ +\ i)*nch,\ pcmb,\ 1);}
+\DoxyCodeLine{01549\ \ \ \ \ \ \ \ \ \ \ \ \ vst1\_lane\_s16(dstl\ +\ (15\ -\/\ i)*nch,\ pcma,\ 0);}
+\DoxyCodeLine{01550\ \ \ \ \ \ \ \ \ \ \ \ \ vst1\_lane\_s16(dstl\ +\ (17\ +\ i)*nch,\ pcmb,\ 0);}
+\DoxyCodeLine{01551\ \ \ \ \ \ \ \ \ \ \ \ \ vst1\_lane\_s16(dstr\ +\ (47\ -\/\ i)*nch,\ pcma,\ 3);}
+\DoxyCodeLine{01552\ \ \ \ \ \ \ \ \ \ \ \ \ vst1\_lane\_s16(dstr\ +\ (49\ +\ i)*nch,\ pcmb,\ 3);}
+\DoxyCodeLine{01553\ \ \ \ \ \ \ \ \ \ \ \ \ vst1\_lane\_s16(dstl\ +\ (47\ -\/\ i)*nch,\ pcma,\ 2);}
+\DoxyCodeLine{01554\ \ \ \ \ \ \ \ \ \ \ \ \ vst1\_lane\_s16(dstl\ +\ (49\ +\ i)*nch,\ pcmb,\ 2);}
+\DoxyCodeLine{01555\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ HAVE\_SSE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01556\ }
+\DoxyCodeLine{01557\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ MINIMP3\_FLOAT\_OUTPUT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01558\ }
+\DoxyCodeLine{01559\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ f4\ g\_scale\ =\ \{\ 1.0f/32768.0f,\ 1.0f/32768.0f,\ 1.0f/32768.0f,\ 1.0f/32768.0f\ \};}
+\DoxyCodeLine{01560\ \ \ \ \ \ \ \ \ \ \ \ \ a\ =\ VMUL(a,\ g\_scale);}
+\DoxyCodeLine{01561\ \ \ \ \ \ \ \ \ \ \ \ \ b\ =\ VMUL(b,\ g\_scale);}
+\DoxyCodeLine{01562\ \textcolor{preprocessor}{\#if\ HAVE\_SSE}}
+\DoxyCodeLine{01563\ \ \ \ \ \ \ \ \ \ \ \ \ \_mm\_store\_ss(dstr\ +\ (15\ -\/\ i)*nch,\ \_mm\_shuffle\_ps(a,\ a,\ \_MM\_SHUFFLE(1,\ 1,\ 1,\ 1)));}
+\DoxyCodeLine{01564\ \ \ \ \ \ \ \ \ \ \ \ \ \_mm\_store\_ss(dstr\ +\ (17\ +\ i)*nch,\ \_mm\_shuffle\_ps(b,\ b,\ \_MM\_SHUFFLE(1,\ 1,\ 1,\ 1)));}
+\DoxyCodeLine{01565\ \ \ \ \ \ \ \ \ \ \ \ \ \_mm\_store\_ss(dstl\ +\ (15\ -\/\ i)*nch,\ \_mm\_shuffle\_ps(a,\ a,\ \_MM\_SHUFFLE(0,\ 0,\ 0,\ 0)));}
+\DoxyCodeLine{01566\ \ \ \ \ \ \ \ \ \ \ \ \ \_mm\_store\_ss(dstl\ +\ (17\ +\ i)*nch,\ \_mm\_shuffle\_ps(b,\ b,\ \_MM\_SHUFFLE(0,\ 0,\ 0,\ 0)));}
+\DoxyCodeLine{01567\ \ \ \ \ \ \ \ \ \ \ \ \ \_mm\_store\_ss(dstr\ +\ (47\ -\/\ i)*nch,\ \_mm\_shuffle\_ps(a,\ a,\ \_MM\_SHUFFLE(3,\ 3,\ 3,\ 3)));}
+\DoxyCodeLine{01568\ \ \ \ \ \ \ \ \ \ \ \ \ \_mm\_store\_ss(dstr\ +\ (49\ +\ i)*nch,\ \_mm\_shuffle\_ps(b,\ b,\ \_MM\_SHUFFLE(3,\ 3,\ 3,\ 3)));}
+\DoxyCodeLine{01569\ \ \ \ \ \ \ \ \ \ \ \ \ \_mm\_store\_ss(dstl\ +\ (47\ -\/\ i)*nch,\ \_mm\_shuffle\_ps(a,\ a,\ \_MM\_SHUFFLE(2,\ 2,\ 2,\ 2)));}
+\DoxyCodeLine{01570\ \ \ \ \ \ \ \ \ \ \ \ \ \_mm\_store\_ss(dstl\ +\ (49\ +\ i)*nch,\ \_mm\_shuffle\_ps(b,\ b,\ \_MM\_SHUFFLE(2,\ 2,\ 2,\ 2)));}
+\DoxyCodeLine{01571\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ HAVE\_SSE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01572\ \ \ \ \ \ \ \ \ \ \ \ \ vst1q\_lane\_f32(dstr\ +\ (15\ -\/\ i)*nch,\ a,\ 1);}
+\DoxyCodeLine{01573\ \ \ \ \ \ \ \ \ \ \ \ \ vst1q\_lane\_f32(dstr\ +\ (17\ +\ i)*nch,\ b,\ 1);}
+\DoxyCodeLine{01574\ \ \ \ \ \ \ \ \ \ \ \ \ vst1q\_lane\_f32(dstl\ +\ (15\ -\/\ i)*nch,\ a,\ 0);}
+\DoxyCodeLine{01575\ \ \ \ \ \ \ \ \ \ \ \ \ vst1q\_lane\_f32(dstl\ +\ (17\ +\ i)*nch,\ b,\ 0);}
+\DoxyCodeLine{01576\ \ \ \ \ \ \ \ \ \ \ \ \ vst1q\_lane\_f32(dstr\ +\ (47\ -\/\ i)*nch,\ a,\ 3);}
+\DoxyCodeLine{01577\ \ \ \ \ \ \ \ \ \ \ \ \ vst1q\_lane\_f32(dstr\ +\ (49\ +\ i)*nch,\ b,\ 3);}
+\DoxyCodeLine{01578\ \ \ \ \ \ \ \ \ \ \ \ \ vst1q\_lane\_f32(dstl\ +\ (47\ -\/\ i)*nch,\ a,\ 2);}
+\DoxyCodeLine{01579\ \ \ \ \ \ \ \ \ \ \ \ \ vst1q\_lane\_f32(dstl\ +\ (49\ +\ i)*nch,\ b,\ 2);}
+\DoxyCodeLine{01580\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ HAVE\_SSE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01581\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MINIMP3\_FLOAT\_OUTPUT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01582\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01583\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01584\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ HAVE\_SIMD\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01585\ \textcolor{preprocessor}{\#ifdef\ MINIMP3\_ONLY\_SIMD}}
+\DoxyCodeLine{01586\ \ \ \ \ \{\}\ \textcolor{comment}{/*\ for\ HAVE\_SIMD=1,\ MINIMP3\_ONLY\_SIMD=1\ case\ we\ do\ not\ need\ non-\/intrinsic\ "{}else"{}\ branch\ */}}
+\DoxyCodeLine{01587\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ MINIMP3\_ONLY\_SIMD\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01588\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 14;\ i\ >=\ 0;\ i-\/-\/)}
+\DoxyCodeLine{01589\ \ \ \ \ \{}
+\DoxyCodeLine{01590\ \textcolor{preprocessor}{\#define\ LOAD(k)\ float\ w0\ =\ *w++;\ float\ w1\ =\ *w++;\ float\ *vz\ =\ \&zlin[4*i\ -\/\ k*64];\ float\ *vy\ =\ \&zlin[4*i\ -\/\ (15\ -\/\ k)*64];}}
+\DoxyCodeLine{01591\ \textcolor{preprocessor}{\#define\ S0(k)\ \{\ int\ j;\ LOAD(k);\ for\ (j\ =\ 0;\ j\ <\ 4;\ j++)\ b[j]\ \ =\ vz[j]*w1\ +\ vy[j]*w0,\ a[j]\ \ =\ vz[j]*w0\ -\/\ vy[j]*w1;\ \}}}
+\DoxyCodeLine{01592\ \textcolor{preprocessor}{\#define\ S1(k)\ \{\ int\ j;\ LOAD(k);\ for\ (j\ =\ 0;\ j\ <\ 4;\ j++)\ b[j]\ +=\ vz[j]*w1\ +\ vy[j]*w0,\ a[j]\ +=\ vz[j]*w0\ -\/\ vy[j]*w1;\ \}}}
+\DoxyCodeLine{01593\ \textcolor{preprocessor}{\#define\ S2(k)\ \{\ int\ j;\ LOAD(k);\ for\ (j\ =\ 0;\ j\ <\ 4;\ j++)\ b[j]\ +=\ vz[j]*w1\ +\ vy[j]*w0,\ a[j]\ +=\ vy[j]*w1\ -\/\ vz[j]*w0;\ \}}}
+\DoxyCodeLine{01594\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ a[4],\ b[4];}
+\DoxyCodeLine{01595\ }
+\DoxyCodeLine{01596\ \ \ \ \ \ \ \ \ zlin[4*i]\ \ \ \ \ =\ xl[18*(31\ -\/\ i)];}
+\DoxyCodeLine{01597\ \ \ \ \ \ \ \ \ zlin[4*i\ +\ 1]\ =\ xr[18*(31\ -\/\ i)];}
+\DoxyCodeLine{01598\ \ \ \ \ \ \ \ \ zlin[4*i\ +\ 2]\ =\ xl[1\ +\ 18*(31\ -\/\ i)];}
+\DoxyCodeLine{01599\ \ \ \ \ \ \ \ \ zlin[4*i\ +\ 3]\ =\ xr[1\ +\ 18*(31\ -\/\ i)];}
+\DoxyCodeLine{01600\ \ \ \ \ \ \ \ \ zlin[4*(i\ +\ 16)]\ \ \ =\ xl[1\ +\ 18*(1\ +\ i)];}
+\DoxyCodeLine{01601\ \ \ \ \ \ \ \ \ zlin[4*(i\ +\ 16)\ +\ 1]\ =\ xr[1\ +\ 18*(1\ +\ i)];}
+\DoxyCodeLine{01602\ \ \ \ \ \ \ \ \ zlin[4*(i\ -\/\ 16)\ +\ 2]\ =\ xl[18*(1\ +\ i)];}
+\DoxyCodeLine{01603\ \ \ \ \ \ \ \ \ zlin[4*(i\ -\/\ 16)\ +\ 3]\ =\ xr[18*(1\ +\ i)];}
+\DoxyCodeLine{01604\ }
+\DoxyCodeLine{01605\ \ \ \ \ \ \ \ \ S0(0)\ S2(1)\ S1(2)\ S2(3)\ S1(4)\ S2(5)\ S1(6)\ S2(7)}
+\DoxyCodeLine{01606\ }
+\DoxyCodeLine{01607\ \ \ \ \ \ \ \ \ dstr[(15\ -\/\ i)*nch]\ =\ mp3d\_scale\_pcm(a[1]);}
+\DoxyCodeLine{01608\ \ \ \ \ \ \ \ \ dstr[(17\ +\ i)*nch]\ =\ mp3d\_scale\_pcm(b[1]);}
+\DoxyCodeLine{01609\ \ \ \ \ \ \ \ \ dstl[(15\ -\/\ i)*nch]\ =\ mp3d\_scale\_pcm(a[0]);}
+\DoxyCodeLine{01610\ \ \ \ \ \ \ \ \ dstl[(17\ +\ i)*nch]\ =\ mp3d\_scale\_pcm(b[0]);}
+\DoxyCodeLine{01611\ \ \ \ \ \ \ \ \ dstr[(47\ -\/\ i)*nch]\ =\ mp3d\_scale\_pcm(a[3]);}
+\DoxyCodeLine{01612\ \ \ \ \ \ \ \ \ dstr[(49\ +\ i)*nch]\ =\ mp3d\_scale\_pcm(b[3]);}
+\DoxyCodeLine{01613\ \ \ \ \ \ \ \ \ dstl[(47\ -\/\ i)*nch]\ =\ mp3d\_scale\_pcm(a[2]);}
+\DoxyCodeLine{01614\ \ \ \ \ \ \ \ \ dstl[(49\ +\ i)*nch]\ =\ mp3d\_scale\_pcm(b[2]);}
+\DoxyCodeLine{01615\ \ \ \ \ \}}
+\DoxyCodeLine{01616\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MINIMP3\_ONLY\_SIMD\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01617\ \}}
+\DoxyCodeLine{01618\ }
+\DoxyCodeLine{01619\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ mp3d\_synth\_granule(\textcolor{keywordtype}{float}\ *qmf\_state,\ \textcolor{keywordtype}{float}\ *grbuf,\ \textcolor{keywordtype}{int}\ nbands,\ \textcolor{keywordtype}{int}\ nch,\ mp3d\_sample\_t\ *pcm,\ \textcolor{keywordtype}{float}\ *lins)}
+\DoxyCodeLine{01620\ \{}
+\DoxyCodeLine{01621\ \ \ \ \ \textcolor{keywordtype}{int}\ i;}
+\DoxyCodeLine{01622\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ nch;\ i++)}
+\DoxyCodeLine{01623\ \ \ \ \ \{}
+\DoxyCodeLine{01624\ \ \ \ \ \ \ \ \ mp3d\_DCT\_II(grbuf\ +\ 576*i,\ nbands);}
+\DoxyCodeLine{01625\ \ \ \ \ \}}
+\DoxyCodeLine{01626\ }
+\DoxyCodeLine{01627\ \ \ \ \ memcpy(lins,\ qmf\_state,\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{float})*15*64);}
+\DoxyCodeLine{01628\ }
+\DoxyCodeLine{01629\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ nbands;\ i\ +=\ 2)}
+\DoxyCodeLine{01630\ \ \ \ \ \{}
+\DoxyCodeLine{01631\ \ \ \ \ \ \ \ \ mp3d\_synth(grbuf\ +\ i,\ pcm\ +\ 32*nch*i,\ nch,\ lins\ +\ i*64);}
+\DoxyCodeLine{01632\ \ \ \ \ \}}
+\DoxyCodeLine{01633\ \textcolor{preprocessor}{\#ifndef\ MINIMP3\_NONSTANDARD\_BUT\_LOGICAL}}
+\DoxyCodeLine{01634\ \ \ \ \ \textcolor{keywordflow}{if}\ (nch\ ==\ 1)}
+\DoxyCodeLine{01635\ \ \ \ \ \{}
+\DoxyCodeLine{01636\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ 15*64;\ i\ +=\ 2)}
+\DoxyCodeLine{01637\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01638\ \ \ \ \ \ \ \ \ \ \ \ \ qmf\_state[i]\ =\ lins[nbands*64\ +\ i];}
+\DoxyCodeLine{01639\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01640\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01641\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MINIMP3\_NONSTANDARD\_BUT\_LOGICAL\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01642\ \ \ \ \ \{}
+\DoxyCodeLine{01643\ \ \ \ \ \ \ \ \ memcpy(qmf\_state,\ lins\ +\ nbands*64,\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{float})*15*64);}
+\DoxyCodeLine{01644\ \ \ \ \ \}}
+\DoxyCodeLine{01645\ \}}
+\DoxyCodeLine{01646\ }
+\DoxyCodeLine{01647\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ mp3d\_match\_frame(\textcolor{keyword}{const}\ uint8\_t\ *hdr,\ \textcolor{keywordtype}{int}\ mp3\_bytes,\ \textcolor{keywordtype}{int}\ frame\_bytes)}
+\DoxyCodeLine{01648\ \{}
+\DoxyCodeLine{01649\ \ \ \ \ \textcolor{keywordtype}{int}\ i,\ nmatch;}
+\DoxyCodeLine{01650\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0,\ nmatch\ =\ 0;\ nmatch\ <\ MAX\_FRAME\_SYNC\_MATCHES;\ nmatch++)}
+\DoxyCodeLine{01651\ \ \ \ \ \{}
+\DoxyCodeLine{01652\ \ \ \ \ \ \ \ \ i\ +=\ hdr\_frame\_bytes(hdr\ +\ i,\ frame\_bytes)\ +\ hdr\_padding(hdr\ +\ i);}
+\DoxyCodeLine{01653\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ +\ HDR\_SIZE\ >\ mp3\_bytes)}
+\DoxyCodeLine{01654\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ nmatch\ >\ 0;}
+\DoxyCodeLine{01655\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!hdr\_compare(hdr,\ hdr\ +\ i))}
+\DoxyCodeLine{01656\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{01657\ \ \ \ \ \}}
+\DoxyCodeLine{01658\ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{01659\ \}}
+\DoxyCodeLine{01660\ }
+\DoxyCodeLine{01661\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ mp3d\_find\_frame(\textcolor{keyword}{const}\ uint8\_t\ *mp3,\ \textcolor{keywordtype}{int}\ mp3\_bytes,\ \textcolor{keywordtype}{int}\ *free\_format\_bytes,\ \textcolor{keywordtype}{int}\ *ptr\_frame\_bytes)}
+\DoxyCodeLine{01662\ \{}
+\DoxyCodeLine{01663\ \ \ \ \ \textcolor{keywordtype}{int}\ i,\ k;}
+\DoxyCodeLine{01664\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ mp3\_bytes\ -\/\ HDR\_SIZE;\ i++,\ mp3++)}
+\DoxyCodeLine{01665\ \ \ \ \ \{}
+\DoxyCodeLine{01666\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (hdr\_valid(mp3))}
+\DoxyCodeLine{01667\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01668\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ frame\_bytes\ =\ hdr\_frame\_bytes(mp3,\ *free\_format\_bytes);}
+\DoxyCodeLine{01669\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ frame\_and\_padding\ =\ frame\_bytes\ +\ hdr\_padding(mp3);}
+\DoxyCodeLine{01670\ }
+\DoxyCodeLine{01671\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (k\ =\ HDR\_SIZE;\ !frame\_bytes\ \&\&\ k\ <\ MAX\_FREE\_FORMAT\_FRAME\_SIZE\ \&\&\ i\ +\ 2*k\ <\ mp3\_bytes\ -\/\ HDR\_SIZE;\ k++)}
+\DoxyCodeLine{01672\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01673\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (hdr\_compare(mp3,\ mp3\ +\ k))}
+\DoxyCodeLine{01674\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01675\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ fb\ =\ k\ -\/\ hdr\_padding(mp3);}
+\DoxyCodeLine{01676\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ nextfb\ =\ fb\ +\ hdr\_padding(mp3\ +\ k);}
+\DoxyCodeLine{01677\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ +\ k\ +\ nextfb\ +\ HDR\_SIZE\ >\ mp3\_bytes\ ||\ !hdr\_compare(mp3,\ mp3\ +\ k\ +\ nextfb))}
+\DoxyCodeLine{01678\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{01679\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ frame\_and\_padding\ =\ k;}
+\DoxyCodeLine{01680\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ frame\_bytes\ =\ fb;}
+\DoxyCodeLine{01681\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *free\_format\_bytes\ =\ fb;}
+\DoxyCodeLine{01682\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01683\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01684\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((frame\_bytes\ \&\&\ i\ +\ frame\_and\_padding\ <=\ mp3\_bytes\ \&\&}
+\DoxyCodeLine{01685\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mp3d\_match\_frame(mp3,\ mp3\_bytes\ -\/\ i,\ frame\_bytes))\ ||}
+\DoxyCodeLine{01686\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (!i\ \&\&\ frame\_and\_padding\ ==\ mp3\_bytes))}
+\DoxyCodeLine{01687\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01688\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *ptr\_frame\_bytes\ =\ frame\_and\_padding;}
+\DoxyCodeLine{01689\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ i;}
+\DoxyCodeLine{01690\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01691\ \ \ \ \ \ \ \ \ \ \ \ \ *free\_format\_bytes\ =\ 0;}
+\DoxyCodeLine{01692\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01693\ \ \ \ \ \}}
+\DoxyCodeLine{01694\ \ \ \ \ *ptr\_frame\_bytes\ =\ 0;}
+\DoxyCodeLine{01695\ \ \ \ \ \textcolor{keywordflow}{return}\ mp3\_bytes;}
+\DoxyCodeLine{01696\ \}}
+\DoxyCodeLine{01697\ }
+\DoxyCodeLine{01698\ \textcolor{keywordtype}{void}\ mp3dec\_init(\mbox{\hyperlink{structmp3dec__t}{mp3dec\_t}}\ *dec)}
+\DoxyCodeLine{01699\ \{}
+\DoxyCodeLine{01700\ \ \ \ \ dec-\/>header[0]\ =\ 0;}
+\DoxyCodeLine{01701\ \}}
+\DoxyCodeLine{01702\ }
+\DoxyCodeLine{01703\ \textcolor{keywordtype}{int}\ mp3dec\_decode\_frame(\mbox{\hyperlink{structmp3dec__t}{mp3dec\_t}}\ *dec,\ \textcolor{keyword}{const}\ uint8\_t\ *mp3,\ \textcolor{keywordtype}{int}\ mp3\_bytes,\ mp3d\_sample\_t\ *pcm,\ \mbox{\hyperlink{structmp3dec__frame__info__t}{mp3dec\_frame\_info\_t}}\ *info)}
+\DoxyCodeLine{01704\ \{}
+\DoxyCodeLine{01705\ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ 0,\ igr,\ frame\_size\ =\ 0,\ success\ =\ 1;}
+\DoxyCodeLine{01706\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *hdr;}
+\DoxyCodeLine{01707\ \ \ \ \ bs\_t\ bs\_frame[1];}
+\DoxyCodeLine{01708\ \ \ \ \ mp3dec\_scratch\_t\ scratch;}
+\DoxyCodeLine{01709\ }
+\DoxyCodeLine{01710\ \ \ \ \ \textcolor{keywordflow}{if}\ (mp3\_bytes\ >\ 4\ \&\&\ dec-\/>header[0]\ ==\ 0xff\ \&\&\ hdr\_compare(dec-\/>header,\ mp3))}
+\DoxyCodeLine{01711\ \ \ \ \ \{}
+\DoxyCodeLine{01712\ \ \ \ \ \ \ \ \ frame\_size\ =\ hdr\_frame\_bytes(mp3,\ dec-\/>free\_format\_bytes)\ +\ hdr\_padding(mp3);}
+\DoxyCodeLine{01713\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (frame\_size\ !=\ mp3\_bytes\ \&\&\ (frame\_size\ +\ HDR\_SIZE\ >\ mp3\_bytes\ ||\ !hdr\_compare(mp3,\ mp3\ +\ frame\_size)))}
+\DoxyCodeLine{01714\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01715\ \ \ \ \ \ \ \ \ \ \ \ \ frame\_size\ =\ 0;}
+\DoxyCodeLine{01716\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01717\ \ \ \ \ \}}
+\DoxyCodeLine{01718\ \ \ \ \ \textcolor{keywordflow}{if}\ (!frame\_size)}
+\DoxyCodeLine{01719\ \ \ \ \ \{}
+\DoxyCodeLine{01720\ \ \ \ \ \ \ \ \ memset(dec,\ 0,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{structmp3dec__t}{mp3dec\_t}}));}
+\DoxyCodeLine{01721\ \ \ \ \ \ \ \ \ i\ =\ mp3d\_find\_frame(mp3,\ mp3\_bytes,\ \&dec-\/>free\_format\_bytes,\ \&frame\_size);}
+\DoxyCodeLine{01722\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!frame\_size\ ||\ i\ +\ frame\_size\ >\ mp3\_bytes)}
+\DoxyCodeLine{01723\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01724\ \ \ \ \ \ \ \ \ \ \ \ \ info-\/>frame\_bytes\ =\ i;}
+\DoxyCodeLine{01725\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{01726\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01727\ \ \ \ \ \}}
+\DoxyCodeLine{01728\ }
+\DoxyCodeLine{01729\ \ \ \ \ hdr\ =\ mp3\ +\ i;}
+\DoxyCodeLine{01730\ \ \ \ \ memcpy(dec-\/>header,\ hdr,\ HDR\_SIZE);}
+\DoxyCodeLine{01731\ \ \ \ \ info-\/>frame\_bytes\ =\ i\ +\ frame\_size;}
+\DoxyCodeLine{01732\ \ \ \ \ info-\/>frame\_offset\ =\ i;}
+\DoxyCodeLine{01733\ \ \ \ \ info-\/>channels\ =\ HDR\_IS\_MONO(hdr)\ ?\ 1\ :\ 2;}
+\DoxyCodeLine{01734\ \ \ \ \ info-\/>hz\ =\ hdr\_sample\_rate\_hz(hdr);}
+\DoxyCodeLine{01735\ \ \ \ \ info-\/>layer\ =\ 4\ -\/\ HDR\_GET\_LAYER(hdr);}
+\DoxyCodeLine{01736\ \ \ \ \ info-\/>bitrate\_kbps\ =\ hdr\_bitrate\_kbps(hdr);}
+\DoxyCodeLine{01737\ }
+\DoxyCodeLine{01738\ \ \ \ \ \textcolor{keywordflow}{if}\ (!pcm)}
+\DoxyCodeLine{01739\ \ \ \ \ \{}
+\DoxyCodeLine{01740\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ hdr\_frame\_samples(hdr);}
+\DoxyCodeLine{01741\ \ \ \ \ \}}
+\DoxyCodeLine{01742\ }
+\DoxyCodeLine{01743\ \ \ \ \ bs\_init(bs\_frame,\ hdr\ +\ HDR\_SIZE,\ frame\_size\ -\/\ HDR\_SIZE);}
+\DoxyCodeLine{01744\ \ \ \ \ \textcolor{keywordflow}{if}\ (HDR\_IS\_CRC(hdr))}
+\DoxyCodeLine{01745\ \ \ \ \ \{}
+\DoxyCodeLine{01746\ \ \ \ \ \ \ \ \ get\_bits(bs\_frame,\ 16);}
+\DoxyCodeLine{01747\ \ \ \ \ \}}
+\DoxyCodeLine{01748\ }
+\DoxyCodeLine{01749\ \ \ \ \ \textcolor{keywordflow}{if}\ (info-\/>layer\ ==\ 3)}
+\DoxyCodeLine{01750\ \ \ \ \ \{}
+\DoxyCodeLine{01751\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ main\_data\_begin\ =\ L3\_read\_side\_info(bs\_frame,\ scratch.gr\_info,\ hdr);}
+\DoxyCodeLine{01752\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (main\_data\_begin\ <\ 0\ ||\ bs\_frame-\/>pos\ >\ bs\_frame-\/>limit)}
+\DoxyCodeLine{01753\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01754\ \ \ \ \ \ \ \ \ \ \ \ \ mp3dec\_init(dec);}
+\DoxyCodeLine{01755\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{01756\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01757\ \ \ \ \ \ \ \ \ success\ =\ L3\_restore\_reservoir(dec,\ bs\_frame,\ \&scratch,\ main\_data\_begin);}
+\DoxyCodeLine{01758\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (success)}
+\DoxyCodeLine{01759\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01760\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (igr\ =\ 0;\ igr\ <\ (HDR\_TEST\_MPEG1(hdr)\ ?\ 2\ :\ 1);\ igr++,\ pcm\ +=\ 576*info-\/>channels)}
+\DoxyCodeLine{01761\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01762\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ memset(scratch.grbuf[0],\ 0,\ 576*2*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{float}));}
+\DoxyCodeLine{01763\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ L3\_decode(dec,\ \&scratch,\ scratch.gr\_info\ +\ igr*info-\/>channels,\ info-\/>channels);}
+\DoxyCodeLine{01764\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mp3d\_synth\_granule(dec-\/>qmf\_state,\ scratch.grbuf[0],\ 18,\ info-\/>channels,\ pcm,\ scratch.syn[0]);}
+\DoxyCodeLine{01765\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01766\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01767\ \ \ \ \ \ \ \ \ L3\_save\_reservoir(dec,\ \&scratch);}
+\DoxyCodeLine{01768\ \ \ \ \ \}\ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01769\ \ \ \ \ \{}
+\DoxyCodeLine{01770\ \textcolor{preprocessor}{\#ifdef\ MINIMP3\_ONLY\_MP3}}
+\DoxyCodeLine{01771\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{01772\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ MINIMP3\_ONLY\_MP3\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01773\ \ \ \ \ \ \ \ \ L12\_scale\_info\ sci[1];}
+\DoxyCodeLine{01774\ \ \ \ \ \ \ \ \ L12\_read\_scale\_info(hdr,\ bs\_frame,\ sci);}
+\DoxyCodeLine{01775\ }
+\DoxyCodeLine{01776\ \ \ \ \ \ \ \ \ memset(scratch.grbuf[0],\ 0,\ 576*2*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{float}));}
+\DoxyCodeLine{01777\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0,\ igr\ =\ 0;\ igr\ <\ 3;\ igr++)}
+\DoxyCodeLine{01778\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01779\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (12\ ==\ (i\ +=\ L12\_dequantize\_granule(scratch.grbuf[0]\ +\ i,\ bs\_frame,\ sci,\ info-\/>layer\ |\ 1)))}
+\DoxyCodeLine{01780\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01781\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i\ =\ 0;}
+\DoxyCodeLine{01782\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ L12\_apply\_scf\_384(sci,\ sci-\/>scf\ +\ igr,\ scratch.grbuf[0]);}
+\DoxyCodeLine{01783\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mp3d\_synth\_granule(dec-\/>qmf\_state,\ scratch.grbuf[0],\ 12,\ info-\/>channels,\ pcm,\ scratch.syn[0]);}
+\DoxyCodeLine{01784\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ memset(scratch.grbuf[0],\ 0,\ 576*2*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{float}));}
+\DoxyCodeLine{01785\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pcm\ +=\ 384*info-\/>channels;}
+\DoxyCodeLine{01786\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01787\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bs\_frame-\/>pos\ >\ bs\_frame-\/>limit)}
+\DoxyCodeLine{01788\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01789\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mp3dec\_init(dec);}
+\DoxyCodeLine{01790\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{01791\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01792\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01793\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MINIMP3\_ONLY\_MP3\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01794\ \ \ \ \ \}}
+\DoxyCodeLine{01795\ \ \ \ \ \textcolor{keywordflow}{return}\ success*hdr\_frame\_samples(dec-\/>header);}
+\DoxyCodeLine{01796\ \}}
+\DoxyCodeLine{01797\ }
+\DoxyCodeLine{01798\ \textcolor{preprocessor}{\#ifdef\ MINIMP3\_FLOAT\_OUTPUT}}
+\DoxyCodeLine{01799\ \textcolor{keywordtype}{void}\ mp3dec\_f32\_to\_s16(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ *in,\ int16\_t\ *out,\ \textcolor{keywordtype}{int}\ num\_samples)}
+\DoxyCodeLine{01800\ \{}
+\DoxyCodeLine{01801\ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ 0;}
+\DoxyCodeLine{01802\ \textcolor{preprocessor}{\#if\ HAVE\_SIMD}}
+\DoxyCodeLine{01803\ \ \ \ \ \textcolor{keywordtype}{int}\ aligned\_count\ =\ num\_samples\ \&\ \string~7;}
+\DoxyCodeLine{01804\ \ \ \ \ \textcolor{keywordflow}{for}(;\ i\ <\ aligned\_count;\ i\ +=\ 8)}
+\DoxyCodeLine{01805\ \ \ \ \ \{}
+\DoxyCodeLine{01806\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ f4\ g\_scale\ =\ \{\ 32768.0f,\ 32768.0f,\ 32768.0f,\ 32768.0f\ \};}
+\DoxyCodeLine{01807\ \ \ \ \ \ \ \ \ f4\ a\ =\ VMUL(VLD(\&in[i\ \ ]),\ g\_scale);}
+\DoxyCodeLine{01808\ \ \ \ \ \ \ \ \ f4\ b\ =\ VMUL(VLD(\&in[i+4]),\ g\_scale);}
+\DoxyCodeLine{01809\ \textcolor{preprocessor}{\#if\ HAVE\_SSE}}
+\DoxyCodeLine{01810\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ f4\ g\_max\ =\ \{\ 32767.0f,\ 32767.0f,\ 32767.0f,\ 32767.0f\ \};}
+\DoxyCodeLine{01811\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ f4\ g\_min\ =\ \{\ -\/32768.0f,\ -\/32768.0f,\ -\/32768.0f,\ -\/32768.0f\ \};}
+\DoxyCodeLine{01812\ \ \ \ \ \ \ \ \ \_\_m128i\ pcm8\ =\ \_mm\_packs\_epi32(\_mm\_cvtps\_epi32(\_mm\_max\_ps(\_mm\_min\_ps(a,\ g\_max),\ g\_min)),}
+\DoxyCodeLine{01813\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_mm\_cvtps\_epi32(\_mm\_max\_ps(\_mm\_min\_ps(b,\ g\_max),\ g\_min)));}
+\DoxyCodeLine{01814\ \ \ \ \ \ \ \ \ out[i\ \ ]\ =\ \_mm\_extract\_epi16(pcm8,\ 0);}
+\DoxyCodeLine{01815\ \ \ \ \ \ \ \ \ out[i+1]\ =\ \_mm\_extract\_epi16(pcm8,\ 1);}
+\DoxyCodeLine{01816\ \ \ \ \ \ \ \ \ out[i+2]\ =\ \_mm\_extract\_epi16(pcm8,\ 2);}
+\DoxyCodeLine{01817\ \ \ \ \ \ \ \ \ out[i+3]\ =\ \_mm\_extract\_epi16(pcm8,\ 3);}
+\DoxyCodeLine{01818\ \ \ \ \ \ \ \ \ out[i+4]\ =\ \_mm\_extract\_epi16(pcm8,\ 4);}
+\DoxyCodeLine{01819\ \ \ \ \ \ \ \ \ out[i+5]\ =\ \_mm\_extract\_epi16(pcm8,\ 5);}
+\DoxyCodeLine{01820\ \ \ \ \ \ \ \ \ out[i+6]\ =\ \_mm\_extract\_epi16(pcm8,\ 6);}
+\DoxyCodeLine{01821\ \ \ \ \ \ \ \ \ out[i+7]\ =\ \_mm\_extract\_epi16(pcm8,\ 7);}
+\DoxyCodeLine{01822\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ HAVE\_SSE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01823\ \ \ \ \ \ \ \ \ int16x4\_t\ pcma,\ pcmb;}
+\DoxyCodeLine{01824\ \ \ \ \ \ \ \ \ a\ =\ VADD(a,\ VSET(0.5f));}
+\DoxyCodeLine{01825\ \ \ \ \ \ \ \ \ b\ =\ VADD(b,\ VSET(0.5f));}
+\DoxyCodeLine{01826\ \ \ \ \ \ \ \ \ pcma\ =\ vqmovn\_s32(vqaddq\_s32(vcvtq\_s32\_f32(a),\ vreinterpretq\_s32\_u32(vcltq\_f32(a,\ VSET(0)))));}
+\DoxyCodeLine{01827\ \ \ \ \ \ \ \ \ pcmb\ =\ vqmovn\_s32(vqaddq\_s32(vcvtq\_s32\_f32(b),\ vreinterpretq\_s32\_u32(vcltq\_f32(b,\ VSET(0)))));}
+\DoxyCodeLine{01828\ \ \ \ \ \ \ \ \ vst1\_lane\_s16(out+i\ \ ,\ pcma,\ 0);}
+\DoxyCodeLine{01829\ \ \ \ \ \ \ \ \ vst1\_lane\_s16(out+i+1,\ pcma,\ 1);}
+\DoxyCodeLine{01830\ \ \ \ \ \ \ \ \ vst1\_lane\_s16(out+i+2,\ pcma,\ 2);}
+\DoxyCodeLine{01831\ \ \ \ \ \ \ \ \ vst1\_lane\_s16(out+i+3,\ pcma,\ 3);}
+\DoxyCodeLine{01832\ \ \ \ \ \ \ \ \ vst1\_lane\_s16(out+i+4,\ pcmb,\ 0);}
+\DoxyCodeLine{01833\ \ \ \ \ \ \ \ \ vst1\_lane\_s16(out+i+5,\ pcmb,\ 1);}
+\DoxyCodeLine{01834\ \ \ \ \ \ \ \ \ vst1\_lane\_s16(out+i+6,\ pcmb,\ 2);}
+\DoxyCodeLine{01835\ \ \ \ \ \ \ \ \ vst1\_lane\_s16(out+i+7,\ pcmb,\ 3);}
+\DoxyCodeLine{01836\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ HAVE\_SSE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01837\ \ \ \ \ \}}
+\DoxyCodeLine{01838\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ HAVE\_SIMD\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01839\ \ \ \ \ \textcolor{keywordflow}{for}(;\ i\ <\ num\_samples;\ i++)}
+\DoxyCodeLine{01840\ \ \ \ \ \{}
+\DoxyCodeLine{01841\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ sample\ =\ in[i]\ *\ 32768.0f;}
+\DoxyCodeLine{01842\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sample\ >=\ \ 32766.5)}
+\DoxyCodeLine{01843\ \ \ \ \ \ \ \ \ \ \ \ \ out[i]\ =\ (int16\_t)\ 32767;}
+\DoxyCodeLine{01844\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (sample\ <=\ -\/32767.5)}
+\DoxyCodeLine{01845\ \ \ \ \ \ \ \ \ \ \ \ \ out[i]\ =\ (int16\_t)-\/32768;}
+\DoxyCodeLine{01846\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01847\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01848\ \ \ \ \ \ \ \ \ \ \ \ \ int16\_t\ s\ =\ (int16\_t)(sample\ +\ .5f);}
+\DoxyCodeLine{01849\ \ \ \ \ \ \ \ \ \ \ \ \ s\ -\/=\ (s\ <\ 0);\ \ \ \textcolor{comment}{/*\ away\ from\ zero,\ to\ be\ compliant\ */}}
+\DoxyCodeLine{01850\ \ \ \ \ \ \ \ \ \ \ \ \ out[i]\ =\ s;}
+\DoxyCodeLine{01851\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01852\ \ \ \ \ \}}
+\DoxyCodeLine{01853\ \}}
+\DoxyCodeLine{01854\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MINIMP3\_FLOAT\_OUTPUT\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01855\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MINIMP3\_IMPLEMENTATION\ \&\&\ !\_MINIMP3\_IMPLEMENTATION\_GUARD\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -1,0 +1,71 @@
+\doxysection{sf\+::priv\+::Matrix\texorpdfstring{$<$}{<} Columns, Rows \texorpdfstring{$>$}{>} Struct Template Reference}
+\hypertarget{structsf_1_1priv_1_1Matrix}{}\label{structsf_1_1priv_1_1Matrix}\index{sf::priv::Matrix$<$ Columns, Rows $>$@{sf::priv::Matrix$<$ Columns, Rows $>$}}
+
+
+\doxylink{structsf_1_1priv_1_1Matrix}{Matrix} type, used to set uniforms in GLSL.  
+
+
+
+
+{\ttfamily \#include $<$Glsl.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structsf_1_1priv_1_1Matrix_ad3734cf028bf079e7a682c52e1e42e6f}{Matrix}} (const float \texorpdfstring{$\ast$}{*}pointer)
+\begin{DoxyCompactList}\small\item\em Construct from raw data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structsf_1_1priv_1_1Matrix_a8511438f38364bc1907bbf0ce9f85c38}{Matrix}} (const \mbox{\hyperlink{classsf_1_1Transform}{Transform}} \&transform)
+\begin{DoxyCompactList}\small\item\em Construct implicitly from SFML transform. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{structsf_1_1priv_1_1Matrix_afca785d791b2dba5e10dfda91cd2088a}\label{structsf_1_1priv_1_1Matrix_afca785d791b2dba5e10dfda91cd2088a} 
+float {\bfseries array} \mbox{[}Columns \texorpdfstring{$\ast$}{*}Rows\mbox{]}
+\begin{DoxyCompactList}\small\item\em Array holding matrix data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$std\+::size\+\_\+t Columns, std\+::size\+\_\+t Rows$>$\newline
+struct sf\+::priv\+::\+Matrix$<$ Columns, Rows $>$}
+\doxylink{structsf_1_1priv_1_1Matrix}{Matrix} type, used to set uniforms in GLSL. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{structsf_1_1priv_1_1Matrix_ad3734cf028bf079e7a682c52e1e42e6f}\index{sf::priv::Matrix$<$ Columns, Rows $>$@{sf::priv::Matrix$<$ Columns, Rows $>$}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!sf::priv::Matrix$<$ Columns, Rows $>$@{sf::priv::Matrix$<$ Columns, Rows $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{structsf_1_1priv_1_1Matrix_ad3734cf028bf079e7a682c52e1e42e6f} 
+template$<$std\+::size\+\_\+t Columns, std\+::size\+\_\+t Rows$>$ \\
+\mbox{\hyperlink{structsf_1_1priv_1_1Matrix}{sf\+::priv\+::\+Matrix}}$<$ Columns, Rows $>$\mbox{\hyperlink{structMatrix}{\+::\+Matrix}} (\begin{DoxyParamCaption}\item[{const float \texorpdfstring{$\ast$}{*}}]{pointer}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Construct from raw data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pointer} & Points to the beginning of an array that has the size of the matrix. The elements are copied to the instance. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{structsf_1_1priv_1_1Matrix_a8511438f38364bc1907bbf0ce9f85c38}\index{sf::priv::Matrix$<$ Columns, Rows $>$@{sf::priv::Matrix$<$ Columns, Rows $>$}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!sf::priv::Matrix$<$ Columns, Rows $>$@{sf::priv::Matrix$<$ Columns, Rows $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{structsf_1_1priv_1_1Matrix_a8511438f38364bc1907bbf0ce9f85c38} 
+template$<$std\+::size\+\_\+t Columns, std\+::size\+\_\+t Rows$>$ \\
+\mbox{\hyperlink{structsf_1_1priv_1_1Matrix}{sf\+::priv\+::\+Matrix}}$<$ Columns, Rows $>$\mbox{\hyperlink{structMatrix}{\+::\+Matrix}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classsf_1_1Transform}{Transform}} \&}]{transform}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct implicitly from SFML transform. 
+
+This constructor is only supported for 3x3 and 4x4 matrices.
+
+
+\begin{DoxyParams}{Parameters}
+{\em transform} & Object containing a transform. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/include/\+SFML/\+Graphics/Glsl.\+hpp\end{DoxyCompactItemize}

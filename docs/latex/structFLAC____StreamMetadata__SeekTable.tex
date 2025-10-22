@@ -1,0 +1,43 @@
+\doxysection{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Seek\+Table Struct Reference}
+\hypertarget{structFLAC____StreamMetadata__SeekTable}{}\label{structFLAC____StreamMetadata__SeekTable}\index{FLAC\_\_StreamMetadata\_SeekTable@{FLAC\_\_StreamMetadata\_SeekTable}}
+
+
+{\ttfamily \#include $<$format.\+h$>$}
+
+
+
+Collaboration diagram for FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Seek\+Table\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=204pt]{structFLAC____StreamMetadata__SeekTable__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned {\bfseries num\+\_\+points}
+\item 
+\mbox{\hyperlink{structFLAC____StreamMetadata__SeekPoint}{FLAC\+\_\+\+\_\+\+Stream\+Metadata\+\_\+\+Seek\+Point}} \texorpdfstring{$\ast$}{*} {\bfseries points}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+FLAC SEEKTABLE structure. (c.\+f. \href{../format.html\#metadata_block_seektable}{\texttt{ format specification}})
+
+\begin{DoxyNote}{Note}
+From the format specification\+:
+\begin{DoxyItemize}
+\item The seek points must be sorted by ascending sample number.
+\item Each seek point\textquotesingle{}s sample number must be the first sample of the target frame.
+\item Each seek point\textquotesingle{}s sample number must be unique within the table.
+\item Existence of a SEEKTABLE block implies a correct setting of total\+\_\+samples in the stream\+\_\+info block.
+\item Behavior is undefined when more than one SEEKTABLE block is present in a stream. 
+\end{DoxyItemize}
+\end{DoxyNote}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+build/\+\_\+deps/sfml-\/src/extlibs/headers/\+FLAC/format.\+h\end{DoxyCompactItemize}
