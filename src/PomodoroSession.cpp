@@ -20,9 +20,11 @@ PomodoroSession::PomodoroSession(uint rounds, Seconds workTime,
 
 const PomodoroSession::Status& PomodoroSession::GetStatus() {
 	if (!_roundQueue.empty())
-		UpdateRound();
+		Update();
 	return _status;
 }
+
+
 
 void PomodoroSession::StartActualRound() {
 	Round& round = _roundQueue.front();
@@ -52,7 +54,7 @@ void zenith::PomodoroSession::SetNextRound() {
 	}
 }
 
-void PomodoroSession::UpdateRound() {
+void PomodoroSession::Update() {
 	Round& round = _roundQueue.front();
 
 	switch (round.mode)
@@ -61,11 +63,15 @@ void PomodoroSession::UpdateRound() {
 			break;
 		case RoundMode::WORKING:
 			round.progress = round.workTimer.GetStatus().progress;
+			_status.remainingTime = round.workTimer.GetStatus().remaining;
+			_status.elapsedTime = round.workTimer.GetStatus().elapsed;
 			if (round.workTimer.GetStatus().mode == Timer::Mode::Ended)
 				round.mode = RoundMode::RESTING;
 			break;
 		case RoundMode::RESTING:
 			round.progress = round.restTimer.GetStatus().progress;
+			_status.remainingTime = round.restTimer.GetStatus().remaining;
+			_status.elapsedTime = round.restTimer.GetStatus().elapsed;
 			if (round.restTimer.GetStatus().mode == Timer::Mode::Ended) {
 				round.mode = RoundMode::COMPLETED;
 				SetNextRound();
@@ -77,6 +83,9 @@ void PomodoroSession::UpdateRound() {
 			throw InvalidModeException();
 			return;
 	}
+
+	_status.progress = round.progress;
+	_status.roundsLeft = _roundQueue.size();
 }
 
 bool PomodoroSession::IsHalfSessionRound(uint rounds, uint index) {

@@ -50,7 +50,7 @@ void Timer::Reset() {
 	}
 }
 
-const Timer::Status Timer::GetStatus(){
+const Timer::Status Timer::GetStatus() {
 	auto remainingTime = FetchRemainingTime();
 	if (remainingTime <= Seconds::zero()) {
 		remainingTime = Seconds::zero();

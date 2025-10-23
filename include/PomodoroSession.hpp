@@ -48,6 +48,11 @@ namespace zenith {
 			 */
 			struct Status {
 				Mode mode = Mode::IDLE;
+				RoundMode roundMode = RoundMode::IDLE;
+				string remainingTime = "00:00";
+				string elapsedTime = "00:00";
+				float progress = 0.0f;
+				uint roundsLeft = 8;
 			};
 			
 			/**
@@ -92,14 +97,13 @@ namespace zenith {
 			/**
 			 * @brief Updates the round mode and data on behalf of the period timers.
 			 */
-			void UpdateRound();
+			void Update();
 
 			/**
 			 * @brief Determines if the round's index refers to the half of the session.
 			 * @note Used to assign large rest period on the zenith of the session.
 			 */
 			bool IsHalfSessionRound(uint rounds, uint index);
-
 
 	};
 }

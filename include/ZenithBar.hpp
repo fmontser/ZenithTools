@@ -5,6 +5,7 @@
 #include "imgui-SFML.h"
 #include <memory>
 #include "Timer.hpp"
+#include "PomodoroSession.hpp"
 
 namespace zenith {
 
@@ -18,11 +19,13 @@ namespace zenith {
 
 		private:
 			std::unique_ptr<sf::RenderWindow> _viewport;
+			PomodoroSession _session;
 
 			void InitViewport();
 			void SetWindows();
-			void SetPomodoroWindow(ImGuiViewport* viewport);
-			void SetNoiseGeneratorWindow(ImGuiViewport* viewport);
+			void DrawPomodoroWindow(ImGuiViewport* viewport);
+			void DrawNoiseGeneratorWindow(ImGuiViewport* viewport);
 			void SetDynamicResolution();
+
 	};
 }
