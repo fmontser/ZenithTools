@@ -106,4 +106,11 @@ namespace zenith {
 			bool IsHalfSessionRound(uint rounds, uint index);
 
 	};
+
+	/// @brief The mode of a session, idle, ongoing or completed
+	using Mode = PomodoroSession::Mode;
+	/// @brief The mode of a round, idle, working, resting or completed
+	using RoundMode = PomodoroSession::RoundMode;
+	/// @brief A structure of data that contains information about the session
+	using Status = PomodoroSession::Status;
 }
