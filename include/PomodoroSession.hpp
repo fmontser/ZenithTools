@@ -40,7 +40,7 @@ namespace zenith {
 			 * @brief Represents the mode of the session itself, the actual state.
 			 */
 			enum class Mode {
-				IDLE, ONGOING, COMPLETED
+				IDLE, ONGOING, PAUSED, COMPLETED
 			};
 
 			/**
@@ -107,7 +107,7 @@ namespace zenith {
 
 	};
 
-	/// @brief The mode of a session, idle, ongoing or completed
+	/// @brief The mode of a session, idle, ongoing, paused or completed
 	using Mode = PomodoroSession::Mode;
 	/// @brief The mode of a round, idle, working, resting or completed
 	using RoundMode = PomodoroSession::RoundMode;

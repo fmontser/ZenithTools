@@ -59,21 +59,49 @@ void ZenithBar::DrawPomodoroWindow(ImGuiViewport* viewport) {
 		| ImGuiWindowFlags_NoScrollbar
 		| ImGuiWindowFlags_NoSavedSettings;
 
-/* 	const PomodoroSession::Round& _actualRound = _session.GetActualRound();
-
-	const Timer *_actualTimer = nullptr;
-	if (_actualRound.mode == PomodoroSession::RoundMode::WORKING)
-		_actualTimer = &_actualRound.workTimer;
-	else if (_actualRound.mode == PomodoroSession::RoundMode::RESTING)
-		_actualTimer = &_actualRound.restTimer;
-
-	float _progress = _actualRound.progress;
-
-	string _remainingTime = _actualTimer->GetStatus().remaining;
-	string _elapsedTime; */
-
+	Status status = _session.GetStatus();
+	Mode _mode = status.mode;
+	RoundMode _roundMode = status.roundMode;
+	float _progress = status.progress;
+	string _remainingTime = status.remainingTime;
+	string _elapsedTime = status.elapsedTime;
+	uint _roundsLeft = status.roundsLeft;
+	
 	if (ImGui::Begin("PomodoroWindow",nullptr, windowFlags)) {
 		
+		ImGui::BeginDisabled();
+		for (uint i = 0; i < _roundsLeft; ++i) {
+			ImGui::SameLine();
+			ImGui::RadioButton("##Round_",false);
+		}
+		ImGui::EndDisabled();
+
+		ImGui::SetWindowFontScale(5.0f);
+		ImGui::Text(_remainingTime.c_str());
+		ImGui::SetWindowFontScale(1.0f);
+
+
+		ImGui::ProgressBar(_progress, ImVec2(-1.0f, 0.0f),_elapsedTime.c_str());
+
+
+		if (_roundMode == RoundMode::IDLE || _roundMode == RoundMode::COMPLETED){
+			if (ImGui::Button("Start", ImVec2(50,50)))
+				_session.StartActualRound();
+		} else if (_mode == Mode::ONGOING) {
+			if (ImGui::Button("Pause", ImVec2(50,50)))
+				//TODO pause
+				;
+		} else if (_mode == Mode::PAUSED) {
+			if (ImGui::Button("Resume", ImVec2(50,50)))
+			//TODO resume
+			;
+		}
+
+		ImGui::SameLine();
+		if (ImGui::Button("Reset", ImVec2(50,50)))
+			//TODO reset
+			;
+
 
 		ImGui::End();
 	};
