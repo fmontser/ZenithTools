@@ -16,6 +16,7 @@ PomodoroSession::PomodoroSession(uint rounds, Seconds workTime,
 				Timer(Minutes::zero(), restSeconds)
 			));
 		}
+		_status.roundsLeft = rounds;
 }
 
 const PomodoroSession::Status& PomodoroSession::GetStatus() {
@@ -24,9 +25,8 @@ const PomodoroSession::Status& PomodoroSession::GetStatus() {
 	return _status;
 }
 
-
-
 void PomodoroSession::StartActualRound() {
+	Update();
 	Round& round = _roundQueue.front();
 	if (_status.mode == Mode::IDLE)
 		_status.mode = Mode::ONGOING;
@@ -38,15 +38,18 @@ void PomodoroSession::StartActualRound() {
 }
 
 void PomodoroSession::StartRestingPeriod() {
+	Update();
 	Round& round = _roundQueue.front();
 	if (round.mode == RoundMode::RESTING) 
-		round.restTimer.Start();round.workTimer.Start();
+		round.restTimer.Start();
 }
 
 void zenith::PomodoroSession::SetNextRound() {
 	Round& round = _roundQueue.front();
 	if (round.mode == RoundMode::COMPLETED) {
 		_roundQueue.pop();
+		if (_status.roundsLeft > 0)
+			_status.roundsLeft--;
 		if (_roundQueue.empty())
 			_status.mode = Mode::COMPLETED;
 		else
