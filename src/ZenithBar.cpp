@@ -6,7 +6,11 @@
 using namespace zenith;
 
 //TODO remove hardcoded values
-ZenithBar::ZenithBar(): _session(PomodoroSession(8, Minutes(25),Minutes(5), Minutes(15))) {
+/* ZenithBar::ZenithBar(): _session(PomodoroSession(2, Minutes(25),Minutes(5), Minutes(15))) {
+	InitViewport();
+}
+ */
+ZenithBar::ZenithBar(): _session(PomodoroSession(2, Seconds(5),Seconds(2), Seconds(3))) {
 	InitViewport();
 }
 
@@ -84,23 +88,29 @@ void ZenithBar::DrawPomodoroWindow(ImGuiViewport* viewport) {
 		ImGui::ProgressBar(_progress, ImVec2(-1.0f, 0.0f),_elapsedTime.c_str());
 
 
-		if (_roundMode == RoundMode::IDLE || _roundMode == RoundMode::COMPLETED){
-			if (ImGui::Button("Start", ImVec2(50,50)))
-				_session.StartActualRound();
+		if (_mode == Mode::IDLE) {
+			if (ImGui::Button("Start", ImVec2(50,50))){
+				if (_roundMode == RoundMode::IDLE)
+					_session.StartActualRound();
+				else if (_roundMode == RoundMode::RESTING)
+					_session.StartRestingPeriod();
+			}
 		} else if (_mode == Mode::ONGOING) {
 			if (ImGui::Button("Pause", ImVec2(50,50)))
-				//TODO pause
-				;
+				_session.PausePeriod();
 		} else if (_mode == Mode::PAUSED) {
 			if (ImGui::Button("Resume", ImVec2(50,50)))
-			//TODO resume
-			;
+				_session.ResumePeriod();
 		}
 
 		ImGui::SameLine();
 		if (ImGui::Button("Reset", ImVec2(50,50)))
-			//TODO reset
-			;
+			_session.ResetPeriod();
+
+		
+		ImGui::SameLine();
+		if (ImGui::Button("Restart", ImVec2(50,50)))
+			_session.RestartSession();
 
 
 		ImGui::End();

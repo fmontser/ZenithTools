@@ -13,6 +13,15 @@ using std::string;
 
 namespace zenith {
 
+	/// @brief A clock that cannot be set and represents monotonic time.
+	using Clock = std::chrono::steady_clock;
+	/// @brief A specific point in time, as measured by a Clock.
+	using TimePoint = std::chrono::time_point<std::chrono::steady_clock>;
+	/// @brief A duration measured in seconds.
+	using Seconds = std::chrono::seconds;
+	/// @brief A duration measured in minutes.
+	using Minutes = std::chrono::minutes;
+
 	/**
 	 * @brief Manages a timer with minutes and seconds.
 	 * 
@@ -108,14 +117,5 @@ namespace zenith {
 			 */
 			float CalculateProgress(const Seconds& elapsedTime) const;
 	};
-
-	/// @brief A clock that cannot be set and represents monotonic time.
-	using Clock = std::chrono::steady_clock;
-	/// @brief A specific point in time, as measured by a Clock.
-	using TimePoint = std::chrono::time_point<std::chrono::steady_clock>;
-	/// @brief A duration measured in seconds.
-	using Seconds = std::chrono::seconds;
-	/// @brief A duration measured in minutes.
-	using Minutes = std::chrono::minutes;
 
 }

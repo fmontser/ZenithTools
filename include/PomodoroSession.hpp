@@ -84,6 +84,27 @@ namespace zenith {
 			 */
 			void StartRestingPeriod();
 
+			/**
+			 * @brief Pauses the actual period.
+			 */
+			void PausePeriod();
+
+			/**
+			 * @brief Resumes the actual paused period.
+			 */
+			void ResumePeriod();
+
+			/**
+			 * @brief Resets the actual period.
+			 */
+			void ResetPeriod();
+
+			/**
+			 * @brief Resets the actual session.
+			 */
+			void RestartSession();
+
+
 		private:
 			Status _status;                 ///< Holds the status data for the session.
 			std::queue<Round> _roundQueue;  ///< A queue containing every round for a given session.

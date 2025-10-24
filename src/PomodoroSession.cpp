@@ -1,5 +1,7 @@
 #include "PomodoroSession.hpp"
 #include "Exceptions.hpp"
+//TODO borrar
+#include <iostream>
 
 using namespace zenith;
 
@@ -20,8 +22,7 @@ PomodoroSession::PomodoroSession(uint rounds, Seconds workTime,
 }
 
 const PomodoroSession::Status& PomodoroSession::GetStatus() {
-	if (!_roundQueue.empty())
-		Update();
+	Update();
 	return _status;
 }
 
@@ -40,8 +41,30 @@ void PomodoroSession::StartActualRound() {
 void PomodoroSession::StartRestingPeriod() {
 	Update();
 	Round& round = _roundQueue.front();
-	if (round.mode == RoundMode::RESTING) 
+	if (round.mode == RoundMode::RESTING) {
+		_status.mode = Mode::ONGOING;
 		round.restTimer.Start();
+	}
+}
+
+void PomodoroSession::PausePeriod() {
+	//TODO
+	throw NotImplementedException();
+}
+
+void PomodoroSession::ResumePeriod() {
+	//TODO
+	throw NotImplementedException();
+}
+
+void PomodoroSession::ResetPeriod() {
+	//TODO
+	throw NotImplementedException();
+}
+
+void PomodoroSession::RestartSession() {
+	//TODO
+	throw NotImplementedException();
 }
 
 void zenith::PomodoroSession::SetNextRound() {
@@ -58,6 +81,9 @@ void zenith::PomodoroSession::SetNextRound() {
 }
 
 void PomodoroSession::Update() {
+	if (_roundQueue.empty())
+		return;
+
 	Round& round = _roundQueue.front();
 
 	switch (round.mode)
@@ -68,14 +94,17 @@ void PomodoroSession::Update() {
 			round.progress = round.workTimer.GetStatus().progress;
 			_status.remainingTime = round.workTimer.GetStatus().remaining;
 			_status.elapsedTime = round.workTimer.GetStatus().elapsed;
-			if (round.workTimer.GetStatus().mode == Timer::Mode::Ended)
+			if (round.workTimer.GetStatus().mode == Timer::Mode::Ended) {
+				_status.mode = Mode::IDLE;
 				round.mode = RoundMode::RESTING;
+			}
 			break;
 		case RoundMode::RESTING:
 			round.progress = round.restTimer.GetStatus().progress;
 			_status.remainingTime = round.restTimer.GetStatus().remaining;
 			_status.elapsedTime = round.restTimer.GetStatus().elapsed;
 			if (round.restTimer.GetStatus().mode == Timer::Mode::Ended) {
+				_status.mode = Mode::IDLE;
 				round.mode = RoundMode::COMPLETED;
 				SetNextRound();
 			}
@@ -87,6 +116,7 @@ void PomodoroSession::Update() {
 			return;
 	}
 
+	_status.roundMode = round.mode;
 	_status.progress = round.progress;
 	_status.roundsLeft = _roundQueue.size();
 }
