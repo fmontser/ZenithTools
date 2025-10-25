@@ -46,11 +46,14 @@ void Timer::Resume() {
 void Timer::Reset() {
 	if (_status.mode != Mode::Stopped) {
 		_remainingTime = _durationTime;
+		_startTime = Clock::now();
+		_targetTime = _startTime + _remainingTime;
+		_status.progress = 0.0f;
 		_status.mode = Mode::Stopped;
 	}
 }
 
-const Timer::Status Timer::GetStatus(){
+const Timer::Status Timer::GetStatus() {
 	auto remainingTime = FetchRemainingTime();
 	if (remainingTime <= Seconds::zero()) {
 		remainingTime = Seconds::zero();

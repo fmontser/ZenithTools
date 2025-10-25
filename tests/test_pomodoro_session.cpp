@@ -94,4 +94,27 @@ namespace zenith {
 		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::COMPLETED);
 	}
 
+	// Verify status data is returned correctly
+	TEST(PomodoroSessionTest, GetStatusDataTest) {
+		PomodoroSession session = PomodoroSession(2,Seconds(4),Seconds(2),Seconds(2));
+		
+		session.StartActualRound();
+		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
+		PomodoroSession::Status status = session.GetStatus();
+		EXPECT_EQ(status.mode, PomodoroSession::Mode::ONGOING);
+		EXPECT_EQ(status.remainingTime, "00:02");
+		EXPECT_EQ(status.elapsedTime, "00:02");
+		EXPECT_GE(status.progress, 0.5);
+		EXPECT_LE(status.progress, 0.6);
+		EXPECT_EQ(status.roundsLeft, 2);
+		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
+
+		session.StartRestingPeriod();
+		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
+		session.StartActualRound();
+		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
+		status = session.GetStatus();
+		EXPECT_EQ(status.roundsLeft, 1);
+	}
+
 }

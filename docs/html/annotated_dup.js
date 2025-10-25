@@ -5,7 +5,7 @@ var annotated_dup =
       [ "NotImplementedException", "structzenith_1_1NotImplementedException.html", null ],
       [ "PomodoroSession", "classzenith_1_1PomodoroSession.html", "classzenith_1_1PomodoroSession" ],
       [ "Timer", "classzenith_1_1Timer.html", "classzenith_1_1Timer" ],
-      [ "ZenithBar", "classzenith_1_1ZenithBar.html", null ],
-      [ "ZenithUi", "classzenith_1_1ZenithUi.html", null ]
+      [ "ZenithBar", "classzenith_1_1ZenithBar.html", "classzenith_1_1ZenithBar" ],
+      [ "ZenithUi", "classzenith_1_1ZenithUi.html", "classzenith_1_1ZenithUi" ]
     ] ]
 ];

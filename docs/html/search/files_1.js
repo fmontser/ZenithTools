@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['timer_2ehpp_0',['Timer.hpp',['../Timer_8hpp.html',1,'']]]
+  ['pomodorosession_2ehpp_0',['PomodoroSession.hpp',['../PomodoroSession_8hpp.html',1,'']]]
 ];

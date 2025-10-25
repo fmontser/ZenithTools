@@ -40,7 +40,7 @@ namespace zenith {
 			 * @brief Represents the mode of the session itself, the actual state.
 			 */
 			enum class Mode {
-				IDLE, ONGOING, COMPLETED
+				IDLE, ONGOING, PAUSED, COMPLETED
 			};
 
 			/**
@@ -48,10 +48,16 @@ namespace zenith {
 			 */
 			struct Status {
 				Mode mode = Mode::IDLE;
+				RoundMode roundMode = RoundMode::IDLE;
+				string remainingTime = "00:00";
+				string elapsedTime = "00:00";
+				float progress = 0.0f;
+				uint roundsLeft = 8;
+				uint roundsTotal = 8;
 			};
 			
 			/**
-			 * @brief Constructs a new seesion with a number of rounds and periods values.
+			 * @brief Constructs a new session with a number of rounds and periods values.
 			 * @param rounds The number of rounds for a session.
 			 * @param workTime The number in seconds for work periods.
 			 * @param restTime The number in seconds for rest periods.
@@ -79,6 +85,26 @@ namespace zenith {
 			 */
 			void StartRestingPeriod();
 
+			/**
+			 * @brief Pauses the actual period.
+			 */
+			void PausePeriod();
+
+			/**
+			 * @brief Resumes the actual paused period.
+			 */
+			void ResumePeriod();
+
+			/**
+			 * @brief Resets the actual period.
+			 */
+			void ResetPeriod();
+
+			/**
+			 * @brief Skips the actual period.
+			 */
+			void SkipPeriod();
+
 		private:
 			Status _status;                 ///< Holds the status data for the session.
 			std::queue<Round> _roundQueue;  ///< A queue containing every round for a given session.
@@ -92,7 +118,7 @@ namespace zenith {
 			/**
 			 * @brief Updates the round mode and data on behalf of the period timers.
 			 */
-			void UpdateRound();
+			void Update();
 
 			/**
 			 * @brief Determines if the round's index refers to the half of the session.
@@ -100,6 +126,18 @@ namespace zenith {
 			 */
 			bool IsHalfSessionRound(uint rounds, uint index);
 
+			/**
+			 * @brief Gets the actual work/rest timer.
+			 * @note Class internal use only.
+			 */
+			Timer& GetActualTimer();
 
 	};
+
+	/// @brief The mode of a session, idle, ongoing, paused or completed
+	using Mode = PomodoroSession::Mode;
+	/// @brief The mode of a round, idle, working, resting or completed
+	using RoundMode = PomodoroSession::RoundMode;
+	/// @brief A structure of data that contains information about the session
+	using Status = PomodoroSession::Status;
 }

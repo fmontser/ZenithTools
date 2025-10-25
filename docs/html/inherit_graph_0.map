@@ -1,7 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="Node000000" title=" " alt="" coords="5,31,113,57"/>
-<area shape="rect" id="Node000001" href="$structzenith_1_1InvalidModeException.html" title=" " alt="" coords="174,5,366,32"/>
+<area shape="rect" id="Node000001" href="$structzenith_1_1InvalidModeException.html" title="Triggers when an invalid MODE or STATE is provided." alt="" coords="174,5,366,32"/>
 <area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="128,33,173,28,173,33,128,38"/>
-<area shape="rect" id="Node000002" href="$structzenith_1_1NotImplementedException.html" title=" " alt="" coords="161,56,379,83"/>
+<area shape="rect" id="Node000002" href="$structzenith_1_1NotImplementedException.html" title="Stub for non implemented code." alt="" coords="161,56,379,83"/>
 <area shape="poly" id="edge2_Node000000_Node000002" title=" " alt="" coords="128,50,161,54,160,59,128,55"/>
 </map>
