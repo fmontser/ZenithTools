@@ -21,6 +21,10 @@ namespace zenith {
 			std::unique_ptr<sf::RenderWindow> _viewport;
 			PomodoroSession _session;
 
+			/**
+			 * @brief Resets the actual session.
+			 */
+			void RestartSession();
 			void InitViewport();
 			void SetWindows();
 			void DrawPomodoroWindow(ImGuiViewport* viewport);

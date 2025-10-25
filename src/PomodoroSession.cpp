@@ -16,10 +16,12 @@ PomodoroSession::PomodoroSession(uint rounds, Seconds workTime,
 				Timer(Minutes::zero(), restSeconds)
 			));
 		}
+		_status.roundsTotal = rounds;
 		_status.roundsLeft = rounds;
 
 		//TODO protect every _roundQueue acces if empty
 		//TODO refactor modes/roundmodes into single sequence
+		//TODO refactor unification on status updates.
 }
 
 const PomodoroSession::Status& PomodoroSession::GetStatus() {
@@ -72,15 +74,9 @@ void PomodoroSession::ResetPeriod() {
 		_status.mode = Mode::IDLE;
 	}
 	timer.Reset();
-	//TODO check necesary
 	_status.remainingTime = timer.GetStatus().remaining;
 	_status.elapsedTime = timer.GetStatus().elapsed;
 	round.progress = timer.GetStatus().progress;
-}
-
-void PomodoroSession::RestartSession() {
-	//TODO not implemented
-	throw NotImplementedException();
 }
 
 void PomodoroSession::SkipPeriod() {

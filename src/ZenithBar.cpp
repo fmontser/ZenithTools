@@ -10,7 +10,7 @@ using namespace zenith;
 	InitViewport();
 }
  */
-ZenithBar::ZenithBar(): _session(PomodoroSession(2, Seconds(5),Seconds(2), Seconds(3))) {
+ZenithBar::ZenithBar(): _session(PomodoroSession(4, Seconds(4),Seconds(2), Seconds(3))) {
 	InitViewport();
 }
 
@@ -27,6 +27,10 @@ void ZenithBar::Render() {
 
 sf::RenderWindow& ZenithBar::GetRenderWindow() const { return *_viewport; }
 
+void ZenithBar::RestartSession() {
+	//TODO hardcoded values
+	_session = PomodoroSession(4, Seconds(4),Seconds(2), Seconds(3));
+}
 
 void ZenithBar::InitViewport()
 {
@@ -70,21 +74,28 @@ void ZenithBar::DrawPomodoroWindow(ImGuiViewport* viewport) {
 	string _remainingTime = status.remainingTime;
 	string _elapsedTime = status.elapsedTime;
 	uint _roundsLeft = status.roundsLeft;
+	uint _roundsTotal = status.roundsTotal;
 	
 	if (ImGui::Begin("PomodoroWindow",nullptr, windowFlags)) {
 		
+		// Round tokens
+		ImGui::Text("ROUNDS ");
 		ImGui::BeginDisabled();
-		for (uint i = 0; i < _roundsLeft; ++i) {
+		for (uint i = 0; i < _roundsTotal; ++i) {
 			ImGui::SameLine();
-			ImGui::RadioButton("##Round_",false);
+			if (i < _roundsLeft)
+				ImGui::RadioButton("##Round_",true);
+			else
+				ImGui::RadioButton("##Round_",false);
 		}
 		ImGui::EndDisabled();
 
+		// Primary timer
 		ImGui::SetWindowFontScale(5.0f);
 		ImGui::Text(_remainingTime.c_str());
 		ImGui::SetWindowFontScale(1.0f);
-
-
+		
+		//Progress bar and indicator
 		switch (_roundMode)
 		{
 			case RoundMode::IDLE: 
@@ -103,16 +114,8 @@ void ZenithBar::DrawPomodoroWindow(ImGuiViewport* viewport) {
 				throw InvalidModeException();
 				break;
 		}
-
 		ImGui::SameLine();
 		ImGui::ProgressBar(_progress, ImVec2(-1.0f, 0.0f),_elapsedTime.c_str());
-
-		/* 
-			TODO not implemented
-
-			- implement pause/resume/reset
-			- implement restart session
-		*/
 
 		//User controls
 		if (_mode == Mode::IDLE) {
@@ -130,15 +133,17 @@ void ZenithBar::DrawPomodoroWindow(ImGuiViewport* viewport) {
 				_session.ResumePeriod();
 		}
 
-		ImGui::SameLine();
-		if (ImGui::Button("Reset", ImVec2(50,50)))
-			_session.ResetPeriod();
-
-		
-		ImGui::SameLine();
-		if (ImGui::Button("Restart", ImVec2(50,50)))
-			_session.RestartSession();
-
+		if (_mode != Mode::COMPLETED) {
+			ImGui::SameLine();
+			if (ImGui::Button("Reset", ImVec2(50,50)))
+				_session.ResetPeriod();
+			ImGui::SameLine();
+			if (ImGui::Button("Restart", ImVec2(50,50)))
+				RestartSession();
+		} else {
+			if (ImGui::Button("Restart", ImVec2(50,50)))
+				RestartSession();
+		}
 
 		ImGui::End();
 	};

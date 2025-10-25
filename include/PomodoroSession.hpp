@@ -53,6 +53,7 @@ namespace zenith {
 				string elapsedTime = "00:00";
 				float progress = 0.0f;
 				uint roundsLeft = 8;
+				uint roundsTotal = 8;
 			};
 			
 			/**
@@ -98,11 +99,6 @@ namespace zenith {
 			 * @brief Resets the actual period.
 			 */
 			void ResetPeriod();
-
-			/**
-			 * @brief Resets the actual session.
-			 */
-			void RestartSession();
 
 			/**
 			 * @brief Skips the actual period.
