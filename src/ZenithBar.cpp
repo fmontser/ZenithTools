@@ -3,6 +3,10 @@
 #include "imgui-SFML.h"
 #include "Exceptions.hpp"
 
+//TODO borrar test
+#include <iostream>
+#include <filesystem>
+
 using namespace zenith;
 
 //TODO remove hardcoded values
@@ -47,7 +51,7 @@ void ZenithBar::InitView()
 	_renderWindow->setPosition(sf::Vector2i(500,100));
 	ImGui::SFML::Init(*_renderWindow);
 
-	_viewport = ImGui::GetMainViewport();
+	_viewport = ImGui::GetMainViewport();;
 }
 
 
@@ -172,6 +176,12 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 			_renderWindow->close();
 
 		ImGui::SetCursorPos(ImVec2(100,120));
+
+		//TODO sound test!
+		if (ImGui::Button("SOUND", ImVec2(50,50))) {
+				_sg.play();
+		}
+
 		ImGui::Text("NOISE GEN PLACEHOLDER");
 
 		ImGui::End();
