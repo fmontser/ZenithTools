@@ -46,6 +46,8 @@ void Timer::Resume() {
 void Timer::Reset() {
 	if (_status.mode != Mode::Stopped) {
 		_remainingTime = _durationTime;
+		_startTime = Clock::now();
+		_targetTime = _startTime + _remainingTime;
 		_status.progress = 0.0f;
 		_status.mode = Mode::Stopped;
 	}

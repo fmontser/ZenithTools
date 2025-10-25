@@ -26,6 +26,5 @@ namespace zenith {
 			void DrawPomodoroWindow(ImGuiViewport* viewport);
 			void DrawNoiseGeneratorWindow(ImGuiViewport* viewport);
 			void SetDynamicResolution();
-
 	};
 }

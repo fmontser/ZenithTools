@@ -85,9 +85,36 @@ void ZenithBar::DrawPomodoroWindow(ImGuiViewport* viewport) {
 		ImGui::SetWindowFontScale(1.0f);
 
 
+		switch (_roundMode)
+		{
+			case RoundMode::IDLE: 
+				ImGui::Text("IDLE");
+				break;
+			case RoundMode::WORKING: 
+				ImGui::Text("WORK");
+				break;
+			case RoundMode::RESTING: 
+				ImGui::Text("REST");
+				break;
+			case RoundMode::COMPLETED: 
+				ImGui::Text("DONE");
+				break;
+			default:
+				throw InvalidModeException();
+				break;
+		}
+
+		ImGui::SameLine();
 		ImGui::ProgressBar(_progress, ImVec2(-1.0f, 0.0f),_elapsedTime.c_str());
 
+		/* 
+			TODO not implemented
 
+			- implement pause/resume/reset
+			- implement restart session
+		*/
+
+		//User controls
 		if (_mode == Mode::IDLE) {
 			if (ImGui::Button("Start", ImVec2(50,50))){
 				if (_roundMode == RoundMode::IDLE)
@@ -148,8 +175,9 @@ void ZenithBar::DrawNoiseGeneratorWindow(ImGuiViewport *viewport) {
 
 }
 
-void ZenithBar::SetDynamicResolution()
-{
-	//TODO
+void ZenithBar::SetDynamicResolution() {
+	//TODO not implemented
 	throw NotImplementedException();
 }
+
+

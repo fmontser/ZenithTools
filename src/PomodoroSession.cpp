@@ -1,7 +1,5 @@
 #include "PomodoroSession.hpp"
 #include "Exceptions.hpp"
-//TODO borrar
-#include <iostream>
 
 using namespace zenith;
 
@@ -19,6 +17,9 @@ PomodoroSession::PomodoroSession(uint rounds, Seconds workTime,
 			));
 		}
 		_status.roundsLeft = rounds;
+
+		//TODO protect every _roundQueue acces if empty
+		//TODO refactor modes/roundmodes into single sequence
 }
 
 const PomodoroSession::Status& PomodoroSession::GetStatus() {
@@ -48,22 +49,42 @@ void PomodoroSession::StartRestingPeriod() {
 }
 
 void PomodoroSession::PausePeriod() {
-	//TODO
-	throw NotImplementedException();
+	Timer& timer = GetActualTimer();
+	_status.mode = Mode::PAUSED;
+	timer.Pause();
 }
 
 void PomodoroSession::ResumePeriod() {
-	//TODO
-	throw NotImplementedException();
+	Timer& timer = GetActualTimer();
+	_status.mode = Mode::ONGOING;
+	timer.Resume();
 }
 
 void PomodoroSession::ResetPeriod() {
-	//TODO
-	throw NotImplementedException();
+	Round& round = _roundQueue.front();
+	Timer& timer = GetActualTimer();
+
+	if (_status.roundMode == RoundMode::WORKING) {
+		round.mode = RoundMode::IDLE;
+		_status.roundMode = RoundMode::IDLE;
+		_status.mode = Mode::IDLE;
+	} else if (_status.roundMode == RoundMode::RESTING) {
+		_status.mode = Mode::IDLE;
+	}
+	timer.Reset();
+	//TODO check necesary
+	_status.remainingTime = timer.GetStatus().remaining;
+	_status.elapsedTime = timer.GetStatus().elapsed;
+	round.progress = timer.GetStatus().progress;
 }
 
 void PomodoroSession::RestartSession() {
-	//TODO
+	//TODO not implemented
+	throw NotImplementedException();
+}
+
+void PomodoroSession::SkipPeriod() {
+	//TODO not implemented
 	throw NotImplementedException();
 }
 
@@ -75,8 +96,10 @@ void zenith::PomodoroSession::SetNextRound() {
 			_status.roundsLeft--;
 		if (_roundQueue.empty())
 			_status.mode = Mode::COMPLETED;
-		else
+		else {
 			_status.mode = Mode::IDLE;
+			_status.elapsedTime = "00:00";
+		}
 	}
 }
 
@@ -124,4 +147,13 @@ void PomodoroSession::Update() {
 bool PomodoroSession::IsHalfSessionRound(uint rounds, uint index) {
 	const uint IDX_OFFSET = 1;
 	return ((index + IDX_OFFSET) == (rounds / 2) && rounds > 1);
+}
+
+Timer& PomodoroSession::GetActualTimer() {
+	Update();
+	Round& round = _roundQueue.front();
+	if (_status.roundMode == RoundMode::WORKING || _status.roundMode == RoundMode::IDLE)
+		return round.workTimer;
+	else
+		return round.restTimer;
 }

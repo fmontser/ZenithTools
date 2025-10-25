@@ -104,6 +104,10 @@ namespace zenith {
 			 */
 			void RestartSession();
 
+			/**
+			 * @brief Skips the actual period.
+			 */
+			void SkipPeriod();
 
 		private:
 			Status _status;                 ///< Holds the status data for the session.
@@ -125,6 +129,12 @@ namespace zenith {
 			 * @note Used to assign large rest period on the zenith of the session.
 			 */
 			bool IsHalfSessionRound(uint rounds, uint index);
+
+			/**
+			 * @brief Gets the actual work/rest timer.
+			 * @note Class internal use only.
+			 */
+			Timer& GetActualTimer();
 
 	};
 
