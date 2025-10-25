@@ -11,7 +11,7 @@ using namespace zenith;
 }
  */
 ZenithBar::ZenithBar(): _session(PomodoroSession(4, Seconds(4),Seconds(2), Seconds(3))) {
-	InitViewport();
+	InitView();
 }
 
 ZenithBar::~ZenithBar() {}
@@ -19,45 +19,44 @@ ZenithBar::~ZenithBar() {}
 
 void ZenithBar::Render() {
 
-	SetWindows();
-	_viewport->clear();
-	ImGui::SFML::Render(*_viewport);
-	_viewport->display();
+	DrawPomodoroWindow();
+	DrawNoiseGeneratorWindow();
+	_renderWindow->clear();
+	ImGui::SFML::Render(*_renderWindow);
+	_renderWindow->display();
 }
 
-sf::RenderWindow& ZenithBar::GetRenderWindow() const { return *_viewport; }
+sf::RenderWindow& ZenithBar::GetRenderWindow() const { return *_renderWindow; }
 
 void ZenithBar::RestartSession() {
 	//TODO hardcoded values
 	_session = PomodoroSession(4, Seconds(4),Seconds(2), Seconds(3));
 }
 
-void ZenithBar::InitViewport()
+void ZenithBar::InitView()
 {
-	_viewport = std::make_unique<sf::RenderWindow>(
+	_renderWindow = std::make_unique<sf::RenderWindow>(
 		sf::VideoMode::getDesktopMode(),
 		"ZenithTools",
 		sf::Style::None
 	);
 
 	//TODO remove hardcoded values
-	_viewport->setFramerateLimit(60);
-	_viewport->setSize(sf::Vector2u(1000, 300));
-	_viewport->setPosition(sf::Vector2i(500,100));
+	_renderWindow->setFramerateLimit(60);
+	_renderWindow->setSize(sf::Vector2u(1000, 300));
+	_renderWindow->setPosition(sf::Vector2i(500,100));
+	ImGui::SFML::Init(*_renderWindow);
 
-	ImGui::SFML::Init(*_viewport);
+	_viewport = ImGui::GetMainViewport();
 }
 
-void ZenithBar::SetWindows() {
-	ImGuiViewport* viewport = ImGui::GetMainViewport();
-	DrawPomodoroWindow(viewport);
-	DrawNoiseGeneratorWindow(viewport);
-}
 
-void ZenithBar::DrawPomodoroWindow(ImGuiViewport* viewport) {
-	ImVec2 winSize = ImVec2(viewport->WorkSize.x / 2, viewport->WorkSize.y);
+void ZenithBar::DrawPomodoroWindow() {
 
-	ImGui::SetNextWindowPos(viewport->WorkPos);
+
+	ImVec2 winSize = ImVec2(_viewport->WorkSize.x / 2, _viewport->WorkSize.y);
+
+	ImGui::SetNextWindowPos(_viewport->WorkPos);
 	ImGui::SetNextWindowSize(winSize);
 
 	ImGuiWindowFlags windowFlags = 0
@@ -150,7 +149,7 @@ void ZenithBar::DrawPomodoroWindow(ImGuiViewport* viewport) {
 
 }
 
-void ZenithBar::DrawNoiseGeneratorWindow(ImGuiViewport *viewport) {
+void ZenithBar::DrawNoiseGeneratorWindow() {
 
 
 	ImVec2 winSize = ImVec2(500, 300);
@@ -170,7 +169,7 @@ void ZenithBar::DrawNoiseGeneratorWindow(ImGuiViewport *viewport) {
 		
 		ImGui::SameLine(450, 0);
 		if (ImGui::Button("X", ImVec2(50,50)))
-			_viewport->close();
+			_renderWindow->close();
 
 		ImGui::SetCursorPos(ImVec2(100,120));
 		ImGui::Text("NOISE GEN PLACEHOLDER");

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['seconds_0',['Seconds',['../Timer_8hpp.html#a5e6c50203625681fded15903008539fa',1,'zenith']]]
+  ['roundmode_0',['RoundMode',['../PomodoroSession_8hpp.html#a9972b9eb5e6238f66627f24dbdd65b64',1,'zenith']]]
 ];

@@ -136,6 +136,7 @@ Public Types</h2></td></tr>
 <tr class="separator:ab11f87b6463d1b396489e79f4e7746ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56764997fa4ae0e26f486c51327fad06" id="r_a56764997fa4ae0e26f486c51327fad06"><td class="memItemLeft" align="right" valign="top"><a id="a56764997fa4ae0e26f486c51327fad06" name="a56764997fa4ae0e26f486c51327fad06"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a56764997fa4ae0e26f486c51327fad06">Mode</a> { <b>IDLE</b>
 , <b>ONGOING</b>
+, <b>PAUSED</b>
 , <b>COMPLETED</b>
  }</td></tr>
 <tr class="memdesc:a56764997fa4ae0e26f486c51327fad06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the mode of the session itself, the actual state. <br /></td></tr>
@@ -144,7 +145,7 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aadd31a773844890abbe54152847889eb" id="r_aadd31a773844890abbe54152847889eb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aadd31a773844890abbe54152847889eb">PomodoroSession</a> (uint rounds, <a class="el" href="Timer_8hpp.html#a5e6c50203625681fded15903008539fa">Seconds</a> workTime, <a class="el" href="Timer_8hpp.html#a5e6c50203625681fded15903008539fa">Seconds</a> restTime, <a class="el" href="Timer_8hpp.html#a5e6c50203625681fded15903008539fa">Seconds</a> largeRestTime)</td></tr>
-<tr class="memdesc:aadd31a773844890abbe54152847889eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new seesion with a number of rounds and periods values.  <br /></td></tr>
+<tr class="memdesc:aadd31a773844890abbe54152847889eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new session with a number of rounds and periods values.  <br /></td></tr>
 <tr class="separator:aadd31a773844890abbe54152847889eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad367586835a2661e740a2a2dcbaa585c" id="r_ad367586835a2661e740a2a2dcbaa585c"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structzenith_1_1PomodoroSession_1_1Status.html">Status</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad367586835a2661e740a2a2dcbaa585c">GetStatus</a> ()</td></tr>
 <tr class="memdesc:ad367586835a2661e740a2a2dcbaa585c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtains the status data of.the session.  <br /></td></tr>
@@ -155,6 +156,22 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3084f65cacc7b1e48be112b13e3e0d2e" id="r_a3084f65cacc7b1e48be112b13e3e0d2e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3084f65cacc7b1e48be112b13e3e0d2e">StartRestingPeriod</a> ()</td></tr>
 <tr class="memdesc:a3084f65cacc7b1e48be112b13e3e0d2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Continues a session/round after a work period.  <br /></td></tr>
 <tr class="separator:a3084f65cacc7b1e48be112b13e3e0d2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa44009097e6b71a2849a17ad005dab87" id="r_aa44009097e6b71a2849a17ad005dab87"><td class="memItemLeft" align="right" valign="top"><a id="aa44009097e6b71a2849a17ad005dab87" name="aa44009097e6b71a2849a17ad005dab87"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>PausePeriod</b> ()</td></tr>
+<tr class="memdesc:aa44009097e6b71a2849a17ad005dab87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pauses the actual period. <br /></td></tr>
+<tr class="separator:aa44009097e6b71a2849a17ad005dab87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe7dadf7d89db93e45df4d1ca9d892a1" id="r_afe7dadf7d89db93e45df4d1ca9d892a1"><td class="memItemLeft" align="right" valign="top"><a id="afe7dadf7d89db93e45df4d1ca9d892a1" name="afe7dadf7d89db93e45df4d1ca9d892a1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>ResumePeriod</b> ()</td></tr>
+<tr class="memdesc:afe7dadf7d89db93e45df4d1ca9d892a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resumes the actual paused period. <br /></td></tr>
+<tr class="separator:afe7dadf7d89db93e45df4d1ca9d892a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a220f7f80046884ceb8e11e9d2ff0bb3e" id="r_a220f7f80046884ceb8e11e9d2ff0bb3e"><td class="memItemLeft" align="right" valign="top"><a id="a220f7f80046884ceb8e11e9d2ff0bb3e" name="a220f7f80046884ceb8e11e9d2ff0bb3e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>ResetPeriod</b> ()</td></tr>
+<tr class="memdesc:a220f7f80046884ceb8e11e9d2ff0bb3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the actual period. <br /></td></tr>
+<tr class="separator:a220f7f80046884ceb8e11e9d2ff0bb3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e5fb8a58dc2abbde7c847d463a49912" id="r_a8e5fb8a58dc2abbde7c847d463a49912"><td class="memItemLeft" align="right" valign="top"><a id="a8e5fb8a58dc2abbde7c847d463a49912" name="a8e5fb8a58dc2abbde7c847d463a49912"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SkipPeriod</b> ()</td></tr>
+<tr class="memdesc:a8e5fb8a58dc2abbde7c847d463a49912"><td class="mdescLeft">&#160;</td><td class="mdescRight">Skips the actual period. <br /></td></tr>
+<tr class="separator:a8e5fb8a58dc2abbde7c847d463a49912"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Creates and manages a complete pomodoro session, including rounds and work/rest periods. </p>
@@ -188,7 +205,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Constructs a new seesion with a number of rounds and periods values. </p>
+<p>Constructs a new session with a number of rounds and periods values. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">rounds</td><td>The number of rounds for a session. </td></tr>

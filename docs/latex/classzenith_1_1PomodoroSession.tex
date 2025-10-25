@@ -29,6 +29,7 @@ enum class \mbox{\hyperlink{classzenith_1_1PomodoroSession_ab11f87b6463d1b396489
 \Hypertarget{classzenith_1_1PomodoroSession_a56764997fa4ae0e26f486c51327fad06}\label{classzenith_1_1PomodoroSession_a56764997fa4ae0e26f486c51327fad06} 
 enum class \mbox{\hyperlink{classzenith_1_1PomodoroSession_a56764997fa4ae0e26f486c51327fad06}{Mode}} \{ {\bfseries IDLE}
 , {\bfseries ONGOING}
+, {\bfseries PAUSED}
 , {\bfseries COMPLETED}
  \}
 \begin{DoxyCompactList}\small\item\em Represents the mode of the session itself, the actual state. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -36,13 +37,25 @@ enum class \mbox{\hyperlink{classzenith_1_1PomodoroSession_a56764997fa4ae0e26f48
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classzenith_1_1PomodoroSession_aadd31a773844890abbe54152847889eb}{Pomodoro\+Session}} (uint rounds, \mbox{\hyperlink{Timer_8hpp_a5e6c50203625681fded15903008539fa}{Seconds}} work\+Time, \mbox{\hyperlink{Timer_8hpp_a5e6c50203625681fded15903008539fa}{Seconds}} rest\+Time, \mbox{\hyperlink{Timer_8hpp_a5e6c50203625681fded15903008539fa}{Seconds}} large\+Rest\+Time)
-\begin{DoxyCompactList}\small\item\em Constructs a new seesion with a number of rounds and periods values. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructs a new session with a number of rounds and periods values. \end{DoxyCompactList}\item 
 const \mbox{\hyperlink{structzenith_1_1PomodoroSession_1_1Status}{Status}} \& \mbox{\hyperlink{classzenith_1_1PomodoroSession_ad367586835a2661e740a2a2dcbaa585c}{Get\+Status}} ()
 \begin{DoxyCompactList}\small\item\em Obtains the status data of.\+the session. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classzenith_1_1PomodoroSession_a9d135fbb2acdbaa923e0f7ab395d309c}{Start\+Actual\+Round}} ()
 \begin{DoxyCompactList}\small\item\em Starts and IDLE session/round. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classzenith_1_1PomodoroSession_a3084f65cacc7b1e48be112b13e3e0d2e}{Start\+Resting\+Period}} ()
-\begin{DoxyCompactList}\small\item\em Continues a session/round after a work period. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Continues a session/round after a work period. \end{DoxyCompactList}\item 
+\Hypertarget{classzenith_1_1PomodoroSession_aa44009097e6b71a2849a17ad005dab87}\label{classzenith_1_1PomodoroSession_aa44009097e6b71a2849a17ad005dab87} 
+void {\bfseries Pause\+Period} ()
+\begin{DoxyCompactList}\small\item\em Pauses the actual period. \end{DoxyCompactList}\item 
+\Hypertarget{classzenith_1_1PomodoroSession_afe7dadf7d89db93e45df4d1ca9d892a1}\label{classzenith_1_1PomodoroSession_afe7dadf7d89db93e45df4d1ca9d892a1} 
+void {\bfseries Resume\+Period} ()
+\begin{DoxyCompactList}\small\item\em Resumes the actual paused period. \end{DoxyCompactList}\item 
+\Hypertarget{classzenith_1_1PomodoroSession_a220f7f80046884ceb8e11e9d2ff0bb3e}\label{classzenith_1_1PomodoroSession_a220f7f80046884ceb8e11e9d2ff0bb3e} 
+void {\bfseries Reset\+Period} ()
+\begin{DoxyCompactList}\small\item\em Resets the actual period. \end{DoxyCompactList}\item 
+\Hypertarget{classzenith_1_1PomodoroSession_a8e5fb8a58dc2abbde7c847d463a49912}\label{classzenith_1_1PomodoroSession_a8e5fb8a58dc2abbde7c847d463a49912} 
+void {\bfseries Skip\+Period} ()
+\begin{DoxyCompactList}\small\item\em Skips the actual period. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -57,7 +70,7 @@ zenith\+::\+Pomodoro\+Session\+::\+Pomodoro\+Session (\begin{DoxyParamCaption}\i
 
 
 
-Constructs a new seesion with a number of rounds and periods values. 
+Constructs a new session with a number of rounds and periods values. 
 
 
 \begin{DoxyParams}{Parameters}

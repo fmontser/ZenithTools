@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['pomodorosession_2ehpp_0',['PomodoroSession.hpp',['../PomodoroSession_8hpp.html',1,'']]]
+  ['exceptions_2ehpp_0',['Exceptions.hpp',['../Exceptions_8hpp.html',1,'']]]
 ];
