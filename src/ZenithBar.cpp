@@ -179,7 +179,7 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 
 		//TODO sound test!
 		if (ImGui::Button("SOUND", ImVec2(50,50))) {
-				_sg.play();
+			_sg.PlayPeriodBell();
 		}
 
 		ImGui::Text("NOISE GEN PLACEHOLDER");
