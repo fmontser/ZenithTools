@@ -10,16 +10,14 @@ SoundGenerator::SoundGenerator() : sf::SoundStream() {
 	initialize(2, 48000);
 }
 
+//TODO clean the function...
 void SoundGenerator::PlayPeriodBell() {
-	
-
 	double frequency = 500.0f;
 	double amplitude = 16000.0f;
 	double phase = 0.0f;
 	double delta = (frequency * 2 * 3.14159265358979323846) / 48000.0f;
 
-	//TODO crear funcion para automatizar la duracion
-	int duration = 55;
+	int duration = 26;
 
 
 	_soundFunction = [=](const std::size_t frameCount) mutable {
@@ -30,6 +28,11 @@ void SoundGenerator::PlayPeriodBell() {
 		duration--;
 
 		for (std::size_t i = 0; i < frameCount; ++i) {
+			
+			//Fade out to avoid the poping at the end
+			if (duration <= (amplitude / 1000))
+				amplitude = duration * 1000;
+
 			sf::Int16 sample = static_cast<sf::Int16>(amplitude * std::sin(phase));
 			_buffer[i * 2]     = sample; //L-channel
 			_buffer[i * 2 + 1] = sample; //R-channel
