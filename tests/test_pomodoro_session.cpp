@@ -28,7 +28,7 @@ namespace zenith {
 		session.StartActualRound();
 		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
-		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE);
 		session.StartRestingPeriod();
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
 		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::COMPLETED);
@@ -41,7 +41,7 @@ namespace zenith {
 		session.StartActualRound();
 		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
-		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE);
 		session.StartRestingPeriod();
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
 
@@ -49,7 +49,7 @@ namespace zenith {
 		session.StartActualRound();
 		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
-		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE);
 		session.StartRestingPeriod();
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
 		
@@ -63,7 +63,7 @@ namespace zenith {
 		session.StartActualRound();
 		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
-		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE);
 		session.StartRestingPeriod();
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
 
@@ -71,7 +71,7 @@ namespace zenith {
 		session.StartActualRound();
 		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
-		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE);
 		session.StartRestingPeriod();
 		std::this_thread::sleep_for(std::chrono::milliseconds(3100));
 
@@ -79,7 +79,7 @@ namespace zenith {
 		session.StartActualRound();
 		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
-		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE);
 		session.StartRestingPeriod();
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
 
@@ -87,7 +87,7 @@ namespace zenith {
 		session.StartActualRound();
 		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
-		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE);
 		session.StartRestingPeriod();
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
 

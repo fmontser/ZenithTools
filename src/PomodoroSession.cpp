@@ -18,6 +18,7 @@ PomodoroSession::PomodoroSession(uint rounds, Seconds workTime,
 		}
 		_status.roundsTotal = rounds;
 		_status.roundsLeft = rounds;
+		_sg = std::make_unique<SoundGenerator>();
 
 		//TODO protect every _roundQueue acces if empty
 		//TODO refactor modes/roundmodes into single sequence
@@ -116,6 +117,8 @@ void PomodoroSession::Update() {
 			if (round.workTimer.GetStatus().mode == Timer::Mode::Ended) {
 				_status.mode = Mode::IDLE;
 				round.mode = RoundMode::RESTING;
+				//_sg->PlayRestBell();
+				round.mode = RoundMode::RESTING;
 			}
 			break;
 		case RoundMode::RESTING:
@@ -125,6 +128,7 @@ void PomodoroSession::Update() {
 			if (round.restTimer.GetStatus().mode == Timer::Mode::Ended) {
 				_status.mode = Mode::IDLE;
 				round.mode = RoundMode::COMPLETED;
+				//_sg->PlayWorkBell();
 				SetNextRound();
 			}
 			break;

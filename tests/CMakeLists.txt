@@ -4,6 +4,7 @@ set(TEST_SOURCES
 	${CMAKE_SOURCE_DIR}/src/Exceptions.cpp
 	${CMAKE_SOURCE_DIR}/src/Timer.cpp
 	${CMAKE_SOURCE_DIR}/src/PomodoroSession.cpp
+	${CMAKE_SOURCE_DIR}/src/SoundGenerator.cpp
 
 )
 

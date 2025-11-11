@@ -17,7 +17,8 @@ namespace zenith {
 	class SoundGenerator : public sf::SoundStream {
 		public:
 			SoundGenerator();
-			void PlayPeriodBell();
+			void PlayRestBell();
+			void PlayWorkBell();
 
 		private:
 			bool onGetData(Chunk& data) override;

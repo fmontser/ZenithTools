@@ -7,7 +7,9 @@
 #pragma once
 
 #include "Timer.hpp"
+#include "SoundGenerator.hpp"
 #include <queue>
+#include <memory>
 
 namespace zenith {
 
@@ -106,9 +108,10 @@ namespace zenith {
 			void SkipPeriod();
 
 		private:
-			Status _status;                 ///< Holds the status data for the session.
-			std::queue<Round> _roundQueue;  ///< A queue containing every round for a given session.
-			
+			Status _status;                        ///< Holds the status data for the session.
+			std::queue<Round> _roundQueue;         ///< A queue containing every round for a given session.
+			std::unique_ptr<SoundGenerator> _sg;   ///< Contains the sound generator instance for this session.
+
 			/**
 			 * @brief Ends actual round and replaces it for the next if present.
 			 * @details Will end session if no more rounds are left.
