@@ -14,7 +14,8 @@ using namespace zenith;
 	InitViewport();
 }
  */
-ZenithBar::ZenithBar(): _session(PomodoroSession(4, Seconds(4),Seconds(2), Seconds(3))) {
+ZenithBar::ZenithBar() : _session(PomodoroSession(std::make_unique<SoundGenerator>(), 4, Seconds(4),Seconds(2), Seconds(3))) {
+	_sg = std::move(std::make_unique<SoundGenerator>());
 	InitView();
 }
 
@@ -34,7 +35,7 @@ sf::RenderWindow& ZenithBar::GetRenderWindow() const { return *_renderWindow; }
 
 void ZenithBar::RestartSession() {
 	//TODO hardcoded values
-	_session = PomodoroSession(4, Seconds(4),Seconds(2), Seconds(3));
+	_session = PomodoroSession(std::make_unique<SoundGenerator>(), 4, Seconds(4),Seconds(2), Seconds(3));
 }
 
 void ZenithBar::InitView()
@@ -179,7 +180,7 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 
 		//TODO remove sound test!
 		if (ImGui::Button("SOUND", ImVec2(50,50))) {
-			_sg.PlayRestBell();
+			_sg->PlayRestBell();
 		}
 
 		ImGui::Text("NOISE GEN PLACEHOLDER");

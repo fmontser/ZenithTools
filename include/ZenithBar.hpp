@@ -31,7 +31,7 @@ namespace zenith {
 			std::unique_ptr<sf::RenderWindow> _renderWindow;  ///< Contains a smart pointer to the render window.
 			ImGuiViewport* _viewport;                         ///< Contains a pointer to the viewport.
 			PomodoroSession _session;                         ///< Contains the actual pomodoro session.
-			SoundGenerator _sg;                               ///< Contains the sound generator instance for the bar.
+			std::unique_ptr<ISoundGenerator> _sg;             ///< Contains the sound generator instance for the bar.
 
 
 			/**

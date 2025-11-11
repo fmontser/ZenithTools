@@ -14,6 +14,7 @@ target_include_directories(zenith_tests PRIVATE ../include)
 
 target_link_libraries(zenith_tests PRIVATE
 	gtest_main
+	gmock
 	${APP_LIBS}
 )
 

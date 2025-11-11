@@ -110,7 +110,7 @@ namespace zenith {
 		private:
 			Status _status;                        ///< Holds the status data for the session.
 			std::queue<Round> _roundQueue;         ///< A queue containing every round for a given session.
-			std::unique_ptr<ISoundGenerator> _sg;   ///< Contains the sound generator instance for this session.
+			std::unique_ptr<ISoundGenerator> _sg;  ///< Contains the sound generator instance for this session.
 
 			/**
 			 * @brief Ends actual round and replaces it for the next if present.
