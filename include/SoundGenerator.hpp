@@ -6,19 +6,18 @@
 
 #pragma once
 
+#include "ISoundGenerator.hpp"
 #include "SFML/Audio/SoundStream.hpp"
 #include <vector>
 #include <functional>
 
 namespace zenith {
 
-	using SoundFunction = std::function<void (const std::size_t frameCount)>;
-
-	class SoundGenerator : public sf::SoundStream {
+	class SoundGenerator : public sf::SoundStream, public ISoundGenerator {
 		public:
 			SoundGenerator();
-			void PlayRestBell();
-			void PlayWorkBell();
+			void PlayRestBell() override;
+			void PlayWorkBell() override;
 
 		private:
 			bool onGetData(Chunk& data) override;
@@ -30,7 +29,7 @@ namespace zenith {
 			std::vector<sf::Int16> _buffer;
 			std::vector<sf::Int16> _restBellbuffer;
 			std::vector<sf::Int16> _workBellbuffer;
-			SoundFunction _soundFunction;
+
 	};
 
 }

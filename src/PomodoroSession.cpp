@@ -3,8 +3,8 @@
 
 using namespace zenith;
 
-PomodoroSession::PomodoroSession(uint rounds, Seconds workTime,
-	Seconds restTime, Seconds largeRestTime) {
+PomodoroSession::PomodoroSession(std::unique_ptr<ISoundGenerator> sg, uint rounds,
+	Seconds workTime, Seconds restTime, Seconds largeRestTime) {
 
 		for (uint i = 0; i < rounds; ++i) {
 			auto restSeconds = restTime;
@@ -18,7 +18,8 @@ PomodoroSession::PomodoroSession(uint rounds, Seconds workTime,
 		}
 		_status.roundsTotal = rounds;
 		_status.roundsLeft = rounds;
-		_sg = std::make_unique<SoundGenerator>();
+		_sg = std::move(sg);
+
 
 		//TODO protect every _roundQueue acces if empty
 		//TODO refactor modes/roundmodes into single sequence

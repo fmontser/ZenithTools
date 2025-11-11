@@ -65,8 +65,8 @@ namespace zenith {
 			 * @param restTime The number in seconds for rest periods.
 			 * @param largeRestTime The number in seconds for large rest period wich occur at half the session.
 			 */
-			PomodoroSession(uint rounds, Seconds workTime,
-				Seconds restTime, Seconds largeRestTime);
+			PomodoroSession(std::unique_ptr<ISoundGenerator> sg, uint rounds,
+				Seconds workTime, Seconds restTime, Seconds largeRestTime);
 			
 			/**
 			 * @brief Obtains the status data of.the session.
@@ -110,7 +110,7 @@ namespace zenith {
 		private:
 			Status _status;                        ///< Holds the status data for the session.
 			std::queue<Round> _roundQueue;         ///< A queue containing every round for a given session.
-			std::unique_ptr<SoundGenerator> _sg;   ///< Contains the sound generator instance for this session.
+			std::unique_ptr<ISoundGenerator> _sg;   ///< Contains the sound generator instance for this session.
 
 			/**
 			 * @brief Ends actual round and replaces it for the next if present.
