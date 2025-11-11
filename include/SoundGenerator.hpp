@@ -24,7 +24,12 @@ namespace zenith {
 			bool onGetData(Chunk& data) override;
 			void onSeek(sf::Time timeOffset) override;
 
+			void GenerateRestBell();
+			void GenerateWorkBell();
+
 			std::vector<sf::Int16> _buffer;
+			std::vector<sf::Int16> _restBellbuffer;
+			std::vector<sf::Int16> _workBellbuffer;
 			SoundFunction _soundFunction;
 	};
 

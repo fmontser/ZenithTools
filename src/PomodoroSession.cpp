@@ -117,8 +117,7 @@ void PomodoroSession::Update() {
 			if (round.workTimer.GetStatus().mode == Timer::Mode::Ended) {
 				_status.mode = Mode::IDLE;
 				round.mode = RoundMode::RESTING;
-				//_sg->PlayRestBell();
-				round.mode = RoundMode::RESTING;
+				_sg->PlayRestBell();
 			}
 			break;
 		case RoundMode::RESTING:
@@ -128,7 +127,7 @@ void PomodoroSession::Update() {
 			if (round.restTimer.GetStatus().mode == Timer::Mode::Ended) {
 				_status.mode = Mode::IDLE;
 				round.mode = RoundMode::COMPLETED;
-				//_sg->PlayWorkBell();
+				_sg->PlayWorkBell();
 				SetNextRound();
 			}
 			break;
