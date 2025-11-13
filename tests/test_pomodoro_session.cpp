@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "PomodoroSession.hpp"
+#include "mock_sound_generator.hpp"
 #include <thread>
 
 #include <iostream>
@@ -8,13 +9,15 @@ namespace zenith {
 
 	// Verify initial mode
 	TEST(PomodoroSessionTest, SessionIsIdle) {
-		PomodoroSession session = PomodoroSession(1,Seconds(2),Seconds(0),Seconds(0));
+		PomodoroSession session = PomodoroSession(std::make_unique<MockSoundGenerator>(),
+			 1,Seconds(2),Seconds(0),Seconds(0));
 		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE );
 	}
 
 	// Verify ongoing mode
 	TEST(PomodoroSessionTest, SessionToOngoing) {
-		PomodoroSession session = PomodoroSession(1,Seconds(2),Seconds(0),Seconds(0));
+		PomodoroSession session = PomodoroSession(std::make_unique<MockSoundGenerator>(),
+			 1,Seconds(2),Seconds(0),Seconds(0));
 		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE );
 		session.StartActualRound();
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -23,12 +26,13 @@ namespace zenith {
  
 	// Verify completed mode
 	TEST(PomodoroSessionTest, SessionToCompleted) {
-		PomodoroSession session = PomodoroSession(1,Seconds(2),Seconds(2),Seconds(0));
+		PomodoroSession session = PomodoroSession(std::make_unique<MockSoundGenerator>(),
+			 1,Seconds(2),Seconds(2),Seconds(0));
 		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE );
 		session.StartActualRound();
 		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
-		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE);
 		session.StartRestingPeriod();
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
 		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::COMPLETED);
@@ -36,12 +40,13 @@ namespace zenith {
 
 	// Verify completed mode
 	TEST(PomodoroSessionTest, SessionRoundsToCompleted) {
-		PomodoroSession session = PomodoroSession(2,Seconds(2),Seconds(2),Seconds(0));
+		PomodoroSession session = PomodoroSession(std::make_unique<MockSoundGenerator>(),
+			 2,Seconds(2),Seconds(2),Seconds(0));
 		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE );
 		session.StartActualRound();
 		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
-		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE);
 		session.StartRestingPeriod();
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
 
@@ -49,7 +54,7 @@ namespace zenith {
 		session.StartActualRound();
 		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
-		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE);
 		session.StartRestingPeriod();
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
 		
@@ -58,12 +63,13 @@ namespace zenith {
 
 	// Verify largerest to completed
 	TEST(PomodoroSessionTest, SessionLargeRestToCompleted) {
-		PomodoroSession session = PomodoroSession(4,Seconds(2),Seconds(2),Seconds(3));
+		PomodoroSession session = PomodoroSession(std::make_unique<MockSoundGenerator>(),
+			 4,Seconds(2),Seconds(2),Seconds(3));
 		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE );
 		session.StartActualRound();
 		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
-		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE);
 		session.StartRestingPeriod();
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
 
@@ -71,7 +77,7 @@ namespace zenith {
 		session.StartActualRound();
 		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
-		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE);
 		session.StartRestingPeriod();
 		std::this_thread::sleep_for(std::chrono::milliseconds(3100));
 
@@ -79,7 +85,7 @@ namespace zenith {
 		session.StartActualRound();
 		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
-		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE);
 		session.StartRestingPeriod();
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
 
@@ -87,7 +93,7 @@ namespace zenith {
 		session.StartActualRound();
 		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
-		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::ONGOING);
+		EXPECT_EQ(session.GetStatus().mode, PomodoroSession::Mode::IDLE);
 		session.StartRestingPeriod();
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));
 
@@ -96,7 +102,8 @@ namespace zenith {
 
 	// Verify status data is returned correctly
 	TEST(PomodoroSessionTest, GetStatusDataTest) {
-		PomodoroSession session = PomodoroSession(2,Seconds(4),Seconds(2),Seconds(2));
+		PomodoroSession session = PomodoroSession(std::make_unique<MockSoundGenerator>(),
+			 2,Seconds(4),Seconds(2),Seconds(2));
 		
 		session.StartActualRound();
 		std::this_thread::sleep_for(std::chrono::milliseconds(2100));

@@ -4,6 +4,7 @@ set(TEST_SOURCES
 	${CMAKE_SOURCE_DIR}/src/Exceptions.cpp
 	${CMAKE_SOURCE_DIR}/src/Timer.cpp
 	${CMAKE_SOURCE_DIR}/src/PomodoroSession.cpp
+	${CMAKE_SOURCE_DIR}/src/SoundGenerator.cpp
 
 )
 
@@ -13,6 +14,7 @@ target_include_directories(zenith_tests PRIVATE ../include)
 
 target_link_libraries(zenith_tests PRIVATE
 	gtest_main
+	gmock
 	${APP_LIBS}
 )
 

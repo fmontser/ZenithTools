@@ -3,6 +3,10 @@
 #include "imgui-SFML.h"
 #include "Exceptions.hpp"
 
+//TODO borrar test
+#include <iostream>
+#include <filesystem>
+
 using namespace zenith;
 
 //TODO remove hardcoded values
@@ -10,7 +14,8 @@ using namespace zenith;
 	InitViewport();
 }
  */
-ZenithBar::ZenithBar(): _session(PomodoroSession(4, Seconds(4),Seconds(2), Seconds(3))) {
+ZenithBar::ZenithBar() : _session(PomodoroSession(std::make_unique<SoundGenerator>(), 4, Seconds(4),Seconds(2), Seconds(3))) {
+	_sg = std::move(std::make_unique<SoundGenerator>());
 	InitView();
 }
 
@@ -30,7 +35,7 @@ sf::RenderWindow& ZenithBar::GetRenderWindow() const { return *_renderWindow; }
 
 void ZenithBar::RestartSession() {
 	//TODO hardcoded values
-	_session = PomodoroSession(4, Seconds(4),Seconds(2), Seconds(3));
+	_session = PomodoroSession(std::make_unique<SoundGenerator>(), 4, Seconds(4),Seconds(2), Seconds(3));
 }
 
 void ZenithBar::InitView()
@@ -47,7 +52,7 @@ void ZenithBar::InitView()
 	_renderWindow->setPosition(sf::Vector2i(500,100));
 	ImGui::SFML::Init(*_renderWindow);
 
-	_viewport = ImGui::GetMainViewport();
+	_viewport = ImGui::GetMainViewport();;
 }
 
 
@@ -172,6 +177,12 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 			_renderWindow->close();
 
 		ImGui::SetCursorPos(ImVec2(100,120));
+
+		//TODO remove sound test!
+		if (ImGui::Button("SOUND", ImVec2(50,50))) {
+			_sg->PlayRestBell();
+		}
+
 		ImGui::Text("NOISE GEN PLACEHOLDER");
 
 		ImGui::End();
