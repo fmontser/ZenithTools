@@ -159,6 +159,8 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 
 	ImVec2 winSize = ImVec2(500, 300);
 	ImVec2 winPos = ImVec2(500, 0);
+	SoundGenerator* sg = dynamic_cast<SoundGenerator*>(_sg.get());
+	static float newVolume = 50.0f;
 
 	ImGui::SetNextWindowPos(winPos);
 	ImGui::SetNextWindowSize(winSize);
@@ -176,14 +178,13 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 		if (ImGui::Button("X", ImVec2(50,50)))
 			_renderWindow->close();
 
-		ImGui::SetCursorPos(ImVec2(100,120));
+		if (ImGui::VSliderFloat("##NoiseVolumeSlider", ImVec2(20,80), &newVolume , 0.0f, 100.0f, ""))
+			sg->setVolume(newVolume);
 
-		//TODO remove sound test!
-		if (ImGui::Button("SOUND", ImVec2(50,50))) {
-			_sg->PlayRestBell();
+		//TODO delete test button
+		if (ImGui::Button("NOISE", ImVec2(20,20))) {
+			sg->PlayRestBell();
 		}
-
-		ImGui::Text("NOISE GEN PLACEHOLDER");
 
 		ImGui::End();
 	};

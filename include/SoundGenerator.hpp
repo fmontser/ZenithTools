@@ -15,21 +15,24 @@ namespace zenith {
 
 	class SoundGenerator : public sf::SoundStream, public ISoundGenerator {
 		public:
-			SoundGenerator();
-			void PlayRestBell() override;
-			void PlayWorkBell() override;
-
+		
+		SoundGenerator();
+		void PlayRestBell() override;
+		void PlayWorkBell() override;
+	
 		private:
-			bool onGetData(Chunk& data) override;
-			void onSeek(sf::Time timeOffset) override;
+		bool onGetData(Chunk& data) override;
+		void onSeek(sf::Time timeOffset) override;
+		
+		void GenerateRestBell();
+		void GenerateWorkBell();
+		void SetAmplitude(int16_t *amplitude, float *volume);
+		
 
-			void GenerateRestBell();
-			void GenerateWorkBell();
-
-			std::vector<sf::Int16> _buffer;
-			std::vector<sf::Int16> _restBellbuffer;
-			std::vector<sf::Int16> _workBellbuffer;
-
+		std::vector<sf::Int16> _buffer;
+		std::vector<sf::Int16> _restBellbuffer;
+		std::vector<sf::Int16> _workBellbuffer;
+		
 	};
 
 }

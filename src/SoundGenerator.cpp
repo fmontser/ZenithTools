@@ -1,12 +1,17 @@
 #include "SoundGenerator.hpp"
 #include "Exceptions.hpp"
 #include <cmath>
+#include <algorithm>
+#include <limits>
 
 using namespace zenith;
 
 constexpr double Pi = 3.14159265358979323846;
 constexpr uint Channels = 2;
 constexpr uint SampleRate = 48000;
+
+const sf::Int16 MaxAmplitude =  32767 * 0.5;
+const sf::Int16 MinAmplitude = -32767 * 0.5;
 
 //TODO borrar?
 constexpr uint FrameCount = 1024;
@@ -16,8 +21,8 @@ SoundGenerator::SoundGenerator() : sf::SoundStream() {
 	initialize(2, SampleRate);
 	GenerateRestBell();
 	GenerateWorkBell();
+	setVolume(50.0f);
 }
-
 
 void SoundGenerator::PlayRestBell() {
 	_buffer = _restBellbuffer;
@@ -42,7 +47,7 @@ void SoundGenerator::onSeek(sf::Time timeOffset) {}
 
 void SoundGenerator::GenerateRestBell() {
 	double frequency = 500.0f;
-	double amplitude = 16000.0f;
+	double amplitude = MaxAmplitude;
 	double phase = 0.0f;
 	double delta = (frequency * 2 * Pi) / SampleRate;
 	double duration = 1.0f;
@@ -58,8 +63,11 @@ void SoundGenerator::GenerateRestBell() {
 		if (i >= fade_frames)
 			amplitude -= fade_delta;
 
-		sf::Int16 sample = static_cast<sf::Int16>(amplitude * std::sin(phase));
-
+		sf::Int16 sample = std::clamp(
+			static_cast<sf::Int16>(amplitude * std::sin(phase)),
+			MinAmplitude,
+			MaxAmplitude);
+		
 		_restBellbuffer[i * Channels]     = sample; //L-channel
 		_restBellbuffer[i * Channels + 1] = sample; //R-channel
 			
@@ -77,7 +85,7 @@ void SoundGenerator::GenerateRestBell() {
 
 void SoundGenerator::GenerateWorkBell() {
 	double frequency = 0.0f;
-	double amplitude = 16000.0f;
+	sf::Int16 amplitude = MaxAmplitude / 2;
 	double phase = 0.0f;
 	double delta = (frequency * 2 * Pi) / SampleRate;
 	double duration = 1.0f;
@@ -93,7 +101,10 @@ void SoundGenerator::GenerateWorkBell() {
 		if (i >= fade_frames)
 			amplitude -= fade_delta;
 
-		sf::Int16 sample = static_cast<sf::Int16>(amplitude * std::sin(phase));
+		sf::Int16 sample = std::clamp(
+			static_cast<sf::Int16>(amplitude * std::sin(phase)),
+			MinAmplitude,
+			MaxAmplitude);
 
 		_workBellbuffer[i * Channels]     = sample; //L-channel
 		_workBellbuffer[i * Channels + 1] = sample; //R-channel
@@ -108,6 +119,12 @@ void SoundGenerator::GenerateWorkBell() {
 	}
 }
 
+#include <iostream>
+
+
+void SoundGenerator::SetAmplitude(int16_t *amplitude, float *volume) {
+	*amplitude = MaxAmplitude * std::clamp(*volume, 0.0f, 1.0f);
+}
 
 /* 
 
