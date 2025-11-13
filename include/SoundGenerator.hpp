@@ -19,6 +19,7 @@ namespace zenith {
 		SoundGenerator();
 		void PlayRestBell() override;
 		void PlayWorkBell() override;
+		void PlayNoise();
 	
 		private:
 		bool onGetData(Chunk& data) override;
@@ -26,12 +27,13 @@ namespace zenith {
 		
 		void GenerateRestBell();
 		void GenerateWorkBell();
-		void SetAmplitude(int16_t *amplitude, float *volume);
-		
+		void GenerateNoise();
 
+		bool _loopMode;
 		std::vector<sf::Int16> _buffer;
 		std::vector<sf::Int16> _restBellbuffer;
 		std::vector<sf::Int16> _workBellbuffer;
+		std::vector<sf::Int16> _noiseBuffer;
 		
 	};
 

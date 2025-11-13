@@ -182,8 +182,8 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 			sg->setVolume(newVolume);
 
 		//TODO delete test button
-		if (ImGui::Button("NOISE", ImVec2(20,20))) {
-			sg->PlayRestBell();
+		if (ImGui::Button("T", ImVec2(20,20))) {
+			sg->PlayNoise();
 		}
 
 		ImGui::End();
