@@ -9,13 +9,8 @@ using namespace zenith;
 constexpr double Pi = 3.14159265358979323846;
 constexpr uint Channels = 2;
 constexpr uint SampleRate = 48000;
-
 const sf::Int16 MaxAmplitude =  32767 * 0.5;
 const sf::Int16 MinAmplitude = -32767 * 0.5;
-
-//TODO borrar?
-constexpr uint FrameCount = 1024;
-const std::size_t SampleCount = FrameCount * Channels;
 
 SoundGenerator::SoundGenerator() : sf::SoundStream() {
 	_loopMode = false;
@@ -38,9 +33,30 @@ void SoundGenerator::PlayWorkBell() {
 	play();
 }
 
-void SoundGenerator::PlayNoise() {
+void SoundGenerator::PlayNoise(NoiseColor color) {
 	_loopMode = true;
-	_buffer = _noiseBuffer;
+	switch (color)
+	{
+		case SoundGenerator::NoiseColor::BROWN:
+			_buffer = _brownNoiseBuffer;
+			break;
+		case SoundGenerator::NoiseColor::PINK:
+			_buffer = _pinkNoiseBuffer;
+			break;
+		case SoundGenerator::NoiseColor::WHITE:
+			_buffer = _whiteNoiseBuffer;
+			break;
+		case SoundGenerator::NoiseColor::BLUE:
+			_buffer = _blueNoiseBuffer;
+			break;
+		case SoundGenerator::NoiseColor::VIOLET:
+			_buffer = _violetNoiseBuffer;
+			break;
+		default:
+			InvalidModeException();
+			_loopMode = false;
+			return;
+	}
 	play();
 }
 
@@ -96,7 +112,7 @@ void SoundGenerator::GenerateRestBell() {
 
 void SoundGenerator::GenerateWorkBell() {
 	double frequency = 0.0f;
-	sf::Int16 amplitude = MaxAmplitude / 2;
+	sf::Int16 amplitude = MaxAmplitude;
 	double phase = 0.0f;
 	double delta = (frequency * 2 * Pi) / SampleRate;
 	double duration = 1.0f;
@@ -131,36 +147,75 @@ void SoundGenerator::GenerateWorkBell() {
 }
 
 void SoundGenerator::GenerateNoise() {
+	
 
-	double frequency = 0.0f;
-	sf::Int16 amplitude = MaxAmplitude / 2;
-	double phase = 0.0f;
-	double delta = (frequency * 2 * Pi) / SampleRate;
+/* 	_pinkNoiseBuffer.resize(totalFrames * Channels);
+	_blueNoiseBuffer.resize(totalFrames * Channels);
+	_violetNoiseBuffer.resize(totalFrames * Channels); */
+
+	GenerateBrown(60.0f);
+	//GeneratePink(60.0f);
+	GenerateWhite(60.0f);
+	//GenerateBlue(60.0f);
+	//GenerateViolet(60.f);
+
+}
+
+void SoundGenerator::GenerateBrown(double duration) {
+	sf::Int16 amplitude = MaxAmplitude;
+	const size_t totalFrames = SampleRate * duration;
+	float lastSample = 0.0f;
+
+	_brownNoiseBuffer.resize(totalFrames * Channels);
+
+	for (std::size_t i = 0; i < totalFrames; ++i) {
+		float stepSize = 0.02f;
+		float noise = (float(rand()) / RAND_MAX - 0.5f) * stepSize;
+ 		lastSample += noise;
+		lastSample = std::clamp(lastSample, -1.f, 1.f);
+		sf::Int16 newSample = static_cast<sf::Int16>(lastSample * amplitude);
+		_brownNoiseBuffer[i * Channels]     = newSample; // L
+		_brownNoiseBuffer[i * Channels + 1] = newSample; // R
+	}
+}
+
+void SoundGenerator::GenerateWhite(double duration) {
+	sf::Int16 amplitude = MaxAmplitude;
+	const size_t totalFrames = SampleRate * duration;
+
+	_whiteNoiseBuffer.resize(totalFrames * Channels);
+
+	float stepSize = 0.2f;
+	for (std::size_t i = 0; i < totalFrames; ++i) {
+		float noise = (float(rand()) / RAND_MAX - 0.5f) * stepSize;
+		sf::Int16 newSample = static_cast<sf::Int16>(noise * amplitude);
+		_whiteNoiseBuffer[i * Channels]     = newSample; // L
+		_whiteNoiseBuffer[i * Channels + 1] = newSample; // R
+	}
+}
+
+
+/* 
+void SoundGenerator::GenerateNoise() {
+	sf::Int16 amplitude = MaxAmplitude;
 	double duration = 1.0f;
 	const size_t totalFrames = SampleRate * duration;
-	const float fade_start = 0.16f;
-	const size_t fade_frames = totalFrames - (totalFrames * fade_start);
-	const float fade_delta = amplitude / (totalFrames * fade_start);
+	static sf::Int16 last_sample = 0;
 
 	_noiseBuffer.resize(totalFrames * Channels);
 
 	for (std::size_t i = 0; i < totalFrames; ++i) {
-		
-		if (i >= fade_frames)
-			amplitude -= fade_delta;
 
-		sf::Int16 random = amplitude * ((rand() % 65536) - 32768);
+	
+		
+		sf::Int16 random = amplitude * ((rand() % 65536));
 		sf::Int16 sample = std::clamp(random, MinAmplitude, MaxAmplitude);
 
 		_noiseBuffer[i * Channels]     = sample; //L-channel
 		_noiseBuffer[i * Channels + 1] = sample; //R-channel
-			
-		phase += delta;
-		if (phase > 2 * Pi)
-			phase -= 2 * Pi;
 
-		frequency += 0.01f;
-
-		delta = (frequency * 2 * Pi) / SampleRate;
 	}
 }
+
+
+*/

@@ -15,25 +15,36 @@ namespace zenith {
 
 	class SoundGenerator : public sf::SoundStream, public ISoundGenerator {
 		public:
-		
-		SoundGenerator();
-		void PlayRestBell() override;
-		void PlayWorkBell() override;
-		void PlayNoise();
+
+			enum class NoiseColor {
+				BROWN, PINK, WHITE, BLUE, VIOLET
+			};
+
+			SoundGenerator();
+			void PlayRestBell() override;
+			void PlayWorkBell() override;
+			void PlayNoise(NoiseColor color);
 	
 		private:
-		bool onGetData(Chunk& data) override;
-		void onSeek(sf::Time timeOffset) override;
-		
-		void GenerateRestBell();
-		void GenerateWorkBell();
-		void GenerateNoise();
+			bool onGetData(Chunk& data) override;
+			void onSeek(sf::Time timeOffset) override;
+			
+			void GenerateRestBell();
+			void GenerateWorkBell();
+			void GenerateNoise();
 
-		bool _loopMode;
-		std::vector<sf::Int16> _buffer;
-		std::vector<sf::Int16> _restBellbuffer;
-		std::vector<sf::Int16> _workBellbuffer;
-		std::vector<sf::Int16> _noiseBuffer;
+			void GenerateWhite(double duration);
+			void GenerateBrown(double duration);
+
+			bool _loopMode;
+			std::vector<sf::Int16> _buffer;
+			std::vector<sf::Int16> _restBellbuffer;
+			std::vector<sf::Int16> _workBellbuffer;
+			std::vector<sf::Int16> _brownNoiseBuffer;
+			std::vector<sf::Int16> _pinkNoiseBuffer;
+			std::vector<sf::Int16> _whiteNoiseBuffer;
+			std::vector<sf::Int16> _blueNoiseBuffer;
+			std::vector<sf::Int16> _violetNoiseBuffer;
 		
 	};
 
