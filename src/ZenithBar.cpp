@@ -212,7 +212,7 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 			ImGui::SameLine(0, 4);
 			if (ImGui::VSliderFloat(name.c_str(), ImVec2(20,80), &gen->volume ,
 				0.0f, 100.0f, ""))
-					gen->setVolume(gen->volume);
+					gen->setVolume(gen->volume * masterVolume);
 		}
 
 		static bool masterMute = false;
