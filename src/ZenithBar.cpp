@@ -171,9 +171,9 @@ void ZenithBar::DrawPomodoroWindow() {
 void ZenithBar::DrawNoiseGeneratorWindow() {
 
 	//TODO covertir en static? sacar a clase?
-	ImVec2 winSize = ImVec2(500, 300);
-	ImVec2 winPos = ImVec2(500, 0);
-	SoundGenerator* noiseGen[5] {
+	static ImVec2 winSize = ImVec2(500, 300);
+	static ImVec2 winPos = ImVec2(500, 0);
+	static SoundGenerator* noiseGen[5] {
 		dynamic_cast<SoundGenerator*>(_sgBrown.get()),
 		dynamic_cast<SoundGenerator*>(_sgPink.get()),
 		dynamic_cast<SoundGenerator*>(_sgWhite.get()),
@@ -184,7 +184,7 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 	ImGui::SetNextWindowPos(winPos);
 	ImGui::SetNextWindowSize(winSize);
 
-	ImGuiWindowFlags windowFlags = 0
+	static ImGuiWindowFlags windowFlags = 0
 		| ImGuiWindowFlags_NoTitleBar
 		| ImGuiWindowFlags_NoResize
 		| ImGuiWindowFlags_NoMove
@@ -197,7 +197,7 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 		if (ImGui::Button("X", ImVec2(50,50)))
 			_renderWindow->close();
 
-		static float masterVolume = 0.5f;
+		static float masterVolume = 1.0f;
 		if (ImGui::VSliderFloat("##MasterVolumeSlider", ImVec2(20,80),
 			&masterVolume , 0.0f, 1.0f, "")) {
 			for (auto &&g : noiseGen) 
@@ -218,25 +218,25 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 		static bool masterMute = false;
 		if (ImGui::Button(masterMute ? "S" : "P", ImVec2(20,20))) {
 			masterMute = !masterMute;
-			if (masterMute) {
-				for (auto &&g : noiseGen)
-					g->stop();
-			}
-			else {
-				for (auto &&g : noiseGen)
-					g->play();
+			for (auto &&gen : noiseGen) {
+				if (masterMute)
+					gen->stop();
+				else
+					gen->play();
 			}
 		}
-		
+
 		for (auto &&gen : noiseGen) {
+			ImGui::PushID(gen);
 			ImGui::SameLine(0, 4);
 			if (ImGui::Button(gen->muted ? "S" : "P", ImVec2(20,20))) {
 				gen->muted = !gen->muted;
 				if (gen->getStatus() == SoundGenerator::Playing)
 					gen->stop();
 				else
-					gen->PlayNoise(SoundGenerator::NoiseColor::BROWN);
+					gen->PlayNoise(gen->GetNoiseColor());
 			}
+			ImGui::PopID();
 		}
 
 		ImGui::End();
