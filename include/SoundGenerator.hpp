@@ -41,8 +41,11 @@ namespace zenith {
 			void GenerateWorkBell();
 			void GenerateNoise();
 
-			void GenerateWhite(double duration);
 			void GenerateBrown(double duration);
+			void GeneratePink(double duration);
+			void GenerateWhite(double duration);
+			void GenerateBlue(double duration);
+			void GenerateViolet(double duration);
 
 			bool _loopMode;
 			NoiseColor _noiseColor;
