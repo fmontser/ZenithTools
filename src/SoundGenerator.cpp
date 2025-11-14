@@ -204,14 +204,16 @@ void SoundGenerator::GenerateBrown(double duration) {
 
 	_brownNoiseBuffer.resize(totalFrames * Channels);
 
+	float stepSize = 0.1f;
 	for (std::size_t i = 0; i < totalFrames; ++i) {
-		float stepSize = 0.02f;
 		float white = (float(rand()) / RAND_MAX - 0.5f) * stepSize;
  		lastSample += white;
 		lastSample = std::clamp(lastSample, -1.0f, 1.0f);
-		sf::Int16 brown = static_cast<sf::Int16>(lastSample * amplitude);
-		_brownNoiseBuffer[i * Channels] = brown; // L
-		_brownNoiseBuffer[i * Channels + 1] = brown; // R
+		sf::Int16 newSample = static_cast<sf::Int16>(
+			std::clamp(lastSample * amplitude, float(-amplitude), float(amplitude))
+		);
+		_brownNoiseBuffer[i * Channels] = newSample; // L
+		_brownNoiseBuffer[i * Channels + 1] = newSample; // R
 	}
 }
 
@@ -236,7 +238,7 @@ void SoundGenerator::GenerateWhite(double duration) {
 
 	_whiteNoiseBuffer.resize(totalFrames * Channels);
 
-	float stepSize = 0.02f;
+	float stepSize = 0.5f;
 	for (size_t i = 0; i < totalFrames; ++i) {
 		float white = (float(rand()) / RAND_MAX - 0.5f) * stepSize;
 
@@ -272,9 +274,10 @@ void SoundGenerator::GenerateViolet(double duration) {
 
 	_violetNoiseBuffer.resize(totalFrames * Channels);
 
+	float stepSize = 0.5f;
 	float lastWhite = 0.0f;
 	for (size_t i = 0; i < totalFrames; ++i) {
-		float white = (float(rand()) / RAND_MAX - 0.5f);
+		float white = (float(rand()) / RAND_MAX - 0.5f) * stepSize;
 		float violet = white - lastWhite;
 		lastWhite = white;
 
