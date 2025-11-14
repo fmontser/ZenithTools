@@ -14,11 +14,14 @@ const sf::Int16 MinAmplitude = -32767 * 0.5;
 
 SoundGenerator::SoundGenerator() : sf::SoundStream() {
 	_loopMode = false;
+	_noiseColorName = "NONE";
+	volume = 50.0f;
+	muted = true;
 	initialize(2, SampleRate);
 	GenerateRestBell();
 	GenerateWorkBell();
 	GenerateNoise();
-	setVolume(50.0f);
+	setVolume(volume);
 }
 
 void SoundGenerator::PlayRestBell() {
@@ -38,26 +41,65 @@ void SoundGenerator::PlayNoise(NoiseColor color) {
 	switch (color)
 	{
 		case SoundGenerator::NoiseColor::BROWN:
+			_noiseColorName = "BROWN";
 			_buffer = _brownNoiseBuffer;
 			break;
 		case SoundGenerator::NoiseColor::PINK:
+			_noiseColorName = "PINK";
 			_buffer = _pinkNoiseBuffer;
 			break;
 		case SoundGenerator::NoiseColor::WHITE:
+			_noiseColorName = "WHITE";
 			_buffer = _whiteNoiseBuffer;
 			break;
 		case SoundGenerator::NoiseColor::BLUE:
+			_noiseColorName = "BLUE";
 			_buffer = _blueNoiseBuffer;
 			break;
 		case SoundGenerator::NoiseColor::VIOLET:
+			_noiseColorName = "VIOLET";
 			_buffer = _violetNoiseBuffer;
 			break;
 		default:
 			InvalidModeException();
+			_noiseColorName = "NONE";
 			_loopMode = false;
 			return;
 	}
 	play();
+}
+
+const std::string SoundGenerator::GetNoiseColorName() const {
+	return _noiseColorName;
+}
+
+const SoundGenerator::NoiseColor SoundGenerator::GetNoiseColor() const {
+	return _noiseColor;
+}
+
+void SoundGenerator::SetNoiseColor(NoiseColor color) {
+	_noiseColor = color;
+	switch (color)
+	{
+		case SoundGenerator::NoiseColor::BROWN:
+			_noiseColorName = "BROWN";
+			break;
+		case SoundGenerator::NoiseColor::PINK:
+			_noiseColorName = "PINK";
+			break;
+		case SoundGenerator::NoiseColor::WHITE:
+			_noiseColorName = "WHITE";
+			break;
+		case SoundGenerator::NoiseColor::BLUE:
+			_noiseColorName = "BLUE";
+			break;
+		case SoundGenerator::NoiseColor::VIOLET:
+			_noiseColorName = "VIOLET";
+			break;
+		default:
+			_noiseColorName = "NONE";
+			return;
+	}
 }
 
 bool SoundGenerator::onGetData(Chunk &data) {

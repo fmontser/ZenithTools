@@ -10,6 +10,7 @@
 #include "SFML/Audio/SoundStream.hpp"
 #include <vector>
 #include <functional>
+#include <string>
 
 namespace zenith {
 
@@ -24,7 +25,14 @@ namespace zenith {
 			void PlayRestBell() override;
 			void PlayWorkBell() override;
 			void PlayNoise(NoiseColor color);
-	
+			
+			const std::string GetNoiseColorName() const;
+			const NoiseColor GetNoiseColor() const;
+			void SetNoiseColor(NoiseColor color);
+
+			float volume;
+			bool muted;
+
 		private:
 			bool onGetData(Chunk& data) override;
 			void onSeek(sf::Time timeOffset) override;
@@ -37,6 +45,8 @@ namespace zenith {
 			void GenerateBrown(double duration);
 
 			bool _loopMode;
+			NoiseColor _noiseColor;
+			std::string _noiseColorName;
 			std::vector<sf::Int16> _buffer;
 			std::vector<sf::Int16> _restBellbuffer;
 			std::vector<sf::Int16> _workBellbuffer;
@@ -47,5 +57,4 @@ namespace zenith {
 			std::vector<sf::Int16> _violetNoiseBuffer;
 		
 	};
-
 }
