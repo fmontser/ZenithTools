@@ -5,7 +5,7 @@ set(TEST_SOURCES
 	${CMAKE_SOURCE_DIR}/src/Timer.cpp
 	${CMAKE_SOURCE_DIR}/src/PomodoroSession.cpp
 	${CMAKE_SOURCE_DIR}/src/SoundGenerator.cpp
-
+	${CMAKE_SOURCE_DIR}/src/NoiseGenerator.cpp
 )
 
 add_executable(zenith_tests ${TEST_SOURCES})
