@@ -9,43 +9,53 @@ using namespace zenith;
 ZenithBar::ZenithBar() : _session(PomodoroSession(
 	std::make_unique<SoundGenerator>(), 4, Seconds(4),Seconds(2), Seconds(3))) {
 		InitView();
-	}
-	
-	ZenithBar::~ZenithBar() {}
-	
-	void ZenithBar::Render() {
-		
-		DrawPomodoroWindow();
-		DrawNoiseGeneratorWindow();
-		_renderWindow->clear();
-		ImGui::SFML::Render(*_renderWindow);
-		_renderWindow->display();
-	}
-	
-	sf::RenderWindow& ZenithBar::GetRenderWindow() const { return *_renderWindow; }
-	
-	void ZenithBar::RestartSession() {
-		//TODO hardcoded values
-		_session = PomodoroSession(std::make_unique<SoundGenerator>(), 4, Seconds(4),Seconds(2), Seconds(3));
-	}
-	
-	void ZenithBar::InitView()
-	{
-		_renderWindow = std::make_unique<sf::RenderWindow>(
-			sf::VideoMode::getDesktopMode(),
-			"ZenithTools",
-			sf::Style::None
-		);
-		
-		//TODO remove hardcoded values
-		_renderWindow->setFramerateLimit(60);
-		_renderWindow->setSize(sf::Vector2u(1000, 300));
-		_renderWindow->setPosition(sf::Vector2i(500,100));
-		ImGui::SFML::Init(*_renderWindow);
-		
-		_viewport = ImGui::GetMainViewport();;
-		_noiseGen = std::make_unique<NoiseGenerator>();
 }
+	
+void ZenithBar::InitView() {
+	_renderWindow = std::make_unique<sf::RenderWindow>(
+		sf::VideoMode::getDesktopMode(),
+		"ZenithTools",
+		sf::Style::None
+	);
+	
+	//TODO remove hardcoded values
+	_renderWindow->setFramerateLimit(60);
+	_renderWindow->setSize(sf::Vector2u(1000, 300));
+	_renderWindow->setPosition(sf::Vector2i(500,100));
+	ImGui::SFML::Init(*_renderWindow);
+	
+	_viewport = ImGui::GetMainViewport();
+	
+
+	//TODO @@@@@@@@@@ no se oye nada...debug
+
+	NoiseGenerator* leak_test = new NoiseGenerator(63.0f);
+	leak_test->play();
+
+
+	for (auto &&band : NoiseGenerator::GetDefaultBands())
+		_noiseGenerators.push_back(std::make_unique<NoiseGenerator>(band));
+}
+
+ZenithBar::~ZenithBar() {}
+
+void ZenithBar::Render() {
+	
+	DrawPomodoroWindow();
+	DrawNoiseGeneratorWindow();
+	_renderWindow->clear();
+	ImGui::SFML::Render(*_renderWindow);
+	_renderWindow->display();
+}
+
+sf::RenderWindow& ZenithBar::GetRenderWindow() const { return *_renderWindow; }
+
+void ZenithBar::RestartSession() {
+	//TODO hardcoded values
+	_session = PomodoroSession(std::make_unique<SoundGenerator>(), 4, Seconds(4),Seconds(2), Seconds(3));
+}
+
+
 
 void ZenithBar::DrawPomodoroWindow() {
 
@@ -167,10 +177,17 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 
 
 		//TODO delete test
+		for (auto &&gen : _noiseGenerators) {
+			ImGui::PushID(gen.get());
+			if (ImGui::Button(gen->GetBandText().c_str(), ImVec2(50,50))) {
+				gen->play();
+			}
+			ImGui::PopID();
+			ImGui::SameLine(0, 4);
 
-		if (ImGui::Button("test", ImVec2(20,20))) {
-			_noiseGen->play();
 		}
+		
+
 
 		/* static float masterVolume = 1.0f;
 		if (ImGui::VSliderFloat("##MasterVolumeSlider", ImVec2(20,80),

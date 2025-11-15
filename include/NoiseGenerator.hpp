@@ -10,41 +10,38 @@
 #include <vector>
 #include <functional>
 #include <array>
+#include <string>
 
 namespace zenith {
 
 	class NoiseGenerator : public sf::SoundStream {
 		public:
-			using FilterState = std::array<float, 4>;
-			using FilterFunction = std::function<float (float, FilterState&)>;
-
 			float volume;
 			bool muted;
-			
-			NoiseGenerator(FilterFunction filterFunction);
-			
+				
+			NoiseGenerator(float band);
+			static const std::array<float, 8> GetDefaultBands();
+			const std::string GetBandText() const;
+		
 		private:
-
-			enum class FilterIndex {
-				IN1, IN2, OUT1, OUT2
+			using FilterState = std::array<float, 6>;
+			using FilterFunction = std::function<float (float, FilterState&)>;
+		
+			enum FilterIndex {
+				IN, IN_PREV, IN_PREV2, OUT_PREV, OUT_PREV2, BAND
 			};
 
 			std::vector<sf::Int16> _buffer;
-			std::function<float (float, FilterState&)> _filter;
 			FilterState _fState;
+			std::string _bandText;
 
 			bool onGetData(Chunk& data) override;
 			void onSeek(sf::Time timeOffset) override;
 			
-			void GenerateNoise();
-			static float BandFilter63Hz(float white, FilterState& fState);
-			static float BandFilter125Hz(float white, FilterState& fState);
-			static float BandFilter250Hz(float white, FilterState& fState);
-			static float BandFilter500Hz(float white, FilterState& fState);
-			static float BandFilter1KHz(float white, FilterState& fState);
-			static float BandFilter2KHz(float white, FilterState& fState);
-			static float BandFilter4KHz(float white, FilterState& fState);
-			static float BandFilter8KHz(float white, FilterState& fState);
+			void SetBandText();
 
+			void GenerateNoise();
+			float BandFilter(float white);
+			std::array<float,5> CalculateBiquadCoeffs();
 	};
 }
