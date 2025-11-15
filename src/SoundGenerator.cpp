@@ -13,102 +13,27 @@ const sf::Int16 MaxAmplitude =  32767 * 0.5;
 const sf::Int16 MinAmplitude = -32767 * 0.5;
 
 SoundGenerator::SoundGenerator() : sf::SoundStream() {
-	_loopMode = false;
-	_noiseColorName = "NONE";
 	volume = 50.0f;
 	muted = true;
 	initialize(2, SampleRate);
 	GenerateRestBell();
 	GenerateWorkBell();
-	GenerateNoise();
 	setVolume(volume);
 }
 
 void SoundGenerator::PlayRestBell() {
-	_loopMode = false;
 	_buffer = _restBellbuffer;
 	play();
 }
 
 void SoundGenerator::PlayWorkBell() {
-	_loopMode = false;
 	_buffer = _workBellbuffer;
 	play();
 }
 
-void SoundGenerator::PlayNoise(NoiseColor color) {
-	_loopMode = true;
-	switch (color)
-	{
-		case SoundGenerator::NoiseColor::BROWN:
-			_noiseColorName = "BROWN";
-			_buffer = _brownNoiseBuffer;
-			break;
-		case SoundGenerator::NoiseColor::PINK:
-			_noiseColorName = "PINK";
-			_buffer = _pinkNoiseBuffer;
-			break;
-		case SoundGenerator::NoiseColor::WHITE:
-			_noiseColorName = "WHITE";
-			_buffer = _whiteNoiseBuffer;
-			break;
-		case SoundGenerator::NoiseColor::BLUE:
-			_noiseColorName = "BLUE";
-			_buffer = _blueNoiseBuffer;
-			break;
-		case SoundGenerator::NoiseColor::VIOLET:
-			_noiseColorName = "VIOLET";
-			_buffer = _violetNoiseBuffer;
-			break;
-		default:
-			InvalidModeException();
-			_noiseColorName = "NONE";
-			_loopMode = false;
-			return;
-	}
-	play();
-}
-
-const std::string SoundGenerator::GetNoiseColorName() const {
-	return _noiseColorName;
-}
-
-const SoundGenerator::NoiseColor SoundGenerator::GetNoiseColor() const {
-	return _noiseColor;
-}
-
-void SoundGenerator::SetNoiseColor(NoiseColor color) {
-	_noiseColor = color;
-	switch (color)
-	{
-		case SoundGenerator::NoiseColor::BROWN:
-			_noiseColorName = "BROWN";
-			break;
-		case SoundGenerator::NoiseColor::PINK:
-			_noiseColorName = "PINK";
-			break;
-		case SoundGenerator::NoiseColor::WHITE:
-			_noiseColorName = "WHITE";
-			break;
-		case SoundGenerator::NoiseColor::BLUE:
-			_noiseColorName = "BLUE";
-			break;
-		case SoundGenerator::NoiseColor::VIOLET:
-			_noiseColorName = "VIOLET";
-			break;
-		default:
-			_noiseColorName = "NONE";
-			return;
-	}
-}
-
 bool SoundGenerator::onGetData(Chunk &data) {
-	if (_buffer.empty())
-		return false;
 	data.samples = _buffer.data();
 	data.sampleCount = _buffer.size();
-	if (!_loopMode)
-		_buffer.clear();
 	return true;
 }
 
@@ -185,131 +110,5 @@ void SoundGenerator::GenerateWorkBell() {
 		frequency += 0.01f;
 
 		delta = (frequency * 2 * Pi) / SampleRate;
-	}
-}
-
-void SoundGenerator::GenerateNoise() {
-	GenerateBrown(60.0f);
-	GeneratePink(60.0f);
-	GenerateWhite(60.0f);
-	GenerateBlue(60.0f);
-	GenerateViolet(60.f);
-}
-
-void SoundGenerator::GenerateBrown(double duration) {
-	sf::Int16 amplitude = MaxAmplitude;
-	const size_t totalFrames = SampleRate * duration;
-	float lastSample = 0.0f;
-
-	_brownNoiseBuffer.resize(totalFrames * Channels);
-
-	float stepSize = 0.1f;
-	for (std::size_t i = 0; i < totalFrames; ++i) {
-		float white = (float(rand()) / RAND_MAX - 0.5f) * stepSize;
- 		lastSample += white;
-		lastSample = std::clamp(lastSample, -1.0f, 1.0f);
-		sf::Int16 newSample = static_cast<sf::Int16>(
-			std::clamp(lastSample * amplitude, float(-amplitude), float(amplitude))
-		);
-		_brownNoiseBuffer[i * Channels] = newSample; // L
-		_brownNoiseBuffer[i * Channels + 1] = newSample; // R
-	}
-}
-
-void SoundGenerator::GeneratePink(double duration) {
-	sf::Int16 amplitude = MaxAmplitude;
-	const size_t totalFrames = SampleRate * duration;
-
-	_pinkNoiseBuffer.resize(totalFrames * Channels);
-
-	float b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0;
-	float stepSize = 0.2f;
-	for (size_t i = 0; i < totalFrames; ++i) {
-		float white = (float(rand()) / RAND_MAX - 0.5f) * stepSize;
-
-		b0 = 0.99886f * b0 + white * 0.0555179f;
-		b1 = 0.99332f * b1 + white * 0.0750759f;
-		b2 = 0.96900f * b2 + white * 0.1538520f;
-		b3 = 0.86650f * b3 + white * 0.3104856f;
-		b4 = 0.55000f * b4 + white * 0.5329522f;
-		b5 = -0.7616f * b5 - white * 0.0168980f;
-		float pink = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362f;
-		b6 = white * 0.115926f;
-
-		sf::Int16 newSample = static_cast<sf::Int16>(
-			std::clamp(pink * amplitude, float(-amplitude), float(amplitude))
-		);
-
-		_pinkNoiseBuffer[i * Channels] = newSample; // L
-		_pinkNoiseBuffer[i * Channels + 1] = newSample; // R
-	}
-}
-
-
-void SoundGenerator::GenerateWhite(double duration) {
-	sf::Int16 amplitude = MaxAmplitude;
-	const size_t totalFrames = SampleRate * duration;
-
-	_whiteNoiseBuffer.resize(totalFrames * Channels);
-
-	float stepSize = 0.5f;
-	for (size_t i = 0; i < totalFrames; ++i) {
-		float white = (float(rand()) / RAND_MAX - 0.5f) * stepSize;
-
-		float scaled = white * amplitude;
-		sf::Int16 newSample = static_cast<sf::Int16>(
-			std::clamp(scaled, float(-amplitude), float(amplitude))
-		);
-
-		_whiteNoiseBuffer[i * Channels] = newSample; // L
-		_whiteNoiseBuffer[i * Channels + 1] = newSample; // R
-	}
-}
-
-
-void SoundGenerator::GenerateBlue(double duration) {
-	sf::Int16 amplitude = MaxAmplitude;
-	const size_t totalFrames = SampleRate * duration;
-
-	_blueNoiseBuffer.resize(totalFrames * Channels);
-
-	float lastWhite = 0.0f;
-	float alpha = 0.6f;
-	float stepSize = 0.5f;
-	for (size_t i = 0; i < totalFrames; ++i) {
-		float white = (float(rand()) / RAND_MAX - 0.5f) * stepSize;
-		
-		float blue = white - alpha * lastWhite;
-		lastWhite = white;
-
-		sf::Int16 newSample = static_cast<sf::Int16>(
-			std::clamp(blue * amplitude, float(-amplitude), float(amplitude))
-		);
-
-		_blueNoiseBuffer[i * Channels] = newSample; // L
-		_blueNoiseBuffer[i * Channels + 1] = newSample; // R
-	}
-}
-
-
-void SoundGenerator::GenerateViolet(double duration) {
-	sf::Int16 amplitude = MaxAmplitude;
-	const size_t totalFrames = SampleRate * duration;
-
-	_violetNoiseBuffer.resize(totalFrames * Channels);
-
-	float stepSize = 0.5f;
-	float lastWhite = 0.0f;
-	for (size_t i = 0; i < totalFrames; ++i) {
-		float white = (float(rand()) / RAND_MAX - 0.5f) * stepSize;
-		float violet = white - lastWhite;
-		lastWhite = white;
-
-		sf::Int16 newSample = static_cast<sf::Int16>(
-			std::clamp(violet * amplitude, float(-amplitude), float(amplitude))
-		);
-
-		_violetNoiseBuffer[i * Channels] = newSample; // L
-		_violetNoiseBuffer[i * Channels + 1] = newSample; // R
 	}
 }

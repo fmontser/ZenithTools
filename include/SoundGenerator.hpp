@@ -16,19 +16,9 @@ namespace zenith {
 
 	class SoundGenerator : public sf::SoundStream, public ISoundGenerator {
 		public:
-
-			enum class NoiseColor {
-				BROWN, PINK, WHITE, BLUE, VIOLET
-			};
-
 			SoundGenerator();
 			void PlayRestBell() override;
 			void PlayWorkBell() override;
-			void PlayNoise(NoiseColor color);
-			
-			const std::string GetNoiseColorName() const;
-			const NoiseColor GetNoiseColor() const;
-			void SetNoiseColor(NoiseColor color);
 
 			float volume;
 			bool muted;
@@ -39,25 +29,9 @@ namespace zenith {
 			
 			void GenerateRestBell();
 			void GenerateWorkBell();
-			void GenerateNoise();
 
-			void GenerateBrown(double duration);
-			void GeneratePink(double duration);
-			void GenerateWhite(double duration);
-			void GenerateBlue(double duration);
-			void GenerateViolet(double duration);
-
-			bool _loopMode;
-			NoiseColor _noiseColor;
-			std::string _noiseColorName;
 			std::vector<sf::Int16> _buffer;
 			std::vector<sf::Int16> _restBellbuffer;
 			std::vector<sf::Int16> _workBellbuffer;
-			std::vector<sf::Int16> _brownNoiseBuffer;
-			std::vector<sf::Int16> _pinkNoiseBuffer;
-			std::vector<sf::Int16> _whiteNoiseBuffer;
-			std::vector<sf::Int16> _blueNoiseBuffer;
-			std::vector<sf::Int16> _violetNoiseBuffer;
-		
 	};
 }
