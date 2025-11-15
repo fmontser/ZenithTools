@@ -9,11 +9,10 @@
 
 using namespace zenith;
 
-constexpr double Pi = 3.14159265358979323846;
 constexpr uint Channels = 2;
 constexpr uint FrameCount = 1024;
 constexpr uint SampleRate = 48000;
-constexpr uint Quality = 0.707f;
+constexpr float Quality = 0.707f;
 const sf::Int16 MaxAmplitude =  32767;
 const sf::Int16 MinAmplitude = -32767;
 

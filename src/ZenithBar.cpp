@@ -27,12 +27,6 @@ void ZenithBar::InitView() {
 	_viewport = ImGui::GetMainViewport();
 	
 
-	//TODO @@@@@@@@@@ no se oye nada...debug
-
-	NoiseGenerator* leak_test = new NoiseGenerator(63.0f);
-	leak_test->play();
-
-
 	for (auto &&band : NoiseGenerator::GetDefaultBands())
 		_noiseGenerators.push_back(std::make_unique<NoiseGenerator>(band));
 }
