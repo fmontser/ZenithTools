@@ -13,22 +13,12 @@ constexpr uint SampleRate = 48000;
 const sf::Int16 MaxAmplitude =  32767;
 const sf::Int16 MinAmplitude = -32767;
 
-NoiseGenerator::NoiseGenerator(BandFilter bandFrequency) : sf::SoundStream() {
+NoiseGenerator::NoiseGenerator(FilterFunction filterFunction) : sf::SoundStream() {
 	volume = 50.0f;
 	muted = true;
 	initialize(2, SampleRate);
 	setVolume(volume);
-	switch (bandFrequency) {
-		case BandFilter::_63HZ:   _filter = BandFilter63Hz;   break;
-		case BandFilter::_125HZ:  _filter = BandFilter125Hz;  break;
-		case BandFilter::_250HZ:  _filter = BandFilter250Hz;  break;
-		case BandFilter::_500HZ:  _filter = BandFilter500Hz;  break;
-		case BandFilter::_1KHZ:   _filter = BandFilter1KHz;   break;
-		case BandFilter::_2KHZ:   _filter = BandFilter2KHz;   break;
-		case BandFilter::_4KHZ:   _filter = BandFilter4KHz;   break;
-		case BandFilter::_8KHZ:   _filter = BandFilter8KHz;   break;
-		default:                                              break;
-	}
+	_filter = filterFunction;
 }
 
 bool NoiseGenerator::onGetData(Chunk &data) {

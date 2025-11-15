@@ -15,17 +15,15 @@ namespace zenith {
 
 	class NoiseGenerator : public sf::SoundStream {
 		public:
-			enum class BandFilter {
-				_63HZ, _125HZ, _250HZ, _500HZ, _1KHZ, _2KHZ, _4KHZ, _8KHZ
-			};
-			
+			using FilterState = std::array<float, 4>;
+			using FilterFunction = std::function<float (float, FilterState&)>;
+
 			float volume;
 			bool muted;
 			
-			NoiseGenerator(BandFilter bandFrequency);
+			NoiseGenerator(FilterFunction filterFunction);
 			
 		private:
-			using FilterState = std::array<float, 4>;
 
 			enum class FilterIndex {
 				IN1, IN2, OUT1, OUT2
