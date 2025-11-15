@@ -8,6 +8,7 @@
 
 #include "Timer.hpp"
 #include "PomodoroSession.hpp"
+#include "NoiseGenerator.hpp"
 #include "imgui.h"
 #include "imgui-SFML.h"
 #include <SFML/Graphics.hpp>
@@ -31,11 +32,7 @@ namespace zenith {
 			std::unique_ptr<sf::RenderWindow> _renderWindow;  ///< Contains a smart pointer to the render window.
 			ImGuiViewport* _viewport;                         ///< Contains a pointer to the viewport.
 			PomodoroSession _session;                         ///< Contains the actual pomodoro session.
-			std::unique_ptr<ISoundGenerator> _sgBrown;        ///< Contains the sound generator instance for Brown noise.
-			std::unique_ptr<ISoundGenerator> _sgPink;         ///< Contains the sound generator instance for Pink noise.
-			std::unique_ptr<ISoundGenerator> _sgWhite;        ///< Contains the sound generator instance for White noise.
-			std::unique_ptr<ISoundGenerator> _sgBlue;         ///< Contains the sound generator instance for Blue noise.
-			std::unique_ptr<ISoundGenerator> _sgViolet;       ///< Contains the sound generator instance for Violet noise.
+			std::unique_ptr<NoiseGenerator> _noiseGen;       ///< Contains the noise generator pointer.
 
 			/**
 			 * @brief Restarts the actual session.

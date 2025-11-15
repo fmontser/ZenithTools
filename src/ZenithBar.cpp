@@ -9,41 +9,42 @@ using namespace zenith;
 ZenithBar::ZenithBar() : _session(PomodoroSession(
 	std::make_unique<SoundGenerator>(), 4, Seconds(4),Seconds(2), Seconds(3))) {
 		InitView();
-}
-
-ZenithBar::~ZenithBar() {}
-
-void ZenithBar::Render() {
-
-	DrawPomodoroWindow();
-	DrawNoiseGeneratorWindow();
-	_renderWindow->clear();
-	ImGui::SFML::Render(*_renderWindow);
-	_renderWindow->display();
-}
-
-sf::RenderWindow& ZenithBar::GetRenderWindow() const { return *_renderWindow; }
-
-void ZenithBar::RestartSession() {
-	//TODO hardcoded values
-	_session = PomodoroSession(std::make_unique<SoundGenerator>(), 4, Seconds(4),Seconds(2), Seconds(3));
-}
-
-void ZenithBar::InitView()
-{
-	_renderWindow = std::make_unique<sf::RenderWindow>(
-		sf::VideoMode::getDesktopMode(),
-		"ZenithTools",
-		sf::Style::None
-	);
-
-	//TODO remove hardcoded values
-	_renderWindow->setFramerateLimit(60);
-	_renderWindow->setSize(sf::Vector2u(1000, 300));
-	_renderWindow->setPosition(sf::Vector2i(500,100));
-	ImGui::SFML::Init(*_renderWindow);
-
-	_viewport = ImGui::GetMainViewport();;
+	}
+	
+	ZenithBar::~ZenithBar() {}
+	
+	void ZenithBar::Render() {
+		
+		DrawPomodoroWindow();
+		DrawNoiseGeneratorWindow();
+		_renderWindow->clear();
+		ImGui::SFML::Render(*_renderWindow);
+		_renderWindow->display();
+	}
+	
+	sf::RenderWindow& ZenithBar::GetRenderWindow() const { return *_renderWindow; }
+	
+	void ZenithBar::RestartSession() {
+		//TODO hardcoded values
+		_session = PomodoroSession(std::make_unique<SoundGenerator>(), 4, Seconds(4),Seconds(2), Seconds(3));
+	}
+	
+	void ZenithBar::InitView()
+	{
+		_renderWindow = std::make_unique<sf::RenderWindow>(
+			sf::VideoMode::getDesktopMode(),
+			"ZenithTools",
+			sf::Style::None
+		);
+		
+		//TODO remove hardcoded values
+		_renderWindow->setFramerateLimit(60);
+		_renderWindow->setSize(sf::Vector2u(1000, 300));
+		_renderWindow->setPosition(sf::Vector2i(500,100));
+		ImGui::SFML::Init(*_renderWindow);
+		
+		_viewport = ImGui::GetMainViewport();;
+		_noiseGen = std::make_unique<NoiseGenerator>();
 }
 
 void ZenithBar::DrawPomodoroWindow() {
@@ -163,6 +164,13 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 		ImGui::SameLine(450, 0);
 		if (ImGui::Button("X", ImVec2(50,50)))
 			_renderWindow->close();
+
+
+		//TODO delete test
+
+		if (ImGui::Button("test", ImVec2(20,20))) {
+			_noiseGen->play();
+		}
 
 		/* static float masterVolume = 1.0f;
 		if (ImGui::VSliderFloat("##MasterVolumeSlider", ImVec2(20,80),

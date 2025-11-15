@@ -13,6 +13,7 @@ const sf::Int16 MaxAmplitude =  32767 * 0.5;
 const sf::Int16 MinAmplitude = -32767 * 0.5;
 
 SoundGenerator::SoundGenerator() : sf::SoundStream() {
+
 	volume = 50.0f;
 	muted = true;
 	initialize(2, SampleRate);
@@ -34,6 +35,7 @@ void SoundGenerator::PlayWorkBell() {
 bool SoundGenerator::onGetData(Chunk &data) {
 	data.samples = _buffer.data();
 	data.sampleCount = _buffer.size();
+	_buffer.clear();
 	return true;
 }
 

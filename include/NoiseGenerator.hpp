@@ -21,7 +21,6 @@ namespace zenith {
 			};
 
 			NoiseGenerator();
-			void PlayNoise(NoiseColor color);
 			
 			float volume;
 			bool muted;
@@ -32,7 +31,6 @@ namespace zenith {
 			
 			void GenerateNoise();
 
-			bool _loopMode;
 			std::vector<sf::Int16> _buffer;
 	};
 }
