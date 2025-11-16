@@ -36,7 +36,7 @@ namespace zenith {
 
 			//TODO documentar
 			bool _animateNoise;
-			uint _animateNoiseInterval;
+			int _animateNoiseInterval;
 			float _animateNoiseStrength;
 
 			void AnimateNoiseSliders();

@@ -33,8 +33,8 @@ void ZenithBar::InitView() {
 		_noiseGenerators.push_back(std::make_unique<NoiseGenerator>(band));
 
 	_animateNoise = false;
-	_animateNoiseInterval = 2;
-	_animateNoiseStrength = 0.3f;
+	_animateNoiseInterval = 10;
+	_animateNoiseStrength = 0.2f;
 }
 
 ZenithBar::~ZenithBar() {}
@@ -49,8 +49,6 @@ void ZenithBar::Render() {
 }
 
 sf::RenderWindow& ZenithBar::GetRenderWindow() const { return *_renderWindow; }
-
-
 
 void ZenithBar::RestartSession()
 {
@@ -194,14 +192,10 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 			if (ImGui::Button(NoiseGenerator::masterMuted ? "S" : "P", ImVec2(30,30))) {
 				NoiseGenerator::masterMuted = !NoiseGenerator::masterMuted;
 				for (auto &&gen : _noiseGenerators) {
-					if (gen->getStatus() == SoundGenerator::Playing) {
+					if (gen->getStatus() == SoundGenerator::Playing)
 						gen->stop();
-						gen->muted = true;
-					}
-					else if (!gen->muted) {
+					else if (!gen->muted)
 						gen->play();
-						gen->muted = false;
-					}
 				}
 			}
 
@@ -231,8 +225,18 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 			ImGui::EndTable();
 		}
 
+
+			if (ImGui::Button(_animateNoise ? "Fixed" : "Anime", ImVec2(50, 20)))
+				_animateNoise = !_animateNoise;
+
+			ImGui::SliderInt("##AnimationTimeSlider", &_animateNoiseInterval, 1,60, "%ds");
+			ImGui::SliderFloat("##AnimationStrenghtSlider", &_animateNoiseStrength, 0.1f,0.3f, "%.1f POWER");
+
+
+
 		ImGui::End();
 	};
+
 }
 
 void ZenithBar::AnimateNoiseSliders() {
@@ -246,6 +250,9 @@ void ZenithBar::AnimateNoiseSliders() {
 			genTargetVolumeMap[gen.get()] = 50.0f;
 		}
 	}
+
+	if (!_animateNoise || NoiseGenerator::masterMuted)
+		return;
 
 	if (frameNumber++ == frameLimit){
 		frameNumber = 0;
