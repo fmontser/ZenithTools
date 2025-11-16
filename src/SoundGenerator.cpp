@@ -6,11 +6,10 @@
 
 using namespace zenith;
 
-constexpr double Pi = 3.14159265358979323846;
 constexpr uint Channels = 2;
 constexpr uint SampleRate = 48000;
-const sf::Int16 MaxAmplitude =  32767 * 0.5;
-const sf::Int16 MinAmplitude = -32767 * 0.5;
+const sf::Int16 MaxAmplitude =  32767;
+const sf::Int16 MinAmplitude = -32767;
 
 SoundGenerator::SoundGenerator() : sf::SoundStream() {
 
@@ -45,7 +44,7 @@ void SoundGenerator::GenerateRestBell() {
 	double frequency = 500.0f;
 	double amplitude = MaxAmplitude;
 	double phase = 0.0f;
-	double delta = (frequency * 2 * Pi) / SampleRate;
+	double delta = (frequency * 2 * M_PI) / SampleRate;
 	double duration = 1.0f;
 	const size_t totalFrames = SampleRate * duration;
 	const float fade_start = 0.16f;
@@ -60,22 +59,22 @@ void SoundGenerator::GenerateRestBell() {
 			amplitude -= fade_delta;
 
 		sf::Int16 sample = std::clamp(
-			static_cast<sf::Int16>(amplitude * std::sin(phase)),
+			static_cast<sf::Int16>(amplitude * std::sin(phase) * 0.5f),
 			MinAmplitude,
 			MaxAmplitude);
 		
-		_restBellbuffer[i * Channels]     = sample; //L-channel
-		_restBellbuffer[i * Channels + 1] = sample; //R-channel
+		_restBellbuffer[i * Channels]     = sample; //L
+		_restBellbuffer[i * Channels + 1] = sample; //R
 			
 		phase += delta;
-		if (phase > 2 * Pi)
-			phase -= 2 * Pi;
+		if (phase > 2 * M_PI)
+			phase -= 2 * M_PI;
 
 		frequency -= 0.02f;
 		if (frequency < 0)
 			frequency = 0;
 
-		delta = (frequency * 2 * Pi) / SampleRate;
+		delta = (frequency * 2 * M_PI) / SampleRate;
 	}
 }
 
@@ -83,7 +82,7 @@ void SoundGenerator::GenerateWorkBell() {
 	double frequency = 0.0f;
 	sf::Int16 amplitude = MaxAmplitude;
 	double phase = 0.0f;
-	double delta = (frequency * 2 * Pi) / SampleRate;
+	double delta = (frequency * 2 * M_PI) / SampleRate;
 	double duration = 1.0f;
 	const size_t totalFrames = SampleRate * duration;
 	const float fade_start = 0.16f;
@@ -102,15 +101,15 @@ void SoundGenerator::GenerateWorkBell() {
 			MinAmplitude,
 			MaxAmplitude);
 
-		_workBellbuffer[i * Channels]     = sample; //L-channel
-		_workBellbuffer[i * Channels + 1] = sample; //R-channel
+		_workBellbuffer[i * Channels]     = sample; //L
+		_workBellbuffer[i * Channels + 1] = sample; //R
 			
 		phase += delta;
-		if (phase > 2 * Pi)
-			phase -= 2 * Pi;
+		if (phase > 2 * M_PI)
+			phase -= 2 * M_PI;
 
 		frequency += 0.01f;
 
-		delta = (frequency * 2 * Pi) / SampleRate;
+		delta = (frequency * 2 * M_PI) / SampleRate;
 	}
 }
