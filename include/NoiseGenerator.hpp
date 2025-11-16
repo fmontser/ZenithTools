@@ -22,7 +22,7 @@ namespace zenith {
 			static bool masterMuted;
 				
 			NoiseGenerator(float band);
-			static const std::array<float, 8> GetDefaultBands();
+			static const std::array<float, 10> GetDefaultBands();
 			const std::string GetBandText() const;
 		
 		private:

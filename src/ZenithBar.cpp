@@ -26,7 +26,6 @@ void ZenithBar::InitView() {
 	
 	_viewport = ImGui::GetMainViewport();
 	
-
 	for (auto &&band : NoiseGenerator::GetDefaultBands())
 		_noiseGenerators.push_back(std::make_unique<NoiseGenerator>(band));
 }
@@ -169,7 +168,7 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 			_renderWindow->close();
 
 
-		if (ImGui::BeginTable("VolumeControls", 9))
+		if (ImGui::BeginTable("VolumeControls", 11))
 		{
 			ImGui::TableNextRow();
 

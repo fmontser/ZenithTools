@@ -30,8 +30,9 @@ NoiseGenerator::NoiseGenerator(float band) : sf::SoundStream() {
 	SetBandText();
 }
 
-const std::array<float, 8> NoiseGenerator::GetDefaultBands() {
-	return { 63.0, 125.0f, 250.0f, 500.0f, 1000.0f, 2000.0f, 4000.0f, 8000.0f };
+const std::array<float, 10> NoiseGenerator::GetDefaultBands() {
+	return { 63.0, 125.0f, 250.0f, 500.0f,
+			 1000.0f, 2000.0f, 4000.0f, 8000.0f, 16000.0f, 24000.0f };
 }
 
 void NoiseGenerator::SetBandText() {
@@ -128,7 +129,7 @@ std::array<float,5> NoiseGenerator::CalculateBiquadCoeffs()
 float NoiseGenerator::CalculatePerceptualGain()
 {
 	//TODO switch from hardcoded to log curve strong on bass
-	
+
 	std::map<float, float> gain = {
 		{63.0f, 10.0f},
 		{125.0f, 5.0f},
@@ -137,7 +138,9 @@ float NoiseGenerator::CalculatePerceptualGain()
 		{1000.0f, 0.6f},
 		{2000.0f, 0.3f},
 		{4000.0f, 0.15f},
-		{8000.0f, 0.075f}
+		{8000.0f, 0.1f},
+		{16000.0f, 0.085f},
+		{24000.0f, 0.075f}
 	};
 
 	try {
