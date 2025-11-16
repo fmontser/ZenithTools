@@ -73,6 +73,7 @@ include(FetchContent)
 		src/ZenithBar.cpp
 		src/PomodoroSession.cpp
 		src/SoundGenerator.cpp
+		src/NoiseGenerator.cpp
 	)
 
 	set(APP_LIBS

@@ -3,41 +3,37 @@
 #include "imgui-SFML.h"
 #include "Exceptions.hpp"
 
-//TODO borrar test
-#include <iostream>
-#include <filesystem>
-#include <map>
-
 using namespace zenith;
 
 //TODO remove hardcoded values
-/* ZenithBar::ZenithBar(): _session(PomodoroSession(2, Minutes(25),Minutes(5), Minutes(15))) {
-	InitViewport();
+ZenithBar::ZenithBar() : _session(PomodoroSession(
+	std::make_unique<SoundGenerator>(), 4, Seconds(4),Seconds(2), Seconds(3))) {
+		InitView();
 }
- */
-ZenithBar::ZenithBar() : _session(PomodoroSession(std::make_unique<SoundGenerator>(), 4, Seconds(4),Seconds(2), Seconds(3))) {
-	_sgBrown = std::move(std::make_unique<SoundGenerator>());
-	dynamic_cast<SoundGenerator*>(_sgBrown.get())
-		->SetNoiseColor(SoundGenerator::NoiseColor::BROWN);
-	_sgPink = std::move(std::make_unique<SoundGenerator>());
-		dynamic_cast<SoundGenerator*>(_sgPink.get())
-		->SetNoiseColor(SoundGenerator::NoiseColor::PINK);
-	_sgWhite = std::move(std::make_unique<SoundGenerator>());
-		dynamic_cast<SoundGenerator*>(_sgWhite.get())
-		->SetNoiseColor(SoundGenerator::NoiseColor::WHITE);
-	_sgBlue = std::move(std::make_unique<SoundGenerator>());
-		dynamic_cast<SoundGenerator*>(_sgBlue.get())
-		->SetNoiseColor(SoundGenerator::NoiseColor::BLUE);
-	_sgViolet = std::move(std::make_unique<SoundGenerator>());
-		dynamic_cast<SoundGenerator*>(_sgViolet.get())
-		->SetNoiseColor(SoundGenerator::NoiseColor::VIOLET);
-	InitView();
+	
+void ZenithBar::InitView() {
+	_renderWindow = std::make_unique<sf::RenderWindow>(
+		sf::VideoMode::getDesktopMode(),
+		"ZenithTools",
+		sf::Style::None
+	);
+	
+	//TODO remove hardcoded values
+	_renderWindow->setFramerateLimit(60);
+	_renderWindow->setSize(sf::Vector2u(1000, 300));
+	_renderWindow->setPosition(sf::Vector2i(500,100));
+	ImGui::SFML::Init(*_renderWindow);
+	
+	_viewport = ImGui::GetMainViewport();
+	
+	for (auto &&band : NoiseGenerator::GetDefaultBands())
+		_noiseGenerators.push_back(std::make_unique<NoiseGenerator>(band));
 }
 
 ZenithBar::~ZenithBar() {}
 
 void ZenithBar::Render() {
-
+	
 	DrawPomodoroWindow();
 	DrawNoiseGeneratorWindow();
 	_renderWindow->clear();
@@ -52,33 +48,16 @@ void ZenithBar::RestartSession() {
 	_session = PomodoroSession(std::make_unique<SoundGenerator>(), 4, Seconds(4),Seconds(2), Seconds(3));
 }
 
-void ZenithBar::InitView()
-{
-	_renderWindow = std::make_unique<sf::RenderWindow>(
-		sf::VideoMode::getDesktopMode(),
-		"ZenithTools",
-		sf::Style::None
-	);
-
-	//TODO remove hardcoded values
-	_renderWindow->setFramerateLimit(60);
-	_renderWindow->setSize(sf::Vector2u(1000, 300));
-	_renderWindow->setPosition(sf::Vector2i(500,100));
-	ImGui::SFML::Init(*_renderWindow);
-
-	_viewport = ImGui::GetMainViewport();;
-}
-
 
 void ZenithBar::DrawPomodoroWindow() {
 
 
-	ImVec2 winSize = ImVec2(_viewport->WorkSize.x / 2, _viewport->WorkSize.y);
+	static ImVec2 winSize = ImVec2(_viewport->WorkSize.x / 2, _viewport->WorkSize.y);
 
 	ImGui::SetNextWindowPos(_viewport->WorkPos);
 	ImGui::SetNextWindowSize(winSize);
 
-	ImGuiWindowFlags windowFlags = 0
+	static ImGuiWindowFlags windowFlags = 0
 		| ImGuiWindowFlags_NoTitleBar
 		| ImGuiWindowFlags_NoResize
 		| ImGuiWindowFlags_NoMove
@@ -169,17 +148,8 @@ void ZenithBar::DrawPomodoroWindow() {
 }
 
 void ZenithBar::DrawNoiseGeneratorWindow() {
-
-	//TODO covertir en static? sacar a clase?
 	static ImVec2 winSize = ImVec2(500, 300);
 	static ImVec2 winPos = ImVec2(500, 0);
-	static SoundGenerator* noiseGen[5] {
-		dynamic_cast<SoundGenerator*>(_sgBrown.get()),
-		dynamic_cast<SoundGenerator*>(_sgPink.get()),
-		dynamic_cast<SoundGenerator*>(_sgWhite.get()),
-		dynamic_cast<SoundGenerator*>(_sgBlue.get()),
-		dynamic_cast<SoundGenerator*>(_sgViolet.get())
-	};
 
 	ImGui::SetNextWindowPos(winPos);
 	ImGui::SetNextWindowSize(winSize);
@@ -197,46 +167,55 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 		if (ImGui::Button("X", ImVec2(50,50)))
 			_renderWindow->close();
 
-		static float masterVolume = 1.0f;
-		if (ImGui::VSliderFloat("##MasterVolumeSlider", ImVec2(20,80),
-			&masterVolume , 0.0f, 1.0f, "")) {
-			for (auto &&g : noiseGen) 
-				g->setVolume(std::clamp(g->volume * masterVolume, 0.0f, 100.0f));
-		}
 
-		for (auto &&gen : noiseGen) {
-			const std::string name = std::string(
-				"##" + gen->GetNoiseColorName() + "VolumeSlider"
-			);
+		if (ImGui::BeginTable("VolumeControls", 11))
+		{
+			ImGui::TableNextRow();
 
-			ImGui::SameLine(0, 4);
-			if (ImGui::VSliderFloat(name.c_str(), ImVec2(20,80), &gen->volume ,
-				0.0f, 100.0f, ""))
-					gen->setVolume(gen->volume * masterVolume);
-		}
+ 			ImGui::TableSetColumnIndex(0);
+			ImGui::AlignTextToFramePadding();
+			ImGui::Text("Master");
 
-		static bool masterMute = false;
-		if (ImGui::Button(masterMute ? "S" : "P", ImVec2(20,20))) {
-			masterMute = !masterMute;
-			for (auto &&gen : noiseGen) {
-				if (masterMute)
-					gen->stop();
-				else
-					gen->play();
+			if (ImGui::VSliderFloat("##MasterVolumeSlider", ImVec2(30,100),
+				&NoiseGenerator::masterVolume, 0.0f, 1.0f, "")) {
+					for (auto &&gen : _noiseGenerators)
+						gen->setVolume(gen->volume * NoiseGenerator::masterVolume);
 			}
-		}
 
-		for (auto &&gen : noiseGen) {
-			ImGui::PushID(gen);
-			ImGui::SameLine(0, 4);
-			if (ImGui::Button(gen->muted ? "S" : "P", ImVec2(20,20))) {
-				gen->muted = !gen->muted;
-				if (gen->getStatus() == SoundGenerator::Playing)
-					gen->stop();
-				else
-					gen->PlayNoise(gen->GetNoiseColor());
+			if (ImGui::Button(NoiseGenerator::masterMuted ? "S" : "P", ImVec2(30,30))) {
+				NoiseGenerator::masterMuted = !NoiseGenerator::masterMuted;
+				for (auto &&gen : _noiseGenerators) {
+					if (gen->getStatus() == SoundGenerator::Playing)
+						gen->stop();
+					else if (!gen->muted)
+						gen->play();
+				}
 			}
-			ImGui::PopID();
+
+			uint col = 1;
+			for (auto &&gen : _noiseGenerators) {
+				ImGui::TableSetColumnIndex(col++);
+				ImGui::PushID(gen.get());
+
+				ImGui::AlignTextToFramePadding();
+				ImGui::Text(gen->GetBandText().c_str());
+
+				if (ImGui::VSliderFloat("##VolumeSlider", ImVec2(30,100), &gen->volume ,
+					0.0f, 100.0f, ""))
+						gen->setVolume(gen->volume * NoiseGenerator::masterVolume);
+
+				if (ImGui::Button(gen->muted ? "P" : "S", ImVec2(30,30))) {
+					gen->muted = !gen->muted;
+					if (gen->getStatus() == SoundGenerator::Playing)
+						gen->stop();
+					else
+						gen->play();
+				}
+
+				ImGui::PopID();
+			}
+			
+			ImGui::EndTable();
 		}
 
 		ImGui::End();
