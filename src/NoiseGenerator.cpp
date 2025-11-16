@@ -130,7 +130,7 @@ float NoiseGenerator::CalculatePerceptualGain()
 {
 	//TODO switch from hardcoded to log curve strong on bass
 
-	std::map<float, float> gain = {
+	static std::map<float, float> gain = {
 		{63.0f, 10.0f},
 		{125.0f, 5.0f},
 		{250.0f, 2.0f},

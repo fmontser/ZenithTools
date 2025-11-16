@@ -2,8 +2,11 @@
 #include "imgui.h"
 #include "imgui-SFML.h"
 #include "Exceptions.hpp"
+#include <map>
 
 using namespace zenith;
+
+constexpr uint frameLimit = 60;
 
 //TODO remove hardcoded values
 ZenithBar::ZenithBar() : _session(PomodoroSession(
@@ -19,7 +22,7 @@ void ZenithBar::InitView() {
 	);
 	
 	//TODO remove hardcoded values
-	_renderWindow->setFramerateLimit(60);
+	_renderWindow->setFramerateLimit(frameLimit);
 	_renderWindow->setSize(sf::Vector2u(1000, 300));
 	_renderWindow->setPosition(sf::Vector2i(500,100));
 	ImGui::SFML::Init(*_renderWindow);
@@ -28,14 +31,18 @@ void ZenithBar::InitView() {
 	
 	for (auto &&band : NoiseGenerator::GetDefaultBands())
 		_noiseGenerators.push_back(std::make_unique<NoiseGenerator>(band));
+
+	_animateNoise = false;
+	_animateNoiseInterval = 10;
+	_animateNoiseStrength = 0.2f;
 }
 
 ZenithBar::~ZenithBar() {}
 
 void ZenithBar::Render() {
-	
 	DrawPomodoroWindow();
 	DrawNoiseGeneratorWindow();
+	AnimateNoiseSliders();
 	_renderWindow->clear();
 	ImGui::SFML::Render(*_renderWindow);
 	_renderWindow->display();
@@ -43,11 +50,11 @@ void ZenithBar::Render() {
 
 sf::RenderWindow& ZenithBar::GetRenderWindow() const { return *_renderWindow; }
 
-void ZenithBar::RestartSession() {
+void ZenithBar::RestartSession()
+{
 	//TODO hardcoded values
 	_session = PomodoroSession(std::make_unique<SoundGenerator>(), 4, Seconds(4),Seconds(2), Seconds(3));
 }
-
 
 void ZenithBar::DrawPomodoroWindow() {
 
@@ -218,10 +225,67 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 			ImGui::EndTable();
 		}
 
+
+			if (ImGui::Button(_animateNoise ? "Fixed" : "Anime", ImVec2(50, 20)))
+				_animateNoise = !_animateNoise;
+
+			ImGui::SliderInt("##AnimationTimeSlider", &_animateNoiseInterval, 1,60, "%ds");
+			ImGui::SliderFloat("##AnimationStrenghtSlider", &_animateNoiseStrength, 0.1f,0.3f, "%.1f POWER");
+
+
+
 		ImGui::End();
 	};
 
 }
+
+void ZenithBar::AnimateNoiseSliders() {
+	static uint frameNumber = 0;
+	static uint elapsedSecs = 0;
+	static uint fadeFrames = frameLimit;
+	
+	static std::map<NoiseGenerator*, float> genTargetVolumeMap;
+	if (genTargetVolumeMap.empty()){
+		for (auto &&gen : _noiseGenerators) {
+			genTargetVolumeMap[gen.get()] = 50.0f;
+		}
+	}
+
+	if (!_animateNoise || NoiseGenerator::masterMuted)
+		return;
+
+	if (frameNumber++ == frameLimit){
+		frameNumber = 0;
+		elapsedSecs++;
+	}
+	
+	if (elapsedSecs == _animateNoiseInterval){
+		elapsedSecs = 0;
+		
+		for (auto &&gen : _noiseGenerators) {
+			if (gen->muted)
+			continue;
+			float gain = (rand() % 201 - 100) * _animateNoiseStrength;
+			genTargetVolumeMap[gen.get()] = std::clamp(gen->volume + gain, 0.0f, 100.0f);
+		}
+	}
+
+	for (auto &&gen : _noiseGenerators) {
+		float targetVolume = genTargetVolumeMap[gen.get()];
+		if (gen->volume <= targetVolume) {
+			gen->volume += targetVolume / fadeFrames;
+			if (gen->volume > targetVolume)
+				gen->volume = targetVolume;
+		}
+		else if (gen->volume >= targetVolume) {
+			gen->volume -= targetVolume / fadeFrames;
+			if (gen->volume < targetVolume)
+				gen->volume = targetVolume;
+		}
+		gen->setVolume(gen->volume * NoiseGenerator::masterVolume);
+	}
+}
+
 
 void ZenithBar::SetDynamicResolution() {
 	//TODO not implemented

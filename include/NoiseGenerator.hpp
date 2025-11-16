@@ -18,25 +18,26 @@ namespace zenith {
 		public:
 			float volume;
 			bool muted;
+			
 			static float masterVolume;
 			static bool masterMuted;
-				
+						
 			NoiseGenerator(float band);
 			static const std::array<float, 10> GetDefaultBands();
 			const std::string GetBandText() const;
-		
-		private:
+			
+			private:
 			using FilterState = std::array<float, 6>;
 			using FilterFunction = std::function<float (float, FilterState&)>;
-		
+			
 			enum FilterIndex {
 				IN, IN_PREV, IN_PREV2, OUT_PREV, OUT_PREV2, BAND
 			};
-
+			
 			std::vector<sf::Int16> _buffer;
 			FilterState _fState;
 			std::string _bandText;
-
+			
 			bool onGetData(Chunk& data) override;
 			void onSeek(sf::Time timeOffset) override;
 			
