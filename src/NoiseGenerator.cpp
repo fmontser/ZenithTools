@@ -16,11 +16,14 @@ constexpr float Quality = 0.707f;
 const sf::Int16 MaxAmplitude =  32767;
 const sf::Int16 MinAmplitude = -32767;
 
+float NoiseGenerator::masterVolume = 0.5f;
+bool NoiseGenerator::masterMuted = false;
+
 NoiseGenerator::NoiseGenerator(float band) : sf::SoundStream() {
 	volume = 50.0f;
 	muted = true;
 	initialize(2, SampleRate);
-	setVolume(volume);
+	setVolume(volume * masterVolume);
 	_fState.fill(0.0f);
 	_fState[BAND] = band;
 	SetBandText();

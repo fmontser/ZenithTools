@@ -50,7 +50,6 @@ void ZenithBar::RestartSession() {
 }
 
 
-
 void ZenithBar::DrawPomodoroWindow() {
 
 
@@ -169,9 +168,7 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 		if (ImGui::Button("X", ImVec2(50,50)))
 			_renderWindow->close();
 
-		//TODO temp master volume, move to NoiseGen
-		static float masterVolume = 0.5f;
-		static bool masterMute = false;
+
 		if (ImGui::BeginTable("VolumeControls", 9))
 		{
 			ImGui::TableNextRow();
@@ -181,13 +178,13 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 			ImGui::Text("Master");
 
 			if (ImGui::VSliderFloat("##MasterVolumeSlider", ImVec2(30,100),
-				&masterVolume, 0.0f, 1.0f, "")) {
+				&NoiseGenerator::masterVolume, 0.0f, 1.0f, "")) {
 					for (auto &&gen : _noiseGenerators)
-						gen->setVolume(gen->volume * masterVolume);
+						gen->setVolume(gen->volume * NoiseGenerator::masterVolume);
 			}
 
-			if (ImGui::Button(masterMute ? "S" : "P", ImVec2(30,30))) {
-				masterMute = !masterMute;
+			if (ImGui::Button(NoiseGenerator::masterMuted ? "S" : "P", ImVec2(30,30))) {
+				NoiseGenerator::masterMuted = !NoiseGenerator::masterMuted;
 				for (auto &&gen : _noiseGenerators) {
 					if (gen->getStatus() == SoundGenerator::Playing)
 						gen->stop();
@@ -195,7 +192,7 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 						gen->play();
 				}
 			}
- 
+
 			uint col = 1;
 			for (auto &&gen : _noiseGenerators) {
 				ImGui::TableSetColumnIndex(col++);
@@ -206,7 +203,7 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 
 				if (ImGui::VSliderFloat("##VolumeSlider", ImVec2(30,100), &gen->volume ,
 					0.0f, 100.0f, ""))
-						gen->setVolume(gen->volume * masterVolume);
+						gen->setVolume(gen->volume * NoiseGenerator::masterVolume);
 
 				if (ImGui::Button(gen->muted ? "P" : "S", ImVec2(30,30))) {
 					gen->muted = !gen->muted;
@@ -222,59 +219,6 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 			ImGui::EndTable();
 		}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		/* static float masterVolume = 1.0f;
-		if (ImGui::VSliderFloat("##MasterVolumeSlider", ImVec2(20,80),
-			&masterVolume , 0.0f, 1.0f, "")) {
-			for (auto &&g : noiseGen) 
-				g->setVolume(std::clamp(g->volume * masterVolume, 0.0f, 100.0f));
-		}
-
-		for (auto &&gen : noiseGen) {
-			//TODO test...
-			ImGui::SameLine(0, 4);
-			if (ImGui::VSliderFloat("##VolumeSlider", ImVec2(20,80), &gen->volume ,
-				0.0f, 100.0f, ""))
-					gen->setVolume(gen->volume * masterVolume);
-		}
-
-		static bool masterMute = false;
-		if (ImGui::Button(masterMute ? "S" : "P", ImVec2(20,20))) {
-			masterMute = !masterMute;
-			for (auto &&gen : noiseGen) {
-				if (masterMute)
-					gen->stop();
-				else
-					gen->play();
-			}
-		}
-
-		for (auto &&gen : noiseGen) {
-			ImGui::PushID(gen);
-			ImGui::SameLine(0, 4);
-			if (ImGui::Button(gen->muted ? "S" : "P", ImVec2(20,20))) {
-				gen->muted = !gen->muted;
-				if (gen->getStatus() == SoundGenerator::Playing)
-					gen->stop();
-				else
-					gen->play();
-			}
-			ImGui::PopID();
-		}
- */
 		ImGui::End();
 	};
 

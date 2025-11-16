@@ -18,6 +18,8 @@ namespace zenith {
 		public:
 			float volume;
 			bool muted;
+			static float masterVolume;
+			static bool masterMuted;
 				
 			NoiseGenerator(float band);
 			static const std::array<float, 8> GetDefaultBands();
