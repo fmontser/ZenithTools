@@ -18,10 +18,10 @@ namespace zenith {
 		public:
 			float volume;
 			bool muted;
-
+			
 			static float masterVolume;
 			static bool masterMuted;
-			
+						
 			NoiseGenerator(float band);
 			static const std::array<float, 10> GetDefaultBands();
 			const std::string GetBandText() const;
@@ -38,10 +38,6 @@ namespace zenith {
 			FilterState _fState;
 			std::string _bandText;
 			
-			static bool masterAnimation;
-			static uint animationInterval;
-			static float animationStrength;
-			
 			bool onGetData(Chunk& data) override;
 			void onSeek(sf::Time timeOffset) override;
 			
@@ -51,7 +47,5 @@ namespace zenith {
 			float BandFilter(float white);
 			std::array<float,5> CalculateBiquadCoeffs();
 			float CalculatePerceptualGain();
-
-			static void AnimateNoise();
 	};
 }

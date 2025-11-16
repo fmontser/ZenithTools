@@ -34,6 +34,13 @@ namespace zenith {
 			PomodoroSession _session;                                       ///< Contains the actual pomodoro session.
 			std::vector<std::unique_ptr<NoiseGenerator>> _noiseGenerators;  ///< Contains the noise generators pointers.
 
+			//TODO documentar
+			bool _animateNoise;
+			uint _animateNoiseInterval;
+			float _animateNoiseStrength;
+
+			void AnimateNoiseSliders();
+
 			/**
 			 * @brief Restarts the actual session.
 			 */

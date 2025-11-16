@@ -19,9 +19,6 @@ const sf::Int16 MinAmplitude = -32767;
 
 float NoiseGenerator::masterVolume = 0.5f;
 bool NoiseGenerator::masterMuted = false;
-bool  NoiseGenerator::masterAnimation   = false;
-uint  NoiseGenerator::animationInterval = 5;
-float NoiseGenerator::animationStrength = 0.15;
 
 NoiseGenerator::NoiseGenerator(float band) : sf::SoundStream() {
 	volume = 50.0f;
@@ -133,7 +130,7 @@ float NoiseGenerator::CalculatePerceptualGain()
 {
 	//TODO switch from hardcoded to log curve strong on bass
 
-	std::map<float, float> gain = {
+	static std::map<float, float> gain = {
 		{63.0f, 10.0f},
 		{125.0f, 5.0f},
 		{250.0f, 2.0f},
@@ -152,8 +149,4 @@ float NoiseGenerator::CalculatePerceptualGain()
 	catch(const std::exception& e) {
 		return 1.0f;
 	}
-}
-
-void NoiseGenerator::AnimateNoise() {
-	//TODO @@@@@@@@ continuar aqui, necesitara un thread/ mutex? o quizas animarlo dentro del bucle de imgui???
 }
