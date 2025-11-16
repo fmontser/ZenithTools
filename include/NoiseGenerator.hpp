@@ -45,5 +45,6 @@ namespace zenith {
 			void GenerateNoise();
 			float BandFilter(float white);
 			std::array<float,5> CalculateBiquadCoeffs();
+			float CalculatePerceptualGain();
 	};
 }

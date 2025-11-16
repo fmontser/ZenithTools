@@ -5,6 +5,7 @@
 #include <limits>
 #include <sstream>
 #include <iomanip>
+#include <map>
 
 
 using namespace zenith;
@@ -80,6 +81,7 @@ void NoiseGenerator::GenerateNoise() {
 
 float NoiseGenerator::BandFilter(float white) {
 	std::array<float, 5> coeffs = CalculateBiquadCoeffs();
+	float perceptualGain = CalculatePerceptualGain();
 
 	_fState[IN] = white;
 	float filtered = coeffs[0] * _fState[IN] +
@@ -93,7 +95,7 @@ float NoiseGenerator::BandFilter(float white) {
 	_fState[OUT_PREV2] = _fState[OUT_PREV];
 	_fState[OUT_PREV] = filtered;
 
-	return filtered;
+	return filtered * perceptualGain;
 }
 
 std::array<float,5> NoiseGenerator::CalculateBiquadCoeffs()
@@ -121,4 +123,27 @@ std::array<float,5> NoiseGenerator::CalculateBiquadCoeffs()
 	coeffs[4] = a2 / a0;
 
 	return coeffs;
+}
+
+float NoiseGenerator::CalculatePerceptualGain()
+{
+	//TODO switch from hardcoded to log curve strong on bass
+	
+	std::map<float, float> gain = {
+		{63.0f, 10.0f},
+		{125.0f, 5.0f},
+		{250.0f, 2.0f},
+		{500.0f, 1.0f},
+		{1000.0f, 0.6f},
+		{2000.0f, 0.3f},
+		{4000.0f, 0.15f},
+		{8000.0f, 0.075f}
+	};
+
+	try {
+		return gain[_fState[BAND]];
+	}
+	catch(const std::exception& e) {
+		return 1.0f;
+	}
 }
