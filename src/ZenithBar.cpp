@@ -13,7 +13,18 @@ ZenithBar::ZenithBar() : _session(PomodoroSession(
 	std::make_unique<SoundGenerator>(), 4, Seconds(4),Seconds(2), Seconds(3))) {
 		InitView();
 }
-	
+
+sf::RenderWindow& ZenithBar::GetRenderWindow() const { return *_renderWindow; }
+
+void ZenithBar::Render() {
+	DrawPomodoroWindow();
+	DrawNoiseGeneratorWindow();
+	AnimateNoiseSliders();
+	_renderWindow->clear();
+	ImGui::SFML::Render(*_renderWindow);
+	_renderWindow->display();
+}
+
 void ZenithBar::InitView() {
 	_renderWindow = std::make_unique<sf::RenderWindow>(
 		sf::VideoMode::getDesktopMode(),
@@ -36,19 +47,6 @@ void ZenithBar::InitView() {
 	_animateNoiseInterval = 10;
 	_animateNoiseStrength = 0.2f;
 }
-
-ZenithBar::~ZenithBar() {}
-
-void ZenithBar::Render() {
-	DrawPomodoroWindow();
-	DrawNoiseGeneratorWindow();
-	AnimateNoiseSliders();
-	_renderWindow->clear();
-	ImGui::SFML::Render(*_renderWindow);
-	_renderWindow->display();
-}
-
-sf::RenderWindow& ZenithBar::GetRenderWindow() const { return *_renderWindow; }
 
 void ZenithBar::RestartSession()
 {
@@ -286,10 +284,7 @@ void ZenithBar::AnimateNoiseSliders() {
 	}
 }
 
-
 void ZenithBar::SetDynamicResolution() {
 	//TODO not implemented
 	throw NotImplementedException();
 }
-
-

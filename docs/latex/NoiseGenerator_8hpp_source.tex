@@ -1,0 +1,53 @@
+\doxysection{Noise\+Generator.\+hpp}
+\hypertarget{NoiseGenerator_8hpp_source}{}\label{NoiseGenerator_8hpp_source}\index{include/NoiseGenerator.hpp@{include/NoiseGenerator.hpp}}
+\mbox{\hyperlink{NoiseGenerator_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}SFML/Audio/SoundStream.hpp"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <array>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }zenith\ \{}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{class\ }NoiseGenerator\ :\ \textcolor{keyword}{public}\ sf::SoundStream\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ volume;}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ muted;}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{float}\ masterVolume;}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ masterMuted;}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ NoiseGenerator(\textcolor{keywordtype}{float}\ band);}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::array<float,\ 10>\ GetDefaultBands();}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ GetBandText()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }FilterState\ =\ std::array<float,\ 6>;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }FilterFunction\ =\ std::function<float\ (\textcolor{keywordtype}{float},\ FilterState\&)>;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{enum}\ FilterIndex\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ IN,\ IN\_PREV,\ IN\_PREV2,\ OUT\_PREV,\ OUT\_PREV2,\ BAND}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<sf::Int16>\ \_buffer;}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ FilterState\ \_fState;}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ \_bandText;}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ onGetData(Chunk\&\ data)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ onSeek(sf::Time\ timeOffset)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetBandText();}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ GenerateNoise();}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ BandFilter(\textcolor{keywordtype}{float}\ white);}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ std::array<float,5>\ CalculateBiquadCoeffs();}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ CalculatePerceptualGain();}
+\DoxyCodeLine{00050\ \ \ \ \ \};}
+\DoxyCodeLine{00051\ \}}
+
+\end{DoxyCode}

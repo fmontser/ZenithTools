@@ -14,7 +14,7 @@ var classzenith_1_1PomodoroSession =
       [ "RESTING", "classzenith_1_1PomodoroSession.html#ab11f87b6463d1b396489e79f4e7746aca7dd6078d750ad27f0ad82e1c27f6c77c", null ],
       [ "COMPLETED", "classzenith_1_1PomodoroSession.html#ab11f87b6463d1b396489e79f4e7746aca8f7afecbc8fbc4cd0f50a57d1172482e", null ]
     ] ],
-    [ "PomodoroSession", "classzenith_1_1PomodoroSession.html#aadd31a773844890abbe54152847889eb", null ],
+    [ "PomodoroSession", "classzenith_1_1PomodoroSession.html#a7c69fb587915c9b9b5d989a9e8514668", null ],
     [ "GetStatus", "classzenith_1_1PomodoroSession.html#ad367586835a2661e740a2a2dcbaa585c", null ],
     [ "PausePeriod", "classzenith_1_1PomodoroSession.html#aa44009097e6b71a2849a17ad005dab87", null ],
     [ "ResetPeriod", "classzenith_1_1PomodoroSession.html#a220f7f80046884ceb8e11e9d2ff0bb3e", null ],
