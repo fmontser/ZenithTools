@@ -66,8 +66,13 @@ namespace zenith {
 			 * @param restTime The number in seconds for rest periods.
 			 * @param largeRestTime The number in seconds for large rest period wich occur at half the session.
 			 */
-			PomodoroSession(std::unique_ptr<ISoundGenerator> sg, uint rounds,
-				Seconds workTime, Seconds restTime, Seconds largeRestTime);
+			PomodoroSession(
+				std::unique_ptr<ISoundGenerator> sg,
+				uint rounds = 4,
+				Seconds workTime = Minutes(25),
+				Seconds restTime = Minutes(5),
+				Seconds largeRestTime = Minutes(15)
+			);
 			
 			/**
 			 * @brief Obtains the status data of.the session.
