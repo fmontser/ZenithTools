@@ -1,0 +1,7 @@
+<map id="zenith::SoundGenerator" name="zenith::SoundGenerator">
+<area shape="rect" id="Node000001" title=" " alt="" coords="68,80,227,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,125,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,40,135,78,132,82,89,45"/>
+<area shape="rect" id="Node000003" href="$classzenith_1_1ISoundGenerator.html" title=" " alt="" coords="149,5,312,32"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="206,45,164,82,160,78,203,40"/>
+</map>

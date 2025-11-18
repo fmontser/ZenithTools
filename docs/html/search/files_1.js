@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['pomodorosession_2ehpp_0',['PomodoroSession.hpp',['../PomodoroSession_8hpp.html',1,'']]]
+  ['noisegenerator_2ehpp_0',['NoiseGenerator.hpp',['../NoiseGenerator_8hpp.html',1,'']]]
 ];
