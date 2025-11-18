@@ -60,6 +60,7 @@ namespace zenith {
 			
 			/**
 			 * @brief Constructs a new session with a number of rounds and periods values.
+			 * @note Time is managed with <chrono> so you can use any time type.
 			 * @param rounds The number of rounds for a session.
 			 * @param workTime The number in seconds for work periods.
 			 * @param restTime The number in seconds for rest periods.

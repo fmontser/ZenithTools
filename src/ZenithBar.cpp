@@ -10,7 +10,7 @@ constexpr uint frameLimit = 60;
 
 //TODO remove hardcoded values
 ZenithBar::ZenithBar() : _session(PomodoroSession(
-	std::make_unique<SoundGenerator>(), 4, Seconds(4),Seconds(2), Seconds(3))) {
+	std::make_unique<SoundGenerator>(), 4, Minutes(25),Minutes(5), Minutes(15))) {
 		InitView();
 }
 
@@ -55,8 +55,6 @@ void ZenithBar::RestartSession()
 }
 
 void ZenithBar::DrawPomodoroWindow() {
-
-
 	static ImVec2 winSize = ImVec2(_viewport->WorkSize.x / 2, _viewport->WorkSize.y);
 
 	ImGui::SetNextWindowPos(_viewport->WorkPos);
@@ -80,6 +78,46 @@ void ZenithBar::DrawPomodoroWindow() {
 	
 	if (ImGui::Begin("PomodoroWindow",nullptr, windowFlags)) {
 		
+		//Session config
+
+		static int rounds = 4;
+		static int workTime = 25;
+		static int restTime = 5;
+		static int longRestTime = 15;
+
+		if (ImGui::BeginTable("SessionControls", 4))
+		{
+			ImGui::TableNextRow();
+
+ 			ImGui::TableSetColumnIndex(0);
+			ImGui::AlignTextToFramePadding();
+
+			ImGui::SetNextItemWidth(100);
+			ImGui::Text("Rounds");
+			ImGui::SetNextItemWidth(100);
+			ImGui::InputInt("##Rounds", &rounds);
+
+			ImGui::TableSetColumnIndex(1);
+			ImGui::SetNextItemWidth(100);
+			ImGui::Text("Work time");
+			ImGui::SetNextItemWidth(100);
+			ImGui::InputInt("##WorkTime", &workTime);
+			
+			ImGui::TableSetColumnIndex(2);
+			ImGui::SetNextItemWidth(100);
+			ImGui::Text("Rest time");
+			ImGui::SetNextItemWidth(100);
+			ImGui::InputInt("##RestTime", &restTime);
+
+			ImGui::TableSetColumnIndex(3);
+			ImGui::SetNextItemWidth(100);
+			ImGui::Text("Long rest time");
+			ImGui::SetNextItemWidth(100);
+			ImGui::InputInt("##LongRestTime", &longRestTime);
+			
+			ImGui::EndTable();
+		}
+
 		// Round tokens
 		ImGui::Text("ROUNDS ");
 		ImGui::BeginDisabled();
@@ -98,6 +136,8 @@ void ZenithBar::DrawPomodoroWindow() {
 		ImGui::SetWindowFontScale(1.0f);
 		
 		//Progress bar and indicator
+
+		//TODO refactor switch into session class
 		switch (_roundMode)
 		{
 			case RoundMode::IDLE: 
