@@ -34,11 +34,14 @@ namespace zenith {
 			PomodoroSession _session;                                       ///< Contains the actual pomodoro session.
 			std::vector<std::unique_ptr<NoiseGenerator>> _noiseGenerators;  ///< Contains the noise generators pointers.
 
-			//TODO documentar
-			bool _animateNoise;
-			int _animateNoiseInterval;
-			float _animateNoiseStrength;
-
+			bool _animateNoise;           ///< Switches noise sliders animation on/off.
+			int _animateNoiseInterval;    ///< The ammount of seconds between changes to the sliders.
+			float _animateNoiseStrength;  ///< The strenght of changes to the sliders.
+			
+			/**
+			 * @brief Animate the amplitude sliders for noise generation.
+			 * @note Controlled by _animateNoise%propertie% variables.
+			 */
 			void AnimateNoiseSliders();
 
 			/**
