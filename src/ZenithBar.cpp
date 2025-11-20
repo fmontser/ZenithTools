@@ -85,91 +85,6 @@ void ZenithBar::DrawPomodoroWindow() {
 	};
 }
 
-void ZenithBar::DrawNoiseGeneratorWindow() {
-	static ImVec2 winSize = ImVec2(500, 300);
-	static ImVec2 winPos = ImVec2(500, 0);
-
-	ImGui::SetNextWindowPos(winPos);
-	ImGui::SetNextWindowSize(winSize);
-
-	static ImGuiWindowFlags windowFlags = 0
-		| ImGuiWindowFlags_NoTitleBar
-		| ImGuiWindowFlags_NoResize
-		| ImGuiWindowFlags_NoMove
-		| ImGuiWindowFlags_NoScrollbar
-		| ImGuiWindowFlags_NoSavedSettings;
-
-	if (ImGui::Begin("NoiseGenWindow",nullptr, windowFlags)) {
-		
-		ImGui::SameLine(450, 0);
-		if (ImGui::Button("X", ImVec2(50,50)))
-			_renderWindow->close();
-
-
-		if (ImGui::BeginTable("VolumeControls", 11))
-		{
-			ImGui::TableNextRow();
-
- 			ImGui::TableSetColumnIndex(0);
-			ImGui::AlignTextToFramePadding();
-			ImGui::Text("Master");
-
-			if (ImGui::VSliderFloat("##MasterVolumeSlider", ImVec2(30,100),
-				&NoiseGenerator::masterVolume, 0.0f, 1.0f, "")) {
-					for (auto &&gen : _noiseGenerators)
-						gen->setVolume(gen->volume * NoiseGenerator::masterVolume);
-			}
-
-			if (ImGui::Button(NoiseGenerator::masterMuted ? "S" : "P", ImVec2(30,30))) {
-				NoiseGenerator::masterMuted = !NoiseGenerator::masterMuted;
-				for (auto &&gen : _noiseGenerators) {
-					if (gen->getStatus() == SoundGenerator::Playing)
-						gen->stop();
-					else if (!gen->muted)
-						gen->play();
-				}
-			}
-
-			uint col = 1;
-			for (auto &&gen : _noiseGenerators) {
-				ImGui::TableSetColumnIndex(col++);
-				ImGui::PushID(gen.get());
-
-				ImGui::AlignTextToFramePadding();
-				ImGui::Text(gen->GetBandText().c_str());
-
-				if (ImGui::VSliderFloat("##VolumeSlider", ImVec2(30,100), &gen->volume ,
-					0.0f, 100.0f, ""))
-						gen->setVolume(gen->volume * NoiseGenerator::masterVolume);
-
-				if (ImGui::Button(gen->muted ? "P" : "S", ImVec2(30,30))) {
-					gen->muted = !gen->muted;
-					if (gen->getStatus() == SoundGenerator::Playing)
-						gen->stop();
-					else
-						gen->play();
-				}
-
-				ImGui::PopID();
-			}
-			
-			ImGui::EndTable();
-		}
-
-
-			if (ImGui::Button(_animateNoise ? "Fixed" : "Anime", ImVec2(50, 20)))
-				_animateNoise = !_animateNoise;
-
-			ImGui::SliderInt("##AnimationTimeSlider", &_animateNoiseInterval, 1,60, "%ds");
-			ImGui::SliderFloat("##AnimationStrenghtSlider", &_animateNoiseStrength, 0.1f,0.3f, "%.1f POWER");
-
-
-
-		ImGui::End();
-	};
-
-}
-
 void ZenithBar::DrawSessionSettings() {
 	static int rounds = 4;
 	static int workTime = 25;
@@ -321,6 +236,87 @@ void ZenithBar::DrawSessionControl(Status status) {
 	}
 
 	ImGui::End();
+}
+
+void ZenithBar::DrawNoiseGeneratorWindow() {
+	static ImVec2 winSize = ImVec2(500, 300);
+	static ImVec2 winPos = ImVec2(500, 0);
+
+	ImGui::SetNextWindowPos(winPos);
+	ImGui::SetNextWindowSize(winSize);
+
+	static ImGuiWindowFlags windowFlags = 0
+		| ImGuiWindowFlags_NoTitleBar
+		| ImGuiWindowFlags_NoResize
+		| ImGuiWindowFlags_NoMove
+		| ImGuiWindowFlags_NoScrollbar
+		| ImGuiWindowFlags_NoSavedSettings;
+
+	if (ImGui::Begin("NoiseGenWindow",nullptr, windowFlags)) {
+		
+		ImGui::SameLine(450, 0);
+		if (ImGui::Button("X", ImVec2(50,50)))
+			_renderWindow->close();
+
+		if (ImGui::BeginTable("VolumeControls", 11))
+		{
+			ImGui::TableNextRow();
+
+ 			ImGui::TableSetColumnIndex(0);
+			ImGui::AlignTextToFramePadding();
+			ImGui::Text("Master");
+
+			if (ImGui::VSliderFloat("##MasterVolumeSlider", ImVec2(30,100),
+				&NoiseGenerator::masterVolume, 0.0f, 1.0f, "")) {
+					for (auto &&gen : _noiseGenerators)
+						gen->setVolume(gen->volume * NoiseGenerator::masterVolume);
+			}
+
+			if (ImGui::Button(NoiseGenerator::masterMuted ? "S" : "P", ImVec2(30,30))) {
+				NoiseGenerator::masterMuted = !NoiseGenerator::masterMuted;
+				for (auto &&gen : _noiseGenerators) {
+					if (gen->getStatus() == SoundGenerator::Playing)
+						gen->stop();
+					else if (!gen->muted)
+						gen->play();
+				}
+			}
+
+			uint col = 1;
+			for (auto &&gen : _noiseGenerators) {
+				ImGui::TableSetColumnIndex(col++);
+				ImGui::PushID(gen.get());
+
+				ImGui::AlignTextToFramePadding();
+				ImGui::Text(gen->GetBandText().c_str());
+
+				if (ImGui::VSliderFloat("##VolumeSlider", ImVec2(30,100), &gen->volume ,
+					0.0f, 100.0f, ""))
+						gen->setVolume(gen->volume * NoiseGenerator::masterVolume);
+
+				if (ImGui::Button(gen->muted ? "P" : "S", ImVec2(30,30))) {
+					gen->muted = !gen->muted;
+					if (gen->getStatus() == SoundGenerator::Playing)
+						gen->stop();
+					else
+						gen->play();
+				}
+
+				ImGui::PopID();
+			}
+			
+			ImGui::EndTable();
+		}
+
+		if (ImGui::Button(_animateNoise ? "Fixed" : "Anime", ImVec2(50, 20)))
+			_animateNoise = !_animateNoise;
+
+		ImGui::SliderInt("##AnimationTimeSlider", &_animateNoiseInterval, 1,60, "%ds");
+		ImGui::SliderFloat("##AnimationStrenghtSlider", &_animateNoiseStrength, 0.1f,0.3f, "%.1f POWER");
+
+		ImGui::End();
+	};
+
 }
 
 void ZenithBar::AnimateNoiseSliders() {
