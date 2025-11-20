@@ -37,11 +37,13 @@ namespace zenith {
 			void InitView();
 			void RestartSession(int rounds, int workTime, int restTime, int longRestTime);
 			void DrawPomodoroWindow();
-			void DrawNoiseGeneratorWindow();
 			void DrawSessionSettings();
 			void DrawSessionTokens(Status status);
 			void DrawTimerStatus(Status status);
 			void DrawSessionControl(Status status);
+			void DrawNoiseGeneratorWindow();
+			void DrawFilteredNoiseSliders();
+			void DrawAnimationControls();
 			void AnimateNoiseSliders();
 			void SetDynamicResolution();
 	};

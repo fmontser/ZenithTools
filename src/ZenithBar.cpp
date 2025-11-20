@@ -12,7 +12,7 @@ constexpr uint DEF_ANIM_INTERVAL = 10;
 constexpr float DEF_ANIM_STRENGTH = 0.2f;
 
 ZenithBar::ZenithBar() {
-		InitView();
+	InitView();
 }
 
 sf::RenderWindow& ZenithBar::GetRenderWindow() const { return *_renderWindow; }
@@ -254,91 +254,93 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 		| ImGuiWindowFlags_NoScrollbar
 		| ImGuiWindowFlags_NoSavedSettings;
 
-
-
 	if (ImGui::Begin("NoiseGenWindow",nullptr, windowFlags)) {
-		if (ImGui::BeginTable("VolumeControls", 11))
-		{
-			ImGui::TableNextRow();
-
- 			ImGui::TableSetColumnIndex(0);
-			ImGui::AlignTextToFramePadding();
-			ImGui::Text("Master");
-
-			if (ImGui::VSliderFloat("##MasterVolumeSlider", ImVec2(30,100),
-				&NoiseGenerator::masterVolume, 0.0f, 1.0f, "")) {
-					for (auto &&gen : _noiseGenerators)
-						gen->setVolume(gen->volume * NoiseGenerator::masterVolume);
-			}
-
-			if (ImGui::Button(NoiseGenerator::masterMuted ? "S" : "P", ImVec2(30,30))) {
-				NoiseGenerator::masterMuted = !NoiseGenerator::masterMuted;
-				for (auto &&gen : _noiseGenerators) {
-					if (gen->getStatus() == SoundGenerator::Playing)
-						gen->stop();
-					else if (!gen->muted)
-						gen->play();
-				}
-			}
-
-			uint col = 1;
-			for (auto &&gen : _noiseGenerators) {
-				ImGui::TableSetColumnIndex(col++);
-				ImGui::PushID(gen.get());
-
-				ImGui::AlignTextToFramePadding();
-				ImGui::Text(gen->GetBandText().c_str());
-
-				if (ImGui::VSliderFloat("##VolumeSlider", ImVec2(30,100), &gen->volume ,
-					0.0f, 100.0f, ""))
-						gen->setVolume(gen->volume * NoiseGenerator::masterVolume);
-
-				if (ImGui::Button(gen->muted ? "P" : "S", ImVec2(30,30))) {
-					gen->muted = !gen->muted;
-					if (gen->getStatus() == SoundGenerator::Playing)
-						gen->stop();
-					else
-						gen->play();
-				}
-
-				ImGui::PopID();
-			}
-			
-			ImGui::EndTable();
-		}
-
-		if (ImGui::Button(_animateNoise ? "Fixed" : "Anime", ImVec2(50, 50)))
-			_animateNoise = !_animateNoise;
-
-		static int animMinutes = 0;
-		static int animSeconds = DEF_ANIM_INTERVAL;
-
-		ImGui::SameLine();
-		ImGui::BeginGroup();
-		ImGui::Text("Minutes");
-		ImGui::AlignTextToFramePadding();
-		ImGui::SetNextItemWidth(100);
-		if (ImGui::InputInt("##AnimMinutes", &animMinutes))
-			animMinutes = std::clamp(animMinutes, 0, 60);
-		ImGui::EndGroup();
-
-		ImGui::SameLine();
-		ImGui::BeginGroup();
-		ImGui::Text("Seconds");
-		ImGui::AlignTextToFramePadding();
-		ImGui::SetNextItemWidth(100);
-		if (ImGui::InputInt("##AnimSeconds", &animSeconds))
-			animSeconds = std::clamp(animSeconds, 1, 60);
-		ImGui::EndGroup();
-
-		_animateNoiseInterval = (animMinutes * 60) + animSeconds;
-		
-		ImGui::SameLine();
-		if (ImGui::Button("CLOSE", ImVec2(50,50)))
-			_renderWindow->close();
+		DrawFilteredNoiseSliders();
+		DrawAnimationControls();
 		ImGui::End();
 	};
+}
 
+void ZenithBar::DrawFilteredNoiseSliders() {
+	if (ImGui::BeginTable("VolumeControls", 11)) {
+		ImGui::TableNextRow();
+
+		ImGui::TableSetColumnIndex(0);
+		ImGui::AlignTextToFramePadding();
+		ImGui::Text("Master");
+
+		if (ImGui::VSliderFloat("##MasterVolumeSlider", ImVec2(30,100),
+			&NoiseGenerator::masterVolume, 0.0f, 1.0f, "")) {
+				for (auto &&gen : _noiseGenerators)
+					gen->setVolume(gen->volume * NoiseGenerator::masterVolume);
+		}
+
+		if (ImGui::Button(NoiseGenerator::masterMuted ? "S" : "P", ImVec2(30,30))) {
+			NoiseGenerator::masterMuted = !NoiseGenerator::masterMuted;
+			for (auto &&gen : _noiseGenerators) {
+				if (gen->getStatus() == SoundGenerator::Playing)
+					gen->stop();
+				else if (!gen->muted)
+					gen->play();
+			}
+		}
+
+		uint col = 1;
+		for (auto &&gen : _noiseGenerators) {
+			ImGui::TableSetColumnIndex(col++);
+			ImGui::PushID(gen.get());
+
+			ImGui::AlignTextToFramePadding();
+			ImGui::Text(gen->GetBandText().c_str());
+
+			if (ImGui::VSliderFloat("##VolumeSlider", ImVec2(30,100), &gen->volume ,
+				0.0f, 100.0f, ""))
+					gen->setVolume(gen->volume * NoiseGenerator::masterVolume);
+
+			if (ImGui::Button(gen->muted ? "P" : "S", ImVec2(30,30))) {
+				gen->muted = !gen->muted;
+				if (gen->getStatus() == SoundGenerator::Playing)
+					gen->stop();
+				else
+					gen->play();
+			}
+
+			ImGui::PopID();
+		}
+		ImGui::EndTable();
+	}
+}
+
+void ZenithBar::DrawAnimationControls() {
+	if (ImGui::Button(_animateNoise ? "Fixed" : "Anime", ImVec2(50, 50)))
+		_animateNoise = !_animateNoise;
+
+	static int animMinutes = 0;
+	static int animSeconds = DEF_ANIM_INTERVAL;
+
+	ImGui::SameLine();
+	ImGui::BeginGroup();
+	ImGui::Text("Minutes");
+	ImGui::AlignTextToFramePadding();
+	ImGui::SetNextItemWidth(100);
+	if (ImGui::InputInt("##AnimMinutes", &animMinutes))
+		animMinutes = std::clamp(animMinutes, 0, 60);
+	ImGui::EndGroup();
+
+	ImGui::SameLine();
+	ImGui::BeginGroup();
+	ImGui::Text("Seconds");
+	ImGui::AlignTextToFramePadding();
+	ImGui::SetNextItemWidth(100);
+	if (ImGui::InputInt("##AnimSeconds", &animSeconds))
+		animSeconds = std::clamp(animSeconds, 1, 60);
+	ImGui::EndGroup();
+
+	_animateNoiseInterval = (animMinutes * 60) + animSeconds;
+	
+	ImGui::SameLine();
+	if (ImGui::Button("CLOSE", ImVec2(50,50)))
+		_renderWindow->close();
 }
 
 void ZenithBar::AnimateNoiseSliders() {
