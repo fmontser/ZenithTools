@@ -36,8 +36,6 @@ _renderWindow = std::make_unique<sf::RenderWindow>(
 	_renderWindow->setSize(sf::Vector2u(1000, 300));
 	_renderWindow->setPosition(sf::Vector2i(500,100));
 	ImGui::SFML::Init(*_renderWindow);
-	
-	_viewport = ImGui::GetMainViewport();
 
 	_sessionStarted =  false;
 	_session = std::make_unique<PomodoroSession>(std::make_unique<SoundGenerator>());
@@ -63,9 +61,11 @@ void ZenithBar::RestartSession(
 }
 
 void ZenithBar::DrawPomodoroWindow() {
-	static ImVec2 winSize = ImVec2(_viewport->WorkSize.x / 2, _viewport->WorkSize.y);
 
-	ImGui::SetNextWindowPos(_viewport->WorkPos);
+	static ImGuiViewport* viewPort = ImGui::GetMainViewport();
+	static ImVec2 winSize = ImVec2(viewPort->WorkSize.x / 2, viewPort->WorkSize.y);
+
+	ImGui::SetNextWindowPos(viewPort->WorkPos);
 	ImGui::SetNextWindowSize(winSize);
 
 	static ImGuiWindowFlags windowFlags = 0
@@ -239,8 +239,9 @@ void ZenithBar::DrawSessionControl(Status status) {
 }
 
 void ZenithBar::DrawNoiseGeneratorWindow() {
-	static ImVec2 winSize = ImVec2(500, 300);
-	static ImVec2 winPos = ImVec2(500, 0);
+	static ImGuiViewport* viewPort = ImGui::GetMainViewport();
+	static ImVec2 winSize = ImVec2(viewPort->WorkSize.x / 2, viewPort->WorkSize.y);
+	static ImVec2 winPos = ImVec2(viewPort->WorkSize.x / 2, 0);
 
 	ImGui::SetNextWindowPos(winPos);
 	ImGui::SetNextWindowSize(winSize);
@@ -257,6 +258,7 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 		ImGui::SameLine(450, 0);
 		if (ImGui::Button("X", ImVec2(50,50)))
 			_renderWindow->close();
+
 
 		if (ImGui::BeginTable("VolumeControls", 11))
 		{
@@ -318,6 +320,7 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 	};
 
 }
+
 
 void ZenithBar::AnimateNoiseSliders() {
 	static uint frameNumber = 0;

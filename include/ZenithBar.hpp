@@ -27,10 +27,9 @@ namespace zenith {
 
 		private:
 			std::unique_ptr<sf::RenderWindow> _renderWindow;
-			ImGuiViewport* _viewport;
 			std::unique_ptr<PomodoroSession> _session;
-			bool _sessionStarted;
 			std::vector<std::unique_ptr<NoiseGenerator>> _noiseGenerators;
+			bool _sessionStarted;
 			bool _animateNoise;
 			int _animateNoiseInterval;
 			float _animateNoiseStrength;
