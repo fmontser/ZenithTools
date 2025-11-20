@@ -6,9 +6,12 @@
 
 using namespace zenith;
 
-constexpr uint frameLimit = 60;
+constexpr uint FRAME_LIMIT = 60;
+constexpr uint WINDOW_WIDTH = 1280;
+constexpr uint WINDOW_HEIGHT = 386;
+constexpr uint DEF_ANIM_INTERVAL = 10;
+constexpr float DEF_ANIM_STRENGTH = 0.2f;
 
-//TODO remove hardcoded values
 ZenithBar::ZenithBar() {
 		InitView();
 }
@@ -25,28 +28,27 @@ void ZenithBar::Render() {
 }
 
 void ZenithBar::InitView() {
-_renderWindow = std::make_unique<sf::RenderWindow>(
-		sf::VideoMode::getDesktopMode(),
+	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+	_renderWindow = std::make_unique<sf::RenderWindow>(
+		desktop,
 		"ZenithTools",
 		sf::Style::None
 	);
 	
-	//TODO remove hardcoded values
-	_renderWindow->setFramerateLimit(frameLimit);
-	_renderWindow->setSize(sf::Vector2u(1000, 300));
-	_renderWindow->setPosition(sf::Vector2i(500,100));
+	_renderWindow->setFramerateLimit(FRAME_LIMIT);
+	_renderWindow->setSize(sf::Vector2u(WINDOW_WIDTH, WINDOW_HEIGHT));
+	_renderWindow->setPosition(sf::Vector2i((desktop.width / 2) - (WINDOW_WIDTH / 2), 0));
 	ImGui::SFML::Init(*_renderWindow);
 
 	_sessionStarted =  false;
 	_session = std::make_unique<PomodoroSession>(std::make_unique<SoundGenerator>());
 	
 	for (auto &&band : NoiseGenerator::GetDefaultBands())
-	_noiseGenerators.push_back(std::make_unique<NoiseGenerator>(band));
-	//TODO remove hardcoded default values...
+		_noiseGenerators.push_back(std::make_unique<NoiseGenerator>(band));
 
 	_animateNoise = false;
-	_animateNoiseInterval = 10;
-	_animateNoiseStrength = 0.2f;
+	_animateNoiseInterval = DEF_ANIM_INTERVAL;
+	_animateNoiseStrength = DEF_ANIM_STRENGTH;
 }
 
 void ZenithBar::RestartSession(
@@ -325,7 +327,7 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 void ZenithBar::AnimateNoiseSliders() {
 	static uint frameNumber = 0;
 	static uint elapsedSecs = 0;
-	static uint fadeFrames = frameLimit;
+	static uint fadeFrames = FRAME_LIMIT;
 	
 	static std::map<NoiseGenerator*, float> genTargetVolumeMap;
 	if (genTargetVolumeMap.empty()){
@@ -337,7 +339,7 @@ void ZenithBar::AnimateNoiseSliders() {
 	if (!_animateNoise || NoiseGenerator::masterMuted)
 		return;
 
-	if (frameNumber++ == frameLimit){
+	if (frameNumber++ == FRAME_LIMIT){
 		frameNumber = 0;
 		elapsedSecs++;
 	}

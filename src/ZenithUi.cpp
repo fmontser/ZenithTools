@@ -43,7 +43,7 @@ void ZenithUi::SetupStyle() {
 
 	ImGui::GetStyle().FrameRounding = 5;
 	ImGui::GetStyle().FrameBorderSize = 1;
-
+	ImGui::GetStyle().GrabRounding = 5;
 }
 
 void ZenithUi::SetupEvents() {

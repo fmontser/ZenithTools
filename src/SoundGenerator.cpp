@@ -6,16 +6,16 @@
 
 using namespace zenith;
 
-constexpr uint Channels = 2;
-constexpr uint SampleRate = 48000;
-const sf::Int16 MaxAmplitude =  32767;
-const sf::Int16 MinAmplitude = -32767;
+constexpr uint CHANNELS = 2;
+constexpr uint SAMPLE_RATE = 48000;
+const sf::Int16 MAX_AMPLITUDE =  32767;
+const sf::Int16 MIN_AMPLITUDE = -32767;
 
 SoundGenerator::SoundGenerator() : sf::SoundStream() {
 
 	volume = 50.0f;
 	muted = true;
-	initialize(2, SampleRate);
+	initialize(2, SAMPLE_RATE);
 	GenerateRestBell();
 	GenerateWorkBell();
 	setVolume(volume);
@@ -42,16 +42,16 @@ void SoundGenerator::onSeek(sf::Time timeOffset) {}
 
 void SoundGenerator::GenerateRestBell() {
 	double frequency = 500.0f;
-	double amplitude = MaxAmplitude;
+	double amplitude = MAX_AMPLITUDE;
 	double phase = 0.0f;
-	double delta = (frequency * 2 * M_PI) / SampleRate;
+	double delta = (frequency * 2 * M_PI) / SAMPLE_RATE;
 	double duration = 1.0f;
-	const size_t totalFrames = SampleRate * duration;
+	const size_t totalFrames = SAMPLE_RATE * duration;
 	const float fade_start = 0.16f;
 	const size_t fade_frames = totalFrames - (totalFrames * fade_start);
 	const float fade_delta = amplitude / (totalFrames * fade_start);
 
-	_restBellbuffer.resize(totalFrames * Channels);
+	_restBellbuffer.resize(totalFrames * CHANNELS);
 
 	for (std::size_t i = 0; i < totalFrames; ++i) {
 		
@@ -60,11 +60,11 @@ void SoundGenerator::GenerateRestBell() {
 
 		sf::Int16 sample = std::clamp(
 			static_cast<sf::Int16>(amplitude * std::sin(phase) * 0.5f),
-			MinAmplitude,
-			MaxAmplitude);
+			MIN_AMPLITUDE,
+			MAX_AMPLITUDE);
 		
-		_restBellbuffer[i * Channels]     = sample; //L
-		_restBellbuffer[i * Channels + 1] = sample; //R
+		_restBellbuffer[i * CHANNELS]     = sample; //L
+		_restBellbuffer[i * CHANNELS + 1] = sample; //R
 			
 		phase += delta;
 		if (phase > 2 * M_PI)
@@ -74,22 +74,22 @@ void SoundGenerator::GenerateRestBell() {
 		if (frequency < 0)
 			frequency = 0;
 
-		delta = (frequency * 2 * M_PI) / SampleRate;
+		delta = (frequency * 2 * M_PI) / SAMPLE_RATE;
 	}
 }
 
 void SoundGenerator::GenerateWorkBell() {
 	double frequency = 0.0f;
-	sf::Int16 amplitude = MaxAmplitude;
+	sf::Int16 amplitude = MAX_AMPLITUDE;
 	double phase = 0.0f;
-	double delta = (frequency * 2 * M_PI) / SampleRate;
+	double delta = (frequency * 2 * M_PI) / SAMPLE_RATE;
 	double duration = 1.0f;
-	const size_t totalFrames = SampleRate * duration;
+	const size_t totalFrames = SAMPLE_RATE * duration;
 	const float fade_start = 0.16f;
 	const size_t fade_frames = totalFrames - (totalFrames * fade_start);
 	const float fade_delta = amplitude / (totalFrames * fade_start);
 
-	_workBellbuffer.resize(totalFrames * Channels);
+	_workBellbuffer.resize(totalFrames * CHANNELS);
 
 	for (std::size_t i = 0; i < totalFrames; ++i) {
 		
@@ -98,11 +98,11 @@ void SoundGenerator::GenerateWorkBell() {
 
 		sf::Int16 sample = std::clamp(
 			static_cast<sf::Int16>(amplitude * std::sin(phase)),
-			MinAmplitude,
-			MaxAmplitude);
+			MIN_AMPLITUDE,
+			MAX_AMPLITUDE);
 
-		_workBellbuffer[i * Channels]     = sample; //L
-		_workBellbuffer[i * Channels + 1] = sample; //R
+		_workBellbuffer[i * CHANNELS]     = sample; //L
+		_workBellbuffer[i * CHANNELS + 1] = sample; //R
 			
 		phase += delta;
 		if (phase > 2 * M_PI)
@@ -110,6 +110,6 @@ void SoundGenerator::GenerateWorkBell() {
 
 		frequency += 0.01f;
 
-		delta = (frequency * 2 * M_PI) / SampleRate;
+		delta = (frequency * 2 * M_PI) / SAMPLE_RATE;
 	}
 }
