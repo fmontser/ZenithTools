@@ -9,7 +9,7 @@ constexpr uint FRAME_LIMIT = 60;
 constexpr uint WINDOW_WIDTH = 1280;
 constexpr uint WINDOW_HEIGHT = 240;
 constexpr uint DEF_ANIM_INTERVAL = 10;
-constexpr float DEF_ANIM_STRENGTH = 0.2f;
+constexpr float DEF_ANIM_STRENGTH = 0.3f;
 
 ZenithBar::ZenithBar() {
 	InitView();
@@ -257,6 +257,13 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 	if (ImGui::Begin("NoiseGenWindow",nullptr, windowFlags)) {
 		DrawFilteredNoiseSliders();
 		DrawAnimationControls();
+
+		ImGui::SameLine(winSize.x - 78, 0);
+		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.2f, 0.5f, 0.1f, 1.00f));
+		if (ImGui::Button("CLOSE", ImVec2(50,50)))
+			_renderWindow->close();
+			
+		ImGui::PopStyleColor();
 		ImGui::End();
 	};
 }
@@ -317,6 +324,7 @@ void ZenithBar::DrawAnimationControls() {
 
 	static int animMinutes = 0;
 	static int animSeconds = DEF_ANIM_INTERVAL;
+	static int animStrength = DEF_ANIM_STRENGTH * 10;
 
 	ImGui::SameLine();
 	ImGui::BeginGroup();
@@ -336,11 +344,16 @@ void ZenithBar::DrawAnimationControls() {
 		animSeconds = std::clamp(animSeconds, 1, 60);
 	ImGui::EndGroup();
 
-	_animateNoiseInterval = (animMinutes * 60) + animSeconds;
-	
 	ImGui::SameLine();
-	if (ImGui::Button("CLOSE", ImVec2(50,50)))
-		_renderWindow->close();
+	ImGui::BeginGroup();
+	ImGui::Text("Strength");
+	ImGui::AlignTextToFramePadding();
+	ImGui::SetNextItemWidth(274);
+	if (ImGui::SliderInt("##AnimStrength",&animStrength,1,5, "%i0%%"))
+		_animateNoiseStrength = std::clamp(float(animStrength / 10.f), 0.1f, 0.5f);
+	
+	ImGui::EndGroup();
+	_animateNoiseInterval = (animMinutes * 60) + animSeconds;
 }
 
 void ZenithBar::AnimateNoiseSliders() {
