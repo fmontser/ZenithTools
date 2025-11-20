@@ -2,7 +2,6 @@
 #include "imgui.h"
 #include "imgui-SFML.h"
 #include "Exceptions.hpp"
-#include <map>
 
 using namespace zenith;
 
@@ -307,56 +306,52 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 			
 			ImGui::EndTable();
 		}
-		
-	
+
 		if (ImGui::Button(_animateNoise ? "Fixed" : "Anime", ImVec2(50, 50)))
 			_animateNoise = !_animateNoise;
 
-		//TODO fix logic bug, on change minutes animation stops
 		static int animMinutes = 0;
 		static int animSeconds = DEF_ANIM_INTERVAL;
 
 		ImGui::SameLine();
 		ImGui::BeginGroup();
-
-			ImGui::Text("Minutes");
-			ImGui::SetNextItemWidth(100);
-			ImGui::AlignTextToFramePadding();
-			if (ImGui::InputInt("##AnimMinutes", &animMinutes)) {
-				animMinutes = std::clamp(animMinutes, 0, 60);
-				_animateNoiseInterval = (animMinutes * 60) + animSeconds;
-			}
+		ImGui::Text("Minutes");
+		ImGui::AlignTextToFramePadding();
+		ImGui::SetNextItemWidth(100);
+		if (ImGui::InputInt("##AnimMinutes", &animMinutes))
+			animMinutes = std::clamp(animMinutes, 0, 60);
 		ImGui::EndGroup();
 
 		ImGui::SameLine();
 		ImGui::BeginGroup();
-
-			ImGui::Text("Seconds");
-			ImGui::SetNextItemWidth(100);
-			ImGui::AlignTextToFramePadding();
-			if (ImGui::InputInt("##AnimSeconds", &animSeconds)) {
-				animSeconds = std::clamp(animSeconds, 1, 60);
-				_animateNoiseInterval = (animMinutes * 60) + animSeconds;
-			}
+		ImGui::Text("Seconds");
+		ImGui::AlignTextToFramePadding();
+		ImGui::SetNextItemWidth(100);
+		if (ImGui::InputInt("##AnimSeconds", &animSeconds))
+			animSeconds = std::clamp(animSeconds, 1, 60);
 		ImGui::EndGroup();
 
+		_animateNoiseInterval = (animMinutes * 60) + animSeconds;
 		
 		ImGui::SameLine();
 		if (ImGui::Button("CLOSE", ImVec2(50,50)))
-		_renderWindow->close();
-		
-
-
+			_renderWindow->close();
 		ImGui::End();
 	};
 
 }
 
-
 void ZenithBar::AnimateNoiseSliders() {
 	static uint frameNumber = 0;
 	static uint elapsedSecs = 0;
 	static uint fadeFrames = FRAME_LIMIT;
+	static uint lastInterval = _animateNoiseInterval;
+
+	if (lastInterval != _animateNoiseInterval) {
+		frameNumber = 0;
+		elapsedSecs = 0;
+		lastInterval = _animateNoiseInterval;
+	}
 	
 	static std::map<NoiseGenerator*, float> genTargetVolumeMap;
 	if (genTargetVolumeMap.empty()){
