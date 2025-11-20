@@ -60,13 +60,19 @@ namespace zenith {
 			
 			/**
 			 * @brief Constructs a new session with a number of rounds and periods values.
+			 * @note Time is managed with <chrono> so you can use any time type.
 			 * @param rounds The number of rounds for a session.
 			 * @param workTime The number in seconds for work periods.
 			 * @param restTime The number in seconds for rest periods.
 			 * @param largeRestTime The number in seconds for large rest period wich occur at half the session.
 			 */
-			PomodoroSession(std::unique_ptr<ISoundGenerator> sg, uint rounds,
-				Seconds workTime, Seconds restTime, Seconds largeRestTime);
+			PomodoroSession(
+				std::unique_ptr<ISoundGenerator> sg,
+				uint rounds = 4,
+				Seconds workTime = Minutes(25),
+				Seconds restTime = Minutes(5),
+				Seconds largeRestTime = Minutes(15)
+			);
 			
 			/**
 			 * @brief Obtains the status data of.the session.

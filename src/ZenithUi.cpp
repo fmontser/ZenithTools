@@ -24,15 +24,12 @@ void ZenithUi::RenderLoop() {
 }
 
 void ZenithUi::SetupEvents() {
-
-	// Alt+F4 close //TODO not working due to sf::Style::None
 	_eventList.push_back([this](sf::Event e){
 		if (e.type == sf::Event::KeyPressed 
 			&& e.key.code == sf::Keyboard::F4 && e.key.alt)
 				this->_bar.GetRenderWindow().close();
 	});
 
-	// Other close events //TODO not working due to sf::Style::None
 	_eventList.push_back([this](sf::Event e){
 		if (e.type == sf::Event::Closed)
 			 this->_bar.GetRenderWindow().close();

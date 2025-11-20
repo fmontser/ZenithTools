@@ -9,8 +9,7 @@ using namespace zenith;
 constexpr uint frameLimit = 60;
 
 //TODO remove hardcoded values
-ZenithBar::ZenithBar() : _session(PomodoroSession(
-	std::make_unique<SoundGenerator>(), 4, Seconds(4),Seconds(2), Seconds(3))) {
+ZenithBar::ZenithBar() {
 		InitView();
 }
 
@@ -26,7 +25,7 @@ void ZenithBar::Render() {
 }
 
 void ZenithBar::InitView() {
-	_renderWindow = std::make_unique<sf::RenderWindow>(
+_renderWindow = std::make_unique<sf::RenderWindow>(
 		sf::VideoMode::getDesktopMode(),
 		"ZenithTools",
 		sf::Style::None
@@ -37,29 +36,36 @@ void ZenithBar::InitView() {
 	_renderWindow->setSize(sf::Vector2u(1000, 300));
 	_renderWindow->setPosition(sf::Vector2i(500,100));
 	ImGui::SFML::Init(*_renderWindow);
-	
-	_viewport = ImGui::GetMainViewport();
+
+	_sessionStarted =  false;
+	_session = std::make_unique<PomodoroSession>(std::make_unique<SoundGenerator>());
 	
 	for (auto &&band : NoiseGenerator::GetDefaultBands())
-		_noiseGenerators.push_back(std::make_unique<NoiseGenerator>(band));
+	_noiseGenerators.push_back(std::make_unique<NoiseGenerator>(band));
+	//TODO remove hardcoded default values...
 
 	_animateNoise = false;
 	_animateNoiseInterval = 10;
 	_animateNoiseStrength = 0.2f;
 }
 
-void ZenithBar::RestartSession()
-{
-	//TODO hardcoded values
-	_session = PomodoroSession(std::make_unique<SoundGenerator>(), 4, Seconds(4),Seconds(2), Seconds(3));
+void ZenithBar::RestartSession(
+	int rounds = 4, int workTime = 25, int restTime = 5, int longRestTime = 15) {
+	_session = std::make_unique<PomodoroSession>(
+		std::make_unique<SoundGenerator>(),
+		static_cast<uint>(rounds),
+		Minutes(workTime),
+		Minutes(restTime),
+		Minutes(longRestTime)
+	);
 }
 
 void ZenithBar::DrawPomodoroWindow() {
 
+	static ImGuiViewport* viewPort = ImGui::GetMainViewport();
+	static ImVec2 winSize = ImVec2(viewPort->WorkSize.x / 2, viewPort->WorkSize.y);
 
-	static ImVec2 winSize = ImVec2(_viewport->WorkSize.x / 2, _viewport->WorkSize.y);
-
-	ImGui::SetNextWindowPos(_viewport->WorkPos);
+	ImGui::SetNextWindowPos(viewPort->WorkPos);
 	ImGui::SetNextWindowSize(winSize);
 
 	static ImGuiWindowFlags windowFlags = 0
@@ -69,92 +75,173 @@ void ZenithBar::DrawPomodoroWindow() {
 		| ImGuiWindowFlags_NoScrollbar
 		| ImGuiWindowFlags_NoSavedSettings;
 
-	Status status = _session.GetStatus();
-	Mode _mode = status.mode;
+	Status status = _session.get()->GetStatus();
+	
+	if (ImGui::Begin("PomodoroWindow",nullptr, windowFlags)) {
+		DrawSessionSettings();
+		DrawSessionTokens(status);
+		DrawTimerStatus(status);
+		DrawSessionControl(status);
+	};
+}
+
+void ZenithBar::DrawSessionSettings() {
+	static int rounds = 4;
+	static int workTime = 25;
+	static int restTime = 5;
+	static int longRestTime = 15;
+	bool sessionChanged = false;
+
+	if (ImGui::BeginTable("SessionControls", 4))
+	{
+		if (_sessionStarted)
+			ImGui::BeginDisabled();
+		
+		ImGui::TableNextRow();
+			
+		ImGui::TableSetColumnIndex(0);
+		
+		ImGui::SetNextItemWidth(100);
+		ImGui::AlignTextToFramePadding();
+		ImGui::Text("Rounds");
+		ImGui::SetNextItemWidth(100);
+		if (ImGui::InputInt("##Rounds", &rounds))
+			sessionChanged = true;
+		rounds = std::clamp(rounds, 4, 8);
+
+		ImGui::TableSetColumnIndex(1);
+		ImGui::SetNextItemWidth(100);
+		ImGui::AlignTextToFramePadding();
+		ImGui::Text("Work time");
+		ImGui::SetNextItemWidth(100);
+		if (ImGui::InputInt("##WorkTime", &workTime))
+			sessionChanged = true;
+		workTime = std::clamp(workTime, 25, 55);
+		
+		ImGui::TableSetColumnIndex(2);
+		ImGui::SetNextItemWidth(100);
+		ImGui::AlignTextToFramePadding();
+		ImGui::Text("Rest time");
+		ImGui::SetNextItemWidth(100);
+		if (ImGui::InputInt("##RestTime", &restTime))
+			sessionChanged = true;
+		restTime = std::clamp(restTime, 5, 15);
+
+		ImGui::TableSetColumnIndex(3);
+		ImGui::SetNextItemWidth(100);
+		ImGui::AlignTextToFramePadding();
+		ImGui::Text("Long rest time");
+		ImGui::SetNextItemWidth(100);
+		if (ImGui::InputInt("##LongRestTime", &longRestTime))
+			sessionChanged = true;
+		longRestTime = std::clamp(longRestTime, 15, 30);
+		
+		if (_sessionStarted)
+			ImGui::EndDisabled();
+
+		if (sessionChanged) {
+			RestartSession(rounds, workTime, restTime, longRestTime);
+			_sessionStarted = false;
+			sessionChanged = false;
+		}
+
+		ImGui::EndTable();
+	}
+}
+
+void ZenithBar::DrawSessionTokens(Status status) {
+
+	uint _roundsLeft = status.roundsLeft;
+	uint _roundsTotal = status.roundsTotal;
+
+	ImGui::Text("ROUNDS ");
+	ImGui::BeginDisabled();
+	for (uint i = 0; i < _roundsTotal; ++i) {
+		ImGui::SameLine();
+		if (i < _roundsLeft)
+			ImGui::RadioButton("##Round_",true);
+		else
+			ImGui::RadioButton("##Round_",false);
+	}
+	ImGui::EndDisabled();
+}
+
+void ZenithBar::DrawTimerStatus(Status status) {
+
 	RoundMode _roundMode = status.roundMode;
 	float _progress = status.progress;
 	string _remainingTime = status.remainingTime;
 	string _elapsedTime = status.elapsedTime;
-	uint _roundsLeft = status.roundsLeft;
-	uint _roundsTotal = status.roundsTotal;
-	
-	if (ImGui::Begin("PomodoroWindow",nullptr, windowFlags)) {
-		
-		// Round tokens
-		ImGui::Text("ROUNDS ");
-		ImGui::BeginDisabled();
-		for (uint i = 0; i < _roundsTotal; ++i) {
-			ImGui::SameLine();
-			if (i < _roundsLeft)
-				ImGui::RadioButton("##Round_",true);
-			else
-				ImGui::RadioButton("##Round_",false);
-		}
-		ImGui::EndDisabled();
 
-		// Primary timer
-		ImGui::SetWindowFontScale(5.0f);
-		ImGui::Text(_remainingTime.c_str());
-		ImGui::SetWindowFontScale(1.0f);
-		
-		//Progress bar and indicator
-		switch (_roundMode)
-		{
-			case RoundMode::IDLE: 
-				ImGui::Text("IDLE");
-				break;
-			case RoundMode::WORKING: 
-				ImGui::Text("WORK");
-				break;
-			case RoundMode::RESTING: 
-				ImGui::Text("REST");
-				break;
-			case RoundMode::COMPLETED: 
-				ImGui::Text("DONE");
-				break;
-			default:
-				throw InvalidModeException();
-				break;
+	ImGui::SetWindowFontScale(5.0f);
+	ImGui::Text(_remainingTime.c_str());
+	ImGui::SetWindowFontScale(1.0f);
+
+	//TODO refactor switch into session class
+	switch (_roundMode)
+	{
+		case RoundMode::IDLE: 
+			ImGui::Text("IDLE");
+			break;
+		case RoundMode::WORKING: 
+			ImGui::Text("WORK");
+			break;
+		case RoundMode::RESTING: 
+			ImGui::Text("REST");
+			break;
+		case RoundMode::COMPLETED: 
+			ImGui::Text("DONE");
+			break;
+		default:
+			throw InvalidModeException();
+			break;
+	}
+	ImGui::SameLine();
+	ImGui::ProgressBar(_progress, ImVec2(-1.0f, 0.0f),_elapsedTime.c_str());
+}
+
+void ZenithBar::DrawSessionControl(Status status) {
+	Mode _mode = status.mode;
+	RoundMode _roundMode = status.roundMode;
+
+	if (_mode == Mode::IDLE) {
+		if (ImGui::Button("Start", ImVec2(50,50))){
+			if (!_sessionStarted)
+				_sessionStarted = true;
+			if (_roundMode == RoundMode::IDLE)
+				_session.get()->StartActualRound();
+			else if (_roundMode == RoundMode::RESTING)
+				_session.get()->StartRestingPeriod();
 		}
+	} else if (_mode == Mode::ONGOING) {
+		if (ImGui::Button("Pause", ImVec2(50,50)))
+			_session.get()->PausePeriod();
+	} else if (_mode == Mode::PAUSED) {
+		if (ImGui::Button("Resume", ImVec2(50,50)))
+			_session.get()->ResumePeriod();
+	}
+
+	if (_mode != Mode::COMPLETED) {
+		if (_sessionStarted)
+			_sessionStarted = false;
 		ImGui::SameLine();
-		ImGui::ProgressBar(_progress, ImVec2(-1.0f, 0.0f),_elapsedTime.c_str());
+		if (ImGui::Button("Reset", ImVec2(50,50)))
+			_session.get()->ResetPeriod();
+		ImGui::SameLine();
+		if (ImGui::Button("Restart", ImVec2(50,50)))
+			RestartSession();
+	} else {
+		if (ImGui::Button("Restart", ImVec2(50,50)))
+			RestartSession();
+	}
 
-		//User controls
-		if (_mode == Mode::IDLE) {
-			if (ImGui::Button("Start", ImVec2(50,50))){
-				if (_roundMode == RoundMode::IDLE)
-					_session.StartActualRound();
-				else if (_roundMode == RoundMode::RESTING)
-					_session.StartRestingPeriod();
-			}
-		} else if (_mode == Mode::ONGOING) {
-			if (ImGui::Button("Pause", ImVec2(50,50)))
-				_session.PausePeriod();
-		} else if (_mode == Mode::PAUSED) {
-			if (ImGui::Button("Resume", ImVec2(50,50)))
-				_session.ResumePeriod();
-		}
-
-		if (_mode != Mode::COMPLETED) {
-			ImGui::SameLine();
-			if (ImGui::Button("Reset", ImVec2(50,50)))
-				_session.ResetPeriod();
-			ImGui::SameLine();
-			if (ImGui::Button("Restart", ImVec2(50,50)))
-				RestartSession();
-		} else {
-			if (ImGui::Button("Restart", ImVec2(50,50)))
-				RestartSession();
-		}
-
-		ImGui::End();
-	};
-
+	ImGui::End();
 }
 
 void ZenithBar::DrawNoiseGeneratorWindow() {
-	static ImVec2 winSize = ImVec2(500, 300);
-	static ImVec2 winPos = ImVec2(500, 0);
+	static ImGuiViewport* viewPort = ImGui::GetMainViewport();
+	static ImVec2 winSize = ImVec2(viewPort->WorkSize.x / 2, viewPort->WorkSize.y);
+	static ImVec2 winPos = ImVec2(viewPort->WorkSize.x / 2, 0);
 
 	ImGui::SetNextWindowPos(winPos);
 	ImGui::SetNextWindowSize(winSize);
@@ -223,19 +310,17 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 			ImGui::EndTable();
 		}
 
+		if (ImGui::Button(_animateNoise ? "Fixed" : "Anime", ImVec2(50, 20)))
+			_animateNoise = !_animateNoise;
 
-			if (ImGui::Button(_animateNoise ? "Fixed" : "Anime", ImVec2(50, 20)))
-				_animateNoise = !_animateNoise;
-
-			ImGui::SliderInt("##AnimationTimeSlider", &_animateNoiseInterval, 1,60, "%ds");
-			ImGui::SliderFloat("##AnimationStrenghtSlider", &_animateNoiseStrength, 0.1f,0.3f, "%.1f POWER");
-
-
+		ImGui::SliderInt("##AnimationTimeSlider", &_animateNoiseInterval, 1,60, "%ds");
+		ImGui::SliderFloat("##AnimationStrenghtSlider", &_animateNoiseStrength, 0.1f,0.3f, "%.1f POWER");
 
 		ImGui::End();
 	};
 
 }
+
 
 void ZenithBar::AnimateNoiseSliders() {
 	static uint frameNumber = 0;
