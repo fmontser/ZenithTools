@@ -8,7 +8,7 @@ using namespace zenith;
 
 constexpr uint FRAME_LIMIT = 60;
 constexpr uint WINDOW_WIDTH = 1280;
-constexpr uint WINDOW_HEIGHT = 386;
+constexpr uint WINDOW_HEIGHT = 240;
 constexpr uint DEF_ANIM_INTERVAL = 10;
 constexpr float DEF_ANIM_STRENGTH = 0.2f;
 
@@ -255,13 +255,9 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 		| ImGuiWindowFlags_NoScrollbar
 		| ImGuiWindowFlags_NoSavedSettings;
 
+
+
 	if (ImGui::Begin("NoiseGenWindow",nullptr, windowFlags)) {
-		
-		ImGui::SameLine(450, 0);
-		if (ImGui::Button("X", ImVec2(50,50)))
-			_renderWindow->close();
-
-
 		if (ImGui::BeginTable("VolumeControls", 11))
 		{
 			ImGui::TableNextRow();
@@ -311,12 +307,45 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 			
 			ImGui::EndTable();
 		}
-
-		if (ImGui::Button(_animateNoise ? "Fixed" : "Anime", ImVec2(50, 20)))
+		
+	
+		if (ImGui::Button(_animateNoise ? "Fixed" : "Anime", ImVec2(50, 50)))
 			_animateNoise = !_animateNoise;
 
-		ImGui::SliderInt("##AnimationTimeSlider", &_animateNoiseInterval, 1,60, "%ds");
-		ImGui::SliderFloat("##AnimationStrenghtSlider", &_animateNoiseStrength, 0.1f,0.3f, "%.1f POWER");
+		//TODO fix logic bug, on change minutes animation stops
+		static int animMinutes = 0;
+		static int animSeconds = DEF_ANIM_INTERVAL;
+
+		ImGui::SameLine();
+		ImGui::BeginGroup();
+
+			ImGui::Text("Minutes");
+			ImGui::SetNextItemWidth(100);
+			ImGui::AlignTextToFramePadding();
+			if (ImGui::InputInt("##AnimMinutes", &animMinutes)) {
+				animMinutes = std::clamp(animMinutes, 0, 60);
+				_animateNoiseInterval = (animMinutes * 60) + animSeconds;
+			}
+		ImGui::EndGroup();
+
+		ImGui::SameLine();
+		ImGui::BeginGroup();
+
+			ImGui::Text("Seconds");
+			ImGui::SetNextItemWidth(100);
+			ImGui::AlignTextToFramePadding();
+			if (ImGui::InputInt("##AnimSeconds", &animSeconds)) {
+				animSeconds = std::clamp(animSeconds, 1, 60);
+				_animateNoiseInterval = (animMinutes * 60) + animSeconds;
+			}
+		ImGui::EndGroup();
+
+		
+		ImGui::SameLine();
+		if (ImGui::Button("CLOSE", ImVec2(50,50)))
+		_renderWindow->close();
+		
+
 
 		ImGui::End();
 	};
