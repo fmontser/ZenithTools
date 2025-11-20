@@ -1,7 +1,6 @@
 #include "ZenithBar.hpp"
-#include "imgui.h"
-#include "imgui-SFML.h"
 #include "Exceptions.hpp"
+#include "Fonts.hpp"
 
 using namespace zenith;
 
@@ -151,10 +150,10 @@ void ZenithBar::DrawSessionSettings() {
 }
 
 void ZenithBar::DrawSessionTokens(Status status) {
-
 	uint _roundsLeft = status.roundsLeft;
 	uint _roundsTotal = status.roundsTotal;
 
+	ImGui::AlignTextToFramePadding();
 	ImGui::Text("ROUNDS ");
 	ImGui::BeginDisabled();
 	for (uint i = 0; i < _roundsTotal; ++i) {
@@ -174,13 +173,14 @@ void ZenithBar::DrawTimerStatus(Status status) {
 	string _remainingTime = status.remainingTime;
 	string _elapsedTime = status.elapsedTime;
 
-	ImGui::SetWindowFontScale(5.0f);
+	ImGui::PushFont(Fonts::GetLargeFont());
 	ImGui::Text(_remainingTime.c_str());
-	ImGui::SetWindowFontScale(1.0f);
+	ImGui::PopFont();
 
-	//TODO refactor switch into session class
+	ImGui::AlignTextToFramePadding();
 	switch (_roundMode)
 	{
+
 		case RoundMode::IDLE: 
 			ImGui::Text("IDLE");
 			break;
@@ -198,7 +198,7 @@ void ZenithBar::DrawTimerStatus(Status status) {
 			break;
 	}
 	ImGui::SameLine();
-	ImGui::ProgressBar(_progress, ImVec2(-1.0f, 0.0f),_elapsedTime.c_str());
+	ImGui::ProgressBar(_progress, ImVec2(540.0f, 0.0f),_elapsedTime.c_str());
 }
 
 void ZenithBar::DrawSessionControl(Status status) {
@@ -259,10 +259,9 @@ void ZenithBar::DrawNoiseGeneratorWindow() {
 		DrawAnimationControls();
 
 		ImGui::SameLine(winSize.x - 78, 0);
-		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.2f, 0.5f, 0.1f, 1.00f));
-		if (ImGui::Button("CLOSE", ImVec2(50,50)))
+		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.5f, 0.25f, 0.1f, 0.5f));
+		if (ImGui::Button("EXIT", ImVec2(50,50)))
 			_renderWindow->close();
-			
 		ImGui::PopStyleColor();
 		ImGui::End();
 	};

@@ -7,3 +7,6 @@ NotImplementedException::NotImplementedException()
 
 InvalidModeException::InvalidModeException()
 	: std::logic_error("Invalid state") {}
+
+MissingClassInstanceException::MissingClassInstanceException()
+	: std::logic_error("Missing class Instance") {}

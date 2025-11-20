@@ -1,4 +1,5 @@
 #include "ZenithUi.hpp"
+#include "Fonts.hpp"
 
 using namespace zenith;
 
@@ -12,9 +13,7 @@ void ZenithUi::Run() {
 
 void ZenithUi::RenderLoop() {
 	auto& window = _bar.GetRenderWindow();
-
 	sf::Clock deltaClock;
-
 	ImGui::SFML::Init(window);
 	while (window.isOpen()) {
 		ProcessEvents(window);
@@ -27,6 +26,7 @@ void ZenithUi::RenderLoop() {
 void ZenithUi::SetupStyle() {
 
 	ImVec4* colors = ImGui::GetStyle().Colors;
+	Fonts();
 
 	colors[ImGuiCol_WindowBg]         = ImVec4(0.51f, 0.60f, 0.57f, 0.94f);
 	colors[ImGuiCol_Border]           = ImVec4(0.74f, 0.81f, 0.76f, 0.50f);

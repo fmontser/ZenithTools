@@ -23,4 +23,11 @@ namespace zenith {
 		InvalidModeException();
 	};
 
+	/**
+	 * @brief Triggers when an static method is called but no instance of class was created.
+	 */
+	struct MissingClassInstanceException : public std::logic_error {
+		MissingClassInstanceException();
+	};
+
 }
