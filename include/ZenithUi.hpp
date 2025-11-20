@@ -38,6 +38,11 @@ namespace zenith {
 			void RenderLoop();
 
 			/**
+			 * @brief Defines the custom style for ImGui.
+			 */
+			void SetupStyle();
+
+			/**
 			 * @brief Setups any external or global event.
 			 */
 			void SetupEvents();
