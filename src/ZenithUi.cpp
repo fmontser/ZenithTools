@@ -1,5 +1,5 @@
 #include "ZenithUi.hpp"
-#include "Fonts.hpp"
+#include "Roboto-Bold.h"
 
 using namespace zenith;
 
@@ -8,13 +8,15 @@ ZenithUi::ZenithUi() {}
 void ZenithUi::Run() {
 	SetupEvents();
 	SetupStyle();
+	SetupFonts();
 	RenderLoop();
 }
 
 void ZenithUi::RenderLoop() {
 	auto& window = _bar.GetRenderWindow();
+	(void)ImGui::SFML::Init(window, false);
+
 	sf::Clock deltaClock;
-	ImGui::SFML::Init(window);
 	while (window.isOpen()) {
 		ProcessEvents(window);
 		ImGui::SFML::Update(window, deltaClock.restart());
@@ -23,10 +25,32 @@ void ZenithUi::RenderLoop() {
 	ImGui::SFML::Shutdown();
 }
 
+void ZenithUi::SetupFonts() {
+	ImGuiIO io = ImGui::GetIO();
+
+	ImFontConfig fc;
+	fc.FontDataOwnedByAtlas = false;
+
+	io.Fonts->AddFontFromMemoryTTF(
+		Roboto_Bold_ttf,
+		Roboto_Bold_ttf_len,
+		14.0f,
+		&fc
+	);
+
+	_bar.SetLargeFont(io.Fonts->AddFontFromMemoryTTF(
+		Roboto_Bold_ttf,
+		Roboto_Bold_ttf_len,
+		64.0f,
+		&fc
+	));
+
+	(void)ImGui::SFML::UpdateFontTexture();
+}
+
 void ZenithUi::SetupStyle() {
 
 	ImVec4* colors = ImGui::GetStyle().Colors;
-	Fonts();
 
 	colors[ImGuiCol_WindowBg]         = ImVec4(0.51f, 0.60f, 0.57f, 0.94f);
 	colors[ImGuiCol_Border]           = ImVec4(0.74f, 0.81f, 0.76f, 0.50f);

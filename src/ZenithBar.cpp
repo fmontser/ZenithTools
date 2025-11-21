@@ -1,6 +1,5 @@
 #include "ZenithBar.hpp"
 #include "Exceptions.hpp"
-#include "Fonts.hpp"
 
 using namespace zenith;
 
@@ -21,8 +20,12 @@ void ZenithBar::Render() {
 	DrawNoiseGeneratorWindow();
 	AnimateNoiseSliders();
 	_renderWindow->clear();
-	ImGui::SFML::Render(*_renderWindow);
+	(void)ImGui::SFML::Render(*_renderWindow);
 	_renderWindow->display();
+}
+
+void ZenithBar::SetLargeFont(ImFont* font) {
+	_largeFont = font;
 }
 
 void ZenithBar::InitView() {
@@ -36,7 +39,7 @@ void ZenithBar::InitView() {
 	_renderWindow->setFramerateLimit(FRAME_LIMIT);
 	_renderWindow->setSize(sf::Vector2u(WINDOW_WIDTH, WINDOW_HEIGHT));
 	_renderWindow->setPosition(sf::Vector2i((desktop.width / 2) - (WINDOW_WIDTH / 2), 0));
-	ImGui::SFML::Init(*_renderWindow);
+	(void)ImGui::SFML::Init(*_renderWindow);
 
 	_sessionStarted =  false;
 	_session = std::make_unique<PomodoroSession>(std::make_unique<SoundGenerator>());
@@ -173,8 +176,8 @@ void ZenithBar::DrawTimerStatus(Status status) {
 	string _remainingTime = status.remainingTime;
 	string _elapsedTime = status.elapsedTime;
 
-	ImGui::PushFont(Fonts::GetLargeFont());
-	ImGui::Text(_remainingTime.c_str());
+	ImGui::PushFont(_largeFont);
+	ImGui::Text("%s", _remainingTime.c_str());
 	ImGui::PopFont();
 
 	ImGui::AlignTextToFramePadding();
@@ -297,7 +300,7 @@ void ZenithBar::DrawFilteredNoiseSliders() {
 			ImGui::PushID(gen.get());
 
 			ImGui::AlignTextToFramePadding();
-			ImGui::Text(gen->GetBandText().c_str());
+			ImGui::Text("%s", gen->GetBandText().c_str());
 
 			if (ImGui::VSliderFloat("##VolumeSlider", ImVec2(30,100), &gen->volume ,
 				0.0f, 100.0f, ""))

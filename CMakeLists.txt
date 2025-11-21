@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.31)
 project(ZenithTools LANGUAGES CXX)
 include(FetchContent)
 
-
 # DEPENDENCIES
 
 	# GTEST
@@ -14,11 +13,11 @@ include(FetchContent)
 	set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 	FetchContent_MakeAvailable(googletest)
 
-	# SFML (IMGUI backend)
+	# SFML 2.6.2
 	FetchContent_Declare(
 		SFML
 		GIT_REPOSITORY https://github.com/SFML/SFML.git
-		GIT_TAG        2.6.1
+		GIT_TAG        2.6.2
 	)
 	FetchContent_MakeAvailable(SFML)
 
@@ -26,45 +25,32 @@ include(FetchContent)
 	FetchContent_Declare(
 		imgui
 		GIT_REPOSITORY https://github.com/ocornut/imgui.git
-		GIT_TAG        v1.90.8
+		GIT_TAG        v1.89.9
 	)
 	FetchContent_MakeAvailable(imgui)
 
-	# IMGUI-SFML Binding
+	# IMGUI-SFML
+	set(IMGUI_DIR ${imgui_SOURCE_DIR})  # Necesario ANTES de MakeAvailable
+	option(IMGUI_SFML_FIND_SFML "Use find_package to find SFML" OFF)
 	FetchContent_Declare(
 		imgui-sfml
 		GIT_REPOSITORY https://github.com/SFML/imgui-sfml
-		GIT_TAG        v2.6
+		GIT_TAG        v2.6.1
 	)
-	set(IMGUI_DIR ${imgui_SOURCE_DIR})
-	option(IMGUI_SFML_FIND_SFML "Use find_package to find SFML" OFF)
 	FetchContent_MakeAvailable(imgui-sfml)
 
-
 # COMPILE OPTIONS
+
 	set(CMAKE_CXX_STANDARD 17)
 	set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 	if(ENABLE_ASAN)
-		message(STATUS "AddressSanitizer enabled.")
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -g")
 	endif()
 	option(ENABLE_ASAN "Enable AddressSanitizer" OFF)
 
-
-# LIBS
-	add_library(imguiLib STATIC
-		${imgui_SOURCE_DIR}/imgui.cpp
-		${imgui_SOURCE_DIR}/imgui_demo.cpp
-		${imgui_SOURCE_DIR}/imgui_draw.cpp
-		${imgui_SOURCE_DIR}/imgui_tables.cpp
-		${imgui_SOURCE_DIR}/imgui_widgets.cpp
-	)
-	target_include_directories(imguiLib PUBLIC ${imgui_SOURCE_DIR})
-
 # BINARIES
 
-	# APP
 	set(APP_SOURCES
 		src/main.cpp
 		src/Timer.cpp
@@ -74,11 +60,9 @@ include(FetchContent)
 		src/PomodoroSession.cpp
 		src/SoundGenerator.cpp
 		src/NoiseGenerator.cpp
-		src/Fonts.cpp
 	)
 
 	set(APP_LIBS
-		imguiLib
 		sfml-system
 		sfml-window
 		sfml-graphics
@@ -87,9 +71,21 @@ include(FetchContent)
 	)
 
 	add_executable(zenith ${APP_SOURCES})
+
 	target_include_directories(zenith PUBLIC include)
 	target_link_libraries(zenith PUBLIC ${APP_LIBS})
 
-# MISC
+	if(APPLE)
+		target_link_libraries(zenith PUBLIC
+			"-framework Cocoa"
+			"-framework IOKit"
+			"-framework CoreVideo"
+			"-framework QuartzCore"
+			"-framework Metal"
+		)
+	endif()
+
+
+# TESTING
 	enable_testing()
 	add_subdirectory(tests)

@@ -24,11 +24,14 @@ namespace zenith {
 			ZenithBar();                                ///< Default constructor.
 			sf::RenderWindow& GetRenderWindow() const;  ///< Returns the RenderWindow object.
 			void Render();                              ///< Render the next frame.
+			void SetLargeFont(ImFont* font);                        ///< Set the large font used for the timer.
 
 		private:
 			std::unique_ptr<sf::RenderWindow> _renderWindow;
 			std::unique_ptr<PomodoroSession> _session;
 			std::vector<std::unique_ptr<NoiseGenerator>> _noiseGenerators;
+			ImFont* _largeFont;
+
 			bool _sessionStarted;
 			bool _animateNoise;
 			int _animateNoiseInterval;
