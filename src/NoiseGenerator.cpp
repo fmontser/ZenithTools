@@ -7,15 +7,14 @@
 #include <iomanip>
 #include <map>
 
-
 using namespace zenith;
 
-constexpr uint Channels = 2;
-constexpr uint FrameCount = 1024;
-constexpr uint SampleRate = 48000;
-constexpr float Quality = 0.707f;
-const sf::Int16 MaxAmplitude =  32767;
-const sf::Int16 MinAmplitude = -32767;
+constexpr uint CHANNELS = 2;
+constexpr uint FRAME_COUNT = 1024;
+constexpr uint SAMPLE_RATE = 48000;
+constexpr float QUALITY = 0.707f;
+const sf::Int16 MAX_AMPLITUDE =  32767;
+const sf::Int16 MIN_AMPLITUDE = -32767;
 
 float NoiseGenerator::masterVolume = 0.5f;
 bool NoiseGenerator::masterMuted = false;
@@ -23,7 +22,7 @@ bool NoiseGenerator::masterMuted = false;
 NoiseGenerator::NoiseGenerator(float band) : sf::SoundStream() {
 	volume = 50.0f;
 	muted = true;
-	initialize(2, SampleRate);
+	initialize(2, SAMPLE_RATE);
 	setVolume(volume * masterVolume);
 	_fState.fill(0.0f);
 	_fState[BAND] = band;
@@ -62,21 +61,21 @@ void NoiseGenerator::onSeek(sf::Time timeOffset) {}
 
 
 void NoiseGenerator::GenerateNoise() {
-	_buffer.resize(FrameCount * Channels);
+	_buffer.resize(FRAME_COUNT * CHANNELS);
 	
-	for (size_t i = 0; i < FrameCount; ++i) {
+	for (size_t i = 0; i < FRAME_COUNT; ++i) {
 		float white = (float(rand()) / RAND_MAX - 0.5f);
 	
 
 		white = BandFilter(white);
 
-		white = white * MaxAmplitude;
+		white = white * MAX_AMPLITUDE;
 		sf::Int16 normalized = static_cast<sf::Int16>(
-			std::clamp(white, float(MinAmplitude), float(MaxAmplitude))
+			std::clamp(white, float(MIN_AMPLITUDE), float(MAX_AMPLITUDE))
 		);
 
-		_buffer[i * Channels] = normalized; // L
-		_buffer[i * Channels + 1] = normalized; // R
+		_buffer[i * CHANNELS] = normalized; // L
+		_buffer[i * CHANNELS + 1] = normalized; // R
 	}
 }
 
@@ -104,8 +103,8 @@ std::array<float,5> NoiseGenerator::CalculateBiquadCoeffs()
 	std::array<float,5> coeffs;
 
 	// Angular frequency
-	float w0 = 2.0f * static_cast<float>(M_PI) * _fState[BAND] / SampleRate;
-	float alpha = std::sin(w0) / (2.0f * Quality);
+	float w0 = 2.0f * static_cast<float>(M_PI) * _fState[BAND] / SAMPLE_RATE;
+	float alpha = std::sin(w0) / (2.0f * QUALITY);
 	float cos_w0 = std::cos(w0);
 
 	// Coefficients for a low-pass / peak filter

@@ -74,6 +74,7 @@ include(FetchContent)
 		src/PomodoroSession.cpp
 		src/SoundGenerator.cpp
 		src/NoiseGenerator.cpp
+		src/Fonts.cpp
 	)
 
 	set(APP_LIBS
