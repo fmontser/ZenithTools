@@ -38,6 +38,11 @@ namespace zenith {
 			void RenderLoop();
 
 			/**
+			 * @brief Setups the fonts used in gui.
+			 */
+			void SetupFonts();
+
+			/**
 			 * @brief Defines the custom style for ImGui.
 			 */
 			void SetupStyle();
