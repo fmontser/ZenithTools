@@ -9,9 +9,10 @@
 
 using namespace zenith;
 
-constexpr uint CHANNELS = 2;
-constexpr uint FRAME_COUNT = 1024;
-constexpr uint SAMPLE_RATE = 48000;
+constexpr double PI = 3.141592653589793;
+constexpr uint32_t CHANNELS = 2;
+constexpr uint32_t FRAME_COUNT = 1024;
+constexpr uint32_t SAMPLE_RATE = 48000;
 constexpr float QUALITY = 0.707f;
 const sf::Int16 MAX_AMPLITUDE =  32767;
 const sf::Int16 MIN_AMPLITUDE = -32767;
@@ -27,6 +28,10 @@ NoiseGenerator::NoiseGenerator(float band) : sf::SoundStream() {
 	_fState.fill(0.0f);
 	_fState[BAND] = band;
 	SetBandText();
+}
+
+NoiseGenerator::~NoiseGenerator() {
+	stop();
 }
 
 const std::array<float, 10> NoiseGenerator::GetDefaultBands() {
@@ -103,7 +108,7 @@ std::array<float,5> NoiseGenerator::CalculateBiquadCoeffs()
 	std::array<float,5> coeffs;
 
 	// Angular frequency
-	float w0 = 2.0f * static_cast<float>(M_PI) * _fState[BAND] / SAMPLE_RATE;
+	float w0 = 2.0f * static_cast<float>(PI) * _fState[BAND] / SAMPLE_RATE;
 	float alpha = std::sin(w0) / (2.0f * QUALITY);
 	float cos_w0 = std::cos(w0);
 

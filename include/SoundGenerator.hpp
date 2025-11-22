@@ -17,8 +17,9 @@ namespace zenith {
 	class SoundGenerator : public sf::SoundStream, public ISoundGenerator {
 		public:
 			SoundGenerator();
-			void PlayRestBell() override;
-			void PlayWorkBell() override;
+            ~SoundGenerator();
+            void PlayRestBell() override;
+            void PlayWorkBell() override;
 
 			float volume;
 			bool muted;
