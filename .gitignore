@@ -44,8 +44,11 @@
 build/
 .vscode/
 
-#misc
+#documentation
+docs/*
+!docs/Doxyfile
 
+#misc
 testFonts/
 TODO
 imgui.ini
