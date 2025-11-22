@@ -33,8 +33,10 @@ Download the latest binaries for Linux, macOS and Windows from the **Releases** 
 
 ## Documentation
 
-* Project has been documented with Doxygen. If you need the docs, install Doxygen.
-* **Generate docs:**
+* Project has been documented with Doxygen
+  [Online documentation](https://fmontser.github.io/ZenithTools/)
+  
+* **Or Generate docs:**
 
   ```bash
   doxygen docs/Doxyfile
