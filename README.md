@@ -13,6 +13,20 @@ Download the latest binaries for Linux, macOS and Windows from the **Releases** 
 * Customizable pomodoro technique sessions: number of rounds, work and rest time.
 * Custom filtered white noise generation to mask environmental noise and keep focused, with animated sliders.
 
+## Future updates
+
+* Add user preferences persistence
+* Add Noise presets
+* Add an icon to the app
+* Update SFML backend so Windows version can be self-contained
+* Improve the UI
+* Add customizable themed soundscapes
+* More productivity tools?
+
+## Known Issues
+
+* Small sound clipping due to hardware not being to reproduce high frequencies, as workarround mute the 24Khz band and so on.
+
 ## Releases
 
 * 1.0 is now released! Find binaries for Linux, macOS and Windows on the releases page.
