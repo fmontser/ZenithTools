@@ -17,14 +17,30 @@
 namespace zenith {
 
 	/**
-	 * @brief ZenithBar containts all the controls and logui for the window ui.
+	 * @brief ZenithBar containts all the controls and logic for the window ui.
 	 */
 	class ZenithBar {
 		public:
-			ZenithBar();                                ///< Default constructor.
-			sf::RenderWindow& GetRenderWindow() const;  ///< Returns the RenderWindow object.
-			void Render();                              ///< Render the next frame.
-			void SetLargeFont(ImFont* font);                        ///< Set the large font used for the timer.
+			/**
+			 * @brief Default constructor
+			 */		
+			ZenithBar();
+
+			/**
+			 * @brief Returns the RenderWindow object
+			 */
+			sf::RenderWindow& GetRenderWindow() const;
+			
+			/**
+			 * @brief Renders the next frame
+			 */
+			void Render();
+
+			/**
+			 * @brief Set the large font used for the timer
+			 * @param font A pointer to the loaded ImFont data
+			 */
+			void SetLargeFont(ImFont* font);
 
 		private:
 			std::unique_ptr<sf::RenderWindow> _renderWindow;

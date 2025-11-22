@@ -87,34 +87,14 @@ namespace zenith {
 			const Status GetStatus();
 
 		private:
-			Status _status;           ///< Holds the current snapshot of the timer's status.
-			Seconds _durationTime;    ///< The total duration the timer was set for.
-			Seconds _remainingTime;   ///< The time remaining when paused.
-			TimePoint _startTime;     ///< The time point when the timer was last (re)started.
-			TimePoint _targetTime;    ///< The time point when the timer is scheduled to end.
+			Status _status;
+			Seconds _durationTime;
+			Seconds _remainingTime;
+			TimePoint _startTime;
+			TimePoint _targetTime;
 
-			/**
-			 * @brief Calculates the remaining time based on the current time (internal, non-locking).
-			 * @return The remaining seconds.
-			 */
-
-			/**
-			 * @brief Acquires a lock and calculates the remaining time.
-			 * @return The remaining seconds.
-			 */
 			const Seconds FetchRemainingTime() const;
-
-			/**
-			 * @brief Formats a duration in seconds into a MM:SS string.
-			 * @param seconds The duration to format.
-			 * @return A string in "MM:SS" format.
-			 */
 			const string FormatTimer(const Seconds& seconds) const;
-
-			/**
-			 * @brief Returns progress with float
-			 * @return A float 0.0g to 1.0f 
-			 */
 			float CalculateProgress(const Seconds& elapsedTime) const;
 	};
 

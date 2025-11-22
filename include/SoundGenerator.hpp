@@ -14,15 +14,32 @@
 
 namespace zenith {
 
+	/**
+	 * @brief Generates and plays sound effects for the gui
+	 */
 	class SoundGenerator : public sf::SoundStream, public ISoundGenerator {
 		public:
+			/**
+			 * @brief Default constructor
+			 */
 			SoundGenerator();
-            ~SoundGenerator();
-            void PlayRestBell() override;
-            void PlayWorkBell() override;
 
-			float volume;
-			bool muted;
+			/**
+			 * @brief Default destructor
+			 */
+			~SoundGenerator();
+
+			/**
+			 * @brief Play the rest period sound effect
+			 */
+			void PlayRestBell() override;
+
+			/**
+			 * @brief Play the work period sound effect
+			 */
+			void PlayWorkBell() override;
+
+			float volume;  ///< Holds the volume value for this generator on SFML scale 0.0f-100.0f
 
 		private:
 			bool onGetData(Chunk& data) override;
