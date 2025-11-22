@@ -1,6 +1,7 @@
 #include "NoiseGenerator.hpp"
 #include "Exceptions.hpp"
 #include <cmath>
+#include <cstdint>
 #include <algorithm>
 #include <limits>
 #include <sstream>

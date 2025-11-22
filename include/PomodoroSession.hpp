@@ -10,6 +10,7 @@
 #include "SoundGenerator.hpp"
 #include <queue>
 #include <memory>
+#include <cstdint>
 
 namespace zenith {
 

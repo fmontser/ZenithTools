@@ -1,6 +1,7 @@
 #include "SoundGenerator.hpp"
 #include "Exceptions.hpp"
 #include <cmath>
+#include <cstdint>
 #include <algorithm>
 #include <limits>
 
