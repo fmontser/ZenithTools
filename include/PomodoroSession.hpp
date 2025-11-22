@@ -115,33 +115,14 @@ namespace zenith {
 			void SkipPeriod();
 
 		private:
-			Status _status;                        ///< Holds the status data for the session.
-			std::queue<Round> _roundQueue;         ///< A queue containing every round for a given session.
-			std::unique_ptr<ISoundGenerator> _sg;  ///< Contains the sound generator instance for this session.
+			Status _status;
+			std::queue<Round> _roundQueue;
+			std::unique_ptr<ISoundGenerator> _sg;
 
-			/**
-			 * @brief Ends actual round and replaces it for the next if present.
-			 * @details Will end session if no more rounds are left.
-			 */
 			void SetNextRound();
-
-			/**
-			 * @brief Updates the round mode and data on behalf of the period timers.
-			 */
 			void Update();
-
-			/**
-			 * @brief Determines if the round's index refers to the half of the session.
-			 * @note Used to assign large rest period on the zenith of the session.
-			 */
 			bool IsHalfSessionRound(uint32_t rounds, uint32_t index);
-
-			/**
-			 * @brief Gets the actual work/rest timer.
-			 * @note Class internal use only.
-			 */
 			Timer& GetActualTimer();
-
 	};
 
 	/// @brief The mode of a session, idle, ongoing, paused or completed

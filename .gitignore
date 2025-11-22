@@ -42,10 +42,14 @@
 
 #CMake build
 build/
-.vscode/
+
+#documentation
+docs/*
+!docs/Doxyfile
+!docs/ScreenShot.png
 
 #misc
-
-testFonts/
-TODO
+releases/*
 imgui.ini
+.vscode/
+TODO

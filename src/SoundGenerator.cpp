@@ -14,9 +14,7 @@ const sf::Int16 MAX_AMPLITUDE =  32767;
 const sf::Int16 MIN_AMPLITUDE = -32767;
 
 SoundGenerator::SoundGenerator() : sf::SoundStream() {
-
 	volume = 50.0f;
-	muted = true;
 	initialize(2, SAMPLE_RATE);
 	GenerateRestBell();
 	GenerateWorkBell();
