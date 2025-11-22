@@ -47,6 +47,7 @@ build/
 #documentation
 docs/*
 !docs/Doxyfile
+!docs/ScreenShot.png
 
 #misc
 testFonts/
