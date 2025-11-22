@@ -1,0 +1,7 @@
+<map id="zenith::SoundGenerator" name="zenith::SoundGenerator">
+<area shape="rect" id="Node000001" title="Generates and plays sound effects for the gui." alt="" coords="70,79,245,104"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,133,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,37,145,76,141,81,92,41"/>
+<area shape="rect" id="Node000003" href="$classzenith_1_1ISoundGenerator.html" title="Interface for SoundGenerator class to allow mocking." alt="" coords="157,5,336,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="223,41,174,81,170,76,220,37"/>
+</map>

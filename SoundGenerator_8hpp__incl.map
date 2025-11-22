@@ -1,0 +1,13 @@
+<map id="include/SoundGenerator.hpp" name="include/SoundGenerator.hpp">
+<area shape="rect" id="Node000001" title="SoundGenerator class definition." alt="" coords="358,5,563,31"/>
+<area shape="rect" id="Node000002" href="$ISoundGenerator_8hpp.html" title="ISoundGenerator interface definition." alt="" coords="5,79,164,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="401,33,159,79,158,73,400,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="188,79,405,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="435,33,337,76,335,71,433,28"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="429,79,492,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="463,31,463,65,458,65,458,31"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="516,79,603,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="478,29,534,68,531,73,475,33"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="627,79,686,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="493,28,615,72,614,77,491,33"/>
+</map>

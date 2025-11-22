@@ -1,0 +1,13 @@
+<map id="include/NoiseGenerator.hpp" name="include/NoiseGenerator.hpp">
+<area shape="rect" id="Node000001" title="NoiseGenerator class definition." alt="" coords="275,5,478,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,223,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="335,33,171,78,169,72,334,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="247,79,309,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="362,33,307,73,304,68,359,29"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="333,79,420,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="379,31,379,65,374,65,374,31"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="445,79,501,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="394,29,447,68,444,72,391,33"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="525,79,583,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="406,28,514,71,512,76,404,33"/>
+</map>

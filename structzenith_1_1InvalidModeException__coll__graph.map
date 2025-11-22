@@ -1,0 +1,5 @@
+<map id="zenith::InvalidModeException" name="zenith::InvalidModeException">
+<area shape="rect" id="Node000001" title="Triggers when an invalid MODE or STATE is provided." alt="" coords="5,79,220,104"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="53,5,172,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,44,115,79,110,79,110,44"/>
+</map>

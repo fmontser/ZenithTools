@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classzenith_1_1ISoundGenerator.html" title="Interface for SoundGenerator class to allow mocking." alt="" coords="5,5,184,31"/>
+<area shape="rect" id="Node000001" href="$classzenith_1_1SoundGenerator.html" title="Generates and plays sound effects for the gui." alt="" coords="232,5,407,31"/>
+<area shape="poly" id="edge4_Node000000_Node000001" title=" " alt="" coords="198,15,232,15,232,21,198,21"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="31,55,159,80"/>
+<area shape="poly" id="edge6_Node000002_Node000001" title=" " alt="" coords="166,49,260,28,261,33,167,54"/>
+<area shape="rect" id="Node000003" href="$classzenith_1_1NoiseGenerator.html" title="Generates and filters a stream of white noise." alt="" coords="233,55,405,80"/>
+<area shape="poly" id="edge5_Node000002_Node000003" title=" " alt="" coords="173,65,233,65,233,70,173,70"/>
+</map>
