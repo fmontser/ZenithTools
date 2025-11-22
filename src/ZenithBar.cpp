@@ -3,10 +3,10 @@
 
 using namespace zenith;
 
-constexpr uint FRAME_LIMIT = 60;
-constexpr uint WINDOW_WIDTH = 1280;
-constexpr uint WINDOW_HEIGHT = 240;
-constexpr uint DEF_ANIM_INTERVAL = 10;
+constexpr uint32_t FRAME_LIMIT = 60;
+constexpr uint32_t WINDOW_WIDTH = 1280;
+constexpr uint32_t WINDOW_HEIGHT = 240;
+constexpr uint32_t DEF_ANIM_INTERVAL = 10;
 constexpr float DEF_ANIM_STRENGTH = 0.3f;
 
 ZenithBar::ZenithBar() {
@@ -56,7 +56,7 @@ void ZenithBar::RestartSession(
 	int rounds = 4, int workTime = 25, int restTime = 5, int longRestTime = 15) {
 	_session = std::make_unique<PomodoroSession>(
 		std::make_unique<SoundGenerator>(),
-		static_cast<uint>(rounds),
+		static_cast<uint32_t>(rounds),
 		Minutes(workTime),
 		Minutes(restTime),
 		Minutes(longRestTime)
@@ -153,13 +153,13 @@ void ZenithBar::DrawSessionSettings() {
 }
 
 void ZenithBar::DrawSessionTokens(Status status) {
-	uint _roundsLeft = status.roundsLeft;
-	uint _roundsTotal = status.roundsTotal;
+	uint32_t _roundsLeft = status.roundsLeft;
+	uint32_t _roundsTotal = status.roundsTotal;
 
 	ImGui::AlignTextToFramePadding();
 	ImGui::Text("ROUNDS ");
 	ImGui::BeginDisabled();
-	for (uint i = 0; i < _roundsTotal; ++i) {
+	for (uint32_t i = 0; i < _roundsTotal; ++i) {
 		ImGui::SameLine();
 		if (i < _roundsLeft)
 			ImGui::RadioButton("##Round_",true);
@@ -294,7 +294,7 @@ void ZenithBar::DrawFilteredNoiseSliders() {
 			}
 		}
 
-		uint col = 1;
+		uint32_t col = 1;
 		for (auto &&gen : _noiseGenerators) {
 			ImGui::TableSetColumnIndex(col++);
 			ImGui::PushID(gen.get());
@@ -359,10 +359,10 @@ void ZenithBar::DrawAnimationControls() {
 }
 
 void ZenithBar::AnimateNoiseSliders() {
-	static uint frameNumber = 0;
-	static uint elapsedSecs = 0;
-	static uint fadeFrames = FRAME_LIMIT;
-	static uint lastInterval = _animateNoiseInterval;
+	static uint32_t frameNumber = 0;
+	static uint32_t elapsedSecs = 0;
+	static uint32_t fadeFrames = FRAME_LIMIT;
+	static uint32_t lastInterval = _animateNoiseInterval;
 
 	if (lastInterval != _animateNoiseInterval) {
 		frameNumber = 0;
