@@ -54,8 +54,8 @@ namespace zenith {
 				string remainingTime = "00:00";
 				string elapsedTime = "00:00";
 				float progress = 0.0f;
-				uint roundsLeft = 8;
-				uint roundsTotal = 8;
+				uint32_t roundsLeft = 8;
+				uint32_t roundsTotal = 8;
 			};
 			
 			/**
@@ -68,7 +68,7 @@ namespace zenith {
 			 */
 			PomodoroSession(
 				std::unique_ptr<ISoundGenerator> sg,
-				uint rounds = 4,
+				uint32_t rounds = 4,
 				Seconds workTime = Minutes(25),
 				Seconds restTime = Minutes(5),
 				Seconds largeRestTime = Minutes(15)
@@ -133,7 +133,7 @@ namespace zenith {
 			 * @brief Determines if the round's index refers to the half of the session.
 			 * @note Used to assign large rest period on the zenith of the session.
 			 */
-			bool IsHalfSessionRound(uint rounds, uint index);
+			bool IsHalfSessionRound(uint32_t rounds, uint32_t index);
 
 			/**
 			 * @brief Gets the actual work/rest timer.

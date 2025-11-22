@@ -3,10 +3,10 @@
 
 using namespace zenith;
 
-PomodoroSession::PomodoroSession(std::unique_ptr<ISoundGenerator> sg, uint rounds,
+PomodoroSession::PomodoroSession(std::unique_ptr<ISoundGenerator> sg, uint32_t rounds,
 	Seconds workTime, Seconds restTime, Seconds largeRestTime) {
 
-		for (uint i = 0; i < rounds; ++i) {
+		for (uint32_t i = 0; i < rounds; ++i) {
 			auto restSeconds = restTime;
 			if (IsHalfSessionRound(rounds, i))
 				restSeconds = largeRestTime;
@@ -144,8 +144,8 @@ void PomodoroSession::Update() {
 	_status.roundsLeft = _roundQueue.size();
 }
 
-bool PomodoroSession::IsHalfSessionRound(uint rounds, uint index) {
-	const uint IDX_OFFSET = 1;
+bool PomodoroSession::IsHalfSessionRound(uint32_t rounds, uint32_t index) {
+	const uint32_t IDX_OFFSET = 1;
 	return ((index + IDX_OFFSET) == (rounds / 2) && rounds > 1);
 }
 

@@ -4,8 +4,6 @@ set(TEST_SOURCES
 	${CMAKE_SOURCE_DIR}/src/Exceptions.cpp
 	${CMAKE_SOURCE_DIR}/src/Timer.cpp
 	${CMAKE_SOURCE_DIR}/src/PomodoroSession.cpp
-	${CMAKE_SOURCE_DIR}/src/SoundGenerator.cpp
-	${CMAKE_SOURCE_DIR}/src/NoiseGenerator.cpp
 )
 
 add_executable(zenith_tests ${TEST_SOURCES})
@@ -15,7 +13,7 @@ target_include_directories(zenith_tests PRIVATE ../include)
 target_link_libraries(zenith_tests PRIVATE
 	gtest_main
 	gmock
-	${APP_LIBS}
+	sfml-audio
 )
 
 include(GoogleTest)

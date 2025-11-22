@@ -13,7 +13,13 @@ include(FetchContent)
 	set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 	FetchContent_MakeAvailable(googletest)
 
-	# SFML 2.6.2
+	# SFML as STATIC so no need to copy .dlls arround
+	# TODO OpenAl32.dll still has to be copied (upgrade to SFML >3.0 when stable)
+	if(WIN32)
+		set(BUILD_SHARED_LIBS OFF)
+		set(SFML_USE_STATIC_STD_LIBS OFF)
+	endif()
+
 	FetchContent_Declare(
 		SFML
 		GIT_REPOSITORY https://github.com/SFML/SFML.git
@@ -30,7 +36,7 @@ include(FetchContent)
 	FetchContent_MakeAvailable(imgui)
 
 	# IMGUI-SFML
-	set(IMGUI_DIR ${imgui_SOURCE_DIR})  # Necesario ANTES de MakeAvailable
+	set(IMGUI_DIR ${imgui_SOURCE_DIR})# TODO check if necesary
 	option(IMGUI_SFML_FIND_SFML "Use find_package to find SFML" OFF)
 	FetchContent_Declare(
 		imgui-sfml
@@ -75,6 +81,23 @@ include(FetchContent)
 	target_include_directories(zenith PUBLIC include)
 	target_link_libraries(zenith PUBLIC ${APP_LIBS})
 
+	# This is needed to link SFML statically on windows
+	if(WIN32)
+		target_compile_definitions(zenith PUBLIC SFML_STATIC)
+	endif()
+
+	# Copies OpenAL32.dll to build dir
+	# TODO move to SFML > 3.0 to avoid this
+	if (WIN32)
+		add_custom_command(TARGET zenith POST_BUILD
+			COMMAND ${CMAKE_COMMAND} -E copy_if_different
+				"${CMAKE_SOURCE_DIR}/build/_deps/sfml-src/extlibs/bin/x64/openal32.dll"
+				$<TARGET_FILE_DIR:zenith>
+		)
+	endif()
+
+
+	# Apple is so special
 	if(APPLE)
 		target_link_libraries(zenith PUBLIC
 			"-framework Cocoa"
@@ -84,7 +107,6 @@ include(FetchContent)
 			"-framework Metal"
 		)
 	endif()
-
 
 # TESTING
 	enable_testing()
